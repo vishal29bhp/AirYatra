@@ -51,7 +51,8 @@ Lime is never used as text on a light background. On white it is 1.1:1.
 
 ## Still to do (screen by screen)
 
-- The brand accent in today's screens is orange (`orange-400/500/600`, about 1,800 usages, mostly with white text).
+- **Done:** Landing page (with its investor and testimonial sections) and the AI chat widget that appears on every page.
+- The brand accent in the other screens is orange (`orange-400/500/600`, about 1,800 usages, mostly with white text).
   Lime needs black text, so a global remap would break contrast. Accents move to lime by hand, one primary action per view, in this order: Landing, Booking flow, Login, Customer dashboard, Payment, then the Operator and Admin dashboards.
 - `blue-*` highlights (about 800 usages) move to lime or amber in the same pass.
 - Headlines should adopt the `.ay-overline` pattern, and cards should drop rounded corners and shadows (`rounded-sm`, no `shadow-*`).

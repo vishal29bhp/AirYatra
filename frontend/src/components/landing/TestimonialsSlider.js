@@ -53,7 +53,7 @@ function TestimonialsSlider() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+          <span className="ay-overline">Testimonials</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
             What Our Clients Say
           </h2>
@@ -62,9 +62,9 @@ function TestimonialsSlider() {
 
         {/* Testimonial Card */}
         <div className="relative">
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+          <div className="bg-slate-800 border border-slate-700 rounded-sm p-8 md:p-12 relative overflow-hidden">
             {/* Quote Icon */}
-            <Quote className="absolute top-8 right-8 h-24 w-24 text-orange-500/10" />
+            <Quote className="absolute top-8 right-8 h-24 w-24 text-lime/10" />
             
             {/* Content */}
             <div className="relative z-10">
@@ -92,11 +92,11 @@ function TestimonialsSlider() {
                 <img
                   src={currentTestimonial.photo_url || `https://ui-avatars.com/api/?name=${currentTestimonial.customer_name}&background=f97316&color=fff`}
                   alt={currentTestimonial.customer_name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-orange-500"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-lime"
                 />
                 <div>
                   <h4 className="text-white font-semibold text-lg">{currentTestimonial.customer_name}</h4>
-                  <p className="text-orange-400 text-sm">
+                  <p className="text-amber text-sm">
                     {currentTestimonial.designation}
                     {currentTestimonial.company && `, ${currentTestimonial.company}`}
                   </p>
@@ -108,14 +108,14 @@ function TestimonialsSlider() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 p-3 bg-orange-500 hover:bg-orange-600 rounded-full text-white transition-all shadow-lg"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 p-3 bg-slate-900 border border-slate-700 hover:border-lime rounded-sm text-lime transition-colors"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 p-3 bg-orange-500 hover:bg-orange-600 rounded-full text-white transition-all shadow-lg"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 p-3 bg-slate-900 border border-slate-700 hover:border-lime rounded-sm text-lime transition-colors"
             aria-label="Next testimonial"
           >
             <ChevronRight className="h-5 w-5" />
@@ -130,7 +130,7 @@ function TestimonialsSlider() {
               onClick={() => setCurrentIndex(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all ${
                 index === currentIndex
-                  ? 'bg-orange-500 w-8'
+                  ? 'bg-lime w-8'
                   : 'bg-slate-600 hover:bg-slate-500'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}

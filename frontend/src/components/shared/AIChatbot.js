@@ -143,12 +143,12 @@ How can I assist you today?
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-20 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-40"
+        className="fixed bottom-20 right-4 bg-lime text-black p-3 rounded-full hover:bg-lime/90 transition-colors z-40"
         title="Chat with AI Assistant"
       >
         <div className="relative">
           <MessageCircle className="h-5 w-5" />
-          <Sparkles className="h-2.5 w-2.5 absolute -top-1 -right-1 text-yellow-300" />
+          <Sparkles className="h-2.5 w-2.5 absolute -top-1 -right-1 text-black" />
         </div>
       </button>
     );
@@ -159,15 +159,15 @@ How can I assist you today?
       isMinimized ? 'w-80 h-14' : 'w-96 h-[500px]'
     }`}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-gradient-to-r from-orange-600 to-orange-500 rounded-t-2xl">
+      <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800 rounded-t-2xl">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Bot className="h-8 w-8 text-white" />
-            <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-orange-500" />
+            <Bot className="h-8 w-8 text-lime" />
+            <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-slate-800" />
           </div>
           <div>
             <h3 className="text-white font-semibold">AirYatra AI</h3>
-            <p className="text-orange-100 text-xs">Always here to help / हमेशा मदद के लिए</p>
+            <p className="text-slate-400 text-xs">Always here to help / हमेशा मदद के लिए</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -198,12 +198,12 @@ How can I assist you today?
                 {/* Avatar */}
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   message.role === 'user' 
-                    ? 'bg-blue-500' 
-                    : 'bg-gradient-to-br from-orange-500 to-orange-600'
+                    ? 'bg-slate-600' 
+                    : 'bg-slate-700'
                 }`}>
                   {message.role === 'user' 
                     ? <User className="h-4 w-4 text-white" />
-                    : <Bot className="h-4 w-4 text-white" />
+                    : <Bot className="h-4 w-4 text-lime" />
                   }
                 </div>
                 
@@ -211,7 +211,7 @@ How can I assist you today?
                 <div className={`max-w-[80%] ${message.role === 'user' ? 'text-right' : ''}`}>
                   <div className={`p-3 rounded-2xl ${
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-tr-sm'
+                      ? 'bg-slate-700 text-white rounded-tr-sm'
                       : 'bg-slate-800 text-slate-100 rounded-tl-sm'
                   }`}>
                     <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -221,7 +221,7 @@ How can I assist you today?
                       {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                     {message.role === 'assistant' && message.ai_generated && (
-                      <span className="text-xs text-orange-400 flex items-center gap-1">
+                      <span className="text-xs text-amber flex items-center gap-1">
                         <Sparkles className="h-3 w-3" /> AI
                       </span>
                     )}
@@ -232,8 +232,8 @@ How can I assist you today?
             
             {loading && (
               <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                  <Bot className="h-4 w-4 text-white" />
+                <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                  <Bot className="h-4 w-4 text-lime" />
                 </div>
                 <div className="bg-slate-800 p-3 rounded-2xl rounded-tl-sm">
                   <div className="flex gap-1">
@@ -280,7 +280,7 @@ How can I assist you today?
               <Button
                 onClick={sendMessage}
                 disabled={!input.trim() || loading}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
               >
                 <Send className="h-4 w-4" />
               </Button>
