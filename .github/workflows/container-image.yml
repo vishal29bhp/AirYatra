@@ -24,11 +24,10 @@ jobs:
           docker run --rm -e JWT_SECRET_KEY=ci-only -e APP_ENV=dev airyatra-api:${{ github.sha }}
           python -c "import server, worker; print('ok')"
       # Report-only until the dependency upgrade PR lands (pip-audit lists known CVEs in today's pins);
-      # that PR switches exit-code to "1" so HIGH/CRITICAL findings with a fix block merges.
+      # that PR switches --exit-code to 1 so HIGH/CRITICAL findings with a fix block merges.
       - name: Trivy scan (report only for now)
-        uses: aquasecurity/trivy-action@0.33.1
-        with:
-          image-ref: airyatra-api:${{ github.sha }}
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: "0"
+        continue-on-error: true
+        run: >
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.58.1
+          image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 0 --no-progress
+          airyatra-api:${{ github.sha }}
