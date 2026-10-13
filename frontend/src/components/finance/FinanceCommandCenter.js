@@ -8,6 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 // Format currency in Indian format
 const formatINR = (amount) => {
@@ -74,7 +75,7 @@ export default function FinanceCommandCenter() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Activity className="h-7 w-7 text-lime" />
-            Finance Command Center / वित्त कमांड सेंटर
+            {bi("Finance Command Center / वित्त कमांड सेंटर")}
           </h1>
           <p className="text-slate-400 mt-1">24x7 Real-time financial monitoring & AI insights</p>
         </div>
@@ -138,7 +139,7 @@ export default function FinanceCommandCenter() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2 text-slate-300">
               <Wallet className="h-5 w-5 text-purple-400" />
-              Current Position / वर्तमान स्थिति
+              {bi("Current Position / वर्तमान स्थिति")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -163,7 +164,7 @@ export default function FinanceCommandCenter() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2 text-green-300">
               <TrendingDown className="h-5 w-5" />
-              Expected Inflow / अपेक्षित आवक
+              {bi("Expected Inflow / अपेक्षित आवक")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -185,7 +186,7 @@ export default function FinanceCommandCenter() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2 text-red-300">
               <TrendingUp className="h-5 w-5" />
-              Expected Outflow / अपेक्षित जावक
+              {bi("Expected Outflow / अपेक्षित जावक")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -334,7 +335,7 @@ export default function FinanceCommandCenter() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
             <Receipt className="h-5 w-5 text-amber" />
-            Recent Transactions / हाल के लेनदेन
+            {bi("Recent Transactions / हाल के लेनदेन")}
           </CardTitle>
           <div className="flex items-center gap-2">
             <Button

@@ -3,6 +3,7 @@ import { TrendingUp, Star, Clock, AlertTriangle, CheckCircle, BarChart3, Target,
 import { Button } from '@/components/ui/button';
 import { operatorManagementAPI, analyticsAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function OperatorPerformance() {
   const [operators, setOperators] = useState([]);
@@ -48,10 +49,10 @@ function OperatorPerformance() {
   };
 
   const getPerformanceLabel = (score) => {
-    if (score >= 90) return 'Excellent / उत्कृष्ट';
-    if (score >= 70) return 'Good / अच्छा';
-    if (score >= 50) return 'Average / औसत';
-    return 'Needs Improvement / सुधार आवश्यक';
+    if (score >= 90) return bi('Excellent / उत्कृष्ट');
+    if (score >= 70) return bi('Good / अच्छा');
+    if (score >= 50) return bi('Average / औसत');
+    return bi('Needs Improvement / सुधार आवश्यक');
   };
 
   if (loading) {
@@ -66,7 +67,7 @@ function OperatorPerformance() {
             <TrendingUp className="h-6 w-6 text-lime" />
             Operator Performance
           </h2>
-          <p className="text-slate-400 mt-1">ऑपरेटर प्रदर्शन - Track and manage operator metrics</p>
+          <p className="text-slate-400 mt-1">{bi("ऑपरेटर प्रदर्शन - Track and manage operator metrics")}</p>
         </div>
         <div className="flex gap-2">
           {['7d', '30d', '90d'].map(period => (

@@ -9,6 +9,7 @@ import { authAPI } from '../services/api';
 import { toast } from 'sonner';
 import { GoogleLoginButton } from '../components/auth/GoogleLogin';
 import PasswordStrengthMeter from '../components/auth/PasswordStrengthMeter';
+import { bi, tr } from '../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -543,7 +544,7 @@ function LoginPage({ setUser }) {
               <div className="w-full border-t border-slate-700"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-slate-900 text-slate-400">या / or</span>
+              <span className="px-2 bg-slate-900 text-slate-400">{bi("या / or")}</span>
             </div>
           </div>
 
@@ -551,7 +552,7 @@ function LoginPage({ setUser }) {
           <GoogleLoginButton 
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleError}
-            buttonText={isLogin ? "Google से Login करें" : "Google से Sign up करें"}
+            buttonText={isLogin ? tr("Log in with Google", "Google से लॉगिन करें") : tr("Sign up with Google", "Google से साइन अप करें")}
           />
 
           <div className="text-center">

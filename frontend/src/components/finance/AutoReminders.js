@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -134,7 +135,7 @@ export default function AutoReminders() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Bell className="h-7 w-7 text-lime" />
-            Auto Reminders / स्वचालित रिमाइंडर
+            {bi("Auto Reminders / स्वचालित रिमाइंडर")}
           </h1>
           <p className="text-slate-400 mt-1">Configure automatic alerts for challan due dates</p>
         </div>
@@ -188,7 +189,7 @@ export default function AutoReminders() {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-amber-400" />
-                Pending Reminders / लंबित रिमाइंडर
+                {bi("Pending Reminders / लंबित रिमाइंडर")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -252,7 +253,7 @@ export default function AutoReminders() {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Settings className="h-5 w-5 text-amber" />
-                Reminder Configurations / रिमाइंडर कॉन्फ़िगरेशन
+                {bi("Reminder Configurations / रिमाइंडर कॉन्फ़िगरेशन")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -321,7 +322,7 @@ export default function AutoReminders() {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-purple-400" />
-                Reminder History / रिमाइंडर इतिहास
+                {bi("Reminder History / रिमाइंडर इतिहास")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -370,7 +371,7 @@ export default function AutoReminders() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Settings className="h-5 w-5 text-amber" />
-              Configure Reminder / रिमाइंडर कॉन्फ़िगर करें
+              {bi("Configure Reminder / रिमाइंडर कॉन्फ़िगर करें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">

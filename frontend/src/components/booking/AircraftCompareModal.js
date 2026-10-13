@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 // Score bar component (extracted to avoid re-render issues)
 const ScoreBar = ({ score, label, color }) => (
@@ -170,7 +171,7 @@ const AircraftCompareModal = ({
             </div>
             <div>
               <h2 className="text-white font-semibold text-lg">
-                Aircraft Compare / विमान तुलना
+                {bi("Aircraft Compare / विमान तुलना")}
               </h2>
               <p className="text-slate-400 text-sm">
                 {comparing 
@@ -293,9 +294,9 @@ const AircraftCompareModal = ({
                       
                       {/* Score Breakdown */}
                       <div className="space-y-2">
-                        <ScoreBar score={aircraft.scores.safety} label="Safety / सुरक्षा" color="text-green-400" />
-                        <ScoreBar score={aircraft.scores.amenity} label="Comfort / आराम" color="text-amber" />
-                        <ScoreBar score={aircraft.scores.value} label="Value / मूल्य" color="text-purple-400" />
+                        <ScoreBar score={aircraft.scores.safety} label={bi("Safety / सुरक्षा")} color="text-green-400" />
+                        <ScoreBar score={aircraft.scores.amenity} label={bi("Comfort / आराम")} color="text-amber" />
+                        <ScoreBar score={aircraft.scores.value} label={bi("Value / मूल्य")} color="text-purple-400" />
                       </div>
                       
                       {/* Specs */}
@@ -393,13 +394,13 @@ const AircraftCompareModal = ({
               <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                 <h4 className="text-white font-medium mb-2 flex items-center gap-2">
                   <AlertCircle className="h-4 w-4 text-amber" />
-                  Comparison Notes / तुलना नोट्स
+                  {bi("Comparison Notes / तुलना नोट्स")}
                 </h4>
                 <ul className="text-slate-400 text-sm space-y-1 list-disc list-inside">
                   <li>Prices are estimates based on distance and hourly rates</li>
                   <li>Safety score includes TCAS, autopilot, and emergency equipment</li>
                   <li>Actual availability may vary based on operator schedule</li>
-                  <li>कीमतें अनुमानित हैं, अंतिम कीमत बुकिंग पर मिलेगी</li>
+                  <li>{tr("Prices are estimates. The final price is confirmed at booking.", "कीमतें अनुमानित हैं, अंतिम कीमत बुकिंग पर मिलेगी")}</li>
                 </ul>
               </div>
             </div>

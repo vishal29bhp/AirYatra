@@ -14,6 +14,12 @@ export const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const current = LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) || LANGUAGES[0];
 
+  // Some labels are picked once when their screen's module loads, so reload to show every label in the new language.
+  const switchLanguage = (code) => {
+    if (code === current.code) return;
+    i18n.changeLanguage(code).then(() => window.location.reload());
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -35,7 +41,7 @@ export const LanguageSwitcher = () => {
         {LANGUAGES.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => i18n.changeLanguage(lang.code)}
+            onClick={() => switchLanguage(lang.code)}
             className="cursor-pointer focus:bg-slate-800 focus:text-white flex items-center gap-2"
             data-testid={`lang-option-${lang.code}`}
           >

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { adminAPI, inquiryBroadcastAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const STATUS_COLORS = {
   pending_acceptance: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'Pending' },
@@ -88,7 +89,7 @@ function InquiryManagement() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Bell className="h-6 w-6 text-lime" />
-            Inquiry Management / इंक्वायरी प्रबंधन
+            {bi("Inquiry Management / इंक्वायरी प्रबंधन")}
           </h1>
           <p className="text-slate-400 text-sm mt-1">
             View and manage all customer booking inquiries
@@ -271,7 +272,7 @@ function InquiryManagement() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Bell className="h-5 w-5 text-lime" />
-              Inquiry Details / इंक्वायरी विवरण
+              {bi("Inquiry Details / इंक्वायरी विवरण")}
             </DialogTitle>
           </DialogHeader>
           

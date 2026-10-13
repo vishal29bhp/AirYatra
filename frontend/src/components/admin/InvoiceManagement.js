@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
 import { ContextMenu } from '@/components/shared/ContextMenu';
+import { bi } from '../../lib/bilingual';
 
 function InvoiceManagement() {
   const [loading, setLoading] = useState(true);
@@ -137,7 +138,7 @@ function InvoiceManagement() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <FileText className="h-6 w-6 text-green-400" />
-            Invoice & Billing / बिलिंग
+            {bi("Invoice & Billing / बिलिंग")}
           </h2>
           <p className="text-slate-400 mt-1">GST compliant invoicing and billing management</p>
         </div>

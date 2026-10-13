@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 const formatDate = (dateStr) => {
   if (!dateStr) return '-';
@@ -105,7 +106,7 @@ export default function AuditTrailDashboard() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <History className="h-7 w-7 text-cyan-400" />
-            Audit Trail Dashboard / ऑडिट ट्रेल
+            {bi("Audit Trail Dashboard / ऑडिट ट्रेल")}
           </h1>
           <p className="text-slate-400 mt-1">Complete log of all finance transactions and actions</p>
         </div>
@@ -324,7 +325,7 @@ export default function AuditTrailDashboard() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Eye className="h-5 w-5 text-cyan-400" />
-              Audit Log Detail / ऑडिट लॉग विवरण
+              {bi("Audit Log Detail / ऑडिट लॉग विवरण")}
             </DialogTitle>
           </DialogHeader>
           {selectedLog && (

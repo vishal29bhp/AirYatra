@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 import { Plane, ArrowLeft, FileText, Shield, AlertTriangle, Loader2, Calendar, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
+import { bi } from '../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -55,11 +56,11 @@ function LegalPage() {
   const getPageTitle = () => {
     switch (pageType) {
       case 'privacy':
-        return 'Privacy Policy / गोपनीयता नीति';
+        return bi('Privacy Policy / गोपनीयता नीति');
       case 'cancellation':
-        return 'Cancellation & Refund Policy / रद्दीकरण और धनवापसी नीति';
+        return bi('Cancellation & Refund Policy / रद्दीकरण और धनवापसी नीति');
       default:
-        return 'Terms & Conditions / नियम एवं शर्तें';
+        return bi('Terms & Conditions / नियम एवं शर्तें');
     }
   };
 
@@ -165,7 +166,7 @@ function LegalPage() {
           <div className="flex items-center space-x-4">
             <Link to="/">
               <Button variant="ghost" className="text-slate-300 hover:text-white">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home / होम पर वापस
+                <ArrowLeft className="mr-2 h-4 w-4" /> {bi("Back to Home / होम पर वापस")}
               </Button>
             </Link>
           </div>

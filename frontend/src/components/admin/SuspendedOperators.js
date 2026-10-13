@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { operatorManagementAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function SuspendedOperators() {
   const [suspendedOperators, setSuspendedOperators] = useState([]);
@@ -35,7 +36,7 @@ function SuspendedOperators() {
     
     try {
       await operatorManagementAPI.activateOperator(selectedOperator.id, { notes: activationNotes });
-      toast.success('Operator activated successfully / ऑपरेटर सक्रिय किया गया');
+      toast.success(bi('Operator activated successfully / ऑपरेटर सक्रिय किया गया'));
       setShowActivateDialog(false);
       setActivationNotes('');
       loadSuspendedOperators();
@@ -74,7 +75,7 @@ function SuspendedOperators() {
             <Ban className="h-6 w-6 text-red-400" />
             Suspended Operators
           </h2>
-          <p className="text-slate-400">निलंबित ऑपरेटर - View and manage suspended operators</p>
+          <p className="text-slate-400">{bi("निलंबित ऑपरेटर - View and manage suspended operators")}</p>
         </div>
         <Button onClick={loadSuspendedOperators} variant="outline" className="border-slate-700">
           <RefreshCw className="h-4 w-4 mr-2" />
@@ -108,8 +109,7 @@ function SuspendedOperators() {
       ) : suspendedOperators.length === 0 ? (
         <div className="p-8 rounded-lg bg-slate-900/50 border border-slate-800 text-center">
           <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-          <p className="text-white font-medium">No Suspended Operators</p>
-          <p className="text-slate-400 text-sm">कोई निलंबित ऑपरेटर नहीं है</p>
+          <p className="text-white font-medium">{tr("No Suspended Operators", "कोई निलंबित ऑपरेटर नहीं है")}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -154,7 +154,7 @@ function SuspendedOperators() {
                   <div>
                     <p className="text-slate-500 text-xs">Suspension Type</p>
                     <p className={`font-medium ${operator.suspension_type === 'permanent' ? 'text-red-400' : 'text-yellow-400'}`}>
-                      {operator.suspension_type === 'permanent' ? 'Permanent / स्थायी' : 'Temporary / अस्थायी'}
+                      {operator.suspension_type === 'permanent' ? bi('Permanent / स्थायी') : bi('Temporary / अस्थायी')}
                     </p>
                   </div>
                   <div>
@@ -174,7 +174,7 @@ function SuspendedOperators() {
                 </div>
                 
                 <div className="mt-4 pt-4 border-t border-red-500/20">
-                  <p className="text-slate-500 text-xs mb-1">Suspension Reason / निलंबन का कारण</p>
+                  <p className="text-slate-500 text-xs mb-1">{bi("Suspension Reason / निलंबन का कारण")}</p>
                   <p className="text-red-300 bg-red-500/10 p-3 rounded">
                     <AlertTriangle className="inline h-4 w-4 mr-2" />
                     {operator.suspension_reason || 'No reason provided'}
@@ -204,7 +204,7 @@ function SuspendedOperators() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-green-400" />
-              Activate Operator / ऑपरेटर सक्रिय करें
+              {bi("Activate Operator / ऑपरेटर सक्रिय करें")}
             </DialogTitle>
           </DialogHeader>
           
@@ -250,7 +250,7 @@ function SuspendedOperators() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <History className="h-5 w-5 text-lime" />
-              Suspension History / निलंबन इतिहास
+              {bi("Suspension History / निलंबन इतिहास")}
             </DialogTitle>
           </DialogHeader>
           

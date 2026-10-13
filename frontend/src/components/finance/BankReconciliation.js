@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -182,7 +183,7 @@ export default function BankReconciliation() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Link2 className="h-7 w-7 text-purple-400" />
-            Bank Reconciliation / बैंक मिलान
+            {bi("Bank Reconciliation / बैंक मिलान")}
           </h1>
           <p className="text-slate-400 mt-1">Match bank statements with recorded transactions</p>
         </div>
@@ -273,7 +274,7 @@ export default function BankReconciliation() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-amber" />
-            Balance Comparison / बैलेंस तुलना
+            {bi("Balance Comparison / बैलेंस तुलना")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -447,7 +448,7 @@ export default function BankReconciliation() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Upload className="h-5 w-5 text-purple-400" />
-              Upload Bank Statement / बैंक स्टेटमेंट अपलोड करें
+              {bi("Upload Bank Statement / बैंक स्टेटमेंट अपलोड करें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">

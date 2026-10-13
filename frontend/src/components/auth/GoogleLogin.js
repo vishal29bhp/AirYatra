@@ -4,6 +4,7 @@ import { Smartphone, Mail, User, Calendar, Phone, Image, Shield, CheckCircle, Lo
 import { Button } from '@/components/ui/button';
 import { googleAuthAPI, authAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 // Device info collector
 const getDeviceInfo = () => {
@@ -98,8 +99,8 @@ function EmergentAuthCallback({ onLogin }) {
       onLogin?.(loginData.user);
       
       toast.success(loginData.is_new_user 
-        ? 'Account created successfully! / खाता बनाया गया!' 
-        : 'Welcome back! / वापसी पर स्वागत है!');
+        ? bi('Account created successfully! / खाता बनाया गया!') 
+        : bi('Welcome back! / वापसी पर स्वागत है!'));
       
       // Redirect based on role
       setTimeout(() => {
@@ -110,7 +111,7 @@ function EmergentAuthCallback({ onLogin }) {
     } catch (error) {
       console.error('Auth callback error:', error);
       setStatus('error');
-      toast.error('Login failed / लॉगिन विफल');
+      toast.error(bi('Login failed / लॉगिन विफल'));
     }
   };
 
@@ -119,8 +120,7 @@ function EmergentAuthCallback({ onLogin }) {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
-          <h2 className="text-xl text-white">Signing you in...</h2>
-          <p className="text-slate-400">आपको साइन इन किया जा रहा है...</p>
+          <h2 className="text-xl text-white">{tr("Signing you in...", "आपको साइन इन किया जा रहा है...")}</h2>
         </div>
       </div>
     );
@@ -133,10 +133,9 @@ function EmergentAuthCallback({ onLogin }) {
           <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-4">
             <span className="text-3xl">❌</span>
           </div>
-          <h2 className="text-xl text-white">Authentication Failed</h2>
-          <p className="text-slate-400 mt-2">प्रमाणीकरण विफल</p>
+          <h2 className="text-xl text-white">{tr("Authentication Failed", "प्रमाणीकरण विफल")}</h2>
           <Button onClick={() => navigate('/login')} className="mt-4">
-            Try Again / पुनः प्रयास करें
+            {bi("Try Again / पुनः प्रयास करें")}
           </Button>
         </div>
       </div>
@@ -150,7 +149,7 @@ function EmergentAuthCallback({ onLogin }) {
           <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="h-10 w-10 text-green-500" />
           </div>
-          <h2 className="text-2xl font-bold text-white">Welcome! / स्वागत है!</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Welcome! / स्वागत है!")}</h2>
           <p className="text-slate-400 mt-2">Successfully signed in with Google</p>
         </div>
 
@@ -176,7 +175,7 @@ function EmergentAuthCallback({ onLogin }) {
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-slate-400" />
                 <div>
-                  <p className="text-xs text-slate-500">Name / नाम</p>
+                  <p className="text-xs text-slate-500">{bi("Name / नाम")}</p>
                   <p className="text-white">{userData.full_name || userData.name}</p>
                 </div>
               </div>
@@ -191,7 +190,7 @@ function EmergentAuthCallback({ onLogin }) {
             </div>
 
             <p className="text-center text-sm text-slate-400">
-              Redirecting... / रीडायरेक्ट किया जा रहा है...
+              {bi("Redirecting... / रीडायरेक्ट किया जा रहा है...")}
             </p>
           </div>
         )}
@@ -200,7 +199,7 @@ function EmergentAuthCallback({ onLogin }) {
   );
 }
 
-function GoogleLoginButton({ onSuccess, onError, buttonText = "Continue with Google / Google से जारी रखें" }) {
+function GoogleLoginButton({ onSuccess, onError, buttonText = bi("Continue with Google / Google से जारी रखें") }) {
   const [loading, setLoading] = useState(false);
   const [googleSettings, setGoogleSettings] = useState({ enabled: true, use_emergent_auth: true });
 
@@ -263,8 +262,8 @@ function GoogleLoginButton({ onSuccess, onError, buttonText = "Continue with Goo
         localStorage.setItem('user', JSON.stringify(result.data.user));
         
         toast.success(result.data.is_new_user 
-          ? 'Account created successfully! / खाता बनाया गया!' 
-          : 'Welcome back! / वापसी पर स्वागत है!');
+          ? bi('Account created successfully! / खाता बनाया गया!') 
+          : bi('Welcome back! / वापसी पर स्वागत है!'));
         
         onSuccess?.(result.data);
       }
@@ -370,8 +369,7 @@ function GoogleAuthSuccess({ onLogin }) {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
-          <h2 className="text-xl text-white">Signing you in...</h2>
-          <p className="text-slate-400">आपको साइन इन किया जा रहा है...</p>
+          <h2 className="text-xl text-white">{tr("Signing you in...", "आपको साइन इन किया जा रहा है...")}</h2>
         </div>
       </div>
     );
@@ -384,10 +382,9 @@ function GoogleAuthSuccess({ onLogin }) {
           <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-4">
             <span className="text-3xl">❌</span>
           </div>
-          <h2 className="text-xl text-white">Authentication Failed</h2>
-          <p className="text-slate-400 mt-2">प्रमाणीकरण विफल</p>
+          <h2 className="text-xl text-white">{tr("Authentication Failed", "प्रमाणीकरण विफल")}</h2>
           <Button onClick={() => navigate('/login')} className="mt-4">
-            Try Again / पुनः प्रयास करें
+            {bi("Try Again / पुनः प्रयास करें")}
           </Button>
         </div>
       </div>
@@ -401,7 +398,7 @@ function GoogleAuthSuccess({ onLogin }) {
           <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="h-10 w-10 text-green-500" />
           </div>
-          <h2 className="text-2xl font-bold text-white">Welcome! / स्वागत है!</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Welcome! / स्वागत है!")}</h2>
           <p className="text-slate-400 mt-2">Successfully signed in with Google</p>
         </div>
 
@@ -427,7 +424,7 @@ function GoogleAuthSuccess({ onLogin }) {
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-slate-400" />
                 <div>
-                  <p className="text-xs text-slate-500">Name / नाम</p>
+                  <p className="text-xs text-slate-500">{bi("Name / नाम")}</p>
                   <p className="text-white">{userData.full_name}</p>
                 </div>
               </div>
@@ -444,7 +441,7 @@ function GoogleAuthSuccess({ onLogin }) {
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-slate-400" />
                   <div>
-                    <p className="text-xs text-slate-500">Phone / फोन</p>
+                    <p className="text-xs text-slate-500">{bi("Phone / फोन")}</p>
                     <p className="text-white">{userData.phone}</p>
                   </div>
                 </div>
@@ -454,7 +451,7 @@ function GoogleAuthSuccess({ onLogin }) {
                 <div className="flex items-center gap-3">
                   <Calendar className="h-5 w-5 text-slate-400" />
                   <div>
-                    <p className="text-xs text-slate-500">Date of Birth / जन्म तिथि</p>
+                    <p className="text-xs text-slate-500">{bi("Date of Birth / जन्म तिथि")}</p>
                     <p className="text-white">{userData.date_of_birth}</p>
                   </div>
                 </div>
@@ -464,7 +461,7 @@ function GoogleAuthSuccess({ onLogin }) {
                 <div className="flex items-center gap-3">
                   <Smartphone className="h-5 w-5 text-slate-400" />
                   <div>
-                    <p className="text-xs text-slate-500">Device / डिवाइस</p>
+                    <p className="text-xs text-slate-500">{bi("Device / डिवाइस")}</p>
                     <p className="text-white">
                       {userData.last_device_info.device_model || userData.last_device_info.device_type} 
                       {userData.last_device_info.os && ` (${userData.last_device_info.os})`}
@@ -475,7 +472,7 @@ function GoogleAuthSuccess({ onLogin }) {
             </div>
 
             <p className="text-center text-sm text-slate-400">
-              Redirecting to dashboard... / डैशबोर्ड पर रीडायरेक्ट किया जा रहा है...
+              {bi("Redirecting to dashboard... / डैशबोर्ड पर रीडायरेक्ट किया जा रहा है...")}
             </p>
           </div>
         )}
@@ -496,16 +493,15 @@ function GoogleAuthError() {
         <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-4">
           <span className="text-3xl">❌</span>
         </div>
-        <h2 className="text-xl font-bold text-white">Authentication Error</h2>
+        <h2 className="text-xl font-bold text-white">{tr("Authentication Error", "प्रमाणीकरण में त्रुटि")}</h2>
         <p className="text-red-400 mt-2">{errorMessage}</p>
-        <p className="text-slate-400 mt-1">प्रमाणीकरण में त्रुटि</p>
         
         <div className="mt-6 space-y-3">
           <Button onClick={() => navigate('/login')} className="w-full bg-lime text-black hover:bg-lime/90">
-            Try Again / पुनः प्रयास करें
+            {bi("Try Again / पुनः प्रयास करें")}
           </Button>
           <Button onClick={() => navigate('/')} variant="outline" className="w-full">
-            Go Home / होम जाएं
+            {bi("Go Home / होम जाएं")}
           </Button>
         </div>
       </div>

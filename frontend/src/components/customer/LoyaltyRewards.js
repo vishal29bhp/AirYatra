@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import api from '../../services/api';
+import { bi } from '../../lib/bilingual';
 
 const TIER_COLORS = {
   bronze: 'from-amber-700 to-amber-900',
@@ -22,7 +23,7 @@ const StatusHeader = ({ status }) => {
     <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-6 mb-6" data-testid="loyalty-status-card">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         <div>
-          <p className="text-slate-400 text-sm uppercase">Available Points / उपलब्ध पॉइंट्स</p>
+          <p className="text-slate-400 text-sm uppercase">{bi("Available Points / उपलब्ध पॉइंट्स")}</p>
           <p className="text-4xl font-black text-lime" data-testid="available-points">
             {(profile?.available_points || 0).toLocaleString()}
           </p>
@@ -175,7 +176,7 @@ export default function LoyaltyRewards({ user }) {
   return (
     <div className="max-w-6xl mx-auto" data-testid="loyalty-rewards-page">
       <h1 className="text-3xl font-bold text-white mb-1 flex items-center gap-2">
-        <Star className="h-7 w-7 text-lime" /> VIP Points & Rewards / पॉइंट्स और रिवॉर्ड्स
+        <Star className="h-7 w-7 text-lime" /> {bi("VIP Points & Rewards / पॉइंट्स और रिवॉर्ड्स")}
       </h1>
       <p className="text-slate-400 mb-6">Earn points on every flight. Redeem for vouchers & experiences.</p>
 
@@ -184,7 +185,7 @@ export default function LoyaltyRewards({ user }) {
       {/* Rewards Catalog */}
       <div className="mb-8">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <Gift className="h-5 w-5 text-lime" /> Rewards Catalog / रिवॉर्ड्स
+          <Gift className="h-5 w-5 text-lime" /> {bi("Rewards Catalog / रिवॉर्ड्स")}
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="rewards-catalog">
           {rewards.map(r => <RewardCard key={r.id} reward={r} onRedeem={setConfirmReward} />)}
@@ -194,7 +195,7 @@ export default function LoyaltyRewards({ user }) {
       {/* My Vouchers */}
       <div className="mb-8">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <Ticket className="h-5 w-5 text-green-400" /> My Vouchers / मेरे वाउचर
+          <Ticket className="h-5 w-5 text-green-400" /> {bi("My Vouchers / मेरे वाउचर")}
         </h2>
         {vouchers.length === 0 ? (
           <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-vouchers">No vouchers yet. Redeem a reward above!</p>
@@ -208,7 +209,7 @@ export default function LoyaltyRewards({ user }) {
       {/* Points History */}
       <div>
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <History className="h-5 w-5 text-amber" /> Points History / पॉइंट्स इतिहास
+          <History className="h-5 w-5 text-amber" /> {bi("Points History / पॉइंट्स इतिहास")}
         </h2>
         {history.length === 0 ? (
           <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-history">

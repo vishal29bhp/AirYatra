@@ -9,15 +9,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Category icons and colors
 const categoryConfig = {
-  customer: { icon: Users, color: 'blue', label: 'Customer / ग्राहक' },
-  pilot: { icon: Shield, color: 'purple', label: 'Pilot / पायलट' },
-  aircraft: { icon: Plane, color: 'cyan', label: 'Aircraft / विमान' },
-  employee: { icon: Briefcase, color: 'green', label: 'Employee / कर्मचारी' }
+  customer: { icon: Users, color: 'blue', label: bi('Customer / ग्राहक') },
+  pilot: { icon: Shield, color: 'purple', label: bi('Pilot / पायलट') },
+  aircraft: { icon: Plane, color: 'cyan', label: bi('Aircraft / विमान') },
+  employee: { icon: Briefcase, color: 'green', label: bi('Employee / कर्मचारी') }
 };
 
 function DocumentTypeMaster() {
@@ -213,7 +214,7 @@ function DocumentTypeMaster() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <FileText className="h-6 w-6 text-lime" />
-            Document Type Master / दस्तावेज़ प्रकार मास्टर
+            {bi("Document Type Master / दस्तावेज़ प्रकार मास्टर")}
           </h2>
           <p className="text-slate-400 mt-1">Manage document types for all categories</p>
         </div>
@@ -333,8 +334,7 @@ function DocumentTypeMaster() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-white font-semibold">{type.name}</h3>
-                        {type.name_hi && <span className="text-slate-400 text-sm">/ {type.name_hi}</span>}
+                        <h3 className="text-white font-semibold">{tr(type.name, type.name_hi)}</h3>
                         {type.is_mandatory && (
                           <span className="px-2 py-0.5 bg-red-500/20 text-red-400 rounded text-xs">Required</span>
                         )}
@@ -453,7 +453,7 @@ function DocumentTypeMaster() {
                   <Input
                     value={formData.name_hi}
                     onChange={(e) => setFormData({...formData, name_hi: e.target.value})}
-                    placeholder="e.g., आधार कार्ड"
+                    placeholder={tr("e.g., Aadhaar Card", "जैसे, आधार कार्ड")}
                     className="mt-1 bg-slate-800 border-slate-600 text-white"
                   />
                 </div>

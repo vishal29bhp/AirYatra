@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -93,7 +94,7 @@ export default function ComplianceDashboard() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Shield className="h-7 w-7 text-emerald-400" />
-            Compliance Dashboard / अनुपालन डैशबोर्ड
+            {bi("Compliance Dashboard / अनुपालन डैशबोर्ड")}
           </h1>
           <p className="text-slate-400 mt-1">Unified view of all statutory compliance</p>
         </div>
@@ -114,7 +115,7 @@ export default function ComplianceDashboard() {
         <div className="bg-gradient-to-r from-red-500/20 border border-red-500/50 rounded-sm p-4">
           <div className="flex items-center gap-2 mb-3">
             <Bell className="h-5 w-5 text-red-400 animate-pulse" />
-            <h3 className="text-white font-semibold">Critical Deadlines / महत्वपूर्ण समय सीमा</h3>
+            <h3 className="text-white font-semibold">{bi("Critical Deadlines / महत्वपूर्ण समय सीमा")}</h3>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {critical_deadlines.slice(0, 6).map((deadline, idx) => (
@@ -181,7 +182,7 @@ export default function ComplianceDashboard() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-amber" />
-              Compliance Summary / अनुपालन सारांश
+              {bi("Compliance Summary / अनुपालन सारांश")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -266,7 +267,7 @@ export default function ComplianceDashboard() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <Calendar className="h-5 w-5 text-lime" />
-            Compliance Calendar / अनुपालन कैलेंडर
+            {bi("Compliance Calendar / अनुपालन कैलेंडर")}
           </CardTitle>
         </CardHeader>
         <CardContent>

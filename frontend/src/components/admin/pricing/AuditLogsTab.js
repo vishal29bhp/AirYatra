@@ -2,6 +2,7 @@ import React from 'react';
 import { FileText, Clock, User, Settings } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { bi } from '../../../lib/bilingual';
 
 /**
  * Audit Logs Tab Component
@@ -34,7 +35,7 @@ export const AuditLogsTab = ({ auditLogs }) => {
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
           <FileText className="h-5 w-5 text-slate-400" />
-          Audit Logs / ऑडिट लॉग
+          {bi("Audit Logs / ऑडिट लॉग")}
         </CardTitle>
       </CardHeader>
       <CardContent>

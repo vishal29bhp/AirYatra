@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { operatorAPI } from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function OperatorProfile({ operator, onOperatorUpdate }) {
   const [loading, setLoading] = useState(false);
@@ -87,7 +88,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
       };
       
       const response = await operatorAPI.updateProfile(updateData);
-      toast.success('Profile updated successfully! / प्रोफाइल अपडेट हुई!');
+      toast.success(bi('Profile updated successfully! / प्रोफाइल अपडेट हुई!'));
       if (onOperatorUpdate) {
         onOperatorUpdate(response.data);
       }
@@ -101,7 +102,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">Operator Profile / ऑपरेटर प्रोफाइल</h1>
+        <h1 className="text-3xl font-bold text-white">{bi("Operator Profile / ऑपरेटर प्रोफाइल")}</h1>
         <p className="text-slate-400 mt-1">Manage your business details and documents</p>
       </div>
 
@@ -143,11 +144,11 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Building2 className="h-5 w-5 text-amber" />
-            Business Information / व्यवसाय जानकारी
+            {bi("Business Information / व्यवसाय जानकारी")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label className="text-slate-300">Company Name / कंपनी का नाम *</Label>
+              <Label className="text-slate-300">{bi("Company Name / कंपनी का नाम *")}</Label>
               <Input
                 value={formData.company_name}
                 onChange={(e) => handleChange('company_name', e.target.value)}
@@ -156,7 +157,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
               />
             </div>
             <div>
-              <Label className="text-slate-300">Owner Name / मालिक का नाम *</Label>
+              <Label className="text-slate-300">{bi("Owner Name / मालिक का नाम *")}</Label>
               <Input
                 value={formData.owner_name}
                 onChange={(e) => handleChange('owner_name', e.target.value)}
@@ -175,7 +176,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
               />
             </div>
             <div>
-              <Label className="text-slate-300">Phone / फोन *</Label>
+              <Label className="text-slate-300">{bi("Phone / फोन *")}</Label>
               <Input
                 value={formData.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
@@ -208,11 +209,11 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-green-400" />
-            Address / पता
+            {bi("Address / पता")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <Label className="text-slate-300">Address / पता</Label>
+              <Label className="text-slate-300">{bi("Address / पता")}</Label>
               <Input
                 value={formData.address}
                 onChange={(e) => handleChange('address', e.target.value)}
@@ -221,7 +222,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
               />
             </div>
             <div>
-              <Label className="text-slate-300">City / शहर</Label>
+              <Label className="text-slate-300">{bi("City / शहर")}</Label>
               <Input
                 value={formData.city}
                 onChange={(e) => handleChange('city', e.target.value)}
@@ -229,7 +230,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
               />
             </div>
             <div>
-              <Label className="text-slate-300">State / राज्य</Label>
+              <Label className="text-slate-300">{bi("State / राज्य")}</Label>
               <Input
                 value={formData.state}
                 onChange={(e) => handleChange('state', e.target.value)}
@@ -252,7 +253,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Award className="h-5 w-5 text-yellow-400" />
-            License Details / लाइसेंस विवरण
+            {bi("License Details / लाइसेंस विवरण")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -280,7 +281,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-purple-400" />
-            Bank Details / बैंक विवरण
+            {bi("Bank Details / बैंक विवरण")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -336,7 +337,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
             ) : (
               <>
                 <Save className="h-4 w-4 mr-2" />
-                Save Profile / प्रोफाइल सेव करें
+                {bi("Save Profile / प्रोफाइल सेव करें")}
               </>
             )}
           </Button>

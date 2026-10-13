@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -225,7 +226,7 @@ const AdminVerificationQueue = () => {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Shield className="h-6 w-6 text-lime" />
-            Document Verification Queue / दस्तावेज़ सत्यापन
+            {bi("Document Verification Queue / दस्तावेज़ सत्यापन")}
           </h2>
           <p className="text-slate-400 text-sm mt-1">
             Review and approve operator documents for verification
@@ -242,21 +243,21 @@ const AdminVerificationQueue = () => {
           <CardContent className="p-4 text-center">
             <Clock className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
             <div className="text-3xl font-bold text-yellow-400">{pendingDocs.length}</div>
-            <div className="text-slate-400 text-sm">Pending Review / लंबित</div>
+            <div className="text-slate-400 text-sm">{bi("Pending Review / लंबित")}</div>
           </CardContent>
         </Card>
         <Card className="bg-green-500/10 border-green-500/50">
           <CardContent className="p-4 text-center">
             <CheckCircle className="h-6 w-6 text-green-400 mx-auto mb-2" />
             <div className="text-3xl font-bold text-green-400">{verifiedDocs.length}</div>
-            <div className="text-slate-400 text-sm">Approved / स्वीकृत</div>
+            <div className="text-slate-400 text-sm">{bi("Approved / स्वीकृत")}</div>
           </CardContent>
         </Card>
         <Card className="bg-red-500/10 border-red-500/50">
           <CardContent className="p-4 text-center">
             <XCircle className="h-6 w-6 text-red-400 mx-auto mb-2" />
             <div className="text-3xl font-bold text-red-400">{rejectedDocs.length}</div>
-            <div className="text-slate-400 text-sm">Rejected / अस्वीकृत</div>
+            <div className="text-slate-400 text-sm">{bi("Rejected / अस्वीकृत")}</div>
           </CardContent>
         </Card>
       </div>

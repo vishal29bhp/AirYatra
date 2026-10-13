@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, Home, ArrowLeft, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { bi } from '../lib/bilingual';
 
 function NotFoundPage() {
   return (
@@ -22,7 +23,7 @@ function NotFoundPage() {
 
       {/* Message */}
       <h2 className="text-3xl font-bold text-white mb-4 text-center">
-        Page Not Found / पेज नहीं मिला
+        {bi("Page Not Found / पेज नहीं मिला")}
       </h2>
       <p className="text-slate-400 text-center max-w-md mb-8">
         The page you&#39;re looking for doesn&#39;t exist or has been moved. 
@@ -47,16 +48,13 @@ function NotFoundPage() {
 
       {/* Quick Links */}
       <div className="mt-12 text-center">
-        <p className="text-slate-500 text-sm mb-4">Quick Links / त्वरित लिंक</p>
+        <p className="text-slate-500 text-sm mb-4">{bi("Quick Links / त्वरित लिंक")}</p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/services" className="text-lime hover:text-lime/80 text-sm">
             Services
           </Link>
           <Link to="/fleet" className="text-lime hover:text-lime/80 text-sm">
             Fleet
-          </Link>
-          <Link to="/exchange" className="text-lime hover:text-lime/80 text-sm">
-            Aviation Exchange
           </Link>
           <Link to="/blog" className="text-lime hover:text-lime/80 text-sm">
             Blog

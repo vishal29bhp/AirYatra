@@ -5,6 +5,7 @@ import {
   CheckCircle, ArrowRight, Phone, Mail, Star
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { tr } from '../lib/bilingual';
 
 const SERVICES = [
   {
@@ -156,8 +157,7 @@ function ServicesPage() {
                   <div className={`bg-gradient-to-br ${service.color} p-4 rounded-sm w-fit mb-6`}>
                     <service.icon className="h-10 w-10 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-white mb-2">{service.title}</h2>
-                  <p className="text-lime text-sm mb-4">{service.titleHi}</p>
+                  <h2 className="text-3xl font-bold text-white mb-2">{tr(service.title, service.titleHi)}</h2>
                   <p className="text-slate-400 text-lg mb-6">{service.description}</p>
                   
                   <ul className="space-y-3 mb-6">

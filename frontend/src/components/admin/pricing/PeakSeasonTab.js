@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { bi } from '../../../lib/bilingual';
 
 /**
  * Peak Season Tab Component
@@ -22,7 +23,7 @@ export const PeakSeasonTab = ({
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
           <TrendingUp className="h-5 w-5 text-yellow-500" />
-          Peak Season Surge / पीक सीजन सर्ज
+          {bi("Peak Season Surge / पीक सीजन सर्ज")}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">

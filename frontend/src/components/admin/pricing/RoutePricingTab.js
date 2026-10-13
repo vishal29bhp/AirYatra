@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { bi } from '../../../lib/bilingual';
 
 /**
  * Route Pricing Tab Component
@@ -23,13 +24,13 @@ export const RoutePricingTab = ({
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
           <MapPin className="h-5 w-5 text-amber" />
-          Route-Based Pricing / रूट-आधारित मूल्य
+          {bi("Route-Based Pricing / रूट-आधारित मूल्य")}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Add New Route */}
         <div className="bg-slate-700/30 rounded-lg p-4">
-          <h4 className="text-white font-medium mb-3">Add New Route / नया रूट जोड़ें</h4>
+          <h4 className="text-white font-medium mb-3">{bi("Add New Route / नया रूट जोड़ें")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
             <div>
               <Label className="text-slate-400 text-sm">From City</Label>

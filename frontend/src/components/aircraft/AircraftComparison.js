@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -179,7 +180,7 @@ export const AircraftComparison = ({ onClose }) => {
       );
       setComparisonData(response.data);
       setActiveTab('overview');
-      toast.success('Comparison ready! / तुलना तैयार है!');
+      toast.success(bi('Comparison ready! / तुलना तैयार है!'));
     } catch (error) {
       console.error('Comparison failed:', error);
       toast.error(error.response?.data?.detail || 'Comparison failed');
@@ -195,7 +196,7 @@ export const AircraftComparison = ({ onClose }) => {
           <div>
             <CardTitle className="text-white flex items-center gap-2">
               <Scale className="h-5 w-5 text-lime" />
-              AI Smart Comparison / स्मार्ट तुलना
+              {bi("AI Smart Comparison / स्मार्ट तुलना")}
             </CardTitle>
             <CardDescription>
               Compare up to 4 aircraft side-by-side to find the best option

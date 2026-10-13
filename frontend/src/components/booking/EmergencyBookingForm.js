@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import LandingPointSelector from '../shared/LandingPointSelector';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -154,17 +155,17 @@ const EmergencyBookingForm = ({
   };
 
   const urgencyLevels = config?.urgency_levels || {
-    critical: { label: 'Critical / अत्यंत जरूरी', color: 'red', surcharge_percent: 50 },
-    high: { label: 'High / उच्च', color: 'orange', surcharge_percent: 25 },
-    medium: { label: 'Medium / मध्यम', color: 'yellow', surcharge_percent: 10 }
+    critical: { label: bi('Critical / अत्यंत जरूरी'), color: 'red', surcharge_percent: 50 },
+    high: { label: bi('High / उच्च'), color: 'orange', surcharge_percent: 25 },
+    medium: { label: bi('Medium / मध्यम'), color: 'yellow', surcharge_percent: 10 }
   };
 
   const urgencyReasons = config?.urgency_reasons || {
-    medical_emergency: { label: 'Medical Emergency / चिकित्सा आपातकाल', icon: '🏥' },
-    time_critical: { label: 'Time Critical / समय-महत्वपूर्ण', icon: '⏰' },
-    vip_travel: { label: 'VIP Travel / वीआईपी यात्रा', icon: '👔' },
-    disaster_relief: { label: 'Disaster Relief / आपदा राहत', icon: '🆘' },
-    organ_transport: { label: 'Organ Transport / अंग परिवहन', icon: '❤️' }
+    medical_emergency: { label: bi('Medical Emergency / चिकित्सा आपातकाल'), icon: '🏥' },
+    time_critical: { label: bi('Time Critical / समय-महत्वपूर्ण'), icon: '⏰' },
+    vip_travel: { label: bi('VIP Travel / वीआईपी यात्रा'), icon: '👔' },
+    disaster_relief: { label: bi('Disaster Relief / आपदा राहत'), icon: '🆘' },
+    organ_transport: { label: bi('Organ Transport / अंग परिवहन'), icon: '❤️' }
   };
 
   return (
@@ -177,7 +178,7 @@ const EmergencyBookingForm = ({
           </div>
           <div>
             <h2 className="text-red-400 font-bold text-xl">
-              Emergency Booking / आपातकालीन बुकिंग
+              {bi("Emergency Booking / आपातकालीन बुकिंग")}
             </h2>
             <p className="text-red-400/70 text-sm">
               Priority queue + Instant operator notification
@@ -192,7 +193,7 @@ const EmergencyBookingForm = ({
           <CardHeader className="pb-2">
             <CardTitle className="text-white text-base flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-red-400" />
-              Urgency Level / आवश्यकता स्तर
+              {bi("Urgency Level / आवश्यकता स्तर")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -230,7 +231,7 @@ const EmergencyBookingForm = ({
           <CardHeader className="pb-2">
             <CardTitle className="text-white text-base flex items-center gap-2">
               <Heart className="h-4 w-4 text-pink-400" />
-              Reason / कारण
+              {bi("Reason / कारण")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -260,7 +261,7 @@ const EmergencyBookingForm = ({
             <CardHeader className="pb-2">
               <CardTitle className="text-white text-base flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-green-400" />
-                Pickup / पिकअप
+                {bi("Pickup / पिकअप")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -278,7 +279,7 @@ const EmergencyBookingForm = ({
             <CardHeader className="pb-2">
               <CardTitle className="text-white text-base flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-red-400" />
-                Drop / गंतव्य
+                {bi("Drop / गंतव्य")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -298,13 +299,13 @@ const EmergencyBookingForm = ({
           <CardHeader className="pb-2">
             <CardTitle className="text-white text-base flex items-center gap-2">
               <Users className="h-4 w-4 text-amber" />
-              Flight Details / उड़ान विवरण
+              {bi("Flight Details / उड़ान विवरण")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <Label className="text-slate-300 mb-2 block">Passengers / यात्री</Label>
+                <Label className="text-slate-300 mb-2 block">{bi("Passengers / यात्री")}</Label>
                 <Input
                   type="number"
                   min="1"
@@ -357,7 +358,7 @@ const EmergencyBookingForm = ({
           <CardHeader className="pb-2">
             <CardTitle className="text-white text-base flex items-center gap-2">
               <Phone className="h-4 w-4 text-green-400" />
-              Emergency Contact / आपातकालीन संपर्क
+              {bi("Emergency Contact / आपातकालीन संपर्क")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -393,7 +394,7 @@ const EmergencyBookingForm = ({
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-5 w-5 text-yellow-400 shrink-0" />
             <div className="text-yellow-400 text-sm">
-              <p className="font-medium">Emergency Surcharge Notice / आपातकालीन अधिभार</p>
+              <p className="font-medium">{bi("Emergency Surcharge Notice / आपातकालीन अधिभार")}</p>
               <p className="mt-1 text-yellow-400/70">
                 Emergency bookings include a {urgencyLevels[formData.urgency_level]?.surcharge_percent}% priority surcharge 
                 for immediate processing and dedicated operator response.

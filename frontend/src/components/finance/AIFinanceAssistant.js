@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const suggestedQueries = [
   "Show me pending payments over ₹1L",
@@ -147,7 +148,7 @@ export default function AIFinanceAssistant() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Bot className="h-7 w-7 text-purple-400" />
-            AI Finance Assistant / वित्त सहायक
+            {bi("AI Finance Assistant / वित्त सहायक")}
           </h1>
           <p className="text-slate-400 mt-1">Ask anything about your finances in natural language</p>
         </div>

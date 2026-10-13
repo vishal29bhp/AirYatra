@@ -16,6 +16,7 @@ import {
   CancellationPolicyTab,
   AuditLogsTab 
 } from './pricing';
+import { bi } from '../../lib/bilingual';
 
 /**
  * Admin Pricing Controls - Refactored
@@ -118,11 +119,11 @@ function AdminPricingControls() {
     try {
       setSaving(true);
       await pricingEngineAPI.setAdminControls(controls);
-      toast.success('✅ Admin controls saved! / एडमिन कंट्रोल्स सेव हो गए!');
+      toast.success(bi('✅ Admin controls saved! / एडमिन कंट्रोल्स सेव हो गए!'));
       loadData();
     } catch (error) {
       console.error('Failed to save admin controls:', error);
-      toast.error('Failed to save / सेव करने में विफल');
+      toast.error(bi('Failed to save / सेव करने में विफल'));
     } finally {
       setSaving(false);
     }
@@ -239,7 +240,7 @@ function AdminPricingControls() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Settings className="h-6 w-6 text-lime" />
-            Admin Pricing Controls / एडमिन प्राइसिंग कंट्रोल
+            {bi("Admin Pricing Controls / एडमिन प्राइसिंग कंट्रोल")}
           </h2>
           <p className="text-slate-400 mt-1">
             Platform-wide pricing configuration (Operators cannot edit)

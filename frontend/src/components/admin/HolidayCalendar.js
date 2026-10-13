@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function HolidayCalendar() {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -54,7 +55,7 @@ function HolidayCalendar() {
     <div className="space-y-6" data-testid="holiday-calendar">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Holiday Calendar / छुट्टी कैलेंडर</h1>
+          <h1 className="text-2xl font-bold text-white">{bi("Holiday Calendar / छुट्टी कैलेंडर")}</h1>
           <p className="text-slate-400 text-sm">Company holidays automatically count as paid days in payroll</p>
         </div>
         <div className="flex gap-2">
@@ -102,7 +103,7 @@ function HolidayCalendar() {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-sm">
-          <DialogHeader><DialogTitle>Add Holiday / छुट्टी जोड़ें</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>{bi("Add Holiday / छुट्टी जोड़ें")}</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div>
               <Label className="text-slate-300">Date</Label>

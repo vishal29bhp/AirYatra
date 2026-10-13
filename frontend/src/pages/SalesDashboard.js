@@ -7,52 +7,53 @@ import NotificationBell from '@/components/shared/NotificationBell';
 import CRMDashboard from '@/components/admin/CRMDashboard';
 import MarketingCampaigns from '@/components/admin/MarketingCampaigns';
 import ReferralSettings from '@/components/admin/ReferralSettings';
+import { bi, tr } from '../lib/bilingual';
 
 // Organized Navigation Structure - 5 Main Categories
 const navGroups = [
   {
     id: 'main',
-    label: 'Dashboard / डैशबोर्ड',
+    label: bi('Dashboard / डैशबोर्ड'),
     icon: Home,
     items: [
-      { id: 'overview', label: 'Overview / ओवरव्यू', icon: BarChart3 },
-      { id: 'targets', label: 'My Targets / मेरे लक्ष्य', icon: Target, highlight: true },
+      { id: 'overview', label: bi('Overview / ओवरव्यू'), icon: BarChart3 },
+      { id: 'targets', label: bi('My Targets / मेरे लक्ष्य'), icon: Target, highlight: true },
     ]
   },
   {
     id: 'crm',
-    label: 'CRM / सीआरएम',
+    label: bi('CRM / सीआरएम'),
     icon: Users,
     items: [
       { id: 'crm_dashboard', label: 'CRM Dashboard', icon: Users, highlight: true },
-      { id: 'leads', label: 'All Leads / सभी लीड्स', icon: Users },
-      { id: 'calls', label: 'Call Logs / कॉल लॉग', icon: Phone },
-      { id: 'tasks', label: 'Tasks / कार्य', icon: Calendar },
+      { id: 'leads', label: bi('All Leads / सभी लीड्स'), icon: Users },
+      { id: 'calls', label: bi('Call Logs / कॉल लॉग'), icon: Phone },
+      { id: 'tasks', label: bi('Tasks / कार्य'), icon: Calendar },
     ]
   },
   {
     id: 'marketing',
-    label: 'Marketing / मार्केटिंग',
+    label: bi('Marketing / मार्केटिंग'),
     icon: Megaphone,
     items: [
-      { id: 'campaigns', label: 'Campaigns / अभियान', icon: Megaphone },
-      { id: 'promotions', label: 'Promotions / प्रमोशन', icon: Gift },
+      { id: 'campaigns', label: bi('Campaigns / अभियान'), icon: Megaphone },
+      { id: 'promotions', label: bi('Promotions / प्रमोशन'), icon: Gift },
       { id: 'referral', label: 'Referral Program', icon: Gift },
     ]
   },
   {
     id: 'performance',
-    label: 'Performance / प्रदर्शन',
+    label: bi('Performance / प्रदर्शन'),
     icon: TrendingUp,
     items: [
       { id: 'my_performance', label: 'My Performance', icon: TrendingUp },
       { id: 'team_performance', label: 'Team Performance', icon: Users },
-      { id: 'incentives', label: 'My Incentives / इंसेंटिव', icon: Award, highlight: true },
+      { id: 'incentives', label: bi('My Incentives / इंसेंटिव'), icon: Award, highlight: true },
     ]
   },
   {
     id: 'reports',
-    label: 'Reports / रिपोर्ट',
+    label: bi('Reports / रिपोर्ट'),
     icon: FileText,
     items: [
       { id: 'sales_report', label: 'Sales Report', icon: FileText },
@@ -108,7 +109,7 @@ function SalesDashboard({ user, onLogout }) {
         return (
           <div className="space-y-6">
             <div>
-              <h1 className="text-2xl font-bold text-white">Sales Dashboard / सेल्स डैशबोर्ड</h1>
+              <h1 className="text-2xl font-bold text-white">{bi("Sales Dashboard / सेल्स डैशबोर्ड")}</h1>
               <p className="text-slate-400">Track leads, conversions and targets</p>
             </div>
 
@@ -117,33 +118,33 @@ function SalesDashboard({ user, onLogout }) {
               <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
                 <Users className="h-5 w-5 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.total_leads}</p>
-                <p className="text-slate-400 text-sm">Total Leads / कुल लीड्स</p>
+                <p className="text-slate-400 text-sm">{bi("Total Leads / कुल लीड्स")}</p>
               </div>
               <div className="bg-green-500/20 rounded-lg p-4 border border-green-500/50">
                 <TrendingUp className="h-5 w-5 text-green-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.converted}</p>
-                <p className="text-slate-400 text-sm">Converted / कन्वर्ट</p>
+                <p className="text-slate-400 text-sm">{bi("Converted / कन्वर्ट")}</p>
               </div>
               <div className="bg-yellow-500/20 rounded-lg p-4 border border-yellow-500/50">
                 <Phone className="h-5 w-5 text-yellow-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.pending_calls}</p>
-                <p className="text-slate-400 text-sm">Pending Calls / कॉल</p>
+                <p className="text-slate-400 text-sm">{bi("Pending Calls / कॉल")}</p>
               </div>
               <div className="bg-purple-500/20 rounded-lg p-4 border border-purple-500/50">
                 <Target className="h-5 w-5 text-purple-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.this_month_target}</p>
-                <p className="text-slate-400 text-sm">Target / लक्ष्य</p>
+                <p className="text-slate-400 text-sm">{bi("Target / लक्ष्य")}</p>
               </div>
               <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
                 <Award className="h-5 w-5 text-lime mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.achieved}</p>
-                <p className="text-slate-400 text-sm">Achieved / हासिल</p>
+                <p className="text-slate-400 text-sm">{bi("Achieved / हासिल")}</p>
               </div>
             </div>
 
             {/* Target Progress */}
             <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-              <h2 className="text-lg font-semibold text-white mb-4">Monthly Target Progress / मासिक लक्ष्य</h2>
+              <h2 className="text-lg font-semibold text-white mb-4">{bi("Monthly Target Progress / मासिक लक्ष्य")}</h2>
               <div className="flex items-center space-x-4">
                 <div className="flex-1">
                   <div className="h-4 bg-slate-700 rounded-full overflow-hidden">
@@ -159,18 +160,15 @@ function SalesDashboard({ user, onLogout }) {
             <div className="grid grid-cols-3 gap-4">
               <button onClick={() => setActiveTab('crm_dashboard')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <Users className="h-8 w-8 text-amber mb-3" />
-                <h3 className="text-lg font-semibold text-white">View CRM</h3>
-                <p className="text-slate-400 text-sm">लीड्स देखें</p>
+                <h3 className="text-lg font-semibold text-white">{tr("View CRM", "लीड्स देखें")}</h3>
               </button>
               <button onClick={() => setActiveTab('campaigns')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <Megaphone className="h-8 w-8 text-purple-400 mb-3" />
-                <h3 className="text-lg font-semibold text-white">Marketing Campaigns</h3>
-                <p className="text-slate-400 text-sm">अभियान प्रबंधित करें</p>
+                <h3 className="text-lg font-semibold text-white">{tr("Marketing Campaigns", "अभियान प्रबंधित करें")}</h3>
               </button>
               <button onClick={() => setActiveTab('referral')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <Gift className="h-8 w-8 text-green-400 mb-3" />
-                <h3 className="text-lg font-semibold text-white">Referral Program</h3>
-                <p className="text-slate-400 text-sm">रेफरल प्रोग्राम</p>
+                <h3 className="text-lg font-semibold text-white">{tr("Referral Program", "रेफरल प्रोग्राम")}</h3>
               </button>
             </div>
           </div>

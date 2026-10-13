@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calculator, Plane, MapPin, Users, DollarSign, Shield, Check, AlertCircle } from 'lucide-react';
+import { bi } from '../../lib/bilingual';
 
 const PriceSummaryStep = ({ 
   formData, 
@@ -12,7 +13,7 @@ const PriceSummaryStep = ({
     return (
       <div className="text-center py-12">
         <Calculator className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-        <p className="text-slate-400">Calculating price... / मूल्य गणना हो रही है...</p>
+        <p className="text-slate-400">{bi("Calculating price... / मूल्य गणना हो रही है...")}</p>
       </div>
     );
   }
@@ -23,19 +24,19 @@ const PriceSummaryStep = ({
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
           <Calculator className="h-5 w-5 text-green-400" />
-          Price Estimate / मूल्य अनुमान
+          {bi("Price Estimate / मूल्य अनुमान")}
         </h3>
 
         <div className="space-y-3">
           {/* Base Fare */}
           <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-            <span className="text-slate-300">Base Fare / आधार किराया</span>
+            <span className="text-slate-300">{bi("Base Fare / आधार किराया")}</span>
             <span className="text-white font-medium">₹{priceEstimate.basePrice?.toLocaleString()}</span>
           </div>
 
           {/* Distance Charge */}
           <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-            <span className="text-slate-300">Distance ({distanceKm} km) / दूरी</span>
+            <span className="text-slate-300">Distance ({distanceKm} {bi("km) / दूरी")}</span>
             <span className="text-white font-medium">₹{priceEstimate.kmPrice?.toLocaleString()}</span>
           </div>
 
@@ -44,7 +45,7 @@ const PriceSummaryStep = ({
             <div className="flex justify-between items-center p-3 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
               <span className="text-yellow-300 flex items-center gap-2">
                 <DollarSign className="h-4 w-4" />
-                Landing Charges / लैंडिंग शुल्क
+                {bi("Landing Charges / लैंडिंग शुल्क")}
               </span>
               <span className="text-yellow-400 font-medium">₹{landingRent.total.toLocaleString()}</span>
             </div>
@@ -61,20 +62,19 @@ const PriceSummaryStep = ({
 
           {/* Total */}
           <div className="flex justify-between items-center p-4 bg-green-500/10 rounded-lg border border-green-500/30">
-            <span className="text-green-300 font-semibold text-lg">Total / कुल</span>
+            <span className="text-green-300 font-semibold text-lg">{bi("Total / कुल")}</span>
             <span className="text-green-400 font-bold text-2xl">₹{priceEstimate.total?.toLocaleString()}</span>
           </div>
         </div>
 
         <p className="text-slate-500 text-xs mt-4">
-          * This is an estimate. Final price may vary based on operator quotes.
-          / यह एक अनुमान है। अंतिम मूल्य ऑपरेटर के कोटेशन पर निर्भर हो सकता है।
+          {bi("* This is an estimate. Final price may vary based on operator quotes. / यह एक अनुमान है। अंतिम मूल्य ऑपरेटर के कोटेशन पर निर्भर हो सकता है।")}
         </p>
       </div>
 
       {/* Booking Summary Card */}
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
-        <h3 className="text-white font-semibold text-lg mb-4">Booking Summary / बुकिंग सारांश</h3>
+        <h3 className="text-white font-semibold text-lg mb-4">{bi("Booking Summary / बुकिंग सारांश")}</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Aircraft */}
@@ -146,7 +146,7 @@ const PriceSummaryStep = ({
           <div className="flex items-start gap-3">
             <AlertCircle className="h-6 w-6 text-lime flex-shrink-0" />
             <div>
-              <h4 className="text-lime font-semibold">Documents Required / दस्तावेज़ आवश्यक</h4>
+              <h4 className="text-lime font-semibold">{bi("Documents Required / दस्तावेज़ आवश्यक")}</h4>
               <p className="text-slate-300 text-sm mt-1">
                 After booking confirmation, you will need to upload permission documents for village/private landing.
               </p>

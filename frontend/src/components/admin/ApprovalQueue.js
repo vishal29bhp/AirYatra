@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { approvalAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function ApprovalQueue() {
   const [approvals, setApprovals] = useState({ pending: [], approved: [], rejected: [], counts: {} });
@@ -34,7 +35,7 @@ function ApprovalQueue() {
 
   const handleAction = async () => {
     if (!remark.trim()) {
-      toast.error('Remark is required / टिप्पणी आवश्यक है');
+      toast.error(bi('Remark is required / टिप्पणी आवश्यक है'));
       return;
     }
     
@@ -44,10 +45,10 @@ function ApprovalQueue() {
         toast.success(response.data.message);
       } else if (actionType === 'reject') {
         await approvalAPI.reject(selectedApproval.id, { remark });
-        toast.success('Request rejected / अनुरोध अस्वीकृत');
+        toast.success(bi('Request rejected / अनुरोध अस्वीकृत'));
       } else if (actionType === 'escalate') {
         await approvalAPI.escalate(selectedApproval.id, { reason: remark, escalate_to: 'super_admin' });
-        toast.success('Request escalated / अनुरोध एस्केलेट किया गया');
+        toast.success(bi('Request escalated / अनुरोध एस्केलेट किया गया'));
       }
       
       setShowActionDialog(false);
@@ -77,9 +78,9 @@ function ApprovalQueue() {
 
   const getTypeLabel = (type) => {
     const labels = {
-      cancellation: 'Cancellation / रद्दीकरण',
-      settlement: 'Settlement / सेटलमेंट',
-      refund: 'Refund / वापसी',
+      cancellation: bi('Cancellation / रद्दीकरण'),
+      settlement: bi('Settlement / सेटलमेंट'),
+      refund: bi('Refund / वापसी'),
       operator_onboarding: 'Operator Onboarding'
     };
     return labels[type] || type;
@@ -106,7 +107,7 @@ function ApprovalQueue() {
             <Clock className="h-6 w-6 text-lime" />
             Approval Queue
           </h2>
-          <p className="text-slate-400">अनुमोदन कतार - Manage pending approvals</p>
+          <p className="text-slate-400">{bi("अनुमोदन कतार - Manage pending approvals")}</p>
         </div>
         <div className="flex gap-2">
           <select
@@ -170,8 +171,7 @@ function ApprovalQueue() {
       ) : currentApprovals.length === 0 ? (
         <div className="p-8 rounded-lg bg-slate-900/50 border border-slate-800 text-center">
           <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-          <p className="text-white font-medium">No {activeTab} approvals</p>
-          <p className="text-slate-400 text-sm">कोई {activeTab} अनुमोदन नहीं</p>
+          <p className="text-white font-medium">{tr(`No ${activeTab} approvals`, `कोई ${activeTab} अनुमोदन नहीं`)}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -220,13 +220,13 @@ function ApprovalQueue() {
               <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700 mb-4">
                 {approval.reason && (
                   <div className="mb-2">
-                    <p className="text-slate-500 text-xs">Reason / कारण</p>
+                    <p className="text-slate-500 text-xs">{bi("Reason / कारण")}</p>
                     <p className="text-white">{approval.reason}</p>
                   </div>
                 )}
                 {approval.refund_amount > 0 && (
                   <div className="mb-2">
-                    <p className="text-slate-500 text-xs">Refund Amount / वापसी राशि</p>
+                    <p className="text-slate-500 text-xs">{bi("Refund Amount / वापसी राशि")}</p>
                     <p className="text-green-400 font-medium">₹{approval.refund_amount?.toLocaleString()}</p>
                   </div>
                 )}
@@ -318,9 +318,9 @@ function ApprovalQueue() {
               {actionType === 'approve' && <CheckCircle className="h-5 w-5 text-green-400" />}
               {actionType === 'reject' && <XCircle className="h-5 w-5 text-red-400" />}
               {actionType === 'escalate' && <ChevronUp className="h-5 w-5 text-yellow-400" />}
-              {actionType === 'approve' && 'Approve Request / अनुरोध स्वीकृत करें'}
-              {actionType === 'reject' && 'Reject Request / अनुरोध अस्वीकृत करें'}
-              {actionType === 'escalate' && 'Escalate Request / अनुरोध एस्केलेट करें'}
+              {actionType === 'approve' && bi('Approve Request / अनुरोध स्वीकृत करें')}
+              {actionType === 'reject' && bi('Reject Request / अनुरोध अस्वीकृत करें')}
+              {actionType === 'escalate' && bi('Escalate Request / अनुरोध एस्केलेट करें')}
             </DialogTitle>
           </DialogHeader>
           
@@ -338,7 +338,7 @@ function ApprovalQueue() {
             
             <div className="space-y-2">
               <Label className="text-white">
-                {actionType === 'reject' ? 'Rejection Reason *' : 'Remark *'} / टिप्पणी *
+                {actionType === 'reject' ? tr('Rejection Reason *', 'अस्वीकृति का कारण *') : tr('Remark *', 'टिप्पणी *')}
               </Label>
               <textarea
                 value={remark}

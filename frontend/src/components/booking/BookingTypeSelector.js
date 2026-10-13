@@ -6,6 +6,7 @@ import {
   Users, AlertTriangle, PartyPopper, CheckCircle, Info, IndianRupee
 } from 'lucide-react';
 import { bookingTypes } from './bookingConfig';
+import { bi, tr } from '../../lib/bilingual';
 
 /**
  * Booking Type Selector Component
@@ -58,7 +59,7 @@ export const BookingTypeSelector = ({
       <div className="flex items-center justify-between">
         <label className="text-white font-medium flex items-center gap-2">
           <Route className="h-5 w-5 text-lime" />
-          Booking Type / बुकिंग प्रकार
+          {bi("Booking Type / बुकिंग प्रकार")}
         </label>
         {selected && (
           <Badge className="bg-green-500/20 text-green-400">
@@ -101,8 +102,7 @@ export const BookingTypeSelector = ({
               </div>
               
               {/* Labels */}
-              <span className="text-xs font-medium block truncate">{type.label}</span>
-              <span className="text-xs text-slate-500 block truncate">{type.labelHi}</span>
+              <span className="text-xs font-medium block truncate">{tr(type.label, type.labelHi)}</span>
               
               {/* Discount/Surcharge Badge */}
               {type.discountHint && (
@@ -157,13 +157,10 @@ export const BookingTypeSelector = ({
                 </div>
                 <div className="flex-1">
                   <h4 className="text-white font-semibold">
-                    {type.label} / {type.labelHi}
+                    {tr(type.label, type.labelHi)}
                   </h4>
                   <p className="text-slate-400 text-sm mt-1">
-                    {type.description}
-                  </p>
-                  <p className="text-slate-500 text-xs">
-                    {type.descriptionHi}
+                    {tr(type.description, type.descriptionHi)}
                   </p>
                   
                   {/* Constraints */}
@@ -220,8 +217,7 @@ export const BookingTypeSelector = ({
       {/* Helper Text */}
       <p className="text-xs text-slate-500 flex items-start gap-1">
         <Info className="h-3 w-3 mt-0.5 flex-shrink-0" />
-        Select your booking type. Prices adjust based on duration, group size, and urgency.
-        / अपना बुकिंग प्रकार चुनें। कीमतें अवधि, समूह आकार और तात्कालिकता के आधार पर समायोजित होती हैं।
+        {bi("Select your booking type. Prices adjust based on duration, group size, and urgency. / अपना बुकिंग प्रकार चुनें। कीमतें अवधि, समूह आकार और तात्कालिकता के आधार पर समायोजित होती हैं।")}
       </p>
     </div>
   );

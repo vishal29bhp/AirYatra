@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { inquiryBroadcastAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function InquiryNotifications({ operator }) {
   const [inquiries, setInquiries] = useState([]);
@@ -44,7 +45,7 @@ function InquiryNotifications({ operator }) {
     setProcessing(true);
     try {
       await inquiryBroadcastAPI.acceptInquiry(selectedInquiry.id, { remark: acceptRemark });
-      toast.success('🎉 Inquiry accepted! Customer will be notified. / पूछताछ स्वीकार!');
+      toast.success(bi('🎉 Inquiry accepted! Customer will be notified. / पूछताछ स्वीकार!'));
       setShowAcceptDialog(false);
       setAcceptRemark('');
       loadInquiries();
@@ -61,7 +62,7 @@ function InquiryNotifications({ operator }) {
     setProcessing(true);
     try {
       await inquiryBroadcastAPI.rejectInquiry(selectedInquiry.id, { reason: rejectReason });
-      toast.success('Inquiry rejected / पूछताछ अस्वीकार');
+      toast.success(bi('Inquiry rejected / पूछताछ अस्वीकार'));
       setShowRejectDialog(false);
       setRejectReason('');
       loadInquiries();
@@ -94,7 +95,7 @@ function InquiryNotifications({ operator }) {
   const handleReviseQuote = async () => {
     if (!selectedInquiry) return;
     if (!reviseData.amount || reviseData.amount <= 0) {
-      toast.error('Please enter valid amount / कृपया वैध राशि दर्ज करें');
+      toast.error(bi('Please enter valid amount / कृपया वैध राशि दर्ज करें'));
       return;
     }
     
@@ -104,7 +105,7 @@ function InquiryNotifications({ operator }) {
         amount: parseFloat(reviseData.amount),
         notes: reviseData.notes
       });
-      toast.success('💰 Revised quote sent to customer! / संशोधित कोट भेजा गया!');
+      toast.success(bi('💰 Revised quote sent to customer! / संशोधित कोट भेजा गया!'));
       setShowReviseDialog(false);
       setReviseData({ amount: '', notes: '' });
       loadInquiries();
@@ -157,7 +158,7 @@ function InquiryNotifications({ operator }) {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Bell className="h-6 w-6 text-lime" />
-            New Booking Inquiries / नई बुकिंग पूछताछ
+            {bi("New Booking Inquiries / नई बुकिंग पूछताछ")}
           </h2>
           <p className="text-slate-400 mt-1">
             Accept or reject booking requests within 500km of your location
@@ -178,7 +179,7 @@ function InquiryNotifications({ operator }) {
       {inquiries.length === 0 ? (
         <div className="text-center py-16 bg-slate-900/50 rounded-sm border border-slate-800">
           <Bell className="h-16 w-16 text-slate-600 mx-auto mb-4" />
-          <p className="text-slate-400 text-lg">No new inquiries / कोई नई पूछताछ नहीं</p>
+          <p className="text-slate-400 text-lg">{bi("No new inquiries / कोई नई पूछताछ नहीं")}</p>
           <p className="text-slate-500 text-sm mt-2">
             New booking requests from customers within 500km will appear here
           </p>
@@ -337,7 +338,7 @@ function InquiryNotifications({ operator }) {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Check className="h-5 w-5 text-green-400" />
-              Accept Inquiry / पूछताछ स्वीकार करें
+              {bi("Accept Inquiry / पूछताछ स्वीकार करें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
@@ -348,7 +349,7 @@ function InquiryNotifications({ operator }) {
               </p>
             </div>
             <div className="space-y-2">
-              <Label className="text-slate-300">Remark (Optional) / टिप्पणी</Label>
+              <Label className="text-slate-300">{bi("Remark (Optional) / टिप्पणी")}</Label>
               <Input
                 value={acceptRemark}
                 onChange={(e) => setAcceptRemark(e.target.value)}
@@ -377,24 +378,24 @@ function InquiryNotifications({ operator }) {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <X className="h-5 w-5 text-red-400" />
-              Reject Inquiry / पूछताछ अस्वीकार करें
+              {bi("Reject Inquiry / पूछताछ अस्वीकार करें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label className="text-slate-300">Reason (Optional) / कारण</Label>
+              <Label className="text-slate-300">{bi("Reason (Optional) / कारण")}</Label>
               <select
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
                 className="w-full px-3 py-2 rounded-md bg-slate-800 border border-slate-700 text-white"
               >
                 <option value="">Select reason...</option>
-                <option value="no_aircraft_available">No aircraft available / विमान उपलब्ध नहीं</option>
-                <option value="date_conflict">Date conflict / तारीख संघर्ष</option>
-                <option value="route_not_serviceable">Route not serviceable / मार्ग सेवा योग्य नहीं</option>
-                <option value="price_mismatch">Price expectations too low / कम बजट</option>
-                <option value="too_far">Location too far / बहुत दूर</option>
-                <option value="other">Other reason / अन्य कारण</option>
+                <option value="no_aircraft_available">{bi("No aircraft available / विमान उपलब्ध नहीं")}</option>
+                <option value="date_conflict">{bi("Date conflict / तारीख संघर्ष")}</option>
+                <option value="route_not_serviceable">{bi("Route not serviceable / मार्ग सेवा योग्य नहीं")}</option>
+                <option value="price_mismatch">{bi("Price expectations too low / कम बजट")}</option>
+                <option value="too_far">{bi("Location too far / बहुत दूर")}</option>
+                <option value="other">{bi("Other reason / अन्य कारण")}</option>
               </select>
             </div>
           </div>
@@ -418,7 +419,7 @@ function InquiryNotifications({ operator }) {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <DollarSign className="h-5 w-5 text-lime" />
-              Send Revised Quote / संशोधित कोट भेजें
+              {bi("Send Revised Quote / संशोधित कोट भेजें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
@@ -430,7 +431,7 @@ function InquiryNotifications({ operator }) {
             </div>
             
             <div className="space-y-2">
-              <Label className="text-slate-300">Your Quote Amount (₹) / आपकी कोट राशि *</Label>
+              <Label className="text-slate-300">{bi("Your Quote Amount (₹) / आपकी कोट राशि *")}</Label>
               <Input
                 type="number"
                 value={reviseData.amount}
@@ -441,7 +442,7 @@ function InquiryNotifications({ operator }) {
             </div>
             
             <div className="space-y-2">
-              <Label className="text-slate-300">Notes for Customer (Optional) / टिप्पणी</Label>
+              <Label className="text-slate-300">{bi("Notes for Customer (Optional) / टिप्पणी")}</Label>
               <textarea
                 value={reviseData.notes}
                 onChange={(e) => setReviseData(prev => ({ ...prev, notes: e.target.value }))}

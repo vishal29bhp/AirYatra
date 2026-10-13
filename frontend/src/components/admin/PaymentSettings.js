@@ -5,19 +5,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { settingsAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 // Booking Purpose Options with default payment percentages
 const DEFAULT_PAYMENT_RULES = [
-  { purpose: 'wedding', label: 'Wedding / शादी', icon: '💒', advance_percent: 50, can_pay_later: true },
-  { purpose: 'temple_yatra', label: 'Temple Yatra / मंदिर यात्रा', icon: '🛕', advance_percent: 50, can_pay_later: true },
-  { purpose: 'company_tour', label: 'Corporate Tour / कॉर्पोरेट टूर', icon: '🏢', advance_percent: 50, can_pay_later: true },
-  { purpose: 'election_tour', label: 'Election Campaign / चुनाव प्रचार', icon: '🗳️', advance_percent: 100, can_pay_later: false },
-  { purpose: 'medical_emergency', label: 'Medical Emergency / मेडिकल', icon: '🏥', advance_percent: 100, can_pay_later: false },
-  { purpose: 'film_shooting', label: 'Film Shooting / फिल्म शूटिंग', icon: '🎬', advance_percent: 50, can_pay_later: true },
-  { purpose: 'general_tour', label: 'General Tour / सामान्य यात्रा', icon: '✈️', advance_percent: 50, can_pay_later: true },
-  { purpose: 'pilgrimage', label: 'Pilgrimage / तीर्थ यात्रा', icon: '🙏', advance_percent: 50, can_pay_later: true },
-  { purpose: 'business', label: 'Business Meeting / बिज़नेस', icon: '💼', advance_percent: 50, can_pay_later: true },
-  { purpose: 'other', label: 'Other / अन्य', icon: '📝', advance_percent: 100, can_pay_later: false },
+  { purpose: 'wedding', label: bi('Wedding / शादी'), icon: '💒', advance_percent: 50, can_pay_later: true },
+  { purpose: 'temple_yatra', label: bi('Temple Yatra / मंदिर यात्रा'), icon: '🛕', advance_percent: 50, can_pay_later: true },
+  { purpose: 'company_tour', label: bi('Corporate Tour / कॉर्पोरेट टूर'), icon: '🏢', advance_percent: 50, can_pay_later: true },
+  { purpose: 'election_tour', label: bi('Election Campaign / चुनाव प्रचार'), icon: '🗳️', advance_percent: 100, can_pay_later: false },
+  { purpose: 'medical_emergency', label: bi('Medical Emergency / मेडिकल'), icon: '🏥', advance_percent: 100, can_pay_later: false },
+  { purpose: 'film_shooting', label: bi('Film Shooting / फिल्म शूटिंग'), icon: '🎬', advance_percent: 50, can_pay_later: true },
+  { purpose: 'general_tour', label: bi('General Tour / सामान्य यात्रा'), icon: '✈️', advance_percent: 50, can_pay_later: true },
+  { purpose: 'pilgrimage', label: bi('Pilgrimage / तीर्थ यात्रा'), icon: '🙏', advance_percent: 50, can_pay_later: true },
+  { purpose: 'business', label: bi('Business Meeting / बिज़नेस'), icon: '💼', advance_percent: 50, can_pay_later: true },
+  { purpose: 'other', label: bi('Other / अन्य'), icon: '📝', advance_percent: 100, can_pay_later: false },
 ];
 
 function PaymentSettings() {
@@ -74,7 +75,7 @@ function PaymentSettings() {
         payment_rules: paymentRules,
         global_settings: globalSettings,
       });
-      toast.success('✅ Payment settings saved! / भुगतान सेटिंग्स सहेजी गईं!');
+      toast.success(bi('✅ Payment settings saved! / भुगतान सेटिंग्स सहेजी गईं!'));
     } catch (error) {
       toast.error('Failed to save settings');
     } finally {
@@ -97,7 +98,7 @@ function PaymentSettings() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <CreditCard className="h-6 w-6 text-lime" />
-            Payment Settings / भुगतान सेटिंग्स
+            {bi("Payment Settings / भुगतान सेटिंग्स")}
           </h2>
           <p className="text-slate-400 text-sm mt-1">
             Configure advance payment percentages by booking purpose
@@ -111,7 +112,7 @@ function PaymentSettings() {
 
       {/* Global Settings */}
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
-        <h3 className="text-lg font-semibold text-white mb-4">Global Settings / सामान्य सेटिंग्स</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{bi("Global Settings / सामान्य सेटिंग्स")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <Label className="text-slate-300">Default Advance %</Label>
@@ -162,10 +163,7 @@ function PaymentSettings() {
       <div className="bg-amber/10 rounded-sm p-4 border border-amber/30">
         <p className="text-amber flex items-center gap-2">
           <AlertCircle className="h-5 w-5" />
-          Set advance payment % for each booking purpose. 100% means full payment required, 50% means half advance.
-        </p>
-        <p className="text-slate-300 text-sm mt-1">
-          प्रत्येक बुकिंग उद्देश्य के लिए अग्रिम भुगतान % सेट करें। 100% = पूरा भुगतान, 50% = आधा अग्रिम।
+          {tr("Set advance payment % for each booking purpose. 100% means full payment required, 50% means half advance.", "प्रत्येक बुकिंग उद्देश्य के लिए अग्रिम भुगतान % सेट करें। 100% = पूरा भुगतान, 50% = आधा अग्रिम।")}
         </p>
       </div>
 
@@ -174,7 +172,7 @@ function PaymentSettings() {
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <Plane className="h-5 w-5 text-lime" />
-            Payment Rules by Booking Purpose / बुकिंग उद्देश्य के अनुसार
+            {bi("Payment Rules by Booking Purpose / बुकिंग उद्देश्य के अनुसार")}
           </h3>
         </div>
         
@@ -233,7 +231,7 @@ function PaymentSettings() {
       <div className="flex justify-end">
         <Button onClick={handleSave} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
           {saving ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
-          Save All Settings / सभी सेटिंग्स सहेजें
+          {bi("Save All Settings / सभी सेटिंग्स सहेजें")}
         </Button>
       </div>
     </div>

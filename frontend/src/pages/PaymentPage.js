@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api, { customerAPI, paymentsAPI, bookingAPI } from '../services/api';
 import { toast } from 'sonner';
+import { bi, tr, isHindi } from '../lib/bilingual';
 
 function PaymentPage({ user }) {
   const { inquiryId } = useParams();
@@ -61,9 +62,9 @@ function PaymentPage({ user }) {
       const res = await api.post('/loyalty/vouchers/validate', { code: trimmed });
       setAppliedVoucher(res.data);
       setVoucherCode(res.data.code);
-      toast.success(`🎫 ${res.data.reward_name} applied! / वाउचर लागू हुआ!`);
+      toast.success(bi(`🎫 ${res.data.reward_name} applied! / वाउचर लागू हुआ!`));
     } catch (e) {
-      toast.error(e.response?.data?.detail || 'Invalid voucher code / अमान्य वाउचर कोड');
+      toast.error(e.response?.data?.detail || bi('Invalid voucher code / अमान्य वाउचर कोड'));
     } finally {
       setApplying(false);
     }
@@ -84,7 +85,7 @@ function PaymentPage({ user }) {
       setInquiry(statusRes.data.inquiry);
       setPaymentInfo(paymentRes.data);
     } catch (error) {
-      toast.error('Failed to load payment details / भुगतान विवरण लोड नहीं हुआ');
+      toast.error(bi('Failed to load payment details / भुगतान विवरण लोड नहीं हुआ'));
       console.error(error);
     } finally {
       setLoading(false);
@@ -128,13 +129,13 @@ function PaymentPage({ user }) {
         payment_type: isBalance ? 'balance' : 'advance',
       });
       if (res.data.checkout_url) {
-        toast.info('Redirecting to secure Stripe checkout... / सुरक्षित भुगतान पेज पर जा रहे हैं');
+        toast.info(bi('Redirecting to secure Stripe checkout... / सुरक्षित भुगतान पेज पर जा रहे हैं'));
         window.location.href = res.data.checkout_url;
       } else {
         throw new Error('Failed to create checkout session');
       }
     } catch (error) {
-      toast.error(error.response?.data?.detail || error.message || 'Payment failed / भुगतान विफल');
+      toast.error(error.response?.data?.detail || error.message || bi('Payment failed / भुगतान विफल'));
       setProcessing(false);
     }
   };
@@ -189,8 +190,7 @@ function PaymentPage({ user }) {
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-white">Complete Payment</h1>
-            <p className="text-slate-400">भुगतान पूरा करें</p>
+            <h1 className="text-2xl font-bold text-white">{tr("Complete Payment", "भुगतान पूरा करें")}</h1>
           </div>
         </div>
 
@@ -198,7 +198,7 @@ function PaymentPage({ user }) {
         <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Plane className="h-5 w-5 text-lime" />
-            Booking Summary / बुकिंग सारांश
+            {bi("Booking Summary / बुकिंग सारांश")}
           </h3>
           
           <div className="space-y-3 text-sm">
@@ -232,13 +232,13 @@ function PaymentPage({ user }) {
         {/* Payment Amount */}
         <div className="bg-lime/20 rounded-sm p-6 border border-lime/30 mb-6" data-testid="payment-amount-card">
           <div className="text-center">
-            <p className="text-slate-400 text-sm">{isBalance ? 'Remaining Balance Payment / शेष राशि भुगतान' : `Amount to Pay Now (${advancePercent}% Advance)`}</p>
+            <p className="text-slate-400 text-sm">{isBalance ? bi('Remaining Balance Payment / शेष राशि भुगतान') : `Amount to Pay Now (${advancePercent}% Advance)`}</p>
             {voucherDiscount > 0 ? (
               <>
                 <p className="text-slate-500 line-through text-lg mt-2" data-testid="original-amount">₹{advanceAmount?.toLocaleString()}</p>
                 <p className="text-4xl font-bold text-white" data-testid="payable-amount">₹{payableAmount?.toLocaleString()}</p>
                 <p className="text-green-400 text-sm mt-1" data-testid="voucher-discount-line">
-                  🎫 Voucher discount / वाउचर छूट: −₹{voucherDiscount.toLocaleString()}
+                  {bi("🎫 Voucher discount / वाउचर छूट: −₹")}{voucherDiscount.toLocaleString()}
                 </p>
               </>
             ) : (
@@ -249,12 +249,12 @@ function PaymentPage({ user }) {
             
             {advancePercent < 100 && remainingAmount > 0 && (
               <div className="mt-4 pt-4 border-t border-lime/30">
-                <p className="text-slate-400 text-sm">
+                {!isHindi() && (<p className="text-slate-400 text-sm">
                   Remaining amount ₹{remainingAmount?.toLocaleString()} to be paid before flight
-                </p>
-                <p className="text-slate-500 text-xs mt-1">
+                </p>)}
+                {isHindi() && (<p className="text-slate-500 text-xs mt-1">
                   शेष राशि उड़ान से पहले देनी होगी
-                </p>
+                </p>)}
               </div>
             )}
           </div>
@@ -265,7 +265,7 @@ function PaymentPage({ user }) {
         <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6" data-testid="voucher-section">
           <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
             <Ticket className="h-5 w-5 text-lime" />
-            Apply Loyalty Voucher / वाउचर लगाएं
+            {bi("Apply Loyalty Voucher / वाउचर लगाएं")}
           </h3>
           {appliedVoucher ? (
             <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-sm px-4 py-3" data-testid="applied-voucher">
@@ -301,7 +301,7 @@ function PaymentPage({ user }) {
               </div>
               {myVouchers.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-slate-500 text-xs mb-2">Your active vouchers / आपके वाउचर:</p>
+                  <p className="text-slate-500 text-xs mb-2">{bi("Your active vouchers / आपके वाउचर:")}</p>
                   <div className="flex flex-wrap gap-2">
                     {myVouchers.map(v => (
                       <button
@@ -324,7 +324,7 @@ function PaymentPage({ user }) {
         {/* Payment Methods */}
         <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6">
           <h3 className="text-lg font-semibold text-white mb-4">
-            Select Payment Method / भुगतान विधि चुनें
+            {bi("Select Payment Method / भुगतान विधि चुनें")}
           </h3>
           
           <div className="space-y-3">

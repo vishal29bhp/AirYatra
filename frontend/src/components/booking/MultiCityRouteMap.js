@@ -5,6 +5,7 @@ import { MapPin, Navigation, Plane, Clock, ArrowRight, ZoomIn, ZoomOut, Maximize
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import 'leaflet/dist/leaflet.css';
+import { bi, tr } from '../../lib/bilingual';
 
 // Fix Leaflet default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -164,7 +165,7 @@ const MultiCityRouteMap = ({
         <div className="flex items-center justify-between p-3 border-b border-slate-700">
           <div className="flex items-center gap-2">
             <Navigation className="h-5 w-5 text-lime" />
-            <span className="text-white font-medium">Route Map / रूट मैप</span>
+            <span className="text-white font-medium">{bi("Route Map / रूट मैप")}</span>
             <Badge className="bg-slate-600 text-slate-300 ml-2">
               Select destinations
             </Badge>
@@ -191,8 +192,7 @@ const MultiCityRouteMap = ({
           <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
             <div className="text-center">
               <MapPin className="h-10 w-10 mx-auto mb-2 text-lime opacity-70" />
-              <p className="text-white font-medium">Add destinations to see route</p>
-              <p className="text-slate-400 text-sm mt-1">रूट देखने के लिए गंतव्य जोड़ें</p>
+              <p className="text-white font-medium">{tr("Add destinations to see route", "रूट देखने के लिए गंतव्य जोड़ें")}</p>
             </div>
           </div>
         </div>
@@ -206,7 +206,7 @@ const MultiCityRouteMap = ({
       <div className="flex items-center justify-between p-3 border-b border-slate-700">
         <div className="flex items-center gap-2">
           <Navigation className="h-5 w-5 text-lime" />
-          <span className="text-white font-medium">Route Map / रूट मैप</span>
+          <span className="text-white font-medium">{bi("Route Map / रूट मैप")}</span>
           <Badge className="bg-amber/20 text-amber ml-2">
             {legs.length} Legs
           </Badge>

@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { bi } from '../../../lib/bilingual';
 
 /**
  * Commission & Fees Tab Component
@@ -15,7 +16,7 @@ export const CommissionFeesTab = ({ controls, setControls }) => {
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
           <Percent className="h-5 w-5 text-green-500" />
-          Commission & Platform Fees / कमीशन और प्लेटफॉर्म शुल्क
+          {bi("Commission & Platform Fees / कमीशन और प्लेटफॉर्म शुल्क")}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -47,7 +48,7 @@ export const CommissionFeesTab = ({ controls, setControls }) => {
 
         {/* Platform Fees */}
         <div className="bg-slate-700/30 rounded-lg p-4">
-          <h4 className="text-white font-medium mb-4">Platform Fees / प्लेटफॉर्म शुल्क</h4>
+          <h4 className="text-white font-medium mb-4">{bi("Platform Fees / प्लेटफॉर्म शुल्क")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <Label className="text-slate-400 text-sm">Convenience Fee (%)</Label>
@@ -88,7 +89,7 @@ export const CommissionFeesTab = ({ controls, setControls }) => {
 
         {/* GST Settings */}
         <div className="bg-slate-700/30 rounded-lg p-4">
-          <h4 className="text-white font-medium mb-4">GST Configuration / जीएसटी विन्यास</h4>
+          <h4 className="text-white font-medium mb-4">{bi("GST Configuration / जीएसटी विन्यास")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <Label className="text-slate-400 text-sm">GST (%)</Label>

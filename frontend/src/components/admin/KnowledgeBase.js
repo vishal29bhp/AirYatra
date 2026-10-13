@@ -3,6 +3,7 @@ import { BookOpen, FileText, HelpCircle, Video, Plus, Edit, Trash2, Eye, Search,
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api from '@/services/api';
+import { tr } from '../../lib/bilingual';
 
 function KnowledgeBase() {
   const [stats, setStats] = useState(null);
@@ -266,8 +267,7 @@ function KnowledgeBase() {
                   <BookOpen className="h-5 w-5 text-lime" />
                 </div>
                 <div>
-                  <h3 className="text-white font-medium">{cat.name}</h3>
-                  <p className="text-slate-400 text-sm">{cat.name_hi}</p>
+                  <h3 className="text-white font-medium">{tr(cat.name, cat.name_hi)}</h3>
                 </div>
               </div>
               <ChevronRight className="h-5 w-5 text-slate-500" />

@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function WeatherDashboard() {
   const [loading, setLoading] = useState(false);
@@ -109,7 +110,7 @@ function WeatherDashboard() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Cloud className="h-6 w-6 text-amber" />
-            Weather & Flight Safety / मौसम
+            {bi("Weather & Flight Safety / मौसम")}
           </h2>
           <p className="text-slate-400 mt-1">Check weather conditions and flight safety assessments</p>
         </div>
@@ -292,7 +293,7 @@ function WeatherDashboard() {
           <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="text-white font-medium mb-3">Origin / उड़ान का स्थान</h4>
+                <h4 className="text-white font-medium mb-3">{bi("Origin / उड़ान का स्थान")}</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <Label className="text-slate-400 text-sm">Latitude</Label>
@@ -317,7 +318,7 @@ function WeatherDashboard() {
                 </div>
               </div>
               <div>
-                <h4 className="text-white font-medium mb-3">Destination / गंतव्य</h4>
+                <h4 className="text-white font-medium mb-3">{bi("Destination / गंतव्य")}</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <Label className="text-slate-400 text-sm">Latitude</Label>

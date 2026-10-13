@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -239,7 +240,7 @@ function CustomerKYCUpload({ user }) {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Shield className="h-6 w-6 text-green-400" />
-            KYC Documents / केवाईसी दस्तावेज़
+            {bi("KYC Documents / केवाईसी दस्तावेज़")}
           </h2>
           <p className="text-slate-400 mt-1">Upload identity documents for verification</p>
         </div>
@@ -262,7 +263,7 @@ function CustomerKYCUpload({ user }) {
           )}
           <div>
             <h3 className={`text-lg font-semibold ${kycComplete ? 'text-green-400' : 'text-yellow-400'}`}>
-              {kycComplete ? 'KYC Complete / केवाईसी पूर्ण' : 'KYC Incomplete / केवाईसी अधूरा'}
+              {kycComplete ? bi('KYC Complete / केवाईसी पूर्ण') : bi('KYC Incomplete / केवाईसी अधूरा')}
             </h3>
             <p className="text-slate-400">
               {kycComplete 
@@ -276,7 +277,7 @@ function CustomerKYCUpload({ user }) {
 
       {/* Documents List */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-white">Your Documents / आपके दस्तावेज़</h3>
+        <h3 className="text-lg font-semibold text-white">{bi("Your Documents / आपके दस्तावेज़")}</h3>
         
         {loading ? (
           <div className="flex items-center justify-center h-40">
@@ -315,8 +316,7 @@ function CustomerKYCUpload({ user }) {
                       </div>
                       <div>
                         <h4 className="text-white font-medium">
-                          {docType?.name || doc.document_type} 
-                          {docType?.name_hi && <span className="text-slate-400 ml-2">/ {docType.name_hi}</span>}
+                          {docType ? tr(docType.name, docType.name_hi) : doc.document_type}
                         </h4>
                         <p className="text-slate-400 text-sm">
                           Number: {doc.document_number?.slice(0, 4)}****{doc.document_number?.slice(-4)}
@@ -369,7 +369,7 @@ function CustomerKYCUpload({ user }) {
 
       {/* Available Document Types */}
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
-        <h3 className="text-lg font-semibold text-white mb-4">Accepted Documents / स्वीकृत दस्तावेज़</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{bi("Accepted Documents / स्वीकृत दस्तावेज़")}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {documentTypes.map(type => {
             const isUploaded = documents.some(d => d.document_type === type.code);
@@ -384,14 +384,13 @@ function CustomerKYCUpload({ user }) {
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-white text-sm font-medium">{type.name}</span>
+                  <span className="text-white text-sm font-medium">{tr(type.name, type.name_hi)}</span>
                   {isVerified ? (
                     <CheckCircle className="h-4 w-4 text-green-400" />
                   ) : isUploaded ? (
                     <Clock className="h-4 w-4 text-amber" />
                   ) : null}
                 </div>
-                {type.name_hi && <p className="text-slate-400 text-xs">{type.name_hi}</p>}
                 {type.is_mandatory && (
                   <span className="text-xs text-red-400">Required</span>
                 )}
@@ -421,7 +420,7 @@ function CustomerKYCUpload({ user }) {
             <div className="space-y-4">
               {/* Document Type */}
               <div>
-                <Label className="text-white">Document Type / दस्तावेज़ प्रकार *</Label>
+                <Label className="text-white">{bi("Document Type / दस्तावेज़ प्रकार *")}</Label>
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
@@ -429,7 +428,7 @@ function CustomerKYCUpload({ user }) {
                 >
                   {documentTypes.map(type => (
                     <option key={type.code} value={type.code}>
-                      {type.name} {type.name_hi ? `/ ${type.name_hi}` : ''}
+                      {tr(type.name, type.name_hi)}
                       {type.verification_api ? ' (Auto-Verify)' : ''}
                     </option>
                   ))}
@@ -438,7 +437,7 @@ function CustomerKYCUpload({ user }) {
 
               {/* Document Number */}
               <div>
-                <Label className="text-white">Document Number / नंबर *</Label>
+                <Label className="text-white">{bi("Document Number / नंबर *")}</Label>
                 <Input
                   value={documentNumber}
                   onChange={(e) => setDocumentNumber(e.target.value)}
@@ -452,7 +451,7 @@ function CustomerKYCUpload({ user }) {
               {/* Expiry Date (if applicable) */}
               {selectedDocType?.has_expiry && (
                 <div>
-                  <Label className="text-white">Expiry Date / समाप्ति तिथि *</Label>
+                  <Label className="text-white">{bi("Expiry Date / समाप्ति तिथि *")}</Label>
                   <Input
                     type="date"
                     value={expiryDate}
@@ -464,7 +463,7 @@ function CustomerKYCUpload({ user }) {
 
               {/* File Upload */}
               <div>
-                <Label className="text-white">Document File / फ़ाइल *</Label>
+                <Label className="text-white">{bi("Document File / फ़ाइल *")}</Label>
                 <div className="mt-1 border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-green-500/50 transition-colors relative">
                   {file ? (
                     <div className="flex items-center justify-center gap-3">

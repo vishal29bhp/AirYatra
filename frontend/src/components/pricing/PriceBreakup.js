@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -217,7 +218,7 @@ export const CustomerPriceBreakup = ({
         <CardTitle className="text-white flex items-center justify-between">
           <span className="flex items-center gap-2">
             <Receipt className="h-5 w-5 text-lime" />
-            Price Breakup / मूल्य विवरण
+            {bi("Price Breakup / मूल्य विवरण")}
           </span>
           <Button 
             variant="ghost" 
@@ -245,7 +246,7 @@ export const CustomerPriceBreakup = ({
             
             {/* Subtotal */}
             <div className="flex justify-between text-sm border-t border-slate-700 pt-2">
-              <span className="text-slate-400">Subtotal / उप-योग</span>
+              <span className="text-slate-400">{bi("Subtotal / उप-योग")}</span>
               <span className="text-white">₹ {breakup.subtotal.toLocaleString()}</span>
             </div>
             
@@ -274,8 +275,8 @@ export const CustomerPriceBreakup = ({
         {/* Grand Total */}
         <div className="flex justify-between items-center pt-3 border-t border-slate-700">
           <div>
-            <span className="text-white font-semibold">Grand Total / कुल राशि</span>
-            <p className="text-slate-500 text-xs">Includes all taxes / सभी कर शामिल</p>
+            <span className="text-white font-semibold">{bi("Grand Total / कुल राशि")}</span>
+            <p className="text-slate-500 text-xs">{bi("Includes all taxes / सभी कर शामिल")}</p>
           </div>
           <span className="text-3xl font-bold text-green-400 flex items-center">
             <IndianRupee className="h-6 w-6" />
@@ -362,7 +363,7 @@ export const OperatorSettlementView = ({
         <CardTitle className="text-white flex items-center justify-between">
           <span className="flex items-center gap-2">
             <IndianRupee className="h-5 w-5 text-green-400" />
-            Your Settlement / आपका भुगतान
+            {bi("Your Settlement / आपका भुगतान")}
           </span>
           <Button 
             variant="ghost" 
@@ -403,7 +404,7 @@ export const OperatorSettlementView = ({
             
             {/* Deductions */}
             <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
-              <h4 className="text-red-400 text-sm font-medium mb-2">Deductions / कटौती</h4>
+              <h4 className="text-red-400 text-sm font-medium mb-2">{bi("Deductions / कटौती")}</h4>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">{settlement.deductions?.platform_commission?.label}</span>
                 <span className="text-red-400">- ₹ {settlement.deductions?.platform_commission?.amount?.toLocaleString()}</span>

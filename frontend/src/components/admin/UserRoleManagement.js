@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { userManagementAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 const ROLES = [
   { id: 'regional_manager', name: 'Regional Manager', name_hi: 'क्षेत्रीय प्रबंधक', color: 'blue' },
@@ -63,7 +64,7 @@ function UserRoleManagement() {
     
     try {
       await userManagementAPI.createUser(formData);
-      toast.success('User created successfully / यूजर बनाया गया');
+      toast.success(bi('User created successfully / यूजर बनाया गया'));
       setShowCreateDialog(false);
       resetForm();
       loadUsers();
@@ -176,7 +177,7 @@ function UserRoleManagement() {
             <Users className="h-6 w-6 text-lime" />
             User & Role Management
           </h2>
-          <p className="text-slate-400">यूजर और भूमिका प्रबंधन - Manage internal users and their roles</p>
+          <p className="text-slate-400">{bi("यूजर और भूमिका प्रबंधन - Manage internal users and their roles")}</p>
         </div>
         <div className="flex gap-2">
           <Button onClick={loadUsers} variant="outline" className="border-slate-700">
@@ -198,7 +199,7 @@ function UserRoleManagement() {
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search users... / यूजर खोजें..."
+              placeholder={bi("Search users... / यूजर खोजें...")}
               className="pl-10 bg-slate-800 border-slate-700"
             />
           </div>
@@ -316,7 +317,7 @@ function UserRoleManagement() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-lime" />
-              Create Internal User / आंतरिक यूजर बनाएं
+              {bi("Create Internal User / आंतरिक यूजर बनाएं")}
             </DialogTitle>
           </DialogHeader>
           
@@ -395,7 +396,7 @@ function UserRoleManagement() {
                         : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
                     }`}
                   >
-                    {role.name} / {role.name_hi}
+                    {tr(role.name, role.name_hi)}
                   </button>
                 ))}
               </div>
@@ -417,7 +418,7 @@ function UserRoleManagement() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Edit className="h-5 w-5 text-lime" />
-              Edit User / यूजर संपादित करें
+              {bi("Edit User / यूजर संपादित करें")}
             </DialogTitle>
           </DialogHeader>
           

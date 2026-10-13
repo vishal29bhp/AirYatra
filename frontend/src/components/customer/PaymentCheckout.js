@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api, { paymentsAPI, bookingAPI } from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -178,7 +179,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
       {/* Loyalty Voucher */}
       <div className="p-4 rounded-sm bg-slate-800/50 border border-slate-700" data-testid="voucher-section">
         <p className="text-white font-medium mb-2 flex items-center gap-2">
-          <Ticket className="h-4 w-4 text-lime" /> Apply Loyalty Voucher / वाउचर लगाएं
+          <Ticket className="h-4 w-4 text-lime" /> {bi("Apply Loyalty Voucher / वाउचर लगाएं")}
         </p>
         {appliedVoucher ? (
           <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2" data-testid="applied-voucher">

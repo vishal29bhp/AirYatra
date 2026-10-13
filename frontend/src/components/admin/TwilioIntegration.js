@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { integrationsAPI } from '@/services/api';
+import { bi } from '../../lib/bilingual';
 
 export default function TwilioIntegration() {
   const [dashboard, setDashboard] = useState(null);
@@ -70,7 +71,7 @@ export default function TwilioIntegration() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-white">Twilio Integration / ट्विलियो इंटीग्रेशन</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Twilio Integration / ट्विलियो इंटीग्रेशन")}</h2>
           <p className="text-slate-400">Call Recording & VoIP Management</p>
         </div>
         <div className="flex gap-2">
@@ -91,7 +92,7 @@ export default function TwilioIntegration() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.total_calls || 0}</p>
-                <p className="text-slate-400 text-sm">Total Calls / कुल कॉल</p>
+                <p className="text-slate-400 text-sm">{bi("Total Calls / कुल कॉल")}</p>
               </div>
             </div>
           </CardContent>
@@ -105,7 +106,7 @@ export default function TwilioIntegration() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.today_calls || 0}</p>
-                <p className="text-slate-400 text-sm">Today Calls / आज की कॉल</p>
+                <p className="text-slate-400 text-sm">{bi("Today Calls / आज की कॉल")}</p>
               </div>
             </div>
           </CardContent>
@@ -119,7 +120,7 @@ export default function TwilioIntegration() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.total_duration_minutes || 0} min</p>
-                <p className="text-slate-400 text-sm">Total Duration / कुल अवधि</p>
+                <p className="text-slate-400 text-sm">{bi("Total Duration / कुल अवधि")}</p>
               </div>
             </div>
           </CardContent>
@@ -133,7 +134,7 @@ export default function TwilioIntegration() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.recordings_count || 0}</p>
-                <p className="text-slate-400 text-sm">Recordings / रिकॉर्डिंग</p>
+                <p className="text-slate-400 text-sm">{bi("Recordings / रिकॉर्डिंग")}</p>
               </div>
             </div>
           </CardContent>
@@ -207,7 +208,7 @@ export default function TwilioIntegration() {
       {/* Make Call Panel */}
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">Make a Call / कॉल करें</CardTitle>
+          <CardTitle className="text-white">{bi("Make a Call / कॉल करें")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex gap-4">
@@ -236,7 +237,7 @@ export default function TwilioIntegration() {
       {/* Call Logs */}
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">Call Logs / कॉल लॉग</CardTitle>
+          <CardTitle className="text-white">{bi("Call Logs / कॉल लॉग")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">

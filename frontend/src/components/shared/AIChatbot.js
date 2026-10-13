@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function AIChatbot({ user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,8 @@ function AIChatbot({ user }) {
       setMessages([{
         id: 'welcome',
         role: 'assistant',
-        content: `नमस्ते! 🙏 Welcome to AirYatra!
+        content: tr(
+          `Welcome to AirYatra!
 
 I'm your AI assistant. I can help you with:
 • 🚁 Booking inquiries & pricing
@@ -36,8 +38,17 @@ I'm your AI assistant. I can help you with:
 • 📋 Flight status updates
 • ❓ General questions
 
-How can I assist you today?
+How can I assist you today?`,
+          `नमस्ते! 🙏 AirYatra में आपका स्वागत है!
+
+मैं आपका AI सहायक हूं। मैं इनमें मदद कर सकता हूं:
+• 🚁 बुकिंग पूछताछ और कीमतें
+• 📍 रूट सुझाव
+• 📋 उड़ान की स्थिति
+• ❓ सामान्य प्रश्न
+
 आज मैं आपकी कैसे मदद कर सकता हूं?`,
+        ),
         timestamp: new Date().toISOString()
       }]);
     }
@@ -117,9 +128,10 @@ How can I assist you today?
       setMessages(prev => prev.map(m => m.id === aiMsgId ? {
         ...m,
         streaming: false,
-        content: `I'm having trouble connecting right now. Please try again or contact support@airyatra.com
-
-मुझे अभी कनेक्ट करने में समस्या हो रही है। कृपया पुनः प्रयास करें।`,
+        content: tr(
+          "I'm having trouble connecting right now. Please try again or contact support@airyatra.com",
+          'मुझे अभी कनेक्ट करने में समस्या हो रही है। कृपया पुनः प्रयास करें या support@airyatra.com पर संपर्क करें।',
+        ),
         ai_generated: false
       } : m));
     } finally {
@@ -167,7 +179,7 @@ How can I assist you today?
           </div>
           <div>
             <h3 className="text-white font-semibold">AirYatra AI</h3>
-            <p className="text-slate-400 text-xs">Always here to help / हमेशा मदद के लिए</p>
+            <p className="text-slate-400 text-xs">{bi("Always here to help / हमेशा मदद के लिए")}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -273,7 +285,7 @@ How can I assist you today?
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your message... / अपना संदेश लिखें..."
+                placeholder={bi("Type your message... / अपना संदेश लिखें...")}
                 className="flex-1 bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
                 disabled={loading}
               />
