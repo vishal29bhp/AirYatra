@@ -1,6 +1,6 @@
 # AirYatra Refurbishment: Master Prompt (RCTFC + TAF)
 
-> How to use: paste everything below the line into Claude (or any capable coding model) with the AirYatra repository attached or checked out. Fill the `{{THEME_*}}` placeholders in Section C.4 from the Gamma deck "Vaayu Prive" first (it could not be read automatically). Run it phase by phase: the model is told to stop at each phase gate for your approval. Section Q (testing) is a standing rule; paste it again at the start of any later development session so it is applied every time.
+> How to use: paste everything below the line into Claude (or any capable coding model) with the AirYatra repository attached or checked out. Section C.4 carries the theme extracted from the Vaayu Prive deck. Run it phase by phase: the model is told to stop at each phase gate for your approval. Section Q (testing) is a standing rule; paste it again at the start of any later development session so it is applied every time.
 
 ---
 
@@ -48,23 +48,33 @@ Core domains: multi-leg booking and quotes, aviation pricing engine (dynamic, pe
 - Budget sensitivity: start lean at launch, scale by configuration (not re-architecture) to the 20K target.
 
 ### C.4 Visual theme source (Gamma deck "Vaayu Prive")
-Source: https://gamma.app/docs/Vaayu-Prive-4g0oej8arljlp3r (could not be fetched automatically; fill these in from the deck before running, or attach screenshots of 3–4 slides):
+Source: the Vaayu Prive investor deck (Gamma, exported to `Vaayu-Prive.pptx`). Values below were extracted from the deck's slide XML and checked against rendered slides. Use them as the AirYatra theme; only the look is borrowed, never the "Vaayu Privé" name.
 
-| Token | Value from deck |
-|---|---|
-| Background (primary) | `{{THEME_BG}}` |
-| Background (surface / card) | `{{THEME_SURFACE}}` |
-| Primary text | `{{THEME_TEXT}}` |
-| Secondary text | `{{THEME_TEXT_MUTED}}` |
-| Primary brand / accent | `{{THEME_ACCENT}}` |
-| Secondary accent | `{{THEME_ACCENT_2}}` |
-| Heading font | `{{THEME_FONT_HEADING}}` |
-| Body font | `{{THEME_FONT_BODY}}` |
-| Corner radius / card style | `{{THEME_RADIUS_AND_CARD_STYLE}}` |
-| Imagery style (photography, gradients, glass, line art) | `{{THEME_IMAGERY}}` |
-| Overall mood (e.g. dark luxury, minimal, editorial) | `{{THEME_MOOD}}` |
+| Token | Value from deck | Where the deck uses it |
+|---|---|---|
+| Background (page, deepest) | `#17111F` | Full-bleed slide background, near-black aubergine |
+| Background (surface / card) | `#221A2D` | Title panels, dark cards, text boxes over photos |
+| Raised surface / border | `#3A3046` | Card borders, dividers, secondary panels |
+| Primary text | `#F2EEF6` (headings), `#FFFFFF` (emphasis) | Headlines and body on dark |
+| Secondary text | `#D0C9DA` | Body copy, descriptions |
+| Muted text / labels | `#A197AE`, `#716785` | Overline labels ("THE TRUST LAYER") and captions use `#A197AE` (6.6:1 on `#17111F`); `#716785` (3.5:1) is for disabled states and large text only |
+| Primary brand / accent | `#C8F23C` (electric lime) | Accent bars above titles, numbered badges, highlighted cards, icons. Text on lime is always `#000000` |
+| Secondary accent | `#FFB000` (amber) | Links and small highlights only; use sparingly (warnings, rating stars) |
+| Heading font | **Barlow Condensed ExtraBold** (800), UPPERCASE, tight leading | Slide titles, 44–48 pt |
+| Body font | **IBM Plex Sans** (400, SemiBold 600) | Body copy 13–16 pt |
+| Label / data font | **JetBrains Mono** (Medium 500, SemiBold 600) | Overlines, card titles, numbers, codes (PNR, flight no.), 11–19 pt. Already in the current AirYatra design system |
+| Corner radius / card style | Square corners (radius 0–4px), flat fills, no shadows, 1px `#3A3046` borders; cards in a grid with one lime "featured" card | Product and trust-layer cards |
+| Imagery style | Real aviation photography (helicopters on the apron at golden hour, private jets, pilot walking to aircraft, engineers servicing engines). Full-bleed photo with a dark solid panel overlaid for text; split layouts of photo left, dark content right | Cover and section slides |
+| Iconography | Thin line icons in lime on dark | Product feature grid |
+| Overall mood | Dark, premium, "night-flight" luxury with a single high-energy lime accent; editorial, data-forward, safety and trust first | Whole deck |
 
-If any placeholder is still empty or screenshots are attached instead, extract the values from the screenshots yourself, list them, and mark them `ASSUMPTION` for my confirmation.
+Theme rules for the UI:
+- Dark theme is the default. Provide a light theme too by inverting surfaces (`#F2EEF6` page, `#FFFFFF` cards, `#17111F` text) and keeping lime only as a fill with black text, since lime text on white fails contrast.
+- Lime is for one primary action or highlight per view (Book now, the selected fare, the Safety Score). Do not use it for large text blocks.
+- Overline pattern: a short lime bar, then a JetBrains Mono uppercase label in `#A197AE`, then the Barlow Condensed headline.
+- Map these tokens onto the existing shadcn CSS variables (`--background`, `--card`, `--primary`, `--accent`, `--muted`, `--border`, `--ring`, chart colours) and `tailwind.config.js` rather than hard-coding hex values in components. Update `design_guidelines.json` to match.
+- Fonts load from Google Fonts (all three are available there) with `font-display: swap`.
+- Verify every text/background pair meets WCAG AA (4.5:1 body, 3:1 large text) and list the ratios.
 
 ---
 
@@ -112,7 +122,7 @@ Provide a capacity and cost model for both stages (SKUs, replica counts, DB tier
 - Before touching a module, write characterisation tests that pin its current behaviour (see Section Q), then refactor.
 
 **Phase 4: UI/UX refresh in the Vaayu Prive theme**
-- Translate Section C.4 into design tokens: update `index.css` CSS variables (light and dark), `tailwind.config.js`, `design_guidelines.json`, and fonts. shadcn/ui components should inherit the theme through tokens, not per-component overrides.
+- Translate Section C.4 (dark aubergine surfaces, lime accent, Barlow Condensed / IBM Plex Sans / JetBrains Mono, square cards, aviation photography) into design tokens: update `index.css` CSS variables (light and dark), `tailwind.config.js`, `design_guidelines.json`, and fonts. shadcn/ui components should inherit the theme through tokens, not per-component overrides.
 - Keep the AirYatra name and logo wordmark; restyle typography, colour, spacing, cards, buttons, hero sections, dashboards and charts.
 - Prioritise screens: Landing, Booking flow, Login, Customer dashboard, Payment, then Operator and Admin dashboards.
 - Meet WCAG 2.1 AA (contrast ≥ 4.5:1 for body text), mobile-first at 360px, Core Web Vitals targets (LCP < 2.5s on 4G, CLS < 0.1). Plan the CRA → Vite migration only if it pays for itself; state the trade-off.
