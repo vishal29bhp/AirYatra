@@ -76,7 +76,7 @@ function MultiLegBooking() {
       <div className="flex space-x-4 border-b border-slate-700">
         {['create', 'bookings'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-medium ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}>
+            className={`px-4 py-2 font-medium ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400'}`}>
             {tab === 'create' ? 'New Booking' : 'My Bookings'}
           </button>
         ))}
@@ -90,7 +90,7 @@ function MultiLegBooking() {
               <div className="flex space-x-3">
                 {[{ id: 'round_trip', label: 'Round Trip', icon: Repeat }, { id: 'multi_city', label: 'Multi-City', icon: Route }, { id: 'group', label: 'Group', icon: Users }].map(type => (
                   <button key={type.id} onClick={() => setBookingType(type.id)}
-                    className={`flex-1 p-3 rounded-lg border ${bookingType === type.id ? 'bg-orange-500/20 border-orange-500 text-orange-400' : 'bg-slate-900 border-slate-700 text-slate-400'}`}>
+                    className={`flex-1 p-3 rounded-lg border ${bookingType === type.id ? 'bg-lime/20 border-lime text-lime' : 'bg-slate-900 border-slate-700 text-slate-400'}`}>
                     <type.icon className="h-5 w-5 mx-auto mb-1" />
                     <span className="text-sm">{type.label}</span>
                   </button>
@@ -106,7 +106,7 @@ function MultiLegBooking() {
               {legs.map((leg, idx) => (
                 <div key={idx} className="p-4 bg-slate-900 rounded-lg mb-3">
                   <div className="flex items-center mb-3">
-                    <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded mr-2">Leg {idx + 1}</span>
+                    <span className="bg-lime text-black text-xs px-2 py-1 rounded mr-2">Leg {idx + 1}</span>
                     {bookingType !== 'round_trip' && legs.length > 2 && (
                       <button onClick={() => removeLeg(idx)} className="ml-auto text-red-400"><X className="h-4 w-4" /></button>
                     )}
@@ -135,7 +135,7 @@ function MultiLegBooking() {
           <div className="space-y-4">
             <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
               <h3 className="text-white font-medium mb-3">Price Estimate</h3>
-              <Button onClick={calculatePrice} className="w-full bg-blue-600 mb-4">Calculate</Button>
+              <Button onClick={calculatePrice} className="w-full bg-slate-700 mb-4">Calculate</Button>
               {pricePreview && (
                 <div className="space-y-2">
                   {pricePreview.leg_prices?.map((l, i) => (
@@ -153,12 +153,12 @@ function MultiLegBooking() {
                   <hr className="border-slate-700" />
                   <div className="flex justify-between text-lg font-bold">
                     <span className="text-white">Total</span>
-                    <span className="text-orange-400">₹{pricePreview.total?.toLocaleString()}</span>
+                    <span className="text-lime">₹{pricePreview.total?.toLocaleString()}</span>
                   </div>
                 </div>
               )}
             </div>
-            <Button onClick={createBooking} disabled={creating || !legs[0].origin} className="w-full bg-orange-500 py-6 text-lg">
+            <Button onClick={createBooking} disabled={creating || !legs[0].origin} className="w-full bg-lime text-black py-6 text-lg">
               {creating ? 'Creating...' : 'Create Booking'}
             </Button>
           </div>
@@ -178,7 +178,7 @@ function MultiLegBooking() {
                   <span key={i} className="px-2 py-1 bg-slate-900 rounded text-sm text-white">{l.route}</span>
                 ))}
               </div>
-              <p className="text-orange-400 font-medium mt-2">₹{b.pricing?.total?.toLocaleString()}</p>
+              <p className="text-lime font-medium mt-2">₹{b.pricing?.total?.toLocaleString()}</p>
             </div>
           ))}
           {bookings.length === 0 && <p className="text-center text-slate-400 py-8">No bookings yet</p>}

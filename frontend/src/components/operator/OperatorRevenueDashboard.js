@@ -99,7 +99,7 @@ export default function OperatorRevenueDashboard({ user }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="revenue-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -152,26 +152,26 @@ export default function OperatorRevenueDashboard({ user }) {
                   {stats.completed_flights || 0} flights completed
                 </p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-blue-100 text-sm font-medium">This Month</p>
+                <p className="text-slate-300 text-sm font-medium">This Month</p>
                 <p className="text-3xl font-bold text-white mt-1">
                   {formatCurrency(stats.month_earnings)}
                 </p>
-                <p className="text-blue-200 text-sm mt-1">
+                <p className="text-slate-300 text-sm mt-1">
                   {stats.month_flights || 0} flights
                 </p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Calendar className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -190,26 +190,26 @@ export default function OperatorRevenueDashboard({ user }) {
                   Next: {stats.next_payout_date || 'TBD'}
                 </p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Wallet className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-orange-100 text-sm font-medium">Commission Rate</p>
+                <p className="text-slate-300 text-sm font-medium">Commission Rate</p>
                 <p className="text-3xl font-bold text-white mt-1">
                   {stats.commission_rate || 85}%
                 </p>
-                <p className="text-orange-200 text-sm mt-1">
+                <p className="text-slate-300 text-sm mt-1">
                   Your share per booking
                 </p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Percent className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -314,7 +314,7 @@ export default function OperatorRevenueDashboard({ user }) {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Plane className="h-5 w-5 text-orange-500" />
+                <Plane className="h-5 w-5 text-lime" />
                 Revenue by Route
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -328,7 +328,7 @@ export default function OperatorRevenueDashboard({ user }) {
                     <div key={idx} className="bg-slate-700/50 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-orange-400 font-bold w-6">#{idx + 1}</span>
+                          <span className="text-lime font-bold w-6">#{idx + 1}</span>
                           <span className="text-white font-medium">{route.route}</span>
                         </div>
                         <span className="text-green-400 font-bold">{formatCurrency(route.total_revenue)}</span>
@@ -341,7 +341,7 @@ export default function OperatorRevenueDashboard({ user }) {
                       {/* Revenue bar */}
                       <div className="mt-2 h-2 bg-slate-600 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-orange-500 to-green-500 rounded-full"
+                          className="h-full bg-slate-800 border border-slate-700 rounded-full"
                           style={{ 
                             width: `${(route.total_revenue / (routeAnalytics[0]?.total_revenue || 1)) * 100}%` 
                           }}
@@ -367,7 +367,7 @@ export default function OperatorRevenueDashboard({ user }) {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Plane className="h-5 w-5 text-blue-500" />
+                <Plane className="h-5 w-5 text-amber" />
                 Revenue by Aircraft
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -396,7 +396,7 @@ export default function OperatorRevenueDashboard({ user }) {
                         </div>
                         <div className="flex justify-between text-slate-400">
                           <span>Revenue/Hour</span>
-                          <span className="text-orange-400 font-semibold">{formatCurrency(aircraft.revenue_per_hour)}</span>
+                          <span className="text-lime font-semibold">{formatCurrency(aircraft.revenue_per_hour)}</span>
                         </div>
                       </div>
                       {/* Top Routes for this aircraft */}
@@ -477,7 +477,7 @@ export default function OperatorRevenueDashboard({ user }) {
                 <CardTitle className="text-white">Commission Details</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                <div className="bg-green-500/10 border border-green-500/30 rounded-sm p-4">
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="text-slate-400 text-sm">Your Earnings</p>
@@ -500,13 +500,13 @@ export default function OperatorRevenueDashboard({ user }) {
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-slate-700">
                     <span className="text-slate-400">Platform Fee (15%)</span>
-                    <span className="text-orange-400">
+                    <span className="text-lime">
                       - {formatCurrency(commissionBreakdown.platform_fee)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-slate-700">
                     <span className="text-slate-400">GST & Taxes</span>
-                    <span className="text-blue-400">
+                    <span className="text-amber">
                       - {formatCurrency(commissionBreakdown.taxes)}
                     </span>
                   </div>

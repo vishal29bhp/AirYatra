@@ -46,10 +46,10 @@ function OperatorHome({ operator }) {
 
       {/* Verification Alert */}
       {operator?.status === 'pending' && (
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 mb-8 flex items-start space-x-3" data-testid="verification-alert">
-          <AlertCircle className="h-5 w-5 text-orange-500 mt-0.5" />
+        <div className="bg-lime/10 border border-lime/30 rounded-lg p-4 mb-8 flex items-start space-x-3" data-testid="verification-alert">
+          <AlertCircle className="h-5 w-5 text-lime mt-0.5" />
           <div>
-            <h3 className="text-orange-400 font-semibold">Verification Pending</h3>
+            <h3 className="text-lime font-semibold">Verification Pending</h3>
             <p className="text-slate-300 text-sm">
               Your operator profile is under review. You can add aircraft and pilots, but won't receive 
               inquiries until verification is complete.
@@ -65,8 +65,8 @@ function OperatorHome({ operator }) {
           className="glass p-6 rounded-lg corner-markers hover:bg-slate-800/50 transition-all duration-200 transform hover:scale-105 cursor-pointer text-left group"
         >
           <div className="flex items-center justify-between mb-3">
-            <Plane className="h-8 w-8 text-orange-500" />
-            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-orange-400 transition-colors" />
+            <Plane className="h-8 w-8 text-lime" />
+            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-lime transition-colors" />
           </div>
           <div className="text-3xl font-bold text-white" data-testid="total-aircraft">{stats.total_aircraft || 0}</div>
           <div className="text-slate-400 text-sm uppercase">Aircraft</div>
@@ -77,8 +77,8 @@ function OperatorHome({ operator }) {
           className="glass p-6 rounded-lg corner-markers hover:bg-slate-800/50 transition-all duration-200 transform hover:scale-105 cursor-pointer text-left group"
         >
           <div className="flex items-center justify-between mb-3">
-            <Users className="h-8 w-8 text-orange-500" />
-            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-orange-400 transition-colors" />
+            <Users className="h-8 w-8 text-lime" />
+            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-lime transition-colors" />
           </div>
           <div className="text-3xl font-bold text-white" data-testid="total-pilots">{stats.total_pilots || 0}</div>
           <div className="text-slate-400 text-sm uppercase">Pilots</div>
@@ -89,10 +89,10 @@ function OperatorHome({ operator }) {
           className="glass p-6 rounded-lg corner-markers hover:bg-slate-800/50 transition-all duration-200 transform hover:scale-105 cursor-pointer text-left group"
         >
           <div className="flex items-center justify-between mb-3">
-            <MessageSquare className="h-8 w-8 text-orange-500" />
-            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-orange-400 transition-colors" />
+            <MessageSquare className="h-8 w-8 text-lime" />
+            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-lime transition-colors" />
           </div>
-          <div className="text-3xl font-bold text-orange-400" data-testid="pending-inquiries">{stats.pending_inquiries || 0}</div>
+          <div className="text-3xl font-bold text-lime" data-testid="pending-inquiries">{stats.pending_inquiries || 0}</div>
           <div className="text-slate-400 text-sm uppercase">Pending Inquiries</div>
         </button>
 
@@ -101,8 +101,8 @@ function OperatorHome({ operator }) {
           className="glass p-6 rounded-lg corner-markers hover:bg-slate-800/50 transition-all duration-200 transform hover:scale-105 cursor-pointer text-left group"
         >
           <div className="flex items-center justify-between mb-3">
-            <TrendingUp className="h-8 w-8 text-orange-500" />
-            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-orange-400 transition-colors" />
+            <TrendingUp className="h-8 w-8 text-lime" />
+            <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-lime transition-colors" />
           </div>
           <div className="text-3xl font-bold text-white" data-testid="total-bookings">{stats.total_bookings || 0}</div>
           <div className="text-slate-400 text-sm uppercase">Total Bookings</div>
@@ -115,7 +115,7 @@ function OperatorHome({ operator }) {
           <h2 className="text-2xl font-bold text-white">Recent Bookings</h2>
           <button 
             onClick={() => handleNavigate('inquiries')}
-            className="text-sm text-orange-400 hover:text-orange-300 flex items-center gap-1"
+            className="text-sm text-lime hover:text-lime/80 flex items-center gap-1"
           >
             View All <ChevronRight className="h-4 w-4" />
           </button>
@@ -144,7 +144,7 @@ function OperatorHome({ operator }) {
                   <span className={`px-3 py-1 rounded-full text-xs ${
                     booking.status === 'completed' ? 'bg-green-500/20 text-green-400' :
                     booking.status === 'cancelled' ? 'bg-red-500/20 text-red-400' :
-                    'bg-orange-500/20 text-orange-400'
+                    'bg-lime/20 text-lime'
                   }`}>
                     {booking.status?.replace(/_/g, ' ')}
                   </span>
@@ -159,28 +159,28 @@ function OperatorHome({ operator }) {
       {/* Quick Actions */}
       <div className="grid md:grid-cols-3 gap-6 mt-8">
         <div className="glass p-6 rounded-lg text-center">
-          <Plane className="h-12 w-12 text-orange-500 mx-auto mb-3" />
+          <Plane className="h-12 w-12 text-lime mx-auto mb-3" />
           <h3 className="text-white font-semibold mb-2">Add Aircraft</h3>
           <p className="text-slate-400 text-sm mb-4">Expand your fleet with new helicopters</p>
-          <a href="/operator/fleet" className="text-orange-500 hover:text-orange-400 text-sm font-medium">
+          <a href="/operator/fleet" className="text-lime hover:text-lime/80 text-sm font-medium">
             Go to Fleet →
           </a>
         </div>
 
         <div className="glass p-6 rounded-lg text-center">
-          <Users className="h-12 w-12 text-orange-500 mx-auto mb-3" />
+          <Users className="h-12 w-12 text-lime mx-auto mb-3" />
           <h3 className="text-white font-semibold mb-2">Manage Pilots</h3>
           <p className="text-slate-400 text-sm mb-4">Add and manage your pilot roster</p>
-          <a href="/operator/pilots" className="text-orange-500 hover:text-orange-400 text-sm font-medium">
+          <a href="/operator/pilots" className="text-lime hover:text-lime/80 text-sm font-medium">
             Manage Pilots →
           </a>
         </div>
 
         <div className="glass p-6 rounded-lg text-center">
-          <MessageSquare className="h-12 w-12 text-orange-500 mx-auto mb-3" />
+          <MessageSquare className="h-12 w-12 text-lime mx-auto mb-3" />
           <h3 className="text-white font-semibold mb-2">View Inquiries</h3>
           <p className="text-slate-400 text-sm mb-4">Respond to customer booking requests</p>
-          <a href="/operator/inquiries" className="text-orange-500 hover:text-orange-400 text-sm font-medium">
+          <a href="/operator/inquiries" className="text-lime hover:text-lime/80 text-sm font-medium">
             View Inquiries →
           </a>
         </div>

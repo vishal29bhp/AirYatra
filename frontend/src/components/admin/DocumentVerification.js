@@ -55,7 +55,7 @@ function DocumentVerification() {
     }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -70,7 +70,7 @@ function DocumentVerification() {
       {dashboard && (
         <div className="grid grid-cols-5 gap-4">
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <FileCheck className="h-5 w-5 text-blue-400 mb-2" />
+            <FileCheck className="h-5 w-5 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.total_documents}</p>
             <p className="text-slate-400 text-sm">Total</p>
           </div>
@@ -89,8 +89,8 @@ function DocumentVerification() {
             <p className="text-2xl font-bold text-white">{dashboard.rejected}</p>
             <p className="text-slate-400 text-sm">Rejected</p>
           </div>
-          <div className="bg-orange-500/20 rounded-lg p-4 border border-orange-500/50">
-            <AlertTriangle className="h-5 w-5 text-orange-400 mb-2" />
+          <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
+            <AlertTriangle className="h-5 w-5 text-lime mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.expiring_within_30_days}</p>
             <p className="text-slate-400 text-sm">Expiring</p>
           </div>
@@ -100,7 +100,7 @@ function DocumentVerification() {
       <div className="flex space-x-4 border-b border-slate-700">
         {['dashboard', 'pending', 'expiring'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}>
+            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400'}`}>
             {tab}
           </button>
         ))}
@@ -126,13 +126,13 @@ function DocumentVerification() {
       {activeTab === 'expiring' && (
         <div className="space-y-3">
           {expiringDocs.map(doc => (
-            <div key={doc.id} className="bg-slate-800 rounded-lg p-4 border border-orange-500/50">
+            <div key={doc.id} className="bg-slate-800 rounded-lg p-4 border border-lime/50">
               <div className="flex justify-between">
                 <div>
                   <p className="text-white font-medium">{doc.document_type_name}</p>
                   <p className="text-slate-400 text-sm">#{doc.document_number}</p>
                 </div>
-                <span className="text-orange-400">{doc.expiry_date}</span>
+                <span className="text-lime">{doc.expiry_date}</span>
               </div>
             </div>
           ))}

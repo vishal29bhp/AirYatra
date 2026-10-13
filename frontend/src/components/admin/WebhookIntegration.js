@@ -149,7 +149,7 @@ function WebhookIntegration() {
   const colorClasses = {
     blue: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
     green: 'bg-green-500/20 text-green-400 border-green-500/30',
-    orange: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+    orange: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
     red: 'bg-red-500/20 text-red-400 border-red-500/30',
     purple: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
     cyan: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
@@ -178,7 +178,7 @@ function WebhookIntegration() {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 flex items-start gap-3">
+      <div className="bg-purple-500/10 border border-purple-500/30 rounded-sm p-4 flex items-start gap-3">
         <AlertTriangle className="h-5 w-5 text-purple-400 flex-shrink-0 mt-0.5" />
         <div>
           <p className="text-purple-200 font-medium">How Webhooks Work / वेबहुक कैसे काम करते हैं</p>
@@ -199,7 +199,7 @@ function WebhookIntegration() {
           return (
             <div 
               key={webhook.id}
-              className={`rounded-xl border ${colorClasses[webhook.color]} transition-all duration-200`}
+              className={`rounded-sm border ${colorClasses[webhook.color]} transition-all duration-200`}
             >
               <div 
                 className="p-4 cursor-pointer"
@@ -252,7 +252,7 @@ function WebhookIntegration() {
                     <ol className="mt-2 space-y-1">
                       {webhook.setupSteps.map((step, idx) => (
                         <li key={idx} className="text-slate-400 text-sm flex gap-2">
-                          <span className="text-orange-400">{idx + 1}.</span>
+                          <span className="text-lime">{idx + 1}.</span>
                           {step}
                         </li>
                       ))}
@@ -290,7 +290,7 @@ function WebhookIntegration() {
       </div>
 
       {/* Testing Section */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-4">Quick Test / त्वरित परीक्षण</h3>
         <p className="text-slate-400 text-sm mb-4">
           Use this cURL command in terminal to test webhook lead creation:
@@ -322,9 +322,9 @@ function WebhookIntegration() {
       </div>
 
       {/* Zapier/Make Integration */}
-      <div className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl p-6 border border-orange-500/30">
+      <div className="bg-lime/10 rounded-sm p-6 border border-lime/30">
         <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-          <ExternalLink className="h-5 w-5 text-orange-400" />
+          <ExternalLink className="h-5 w-5 text-lime" />
           No-Code Integration with Zapier / Make
         </h3>
         <p className="text-slate-400 text-sm mb-4">
@@ -338,7 +338,7 @@ function WebhookIntegration() {
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition"
           >
-            <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-lime/20 rounded-lg flex items-center justify-center">
               <span className="text-xl">⚡</span>
             </div>
             <div>

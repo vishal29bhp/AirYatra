@@ -88,7 +88,7 @@ function AIPricingAdvisor() {
       {/* Header */}
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
-          <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
+          <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-sm">
             <Sparkles className="h-8 w-8 text-white" />
           </div>
           <div>
@@ -99,7 +99,7 @@ function AIPricingAdvisor() {
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Input Form */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+          <div className="bg-slate-900 border border-slate-800 rounded-sm p-6">
             <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
               <Calculator className="h-5 w-5 text-purple-400" />
               Get Price Suggestion
@@ -236,7 +236,7 @@ function AIPricingAdvisor() {
             {result ? (
               <>
                 {/* Main Price */}
-                <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-2xl p-6">
+                <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/50 rounded-sm p-6">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-slate-400 text-sm">AI Suggested Price</p>
@@ -269,9 +269,9 @@ function AIPricingAdvisor() {
                 </div>
 
                 {/* Price Range */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div className="bg-slate-900 border border-slate-800 rounded-sm p-5">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-blue-400" />
+                    <BarChart3 className="h-5 w-5 text-amber" />
                     Price Range
                   </h3>
                   <div className="grid grid-cols-3 gap-4">
@@ -289,7 +289,7 @@ function AIPricingAdvisor() {
                     </div>
                     <div className="text-center p-3 bg-slate-800 rounded-lg">
                       <p className="text-slate-400 text-xs">Maximum</p>
-                      <p className="text-lg font-bold text-orange-400">
+                      <p className="text-lg font-bold text-lime">
                         {formatCurrency(result.price_range?.max)}
                       </p>
                     </div>
@@ -297,7 +297,7 @@ function AIPricingAdvisor() {
                 </div>
 
                 {/* Pricing Factors */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div className="bg-slate-900 border border-slate-800 rounded-sm p-5">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                     <TrendingUp className="h-5 w-5 text-green-400" />
                     Pricing Factors
@@ -332,7 +332,7 @@ function AIPricingAdvisor() {
 
                 {/* Recommendations */}
                 {result.recommendations?.length > 0 && (
-                  <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                  <div className="bg-slate-900 border border-slate-800 rounded-sm p-5">
                     <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                       <Lightbulb className="h-5 w-5 text-yellow-400" />
                       AI Recommendations
@@ -349,7 +349,7 @@ function AIPricingAdvisor() {
                 )}
               </>
             ) : (
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-12 text-center">
+              <div className="bg-slate-900 border border-slate-800 rounded-sm p-12 text-center">
                 <Sparkles className="h-16 w-16 text-purple-400 mx-auto mb-4 opacity-50" />
                 <h3 className="text-xl font-semibold text-white mb-2">AI Pricing Advisor</h3>
                 <p className="text-slate-400 max-w-sm mx-auto">

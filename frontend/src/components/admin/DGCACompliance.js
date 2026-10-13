@@ -44,14 +44,14 @@ function DGCACompliance() {
     return severity === 'critical' ? 'bg-red-500/20 border-red-500 text-red-400' : 'bg-yellow-500/20 border-yellow-500 text-yellow-400';
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center">
-            <Shield className="h-6 w-6 mr-2 text-blue-500" /> DGCA Compliance
+            <Shield className="h-6 w-6 mr-2 text-amber" /> DGCA Compliance
           </h1>
           <p className="text-slate-400">Flight duty time & regulatory compliance</p>
         </div>
@@ -78,7 +78,7 @@ function DGCACompliance() {
             <p className="text-slate-400 text-sm">Warnings</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <Plane className="h-5 w-5 text-blue-400 mb-2" />
+            <Plane className="h-5 w-5 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.this_month?.total_flight_hours || 0}h</p>
             <p className="text-slate-400 text-sm">Flight Hours (Month)</p>
           </div>
@@ -93,7 +93,7 @@ function DGCACompliance() {
       <div className="flex space-x-4 border-b border-slate-700">
         {['dashboard', 'alerts', 'pilot_check', 'limits'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}>
+            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400'}`}>
             {tab.replace('_', ' ')}
           </button>
         ))}
@@ -125,7 +125,7 @@ function DGCACompliance() {
             <h2 className="text-lg font-semibold text-white mb-4">Check Pilot Compliance</h2>
             <div className="flex space-x-3">
               <Input placeholder="Pilot ID" value={pilotSearch} onChange={(e) => setPilotSearch(e.target.value)} className="bg-slate-700 flex-1" />
-              <Button onClick={checkPilotCompliance} className="bg-blue-600">Check</Button>
+              <Button onClick={checkPilotCompliance} className="bg-slate-700">Check</Button>
             </div>
           </div>
 

@@ -19,7 +19,7 @@ const SeverityBadge = ({ severity }) => {
   const config = {
     expired: { color: 'bg-red-600 text-white', label: 'EXPIRED', icon: XCircle },
     critical: { color: 'bg-red-500 text-white', label: 'Critical', icon: AlertTriangle },
-    high: { color: 'bg-orange-500 text-white', label: 'High', icon: AlertTriangle },
+    high: { color: 'bg-amber-500 text-black', label: 'High', icon: AlertTriangle },
     warning: { color: 'bg-yellow-500 text-black', label: 'Warning', icon: Clock },
     attention: { color: 'bg-blue-500 text-white', label: 'Attention', icon: Bell },
     info: { color: 'bg-slate-500 text-white', label: 'Info', icon: FileText }
@@ -152,7 +152,7 @@ const ComplianceDashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -163,7 +163,7 @@ const ComplianceDashboard = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-orange-400" />
+            <Shield className="h-6 w-6 text-lime" />
             AI Compliance Monitor / अनुपालन मॉनिटर
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -181,7 +181,7 @@ const ComplianceDashboard = () => {
           <Button
             onClick={runDailyCheck}
             disabled={runningCheck}
-            className="bg-orange-500 hover:bg-orange-600"
+            className="bg-lime text-black hover:bg-lime/90"
             data-testid="run-compliance-check-btn"
           >
             {runningCheck ? (
@@ -198,7 +198,7 @@ const ComplianceDashboard = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           <Card className="bg-slate-900 border-slate-700">
             <CardContent className="p-4 text-center">
-              <Plane className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+              <Plane className="h-6 w-6 text-amber mx-auto mb-2" />
               <div className="text-3xl font-bold text-white">{dashboardData.aircraft.total}</div>
               <div className="text-slate-400 text-sm">Total Aircraft / कुल विमान</div>
             </CardContent>
@@ -224,10 +224,10 @@ const ComplianceDashboard = () => {
               <div className="text-slate-400 text-sm">Suspended / निलंबित</div>
             </CardContent>
           </Card>
-          <Card className="bg-slate-900 border-orange-500/50 border-2">
+          <Card className="bg-slate-900 border-lime/50 border-2">
             <CardContent className="p-4 text-center">
-              <AlertTriangle className="h-6 w-6 text-orange-400 mx-auto mb-2" />
-              <div className="text-3xl font-bold text-orange-400">{dashboardData.compliance_alerts.insurance_expiring_30d}</div>
+              <AlertTriangle className="h-6 w-6 text-lime mx-auto mb-2" />
+              <div className="text-3xl font-bold text-lime">{dashboardData.compliance_alerts.insurance_expiring_30d}</div>
               <div className="text-slate-400 text-sm">Insurance Expiring / बीमा समाप्त</div>
             </CardContent>
           </Card>
@@ -256,7 +256,7 @@ const ComplianceDashboard = () => {
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-orange-400 font-medium">{dashboardData.last_check.alerts_found} Alerts Found</p>
+                <p className="text-lime font-medium">{dashboardData.last_check.alerts_found} Alerts Found</p>
                 <p className="text-slate-400 text-sm">{dashboardData.last_check.aircraft_hidden} Aircraft Auto-Hidden</p>
               </div>
             </div>
@@ -267,13 +267,13 @@ const ComplianceDashboard = () => {
       {/* Tabs */}
       <Tabs defaultValue="alerts" className="space-y-4">
         <TabsList className="bg-slate-800">
-          <TabsTrigger value="alerts" className="data-[state=active]:bg-orange-500">
+          <TabsTrigger value="alerts" className="data-[state=active]:bg-lime">
             <AlertTriangle className="h-4 w-4 mr-2" /> Active Alerts
           </TabsTrigger>
-          <TabsTrigger value="categories" className="data-[state=active]:bg-orange-500">
+          <TabsTrigger value="categories" className="data-[state=active]:bg-lime">
             <FileText className="h-4 w-4 mr-2" /> Document Categories
           </TabsTrigger>
-          <TabsTrigger value="reports" className="data-[state=active]:bg-orange-500">
+          <TabsTrigger value="reports" className="data-[state=active]:bg-lime">
             <TrendingUp className="h-4 w-4 mr-2" /> Check Reports
           </TabsTrigger>
         </TabsList>
@@ -323,7 +323,7 @@ const ComplianceDashboard = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="p-2 bg-slate-800 rounded-lg">
-                          <Plane className="h-6 w-6 text-orange-400" />
+                          <Plane className="h-6 w-6 text-lime" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
@@ -337,7 +337,7 @@ const ComplianceDashboard = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className={`text-lg font-bold ${alert.days_remaining <= 0 ? 'text-red-400' : alert.days_remaining <= 7 ? 'text-orange-400' : 'text-yellow-400'}`}>
+                        <p className={`text-lg font-bold ${alert.days_remaining <= 0 ? 'text-red-400' : alert.days_remaining <= 7 ? 'text-lime' : 'text-yellow-400'}`}>
                           {alert.days_remaining <= 0 ? 'EXPIRED' : `${alert.days_remaining} days left`}
                         </p>
                         <p className="text-slate-400 text-sm">
@@ -367,7 +367,7 @@ const ComplianceDashboard = () => {
                         <li key={type.id} className="flex items-center justify-between text-sm">
                           <span className="text-slate-300">{type.label}</span>
                           <div className="flex gap-2">
-                            {type.required && <Badge className="bg-orange-500 text-white text-xs">Required</Badge>}
+                            {type.required && <Badge className="bg-amber-500 text-black text-xs">Required</Badge>}
                             {type.has_expiry && <Badge className="bg-blue-500 text-white text-xs">Expiry</Badge>}
                           </div>
                         </li>
@@ -388,9 +388,9 @@ const ComplianceDashboard = () => {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   {categories.photo_categories.map((photo) => (
-                    <div key={photo.id} className={`p-3 rounded-lg text-center ${photo.required ? 'bg-orange-500/20 border border-orange-500/50' : 'bg-slate-800'}`}>
+                    <div key={photo.id} className={`p-3 rounded-lg text-center ${photo.required ? 'bg-lime/20 border border-lime/50' : 'bg-slate-800'}`}>
                       <p className="text-white text-sm">{photo.label}</p>
-                      {photo.required && <Badge className="mt-1 bg-orange-500 text-white text-xs">Required</Badge>}
+                      {photo.required && <Badge className="mt-1 bg-amber-500 text-black text-xs">Required</Badge>}
                     </div>
                   ))}
                 </div>
@@ -431,7 +431,7 @@ const ComplianceDashboard = () => {
                           <p className="text-slate-500 text-xs">Expired</p>
                         </div>
                         <div>
-                          <p className="text-orange-400 text-xl font-bold">{report.alerts_by_severity?.critical || 0}</p>
+                          <p className="text-lime text-xl font-bold">{report.alerts_by_severity?.critical || 0}</p>
                           <p className="text-slate-500 text-xs">Critical</p>
                         </div>
                         <div>

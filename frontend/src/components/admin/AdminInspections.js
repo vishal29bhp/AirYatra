@@ -47,16 +47,16 @@ export const AdminInspections = () => {
     <div className="space-y-3" data-testid="admin-inspections-list">
       {inspections.length === 0 && <p className="text-slate-500 text-center py-10">No inspection requests yet.</p>}
       {inspections.map(i => (
-        <div key={i.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`admin-inspection-${i.id}`}>
+        <div key={i.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`admin-inspection-${i.id}`}>
           <div className="flex items-start justify-between gap-3 flex-wrap">
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-white font-semibold flex items-center gap-2">
-                  <ClipboardCheck className="h-4 w-4 text-orange-400" /> {i.listing_title}
+                  <ClipboardCheck className="h-4 w-4 text-lime" /> {i.listing_title}
                 </h3>
                 <Badge className={`border ${STATUS_STYLES[i.status] || ''}`} data-testid={`inspection-status-${i.id}`}>{i.status}</Badge>
               </div>
-              <p className="text-orange-400 text-sm mt-1.5 flex items-center gap-1">
+              <p className="text-lime text-sm mt-1.5 flex items-center gap-1">
                 <Calendar className="h-3.5 w-3.5" /> {i.preferred_date} • {SLOT_LABELS[i.time_slot] || i.time_slot} • {i.location}
               </p>
               {i.notes && <p className="text-slate-300 text-sm mt-2 bg-slate-800/60 rounded-lg p-2.5">"{i.notes}"</p>}
@@ -80,7 +80,7 @@ export const AdminInspections = () => {
               )}
               {i.status === 'confirmed' && (
                 <>
-                  <Button size="sm" onClick={() => setStatus(i.id, 'completed')} disabled={!!acting} className="bg-blue-600 hover:bg-blue-700" data-testid={`complete-inspection-${i.id}`}>
+                  <Button size="sm" onClick={() => setStatus(i.id, 'completed')} disabled={!!acting} className="bg-slate-700 hover:bg-slate-600" data-testid={`complete-inspection-${i.id}`}>
                     Mark Completed
                   </Button>
                   <Button size="sm" variant="outline" onClick={() => setStatus(i.id, 'cancelled')} disabled={!!acting} className="border-red-500/50 text-red-400 hover:bg-red-500/10" data-testid={`cancel-confirmed-inspection-${i.id}`}>

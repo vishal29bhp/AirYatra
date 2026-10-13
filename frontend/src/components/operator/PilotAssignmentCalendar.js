@@ -137,10 +137,10 @@ function PilotAssignmentCalendar() {
           key={day}
           onClick={() => setSelectedDate(dateKey)}
           className={`p-1 h-20 border border-slate-700 cursor-pointer transition-all overflow-hidden ${
-            isToday ? 'bg-blue-500/10 border-blue-500/50' : 'bg-slate-800/30 hover:bg-slate-800/50'
-          } ${isSelected ? 'ring-2 ring-blue-500' : ''}`}
+            isToday ? 'bg-amber/10 border-amber/50' : 'bg-slate-800/30 hover:bg-slate-800/50'
+          } ${isSelected ? 'ring-2 ring-lime' : ''}`}
         >
-          <div className={`text-xs font-medium mb-1 ${isToday ? 'text-blue-400' : 'text-slate-400'}`}>
+          <div className={`text-xs font-medium mb-1 ${isToday ? 'text-amber' : 'text-slate-400'}`}>
             {day}
           </div>
           <div className="space-y-0.5">
@@ -150,7 +150,7 @@ function PilotAssignmentCalendar() {
                 className={`text-xs px-1 py-0.5 rounded truncate ${
                   booking.assigned_pilot_id 
                     ? 'bg-green-500/20 text-green-400 border-l-2 border-green-500' 
-                    : 'bg-orange-500/20 text-orange-400 border-l-2 border-orange-500'
+                    : 'bg-lime/20 text-lime border-l-2 border-lime'
                 }`}
               >
                 {booking.route?.split('→')[0]?.trim()?.slice(0, 8)}
@@ -174,7 +174,7 @@ function PilotAssignmentCalendar() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-blue-400" />
+        <RefreshCw className="h-8 w-8 animate-spin text-amber" />
       </div>
     );
   }
@@ -185,7 +185,7 @@ function PilotAssignmentCalendar() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <UserPlus className="h-6 w-6 text-blue-400" />
+            <UserPlus className="h-6 w-6 text-amber" />
             Pilot Assignment / पायलट असाइनमेंट
           </h2>
           <p className="text-slate-400 mt-1">Assign pilots to bookings from calendar view</p>
@@ -197,24 +197,24 @@ function PilotAssignmentCalendar() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-4 border border-blue-500/30">
-          <User className="h-6 w-6 text-blue-400 mb-2" />
+        <div className="bg-gradient-to-br to-cyan-500/20 rounded-sm p-4 border border-amber/30">
+          <User className="h-6 w-6 text-amber mb-2" />
           <p className="text-3xl font-bold text-white">{data?.total_pilots || 0}</p>
           <p className="text-slate-400 text-sm">Total Pilots / कुल पायलट</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <Check className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-3xl font-bold text-green-400">
             {(data?.bookings?.length || 0) - (data?.unassigned_bookings || 0)}
           </p>
           <p className="text-slate-400 text-sm">Assigned / असाइन किया गया</p>
         </div>
-        <div className="bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl p-4 border border-orange-500/30">
-          <AlertCircle className="h-6 w-6 text-orange-400 mb-2" />
-          <p className="text-3xl font-bold text-orange-400">{data?.unassigned_bookings || 0}</p>
+        <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
+          <AlertCircle className="h-6 w-6 text-lime mb-2" />
+          <p className="text-3xl font-bold text-lime">{data?.unassigned_bookings || 0}</p>
           <p className="text-slate-400 text-sm">Unassigned / बिना असाइन</p>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-500/30">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-sm p-4 border border-purple-500/30">
           <Plane className="h-6 w-6 text-purple-400 mb-2" />
           <p className="text-3xl font-bold text-purple-400">{data?.bookings?.length || 0}</p>
           <p className="text-slate-400 text-sm">Total Bookings / कुल बुकिंग</p>
@@ -240,14 +240,14 @@ function PilotAssignmentCalendar() {
             <div className="w-3 h-3 rounded bg-green-500" /> Assigned
           </span>
           <span className="flex items-center gap-1">
-            <div className="w-3 h-3 rounded bg-orange-500" /> Unassigned
+            <div className="w-3 h-3 rounded bg-lime text-black" /> Unassigned
           </span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Calendar Grid */}
-        <div className="lg:col-span-2 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="lg:col-span-2 bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <div className="grid grid-cols-7 bg-slate-800">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
               <div key={day} className="p-2 text-center text-slate-400 font-medium text-sm">
@@ -263,9 +263,9 @@ function PilotAssignmentCalendar() {
         {/* Right Panel - Bookings & Assignment */}
         <div className="space-y-4">
           {/* Selected Date Bookings */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-4">
             <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-blue-400" />
+              <Calendar className="h-5 w-5 text-amber" />
               {selectedDate ? new Date(selectedDate).toLocaleDateString('en-IN', { 
                 weekday: 'short', day: 'numeric', month: 'short' 
               }) : 'Select a date'}
@@ -279,16 +279,16 @@ function PilotAssignmentCalendar() {
                     onClick={() => setSelectedBooking(booking)}
                     className={`p-3 rounded-lg cursor-pointer transition-all ${
                       selectedBooking?.id === booking.id 
-                        ? 'bg-blue-500/20 border border-blue-500/50' 
+                        ? 'bg-amber/20 border border-amber/50' 
                         : 'bg-slate-900/50 hover:bg-slate-800/50'
-                    } ${booking.assigned_pilot_id ? 'border-l-4 border-green-500' : 'border-l-4 border-orange-500'}`}
+                    } ${booking.assigned_pilot_id ? 'border-l-4 border-green-500' : 'border-l-4 border-lime'}`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-white font-medium text-sm">{booking.route}</span>
                       {booking.assigned_pilot_id ? (
                         <Check className="h-4 w-4 text-green-400" />
                       ) : (
-                        <AlertCircle className="h-4 w-4 text-orange-400" />
+                        <AlertCircle className="h-4 w-4 text-lime" />
                       )}
                     </div>
                     <p className="text-slate-400 text-xs">{booking.customer}</p>
@@ -317,9 +317,9 @@ function PilotAssignmentCalendar() {
 
           {/* Pilot Selection for Assignment */}
           {selectedBooking && !selectedBooking.assigned_pilot_id && (
-            <div className="bg-slate-800/50 rounded-xl border border-blue-500/30 p-4">
+            <div className="bg-slate-800/50 rounded-sm border border-amber/30 p-4">
               <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-                <UserPlus className="h-5 w-5 text-blue-400" />
+                <UserPlus className="h-5 w-5 text-amber" />
                 Assign Pilot / पायलट चुनें
               </h4>
               <p className="text-slate-400 text-sm mb-3">
@@ -383,10 +383,10 @@ function PilotAssignmentCalendar() {
       </div>
 
       {/* Pilots Availability Grid */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <User className="h-5 w-5 text-blue-400" />
+            <User className="h-5 w-5 text-amber" />
             Pilot Overview / पायलट अवलोकन
           </h3>
         </div>
@@ -411,8 +411,8 @@ function PilotAssignmentCalendar() {
                   <tr key={pilot.id} className="border-t border-slate-700 hover:bg-slate-800/50">
                     <td className="p-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-                          <User className="h-4 w-4 text-blue-400" />
+                        <div className="w-8 h-8 rounded-full bg-amber/20 flex items-center justify-center">
+                          <User className="h-4 w-4 text-amber" />
                         </div>
                         <span className="text-white font-medium">{pilot.name}</span>
                       </div>

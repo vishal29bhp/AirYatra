@@ -15,8 +15,8 @@ const fmtInr = (v) => {
   return `₹${(v || 0).toLocaleString('en-IN')}`;
 };
 
-const KPI = ({ icon: Icon, label, value, sub, accent = 'text-orange-400', testid }) => (
-  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 hover:border-orange-500/40 transition-colors" data-testid={testid}>
+const KPI = ({ icon: Icon, label, value, sub, accent = 'text-lime', testid }) => (
+  <div className="bg-slate-900/70 border border-slate-800 rounded-sm p-4 hover:border-lime/40 transition-colors" data-testid={testid}>
     <div className="flex items-center justify-between">
       <Icon className={`h-5 w-5 ${accent}`} />
     </div>
@@ -124,10 +124,10 @@ const CEODashboard = () => {
           <p className="text-slate-400 text-sm">Executive view — revenue, fleet, marketplace & HR at a glance / एक नज़र में पूरा कारोबार</p>
         </div>
         <div className="flex gap-2">
-          <Button onClick={openInvestors} variant="outline" className="border-slate-700 text-slate-300 hover:border-orange-500/50" data-testid="investor-emails-btn">
+          <Button onClick={openInvestors} variant="outline" className="border-slate-700 text-slate-300 hover:border-lime/50" data-testid="investor-emails-btn">
             <Mail className="h-4 w-4 mr-2" /> Investors
           </Button>
-          <Button onClick={downloadReport} disabled={downloading} className="bg-orange-500 hover:bg-orange-600" data-testid="download-board-report-btn">
+          <Button onClick={downloadReport} disabled={downloading} className="bg-lime text-black hover:bg-lime/90" data-testid="download-board-report-btn">
             {downloading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Download className="h-4 w-4 mr-2" />}
             Board Report (PDF)
           </Button>
@@ -141,9 +141,9 @@ const CEODashboard = () => {
       <Dialog open={investorsOpen} onOpenChange={setInvestorsOpen}>
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-md" data-testid="investor-emails-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Mail className="h-5 w-5 text-orange-400" /> Investor Report Distribution</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Mail className="h-5 w-5 text-lime" /> Investor Report Distribution</DialogTitle>
             <DialogDescription className="text-slate-400">
-              The board report PDF is auto-emailed to these investors on the <b className="text-orange-400">1st of every month</b>.
+              The board report PDF is auto-emailed to these investors on the <b className="text-lime">1st of every month</b>.
             </DialogDescription>
           </DialogHeader>
           <div>
@@ -162,7 +162,7 @@ const CEODashboard = () => {
             </p>
           )}
           <div className="flex gap-2">
-            <Button onClick={saveInvestors} disabled={savingInv} className="flex-1 bg-orange-500 hover:bg-orange-600" data-testid="save-investors-btn">
+            <Button onClick={saveInvestors} disabled={savingInv} className="flex-1 bg-lime text-black hover:bg-lime/90" data-testid="save-investors-btn">
               {savingInv ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null} Save List
             </Button>
             <Button onClick={sendNow} disabled={sendingNow} variant="outline" className="border-green-500/50 text-green-400 hover:bg-green-500/10" data-testid="send-report-now-btn">
@@ -176,13 +176,13 @@ const CEODashboard = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <KPI icon={TrendingUp} label="Revenue Collected" value={fmtInr(revenue.total_collected_inr)} sub={`Accepted quotes: ${fmtInr(revenue.accepted_quotes_value_inr)}`} accent="text-green-400" testid="kpi-revenue" />
         <KPI icon={Tag} label="Total Bookings" value={bookings.total} sub={`${bookings.this_month} this month`} testid="kpi-bookings" />
-        <KPI icon={Users} label="Customers" value={customers.total} sub={`+${customers.new_this_month} this month`} accent="text-blue-400" testid="kpi-customers" />
+        <KPI icon={Users} label="Customers" value={customers.total} sub={`+${customers.new_this_month} this month`} accent="text-amber" testid="kpi-customers" />
         <KPI icon={Building2} label="Operators" value={`${fleet.operators_active}/${fleet.operators_total}`} sub={`${fleet.aircraft_available}/${fleet.aircraft_total} aircraft available`} accent="text-purple-400" testid="kpi-operators" />
       </div>
 
       {/* Marketplace */}
       <div>
-        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Plane className="h-4 w-4 text-orange-400" /> Aviation Exchange Marketplace</h2>
+        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Plane className="h-4 w-4 text-lime" /> Aviation Exchange Marketplace</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <KPI icon={Tag} label="Active Listings" value={mp.listings_active} sub={`${mp.listings_sold} sold • ${mp.listings_pending} pending review`} testid="kpi-listings" />
           <KPI icon={Gavel} label="Live Auctions" value={mp.auctions_live} sub={`${mp.total_bids} bids • ${mp.auction_watchers} watchers • ${fmtInr(mp.live_auction_bid_value_inr)}`} accent="text-red-400" testid="kpi-auctions" />
@@ -193,9 +193,9 @@ const CEODashboard = () => {
 
       {/* People & HR */}
       <div>
-        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Users2 className="h-4 w-4 text-orange-400" /> People & HR (HRMS)</h2>
+        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Users2 className="h-4 w-4 text-lime" /> People & HR (HRMS)</h2>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <KPI icon={Users2} label="Internal Employees" value={hr.employees_total} accent="text-blue-400" testid="kpi-employees" />
+          <KPI icon={Users2} label="Internal Employees" value={hr.employees_total} accent="text-amber" testid="kpi-employees" />
           <KPI icon={CalendarCheck} label="Attendance Today" value={hr.attendance_today} sub="check-ins marked" accent="text-green-400" testid="kpi-attendance" />
           <KPI icon={CalendarCheck} label="Pending Leaves" value={hr.leaves_pending} sub="awaiting approval" accent="text-yellow-400" testid="kpi-leaves" />
           <KPI icon={Receipt} label="Pending Expenses" value={hr.expenses_pending_count} sub={fmtInr(hr.expenses_pending_amount_inr)} accent="text-red-400" testid="kpi-expenses" />
@@ -210,7 +210,7 @@ const CEODashboard = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <KPI icon={Users} label="Logins (24h)" value={securityStats.total_logins} sub={`${securityStats.success_rate}% success rate`} accent="text-green-400" testid="kpi-logins" />
             <KPI icon={Ban} label="Blocked Logins" value={securityStats.blocked_logins} sub="high-risk attempts" accent="text-red-400" testid="kpi-blocked" />
-            <KPI icon={AlertTriangle} label="Open Incidents" value={securityStats.open_incidents} sub="requiring review" accent={securityStats.open_incidents > 0 ? "text-orange-400" : "text-green-400"} testid="kpi-incidents" />
+            <KPI icon={AlertTriangle} label="Open Incidents" value={securityStats.open_incidents} sub="requiring review" accent={securityStats.open_incidents > 0 ? "text-lime" : "text-green-400"} testid="kpi-incidents" />
             <KPI icon={Globe} label="Suspicious IPs" value={securityStats.suspicious_ips} sub="3+ failed attempts" accent="text-yellow-400" testid="kpi-suspicious-ips" />
           </div>
         </div>
@@ -218,7 +218,7 @@ const CEODashboard = () => {
 
       <div className="grid lg:grid-cols-3 gap-4">
         {/* Booking Trend */}
-        <div className="lg:col-span-2 bg-slate-900/70 border border-slate-800 rounded-xl p-5" data-testid="booking-trend-chart">
+        <div className="lg:col-span-2 bg-slate-900/70 border border-slate-800 rounded-sm p-5" data-testid="booking-trend-chart">
           <h3 className="text-white font-semibold text-sm mb-4">Booking Trend (last 6 months)</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={bookings.monthly_trend}>
@@ -233,7 +233,7 @@ const CEODashboard = () => {
 
         {/* Memberships + Partners */}
         <div className="space-y-4">
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5" data-testid="membership-breakdown">
+          <div className="bg-slate-900/70 border border-slate-800 rounded-sm p-5" data-testid="membership-breakdown">
             <h3 className="text-white font-semibold text-sm mb-3">BLACK Memberships</h3>
             {Object.keys(memberships).length === 0 ? (
               <p className="text-slate-500 text-xs">No memberships yet</p>
@@ -242,18 +242,18 @@ const CEODashboard = () => {
                 {Object.entries(memberships).map(([tier, count]) => (
                   <div key={tier} className="flex items-center justify-between text-sm">
                     <span className="text-slate-300 capitalize">{tier}</span>
-                    <span className="text-orange-400 font-bold">{count}</span>
+                    <span className="text-lime font-bold">{count}</span>
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5" data-testid="partner-summary">
-            <h3 className="text-white font-semibold text-sm mb-3 flex items-center gap-2"><Handshake className="h-4 w-4 text-orange-400" /> Partner API Platform</h3>
+          <div className="bg-slate-900/70 border border-slate-800 rounded-sm p-5" data-testid="partner-summary">
+            <h3 className="text-white font-semibold text-sm mb-3 flex items-center gap-2"><Handshake className="h-4 w-4 text-lime" /> Partner API Platform</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-slate-300">Active Partners</span><span className="text-white font-bold">{partners.active}/{partners.total}</span></div>
               <div className="flex justify-between"><span className="text-slate-300">Partner Bookings</span><span className="text-white font-bold">{partners.bookings_total}</span></div>
-              <div className="flex justify-between"><span className="text-slate-300">Awaiting Processing</span><span className="text-orange-400 font-bold">{partners.bookings_new}</span></div>
+              <div className="flex justify-between"><span className="text-slate-300">Awaiting Processing</span><span className="text-lime font-bold">{partners.bookings_new}</span></div>
             </div>
           </div>
         </div>

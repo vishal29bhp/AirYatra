@@ -60,7 +60,7 @@ function AuditLogs() {
       settlement_paid: 'bg-green-500/20 text-green-400',
       landing_permission_approved: 'bg-cyan-500/20 text-cyan-400',
       landing_permission_rejected: 'bg-red-500/20 text-red-400',
-      force_assign_operator: 'bg-orange-500/20 text-orange-400',
+      force_assign_operator: 'bg-amber-500/20 text-amber-400',
     };
     return colors[action] || 'bg-slate-500/20 text-slate-400';
   };
@@ -87,15 +87,15 @@ function AuditLogs() {
       {/* Statistics Summary */}
       {statistics && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
             <p className="text-sm text-slate-400">Total Log Entries</p>
             <p className="text-2xl font-bold text-white">{statistics.total_logs || 0}</p>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
             <p className="text-sm text-slate-400">Action Types</p>
             <p className="text-2xl font-bold text-purple-400">{statistics.by_action?.length || 0}</p>
           </div>
-          <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
             <p className="text-sm text-slate-400">Active Users</p>
             <p className="text-2xl font-bold text-cyan-400">{statistics.most_active_users?.length || 0}</p>
           </div>
@@ -103,7 +103,7 @@ function AuditLogs() {
       )}
 
       {/* Filters */}
-      <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
         <div className="flex items-center gap-2 mb-4">
           <Filter className="h-5 w-5 text-slate-400" />
           <span className="text-white font-medium">Filters</span>
@@ -153,7 +153,7 @@ function AuditLogs() {
             </select>
           </div>
           <div className="flex items-end">
-            <Button onClick={loadLogs} className="w-full bg-orange-500 hover:bg-orange-600">
+            <Button onClick={loadLogs} className="w-full bg-lime text-black hover:bg-lime/90">
               Apply Filters
             </Button>
           </div>
@@ -171,7 +171,7 @@ function AuditLogs() {
       ) : (
         <div className="space-y-3">
           {logs.map((log) => (
-            <div key={log.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all">
+            <div key={log.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
@@ -225,7 +225,7 @@ function AuditLogs() {
 
       {/* Most Active Users */}
       {statistics?.most_active_users && statistics.most_active_users.length > 0 && (
-        <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
           <h3 className="text-lg font-semibold text-white mb-4">Most Active Users</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             {statistics.most_active_users.map((user, index) => (

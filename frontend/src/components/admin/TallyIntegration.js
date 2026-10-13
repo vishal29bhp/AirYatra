@@ -140,8 +140,8 @@ export default function TallyIntegration() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-blue-500/20 rounded-lg">
-                <FileText className="h-6 w-6 text-blue-400" />
+              <div className="p-3 bg-amber/20 rounded-lg">
+                <FileText className="h-6 w-6 text-amber" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.pending_vouchers || 0}</p>
@@ -270,7 +270,7 @@ export default function TallyIntegration() {
               </label>
             </div>
             <div className="flex gap-2">
-              <Button onClick={saveConfig} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={saveConfig} className="bg-lime text-black hover:bg-lime/90">
                 Save Configuration
               </Button>
               <Button variant="outline" onClick={testConnection}>
@@ -291,7 +291,7 @@ export default function TallyIntegration() {
             <Button 
               onClick={() => triggerSync('all')} 
               disabled={syncing}
-              className="bg-blue-500 hover:bg-blue-600"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
               Sync All

@@ -119,7 +119,7 @@ function FlightRecordsManager({ operator }) {
         {selectedAircraft && (
           <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-orange-500 hover:bg-orange-600" data-testid="add-flight-btn">
+              <Button className="bg-lime text-black hover:bg-lime/90" data-testid="add-flight-btn">
                 <Plus className="h-5 w-5 mr-2" />
                 Log Flight
               </Button>
@@ -279,7 +279,7 @@ function FlightRecordsManager({ operator }) {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button type="submit" className="w-full bg-lime text-black hover:bg-lime/90">
                   Save Flight Record
                 </Button>
               </form>
@@ -323,7 +323,7 @@ function FlightRecordsManager({ operator }) {
                   <div className="flex justify-between items-start mb-3">
                     <div>
                       <div className="flex items-center space-x-3 text-white font-semibold">
-                        <MapPin className="h-5 w-5 text-orange-500" />
+                        <MapPin className="h-5 w-5 text-lime" />
                         <span>{record.departure_location} → {record.arrival_location}</span>
                       </div>
                       <div className="text-sm text-slate-400 mt-1">

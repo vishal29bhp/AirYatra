@@ -34,7 +34,7 @@ function CurrencyConverter() {
     setResult(converted.toFixed(2));
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -61,7 +61,7 @@ function CurrencyConverter() {
           <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)} className="p-3 bg-slate-700 rounded-lg border border-slate-600 text-white">
             {currencies.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
-          <Button onClick={convert} className="bg-orange-500 px-8">Convert</Button>
+          <Button onClick={convert} className="bg-lime text-black px-8">Convert</Button>
         </div>
         {result && (
           <div className="mt-6 text-center p-4 bg-green-500/20 rounded-lg border border-green-500/30">

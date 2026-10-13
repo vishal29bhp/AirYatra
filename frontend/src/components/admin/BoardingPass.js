@@ -26,7 +26,7 @@ function BoardingPass() {
     } catch (error) { alert('Failed to download'); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -43,10 +43,10 @@ function BoardingPass() {
       {passes.length > 0 ? (
         <div className="grid grid-cols-2 gap-6">
           {passes.map(pass => (
-            <div key={pass.id} className="bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-xl p-6 border border-orange-500/30">
+            <div key={pass.id} className="bg-lime/20 rounded-sm p-6 border border-lime/30">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <p className="text-orange-400 text-sm font-medium">BOARDING PASS</p>
+                  <p className="text-lime text-sm font-medium">BOARDING PASS</p>
                   <p className="text-white text-2xl font-bold">{pass.booking_number}</p>
                 </div>
                 <div className="bg-white p-3 rounded-lg">
@@ -60,7 +60,7 @@ function BoardingPass() {
                 </div>
                 <div className="flex-1 flex items-center justify-center px-4">
                   <div className="h-px bg-slate-600 flex-1" />
-                  <Plane className="h-6 w-6 text-orange-400 mx-2" />
+                  <Plane className="h-6 w-6 text-lime mx-2" />
                   <div className="h-px bg-slate-600 flex-1" />
                 </div>
                 <div className="text-center">
@@ -83,7 +83,7 @@ function BoardingPass() {
                 </div>
               </div>
               <div className="flex space-x-2">
-                <Button onClick={() => downloadPass(pass.id)} className="flex-1 bg-orange-500">
+                <Button onClick={() => downloadPass(pass.id)} className="flex-1 bg-lime text-black">
                   <Download className="h-4 w-4 mr-2" /> Download
                 </Button>
               </div>

@@ -178,7 +178,7 @@ function OperatorDashboard({ user, onLogout }) {
               onClick={sidebar.toggleMobile} 
               isOpen={sidebar.isMobileOpen}
             />
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-xl lg:text-2xl font-bold text-white">AirYatra Operator</span>
           </div>
           <div className="flex items-center space-x-2 lg:space-x-4">
@@ -187,12 +187,12 @@ function OperatorDashboard({ user, onLogout }) {
             <div className="text-right hidden sm:block">
               <div className="text-white font-medium text-sm lg:text-base" data-testid="operator-name">{operator?.company_name}</div>
               <div className="text-slate-400 text-xs lg:text-sm" data-testid="verification-status">
-                Status: <span className={operator?.status === 'active' ? 'text-green-400' : 'text-orange-400'}>
+                Status: <span className={operator?.status === 'active' ? 'text-green-400' : 'text-lime'}>
                   {operator?.status}
                 </span>
               </div>
             </div>
-            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-orange-400" data-testid="logout-btn">
+            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-lime" data-testid="logout-btn">
               <LogOut className="h-5 w-5" />
             </Button>
           </div>
@@ -237,7 +237,7 @@ function OperatorDashboard({ user, onLogout }) {
                       title={sidebar.effectiveCollapsed ? item.label : undefined}
                       className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
                         isActive
-                          ? 'bg-orange-500 text-white'
+                          ? 'bg-lime text-black'
                           : item.highlight
                             ? 'text-yellow-400 hover:bg-yellow-500/20'
                             : 'text-slate-400 hover:bg-slate-800 hover:text-white'

@@ -197,7 +197,7 @@ export default function AdminPaymentsDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="payments-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -213,7 +213,7 @@ export default function AdminPaymentsDashboard() {
       <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Wallet className="h-7 w-7 text-orange-500" />
+            <Wallet className="h-7 w-7 text-lime" />
             Payments Dashboard
           </h1>
           <p className="text-slate-400 mt-1">Monitor collections, pending balances & transactions</p>
@@ -230,7 +230,7 @@ export default function AdminPaymentsDashboard() {
               <FileSpreadsheet className="h-4 w-4 mr-2" />
               {exportLoading ? 'Exporting...' : 'Export CSV'}
             </Button>
-            <div className="absolute right-0 mt-1 w-56 bg-slate-800 border border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+            <div className="absolute right-0 mt-1 w-56 bg-slate-800 border border-slate-700 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
               <button 
                 onClick={() => exportCSV('transactions')}
                 className="w-full px-4 py-3 text-left text-sm text-slate-300 hover:bg-slate-700 rounded-t-lg flex items-center gap-2"
@@ -278,24 +278,24 @@ export default function AdminPaymentsDashboard() {
                 </p>
                 <p className="text-green-200 text-sm mt-1">{kpis.today_count || 0} payments</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-blue-100 text-sm font-medium">This Week</p>
+                <p className="text-slate-300 text-sm font-medium">This Week</p>
                 <p className="text-3xl font-bold text-white mt-1" data-testid="week-total">
                   {formatCurrency(kpis.week_total || 0)}
                 </p>
-                <p className="text-blue-200 text-sm mt-1">Last 7 days</p>
+                <p className="text-slate-300 text-sm mt-1">Last 7 days</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Calendar className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -312,24 +312,24 @@ export default function AdminPaymentsDashboard() {
                 </p>
                 <p className="text-purple-200 text-sm mt-1">Current month</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <DollarSign className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-orange-100 text-sm font-medium">Pending Balances</p>
+                <p className="text-slate-300 text-sm font-medium">Pending Balances</p>
                 <p className="text-3xl font-bold text-white mt-1" data-testid="pending-total">
                   {formatCurrency(kpis.pending_balance_total || 0)}
                 </p>
-                <p className="text-orange-200 text-sm mt-1">{kpis.pending_balance_count || 0} bookings</p>
+                <p className="text-slate-300 text-sm mt-1">{kpis.pending_balance_count || 0} bookings</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Clock className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -341,7 +341,7 @@ export default function AdminPaymentsDashboard() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardContent className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-green-500/20 rounded-xl">
+            <div className="p-3 bg-green-500/20 rounded-sm">
               <CreditCard className="h-6 w-6 text-green-400" />
             </div>
             <div>
@@ -363,21 +363,21 @@ export default function AdminPaymentsDashboard() {
         <TabsList className="bg-slate-800 border-slate-700 p-1">
           <TabsTrigger 
             value="overview" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black"
             data-testid="tab-overview"
           >
             Daily Trend
           </TabsTrigger>
           <TabsTrigger 
             value="pending" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black"
             data-testid="tab-pending"
           >
             Pending Balances ({pendingBalances.length})
           </TabsTrigger>
           <TabsTrigger 
             value="transactions" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black"
             data-testid="tab-transactions"
           >
             Recent Transactions
@@ -389,7 +389,7 @@ export default function AdminPaymentsDashboard() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-orange-500" />
+                <TrendingUp className="h-5 w-5 text-lime" />
                 Last 7 Days Collections
               </CardTitle>
             </CardHeader>
@@ -424,7 +424,7 @@ export default function AdminPaymentsDashboard() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <AlertTriangle className="h-5 w-5 text-lime" />
                 Bookings with Pending Balance
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -455,7 +455,7 @@ export default function AdminPaymentsDashboard() {
                       {pendingBalances.map((item, idx) => (
                         <tr key={idx} className="border-b border-slate-700/50 hover:bg-slate-700/30">
                           <td className="py-3 px-2">
-                            <span className="text-orange-400 font-mono text-xs">
+                            <span className="text-lime font-mono text-xs">
                               {item.inquiry_number || item.booking_id?.slice(0, 8)}
                             </span>
                           </td>
@@ -471,7 +471,7 @@ export default function AdminPaymentsDashboard() {
                             {formatCurrency(item.paid)}
                           </td>
                           <td className="py-3 px-2 text-right">
-                            <Badge className="bg-orange-500/20 text-orange-400 border-0">
+                            <Badge className="bg-amber-500/20 text-amber-400 border-0">
                               {formatCurrency(item.remaining)}
                             </Badge>
                           </td>
@@ -490,7 +490,7 @@ export default function AdminPaymentsDashboard() {
                               <Button
                                 size="sm"
                                 variant="ghost"
-                                className="h-8 px-2 text-blue-400 hover:bg-blue-500/20"
+                                className="h-8 px-2 text-amber hover:bg-amber/20"
                                 onClick={() => sendBalanceReminder(item.booking_id)}
                                 disabled={reminderLoading[item.booking_id]}
                                 title="Send Reminder Email"
@@ -519,7 +519,7 @@ export default function AdminPaymentsDashboard() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-orange-500" />
+                <Receipt className="h-5 w-5 text-lime" />
                 Recent Successful Payments
               </CardTitle>
             </CardHeader>
@@ -549,7 +549,7 @@ export default function AdminPaymentsDashboard() {
                             {formatDate(txn.paid_at)}
                           </td>
                           <td className="py-3 px-2">
-                            <span className="text-orange-400 font-mono text-xs">
+                            <span className="text-lime font-mono text-xs">
                               {txn.inquiry_number}
                             </span>
                             <div className="text-slate-500 text-xs truncate max-w-[150px]">
@@ -609,14 +609,14 @@ export default function AdminPaymentsDashboard() {
           
           {paymentLinkDialog.loading ? (
             <div className="flex items-center justify-center py-8">
-              <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+              <RefreshCw className="h-8 w-8 animate-spin text-lime" />
             </div>
           ) : paymentLinkDialog.data ? (
             <div className="space-y-4">
               {/* Amount */}
-              <div className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-xl p-4 text-center border border-orange-500/30">
+              <div className="bg-lime/20 rounded-sm p-4 text-center border border-lime/30">
                 <p className="text-slate-400 text-sm">Balance Amount</p>
-                <p className="text-3xl font-bold text-orange-400">
+                <p className="text-3xl font-bold text-lime">
                   {formatCurrency(paymentLinkDialog.data.amount)}
                 </p>
                 <p className="text-slate-500 text-sm mt-1">
@@ -665,7 +665,7 @@ export default function AdminPaymentsDashboard() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-orange-500 text-orange-400 hover:bg-orange-500/20"
+                  className="border-lime text-lime hover:bg-lime/20"
                   onClick={() => {
                     showQrCode(paymentLinkDialog.data.token);
                     setPaymentLinkDialog({ ...paymentLinkDialog, open: false });
@@ -697,7 +697,7 @@ export default function AdminPaymentsDashboard() {
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <QrCode className="h-5 w-5 text-orange-500" />
+              <QrCode className="h-5 w-5 text-lime" />
               Payment QR Code
             </DialogTitle>
             <DialogDescription className="text-slate-400">
@@ -707,7 +707,7 @@ export default function AdminPaymentsDashboard() {
           
           <div className="space-y-4">
             {/* QR Code Image */}
-            <div className="bg-white rounded-xl p-4 flex items-center justify-center">
+            <div className="bg-white rounded-sm p-4 flex items-center justify-center">
               <img 
                 src={`${API_URL}/api/admin/payments/payment-link-qr/${qrDialog.token}`}
                 alt="Payment QR Code"
@@ -726,7 +726,7 @@ export default function AdminPaymentsDashboard() {
             {/* Action Buttons */}
             <div className="flex gap-2">
               <Button
-                className="flex-1 bg-orange-500 hover:bg-orange-600"
+                className="flex-1 bg-lime text-black hover:bg-lime/90"
                 onClick={printQrCode}
               >
                 <Printer className="h-4 w-4 mr-2" />

@@ -70,7 +70,7 @@ const DocumentVerificationModal = ({ document, onClose, onVerify }) => {
       <Card className="bg-slate-900 border-slate-700 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <Shield className="h-5 w-5 text-orange-400" />
+            <Shield className="h-5 w-5 text-lime" />
             Document Verification
           </CardTitle>
           <CardDescription>Review and verify this document</CardDescription>
@@ -213,7 +213,7 @@ const AdminVerificationQueue = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -224,7 +224,7 @@ const AdminVerificationQueue = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-orange-400" />
+            <Shield className="h-6 w-6 text-lime" />
             Document Verification Queue / दस्तावेज़ सत्यापन
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -331,7 +331,7 @@ const AdminVerificationQueue = () => {
                       <VerificationStatusBadge status={doc.verification_status} />
                       <Button
                         onClick={() => setSelectedDoc(doc)}
-                        className="bg-orange-500 hover:bg-orange-600"
+                        className="bg-lime text-black hover:bg-lime/90"
                         size="sm"
                       >
                         <Eye className="h-4 w-4 mr-2" /> Review

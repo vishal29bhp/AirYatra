@@ -38,7 +38,7 @@ function DocumentExpiryAlerts() {
 
   const getUrgencyClass = (days) => {
     if (days <= 7) return 'bg-red-500/20 border-red-500/30 text-red-400';
-    if (days <= 14) return 'bg-orange-500/20 border-orange-500/30 text-orange-400';
+    if (days <= 14) return 'bg-lime/20 border-lime/30 text-lime';
     return 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400';
   };
 
@@ -57,11 +57,11 @@ function DocumentExpiryAlerts() {
   }
 
   return (
-    <div className="glass p-4 rounded-lg border-l-4 border-orange-500" data-testid="document-alerts">
+    <div className="glass p-4 rounded-lg border-l-4 border-lime" data-testid="document-alerts">
       <div className="flex items-center space-x-2 mb-4">
-        <AlertTriangle className="h-5 w-5 text-orange-500" />
+        <AlertTriangle className="h-5 w-5 text-lime" />
         <h3 className="text-lg font-semibold text-white">Document Expiry Alerts</h3>
-        <span className="px-2 py-0.5 bg-orange-500/20 rounded-full text-orange-400 text-sm">
+        <span className="px-2 py-0.5 bg-lime/20 rounded-full text-lime text-sm">
           {totalExpiring}
         </span>
       </div>
@@ -128,7 +128,7 @@ function DocumentExpiryAlerts() {
 
       <a
         href="/operator/fleet"
-        className="flex items-center justify-center mt-4 text-orange-400 hover:text-orange-300 text-sm"
+        className="flex items-center justify-center mt-4 text-lime hover:text-lime/80 text-sm"
       >
         View All Documents <ChevronRight className="h-4 w-4 ml-1" />
       </a>

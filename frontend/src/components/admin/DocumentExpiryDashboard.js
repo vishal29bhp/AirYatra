@@ -188,7 +188,7 @@ function DocumentExpiryDashboard() {
     if (daysLeft <= 30) {
       return <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs font-medium">WARNING ({daysLeft}d)</span>;
     }
-    return <span className="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs font-medium">{daysLeft}d left</span>;
+    return <span className="px-2 py-1 bg-lime/20 text-lime rounded text-xs font-medium">{daysLeft}d left</span>;
   };
 
   return (
@@ -214,7 +214,7 @@ function DocumentExpiryDashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-gradient-to-br from-red-900/40 to-slate-900 rounded-xl p-4 border border-red-700/30">
+        <div className="bg-gradient-to-br from-red-900/40 to-slate-900 rounded-sm p-4 border border-red-700/30">
           <div className="flex items-center gap-2 text-red-400 mb-2">
             <AlertTriangle className="h-5 w-5" />
             <span className="text-sm font-medium">Expired</span>
@@ -223,7 +223,7 @@ function DocumentExpiryDashboard() {
           <p className="text-xs text-slate-500">Need immediate action</p>
         </div>
 
-        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-xl p-4 border border-red-600/30">
+        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-sm p-4 border border-red-600/30">
           <div className="flex items-center gap-2 text-red-300 mb-2">
             <Clock className="h-5 w-5" />
             <span className="text-sm font-medium">7 Days</span>
@@ -232,7 +232,7 @@ function DocumentExpiryDashboard() {
           <p className="text-xs text-slate-500">Critical</p>
         </div>
 
-        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-xl p-4 border border-yellow-700/30">
+        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-sm p-4 border border-yellow-700/30">
           <div className="flex items-center gap-2 text-yellow-400 mb-2">
             <Clock className="h-5 w-5" />
             <span className="text-sm font-medium">30 Days</span>
@@ -241,16 +241,16 @@ function DocumentExpiryDashboard() {
           <p className="text-xs text-slate-500">Warning</p>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-900/30 to-slate-900 rounded-xl p-4 border border-orange-700/30">
-          <div className="flex items-center gap-2 text-orange-400 mb-2">
+        <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
+          <div className="flex items-center gap-2 text-lime mb-2">
             <Calendar className="h-5 w-5" />
             <span className="text-sm font-medium">90 Days</span>
           </div>
-          <p className="text-3xl font-bold text-orange-400">{stats.expiring90}</p>
+          <p className="text-3xl font-bold text-lime">{stats.expiring90}</p>
           <p className="text-xs text-slate-500">Expiring soon</p>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-700">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 text-slate-400 mb-2">
             <FileText className="h-5 w-5" />
             <span className="text-sm font-medium">Total Tracked</span>
@@ -276,7 +276,7 @@ function DocumentExpiryDashboard() {
           <button
             onClick={() => setSelectedCategory('all')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              selectedCategory === 'all' ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+              selectedCategory === 'all' ? 'bg-lime text-black' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
             All
@@ -288,7 +288,7 @@ function DocumentExpiryDashboard() {
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1 ${
-                  selectedCategory === cat ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                  selectedCategory === cat ? 'bg-lime text-black' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                 }`}
               >
                 <Icon className="h-4 w-4" /> {config.label.split('/')[0]}
@@ -300,13 +300,13 @@ function DocumentExpiryDashboard() {
 
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="h-8 w-8 animate-spin text-orange-400" />
+          <RefreshCw className="h-8 w-8 animate-spin text-lime" />
         </div>
       ) : (
         <div className="space-y-6">
           {/* Expired Documents Section */}
           {filteredExpired.length > 0 && (
-            <div className="bg-red-950/20 rounded-xl border border-red-700/30 overflow-hidden">
+            <div className="bg-red-950/20 rounded-sm border border-red-700/30 overflow-hidden">
               <div className="bg-red-900/30 px-4 py-3 border-b border-red-700/30">
                 <h3 className="text-lg font-semibold text-red-400 flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5" />
@@ -359,7 +359,7 @@ function DocumentExpiryDashboard() {
 
           {/* Expiring Documents Section */}
           {filteredExpiring.length > 0 && (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+            <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
               <div className="bg-slate-800 px-4 py-3 border-b border-slate-700">
                 <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                   <Clock className="h-5 w-5 text-yellow-400" />
@@ -397,7 +397,7 @@ function DocumentExpiryDashboard() {
                           variant="outline"
                           onClick={() => sendExpiryAlert(doc)}
                           disabled={sendingAlert === doc.id}
-                          className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+                          className="border-lime text-lime hover:bg-lime/10"
                         >
                           {sendingAlert === doc.id ? (
                             <RefreshCw className="h-4 w-4 animate-spin" />
@@ -415,7 +415,7 @@ function DocumentExpiryDashboard() {
 
           {/* Empty State */}
           {filteredExpired.length === 0 && filteredExpiring.length === 0 && (
-            <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+            <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
               <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
               <p className="text-white text-lg font-medium">All Documents Valid!</p>
               <p className="text-slate-400 mt-2">No documents expiring in the next 90 days</p>

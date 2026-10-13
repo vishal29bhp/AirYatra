@@ -77,7 +77,7 @@ function FleetMaintenanceCalendar() {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'critical': return 'bg-red-500';
-      case 'high': return 'bg-orange-500';
+      case 'high': return 'bg-lime text-black';
       case 'medium': return 'bg-yellow-500';
       case 'low': return 'bg-green-500';
       default: return 'bg-slate-500';
@@ -87,7 +87,7 @@ function FleetMaintenanceCalendar() {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'completed': return <CheckCircle className="h-4 w-4 text-green-400" />;
-      case 'in_progress': return <Loader2 className="h-4 w-4 text-blue-400 animate-spin" />;
+      case 'in_progress': return <Loader2 className="h-4 w-4 text-amber animate-spin" />;
       case 'cancelled': return <XCircle className="h-4 w-4 text-red-400" />;
       default: return <Clock className="h-4 w-4 text-yellow-400" />;
     }
@@ -129,10 +129,10 @@ function FleetMaintenanceCalendar() {
           key={day}
           onClick={() => setSelectedDate(dateKey)}
           className={`p-2 h-24 border border-slate-700 cursor-pointer transition-all overflow-hidden ${
-            isToday ? 'bg-orange-500/10 border-orange-500/50' : 'bg-slate-800/30 hover:bg-slate-800/50'
-          } ${isSelected ? 'ring-2 ring-orange-500' : ''}`}
+            isToday ? 'bg-lime/10 border-lime/50' : 'bg-slate-800/30 hover:bg-slate-800/50'
+          } ${isSelected ? 'ring-2 ring-lime' : ''}`}
         >
-          <div className={`text-sm font-medium mb-1 ${isToday ? 'text-orange-400' : 'text-slate-400'}`}>
+          <div className={`text-sm font-medium mb-1 ${isToday ? 'text-lime' : 'text-slate-400'}`}>
             {day}
           </div>
           <div className="space-y-1">
@@ -160,7 +160,7 @@ function FleetMaintenanceCalendar() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-400" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -171,7 +171,7 @@ function FleetMaintenanceCalendar() {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Calendar className="h-6 w-6 text-blue-400" />
+            <Calendar className="h-6 w-6 text-amber" />
             Maintenance Calendar / रखरखाव कैलेंडर
           </h2>
           <p className="text-slate-400 mt-1">Fleet maintenance schedule overview</p>
@@ -188,22 +188,22 @@ function FleetMaintenanceCalendar() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-4 border border-blue-500/30">
-          <Wrench className="h-6 w-6 text-blue-400 mb-2" />
+        <div className="bg-gradient-to-br to-cyan-500/20 rounded-sm p-4 border border-amber/30">
+          <Wrench className="h-6 w-6 text-amber mb-2" />
           <p className="text-3xl font-bold text-white">{calendarData?.summary?.total || 0}</p>
           <p className="text-slate-400 text-sm">Total Scheduled / कुल</p>
         </div>
-        <div className="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-sm p-4 border border-yellow-500/30">
           <Clock className="h-6 w-6 text-yellow-400 mb-2" />
           <p className="text-3xl font-bold text-yellow-400">{calendarData?.summary?.by_status?.scheduled || 0}</p>
           <p className="text-slate-400 text-sm">Pending / लंबित</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <CheckCircle className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-3xl font-bold text-green-400">{calendarData?.summary?.by_status?.completed || 0}</p>
           <p className="text-slate-400 text-sm">Completed / पूर्ण</p>
         </div>
-        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-xl p-4 border border-red-500/30">
+        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-sm p-4 border border-red-500/30">
           <AlertTriangle className="h-6 w-6 text-red-400 mb-2" />
           <p className="text-3xl font-bold text-red-400">{calendarData?.summary?.by_priority?.critical || 0}</p>
           <p className="text-slate-400 text-sm">Critical / गंभीर</p>
@@ -250,7 +250,7 @@ function FleetMaintenanceCalendar() {
           <div className="w-3 h-3 rounded bg-red-500" /> Critical
         </span>
         <span className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded bg-orange-500" /> High
+          <div className="w-3 h-3 rounded bg-lime text-black" /> High
         </span>
         <span className="flex items-center gap-1">
           <div className="w-3 h-3 rounded bg-yellow-500" /> Medium
@@ -262,7 +262,7 @@ function FleetMaintenanceCalendar() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Calendar Grid */}
-        <div className="lg:col-span-2 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="lg:col-span-2 bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           {/* Day Headers */}
           <div className="grid grid-cols-7 bg-slate-800">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
@@ -279,9 +279,9 @@ function FleetMaintenanceCalendar() {
         </div>
 
         {/* Selected Date Details */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-4">
           <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-orange-400" />
+            <Calendar className="h-5 w-5 text-lime" />
             {selectedDate ? (
               <>
                 {new Date(selectedDate).toLocaleDateString('en-IN', { 
@@ -304,7 +304,7 @@ function FleetMaintenanceCalendar() {
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <Plane className="h-4 w-4 text-blue-400" />
+                      <Plane className="h-4 w-4 text-amber" />
                       <span className="text-white font-medium">{event.aircraft_registration}</span>
                     </div>
                     {getStatusIcon(event.status)}
@@ -336,7 +336,7 @@ function FleetMaintenanceCalendar() {
                   <div className="mt-2 pt-2 border-t border-slate-700">
                     <span className={`text-xs px-2 py-0.5 rounded ${
                       event.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                      event.status === 'in_progress' ? 'bg-blue-500/20 text-blue-400' :
+                      event.status === 'in_progress' ? 'bg-amber/20 text-amber' :
                       event.status === 'cancelled' ? 'bg-red-500/20 text-red-400' :
                       'bg-yellow-500/20 text-yellow-400'
                     }`}>
@@ -358,10 +358,10 @@ function FleetMaintenanceCalendar() {
       </div>
 
       {/* Upcoming Maintenance List */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Wrench className="h-5 w-5 text-orange-400" />
+            <Wrench className="h-5 w-5 text-lime" />
             This Month&apos;s Maintenance / इस महीने का रखरखाव
           </h3>
         </div>
@@ -395,7 +395,7 @@ function FleetMaintenanceCalendar() {
                     <td className="p-3">
                       <span className={`px-2 py-1 rounded text-xs font-medium ${
                         schedule.priority === 'critical' ? 'bg-red-500/20 text-red-400' :
-                        schedule.priority === 'high' ? 'bg-orange-500/20 text-orange-400' :
+                        schedule.priority === 'high' ? 'bg-lime/20 text-lime' :
                         schedule.priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
                         'bg-green-500/20 text-green-400'
                       }`}>

@@ -202,7 +202,7 @@ function VillagePermissionDashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
         <div 
-          className={`glass p-4 rounded-xl cursor-pointer transition-all ${filterStatus === 'documents_pending' ? 'ring-2 ring-yellow-500' : ''}`}
+          className={`glass p-4 rounded-sm cursor-pointer transition-all ${filterStatus === 'documents_pending' ? 'ring-2 ring-yellow-500' : ''}`}
           onClick={() => setFilterStatus('documents_pending')}
         >
           <div className="flex items-center gap-3">
@@ -216,12 +216,12 @@ function VillagePermissionDashboard() {
           </div>
         </div>
         <div 
-          className={`glass p-4 rounded-xl cursor-pointer transition-all ${filterStatus === 'under_review' ? 'ring-2 ring-blue-500' : ''}`}
+          className={`glass p-4 rounded-sm cursor-pointer transition-all ${filterStatus === 'under_review' ? 'ring-2 ring-lime' : ''}`}
           onClick={() => setFilterStatus('under_review')}
         >
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Clock className="h-5 w-5 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <Clock className="h-5 w-5 text-amber" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.under_review}</p>
@@ -230,7 +230,7 @@ function VillagePermissionDashboard() {
           </div>
         </div>
         <div 
-          className={`glass p-4 rounded-xl cursor-pointer transition-all ${filterStatus === 'approved' ? 'ring-2 ring-green-500' : ''}`}
+          className={`glass p-4 rounded-sm cursor-pointer transition-all ${filterStatus === 'approved' ? 'ring-2 ring-green-500' : ''}`}
           onClick={() => setFilterStatus('approved')}
         >
           <div className="flex items-center gap-3">
@@ -244,7 +244,7 @@ function VillagePermissionDashboard() {
           </div>
         </div>
         <div 
-          className={`glass p-4 rounded-xl cursor-pointer transition-all ${filterStatus === 'rejected' ? 'ring-2 ring-red-500' : ''}`}
+          className={`glass p-4 rounded-sm cursor-pointer transition-all ${filterStatus === 'rejected' ? 'ring-2 ring-red-500' : ''}`}
           onClick={() => setFilterStatus('rejected')}
         >
           <div className="flex items-center gap-3">
@@ -283,25 +283,25 @@ function VillagePermissionDashboard() {
       <div className="space-y-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 text-orange-400 animate-spin" />
+            <Loader2 className="h-8 w-8 text-lime animate-spin" />
           </div>
         ) : permissions.length === 0 ? (
-          <div className="glass p-12 rounded-xl text-center">
+          <div className="glass p-12 rounded-sm text-center">
             <AlertTriangle className="h-12 w-12 text-slate-400 mx-auto mb-4" />
             <p className="text-white text-lg">No permission requests found</p>
             <p className="text-slate-400">Village landing permission requests will appear here</p>
           </div>
         ) : (
           permissions.map((permission) => (
-            <div key={permission.id} className="glass rounded-xl overflow-hidden">
+            <div key={permission.id} className="glass rounded-sm overflow-hidden">
               {/* Header Row */}
               <div 
                 className="p-4 flex items-center justify-between cursor-pointer hover:bg-slate-800/50"
                 onClick={() => toggleExpand(permission.id)}
               >
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-orange-500/20 rounded-lg">
-                    <FileText className="h-6 w-6 text-orange-400" />
+                  <div className="p-3 bg-lime/20 rounded-lg">
+                    <FileText className="h-6 w-6 text-lime" />
                   </div>
                   <div>
                     <p className="text-white font-semibold">{permission.permission_number}</p>
@@ -380,7 +380,7 @@ function VillagePermissionDashboard() {
                               <span className="text-slate-400">{docTypeLabels[docType]}</span>
                               <span className={`
                                 ${docStatus.status === 'verified' ? 'text-green-400' : ''}
-                                ${docStatus.status === 'uploaded' ? 'text-blue-400' : ''}
+                                ${docStatus.status === 'uploaded' ? 'text-amber' : ''}
                                 ${docStatus.status === 'pending' ? 'text-yellow-400' : ''}
                               `}>
                                 {docStatus.status === 'verified' && <Check className="h-4 w-4 inline" />}

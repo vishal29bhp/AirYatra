@@ -121,7 +121,7 @@ function SupportDashboard() {
 
   const priorityColors = {
     urgent: 'bg-red-500 text-white',
-    high: 'bg-orange-500 text-white',
+    high: 'bg-amber-500 text-black',
     medium: 'bg-yellow-500 text-black',
     low: 'bg-gray-500 text-white'
   };
@@ -129,7 +129,7 @@ function SupportDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -178,10 +178,10 @@ function SupportDashboard() {
         <div className="space-y-6">
           {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <MessageSquare className="h-6 w-6 text-blue-400" />
+                <div className="p-2 bg-amber/20 rounded-lg">
+                  <MessageSquare className="h-6 w-6 text-amber" />
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm">Open Tickets</p>
@@ -190,7 +190,7 @@ function SupportDashboard() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-red-500/20 rounded-lg">
                   <AlertTriangle className="h-6 w-6 text-red-400" />
@@ -202,7 +202,7 @@ function SupportDashboard() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-yellow-500/20 rounded-lg">
                   <User className="h-6 w-6 text-yellow-400" />
@@ -214,7 +214,7 @@ function SupportDashboard() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <Clock className="h-6 w-6 text-green-400" />
@@ -229,7 +229,7 @@ function SupportDashboard() {
 
           {/* Priority Breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <h3 className="text-white font-semibold mb-4">By Priority</h3>
               <div className="space-y-2">
                 {['urgent', 'high', 'medium', 'low'].map(p => (
@@ -245,7 +245,7 @@ function SupportDashboard() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <h3 className="text-white font-semibold mb-4">By Status</h3>
               <div className="space-y-2">
                 {['open', 'in_progress', 'waiting_customer', 'resolved', 'closed'].map(s => (
@@ -269,7 +269,7 @@ function SupportDashboard() {
       {activeTab === 'tickets' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Ticket List */}
-          <div className="lg:col-span-1 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="lg:col-span-1 bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             {/* Filters */}
             <div className="p-4 border-b border-slate-700 space-y-2">
               <select
@@ -335,7 +335,7 @@ function SupportDashboard() {
           </div>
 
           {/* Ticket Details */}
-          <div className="lg:col-span-2 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="lg:col-span-2 bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             {selectedTicket ? (
               <div className="h-full flex flex-col">
                 {/* Header */}
@@ -476,7 +476,7 @@ function SupportDashboard() {
 
       {/* SLA Settings Tab */}
       {activeTab === 'sla' && slaConfig && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-6">SLA Configuration / SLA सेटिंग्स</h3>
           <p className="text-slate-400 text-sm mb-6">Define response and resolution time limits for each priority level</p>
           

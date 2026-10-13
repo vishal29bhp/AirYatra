@@ -175,10 +175,10 @@ function APIKeysSettings({ user }) {
       </div>
 
       {/* GST Verification API */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <Shield className="h-5 w-5 text-blue-400" />
+            <Shield className="h-5 w-5 text-amber" />
             GST Verification API / GST सत्यापन API
           </h3>
           <div className="flex items-center gap-3">
@@ -267,7 +267,7 @@ function APIKeysSettings({ user }) {
       </div>
 
       {/* PAN Verification API */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
@@ -359,7 +359,7 @@ function APIKeysSettings({ user }) {
       </div>
 
       {/* Sample Data Info */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <TestTube className="h-5 w-5 text-purple-400" />
           Sample Test Data / नमूना परीक्षण डेटा

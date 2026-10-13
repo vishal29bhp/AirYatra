@@ -237,7 +237,7 @@ function VerificationAPISettings() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-xl p-4 border border-green-700/30">
+        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-sm p-4 border border-green-700/30">
           <div className="flex items-center gap-2 text-green-400 mb-2">
             <Server className="h-5 w-5" />
             <span className="text-sm">Total APIs</span>
@@ -245,15 +245,15 @@ function VerificationAPISettings() {
           <p className="text-3xl font-bold text-white">{stats?.verification_apis?.total || 0}</p>
         </div>
         
-        <div className="bg-gradient-to-br from-blue-900/30 to-slate-900 rounded-xl p-4 border border-blue-700/30">
-          <div className="flex items-center gap-2 text-blue-400 mb-2">
+        <div className="bg-gradient-to-br to-slate-900 rounded-sm p-4 border border-amber/30">
+          <div className="flex items-center gap-2 text-amber mb-2">
             <Zap className="h-5 w-5" />
             <span className="text-sm">Enabled</span>
           </div>
           <p className="text-3xl font-bold text-white">{stats?.verification_apis?.enabled || 0}</p>
         </div>
         
-        <div className="bg-gradient-to-br from-purple-900/30 to-slate-900 rounded-xl p-4 border border-purple-700/30">
+        <div className="bg-gradient-to-br from-purple-900/30 to-slate-900 rounded-sm p-4 border border-purple-700/30">
           <div className="flex items-center gap-2 text-purple-400 mb-2">
             <Activity className="h-5 w-5" />
             <span className="text-sm">Total Verifications</span>
@@ -261,8 +261,8 @@ function VerificationAPISettings() {
           <p className="text-3xl font-bold text-white">{stats?.verifications?.total || 0}</p>
         </div>
         
-        <div className="bg-gradient-to-br from-orange-900/30 to-slate-900 rounded-xl p-4 border border-orange-700/30">
-          <div className="flex items-center gap-2 text-orange-400 mb-2">
+        <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
+          <div className="flex items-center gap-2 text-lime mb-2">
             <CheckCircle className="h-5 w-5" />
             <span className="text-sm">Success Rate</span>
           </div>
@@ -271,11 +271,11 @@ function VerificationAPISettings() {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+      <div className="bg-amber/10 border border-amber/30 rounded-sm p-4">
         <div className="flex items-start gap-3">
-          <AlertTriangle className="h-5 w-5 text-blue-400 mt-0.5" />
+          <AlertTriangle className="h-5 w-5 text-amber mt-0.5" />
           <div>
-            <h4 className="text-blue-400 font-medium">API Integration Guide / API इंटीग्रेशन गाइड</h4>
+            <h4 className="text-amber font-medium">API Integration Guide / API इंटीग्रेशन गाइड</h4>
             <p className="text-slate-300 text-sm mt-1">
               To enable real verification, you need API keys from providers like:
             </p>
@@ -297,7 +297,7 @@ function VerificationAPISettings() {
             <RefreshCw className="h-8 w-8 animate-spin text-green-400" />
           </div>
         ) : apis.length === 0 ? (
-          <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+          <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
             <Shield className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 text-lg">No verification APIs configured</p>
             <p className="text-slate-500 text-sm mt-2">Go to Document Type Master and click &quot;Seed Defaults&quot; to create standard APIs</p>
@@ -312,7 +312,7 @@ function VerificationAPISettings() {
             return (
               <div 
                 key={api.id}
-                className={`bg-slate-800/50 rounded-xl border transition-all ${
+                className={`bg-slate-800/50 rounded-sm border transition-all ${
                   api.is_enabled ? 'border-green-500/30' : 'border-slate-700'
                 }`}
               >
@@ -360,7 +360,7 @@ function VerificationAPISettings() {
                       variant="outline"
                       onClick={(e) => { e.stopPropagation(); testAPI(api); }}
                       disabled={testingAPI === api.id}
-                      className="border-blue-500 text-blue-400 hover:bg-blue-500/10"
+                      className="border-amber text-amber hover:bg-amber/10"
                     >
                       {testingAPI === api.id ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
@@ -474,7 +474,7 @@ function VerificationAPISettings() {
       {/* Add/Edit Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-2xl border border-slate-700 max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-2xl border border-slate-700 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-white">
                 {editingAPI ? 'Edit Verification API' : 'Add Verification API'}

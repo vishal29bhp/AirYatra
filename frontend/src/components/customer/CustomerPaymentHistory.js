@@ -248,7 +248,7 @@ export default function CustomerPaymentHistory({ user }) {
                   <p className="text-slate-400 text-sm">Total Amount</p>
                   <p className="text-xl font-bold text-white">{formatCurrency(item.summary?.total_amount)}</p>
                   {item.summary?.remaining > 0 && (
-                    <Badge className="bg-lime/20 text-lime border-0 mt-1">
+                    <Badge className="bg-amber-500/20 text-amber-400 border-0 mt-1">
                       {formatCurrency(item.summary.remaining)} pending
                     </Badge>
                   )}

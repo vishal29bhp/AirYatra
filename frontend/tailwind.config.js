@@ -22,6 +22,10 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html"
   ],
+  // Some admin screens build colour classes at runtime (`bg-${config.color}-500/20`), which Tailwind cannot see.
+  safelist: [
+    { pattern: /^(bg|text|border)-(orange|amber|yellow|red|green|emerald|teal|cyan|blue|indigo|purple|pink|slate)-(400|500)(\/(10|20|30))?$/ },
+  ],
   theme: {
   	extend: {
   		fontFamily: {

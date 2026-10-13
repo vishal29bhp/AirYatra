@@ -62,10 +62,10 @@ function AnalyticsDashboard() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30">
+        <div className="p-4 rounded-sm bg-gradient-to-br border border-amber/30">
           <div className="flex items-center justify-between">
-            <Calendar className="h-8 w-8 text-blue-400" />
-            <span className="text-sm text-blue-400 flex items-center">
+            <Calendar className="h-8 w-8 text-amber" />
+            <span className="text-sm text-amber flex items-center">
               <ArrowUpRight className="h-4 w-4" /> {summary.conversion_rate}%
             </span>
           </div>
@@ -73,7 +73,7 @@ function AnalyticsDashboard() {
           <p className="text-sm text-slate-400">Total Bookings</p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30">
+        <div className="p-4 rounded-sm bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30">
           <div className="flex items-center justify-between">
             <IndianRupee className="h-8 w-8 text-green-400" />
           </div>
@@ -81,15 +81,15 @@ function AnalyticsDashboard() {
           <p className="text-sm text-slate-400">Total Revenue</p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30">
+        <div className="p-4 rounded-sm bg-lime/20 border border-lime/30">
           <div className="flex items-center justify-between">
-            <IndianRupee className="h-8 w-8 text-orange-400" />
+            <IndianRupee className="h-8 w-8 text-lime" />
           </div>
           <p className="text-3xl font-bold text-white mt-2">₹{(summary.total_commission || 0).toLocaleString()}</p>
           <p className="text-sm text-slate-400">Platform Commission</p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30">
+        <div className="p-4 rounded-sm bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30">
           <div className="flex items-center justify-between">
             <TrendingUp className="h-8 w-8 text-purple-400" />
           </div>
@@ -100,9 +100,9 @@ function AnalyticsDashboard() {
 
       {/* Secondary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <div className="flex items-center gap-3 mb-3">
-            <Users className="h-6 w-6 text-blue-400" />
+            <Users className="h-6 w-6 text-amber" />
             <span className="text-white font-medium">Operators</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -117,7 +117,7 @@ function AnalyticsDashboard() {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <div className="flex items-center gap-3 mb-3">
             <Users className="h-6 w-6 text-purple-400" />
             <span className="text-white font-medium">Customers</span>
@@ -134,7 +134,7 @@ function AnalyticsDashboard() {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <div className="flex items-center gap-3 mb-3">
             <Star className="h-6 w-6 text-yellow-400" />
             <span className="text-white font-medium">Feedback</span>
@@ -153,7 +153,7 @@ function AnalyticsDashboard() {
       </div>
 
       {/* Top Routes */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Top Routes</h3>
         <div className="space-y-3">
           {(data?.top_routes || []).slice(0, 5).map((route, index) => (
@@ -174,13 +174,13 @@ function AnalyticsDashboard() {
       </div>
 
       {/* Top Operators */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Top Operators</h3>
         <div className="space-y-3">
           {(operators.top_operators || []).map((op, index) => (
             <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50">
               <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-full bg-orange-500/20 text-orange-400 text-sm flex items-center justify-center">
+                <span className="w-6 h-6 rounded-full bg-lime/20 text-lime text-sm flex items-center justify-center">
                   {index + 1}
                 </span>
                 <div>
@@ -200,7 +200,7 @@ function AnalyticsDashboard() {
       </div>
 
       {/* Booking Trend Chart Placeholder */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Booking Trend</h3>
         <div className="h-48 flex items-end justify-around gap-1">
           {(data?.trends?.bookings || []).slice(-14).map((item, index) => (

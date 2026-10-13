@@ -18,14 +18,14 @@ function VoiceVideoSupport() {
     finally { setLoading(false); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center">
-            <Video className="h-6 w-6 mr-2 text-blue-500" /> Voice/Video Support
+            <Video className="h-6 w-6 mr-2 text-amber" /> Voice/Video Support
           </h1>
           <p className="text-slate-400">Premium support with voice & video calls</p>
         </div>
@@ -39,8 +39,8 @@ function VoiceVideoSupport() {
             <p className="text-2xl font-bold text-white">{dashboard.active_calls || 0}</p>
             <p className="text-slate-400 text-sm">Active Calls</p>
           </div>
-          <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-            <Video className="h-5 w-5 text-blue-400 mb-2" />
+          <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+            <Video className="h-5 w-5 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.total_calls_today || 0}</p>
             <p className="text-slate-400 text-sm">Calls Today</p>
           </div>
@@ -49,8 +49,8 @@ function VoiceVideoSupport() {
             <p className="text-2xl font-bold text-white">{dashboard.avg_duration || '5:30'}</p>
             <p className="text-slate-400 text-sm">Avg Duration</p>
           </div>
-          <div className="bg-orange-500/20 rounded-lg p-4 border border-orange-500/50">
-            <Users className="h-5 w-5 text-orange-400 mb-2" />
+          <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
+            <Users className="h-5 w-5 text-lime mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.agents_online || 3}</p>
             <p className="text-slate-400 text-sm">Agents Online</p>
           </div>
@@ -70,7 +70,7 @@ function VoiceVideoSupport() {
                   </div>
                   <div className="flex space-x-2">
                     <Button size="sm" className="bg-green-500"><Phone className="h-4 w-4" /></Button>
-                    <Button size="sm" className="bg-blue-500"><Video className="h-4 w-4" /></Button>
+                    <Button size="sm" className="bg-slate-700"><Video className="h-4 w-4" /></Button>
                   </div>
                 </div>
               ))}
@@ -88,7 +88,7 @@ function VoiceVideoSupport() {
           {activeCall ? (
             <div className="text-center py-8">
               <div className="w-24 h-24 mx-auto bg-slate-700 rounded-full flex items-center justify-center mb-4">
-                <Video className="h-12 w-12 text-blue-400" />
+                <Video className="h-12 w-12 text-amber" />
               </div>
               <p className="text-white text-xl mb-4">Call in Progress</p>
               <div className="flex justify-center space-x-4">

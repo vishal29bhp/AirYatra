@@ -108,17 +108,17 @@ function MaintenanceCostTracker() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-4 border border-blue-500/30">
-          <DollarSign className="h-6 w-6 text-blue-400 mb-2" />
+        <div className="bg-gradient-to-br to-cyan-500/20 rounded-sm p-4 border border-amber/30">
+          <DollarSign className="h-6 w-6 text-amber mb-2" />
           <p className="text-2xl font-bold text-white">₹{(data?.summary?.total_estimated || 0).toLocaleString()}</p>
           <p className="text-slate-400 text-sm">Total Estimated / अनुमानित</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <DollarSign className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-2xl font-bold text-green-400">₹{(data?.summary?.total_actual || 0).toLocaleString()}</p>
           <p className="text-slate-400 text-sm">Total Actual / वास्तविक</p>
         </div>
-        <div className={`bg-gradient-to-br rounded-xl p-4 border ${
+        <div className={`bg-gradient-to-br rounded-sm p-4 border ${
           data?.summary?.total_variance > 0 
             ? 'from-red-500/20 to-rose-500/20 border-red-500/30' 
             : 'from-green-500/20 to-emerald-500/20 border-green-500/30'
@@ -135,7 +135,7 @@ function MaintenanceCostTracker() {
             Variance ({data?.summary?.variance_percent > 0 ? '+' : ''}{data?.summary?.variance_percent}%)
           </p>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-500/30">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-sm p-4 border border-purple-500/30">
           <BarChart3 className="h-6 w-6 text-purple-400 mb-2" />
           <p className="text-2xl font-bold text-purple-400">{data?.summary?.completed_count || 0}</p>
           <p className="text-slate-400 text-sm">Completed / पूर्ण</p>
@@ -144,7 +144,7 @@ function MaintenanceCostTracker() {
 
       {/* Budget Status Breakdown */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle className="h-5 w-5 text-green-400" />
             <span className="text-white font-medium">On Budget</span>
@@ -152,15 +152,15 @@ function MaintenanceCostTracker() {
           <p className="text-3xl font-bold text-green-400">{data?.summary?.on_budget || 0}</p>
           <p className="text-slate-500 text-sm">Within ±10% of estimate</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingDown className="h-5 w-5 text-blue-400" />
+            <TrendingDown className="h-5 w-5 text-amber" />
             <span className="text-white font-medium">Under Budget</span>
           </div>
-          <p className="text-3xl font-bold text-blue-400">{data?.summary?.under_budget || 0}</p>
+          <p className="text-3xl font-bold text-amber">{data?.summary?.under_budget || 0}</p>
           <p className="text-slate-500 text-sm">More than 10% savings</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="h-5 w-5 text-red-400" />
             <span className="text-white font-medium">Over Budget</span>
@@ -173,9 +173,9 @@ function MaintenanceCostTracker() {
       {/* Charts Row */}
       <div className="grid grid-cols-2 gap-6">
         {/* Monthly Trend Chart */}
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-blue-400" />
+            <TrendingUp className="h-5 w-5 text-amber" />
             Monthly Cost Trend / मासिक रुझान
           </h3>
           {data?.monthly_trend?.length > 0 ? (
@@ -199,7 +199,7 @@ function MaintenanceCostTracker() {
         </div>
 
         {/* By Type Breakdown */}
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
             <PieChart className="h-5 w-5 text-purple-400" />
             Cost by Type / प्रकार अनुसार लागत
@@ -225,10 +225,10 @@ function MaintenanceCostTracker() {
       </div>
 
       {/* Variance Details Table */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Wrench className="h-5 w-5 text-orange-400" />
+            <Wrench className="h-5 w-5 text-lime" />
             Cost Variance Details / लागत विचलन विवरण
           </h3>
         </div>
@@ -258,7 +258,7 @@ function MaintenanceCostTracker() {
                     <td className="p-3 text-slate-400">
                       {item.scheduled_date ? new Date(item.scheduled_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : 'N/A'}
                     </td>
-                    <td className="p-3 text-right text-blue-400">₹{item.estimated_cost?.toLocaleString()}</td>
+                    <td className="p-3 text-right text-amber">₹{item.estimated_cost?.toLocaleString()}</td>
                     <td className="p-3 text-right text-green-400">₹{item.actual_cost?.toLocaleString()}</td>
                     <td className="p-3 text-right">
                       <div className="flex items-center justify-end gap-1">
@@ -286,7 +286,7 @@ function MaintenanceCostTracker() {
                         }}
                         className="p-1.5 hover:bg-slate-700 rounded"
                       >
-                        <Edit2 className="h-4 w-4 text-blue-400" />
+                        <Edit2 className="h-4 w-4 text-amber" />
                       </button>
                     </td>
                   </tr>
@@ -305,7 +305,7 @@ function MaintenanceCostTracker() {
       {/* Edit Cost Modal */}
       {editingCost && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-md border border-slate-700">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-md border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-white">Update Actual Cost</h3>
               <button onClick={() => setEditingCost(null)} className="text-slate-400 hover:text-white">
@@ -321,9 +321,9 @@ function MaintenanceCostTracker() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
+                <div className="p-3 bg-amber/10 rounded-lg border border-amber/30">
                   <p className="text-slate-400 text-xs">Estimated</p>
-                  <p className="text-blue-400 font-bold">₹{editingCost.estimated_cost?.toLocaleString()}</p>
+                  <p className="text-amber font-bold">₹{editingCost.estimated_cost?.toLocaleString()}</p>
                 </div>
                 <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/30">
                   <p className="text-slate-400 text-xs">Current Actual</p>

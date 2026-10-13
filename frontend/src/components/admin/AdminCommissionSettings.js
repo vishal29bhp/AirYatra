@@ -127,7 +127,7 @@ export default function AdminCommissionSettings() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="commission-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -157,7 +157,7 @@ export default function AdminCommissionSettings() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <Settings className="h-5 w-5 text-orange-500" />
+            <Settings className="h-5 w-5 text-lime" />
             Global Commission Settings
           </CardTitle>
           <CardDescription className="text-slate-400">
@@ -218,7 +218,7 @@ export default function AdminCommissionSettings() {
           <div className="mt-6 pt-4 border-t border-slate-700 flex justify-between items-center">
             <div className="text-sm text-slate-400">
               <span className="text-white font-semibold">{globalSettings.default_operator_rate}%</span> to operator + 
-              <span className="text-orange-400 font-semibold"> {globalSettings.platform_fee}%</span> platform fee = 100%
+              <span className="text-lime font-semibold"> {globalSettings.platform_fee}%</span> platform fee = 100%
             </div>
             <Button 
               onClick={saveGlobalSettings}
@@ -236,7 +236,7 @@ export default function AdminCommissionSettings() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-blue-500" />
+            <Building2 className="h-5 w-5 text-amber" />
             Operator Commission Rates
           </CardTitle>
           <CardDescription className="text-slate-400">
@@ -271,8 +271,8 @@ export default function AdminCommissionSettings() {
                       <tr key={idx} className="border-b border-slate-700/50 hover:bg-slate-700/30">
                         <td className="py-4 px-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                              <Building2 className="h-5 w-5 text-blue-400" />
+                            <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center">
+                              <Building2 className="h-5 w-5 text-amber" />
                             </div>
                             <div>
                               <p className="text-white font-medium">{op.company_name}</p>
@@ -304,7 +304,7 @@ export default function AdminCommissionSettings() {
                           </div>
                         </td>
                         <td className="py-4 px-4 text-center">
-                          <span className="text-orange-400 font-semibold">{platformFee}%</span>
+                          <span className="text-lime font-semibold">{platformFee}%</span>
                         </td>
                         <td className="py-4 px-4 text-right">
                           <Button
@@ -341,9 +341,9 @@ export default function AdminCommissionSettings() {
           </DialogHeader>
           
           <div className="space-y-4 py-4">
-            <div className="bg-slate-800 rounded-xl p-4">
+            <div className="bg-slate-800 rounded-sm p-4">
               <div className="flex items-center gap-3 mb-4">
-                <Building2 className="h-8 w-8 text-blue-400" />
+                <Building2 className="h-8 w-8 text-amber" />
                 <div>
                   <p className="text-white font-semibold">{editDialog.operator?.company_name}</p>
                   <p className="text-slate-500 text-sm">{editDialog.operator?.contact_email}</p>
@@ -378,7 +378,7 @@ export default function AdminCommissionSettings() {
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-300">Platform receives:</span>
-                <span className="text-orange-400 font-semibold">₹{((100 - (parseFloat(newRate) || 0)) * 1000).toLocaleString()}</span>
+                <span className="text-lime font-semibold">₹{((100 - (parseFloat(newRate) || 0)) * 1000).toLocaleString()}</span>
               </div>
             </div>
           </div>

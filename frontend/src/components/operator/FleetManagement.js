@@ -119,7 +119,7 @@ function FleetManagement({ operator }) {
         </div>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-orange-500 hover:bg-orange-600" data-testid="add-aircraft-btn">
+            <Button className="bg-lime text-black hover:bg-lime/90" data-testid="add-aircraft-btn">
               <Plus className="h-5 w-5 mr-2" />
               Add Aircraft
             </Button>
@@ -274,7 +274,7 @@ function FleetManagement({ operator }) {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" data-testid="submit-aircraft-btn">
+              <Button type="submit" className="w-full bg-lime text-black hover:bg-lime/90" data-testid="submit-aircraft-btn">
                 Add Aircraft
               </Button>
             </form>
@@ -290,7 +290,7 @@ function FleetManagement({ operator }) {
           <div className="text-center py-12">
             <Plane className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 mb-4">No aircraft in your fleet yet</p>
-            <Button onClick={() => setIsAddDialogOpen(true)} className="bg-orange-500 hover:bg-orange-600" data-testid="add-first-aircraft-btn">
+            <Button onClick={() => setIsAddDialogOpen(true)} className="bg-lime text-black hover:bg-lime/90" data-testid="add-first-aircraft-btn">
               Add Your First Aircraft
             </Button>
           </div>
@@ -354,7 +354,7 @@ function FleetManagement({ operator }) {
                       size="sm"
                       variant="outline"
                       onClick={() => handleViewDocuments(item)}
-                      className="w-full border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
+                      className="w-full border-lime/30 text-lime hover:bg-lime/10"
                       data-testid={`view-docs-${item.id}`}
                     >
                       <FileText className="h-4 w-4 mr-2" />
@@ -379,9 +379,9 @@ function FleetManagement({ operator }) {
           
           <Tabs defaultValue="photos" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-slate-800">
-              <TabsTrigger value="photos" className="data-[state=active]:bg-orange-500">Photos</TabsTrigger>
-              <TabsTrigger value="documents" className="data-[state=active]:bg-orange-500">Documents</TabsTrigger>
-              <TabsTrigger value="upload" className="data-[state=active]:bg-orange-500">Upload New</TabsTrigger>
+              <TabsTrigger value="photos" className="data-[state=active]:bg-lime">Photos</TabsTrigger>
+              <TabsTrigger value="documents" className="data-[state=active]:bg-lime">Documents</TabsTrigger>
+              <TabsTrigger value="upload" className="data-[state=active]:bg-lime">Upload New</TabsTrigger>
             </TabsList>
             
             <TabsContent value="photos" className="mt-4">

@@ -52,7 +52,7 @@ function InventoryManagement() {
     loadSlots();
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -70,7 +70,7 @@ function InventoryManagement() {
       {dashboard && (
         <div className="grid grid-cols-5 gap-4">
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <Package className="h-5 w-5 text-blue-400 mb-2" />
+            <Package className="h-5 w-5 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.today?.total_slots || 0}</p>
             <p className="text-slate-400 text-sm">Today's Slots</p>
           </div>
@@ -79,8 +79,8 @@ function InventoryManagement() {
             <p className="text-2xl font-bold text-white">{dashboard.today?.available_slots || 0}</p>
             <p className="text-slate-400 text-sm">Available</p>
           </div>
-          <div className="bg-orange-500/20 rounded-lg p-4 border border-orange-500/50">
-            <Calendar className="h-5 w-5 text-orange-400 mb-2" />
+          <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
+            <Calendar className="h-5 w-5 text-lime mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.today?.booked_slots || 0}</p>
             <p className="text-slate-400 text-sm">Booked</p>
           </div>
@@ -101,7 +101,7 @@ function InventoryManagement() {
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
           <h2 className="text-lg font-semibold text-white mb-4">Week Utilization: {dashboard.this_week.utilization_percent}%</h2>
           <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-green-500 to-orange-500 rounded-full" style={{ width: `${dashboard.this_week.utilization_percent}%` }} />
+            <div className="h-full bg-gradient-to-r from-green-500 rounded-full" style={{ width: `${dashboard.this_week.utilization_percent}%` }} />
           </div>
         </div>
       )}
@@ -122,7 +122,7 @@ function InventoryManagement() {
             </div>
             <p className="text-slate-400 text-sm mb-2"><Clock className="h-3 w-3 inline mr-1" />{slot.start_time} - {slot.end_time}</p>
             <div className="flex justify-between items-center">
-              <span className="text-orange-400">₹{slot.price_per_slot?.toLocaleString()}</span>
+              <span className="text-lime">₹{slot.price_per_slot?.toLocaleString()}</span>
               {slot.is_blocked ? (
                 <Button size="sm" variant="outline" onClick={() => unblockSlot(slot.id)}><Unlock className="h-3 w-3" /></Button>
               ) : (
@@ -160,7 +160,7 @@ function InventoryManagement() {
             </div>
             <div className="flex justify-end space-x-3 mt-6">
               <Button variant="outline" onClick={() => setShowCreateModal(false)}>Cancel</Button>
-              <Button onClick={createSlot} className="bg-orange-500">Create</Button>
+              <Button onClick={createSlot} className="bg-lime text-black">Create</Button>
             </div>
           </div>
         </div>

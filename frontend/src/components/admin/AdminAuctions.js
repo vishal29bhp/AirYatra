@@ -48,7 +48,7 @@ export const AdminAuctions = () => {
         <p className="text-slate-500 text-center py-10">No auctions yet. Use "Start Auction" on an active listing.</p>
       )}
       {auctions.map(a => (
-        <div key={a.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4" data-testid={`admin-auction-${a.id}`}>
+        <div key={a.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4 flex flex-col sm:flex-row gap-4" data-testid={`admin-auction-${a.id}`}>
           <img src={a.image} alt={a.title} className="w-full sm:w-32 h-20 object-cover rounded-lg" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
@@ -62,7 +62,7 @@ export const AdminAuctions = () => {
             <p className="text-slate-400 text-xs mt-1.5 flex items-center gap-4 flex-wrap">
               <span>Start: <span className="text-white">{formatCr(a.starting_bid_inr)}</span></span>
               <span>Reserve: <span className="text-white">{formatCr(a.reserve_price_inr)}</span></span>
-              <span>Current: <span className="text-orange-400 font-bold">{a.bid_count > 0 ? formatCr(a.current_bid_inr) : '—'}</span> ({a.bid_count} bids)</span>
+              <span>Current: <span className="text-lime font-bold">{a.bid_count > 0 ? formatCr(a.current_bid_inr) : '—'}</span> ({a.bid_count} bids)</span>
               <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> Ends {new Date(a.ends_at).toLocaleString('en-IN')}</span>
             </p>
             {a.highest_bidder_name && (

@@ -65,8 +65,8 @@ function SchedulerStatus() {
 
   const getJobIcon = (jobId) => {
     switch (jobId) {
-      case 'auto_reassign_leads': return <Users className="h-4 w-4 text-orange-400" />;
-      case 'send_notifications': return <Bell className="h-4 w-4 text-blue-400" />;
+      case 'auto_reassign_leads': return <Users className="h-4 w-4 text-lime" />;
+      case 'send_notifications': return <Bell className="h-4 w-4 text-amber" />;
       case 'cleanup_sessions': return <Clock className="h-4 w-4 text-purple-400" />;
       case 'daily_reports': return <FileText className="h-4 w-4 text-green-400" />;
       default: return <Clock className="h-4 w-4 text-slate-400" />;
@@ -89,7 +89,7 @@ function SchedulerStatus() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -100,7 +100,7 @@ function SchedulerStatus() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Clock className="h-6 w-6 text-orange-400" />
+            <Clock className="h-6 w-6 text-lime" />
             Background Scheduler / बैकग्राउंड शेड्यूलर
           </h2>
           <p className="text-slate-400 mt-1">
@@ -123,10 +123,10 @@ function SchedulerStatus() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
+      <div className="bg-lime/10 border border-lime/30 rounded-sm p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-orange-400 font-medium">Quick Actions / त्वरित कार्रवाई</h3>
+            <h3 className="text-lime font-medium">Quick Actions / त्वरित कार्रवाई</h3>
             <p className="text-slate-400 text-sm mt-1">
               Manually trigger background jobs without waiting for schedule
             </p>
@@ -134,7 +134,7 @@ function SchedulerStatus() {
           <Button 
             onClick={triggerAutoReassign}
             disabled={triggering}
-            className="bg-orange-500 hover:bg-orange-600"
+            className="bg-lime text-black hover:bg-lime/90"
           >
             {triggering ? (
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -147,7 +147,7 @@ function SchedulerStatus() {
       </div>
 
       {/* Scheduled Jobs */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold">Scheduled Jobs / निर्धारित कार्य</h3>
         </div>
@@ -166,7 +166,7 @@ function SchedulerStatus() {
               <div className="flex items-center gap-4">
                 <div className="text-right">
                   <p className="text-slate-300 text-sm">Next Run</p>
-                  <p className="text-orange-400 font-medium">{formatNextRun(job.next_run)}</p>
+                  <p className="text-lime font-medium">{formatNextRun(job.next_run)}</p>
                 </div>
                 {job.next_run ? (
                   <Button 
@@ -195,9 +195,9 @@ function SchedulerStatus() {
 
       {/* Job Descriptions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
-            <Users className="h-5 w-5 text-orange-400" />
+            <Users className="h-5 w-5 text-lime" />
             <h4 className="text-white font-medium">Auto Reassign Leads</h4>
           </div>
           <p className="text-slate-400 text-sm">
@@ -206,9 +206,9 @@ function SchedulerStatus() {
           </p>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
-            <Bell className="h-5 w-5 text-blue-400" />
+            <Bell className="h-5 w-5 text-amber" />
             <h4 className="text-white font-medium">Send Notifications</h4>
           </div>
           <p className="text-slate-400 text-sm">
@@ -217,7 +217,7 @@ function SchedulerStatus() {
           </p>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <Clock className="h-5 w-5 text-purple-400" />
             <h4 className="text-white font-medium">Cleanup Sessions</h4>
@@ -228,7 +228,7 @@ function SchedulerStatus() {
           </p>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <FileText className="h-5 w-5 text-green-400" />
             <h4 className="text-white font-medium">Daily Reports</h4>

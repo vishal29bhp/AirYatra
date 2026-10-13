@@ -140,7 +140,7 @@ function RouteOptimization() {
         {/* Single Route Optimizer */}
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center">
-            <Navigation className="h-5 w-5 mr-2 text-orange-400" />
+            <Navigation className="h-5 w-5 mr-2 text-lime" />
             Point-to-Point Route
           </h2>
 
@@ -210,7 +210,7 @@ function RouteOptimization() {
               {singleRoute.waypoints.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {singleRoute.waypoints.map(wp => (
-                    <span key={wp} className="flex items-center gap-1 px-2 py-1 bg-blue-600/30 text-blue-300 rounded text-sm">
+                    <span key={wp} className="flex items-center gap-1 px-2 py-1 bg-amber/30 text-slate-300 rounded text-sm">
                       {wp}
                       <X className="h-3 w-3 cursor-pointer" onClick={() => removeWaypoint(wp)} />
                     </span>
@@ -222,7 +222,7 @@ function RouteOptimization() {
             <Button 
               onClick={optimizeSingleRoute} 
               disabled={optimizing}
-              className="w-full bg-orange-500 hover:bg-orange-600"
+              className="w-full bg-lime text-black hover:bg-lime/90"
             >
               {optimizing ? 'Optimizing...' : 'Calculate Route'}
             </Button>
@@ -239,7 +239,7 @@ function RouteOptimization() {
               
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-2 bg-slate-800 rounded">
-                  <MapPin className="h-4 w-4 mx-auto text-blue-400 mb-1" />
+                  <MapPin className="h-4 w-4 mx-auto text-amber mb-1" />
                   <p className="text-white font-semibold">{singleResult.totals?.distance_km} km</p>
                   <p className="text-slate-400 text-xs">Distance</p>
                 </div>
@@ -249,7 +249,7 @@ function RouteOptimization() {
                   <p className="text-slate-400 text-xs">Flight Time</p>
                 </div>
                 <div className="p-2 bg-slate-800 rounded">
-                  <Fuel className="h-4 w-4 mx-auto text-orange-400 mb-1" />
+                  <Fuel className="h-4 w-4 mx-auto text-lime mb-1" />
                   <p className="text-white font-semibold">{singleResult.totals?.fuel_liters} L</p>
                   <p className="text-slate-400 text-xs">Fuel Est.</p>
                 </div>
@@ -370,7 +370,7 @@ function RouteOptimization() {
 
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-2 bg-slate-800 rounded">
-                  <MapPin className="h-4 w-4 mx-auto text-blue-400 mb-1" />
+                  <MapPin className="h-4 w-4 mx-auto text-amber mb-1" />
                   <p className="text-white font-semibold">{multiResult.totals?.distance_km} km</p>
                   <p className="text-slate-400 text-xs">Total Distance</p>
                 </div>
@@ -380,7 +380,7 @@ function RouteOptimization() {
                   <p className="text-slate-400 text-xs">Total Time</p>
                 </div>
                 <div className="p-2 bg-slate-800 rounded">
-                  <Plane className="h-4 w-4 mx-auto text-orange-400 mb-1" />
+                  <Plane className="h-4 w-4 mx-auto text-lime mb-1" />
                   <p className="text-white font-semibold">{multiResult.totals?.stops}</p>
                   <p className="text-slate-400 text-xs">Stops</p>
                 </div>

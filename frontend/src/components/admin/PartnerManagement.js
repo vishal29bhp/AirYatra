@@ -122,11 +122,11 @@ const PartnerManagement = () => {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Handshake className="h-6 w-6 text-orange-500" /> Partner API Platform
+            <Handshake className="h-6 w-6 text-lime" /> Partner API Platform
           </h1>
           <p className="text-slate-400 text-sm">Hotels & travel agencies plug AirYatra bookings into their systems</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)} className="bg-orange-500 hover:bg-orange-600" data-testid="add-partner-btn">
+        <Button onClick={() => setCreateOpen(true)} className="bg-lime text-black hover:bg-lime/90" data-testid="add-partner-btn">
           <Plus className="h-4 w-4 mr-2" /> Add Partner
         </Button>
       </div>
@@ -136,7 +136,7 @@ const PartnerManagement = () => {
           <button
             key={id}
             onClick={() => setTab(id)}
-            className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 border transition-all ${tab === id ? 'bg-orange-500 border-orange-500 text-white' : 'border-slate-700 text-slate-300 hover:border-orange-500/50'}`}
+            className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 border transition-all ${tab === id ? 'bg-lime border-lime text-black' : 'border-slate-700 text-slate-300 hover:border-lime/50'}`}
             data-testid={`partner-tab-${id}`}
           >
             <Icon className="h-4 w-4" /> {label}
@@ -151,7 +151,7 @@ const PartnerManagement = () => {
         <div className="space-y-3" data-testid="partners-list">
           {partners.length === 0 && <p className="text-slate-500 text-center py-10">No partners yet. Add your first hotel or travel agency partner!</p>}
           {partners.map(p => (
-            <div key={p.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`partner-${p.id}`}>
+            <div key={p.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`partner-${p.id}`}>
               <div className="flex items-start justify-between gap-3 flex-wrap">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -166,7 +166,7 @@ const PartnerManagement = () => {
                     {p.last_used_at && <span>Last used {new Date(p.last_used_at).toLocaleString('en-IN')}</span>}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
-                    <code className="text-xs bg-slate-800 border border-slate-700 rounded px-2 py-1 text-orange-300">{p.api_key.slice(0, 12)}••••••••{p.api_key.slice(-4)}</code>
+                    <code className="text-xs bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-300">{p.api_key.slice(0, 12)}••••••••{p.api_key.slice(-4)}</code>
                     <button onClick={() => copyText(p.api_key, 'API key')} className="text-slate-400 hover:text-white" data-testid={`copy-key-${p.id}`}>
                       <Copy className="h-3.5 w-3.5" />
                     </button>
@@ -197,7 +197,7 @@ const PartnerManagement = () => {
         <div className="space-y-3" data-testid="partner-bookings-list">
           {bookings.length === 0 && <p className="text-slate-500 text-center py-10">No partner bookings yet.</p>}
           {bookings.map(b => (
-            <div key={b.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`partner-booking-${b.id}`}>
+            <div key={b.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`partner-booking-${b.id}`}>
               <div className="flex items-start justify-between gap-3 flex-wrap">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -205,7 +205,7 @@ const PartnerManagement = () => {
                     <Badge className={`border ${STATUS_STYLES[b.status] || ''}`} data-testid={`booking-status-${b.id}`}>{b.status}</Badge>
                     <Badge className="bg-slate-800 text-slate-300 border border-slate-700">{b.partner_company}</Badge>
                   </div>
-                  <p className="text-orange-400 text-sm mt-1 flex items-center gap-1">
+                  <p className="text-lime text-sm mt-1 flex items-center gap-1">
                     <Calendar className="h-3.5 w-3.5" /> {b.departure_date} • {b.passengers} pax
                   </p>
                   <p className="text-slate-400 text-xs mt-1 flex items-center gap-3 flex-wrap">
@@ -218,7 +218,7 @@ const PartnerManagement = () => {
                 </div>
                 <div className="flex gap-2 shrink-0 flex-wrap">
                   {b.status === 'received' && (
-                    <Button size="sm" onClick={() => act(b.id + 'proc', () => api.patch(`/partners/bookings/${b.id}/status?status=processing`))} disabled={!!acting} className="bg-blue-600 hover:bg-blue-700" data-testid={`process-booking-${b.id}`}>
+                    <Button size="sm" onClick={() => act(b.id + 'proc', () => api.patch(`/partners/bookings/${b.id}/status?status=processing`))} disabled={!!acting} className="bg-slate-700 hover:bg-slate-600" data-testid={`process-booking-${b.id}`}>
                       Start Processing
                     </Button>
                   )}
@@ -239,11 +239,11 @@ const PartnerManagement = () => {
         </div>
       ) : (
         <div className="space-y-4" data-testid="partner-api-docs">
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5">
+          <div className="bg-slate-900/70 border border-slate-800 rounded-sm p-5">
             <h3 className="text-white font-semibold mb-1">Base URL & Authentication</h3>
-            <p className="text-slate-400 text-xs mb-3">All requests need the <code className="text-orange-300">X-API-Key</code> header with the partner's key.</p>
+            <p className="text-slate-400 text-xs mb-3">All requests need the <code className="text-slate-300">X-API-Key</code> header with the partner's key.</p>
             <div className="flex items-center gap-2">
-              <code className="text-xs bg-slate-800 border border-slate-700 rounded px-3 py-2 text-orange-300 flex-1 overflow-x-auto">{BASE}</code>
+              <code className="text-xs bg-slate-800 border border-slate-700 rounded px-3 py-2 text-slate-300 flex-1 overflow-x-auto">{BASE}</code>
               <button onClick={() => copyText(BASE, 'Base URL')} className="text-slate-400 hover:text-white"><Copy className="h-4 w-4" /></button>
             </div>
           </div>
@@ -253,22 +253,22 @@ const PartnerManagement = () => {
             ['POST /bookings', 'Create a charter booking request for your customer', `curl -X POST -H "X-API-Key: YOUR_KEY" -H "Content-Type: application/json" \\\n  -d '{"customer_name":"Rahul Sharma","customer_phone":"+919812345678","customer_email":"rahul@example.com","from_location":"Mumbai","to_location":"Shirdi","departure_date":"2026-08-20","passengers":4,"notes":"VIP guests from hotel"}' \\\n  ${BASE}/bookings`],
             ['GET /bookings/{id}', 'Check booking status', `curl -H "X-API-Key: YOUR_KEY" ${BASE}/bookings/pb-xxxxxxxxxx`],
           ].map(([endpoint, desc, example]) => (
-            <div key={endpoint} className="bg-slate-900/70 border border-slate-800 rounded-xl p-5" data-testid={`doc-${endpoint.split(' ')[1].replace(/\W/g, '')}`}>
+            <div key={endpoint} className="bg-slate-900/70 border border-slate-800 rounded-sm p-5" data-testid={`doc-${endpoint.split(' ')[1].replace(/\W/g, '')}`}>
               <div className="flex items-center justify-between">
-                <code className="text-orange-400 font-bold text-sm">{endpoint}</code>
+                <code className="text-lime font-bold text-sm">{endpoint}</code>
                 <button onClick={() => copyText(example, 'Example')} className="text-slate-400 hover:text-white"><Copy className="h-4 w-4" /></button>
               </div>
               <p className="text-slate-400 text-xs mt-1">{desc}</p>
               <pre className="text-[11px] bg-slate-950 border border-slate-800 rounded-lg p-3 mt-2 text-slate-300 overflow-x-auto whitespace-pre-wrap">{example}</pre>
             </div>
           ))}
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5" data-testid="doc-webhooks">
+          <div className="bg-slate-900/70 border border-slate-800 rounded-sm p-5" data-testid="doc-webhooks">
             <div className="flex items-center gap-2">
-              <Webhook className="h-4 w-4 text-orange-400" />
-              <code className="text-orange-400 font-bold text-sm">Webhooks — booking.status_updated</code>
+              <Webhook className="h-4 w-4 text-lime" />
+              <code className="text-lime font-bold text-sm">Webhooks — booking.status_updated</code>
             </div>
             <p className="text-slate-400 text-xs mt-1">
-              Set a webhook URL per partner (Webhook button on the partner card). We POST this JSON when a booking is confirmed/cancelled/updated. Verify authenticity via the <code className="text-orange-300">X-AirYatra-Signature</code> header — HMAC-SHA256 hex of the raw body, keyed with your API key.
+              Set a webhook URL per partner (Webhook button on the partner card). We POST this JSON when a booking is confirmed/cancelled/updated. Verify authenticity via the <code className="text-slate-300">X-AirYatra-Signature</code> header — HMAC-SHA256 hex of the raw body, keyed with your API key.
             </p>
             <pre className="text-[11px] bg-slate-950 border border-slate-800 rounded-lg p-3 mt-2 text-slate-300 overflow-x-auto whitespace-pre-wrap">{`{
   "event": "booking.status_updated",
@@ -317,7 +317,7 @@ const PartnerManagement = () => {
               <label className="text-xs text-slate-400">Contact Email *</label>
               <Input value={form.contact_email} onChange={(e) => setForm({ ...form, contact_email: e.target.value })} placeholder="partnerships@tajhotels.com" className="bg-slate-800 border-slate-600 text-white" data-testid="partner-email-input" />
             </div>
-            <Button onClick={createPartner} disabled={creating} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="create-partner-submit-btn">
+            <Button onClick={createPartner} disabled={creating} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="create-partner-submit-btn">
               {creating ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Key className="h-4 w-4 mr-2" />}
               Create & Generate API Key
             </Button>
@@ -331,16 +331,16 @@ const PartnerManagement = () => {
           {webhookFor && (
             <>
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-2"><Webhook className="h-5 w-5 text-orange-400" /> Webhook — {webhookFor.company}</DialogTitle>
+                <DialogTitle className="flex items-center gap-2"><Webhook className="h-5 w-5 text-lime" /> Webhook — {webhookFor.company}</DialogTitle>
                 <DialogDescription className="text-slate-400">
-                  We POST a signed JSON event to this URL the moment a booking is confirmed or cancelled. Signature header: <code className="text-orange-300">X-AirYatra-Signature</code> (HMAC-SHA256 of body using the API key).
+                  We POST a signed JSON event to this URL the moment a booking is confirmed or cancelled. Signature header: <code className="text-slate-300">X-AirYatra-Signature</code> (HMAC-SHA256 of body using the API key).
                 </DialogDescription>
               </DialogHeader>
               <div>
                 <label className="text-xs text-slate-400">Webhook URL (leave empty to disable)</label>
                 <Input value={webhookUrl} onChange={(e) => setWebhookUrl(e.target.value)} placeholder="https://partner.com/webhooks/airyatra" className="bg-slate-800 border-slate-600 text-white" data-testid="webhook-url-input" />
               </div>
-              <Button onClick={saveWebhook} disabled={savingWebhook} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="save-webhook-btn">
+              <Button onClick={saveWebhook} disabled={savingWebhook} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="save-webhook-btn">
                 {savingWebhook ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Webhook className="h-4 w-4 mr-2" />}
                 Save Webhook
               </Button>

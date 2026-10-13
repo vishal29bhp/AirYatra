@@ -68,14 +68,14 @@ function LandingPermissionApproval() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-          <Shield className="h-8 w-8 text-orange-400" />
+          <Shield className="h-8 w-8 text-lime" />
           Landing Permission Approvals
         </h1>
         <p className="text-slate-400 mt-1">Review and approve landing permission requests</p>
       </div>
 
       {/* Stats */}
-      <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+      <div className="p-4 rounded-sm bg-yellow-500/10 border border-yellow-500/30">
         <div className="flex items-center justify-between">
           <span className="text-slate-300">Pending Approvals</span>
           <span className="text-2xl font-bold text-yellow-400">{permissions.length}</span>
@@ -93,12 +93,12 @@ function LandingPermissionApproval() {
       ) : (
         <div className="space-y-4">
           {permissions.map((permission) => (
-            <div key={permission.id} className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all">
+            <div key={permission.id} className="p-6 rounded-sm bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex-1">
                   {/* Booking Info */}
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm">
+                    <span className="px-3 py-1 rounded-full bg-amber/20 text-amber text-sm">
                       {permission.booking_details?.booking_number || 'Booking'}
                     </span>
                     <span className="text-slate-400 text-sm">
@@ -201,7 +201,7 @@ function LandingPermissionApproval() {
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
               rows={3}
               placeholder={action === 'approve' ? 'Add approval notes...' : 'Reason for rejection...'}
             />

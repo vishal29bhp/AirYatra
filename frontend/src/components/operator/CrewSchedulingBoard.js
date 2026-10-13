@@ -192,7 +192,7 @@ function CrewSchedulingBoard() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <RefreshCw className="h-8 w-8 text-orange-500 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -203,7 +203,7 @@ function CrewSchedulingBoard() {
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Users className="h-6 w-6 text-orange-500" />
+            <Users className="h-6 w-6 text-lime" />
             Crew Scheduling Board
           </h1>
           <p className="text-slate-400 text-sm mt-1">
@@ -266,7 +266,7 @@ function CrewSchedulingBoard() {
 
       {/* Maintenance Alerts Panel */}
       {showMaintenancePanel && (
-        <div className="mb-6 bg-slate-800/80 rounded-xl border border-red-500/30 p-4">
+        <div className="mb-6 bg-slate-800/80 rounded-sm border border-red-500/30 p-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-white font-semibold flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-red-500" />
@@ -322,7 +322,7 @@ function CrewSchedulingBoard() {
       <div className="grid lg:grid-cols-4 gap-6">
         {/* Unassigned Bookings Panel */}
         <div className="lg:col-span-1">
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 sticky top-4">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-4 sticky top-4">
             <h2 className="text-white font-semibold mb-3 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 text-yellow-500" />
               Unassigned Bookings ({unassignedBookings.length})
@@ -342,9 +342,9 @@ function CrewSchedulingBoard() {
                     className="bg-slate-700/50 rounded-lg p-3 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors border border-slate-600 group"
                   >
                     <div className="flex items-start gap-2">
-                      <GripVertical className="h-4 w-4 text-slate-500 mt-1 group-hover:text-orange-400" />
+                      <GripVertical className="h-4 w-4 text-slate-500 mt-1 group-hover:text-lime" />
                       <div className="flex-1 min-w-0">
-                        <p className="text-orange-400 font-mono text-xs">
+                        <p className="text-lime font-mono text-xs">
                           {(booking.id || '').slice(0, 8)}
                         </p>
                         <p className="text-white text-sm truncate">
@@ -365,7 +365,7 @@ function CrewSchedulingBoard() {
 
         {/* Schedule Grid */}
         <div className="lg:col-span-3 overflow-x-auto">
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden min-w-[700px]">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden min-w-[700px]">
             {/* Header Row - Days */}
             <div className="grid grid-cols-8 bg-slate-900/50">
               <div className="p-3 border-b border-r border-slate-700">
@@ -377,13 +377,13 @@ function CrewSchedulingBoard() {
                   <div 
                     key={idx} 
                     className={`p-3 border-b border-r border-slate-700 text-center ${
-                      isToday ? 'bg-orange-500/10' : ''
+                      isToday ? 'bg-lime/10' : ''
                     }`}
                   >
-                    <p className={`text-xs ${isToday ? 'text-orange-400' : 'text-slate-400'}`}>
+                    <p className={`text-xs ${isToday ? 'text-lime' : 'text-slate-400'}`}>
                       {date.toLocaleDateString('en-IN', { weekday: 'short' })}
                     </p>
-                    <p className={`font-semibold ${isToday ? 'text-orange-400' : 'text-white'}`}>
+                    <p className={`font-semibold ${isToday ? 'text-lime' : 'text-white'}`}>
                       {date.getDate()}
                     </p>
                   </div>
@@ -418,7 +418,7 @@ function CrewSchedulingBoard() {
                         onDragOver={handleDragOver}
                         onDrop={(e) => handleDrop(pilot.id, date, e)}
                         className={`p-2 border-b border-r border-slate-700 min-h-[80px] transition-colors ${
-                          isToday ? 'bg-orange-500/5' : ''
+                          isToday ? 'bg-lime/5' : ''
                         } ${
                           draggingBooking ? 'hover:bg-slate-700/50' : ''
                         }`}
@@ -462,7 +462,7 @@ function CrewSchedulingBoard() {
           <span className="text-slate-400">Assigned</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-orange-500/10 rounded" />
+          <div className="w-4 h-4 bg-lime/10 rounded" />
           <span className="text-slate-400">Today</span>
         </div>
         <div className="flex items-center gap-2">
@@ -474,8 +474,8 @@ function CrewSchedulingBoard() {
       {/* Saving Overlay */}
       {saving && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-800 rounded-xl p-6 flex items-center gap-3">
-            <RefreshCw className="h-5 w-5 text-orange-500 animate-spin" />
+          <div className="bg-slate-800 rounded-sm p-6 flex items-center gap-3">
+            <RefreshCw className="h-5 w-5 text-lime animate-spin" />
             <span className="text-white">Saving...</span>
           </div>
         </div>

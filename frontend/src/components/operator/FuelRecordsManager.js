@@ -111,7 +111,7 @@ function FuelRecordsManager({ operator }) {
         {selectedAircraft && (
           <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-orange-500 hover:bg-orange-600" data-testid="add-fuel-btn">
+              <Button className="bg-lime text-black hover:bg-lime/90" data-testid="add-fuel-btn">
                 <Plus className="h-5 w-5 mr-2" />
                 Add Refill
               </Button>
@@ -221,7 +221,7 @@ function FuelRecordsManager({ operator }) {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button type="submit" className="w-full bg-lime text-black hover:bg-lime/90">
                   Save Fuel Record
                 </Button>
               </form>

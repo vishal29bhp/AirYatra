@@ -75,7 +75,7 @@ function CommandCenterDashboard() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <RefreshCw className="h-12 w-12 text-orange-500 animate-spin mx-auto mb-4" />
+          <RefreshCw className="h-12 w-12 text-lime animate-spin mx-auto mb-4" />
           <p className="text-white text-lg">Loading Command Center...</p>
         </div>
       </div>
@@ -90,7 +90,7 @@ function CommandCenterDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
-          <div className="p-3 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl">
+          <div className="p-3 bg-gradient-to-br from-red-500 rounded-sm">
             <Radio className="h-8 w-8 text-white" />
           </div>
           <div>
@@ -124,8 +124,8 @@ function CommandCenterDashboard() {
           icon={Plane} 
           label="Active Flights" 
           value={stats.active_flights || 0} 
-          color="text-blue-400"
-          bgColor="bg-blue-500/20"
+          color="text-amber"
+          bgColor="bg-amber/20"
         />
         <StatCard 
           icon={Clock} 
@@ -138,8 +138,8 @@ function CommandCenterDashboard() {
           icon={Shield} 
           label="Pending Approvals" 
           value={stats.pending_approvals || 0} 
-          color="text-orange-400"
-          bgColor="bg-orange-500/20"
+          color="text-lime"
+          bgColor="bg-lime/20"
         />
         <StatCard 
           icon={AlertTriangle} 
@@ -180,7 +180,7 @@ function CommandCenterDashboard() {
       </div>
 
       {/* System Health */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
+      <div className="bg-slate-900 border border-slate-800 rounded-sm p-4 mb-6">
         <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
           <Heart className="h-5 w-5 text-red-400" />
           System Health
@@ -204,10 +204,10 @@ function CommandCenterDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Live Flights */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-          <div className="bg-blue-500/10 border-b border-slate-800 p-4 flex items-center justify-between">
+        <div className="bg-slate-900 border border-slate-800 rounded-sm overflow-hidden">
+          <div className="bg-amber/10 border-b border-slate-800 p-4 flex items-center justify-between">
             <h3 className="text-white font-semibold flex items-center gap-2">
-              <Plane className="h-5 w-5 text-blue-400" />
+              <Plane className="h-5 w-5 text-amber" />
               Live Flights ({data?.live_flights?.length || 0})
             </h3>
             <Badge className="bg-blue-500">{data?.live_flights?.length || 0} Active</Badge>
@@ -245,13 +245,13 @@ function CommandCenterDashboard() {
         </div>
 
         {/* Pending Approvals */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-          <div className="bg-orange-500/10 border-b border-slate-800 p-4 flex items-center justify-between">
+        <div className="bg-slate-900 border border-slate-800 rounded-sm overflow-hidden">
+          <div className="bg-lime/10 border-b border-slate-800 p-4 flex items-center justify-between">
             <h3 className="text-white font-semibold flex items-center gap-2">
-              <Shield className="h-5 w-5 text-orange-400" />
+              <Shield className="h-5 w-5 text-lime" />
               Pending Approvals ({data?.pending_approvals?.length || 0})
             </h3>
-            <Badge className="bg-orange-500">{data?.pending_approvals?.length || 0} Pending</Badge>
+            <Badge className="bg-amber-500">{data?.pending_approvals?.length || 0} Pending</Badge>
           </div>
           <div className="max-h-80 overflow-y-auto divide-y divide-slate-800">
             {(data?.pending_approvals || []).length === 0 ? (
@@ -285,7 +285,7 @@ function CommandCenterDashboard() {
         </div>
 
         {/* SOS Alerts */}
-        <div className="bg-slate-900 border border-red-500/50 rounded-xl overflow-hidden">
+        <div className="bg-slate-900 border border-red-500/50 rounded-sm overflow-hidden">
           <div className="bg-red-500/10 border-b border-slate-800 p-4 flex items-center justify-between">
             <h3 className="text-white font-semibold flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-red-400 animate-pulse" />
@@ -330,7 +330,7 @@ function CommandCenterDashboard() {
         </div>
 
         {/* AI Warnings */}
-        <div className="bg-slate-900 border border-yellow-500/50 rounded-xl overflow-hidden">
+        <div className="bg-slate-900 border border-yellow-500/50 rounded-sm overflow-hidden">
           <div className="bg-yellow-500/10 border-b border-slate-800 p-4 flex items-center justify-between">
             <h3 className="text-white font-semibold flex items-center gap-2">
               <Zap className="h-5 w-5 text-yellow-400" />
@@ -377,7 +377,7 @@ function CommandCenterDashboard() {
 
 function StatCard({ icon: Icon, label, value, color, bgColor, pulse }) {
   return (
-    <div className={`${bgColor} border border-slate-700 rounded-xl p-4 ${pulse ? 'animate-pulse' : ''}`}>
+    <div className={`${bgColor} border border-slate-700 rounded-sm p-4 ${pulse ? 'animate-pulse' : ''}`}>
       <Icon className={`h-6 w-6 ${color} mb-2`} />
       <p className="text-2xl font-bold text-white">{value}</p>
       <p className="text-slate-400 text-xs">{label}</p>

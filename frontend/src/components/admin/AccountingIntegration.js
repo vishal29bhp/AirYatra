@@ -26,7 +26,7 @@ function AccountingIntegration() {
     } catch (error) { alert('Export failed'); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -53,8 +53,8 @@ function AccountingIntegration() {
               <p className="text-2xl font-bold text-white">₹{((dashboard.total_expenses || 0) / 1000).toFixed(0)}K</p>
               <p className="text-slate-400 text-sm">Total Expenses</p>
             </div>
-            <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-              <DollarSign className="h-5 w-5 text-blue-400 mb-2" />
+            <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+              <DollarSign className="h-5 w-5 text-amber mb-2" />
               <p className="text-2xl font-bold text-white">₹{((dashboard.net_profit || 0) / 1000).toFixed(0)}K</p>
               <p className="text-slate-400 text-sm">Net Profit</p>
             </div>
@@ -68,7 +68,7 @@ function AccountingIntegration() {
           <div className="flex space-x-4 border-b border-slate-700">
             {['overview', 'transactions', 'reports', 'integrations'].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}>
+                className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400'}`}>
                 {tab}
               </button>
             ))}
@@ -167,7 +167,7 @@ function AccountingIntegration() {
                   </select>
                 </div>
               </div>
-              <Button className="mt-4 bg-orange-500"><Download className="h-4 w-4 mr-2" /> Generate Report</Button>
+              <Button className="mt-4 bg-lime text-black"><Download className="h-4 w-4 mr-2" /> Generate Report</Button>
             </div>
           )}
         </>

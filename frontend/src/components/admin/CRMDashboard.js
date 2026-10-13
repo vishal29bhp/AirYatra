@@ -18,7 +18,7 @@ const statusColors = {
   contacted: 'bg-yellow-500',
   qualified: 'bg-purple-500',
   proposal_sent: 'bg-indigo-500',
-  negotiation: 'bg-orange-500',
+  negotiation: 'bg-amber-500',
   won: 'bg-green-500',
   lost: 'bg-red-500',
   follow_up: 'bg-cyan-500',
@@ -27,7 +27,7 @@ const statusColors = {
 
 const priorityColors = {
   hot: 'bg-red-500 text-white',
-  warm: 'bg-orange-500 text-white',
+  warm: 'bg-amber-500 text-black',
   cold: 'bg-blue-500 text-white',
 };
 
@@ -145,10 +145,10 @@ function CRMDashboard() {
     <div className="space-y-6">
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <Users className="h-6 w-6 text-amber" />
             </div>
             <div>
               <p className="text-slate-400 text-sm">Total Leads</p>
@@ -157,7 +157,7 @@ function CRMDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
               <TrendingUp className="h-6 w-6 text-green-400" />
@@ -170,10 +170,10 @@ function CRMDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <Phone className="h-6 w-6 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <Phone className="h-6 w-6 text-lime" />
             </div>
             <div>
               <p className="text-slate-400 text-sm">Today's Calls</p>
@@ -182,7 +182,7 @@ function CRMDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-red-500/20 rounded-lg">
               <AlertTriangle className="h-6 w-6 text-red-400" />
@@ -197,15 +197,15 @@ function CRMDashboard() {
 
       {/* Second Row - Today Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-xl p-4 border border-blue-500/30">
-          <h4 className="text-blue-400 text-sm mb-2">Today's New Leads</h4>
+        <div className="bg-gradient-to-br rounded-sm p-4 border border-amber/30">
+          <h4 className="text-amber text-sm mb-2">Today's New Leads</h4>
           <p className="text-white text-3xl font-bold">{dashboard?.summary?.today_leads || 0}</p>
         </div>
-        <div className="bg-gradient-to-br from-yellow-500/10 to-orange-600/10 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-gradient-to-br from-yellow-500/10 rounded-sm p-4 border border-yellow-500/30">
           <h4 className="text-yellow-400 text-sm mb-2">New Leads (Action Required)</h4>
           <p className="text-white text-3xl font-bold">{dashboard?.summary?.new_leads || 0}</p>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-xl p-4 border border-purple-500/30">
+        <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-sm p-4 border border-purple-500/30">
           <h4 className="text-purple-400 text-sm mb-2">Pending Tasks</h4>
           <p className="text-white text-3xl font-bold">{dashboard?.summary?.pending_tasks || 0}</p>
         </div>
@@ -213,9 +213,9 @@ function CRMDashboard() {
 
       {/* Lead Source Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-orange-400" />
+            <BarChart3 className="h-5 w-5 text-lime" />
             Lead Sources
           </h3>
           <div className="space-y-3">
@@ -228,7 +228,7 @@ function CRMDashboard() {
                 <div className="flex items-center gap-2">
                   <div className="w-24 h-2 bg-slate-700 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-orange-500 rounded-full"
+                      className="h-full bg-lime text-black rounded-full"
                       style={{ width: `${Math.min((item.count / (dashboard?.summary?.total_leads || 1)) * 100, 100)}%` }}
                     />
                   </div>
@@ -239,9 +239,9 @@ function CRMDashboard() {
           </div>
         </div>
 
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <ListChecks className="h-5 w-5 text-blue-400" />
+            <ListChecks className="h-5 w-5 text-amber" />
             Status Breakdown
           </h3>
           <div className="space-y-3">
@@ -260,7 +260,7 @@ function CRMDashboard() {
 
       {/* Urgent Leads */}
       {dashboard?.urgent_leads?.length > 0 && (
-        <div className="bg-red-500/10 rounded-xl p-6 border border-red-500/30">
+        <div className="bg-red-500/10 rounded-sm p-6 border border-red-500/30">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-red-400 font-semibold flex items-center gap-2">
               <AlertTriangle className="h-5 w-5" />
@@ -301,7 +301,7 @@ function CRMDashboard() {
       )}
 
       {/* Recent Leads */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
           <Clock className="h-5 w-5 text-green-400" />
           Recent Leads
@@ -337,7 +337,7 @@ function CRMDashboard() {
   const LeadsList = () => (
     <div className="space-y-4">
       {/* Filters */}
-      <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div>
             <Label className="text-slate-400 text-xs mb-1 block">Search</Label>
@@ -397,7 +397,7 @@ function CRMDashboard() {
             </select>
           </div>
           <div className="flex items-end">
-            <Button onClick={loadLeads} className="w-full bg-orange-500 hover:bg-orange-600">
+            <Button onClick={loadLeads} className="w-full bg-lime text-black hover:bg-lime/90">
               <Search className="h-4 w-4 mr-2" /> Search
             </Button>
           </div>
@@ -420,10 +420,10 @@ function CRMDashboard() {
       </div>
 
       {/* Leads Table */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center p-8">
-            <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+            <Loader2 className="h-8 w-8 animate-spin text-lime" />
           </div>
         ) : leads.length === 0 ? (
           <div className="text-center p-8 text-slate-400">
@@ -517,7 +517,7 @@ function CRMDashboard() {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Pending */}
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <h4 className="text-yellow-400 font-medium mb-4 flex items-center gap-2">
             <Clock className="h-4 w-4" /> Pending
           </h4>
@@ -536,8 +536,8 @@ function CRMDashboard() {
         </div>
         
         {/* In Progress */}
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-          <h4 className="text-blue-400 font-medium mb-4 flex items-center gap-2">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
+          <h4 className="text-amber font-medium mb-4 flex items-center gap-2">
             <Loader2 className="h-4 w-4" /> In Progress
           </h4>
           <div className="space-y-2">
@@ -554,7 +554,7 @@ function CRMDashboard() {
         </div>
         
         {/* Completed */}
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <h4 className="text-green-400 font-medium mb-4 flex items-center gap-2">
             <Check className="h-4 w-4" /> Completed
           </h4>
@@ -590,10 +590,10 @@ function CRMDashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {salesTeam.map((member, idx) => (
-            <div key={idx} className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+            <div key={idx} className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center">
-                  <User className="h-6 w-6 text-orange-400" />
+                <div className="w-12 h-12 bg-lime/20 rounded-full flex items-center justify-center">
+                  <User className="h-6 w-6 text-lime" />
                 </div>
                 <div>
                   <p className="text-white font-semibold">{member.name}</p>
@@ -612,11 +612,11 @@ function CRMDashboard() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400 text-sm">Conversion Rate</span>
-                  <span className="text-orange-400 font-medium">{member.conversion_rate}%</span>
+                  <span className="text-lime font-medium">{member.conversion_rate}%</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400 text-sm">Today's Calls</span>
-                  <span className="text-blue-400 font-medium">{member.today_calls}</span>
+                  <span className="text-amber font-medium">{member.today_calls}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400 text-sm">Pending Tasks</span>
@@ -679,7 +679,7 @@ function CRMDashboard() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-slate-900 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-700">
+        <div className="bg-slate-900 rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-700">
           <div className="p-6 border-b border-slate-700">
             <h3 className="text-white font-semibold text-lg">
               {selectedLead?.id ? 'Edit Lead' : 'New Lead'} / {selectedLead?.id ? 'लीड एडिट करें' : 'नई लीड'}
@@ -830,7 +830,7 @@ function CRMDashboard() {
             <Button variant="outline" onClick={() => { setShowLeadModal(false); setSelectedLead(null); }}>
               Cancel
             </Button>
-            <Button onClick={handleSave} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleSave} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
               {saving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               {selectedLead?.id ? 'Update Lead' : 'Create Lead'}
             </Button>
@@ -873,7 +873,7 @@ function CRMDashboard() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-slate-900 rounded-xl max-w-md w-full border border-slate-700">
+        <div className="bg-slate-900 rounded-sm max-w-md w-full border border-slate-700">
           <div className="p-6 border-b border-slate-700">
             <h3 className="text-white font-semibold text-lg">Log Call / कॉल लॉग करें</h3>
             <p className="text-slate-400 text-sm">{selectedLead.name} - {selectedLead.phone}</p>
@@ -988,7 +988,7 @@ function CRMDashboard() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-slate-900 rounded-xl max-w-md w-full border border-slate-700">
+        <div className="bg-slate-900 rounded-sm max-w-md w-full border border-slate-700">
           <div className="p-6 border-b border-slate-700">
             <h3 className="text-white font-semibold text-lg">New Task / नया कार्य</h3>
           </div>
@@ -1079,7 +1079,7 @@ function CRMDashboard() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
               activeTab === tab.id
-                ? 'bg-orange-500 text-white'
+                ? 'bg-lime text-black'
                 : 'text-slate-400 hover:bg-slate-800'
             }`}
           >

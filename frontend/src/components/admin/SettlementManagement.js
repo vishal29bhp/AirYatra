@@ -122,19 +122,19 @@ function SettlementManagement() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <p className="text-sm text-slate-400">Total Settlements</p>
           <p className="text-2xl font-bold text-white">₹{totals.total.toLocaleString()}</p>
         </div>
-        <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+        <div className="p-4 rounded-sm bg-yellow-500/10 border border-yellow-500/30">
           <p className="text-sm text-slate-400">Pending</p>
           <p className="text-2xl font-bold text-yellow-400">₹{totals.pending.toLocaleString()}</p>
         </div>
-        <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30">
+        <div className="p-4 rounded-sm bg-amber/10 border border-amber/30">
           <p className="text-sm text-slate-400">Approved</p>
-          <p className="text-2xl font-bold text-blue-400">₹{totals.approved.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-amber">₹{totals.approved.toLocaleString()}</p>
         </div>
-        <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30">
+        <div className="p-4 rounded-sm bg-green-500/10 border border-green-500/30">
           <p className="text-sm text-slate-400">Paid</p>
           <p className="text-2xl font-bold text-green-400">₹{totals.paid.toLocaleString()}</p>
         </div>
@@ -147,7 +147,7 @@ function SettlementManagement() {
             key={status}
             variant={filter === status ? 'default' : 'outline'}
             onClick={() => setFilter(status)}
-            className={filter === status ? 'bg-orange-500 hover:bg-orange-600' : 'border-slate-600 text-slate-300'}
+            className={filter === status ? 'bg-lime text-black hover:bg-lime/90' : 'border-slate-600 text-slate-300'}
           >
             {status.charAt(0).toUpperCase() + status.slice(1)}
           </Button>
@@ -163,7 +163,7 @@ function SettlementManagement() {
           <p className="text-slate-400">No settlements found</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-slate-800">
+        <div className="overflow-x-auto rounded-sm border border-slate-800">
           <table className="w-full">
             <thead className="bg-slate-900/80">
               <tr>
@@ -186,7 +186,7 @@ function SettlementManagement() {
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
-                      <Building2 className="h-4 w-4 text-orange-400" />
+                      <Building2 className="h-4 w-4 text-lime" />
                       <span className="text-slate-300">{settlement.operator_name || 'N/A'}</span>
                     </div>
                   </td>
@@ -197,7 +197,7 @@ function SettlementManagement() {
                     <span className="text-white">₹{(settlement.total_booking_amount || 0).toLocaleString()}</span>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-orange-400">₹{(settlement.commission_amount || 0).toLocaleString()}</span>
+                    <span className="text-lime">₹{(settlement.commission_amount || 0).toLocaleString()}</span>
                   </td>
                   <td className="px-4 py-4">
                     <span className="text-green-400 font-semibold">₹{(settlement.payout_amount || 0).toLocaleString()}</span>
@@ -215,7 +215,7 @@ function SettlementManagement() {
                       {settlement.status === 'pending' && (
                         <Button
                           size="sm"
-                          className="bg-blue-600 hover:bg-blue-700"
+                          className="bg-slate-700 hover:bg-slate-600"
                           onClick={() => {
                             setSelectedSettlement(settlement);
                             setShowApproveDialog(true);
@@ -267,7 +267,7 @@ function SettlementManagement() {
             <textarea
               value={approvalNotes}
               onChange={(e) => setApprovalNotes(e.target.value)}
-              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
               rows={3}
               placeholder="Approval notes..."
             />
@@ -276,7 +276,7 @@ function SettlementManagement() {
             <Button variant="outline" onClick={() => setShowApproveDialog(false)} className="border-slate-600 text-slate-300">
               Cancel
             </Button>
-            <Button onClick={handleApprove} disabled={processing} className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={handleApprove} disabled={processing} className="bg-slate-700 hover:bg-slate-600">
               {processing ? 'Processing...' : 'Approve'}
             </Button>
           </DialogFooter>
@@ -299,7 +299,7 @@ function SettlementManagement() {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
               >
                 <option value="bank_transfer">Bank Transfer</option>
                 <option value="upi">UPI</option>
@@ -314,7 +314,7 @@ function SettlementManagement() {
                 type="text"
                 value={paymentRef}
                 onChange={(e) => setPaymentRef(e.target.value)}
-                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
                 placeholder="Transaction ID / Reference Number"
               />
             </div>

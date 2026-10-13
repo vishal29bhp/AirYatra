@@ -93,7 +93,7 @@ function EmployeeManagement() {
       {loading ? (
         <div className="text-slate-400 flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Loading...</div>
       ) : (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-x-auto">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-slate-900/50">
               <tr>
@@ -119,7 +119,7 @@ function EmployeeManagement() {
                   <td className="p-3 text-center">
                     <span className={`px-2 py-1 rounded text-xs ${
                       emp.today_status === 'present' ? 'bg-green-500/20 text-green-400' :
-                      emp.today_status === 'on_leave' ? 'bg-blue-500/20 text-blue-400' :
+                      emp.today_status === 'on_leave' ? 'bg-amber/20 text-amber' :
                       emp.today_status === 'not_marked' ? 'bg-slate-500/20 text-slate-400' :
                       'bg-yellow-500/20 text-yellow-400'
                     }`}>{emp.today_status?.replace('_', ' ').toUpperCase()}</span>
@@ -173,7 +173,7 @@ function EmployeeManagement() {
               <div><Label className="text-slate-300">Designation</Label><Input value={form.designation} onChange={set('designation')} placeholder="e.g. Flight Coordinator" className="bg-slate-800 border-slate-700 mt-1" /></div>
             </div>
             <div>
-              <p className="text-orange-400 font-semibold text-sm mb-2">Salary Structure (Monthly ₹) — optional</p>
+              <p className="text-lime font-semibold text-sm mb-2">Salary Structure (Monthly ₹) — optional</p>
               <div className="grid grid-cols-3 gap-3">
                 {SALARY_FIELDS.map(([k, label]) => (
                   <div key={k}><Label className="text-slate-400 text-xs">{label}</Label><Input type="number" value={form[k]} onChange={set(k)} className="bg-slate-800 border-slate-700 mt-1" data-testid={`emp-${k}-input`} /></div>
@@ -198,7 +198,7 @@ function EmployeeManagement() {
               </div>
             ))}
           </div>
-          <Button onClick={saveSalary} disabled={saving} className="w-full bg-orange-500 hover:bg-orange-600 mt-2" data-testid="save-salary-btn">
+          <Button onClick={saveSalary} disabled={saving} className="w-full bg-lime text-black hover:bg-lime/90 mt-2" data-testid="save-salary-btn">
             {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}Save Salary Structure
           </Button>
         </DialogContent>

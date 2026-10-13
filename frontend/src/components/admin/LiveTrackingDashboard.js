@@ -95,7 +95,7 @@ function LiveTrackingDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -106,7 +106,7 @@ function LiveTrackingDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Navigation className="h-6 w-6 text-blue-400" />
+            <Navigation className="h-6 w-6 text-amber" />
             Live Field Tracking / लाइव ट्रैकिंग
           </h2>
           <p className="text-slate-400 mt-1">
@@ -137,10 +137,10 @@ function LiveTrackingDashboard() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <Users className="h-6 w-6 text-amber" />
             </div>
             <div>
               <p className="text-slate-400 text-sm">Field Team</p>
@@ -149,10 +149,10 @@ function LiveTrackingDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <Target className="h-6 w-6 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <Target className="h-6 w-6 text-lime" />
             </div>
             <div>
               <p className="text-slate-400 text-sm">Total Visits</p>
@@ -161,7 +161,7 @@ function LiveTrackingDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
               <CheckCircle className="h-6 w-6 text-green-400" />
@@ -173,7 +173,7 @@ function LiveTrackingDashboard() {
           </div>
         </div>
         
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-yellow-500/20 rounded-lg">
               <Clock className="h-6 w-6 text-yellow-400" />
@@ -188,7 +188,7 @@ function LiveTrackingDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Employee List */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-700">
             <h3 className="text-white font-semibold">Field Employees / फ़ील्ड कर्मचारी</h3>
           </div>
@@ -251,10 +251,10 @@ function LiveTrackingDashboard() {
         {/* Map Placeholder / Route Info */}
         <div className="lg:col-span-2 space-y-4">
           {/* Map - Using placeholder since we can't use actual maps */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <div className="p-4 border-b border-slate-700 flex items-center justify-between">
               <h3 className="text-white font-semibold flex items-center gap-2">
-                <Route className="h-5 w-5 text-blue-400" />
+                <Route className="h-5 w-5 text-amber" />
                 {selectedEmployee ? `Route: ${selectedEmployee.employee_name}` : 'Select an employee to view route'}
               </h3>
               {employeeRoute && (
@@ -269,7 +269,7 @@ function LiveTrackingDashboard() {
               {selectedEmployee ? (
                 employeeRoute?.route?.length > 0 ? (
                   <div className="text-center p-4">
-                    <Navigation className="h-16 w-16 text-blue-400 mx-auto mb-4" />
+                    <Navigation className="h-16 w-16 text-amber mx-auto mb-4" />
                     <p className="text-white font-medium">Route Tracked</p>
                     <p className="text-slate-400 text-sm">
                       {employeeRoute.route.length} locations recorded
@@ -281,7 +281,7 @@ function LiveTrackingDashboard() {
                       </div>
                       <div className="bg-slate-800 px-3 py-2 rounded">
                         <p className="text-slate-400">Last</p>
-                        <p className="text-blue-400">{formatTime(employeeRoute.end_point?.time)}</p>
+                        <p className="text-amber">{formatTime(employeeRoute.end_point?.time)}</p>
                       </div>
                     </div>
                     <p className="text-slate-500 text-xs mt-4">
@@ -305,7 +305,7 @@ function LiveTrackingDashboard() {
 
           {/* Visits List */}
           {selectedEmployee && (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+            <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
               <div className="p-4 border-b border-slate-700">
                 <h3 className="text-white font-semibold">
                   Today's Visits / आज की विज़िट्स
@@ -329,7 +329,7 @@ function LiveTrackingDashboard() {
                         <span className={`px-2 py-1 rounded text-xs ${
                           visit.status === 'completed' ? 'bg-green-500/20 text-green-400' :
                           visit.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                          'bg-blue-500/20 text-blue-400'
+                          'bg-amber/20 text-amber'
                         }`}>
                           {visit.status}
                         </span>
@@ -363,11 +363,11 @@ function LiveTrackingDashboard() {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 flex items-start gap-3">
-        <AlertTriangle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
+      <div className="bg-amber/10 border border-amber/30 rounded-sm p-4 flex items-start gap-3">
+        <AlertTriangle className="h-5 w-5 text-amber flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-blue-200 font-medium">Mobile App Required for GPS Tracking</p>
-          <p className="text-blue-200/70 text-sm mt-1">
+          <p className="text-slate-300 font-medium">Mobile App Required for GPS Tracking</p>
+          <p className="text-slate-300 text-sm mt-1">
             Field employees need to use the mobile app (PWA) to enable GPS tracking. 
             The app sends location updates every 5 minutes when on duty. 
             Auto check-in works when employee enters client's geofence (100m radius).

@@ -160,7 +160,7 @@ function UserRoleManagement() {
       pink: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
       green: 'bg-green-500/20 text-green-400 border-green-500/30',
       purple: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      orange: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+      orange: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
       red: 'bg-red-500/20 text-red-400 border-red-500/30',
       yellow: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
     };
@@ -173,7 +173,7 @@ function UserRoleManagement() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Users className="h-6 w-6 text-orange-400" />
+            <Users className="h-6 w-6 text-lime" />
             User & Role Management
           </h2>
           <p className="text-slate-400">यूजर और भूमिका प्रबंधन - Manage internal users and their roles</p>
@@ -183,7 +183,7 @@ function UserRoleManagement() {
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
-          <Button onClick={() => { resetForm(); setShowCreateDialog(true); }} className="bg-orange-500 hover:bg-orange-600">
+          <Button onClick={() => { resetForm(); setShowCreateDialog(true); }} className="bg-lime text-black hover:bg-lime/90">
             <Plus className="h-4 w-4 mr-2" />
             Create User
           </Button>
@@ -315,7 +315,7 @@ function UserRoleManagement() {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Plus className="h-5 w-5 text-orange-400" />
+              <Plus className="h-5 w-5 text-lime" />
               Create Internal User / आंतरिक यूजर बनाएं
             </DialogTitle>
           </DialogHeader>
@@ -404,7 +404,7 @@ function UserRoleManagement() {
           
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowCreateDialog(false)}>Cancel</Button>
-            <Button onClick={handleCreateUser} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleCreateUser} className="bg-lime text-black hover:bg-lime/90">
               Create User
             </Button>
           </DialogFooter>
@@ -416,7 +416,7 @@ function UserRoleManagement() {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Edit className="h-5 w-5 text-orange-400" />
+              <Edit className="h-5 w-5 text-lime" />
               Edit User / यूजर संपादित करें
             </DialogTitle>
           </DialogHeader>
@@ -482,7 +482,7 @@ function UserRoleManagement() {
           
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowEditDialog(false)}>Cancel</Button>
-            <Button onClick={handleUpdateUser} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleUpdateUser} className="bg-lime text-black hover:bg-lime/90">
               Update User
             </Button>
           </DialogFooter>

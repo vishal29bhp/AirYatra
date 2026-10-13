@@ -103,7 +103,7 @@ function ApprovalQueue() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Clock className="h-6 w-6 text-orange-400" />
+            <Clock className="h-6 w-6 text-lime" />
             Approval Queue
           </h2>
           <p className="text-slate-400">अनुमोदन कतार - Manage pending approvals</p>

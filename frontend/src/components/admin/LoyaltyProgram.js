@@ -101,7 +101,7 @@ function LoyaltyProgram() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -148,7 +148,7 @@ function LoyaltyProgram() {
         <div className="space-y-6">
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-yellow-500/20 rounded-lg">
                   <Users className="h-6 w-6 text-yellow-400" />
@@ -160,7 +160,7 @@ function LoyaltyProgram() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <Gift className="h-6 w-6 text-green-400" />
@@ -172,7 +172,7 @@ function LoyaltyProgram() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-500/20 rounded-lg">
                   <Star className="h-6 w-6 text-purple-400" />
@@ -184,10 +184,10 @@ function LoyaltyProgram() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <Building2 className="h-6 w-6 text-blue-400" />
+                <div className="p-2 bg-amber/20 rounded-lg">
+                  <Building2 className="h-6 w-6 text-amber" />
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm">Corporate Accounts</p>
@@ -198,13 +198,13 @@ function LoyaltyProgram() {
           </div>
 
           {/* Tier Distribution */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-6">Tier Distribution</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {dashboard.tiers?.map(tier => (
                 <div
                   key={tier.id}
-                  className={`bg-gradient-to-br ${tierColors[tier.id]} rounded-xl p-4 text-white`}
+                  className={`bg-gradient-to-br ${tierColors[tier.id]} rounded-sm p-4 text-white`}
                 >
                   <div className="flex items-center justify-between mb-4">
                     {tierIcons[tier.id]}
@@ -221,7 +221,7 @@ function LoyaltyProgram() {
 
       {/* Members Tab */}
       {activeTab === 'members' && (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead className="bg-slate-900">
               <tr>
@@ -275,14 +275,14 @@ function LoyaltyProgram() {
       {activeTab === 'corporate' && (
         <div className="space-y-4">
           <div className="flex justify-end">
-            <Button onClick={() => setShowCorporateForm(true)} className="bg-blue-500 hover:bg-blue-600">
+            <Button onClick={() => setShowCorporateForm(true)} className="bg-slate-700 hover:bg-slate-600">
               <Plus className="h-4 w-4 mr-2" /> Add Corporate Account
             </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {corporateAccounts.map(account => (
-              <div key={account.id} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+              <div key={account.id} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-white font-semibold">{account.company_name}</p>
@@ -317,7 +317,7 @@ function LoyaltyProgram() {
           </div>
 
           {corporateAccounts.length === 0 && (
-            <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
               <Building2 className="h-12 w-12 text-slate-500 mx-auto mb-4" />
               <p className="text-white font-medium">No Corporate Accounts</p>
               <p className="text-slate-400 text-sm">Create accounts for B2B clients with special pricing</p>
@@ -327,7 +327,7 @@ function LoyaltyProgram() {
           {/* Create Corporate Form Modal */}
           {showCorporateForm && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-              <div className="bg-slate-900 rounded-xl p-6 max-w-md w-full mx-4">
+              <div className="bg-slate-900 rounded-sm p-6 max-w-md w-full mx-4">
                 <h3 className="text-white font-semibold text-lg mb-4">Add Corporate Account</h3>
                 
                 <div className="space-y-4">
@@ -397,7 +397,7 @@ function LoyaltyProgram() {
 
                 <div className="flex justify-end gap-2 mt-6">
                   <Button onClick={() => setShowCorporateForm(false)} variant="outline">Cancel</Button>
-                  <Button onClick={createCorporateAccount} className="bg-blue-500 hover:bg-blue-600">Create Account</Button>
+                  <Button onClick={createCorporateAccount} className="bg-slate-700 hover:bg-slate-600">Create Account</Button>
                 </div>
               </div>
             </div>
@@ -411,7 +411,7 @@ function LoyaltyProgram() {
           {tiersConfig.tiers?.map(tier => (
             <div
               key={tier.id}
-              className={`bg-gradient-to-r ${tierColors[tier.id]} rounded-xl p-6 text-white`}
+              className={`bg-gradient-to-r ${tierColors[tier.id]} rounded-sm p-6 text-white`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">

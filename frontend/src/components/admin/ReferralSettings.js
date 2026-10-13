@@ -210,7 +210,7 @@ function ReferralSettings() {
       {activeTab === 'settings' && (
         <div className="space-y-6">
           {/* Enable/Disable */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4">Program Status / प्रोग्राम स्थिति</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg">
@@ -247,7 +247,7 @@ function ReferralSettings() {
           </div>
 
           {/* Referral Bonus Settings */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-green-400" />
               Referral Bonus / रेफरल बोनस
@@ -301,9 +301,9 @@ function ReferralSettings() {
           </div>
 
           {/* First Booking Discount */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Users className="h-5 w-5 text-blue-400" />
+              <Users className="h-5 w-5 text-amber" />
               First Booking Discount / पहली बुकिंग छूट
             </h3>
             <p className="text-slate-400 text-sm mb-4">
@@ -364,7 +364,7 @@ function ReferralSettings() {
           </div>
 
           {/* Codes List */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
@@ -426,7 +426,7 @@ function ReferralSettings() {
                           <div className="flex gap-2">
                             <button
                               onClick={() => openEditDialog(code)}
-                              className="p-1 text-slate-400 hover:text-blue-400"
+                              className="p-1 text-slate-400 hover:text-amber"
                             >
                               <Edit2 className="h-4 w-4" />
                             </button>

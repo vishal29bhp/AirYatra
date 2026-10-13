@@ -122,7 +122,7 @@ function ReportsDashboard() {
   const renderDutyFlag = (flag) => {
     const flagColors = {
       red: 'bg-red-500',
-      orange: 'bg-orange-500',
+      orange: 'bg-amber-500',
       green: 'bg-green-500'
     };
     return (
@@ -134,7 +134,7 @@ function ReportsDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-white">Reports & Analytics</h2>
-        <Button onClick={loadReportData} variant="outline" className="border-orange-500 text-orange-400">
+        <Button onClick={loadReportData} variant="outline" className="border-amber-500 text-amber-400">
           <RefreshCw className="h-4 w-4 mr-2" /> Refresh
         </Button>
       </div>
@@ -185,7 +185,7 @@ function ReportsDashboard() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${
                 activeTab === tab.id
-                  ? 'bg-orange-500 text-white'
+                  ? 'bg-amber-500 text-white'
                   : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
               }`}
             >
@@ -235,13 +235,13 @@ function ReportsDashboard() {
                     <div className="text-3xl font-bold text-red-400 mt-2">{summary.pilots.red_flag}</div>
                     <div className="text-red-400/60 text-sm">Rest Required</div>
                   </div>
-                  <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                  <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30">
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-orange-500" />
-                      <span className="text-orange-400 font-semibold">Orange Flag (8-12 hrs)</span>
+                      <div className="w-4 h-4 rounded-full bg-amber-500" />
+                      <span className="text-amber-400 font-semibold">Orange Flag (8-12 hrs)</span>
                     </div>
-                    <div className="text-3xl font-bold text-orange-400 mt-2">{summary.pilots.orange_flag}</div>
-                    <div className="text-orange-400/60 text-sm">Approaching Limit</div>
+                    <div className="text-3xl font-bold text-amber-400 mt-2">{summary.pilots.orange_flag}</div>
+                    <div className="text-amber-400/60 text-sm">Approaching Limit</div>
                   </div>
                   <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30">
                     <div className="flex items-center gap-2">
@@ -381,11 +381,11 @@ function ReportsDashboard() {
                           }`}>{op.status}</span>
                         </td>
                         <td className="py-3 px-4 text-right text-white">{op.total_quotes_sent}</td>
-                        <td className="py-3 px-4 text-right text-blue-400">{op.quotes_accepted}</td>
+                        <td className="py-3 px-4 text-right text-amber">{op.quotes_accepted}</td>
                         <td className="py-3 px-4 text-right text-green-400">{op.bookings_completed}</td>
                         <td className="py-3 px-4 text-right text-red-400">{op.cancelled_after_accept}</td>
                         <td className="py-3 px-4 text-right text-white">{formatCurrency(op.total_revenue)}</td>
-                        <td className="py-3 px-4 text-right text-orange-400">{op.acceptance_rate}%</td>
+                        <td className="py-3 px-4 text-right text-amber-400">{op.acceptance_rate}%</td>
                       </tr>
                     ))}
                   </tbody>
@@ -441,12 +441,12 @@ function ReportsDashboard() {
                   </div>
                   <div className="text-2xl font-bold text-red-400">{pilotDutyReport.summary.red_flag_count}</div>
                 </div>
-                <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-orange-500" />
-                    <span className="text-orange-400 text-sm">Orange Flag (8-12 hrs)</span>
+                    <div className="w-3 h-3 rounded-full bg-amber-500" />
+                    <span className="text-amber-400 text-sm">Orange Flag (8-12 hrs)</span>
                   </div>
-                  <div className="text-2xl font-bold text-orange-400">{pilotDutyReport.summary.orange_flag_count}</div>
+                  <div className="text-2xl font-bold text-amber-400">{pilotDutyReport.summary.orange_flag_count}</div>
                 </div>
                 <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30">
                   <div className="flex items-center gap-2">
@@ -478,7 +478,7 @@ function ReportsDashboard() {
                       {pilotDutyReport.pilots.map((pilot, idx) => (
                         <tr key={idx} className={`border-b border-slate-800 ${
                           pilot.duty_flag === 'red' ? 'bg-red-500/5' :
-                          pilot.duty_flag === 'orange' ? 'bg-orange-500/5' : ''
+                          pilot.duty_flag === 'orange' ? 'bg-amber-500/5' : ''
                         }`}>
                           <td className="py-3 px-4">{renderDutyFlag(pilot.duty_flag)}</td>
                           <td className="py-3 px-4 text-white font-medium">{pilot.pilot_name}</td>
@@ -488,7 +488,7 @@ function ReportsDashboard() {
                           <td className="py-3 px-4 text-right">
                             <span className={
                               pilot.duty_flag === 'red' ? 'text-red-400 font-bold' :
-                              pilot.duty_flag === 'orange' ? 'text-orange-400 font-bold' :
+                              pilot.duty_flag === 'orange' ? 'text-amber-400 font-bold' :
                               'text-green-400'
                             }>
                               {pilot.last_24h_hours} hrs
@@ -552,9 +552,9 @@ function ReportsDashboard() {
                   <div className="text-slate-400 text-sm">Total Revenue</div>
                   <div className="text-2xl font-bold text-white">{formatCurrency(settlementByOperator.summary.total_revenue || 0)}</div>
                 </div>
-                <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
-                  <div className="text-orange-400 text-sm">Platform Commission</div>
-                  <div className="text-2xl font-bold text-orange-400">{formatCurrency(settlementByOperator.summary.total_platform_commission || 0)}</div>
+                <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30">
+                  <div className="text-amber-400 text-sm">Platform Commission</div>
+                  <div className="text-2xl font-bold text-amber-400">{formatCurrency(settlementByOperator.summary.total_platform_commission || 0)}</div>
                 </div>
                 <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30">
                   <div className="text-green-400 text-sm">Total Settled</div>
@@ -591,8 +591,8 @@ function ReportsDashboard() {
                           </td>
                           <td className="py-3 px-4 text-right text-white">{op.total_bookings}</td>
                           <td className="py-3 px-4 text-right text-white">{formatCurrency(op.total_revenue)}</td>
-                          <td className="py-3 px-4 text-right text-orange-400">{formatCurrency(op.platform_commission)}</td>
-                          <td className="py-3 px-4 text-right text-blue-400">{formatCurrency(op.operator_earnings)}</td>
+                          <td className="py-3 px-4 text-right text-amber-400">{formatCurrency(op.platform_commission)}</td>
+                          <td className="py-3 px-4 text-right text-amber">{formatCurrency(op.operator_earnings)}</td>
                           <td className="py-3 px-4 text-right text-green-400">{formatCurrency(op.total_settled)}</td>
                           <td className="py-3 px-4 text-right text-yellow-400">{formatCurrency(op.pending_settlement)}</td>
                         </tr>
@@ -625,7 +625,7 @@ function ReportsDashboard() {
                         <td className="py-3 px-4 text-white font-medium">{state.state}</td>
                         <td className="py-3 px-4 text-right text-white">{state.total_bookings}</td>
                         <td className="py-3 px-4 text-right text-white">{formatCurrency(state.total_revenue)}</td>
-                        <td className="py-3 px-4 text-right text-orange-400">{formatCurrency(state.platform_commission)}</td>
+                        <td className="py-3 px-4 text-right text-amber-400">{formatCurrency(state.platform_commission)}</td>
                         <td className="py-3 px-4 text-right text-green-400">{formatCurrency(state.operator_earnings)}</td>
                       </tr>
                     ))}
@@ -669,7 +669,7 @@ function ReportsDashboard() {
                           <td className="py-3 px-4 text-white font-medium">{period.period}</td>
                           <td className="py-3 px-4 text-right text-white">{period.total_bookings}</td>
                           <td className="py-3 px-4 text-right text-white">{formatCurrency(period.total_revenue)}</td>
-                          <td className="py-3 px-4 text-right text-orange-400">{formatCurrency(period.platform_commission)}</td>
+                          <td className="py-3 px-4 text-right text-amber-400">{formatCurrency(period.platform_commission)}</td>
                           <td className="py-3 px-4 text-right text-green-400">{formatCurrency(period.operator_earnings)}</td>
                         </tr>
                       ))}

@@ -18,7 +18,7 @@ function PredictiveAnalytics() {
     finally { setLoading(false); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -45,13 +45,13 @@ function PredictiveAnalytics() {
               <p className="text-2xl font-bold text-white">{dashboard.demand_forecast?.next_week || 45}</p>
               <p className="text-slate-400 text-sm">Next Week Demand</p>
             </div>
-            <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-              <Users className="h-5 w-5 text-blue-400 mb-2" />
+            <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+              <Users className="h-5 w-5 text-amber mb-2" />
               <p className="text-2xl font-bold text-white">{dashboard.churn_risk?.high || 5}</p>
               <p className="text-slate-400 text-sm">High Churn Risk</p>
             </div>
-            <div className="bg-orange-500/20 rounded-lg p-4 border border-orange-500/50">
-              <Target className="h-5 w-5 text-orange-400 mb-2" />
+            <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
+              <Target className="h-5 w-5 text-lime mb-2" />
               <p className="text-2xl font-bold text-white">₹{((dashboard.revenue_forecast?.next_month || 150000) / 1000).toFixed(0)}K</p>
               <p className="text-slate-400 text-sm">Revenue Forecast</p>
             </div>
@@ -60,7 +60,7 @@ function PredictiveAnalytics() {
           <div className="flex space-x-4 border-b border-slate-700">
             {['demand', 'churn', 'revenue', 'routes'].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}>
+                className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400'}`}>
                 {tab} Forecast
               </button>
             ))}
@@ -121,7 +121,7 @@ function PredictiveAnalytics() {
               <div className="space-y-3">
                 {['Mumbai → Pune', 'Delhi → Agra', 'Bangalore → Mysore', 'Chennai → Pondicherry'].map((route, i) => (
                   <div key={route} className="flex items-center p-3 bg-slate-900 rounded-lg">
-                    <span className="w-8 text-orange-400 font-bold">#{i + 1}</span>
+                    <span className="w-8 text-lime font-bold">#{i + 1}</span>
                     <span className="flex-1 text-white">{route}</span>
                     <span className="text-slate-400">{[45, 38, 32, 28][i]} bookings expected</span>
                   </div>

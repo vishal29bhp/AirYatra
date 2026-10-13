@@ -496,15 +496,15 @@ function AdminDashboard({ user, onLogout }) {
               onClick={sidebar.toggleMobile} 
               isOpen={sidebar.isMobileOpen}
             />
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-xl lg:text-2xl font-bold text-white">AirYatra Admin</span>
           </div>
           <div className="flex items-center space-x-2 lg:space-x-4">
             <GlobalSearch user={user} />
             {dashboardData?.statistics?.pending_operator_approvals > 0 && (
-              <div className="hidden md:flex items-center px-3 py-1 bg-orange-500/20 rounded-full">
-                <AlertTriangle className="h-4 w-4 text-orange-500 mr-2" />
-                <span className="text-orange-400 text-sm">
+              <div className="hidden md:flex items-center px-3 py-1 bg-lime/20 rounded-full">
+                <AlertTriangle className="h-4 w-4 text-lime mr-2" />
+                <span className="text-lime text-sm">
                   {dashboardData.statistics.pending_operator_approvals} Pending
                 </span>
               </div>
@@ -512,7 +512,7 @@ function AdminDashboard({ user, onLogout }) {
             <NotificationBell user={user} />
             <ThemeToggle />
             <span className="text-slate-300 hidden lg:inline">Welcome, {user.full_name}</span>
-            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-orange-400" data-testid="logout-btn">
+            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-lime" data-testid="logout-btn">
               <LogOut className="h-5 w-5" />
             </Button>
           </div>

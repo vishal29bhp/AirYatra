@@ -32,7 +32,7 @@ function PushNotifications() {
     } catch (error) { alert(error.response?.data?.detail || 'Failed'); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -44,15 +44,15 @@ function PushNotifications() {
           <p className="text-slate-400">Send and manage push notifications</p>
         </div>
         <div className="flex space-x-2">
-          <Button onClick={() => setShowSendModal(true)} className="bg-orange-500"><Send className="h-4 w-4 mr-2" /> Send</Button>
+          <Button onClick={() => setShowSendModal(true)} className="bg-lime text-black"><Send className="h-4 w-4 mr-2" /> Send</Button>
           <Button onClick={loadDashboard} variant="outline"><RefreshCw className="h-4 w-4" /></Button>
         </div>
       </div>
 
       {dashboard && (
         <div className="grid grid-cols-4 gap-4">
-          <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-            <Send className="h-5 w-5 text-blue-400 mb-2" />
+          <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+            <Send className="h-5 w-5 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">{dashboard.total_sent || 0}</p>
             <p className="text-slate-400 text-sm">Total Sent</p>
           </div>
@@ -111,7 +111,7 @@ function PushNotifications() {
             </div>
             <div className="flex justify-end space-x-3 mt-6">
               <Button variant="outline" onClick={() => setShowSendModal(false)}>Cancel</Button>
-              <Button onClick={sendNotification} className="bg-orange-500">Send</Button>
+              <Button onClick={sendNotification} className="bg-lime text-black">Send</Button>
             </div>
           </div>
         </div>
