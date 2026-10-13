@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -140,7 +141,7 @@ export default function GovernmentChallans() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <FileText className="h-7 w-7 text-amber" />
-            Government Challans / सरकारी चालान
+            {bi("Government Challans / सरकारी चालान")}
           </h1>
           <p className="text-slate-400 mt-1">GST, TDS, PF, ESIC compliance management</p>
         </div>
@@ -318,7 +319,7 @@ export default function GovernmentChallans() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-amber" />
-              Add New Challan / नया चालान जोड़ें
+              {bi("Add New Challan / नया चालान जोड़ें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">

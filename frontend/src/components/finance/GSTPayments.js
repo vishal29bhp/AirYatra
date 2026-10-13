@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const GSTPayments = () => {
   const [payments, setPayments] = useState([]);
@@ -111,7 +112,7 @@ const GSTPayments = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-bold text-white">GST Payments / GST भुगतान</h3>
+          <h3 className="text-xl font-bold text-white">{bi("GST Payments / GST भुगतान")}</h3>
           <p className="text-slate-400">Record and track GST payments</p>
         </div>
         <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>

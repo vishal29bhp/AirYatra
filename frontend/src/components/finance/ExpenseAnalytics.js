@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -81,7 +82,7 @@ export default function ExpenseAnalytics() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <BarChart3 className="h-7 w-7 text-rose-400" />
-            Expense Analytics / खर्च विश्लेषण
+            {bi("Expense Analytics / खर्च विश्लेषण")}
           </h1>
           <p className="text-slate-400 mt-1">Spending trends by category with drill-down analysis</p>
         </div>
@@ -156,7 +157,7 @@ export default function ExpenseAnalytics() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-rose-400" />
-            Expense Trend / खर्च का रुझान
+            {bi("Expense Trend / खर्च का रुझान")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -196,7 +197,7 @@ export default function ExpenseAnalytics() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <PieChart className="h-5 w-5 text-purple-400" />
-              Top Categories / शीर्ष श्रेणियाँ
+              {bi("Top Categories / शीर्ष श्रेणियाँ")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -233,7 +234,7 @@ export default function ExpenseAnalytics() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <TrendingDown className="h-5 w-5 text-green-400" />
-              Growth Trend / वृद्धि रुझान
+              {bi("Growth Trend / वृद्धि रुझान")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">

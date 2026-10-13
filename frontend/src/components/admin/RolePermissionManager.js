@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Checkbox } from '@/components/ui/checkbox';
 import { userManagementAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function RolePermissionManager() {
   const [systemRoles, setSystemRoles] = useState([]);
@@ -51,7 +52,7 @@ function RolePermissionManager() {
     }
     try {
       await userManagementAPI.createRole(formData);
-      toast.success('Role created successfully / भूमिका बनाई गई');
+      toast.success(bi('Role created successfully / भूमिका बनाई गई'));
       setShowCreateDialog(false);
       resetForm();
       loadData();
@@ -63,7 +64,7 @@ function RolePermissionManager() {
   const handleUpdateRole = async () => {
     try {
       await userManagementAPI.updateRole(selectedRole.id, formData);
-      toast.success('Role updated successfully / भूमिका अपडेट की गई');
+      toast.success(bi('Role updated successfully / भूमिका अपडेट की गई'));
       setShowEditDialog(false);
       loadData();
     } catch (error) {
@@ -75,7 +76,7 @@ function RolePermissionManager() {
     if (!confirm('Are you sure you want to delete this role?')) return;
     try {
       await userManagementAPI.deleteRole(roleId);
-      toast.success('Role deleted / भूमिका हटाई गई');
+      toast.success(bi('Role deleted / भूमिका हटाई गई'));
       loadData();
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to delete role');
@@ -131,7 +132,7 @@ function RolePermissionManager() {
             <Shield className="h-6 w-6 text-lime" />
             Role & Permission Manager
           </h2>
-          <p className="text-slate-400 mt-1">भूमिका और अनुमति प्रबंधन - Manage roles and their permissions</p>
+          <p className="text-slate-400 mt-1">{bi("भूमिका और अनुमति प्रबंधन - Manage roles and their permissions")}</p>
         </div>
         <Button onClick={() => setShowCreateDialog(true)} className="bg-lime text-black hover:bg-lime/90">
           <Plus className="h-4 w-4 mr-2" /> Create Custom Role
@@ -140,18 +141,17 @@ function RolePermissionManager() {
 
       {/* System Roles */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-white">System Roles (सिस्टम भूमिकाएं)</h3>
+        <h3 className="text-lg font-semibold text-white">{bi("System Roles (सिस्टम भूमिकाएं)")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {systemRoles.map(role => (
             <div key={role.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className={`w-3 h-3 rounded-full ${roleColors[role.id] || 'bg-slate-500'}`}></span>
-                  <span className="text-white font-medium">{role.name}</span>
+                  <span className="text-white font-medium">{tr(role.name, role.name_hi)}</span>
                 </div>
                 <span className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">System</span>
               </div>
-              <p className="text-slate-400 text-sm mb-3">{role.name_hi}</p>
               <div className="flex flex-wrap gap-1">
                 {role.permissions.slice(0, 5).map(perm => (
                   <span key={perm} className="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded">
@@ -169,7 +169,7 @@ function RolePermissionManager() {
 
       {/* Custom Roles */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-white">Custom Roles (कस्टम भूमिकाएं)</h3>
+        <h3 className="text-lg font-semibold text-white">{bi("Custom Roles (कस्टम भूमिकाएं)")}</h3>
         {customRoles.length === 0 ? (
           <div className="p-8 rounded-sm bg-slate-900/50 border border-dashed border-slate-700 text-center">
             <Shield className="h-12 w-12 text-slate-600 mx-auto mb-3" />
@@ -194,7 +194,7 @@ function RolePermissionManager() {
                     </Button>
                   </div>
                 </div>
-                <p className="text-slate-400 text-sm mb-3">{role.description || role.name_hi}</p>
+                <p className="text-slate-400 text-sm mb-3">{role.description || tr(role.name, role.name_hi)}</p>
                 <div className="flex flex-wrap gap-1">
                   {role.permissions.slice(0, 4).map(perm => (
                     <span key={perm} className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded">
@@ -213,13 +213,13 @@ function RolePermissionManager() {
 
       {/* Permission Matrix Preview */}
       <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
-        <h3 className="text-lg font-semibold text-white mb-4">Permission Matrix (अनुमति मैट्रिक्स)</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{bi("Permission Matrix (अनुमति मैट्रिक्स)")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Object.entries(permissionMatrix).map(([category, data]) => (
             <div key={category} className="space-y-2">
               <h4 className="text-lime font-medium flex items-center gap-2">
                 <Shield className="h-4 w-4" />
-                {data.label} ({data.label_hi})
+                {tr(data.label, data.label_hi)}
               </h4>
               <div className="space-y-1">
                 {data.permissions.map(perm => (
@@ -238,7 +238,7 @@ function RolePermissionManager() {
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-white">Create Custom Role / कस्टम भूमिका बनाएं</DialogTitle>
+            <DialogTitle className="text-white">{bi("Create Custom Role / कस्टम भूमिका बनाएं")}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -256,7 +256,7 @@ function RolePermissionManager() {
                 <Input
                   value={formData.name_hi}
                   onChange={(e) => setFormData({ ...formData, name_hi: e.target.value })}
-                  placeholder="e.g., गुणवत्ता नियंत्रण"
+                  placeholder={tr("e.g., Quality Control", "जैसे, गुणवत्ता नियंत्रण")}
                   className="bg-slate-800 border-slate-700"
                 />
               </div>
@@ -273,7 +273,7 @@ function RolePermissionManager() {
             
             {/* Permission Selection */}
             <div className="space-y-4">
-              <Label className="text-lime">Select Permissions * (अनुमतियां चुनें)</Label>
+              <Label className="text-lime">{bi("Select Permissions * (अनुमतियां चुनें)")}</Label>
               {Object.entries(permissionMatrix).map(([category, data]) => (
                 <div key={category} className="p-3 rounded-lg bg-slate-800/50 border border-slate-700">
                   <h5 className="text-white font-medium mb-2">{data.label}</h5>

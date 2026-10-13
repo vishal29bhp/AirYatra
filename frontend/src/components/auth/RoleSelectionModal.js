@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -74,7 +75,7 @@ export const RoleSelectionModal = ({
       );
       
       if (response.data?.user) {
-        toast.success(`Welcome as ${selectedRole}! / ${selectedRole} के रूप में स्वागत है!`);
+        toast.success(bi(`Welcome as ${selectedRole}! / ${selectedRole} के रूप में स्वागत है!`));
         if (onRoleSelected) {
           onRoleSelected(response.data.user);
         }
@@ -101,10 +102,7 @@ export const RoleSelectionModal = ({
               Welcome to AirYatra! 🎉
             </h2>
             <p className="text-slate-400 mt-2">
-              Choose how you want to use the platform
-            </p>
-            <p className="text-slate-500 text-sm">
-              आप प्लेटफ़ॉर्म का उपयोग कैसे करना चाहते हैं चुनें
+              {tr("Choose how you want to use the platform", "आप प्लेटफ़ॉर्म का उपयोग कैसे करना चाहते हैं चुनें")}
             </p>
           </div>
           
@@ -174,8 +172,7 @@ export const RoleSelectionModal = ({
                   <h3 className={`text-lg font-semibold ${
                     isSelected ? 'text-white' : 'text-slate-300'
                   }`}>
-                    {role.label}
-                    <span className="text-slate-500 text-sm ml-2">/ {role.labelHi}</span>
+                    {tr(role.label, role.labelHi)}
                   </h3>
                   
                   {/* Description */}
@@ -212,9 +209,7 @@ export const RoleSelectionModal = ({
           
           {/* Note */}
           <p className="text-slate-500 text-xs text-center mb-6">
-            You can always change your role later from Settings. Operators can also book flights as customers.
-            <br />
-            आप बाद में सेटिंग्स से अपनी भूमिका बदल सकते हैं।
+            {tr('You can always change your role later from Settings. Operators can also book flights as customers.', 'आप बाद में सेटिंग्स से अपनी भूमिका बदल सकते हैं।')}
           </p>
           
           {/* Submit Button */}

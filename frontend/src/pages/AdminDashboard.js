@@ -81,7 +81,6 @@ import AccountingIntegration from '@/components/admin/AccountingIntegration';
 import TwilioIntegration from '@/components/admin/TwilioIntegration';
 import TallyIntegration from '@/components/admin/TallyIntegration';
 import ZohoIntegration from '@/components/admin/ZohoIntegration';
-import ExchangeManagement from '@/components/admin/ExchangeManagement';
 import CEODashboard from '@/components/admin/CEODashboard';
 import PartnerManagement from '@/components/admin/PartnerManagement';
 import AdminPaymentsDashboard from '@/components/admin/AdminPaymentsDashboard';
@@ -104,10 +103,9 @@ const navGroups = [
     icon: LayoutDashboard,
     items: [
       { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-      { id: 'command_center', label: 'Command Center / कमांड सेंटर', icon: Shield, highlight: true },
+      { id: 'command_center', label: bi('Command Center / कमांड सेंटर'), icon: Shield, highlight: true },
       { id: 'inquiries', label: 'New Inquiries', icon: Bell, highlight: true },
       { id: 'approvals', label: 'Approval Queue', icon: CheckSquare, highlight: true },
-      { id: 'exchange', label: 'Aviation Exchange', icon: Plane, highlight: true },
       { id: 'multi_approval', label: 'Multi-Level Approvals', icon: Shield },
     ]
   },
@@ -158,10 +156,10 @@ const navGroups = [
     icon: DollarSign,
     items: [
       { id: 'payments_dashboard', label: 'Payments Dashboard', icon: Wallet, highlight: true },
-      { id: 'commission_settings', label: 'Commission Settings / कमीशन', icon: Percent, highlight: true },
+      { id: 'commission_settings', label: bi('Commission Settings / कमीशन'), icon: Percent, highlight: true },
       { id: 'settlements', label: 'Settlements', icon: DollarSign },
       { id: 'invoices', label: 'Invoice & GST Billing', icon: FileText },
-      { id: 'pricing_engine', label: 'Pricing Engine / मूल्य इंजन', icon: Calculator, highlight: true },
+      { id: 'pricing_engine', label: bi('Pricing Engine / मूल्य इंजन'), icon: Calculator, highlight: true },
       { id: 'dynamic_pricing', label: 'Dynamic Pricing', icon: Calculator },
       { id: 'currency', label: 'Currency Converter', icon: DollarSign },
       { id: 'insurance', label: 'Insurance Module', icon: Shield },
@@ -189,7 +187,7 @@ const navGroups = [
     items: [
       { id: 'users', label: 'User Management', icon: UserCog },
       { id: 'roles', label: 'Roles & Permissions', icon: Shield },
-      { id: 'incentives', label: 'Incentives / इंसेंटिव', icon: Wallet },
+      { id: 'incentives', label: bi('Incentives / इंसेंटिव'), icon: Wallet },
       { id: 'attendance', label: 'Attendance & Payroll', icon: CreditCard },
       { id: 'field_tracking', label: 'Field Live Tracking', icon: Navigation, highlight: true },
       { id: 'two_factor', label: '2FA Security', icon: Shield },
@@ -217,7 +215,7 @@ const navGroups = [
       { id: 'marketing', label: 'Marketing Campaigns', icon: TrendingUp },
       { id: 'loyalty', label: 'VIP & Loyalty Program', icon: Gift },
       { id: 'referral', label: 'Referral Settings', icon: Gift },
-      { id: 'discount_codes', label: 'Discount Codes / कोड', icon: Percent, highlight: true },
+      { id: 'discount_codes', label: bi('Discount Codes / कोड'), icon: Percent, highlight: true },
       { id: 'push_notifications', label: 'Push Notifications', icon: Bell },
     ]
   },
@@ -236,19 +234,19 @@ const navGroups = [
   },
   {
     id: 'document_master',
-    label: 'Document Master / दस्तावेज़ मास्टर',
+    label: bi('Document Master / दस्तावेज़ मास्टर'),
     icon: Shield,
     items: [
-      { id: 'compliance_dashboard', label: 'AI Compliance Monitor / अनुपालन', icon: Shield, highlight: true },
-      { id: 'verification_queue', label: 'Verification Queue / सत्यापन', icon: CheckSquare, highlight: true },
-      { id: 'document_types', label: 'Document Types / प्रकार', icon: FileText, highlight: true },
+      { id: 'compliance_dashboard', label: bi('AI Compliance Monitor / अनुपालन'), icon: Shield, highlight: true },
+      { id: 'verification_queue', label: bi('Verification Queue / सत्यापन'), icon: CheckSquare, highlight: true },
+      { id: 'document_types', label: bi('Document Types / प्रकार'), icon: FileText, highlight: true },
       { id: 'verification_apis', label: 'Verification APIs / API', icon: Shield, highlight: true },
-      { id: 'document_expiry', label: 'Expiry Dashboard / समाप्ति', icon: AlertTriangle, highlight: true },
+      { id: 'document_expiry', label: bi('Expiry Dashboard / समाप्ति'), icon: AlertTriangle, highlight: true },
     ]
   },
   {
     id: 'integrations',
-    label: 'Integrations / इंटीग्रेशन',
+    label: bi('Integrations / इंटीग्रेशन'),
     icon: HardDrive,
     items: [
       { id: 'partners', label: 'Partner API Platform', icon: Key, highlight: true },
@@ -260,6 +258,7 @@ const navGroups = [
 ];
 
 import { useLocation } from 'react-router-dom';
+import { bi } from '../lib/bilingual';
 
 function AdminDashboard({ user, onLogout }) {
   const location = useLocation();
@@ -412,8 +411,6 @@ function AdminDashboard({ user, onLogout }) {
         return <InquiryManagement />;
       case 'approvals':
         return <ApprovalQueue />;
-      case 'exchange':
-        return <ExchangeManagement />;
       case 'ceo':
         return <CEODashboard />;
       case 'partners':

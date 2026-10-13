@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function FleetMaintenance() {
   const [loading, setLoading] = useState(true);
@@ -109,7 +110,7 @@ function FleetMaintenance() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Wrench className="h-6 w-6 text-lime" />
-            Fleet Maintenance / फ्लीट मेंटेनेंस
+            {bi("Fleet Maintenance / फ्लीट मेंटेनेंस")}
           </h2>
           <p className="text-slate-400 mt-1">Aircraft maintenance scheduling, parts inventory & compliance</p>
         </div>

@@ -26,8 +26,6 @@ const SupportDashboard = lazy(() => import('./pages/SupportDashboard'));
 const FinanceDashboard = lazy(() => import('./pages/FinanceDashboard'));
 // Phase 1: Premium Services - lazy loaded
 const MembershipPage = lazy(() => import('./pages/MembershipPage'));
-const AviationExchangePage = lazy(() => import('./pages/AviationExchangePage'));
-const ListingDetailPage = lazy(() => import('./pages/ListingDetailPage'));
 const CorporateDashboard = lazy(() => import('./pages/CorporateDashboard'));
 const DocumentVault = lazy(() => import('./pages/DocumentVault'));
 const PaymentLinkPage = lazy(() => import('./pages/PaymentLinkPage'));
@@ -157,18 +155,6 @@ function App() {
             element={user && user.roles.includes('customer') ? <CustomerDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
           />
           <Route
-            path="/customer/listings"
-            element={user && user.roles.includes('customer') ? <CustomerDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/customer/investments"
-            element={user && user.roles.includes('customer') ? <CustomerDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/customer/watchlist"
-            element={user && user.roles.includes('customer') ? <CustomerDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
-          />
-          <Route
             path="/customer/payments"
             element={user && user.roles.includes('customer') ? <CustomerDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />}
           />
@@ -244,8 +230,6 @@ function App() {
         <Route path="/booking" element={<BookingPage user={user} />} />
         {/* Phase 1: Premium Services Routes */}
         <Route path="/membership" element={<MembershipPage user={user} />} />
-        <Route path="/exchange" element={<AviationExchangePage user={user} />} />
-        <Route path="/exchange/listing/:listingId" element={<ListingDetailPage user={user} />} />
         <Route path="/payment/success" element={<PaymentSuccessPage />} />
         <Route 
           path="/corporate/*" 

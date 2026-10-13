@@ -8,6 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 // Format currency in Indian format
 const formatINR = (amount) => {
@@ -72,7 +73,7 @@ export default function TreasuryDashboard() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Wallet className="h-7 w-7 text-emerald-400" />
-            Treasury Dashboard / खजाना डैशबोर्ड
+            {bi("Treasury Dashboard / खजाना डैशबोर्ड")}
           </h1>
           <p className="text-slate-400 mt-1">Real-time financial position for ₹100 Cr+ operations</p>
         </div>
@@ -130,7 +131,7 @@ export default function TreasuryDashboard() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-emerald-200 text-sm">Cash in Hand / नकद</p>
+                <p className="text-emerald-200 text-sm">{bi("Cash in Hand / नकद")}</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(summary?.total_cash)}</p>
               </div>
               <PiggyBank className="h-10 w-10 text-emerald-400 opacity-80" />
@@ -142,7 +143,7 @@ export default function TreasuryDashboard() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-300 text-sm">Bank Balance / बैंक</p>
+                <p className="text-slate-300 text-sm">{bi("Bank Balance / बैंक")}</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(summary?.total_bank_balance)}</p>
                 <p className="text-xs text-slate-300 mt-1">{bankAccounts.length} accounts</p>
               </div>
@@ -155,7 +156,7 @@ export default function TreasuryDashboard() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-purple-200 text-sm">Total Available / उपलब्ध</p>
+                <p className="text-purple-200 text-sm">{bi("Total Available / उपलब्ध")}</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(summary?.total_available)}</p>
               </div>
               <Wallet className="h-10 w-10 text-purple-400 opacity-80" />
@@ -167,7 +168,7 @@ export default function TreasuryDashboard() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-300 text-sm">Net Today / आज का</p>
+                <p className="text-slate-300 text-sm">{bi("Net Today / आज का")}</p>
                 <p className={`text-3xl font-bold mt-1 ${(summary?.net_today || 0) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                   {(summary?.net_today || 0) >= 0 ? '+' : ''}{formatINR(summary?.net_today)}
                 </p>
@@ -187,7 +188,7 @@ export default function TreasuryDashboard() {
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2 text-green-400">
               <ArrowDownRight className="h-5 w-5" />
-              Today&apos;s Collection / आज की वसूली
+              {bi("Today&apos;s Collection / आज की वसूली")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -200,7 +201,7 @@ export default function TreasuryDashboard() {
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2 text-red-400">
               <ArrowUpRight className="h-5 w-5" />
-              Today&apos;s Payments / आज का भुगतान
+              {bi("Today&apos;s Payments / आज का भुगतान")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -261,7 +262,7 @@ export default function TreasuryDashboard() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
             <Building2 className="h-5 w-5 text-amber" />
-            Bank Accounts / बैंक खाते
+            {bi("Bank Accounts / बैंक खाते")}
           </CardTitle>
           <Button 
             variant="outline" 
@@ -330,21 +331,21 @@ export default function TreasuryDashboard() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-amber" />
-              Monthly Performance / मासिक प्रदर्शन
+              {bi("Monthly Performance / मासिक प्रदर्शन")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">Revenue / राजस्व</span>
+              <span className="text-slate-400">{bi("Revenue / राजस्व")}</span>
               <span className="text-green-400 font-semibold">{formatINR(monthly?.revenue)}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">Expenses / खर्च</span>
+              <span className="text-slate-400">{bi("Expenses / खर्च")}</span>
               <span className="text-red-400 font-semibold">{formatINR(monthly?.expenses)}</span>
             </div>
             <hr className="border-slate-700" />
             <div className="flex justify-between items-center">
-              <span className="text-white font-semibold">Profit / लाभ</span>
+              <span className="text-white font-semibold">{bi("Profit / लाभ")}</span>
               <span className={`text-xl font-bold ${(monthly?.profit || 0) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                 {formatINR(monthly?.profit)}
               </span>
@@ -363,7 +364,7 @@ export default function TreasuryDashboard() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Calendar className="h-5 w-5 text-lime" />
-              Upcoming (30 Days) / आगामी
+              {bi("Upcoming (30 Days) / आगामी")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -449,12 +450,12 @@ function AddBankAccountModal({ onClose, onSuccess }) {
       <div className="bg-slate-800 rounded-sm p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
           <Building2 className="h-6 w-6 text-amber" />
-          Add Bank Account / बैंक खाता जोड़ें
+          {bi("Add Bank Account / बैंक खाता जोड़ें")}
         </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-slate-400 mb-1">Bank Name / बैंक का नाम *</label>
+            <label className="block text-sm text-slate-400 mb-1">{bi("Bank Name / बैंक का नाम *")}</label>
             <select
               value={formData.bank_name}
               onChange={(e) => setFormData({...formData, bank_name: e.target.value})}
@@ -469,7 +470,7 @@ function AddBankAccountModal({ onClose, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-sm text-slate-400 mb-1">Account Name / खाते का नाम *</label>
+            <label className="block text-sm text-slate-400 mb-1">{bi("Account Name / खाते का नाम *")}</label>
             <input
               type="text"
               value={formData.account_name}
@@ -550,7 +551,7 @@ function AddBankAccountModal({ onClose, onSuccess }) {
               className="rounded border-slate-600"
             />
             <label htmlFor="is_primary" className="text-slate-300 text-sm">
-              Set as Primary Account / मुख्य खाता बनाएं
+              {bi("Set as Primary Account / मुख्य खाता बनाएं")}
             </label>
           </div>
 

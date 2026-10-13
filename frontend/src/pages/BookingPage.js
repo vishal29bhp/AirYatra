@@ -37,6 +37,7 @@ import {
   getOptionLabel,
   calculateDistance,
 } from '../components/booking';
+import { bi, tr, isHindi } from '../lib/bilingual';
 
 // Customer Profile Card
 const CustomerProfileCard = ({ user }) => {
@@ -691,7 +692,7 @@ function BookingPage({ user }) {
   // Apply Referral Code
   const applyReferral = async () => {
     if (!referralCode.trim()) {
-      toast.error('Please enter a referral code / कृपया रेफरल कोड डालें');
+      toast.error(bi('Please enter a referral code / कृपया रेफरल कोड डालें'));
       return;
     }
     
@@ -705,7 +706,7 @@ function BookingPage({ user }) {
       });
       toast.success(res.data.message);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Invalid referral code / अमान्य रेफरल कोड');
+      toast.error(error.response?.data?.detail || bi('Invalid referral code / अमान्य रेफरल कोड'));
       setReferralApplied(null);
     } finally {
       setApplyingCode(false);
@@ -715,12 +716,12 @@ function BookingPage({ user }) {
   // Apply Discount Code
   const applyDiscount = async () => {
     if (!discountCode.trim()) {
-      toast.error('Please enter a discount code / कृपया डिस्काउंट कोड डालें');
+      toast.error(bi('Please enter a discount code / कृपया डिस्काउंट कोड डालें'));
       return;
     }
     
     if (!priceEstimate?.total) {
-      toast.error('Wait for price calculation / कृपया कीमत गणना का इंतजार करें');
+      toast.error(bi('Wait for price calculation / कृपया कीमत गणना का इंतजार करें'));
       return;
     }
     
@@ -739,7 +740,7 @@ function BookingPage({ user }) {
       });
       toast.success(res.data.message);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Invalid discount code / अमान्य डिस्काउंट कोड');
+      toast.error(error.response?.data?.detail || bi('Invalid discount code / अमान्य डिस्काउंट कोड'));
       setDiscountApplied(null);
     } finally {
       setApplyingCode(false);
@@ -1389,7 +1390,7 @@ function BookingPage({ user }) {
         
         <div className="grid grid-cols-2 gap-4 text-sm">
           {/* Booking Type (NEW) */}
-          <div className="text-slate-400">Booking Type / बुकिंग प्रकार</div>
+          <div className="text-slate-400">{bi("Booking Type / बुकिंग प्रकार")}</div>
           <div className="text-white">
             {bookingTypes.find(t => t.value === formData.booking_type)?.icon || '→'}{' '}
             {bookingTypes.find(t => t.value === formData.booking_type)?.label || formData.booking_type}
@@ -1639,13 +1640,13 @@ function BookingPage({ user }) {
             <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700 mt-4">
               <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
                 <Gift className="h-4 w-4 text-green-400" />
-                Referral & Discounts / रेफरल और छूट
+                {bi("Referral & Discounts / रेफरल और छूट")}
               </h4>
               
               {/* Referral Code Input */}
               {!referralApplied && (
                 <div className="mb-3">
-                  <label className="text-slate-400 text-sm mb-1 block">Referral Code (Friend&apos;s Code) / रेफरल कोड</label>
+                  <label className="text-slate-400 text-sm mb-1 block">{bi("Referral Code (Friend&apos;s Code) / रेफरल कोड")}</label>
                   <div className="flex gap-2">
                     <Input
                       value={referralCode}
@@ -1662,7 +1663,7 @@ function BookingPage({ user }) {
                       {applyingCode ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
                     </Button>
                   </div>
-                  <p className="text-slate-500 text-xs mt-1">Get 10% off on your first booking! / पहली बुकिंग पर 10% छूट!</p>
+                  <p className="text-slate-500 text-xs mt-1">{bi("Get 10% off on your first booking! / पहली बुकिंग पर 10% छूट!")}</p>
                 </div>
               )}
               
@@ -1672,7 +1673,7 @@ function BookingPage({ user }) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-400" />
-                      <span className="text-green-400">Referral Applied! / रेफरल लागू!</span>
+                      <span className="text-green-400">{bi("Referral Applied! / रेफरल लागू!")}</span>
                     </div>
                     <span className="text-green-400 font-bold">-{referralApplied.discount_percent}%</span>
                   </div>
@@ -1683,7 +1684,7 @@ function BookingPage({ user }) {
               {/* Discount Code Input */}
               {!discountApplied && (
                 <div className="mb-3">
-                  <label className="text-slate-400 text-sm mb-1 block">Promo Code / प्रोमो कोड</label>
+                  <label className="text-slate-400 text-sm mb-1 block">{bi("Promo Code / प्रोमो कोड")}</label>
                   <div className="flex gap-2">
                     <Input
                       value={discountCode}
@@ -1728,7 +1729,7 @@ function BookingPage({ user }) {
                         onCheckedChange={setUseWallet}
                       />
                       <label htmlFor="use-wallet" className="text-white cursor-pointer">
-                        Use Wallet Balance / वॉलेट बैलेंस उपयोग करें
+                        {bi("Use Wallet Balance / वॉलेट बैलेंस उपयोग करें")}
                       </label>
                     </div>
                     <span className="text-amber font-bold">₹{walletBalance.toLocaleString()}</span>
@@ -1752,7 +1753,7 @@ function BookingPage({ user }) {
                     </div>
                   ))}
                   <div className="flex justify-between items-center pt-2 border-t border-green-500/30">
-                    <span className="text-white font-bold text-lg">You Pay / आप देंगे:</span>
+                    <span className="text-white font-bold text-lg">{bi("You Pay / आप देंगे:")}</span>
                     <span className="text-green-400 font-bold text-2xl">₹{getFinalPrice().total.toLocaleString()}</span>
                   </div>
                 </div>
@@ -1795,8 +1796,8 @@ function BookingPage({ user }) {
       <div className="bg-slate-800/50 rounded-sm p-5 border border-amber-500/30 mt-6">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
           <Scale className="h-5 w-5 text-amber-400" />
-          Mandatory Consents / अनिवार्य सहमतियाँ
-          <span className="text-red-500 text-sm ml-auto">* Required / आवश्यक</span>
+          {bi("Mandatory Consents / अनिवार्य सहमतियाँ")}
+          <span className="text-red-500 text-sm ml-auto">{bi("* Required / आवश्यक")}</span>
         </h3>
         
         <div className="space-y-4">
@@ -1819,9 +1820,9 @@ function BookingPage({ user }) {
               <div className="flex-1">
                 <label htmlFor="consent-terms" className="text-white text-sm font-medium cursor-pointer">
                   <FileText className="h-4 w-4 inline mr-2 text-amber-400" />
-                  Terms & Conditions / नियम एवं शर्तें
+                  {bi("Terms & Conditions / नियम एवं शर्तें")}
                 </label>
-                <p className="text-slate-400 text-xs mt-1">
+                {!isHindi() && (<p className="text-slate-400 text-xs mt-1">
                   I confirm that I have carefully read and understood the AirYatra{' '}
                   <a href="/legal/terms" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
                     Terms & Conditions <ExternalLink className="h-3 w-3 inline" />
@@ -1832,10 +1833,10 @@ function BookingPage({ user }) {
                   <a href="/legal/cancellation" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
                     Cancellation Policy <ExternalLink className="h-3 w-3 inline" />
                   </a>.
-                </p>
-                <p className="text-slate-500 text-xs mt-1">
+                </p>)}
+                {isHindi() && (<p className="text-slate-500 text-xs mt-1">
                   मैं पुष्टि करता/करती हूं कि मैंने AirYatra के नियम एवं शर्तें, गोपनीयता नीति और रद्दीकरण नीति को ध्यान से पढ़ और समझ लिया है।
-                </p>
+                </p>)}
               </div>
             </div>
           </div>
@@ -1859,13 +1860,10 @@ function BookingPage({ user }) {
               <div className="flex-1">
                 <label htmlFor="consent-flight" className="text-white text-sm font-medium cursor-pointer">
                   <AlertTriangle className="h-4 w-4 inline mr-2 text-yellow-400" />
-                  Operator & Flight Conditions / ऑपरेटर व उड़ान शर्तें
+                  {bi("Operator & Flight Conditions / ऑपरेटर व उड़ान शर्तें")}
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
-                  I understand that helicopter and charter flights are subject to weather conditions, DGCA regulations, operational safety, aircraft availability and applicable government permissions.
-                </p>
-                <p className="text-slate-500 text-xs mt-1">
-                  मैं समझता/समझती हूं कि हेलीकॉप्टर और चार्टर उड़ानें मौसम की स्थिति, DGCA नियमों, परिचालन सुरक्षा, विमान उपलब्धता और लागू सरकारी अनुमतियों के अधीन हैं।
+                  {tr("I understand that helicopter and charter flights are subject to weather conditions, DGCA regulations, operational safety, aircraft availability and applicable government permissions.", "मैं समझता/समझती हूं कि हेलीकॉप्टर और चार्टर उड़ानें मौसम की स्थिति, DGCA नियमों, परिचालन सुरक्षा, विमान उपलब्धता और लागू सरकारी अनुमतियों के अधीन हैं।")}
                 </p>
               </div>
             </div>
@@ -1890,13 +1888,10 @@ function BookingPage({ user }) {
               <div className="flex-1">
                 <label htmlFor="consent-platform" className="text-white text-sm font-medium cursor-pointer">
                   <Building2 className="h-4 w-4 inline mr-2 text-amber" />
-                  Platform Role / प्लेटफ़ॉर्म की भूमिका
+                  {bi("Platform Role / प्लेटफ़ॉर्म की भूमिका")}
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
-                  I understand that AirYatra operates as an online aviation marketplace and technology platform connecting customers with verified operators unless specifically stated otherwise.
-                </p>
-                <p className="text-slate-500 text-xs mt-1">
-                  मैं समझता/समझती हूं कि AirYatra एक ऑनलाइन एविएशन मार्केटप्लेस और टेक्नोलॉजी प्लेटफॉर्म है जो ग्राहकों को सत्यापित ऑपरेटरों से जोड़ता है।
+                  {tr("I understand that AirYatra operates as an online aviation marketplace and technology platform connecting customers with verified operators unless specifically stated otherwise.", "मैं समझता/समझती हूं कि AirYatra एक ऑनलाइन एविएशन मार्केटप्लेस और टेक्नोलॉजी प्लेटफॉर्म है जो ग्राहकों को सत्यापित ऑपरेटरों से जोड़ता है।")}
                 </p>
               </div>
             </div>
@@ -1921,13 +1916,10 @@ function BookingPage({ user }) {
               <div className="flex-1">
                 <label htmlFor="consent-info" className="text-white text-sm font-medium cursor-pointer">
                   <User className="h-4 w-4 inline mr-2 text-green-400" />
-                  Information Accuracy / जानकारी की सत्यता
+                  {bi("Information Accuracy / जानकारी की सत्यता")}
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
-                  I confirm that all passenger information, travel details and documents provided by me are true and accurate.
-                </p>
-                <p className="text-slate-500 text-xs mt-1">
-                  मैं पुष्टि करता/करती हूं कि मेरे द्वारा दी गई सभी यात्री जानकारी, यात्रा विवरण और दस्तावेज सत्य और सटीक हैं।
+                  {tr("I confirm that all passenger information, travel details and documents provided by me are true and accurate.", "मैं पुष्टि करता/करती हूं कि मेरे द्वारा दी गई सभी यात्री जानकारी, यात्रा विवरण और दस्तावेज सत्य और सटीक हैं।")}
                 </p>
               </div>
             </div>
@@ -1952,13 +1944,13 @@ function BookingPage({ user }) {
               <div className="flex-1">
                 <label htmlFor="consent-esign" className="text-white text-sm font-medium cursor-pointer">
                   <PenTool className="h-4 w-4 inline mr-2 text-purple-400" />
-                  Electronic Consent / इलेक्ट्रॉनिक सहमति
+                  {bi("Electronic Consent / इलेक्ट्रॉनिक सहमति")}
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
                   I consent to electronic records, digital signatures, OTP authentication and online agreements in accordance with applicable Indian laws (IT Act 2000).
                 </p>
                 <p className="text-slate-500 text-xs mt-1">
-                  मैं इलेक्ट्रॉनिक रिकॉर्ड, डिजिटल हस्ताक्षर, OTP प्रमाणीकरण और ऑनलाइन समझौतों के लिए भारतीय कानूनों (IT Act 2000) के अनुसार सहमति देता/देती हूं।
+                  {bi("मैं इलेक्ट्रॉनिक रिकॉर्ड, डिजिटल हस्ताक्षर, OTP प्रमाणीकरण और ऑनलाइन समझौतों के लिए भारतीय कानूनों (IT Act 2000) के अनुसार सहमति देता/देती हूं।")}
                 </p>
               </div>
             </div>
@@ -1969,15 +1961,15 @@ function BookingPage({ user }) {
         <div className="mt-4 pt-4 border-t border-slate-700">
           <div className="flex items-center justify-between text-sm">
             <span className="text-slate-400">
-              Accepted / स्वीकृत: {Object.values(consents).filter(v => v).length} / 5
+              {bi("Accepted / स्वीकृत:")} {Object.values(consents).filter(v => v).length} / 5
             </span>
             {allConsentsAccepted ? (
               <span className="text-green-400 flex items-center gap-1">
-                <Check className="h-4 w-4" /> All Consents Accepted / सभी सहमतियाँ स्वीकृत
+                <Check className="h-4 w-4" /> {bi("All Consents Accepted / सभी सहमतियाँ स्वीकृत")}
               </span>
             ) : (
               <span className="text-amber-400 flex items-center gap-1">
-                <AlertCircle className="h-4 w-4" /> Please accept all consents / कृपया सभी सहमतियाँ स्वीकार करें
+                <AlertCircle className="h-4 w-4" /> {bi("Please accept all consents / कृपया सभी सहमतियाँ स्वीकार करें")}
               </span>
             )}
           </div>
@@ -2006,7 +1998,7 @@ function BookingPage({ user }) {
         ) : !allConsentsAccepted ? (
           <>
             <AlertCircle className="h-5 w-5 mr-2" />
-            Accept All Consents to Continue / आगे बढ़ने के लिए सभी सहमतियाँ स्वीकार करें
+            {bi("Accept All Consents to Continue / आगे बढ़ने के लिए सभी सहमतियाँ स्वीकार करें")}
           </>
         ) : (
           <>

@@ -6,16 +6,17 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { approvalAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const APPROVAL_TYPES = [
-  { id: 'all', label: 'All Types / सभी', icon: '📋' },
-  { id: 'cancellation', label: 'Cancellation / रद्दीकरण', icon: '❌' },
-  { id: 'refund', label: 'Refund / वापसी', icon: '💰' },
-  { id: 'settlement', label: 'Settlement / सेटलमेंट', icon: '🏦' },
-  { id: 'operator_onboarding', label: 'Operator Onboarding / ऑपरेटर', icon: '✈️' },
-  { id: 'document_verification', label: 'Document Verification / दस्तावेज़', icon: '📄' },
-  { id: 'emergency_override', label: 'Emergency Override / आपातकालीन', icon: '🚨' },
-  { id: 'price_change', label: 'Price Change / मूल्य परिवर्तन', icon: '💲' },
+  { id: 'all', label: bi('All Types / सभी'), icon: '📋' },
+  { id: 'cancellation', label: bi('Cancellation / रद्दीकरण'), icon: '❌' },
+  { id: 'refund', label: bi('Refund / वापसी'), icon: '💰' },
+  { id: 'settlement', label: bi('Settlement / सेटलमेंट'), icon: '🏦' },
+  { id: 'operator_onboarding', label: bi('Operator Onboarding / ऑपरेटर'), icon: '✈️' },
+  { id: 'document_verification', label: bi('Document Verification / दस्तावेज़'), icon: '📄' },
+  { id: 'emergency_override', label: bi('Emergency Override / आपातकालीन'), icon: '🚨' },
+  { id: 'price_change', label: bi('Price Change / मूल्य परिवर्तन'), icon: '💲' },
 ];
 
 function MultiLevelApproval() {
@@ -59,12 +60,12 @@ function MultiLevelApproval() {
 
   const handleApprove = async () => {
     if (!remarks.trim()) {
-      toast.error('Remarks are required / टिप्पणी आवश्यक है');
+      toast.error(bi('Remarks are required / टिप्पणी आवश्यक है'));
       return;
     }
     try {
       await approvalAPI.approve(selectedApproval.id, { remarks, approved_amount: selectedApproval.amount });
-      toast.success('Approved successfully / स्वीकृत');
+      toast.success(bi('Approved successfully / स्वीकृत'));
       setShowApproveDialog(false);
       setRemarks('');
       loadApprovals();
@@ -75,12 +76,12 @@ function MultiLevelApproval() {
 
   const handleReject = async () => {
     if (!remarks.trim()) {
-      toast.error('Rejection reason is required / अस्वीकृति कारण आवश्यक है');
+      toast.error(bi('Rejection reason is required / अस्वीकृति कारण आवश्यक है'));
       return;
     }
     try {
       await approvalAPI.reject(selectedApproval.id, { remarks, reason: remarks });
-      toast.success('Rejected / अस्वीकृत');
+      toast.success(bi('Rejected / अस्वीकृत'));
       setShowRejectDialog(false);
       setRemarks('');
       loadApprovals();
@@ -96,7 +97,7 @@ function MultiLevelApproval() {
     }
     try {
       await approvalAPI.escalate(selectedApproval.id, { reason: escalationReason });
-      toast.success('Escalated to higher authority / ऊपर भेजा गया');
+      toast.success(bi('Escalated to higher authority / ऊपर भेजा गया'));
       setShowEscalateDialog(false);
       setEscalationReason('');
       loadApprovals();
@@ -143,7 +144,7 @@ function MultiLevelApproval() {
             <CheckCircle className="h-6 w-6 text-lime" />
             Multi-Level Approval Workflow
           </h2>
-          <p className="text-slate-400 mt-1">बहु-स्तरीय अनुमोदन - Manage approval requests with escalation</p>
+          <p className="text-slate-400 mt-1">{bi("बहु-स्तरीय अनुमोदन - Manage approval requests with escalation")}</p>
         </div>
         <Button variant="outline" onClick={loadApprovals}>
           <RefreshCw className="h-4 w-4 mr-2" /> Refresh
@@ -222,7 +223,7 @@ function MultiLevelApproval() {
       ) : approvals.length === 0 ? (
         <div className="text-center py-12">
           <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
-          <p className="text-slate-400">No {selectedStatus} approvals / कोई {selectedStatus} अनुमोदन नहीं</p>
+          <p className="text-slate-400">No {selectedStatus} {bi("approvals / कोई")} {selectedStatus} अनुमोदन नहीं</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -329,14 +330,14 @@ function MultiLevelApproval() {
       <Dialog open={showApproveDialog} onOpenChange={setShowApproveDialog}>
         <DialogContent className="bg-slate-900 border-slate-800">
           <DialogHeader>
-            <DialogTitle className="text-white">Approve Request / अनुरोध स्वीकृत करें</DialogTitle>
+            <DialogTitle className="text-white">{bi("Approve Request / अनुरोध स्वीकृत करें")}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/30">
               <p className="text-green-400">Amount: ₹{(selectedApproval?.amount || 0).toLocaleString()}</p>
             </div>
             <div className="space-y-2">
-              <Label>Remarks / टिप्पणी *</Label>
+              <Label>{bi("Remarks / टिप्पणी *")}</Label>
               <textarea
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
@@ -359,11 +360,11 @@ function MultiLevelApproval() {
       <Dialog open={showRejectDialog} onOpenChange={setShowRejectDialog}>
         <DialogContent className="bg-slate-900 border-slate-800">
           <DialogHeader>
-            <DialogTitle className="text-white">Reject Request / अनुरोध अस्वीकार करें</DialogTitle>
+            <DialogTitle className="text-white">{bi("Reject Request / अनुरोध अस्वीकार करें")}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label>Rejection Reason / अस्वीकृति कारण *</Label>
+              <Label>{bi("Rejection Reason / अस्वीकृति कारण *")}</Label>
               <textarea
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
@@ -384,7 +385,7 @@ function MultiLevelApproval() {
       <Dialog open={showEscalateDialog} onOpenChange={setShowEscalateDialog}>
         <DialogContent className="bg-slate-900 border-slate-800">
           <DialogHeader>
-            <DialogTitle className="text-white">Escalate to Higher Authority / ऊपर भेजें</DialogTitle>
+            <DialogTitle className="text-white">{bi("Escalate to Higher Authority / ऊपर भेजें")}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/30">

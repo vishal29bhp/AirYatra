@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const ROLES = ['employee', 'hr', 'sales', 'finance', 'support', 'marketing', 'operations'];
 const SALARY_FIELDS = [
@@ -70,7 +71,7 @@ function EmployeeManagement() {
         employee_id: salaryDialog.id,
         ...Object.fromEntries(SALARY_FIELDS.map(([k]) => [k, Number(salaryForm[k] || 0)])),
       });
-      toast.success('Salary structure updated / वेतन संरचना सेट');
+      toast.success(bi('Salary structure updated / वेतन संरचना सेट'));
       setSalaryDialog(null);
       await load();
     } catch (e) {
@@ -82,11 +83,11 @@ function EmployeeManagement() {
     <div className="space-y-6" data-testid="employee-management">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Employee Management / कर्मचारी प्रबंधन</h1>
+          <h1 className="text-2xl font-bold text-white">{bi("Employee Management / कर्मचारी प्रबंधन")}</h1>
           <p className="text-slate-400 text-sm">{employees.length} staff members • Employees login at /employee</p>
         </div>
         <Button onClick={() => setOpen(true)} className="bg-green-500 hover:bg-green-600" data-testid="add-employee-btn">
-          <Plus className="h-4 w-4 mr-2" />Add Employee / नया कर्मचारी
+          <Plus className="h-4 w-4 mr-2" />{bi("Add Employee / नया कर्मचारी")}
         </Button>
       </div>
 
@@ -155,7 +156,7 @@ function EmployeeManagement() {
       {/* Create Employee Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl max-h-[85vh] overflow-y-auto">
-          <DialogHeader><DialogTitle>Add Employee / नया कर्मचारी जोड़ें</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>{bi("Add Employee / नया कर्मचारी जोड़ें")}</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div><Label className="text-slate-300">Full Name *</Label><Input value={form.full_name} onChange={set('full_name')} className="bg-slate-800 border-slate-700 mt-1" data-testid="emp-name-input" /></div>
@@ -181,7 +182,7 @@ function EmployeeManagement() {
               </div>
             </div>
             <Button onClick={create} disabled={saving} className="w-full bg-green-500 hover:bg-green-600" data-testid="create-employee-btn">
-              {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}Create Employee / कर्मचारी बनाएं
+              {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}{bi("Create Employee / कर्मचारी बनाएं")}
             </Button>
           </div>
         </DialogContent>

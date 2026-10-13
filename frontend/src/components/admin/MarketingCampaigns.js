@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function MarketingCampaigns() {
   const [loading, setLoading] = useState(true);
@@ -134,7 +135,7 @@ function MarketingCampaigns() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Megaphone className="h-6 w-6 text-pink-400" />
-            Marketing & Campaigns / मार्केटिंग
+            {bi("Marketing & Campaigns / मार्केटिंग")}
           </h2>
           <p className="text-slate-400 mt-1">Manage campaigns, promo codes, and push notifications</p>
         </div>

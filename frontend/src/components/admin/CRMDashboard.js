@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { crmAPI, userManagementAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 // Lead Status Colors
 const statusColors = {
@@ -509,7 +510,7 @@ function CRMDashboard() {
   const TasksView = () => (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-white font-semibold">Tasks / कार्य</h3>
+        <h3 className="text-white font-semibold">{bi("Tasks / कार्य")}</h3>
         <Button onClick={() => setShowTaskModal(true)} className="bg-green-500 hover:bg-green-600" size="sm">
           <Plus className="h-4 w-4 mr-2" /> New Task
         </Button>
@@ -582,7 +583,7 @@ function CRMDashboard() {
     return (
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-white font-semibold">Sales Team Performance / सेल्स टीम परफॉर्मेंस</h3>
+          <h3 className="text-white font-semibold">{bi("Sales Team Performance / सेल्स टीम परफॉर्मेंस")}</h3>
           <Button onClick={() => setShowTargetModal(true)} className="bg-purple-500 hover:bg-purple-600" size="sm">
             <Target className="h-4 w-4 mr-2" /> Set Target
           </Button>
@@ -682,14 +683,14 @@ function CRMDashboard() {
         <div className="bg-slate-900 rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-700">
           <div className="p-6 border-b border-slate-700">
             <h3 className="text-white font-semibold text-lg">
-              {selectedLead?.id ? 'Edit Lead' : 'New Lead'} / {selectedLead?.id ? 'लीड एडिट करें' : 'नई लीड'}
+              {selectedLead?.id ? tr('Edit Lead', 'लीड एडिट करें') : tr('New Lead', 'नई लीड')}
             </h3>
           </div>
           
           <div className="p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label className="text-slate-300">Name / नाम *</Label>
+                <Label className="text-slate-300">{bi("Name / नाम *")}</Label>
                 <Input
                   value={leadData.name}
                   onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
@@ -698,7 +699,7 @@ function CRMDashboard() {
                 />
               </div>
               <div>
-                <Label className="text-slate-300">Phone / फोन *</Label>
+                <Label className="text-slate-300">{bi("Phone / फोन *")}</Label>
                 <Input
                   value={leadData.phone}
                   onChange={(e) => setLeadData({ ...leadData, phone: e.target.value })}
@@ -719,7 +720,7 @@ function CRMDashboard() {
                 />
               </div>
               <div>
-                <Label className="text-slate-300">Company / कंपनी</Label>
+                <Label className="text-slate-300">{bi("Company / कंपनी")}</Label>
                 <Input
                   value={leadData.company_name}
                   onChange={(e) => setLeadData({ ...leadData, company_name: e.target.value })}
@@ -730,7 +731,7 @@ function CRMDashboard() {
             
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label className="text-slate-300">City / शहर</Label>
+                <Label className="text-slate-300">{bi("City / शहर")}</Label>
                 <Input
                   value={leadData.city}
                   onChange={(e) => setLeadData({ ...leadData, city: e.target.value })}
@@ -738,7 +739,7 @@ function CRMDashboard() {
                 />
               </div>
               <div>
-                <Label className="text-slate-300">State / राज्य</Label>
+                <Label className="text-slate-300">{bi("State / राज्य")}</Label>
                 <Input
                   value={leadData.state}
                   onChange={(e) => setLeadData({ ...leadData, state: e.target.value })}
@@ -749,7 +750,7 @@ function CRMDashboard() {
             
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label className="text-slate-300">Source / सोर्स</Label>
+                <Label className="text-slate-300">{bi("Source / सोर्स")}</Label>
                 <select
                   value={leadData.source}
                   onChange={(e) => setLeadData({ ...leadData, source: e.target.value })}
@@ -767,7 +768,7 @@ function CRMDashboard() {
                 </select>
               </div>
               <div>
-                <Label className="text-slate-300">Priority / प्राथमिकता</Label>
+                <Label className="text-slate-300">{bi("Priority / प्राथमिकता")}</Label>
                 <select
                   value={leadData.priority}
                   onChange={(e) => setLeadData({ ...leadData, priority: e.target.value })}
@@ -802,7 +803,7 @@ function CRMDashboard() {
             )}
             
             <div>
-              <Label className="text-slate-300">Service Interested / सर्विस</Label>
+              <Label className="text-slate-300">{bi("Service Interested / सर्विस")}</Label>
               <select
                 value={leadData.service_interested}
                 onChange={(e) => setLeadData({ ...leadData, service_interested: e.target.value })}
@@ -816,7 +817,7 @@ function CRMDashboard() {
             </div>
             
             <div>
-              <Label className="text-slate-300">Requirements / आवश्यकताएं</Label>
+              <Label className="text-slate-300">{bi("Requirements / आवश्यकताएं")}</Label>
               <textarea
                 value={leadData.requirements}
                 onChange={(e) => setLeadData({ ...leadData, requirements: e.target.value })}
@@ -875,7 +876,7 @@ function CRMDashboard() {
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-slate-900 rounded-sm max-w-md w-full border border-slate-700">
           <div className="p-6 border-b border-slate-700">
-            <h3 className="text-white font-semibold text-lg">Log Call / कॉल लॉग करें</h3>
+            <h3 className="text-white font-semibold text-lg">{bi("Log Call / कॉल लॉग करें")}</h3>
             <p className="text-slate-400 text-sm">{selectedLead.name} - {selectedLead.phone}</p>
           </div>
           
@@ -921,7 +922,7 @@ function CRMDashboard() {
             </div>
             
             <div>
-              <Label className="text-slate-300">Notes / नोट्स</Label>
+              <Label className="text-slate-300">{bi("Notes / नोट्स")}</Label>
               <textarea
                 value={callData.notes}
                 onChange={(e) => setCallData({ ...callData, notes: e.target.value })}
@@ -990,12 +991,12 @@ function CRMDashboard() {
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-slate-900 rounded-sm max-w-md w-full border border-slate-700">
           <div className="p-6 border-b border-slate-700">
-            <h3 className="text-white font-semibold text-lg">New Task / नया कार्य</h3>
+            <h3 className="text-white font-semibold text-lg">{bi("New Task / नया कार्य")}</h3>
           </div>
           
           <div className="p-6 space-y-4">
             <div>
-              <Label className="text-slate-300">Title / शीर्षक *</Label>
+              <Label className="text-slate-300">{bi("Title / शीर्षक *")}</Label>
               <Input
                 value={taskData.title}
                 onChange={(e) => setTaskData({ ...taskData, title: e.target.value })}
@@ -1005,7 +1006,7 @@ function CRMDashboard() {
             </div>
             
             <div>
-              <Label className="text-slate-300">Description / विवरण</Label>
+              <Label className="text-slate-300">{bi("Description / विवरण")}</Label>
               <textarea
                 value={taskData.description}
                 onChange={(e) => setTaskData({ ...taskData, description: e.target.value })}
@@ -1059,7 +1060,7 @@ function CRMDashboard() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white">CRM Dashboard</h2>
-          <p className="text-slate-400">Lead Management & Sales Team / लीड प्रबंधन और सेल्स टीम</p>
+          <p className="text-slate-400">{bi("Lead Management & Sales Team / लीड प्रबंधन और सेल्स टीम")}</p>
         </div>
         <Button onClick={() => { loadDashboard(); loadLeads(); loadTasks(); }} variant="outline" size="sm">
           <RefreshCw className="h-4 w-4 mr-2" /> Refresh
@@ -1070,8 +1071,8 @@ function CRMDashboard() {
       <div className="flex gap-2 border-b border-slate-700 pb-2">
         {[
           { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-          { id: 'leads', label: 'Leads / लीड्स', icon: Users },
-          { id: 'tasks', label: 'Tasks / कार्य', icon: ListChecks },
+          { id: 'leads', label: bi('Leads / लीड्स'), icon: Users },
+          { id: 'tasks', label: bi('Tasks / कार्य'), icon: ListChecks },
           { id: 'team', label: 'Sales Team', icon: Award },
         ].map((tab) => (
           <button

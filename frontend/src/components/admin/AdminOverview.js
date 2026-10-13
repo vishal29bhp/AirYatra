@@ -7,6 +7,7 @@ import BookingPurposeChart from './BookingPurposeChart';
 import { ContextMenu } from '@/components/shared/ContextMenu';
 import SwipeableCard from '@/components/shared/SwipeableCard';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function AdminOverview({ data, onRefresh, loading, onNavigate }) {
   if (loading) {
@@ -297,7 +298,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
       <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <Target className="h-5 w-5 text-lime" />
-          Booking Purpose Analytics / बुकिंग उद्देश्य विश्लेषण
+          {bi("Booking Purpose Analytics / बुकिंग उद्देश्य विश्लेषण")}
         </h3>
         <BookingPurposeChart />
       </div>

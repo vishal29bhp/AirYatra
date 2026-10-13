@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
@@ -35,7 +36,7 @@ export const EmpDirectory = ({ user }) => {
       const fd = new FormData();
       fd.append('file', file);
       await api.post('/hr/employee/photo', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
-      toast.success('Photo updated / फोटो अपडेट हो गई');
+      toast.success(bi('Photo updated / फोटो अपडेट हो गई'));
       await load();
     } catch (e) {
       toast.error(e.response?.data?.detail || 'Failed to upload photo');
@@ -53,7 +54,7 @@ export const EmpDirectory = ({ user }) => {
     <div className="space-y-6" data-testid="emp-directory">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Team Directory / टीम डायरेक्टरी</h1>
+          <h1 className="text-2xl font-bold text-white">{bi("Team Directory / टीम डायरेक्टरी")}</h1>
           <p className="text-slate-400 text-sm">{staff.length} colleagues</p>
         </div>
         <div>
@@ -66,7 +67,7 @@ export const EmpDirectory = ({ user }) => {
 
       <div className="relative">
         <Search className="h-4 w-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name, department, designation... / नाम, विभाग खोजें"
+        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={bi("Search by name, department, designation... / नाम, विभाग खोजें")}
           className="bg-slate-800 border-slate-700 pl-9 text-white" data-testid="directory-search-input" />
       </div>
 

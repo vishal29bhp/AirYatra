@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -60,7 +61,7 @@ function PilotAssignmentCalendar() {
         throw new Error(err.detail || 'Assignment failed');
       }
       
-      toast.success('Pilot assigned successfully! / पायलट असाइन किया गया!');
+      toast.success(bi('Pilot assigned successfully! / पायलट असाइन किया गया!'));
       setSelectedBooking(null);
       loadData();
     } catch (error) {
@@ -186,7 +187,7 @@ function PilotAssignmentCalendar() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <UserPlus className="h-6 w-6 text-amber" />
-            Pilot Assignment / पायलट असाइनमेंट
+            {bi("Pilot Assignment / पायलट असाइनमेंट")}
           </h2>
           <p className="text-slate-400 mt-1">Assign pilots to bookings from calendar view</p>
         </div>
@@ -200,24 +201,24 @@ function PilotAssignmentCalendar() {
         <div className="bg-gradient-to-br to-cyan-500/20 rounded-sm p-4 border border-amber/30">
           <User className="h-6 w-6 text-amber mb-2" />
           <p className="text-3xl font-bold text-white">{data?.total_pilots || 0}</p>
-          <p className="text-slate-400 text-sm">Total Pilots / कुल पायलट</p>
+          <p className="text-slate-400 text-sm">{bi("Total Pilots / कुल पायलट")}</p>
         </div>
         <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <Check className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-3xl font-bold text-green-400">
             {(data?.bookings?.length || 0) - (data?.unassigned_bookings || 0)}
           </p>
-          <p className="text-slate-400 text-sm">Assigned / असाइन किया गया</p>
+          <p className="text-slate-400 text-sm">{bi("Assigned / असाइन किया गया")}</p>
         </div>
         <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
           <AlertCircle className="h-6 w-6 text-lime mb-2" />
           <p className="text-3xl font-bold text-lime">{data?.unassigned_bookings || 0}</p>
-          <p className="text-slate-400 text-sm">Unassigned / बिना असाइन</p>
+          <p className="text-slate-400 text-sm">{bi("Unassigned / बिना असाइन")}</p>
         </div>
         <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-sm p-4 border border-purple-500/30">
           <Plane className="h-6 w-6 text-purple-400 mb-2" />
           <p className="text-3xl font-bold text-purple-400">{data?.bookings?.length || 0}</p>
-          <p className="text-slate-400 text-sm">Total Bookings / कुल बुकिंग</p>
+          <p className="text-slate-400 text-sm">{bi("Total Bookings / कुल बुकिंग")}</p>
         </div>
       </div>
 
@@ -320,7 +321,7 @@ function PilotAssignmentCalendar() {
             <div className="bg-slate-800/50 rounded-sm border border-amber/30 p-4">
               <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
                 <UserPlus className="h-5 w-5 text-amber" />
-                Assign Pilot / पायलट चुनें
+                {bi("Assign Pilot / पायलट चुनें")}
               </h4>
               <p className="text-slate-400 text-sm mb-3">
                 Select pilot for: <span className="text-white">{selectedBooking.route}</span>
@@ -387,7 +388,7 @@ function PilotAssignmentCalendar() {
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold flex items-center gap-2">
             <User className="h-5 w-5 text-amber" />
-            Pilot Overview / पायलट अवलोकन
+            {bi("Pilot Overview / पायलट अवलोकन")}
           </h3>
         </div>
         

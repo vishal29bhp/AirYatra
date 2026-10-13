@@ -3,6 +3,7 @@ import { MapPin, Calendar, Clock, AlertCircle, Building2, TreePine, DollarSign }
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import LandingPointSelector from '../shared/LandingPointSelector';
+import { bi, tr } from '../../lib/bilingual';
 
 const RouteSelectionStep = ({ 
   formData, 
@@ -18,7 +19,7 @@ const RouteSelectionStep = ({
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
           <MapPin className="h-5 w-5 text-green-400" />
-          Pickup Location / पिकअप स्थान
+          {bi("Pickup Location / पिकअप स्थान")}
         </Label>
         
         <LandingPointSelector
@@ -62,7 +63,7 @@ const RouteSelectionStep = ({
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
           <MapPin className="h-5 w-5 text-red-400" />
-          Drop Location / ड्रॉप स्थान
+          {bi("Drop Location / ड्रॉप स्थान")}
         </Label>
         
         <LandingPointSelector
@@ -105,17 +106,17 @@ const RouteSelectionStep = ({
       {/* Distance & Landing Rent Info */}
       {distanceKm > 0 && (
         <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
-          <h3 className="text-white font-semibold mb-4">Route Summary / मार्ग सारांश</h3>
+          <h3 className="text-white font-semibold mb-4">{bi("Route Summary / मार्ग सारांश")}</h3>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 bg-slate-900/50 rounded-lg text-center">
-              <p className="text-slate-400 text-sm">Distance / दूरी</p>
+              <p className="text-slate-400 text-sm">{bi("Distance / दूरी")}</p>
               <p className="text-2xl font-bold text-white">{distanceKm} km</p>
             </div>
             
             {landingRent.total > 0 && (
               <div className="p-4 bg-slate-900/50 rounded-lg text-center">
-                <p className="text-slate-400 text-sm">Landing Charges / लैंडिंग शुल्क</p>
+                <p className="text-slate-400 text-sm">{bi("Landing Charges / लैंडिंग शुल्क")}</p>
                 <p className="text-2xl font-bold text-yellow-400">₹{landingRent.total.toLocaleString()}</p>
               </div>
             )}
@@ -129,18 +130,15 @@ const RouteSelectionStep = ({
           <div className="flex items-start gap-3">
             <AlertCircle className="h-6 w-6 text-lime flex-shrink-0" />
             <div>
-              <h4 className="text-lime font-semibold">Permission Required / अनुमति आवश्यक</h4>
+              <h4 className="text-lime font-semibold">{bi("Permission Required / अनुमति आवश्यक")}</h4>
               <p className="text-slate-300 text-sm mt-1">
-                Village/Private land landing requires additional permissions. You will need to submit documents after booking confirmation.
-              </p>
-              <p className="text-slate-300 text-sm mt-1">
-                गाँव/निजी भूमि पर उतरने के लिए अतिरिक्त अनुमति की आवश्यकता है। बुकिंग पुष्टि के बाद आपको दस्तावेज़ जमा करने होंगे।
+                {tr("Village/Private land landing requires additional permissions. You will need to submit documents after booking confirmation.", "गाँव/निजी भूमि पर उतरने के लिए अतिरिक्त अनुमति की आवश्यकता है। बुकिंग पुष्टि के बाद आपको दस्तावेज़ जमा करने होंगे।")}
               </p>
               <ul className="text-slate-300 text-sm mt-2 list-disc list-inside">
-                <li>Collector NOC / कलेक्टर एनओसी</li>
-                <li>Fire Department Acknowledgment / अग्निशमन विभाग की पावती</li>
-                <li>Police Station NOC / पुलिस स्टेशन एनओसी</li>
-                <li>SP/DCP Acknowledgment / SP/DCP की पावती</li>
+                <li>{bi("Collector NOC / कलेक्टर एनओसी")}</li>
+                <li>{bi("Fire Department Acknowledgment / अग्निशमन विभाग की पावती")}</li>
+                <li>{bi("Police Station NOC / पुलिस स्टेशन एनओसी")}</li>
+                <li>{bi("SP/DCP Acknowledgment / SP/DCP की पावती")}</li>
               </ul>
             </div>
           </div>
@@ -152,7 +150,7 @@ const RouteSelectionStep = ({
         <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <Label className="text-white mb-4 flex items-center gap-2">
             <Calendar className="h-5 w-5 text-purple-400" />
-            Preferred Date / पसंदीदा तिथि
+            {bi("Preferred Date / पसंदीदा तिथि")}
           </Label>
           <Input
             type="date"
@@ -166,7 +164,7 @@ const RouteSelectionStep = ({
         <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <Label className="text-white mb-4 flex items-center gap-2">
             <Clock className="h-5 w-5 text-cyan-400" />
-            Preferred Time / पसंदीदा समय
+            {bi("Preferred Time / पसंदीदा समय")}
           </Label>
           <Input
             type="time"

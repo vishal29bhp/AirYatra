@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -145,7 +146,7 @@ export default function PaymentReconciliation() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <ArrowRightLeft className="h-7 w-7 text-purple-400" />
-            Payment Reconciliation / भुगतान मिलान
+            {bi("Payment Reconciliation / भुगतान मिलान")}
           </h1>
           <p className="text-slate-400 mt-1">Auto-match gateway settlements with system transactions</p>
         </div>

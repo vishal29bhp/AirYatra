@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import BulkDocumentUpload from './BulkDocumentUpload';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -40,24 +41,24 @@ function PilotDocumentUpload({ pilotId = null }) {
 
   // Fallback document types (used if master config not available)
   const fallbackDocTypes = [
-    { value: 'license', label: 'Pilot License / पायलट लाइसेंस', requiresNumber: true, requiresExpiry: true },
-    { value: 'medical', label: 'Medical Certificate / चिकित्सा प्रमाणपत्र', requiresNumber: true, requiresExpiry: true },
-    { value: 'type_rating', label: 'Type Rating / टाइप रेटिंग', requiresNumber: true, requiresExpiry: true },
+    { value: 'license', label: bi('Pilot License / पायलट लाइसेंस'), requiresNumber: true, requiresExpiry: true },
+    { value: 'medical', label: bi('Medical Certificate / चिकित्सा प्रमाणपत्र'), requiresNumber: true, requiresExpiry: true },
+    { value: 'type_rating', label: bi('Type Rating / टाइप रेटिंग'), requiresNumber: true, requiresExpiry: true },
     { value: 'instrument_rating', label: 'Instrument Rating', requiresNumber: true, requiresExpiry: true },
     { value: 'english_proficiency', label: 'English Proficiency (ICAO)', requiresNumber: false, requiresExpiry: true },
-    { value: 'id_proof', label: 'ID Proof / आधार/पैन', requiresNumber: true, requiresExpiry: false },
-    { value: 'passport', label: 'Passport / पासपोर्ट', requiresNumber: true, requiresExpiry: true },
+    { value: 'id_proof', label: bi('ID Proof / आधार/पैन'), requiresNumber: true, requiresExpiry: false },
+    { value: 'passport', label: bi('Passport / पासपोर्ट'), requiresNumber: true, requiresExpiry: true },
     { value: 'training_certificate', label: 'Training Certificate', requiresNumber: false, requiresExpiry: false },
     { value: 'emergency_training', label: 'Emergency Training', requiresNumber: false, requiresExpiry: true },
     { value: 'security_clearance', label: 'Security Clearance', requiresNumber: true, requiresExpiry: true },
-    { value: 'other', label: 'Other / अन्य', requiresNumber: false, requiresExpiry: false }
+    { value: 'other', label: bi('Other / अन्य'), requiresNumber: false, requiresExpiry: false }
   ];
 
   // Computed document types - prefer master config
   const documentTypes = masterDocTypes.length > 0 
     ? masterDocTypes.map(t => ({
         value: t.code.toLowerCase(),
-        label: `${t.name}${t.name_hi ? ` / ${t.name_hi}` : ''}`,
+        label: tr(t.name, t.name_hi),
         requiresNumber: (t.required_fields || []).includes('document_number'),
         requiresExpiry: t.has_expiry,
         code: t.code,
@@ -221,7 +222,7 @@ function PilotDocumentUpload({ pilotId = null }) {
       }
       
       const result = await res.json();
-      toast.success('Document uploaded successfully! / दस्तावेज़ अपलोड हो गया!');
+      toast.success(bi('Document uploaded successfully! / दस्तावेज़ अपलोड हो गया!'));
       
       if (result.auto_verification) {
         if (result.auto_verification.status === 'expired') {
@@ -269,7 +270,7 @@ function PilotDocumentUpload({ pilotId = null }) {
   };
 
   const deleteDocument = async (docId) => {
-    if (!window.confirm('Delete this document? / यह दस्तावेज़ हटाएं?')) return;
+    if (!window.confirm(bi('Delete this document? / यह दस्तावेज़ हटाएं?'))) return;
     try {
       const token = localStorage.getItem('token');
       await fetch(`${API_URL}/api/maintenance/pilot-documents/${docId}`, {
@@ -393,7 +394,7 @@ function PilotDocumentUpload({ pilotId = null }) {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Shield className="h-6 w-6 text-amber" />
-            Pilot Document Portal / पायलट दस्तावेज़ पोर्टल
+            {bi("Pilot Document Portal / पायलट दस्तावेज़ पोर्टल")}
           </h2>
           <p className="text-slate-400 mt-1">Manage licenses, medicals, certificates with expiry alerts</p>
         </div>
@@ -714,7 +715,7 @@ function PilotDocumentUpload({ pilotId = null }) {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <Upload className="h-5 w-5 text-amber" />
-                Upload Document / दस्तावेज़ अपलोड
+                {bi("Upload Document / दस्तावेज़ अपलोड")}
               </h3>
               <button onClick={() => setShowUpload(false)} className="text-slate-400 hover:text-white">
                 <X className="h-5 w-5" />
@@ -724,7 +725,7 @@ function PilotDocumentUpload({ pilotId = null }) {
             <div className="space-y-4">
               {/* Pilot Selection */}
               <div>
-                <Label className="text-white">Pilot / पायलट *</Label>
+                <Label className="text-white">{bi("Pilot / पायलट *")}</Label>
                 <select
                   value={selectedPilot || ''}
                   onChange={(e) => setSelectedPilot(e.target.value)}
@@ -741,7 +742,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               
               {/* Document Type */}
               <div>
-                <Label className="text-white">Document Type / प्रकार *</Label>
+                <Label className="text-white">{bi("Document Type / प्रकार *")}</Label>
                 <select
                   value={documentType}
                   onChange={(e) => setDocumentType(e.target.value)}
@@ -756,7 +757,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               {/* Document Number */}
               <div>
                 <Label className="text-white">
-                  Document Number / नंबर 
+                  {bi("Document Number / नंबर")} 
                   {documentTypes.find(dt => dt.value === documentType)?.requiresNumber && ' *'}
                 </Label>
                 <Input
@@ -769,7 +770,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               
               {/* Issue Date */}
               <div>
-                <Label className="text-white">Issue Date / जारी तिथि</Label>
+                <Label className="text-white">{bi("Issue Date / जारी तिथि")}</Label>
                 <Input
                   type="date"
                   value={issueDate}
@@ -781,7 +782,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               {/* Expiry Date */}
               <div>
                 <Label className="text-white">
-                  Expiry Date / समाप्ति तिथि 
+                  {bi("Expiry Date / समाप्ति तिथि")} 
                   {documentTypes.find(dt => dt.value === documentType)?.requiresExpiry && ' *'}
                 </Label>
                 <Input
@@ -804,7 +805,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               
               {/* Issuing Authority */}
               <div>
-                <Label className="text-white">Issuing Authority / प्राधिकरण</Label>
+                <Label className="text-white">{bi("Issuing Authority / प्राधिकरण")}</Label>
                 <select
                   value={issuingAuthority}
                   onChange={(e) => setIssuingAuthority(e.target.value)}
@@ -823,7 +824,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               
               {/* File Upload */}
               <div>
-                <Label className="text-white">File / फ़ाइल *</Label>
+                <Label className="text-white">{bi("File / फ़ाइल *")}</Label>
                 <div className="mt-1 border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-amber/50 transition-colors relative">
                   {file ? (
                     <div className="flex items-center justify-center gap-3">
@@ -854,7 +855,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               
               {/* Notes */}
               <div>
-                <Label className="text-white">Notes / टिप्पणी</Label>
+                <Label className="text-white">{bi("Notes / टिप्पणी")}</Label>
                 <Input
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -71,7 +72,7 @@ function TwoFactorSetup({ user, onStatusChange }) {
       
       setSetupData(data);
       setRecoveryCodes(data.recovery_codes || []);
-      toast.success('QR code generated! अब Google Authenticator में scan करें');
+      toast.success(tr('QR code generated. Scan it in Google Authenticator.', 'QR कोड बन गया! अब Google Authenticator में स्कैन करें'));
     } catch (err) {
       toast.error('Setup failed. Please try again.');
     } finally {
@@ -104,7 +105,7 @@ function TwoFactorSetup({ user, onStatusChange }) {
         return;
       }
       
-      toast.success('2FA enabled successfully! / 2FA सफलतापूर्वक enable हुआ');
+      toast.success(bi('2FA enabled successfully! / 2FA सफलतापूर्वक enable हुआ'));
       setSetupData(null);
       setVerifyCode('');
       setShowRecoveryCodes(true);
@@ -141,7 +142,7 @@ function TwoFactorSetup({ user, onStatusChange }) {
         return;
       }
       
-      toast.success('2FA disabled / 2FA बंद कर दिया गया');
+      toast.success(bi('2FA disabled / 2FA बंद कर दिया गया'));
       setShowDisableModal(false);
       setDisablePassword('');
       fetchStatus();
@@ -230,11 +231,11 @@ These codes allow you to access your account if you lose your phone.
         <div className="flex items-center gap-2">
           <Smartphone className="h-5 w-5 text-lime" />
           <h3 className="text-lg font-semibold text-white">
-            Two-Factor Authentication / दो-चरणीय प्रमाणीकरण
+            {bi("Two-Factor Authentication / दो-चरणीय प्रमाणीकरण")}
           </h3>
         </div>
         <p className="text-sm text-slate-400 mt-1">
-          Google Authenticator से अपने account को extra secure करें
+          {tr('Add an extra layer of security to your account with Google Authenticator', 'Google Authenticator से अपने अकाउंट को और सुरक्षित करें')}
         </p>
       </div>
 
@@ -247,7 +248,7 @@ These codes allow you to access your account if you lose your phone.
             </div>
             <div>
               <p className="font-medium text-white">
-                {status.enabled ? '2FA Enabled / सक्रिय' : '2FA Disabled / निष्क्रिय'}
+                {status.enabled ? bi('2FA Enabled / सक्रिय') : bi('2FA Disabled / निष्क्रिय')}
               </p>
               {status.enabled && status.recovery_codes_remaining !== undefined && (
                 <p className="text-xs text-slate-400">
@@ -273,19 +274,19 @@ These codes allow you to access your account if you lose your phone.
         {/* Setup Flow */}
         {!status.enabled && !setupData && (
           <div className="bg-slate-800/50 rounded-lg p-4">
-            <h4 className="font-medium text-white mb-2">How it works / कैसे काम करता है:</h4>
+            <h4 className="font-medium text-white mb-2">{bi("How it works / कैसे काम करता है:")}</h4>
             <ol className="text-sm text-slate-400 space-y-2">
               <li className="flex items-start gap-2">
                 <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
-                <span>Google Authenticator app download करें (iOS/Android)</span>
+                <span>{bi("Google Authenticator app download करें (iOS/Android)")}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
-                <span>QR code scan करें app में</span>
+                <span>{tr('Scan the QR code in the app', 'ऐप में QR कोड स्कैन करें')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
-                <span>6-digit code enter करें verify करने के लिए</span>
+                <span>{tr('Enter the 6-digit code to verify', 'सत्यापित करने के लिए 6 अंकों का कोड दर्ज करें')}</span>
               </li>
             </ol>
             
@@ -305,7 +306,7 @@ These codes allow you to access your account if you lose your phone.
           <div className="space-y-4">
             <div className="bg-slate-800/50 rounded-lg p-4 text-center">
               <p className="text-sm text-slate-400 mb-4">
-                इस QR code को Google Authenticator में scan करें
+                {tr('Scan this QR code in Google Authenticator', 'इस QR कोड को Google Authenticator में स्कैन करें')}
               </p>
               
               <div className="inline-block bg-white p-4 rounded-lg">
@@ -376,10 +377,10 @@ These codes allow you to access your account if you lose your phone.
                   <AlertTriangle className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-yellow-200 font-medium">
-                      Save your recovery codes! / Recovery codes save करें!
+                      {bi("Save your recovery codes! / Recovery codes save करें!")}
                     </p>
                     <p className="text-xs text-yellow-200/70 mt-1">
-                      ये codes phone खो जाने पर account access करने में मदद करेंगे
+                      {tr('These codes let you into your account if you lose your phone', 'फ़ोन खो जाने पर ये कोड अकाउंट खोलने में मदद करेंगे')}
                     </p>
                   </div>
                 </div>

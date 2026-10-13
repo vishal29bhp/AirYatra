@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Crown, TrendingUp, Users, Plane, Building2, Gavel, PieChart as PieIcon, Loader2, RefreshCw, Tag, ClipboardCheck, Handshake, Download, Users2, CalendarCheck, Receipt, Wallet, Mail, Send, Bot, Sparkles, Shield, AlertTriangle, Ban, Globe } from 'lucide-react';
+import { Crown, TrendingUp, Users, Plane, Building2, Loader2, RefreshCw, Tag, Handshake, Download, Users2, CalendarCheck, Receipt, Wallet, Mail, Send, Bot, Sparkles, Shield, AlertTriangle, Ban, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
@@ -8,6 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGri
 import { toast } from 'sonner';
 import api from '../../services/api';
 import AIBusinessAdvisor from '../shared/AIBusinessAdvisor';
+import { bi } from '../../lib/bilingual';
 
 const fmtInr = (v) => {
   if (v >= 10000000) return `₹${(v / 10000000).toFixed(1)} Cr`;
@@ -102,7 +103,7 @@ const CEODashboard = () => {
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      toast.success('Board report downloaded! / बोर्ड रिपोर्ट डाउनलोड हो गई');
+      toast.success(bi('Board report downloaded! / बोर्ड रिपोर्ट डाउनलोड हो गई'));
     } catch (e) {
       toast.error('Failed to download report');
     } finally {
@@ -112,7 +113,7 @@ const CEODashboard = () => {
 
   if (loading || !data) return <div className="text-center text-slate-500 py-20"><Loader2 className="h-6 w-6 animate-spin mx-auto" /></div>;
 
-  const { revenue, bookings, customers, fleet, marketplace: mp, hr, memberships, partners } = data;
+  const { revenue, bookings, customers, fleet, hr, memberships, partners } = data;
 
   return (
     <div className="space-y-6" data-testid="ceo-dashboard">
@@ -121,7 +122,7 @@ const CEODashboard = () => {
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Crown className="h-6 w-6 text-amber-400" /> Country CEO Dashboard
           </h1>
-          <p className="text-slate-400 text-sm">Executive view — revenue, fleet, marketplace & HR at a glance / एक नज़र में पूरा कारोबार</p>
+          <p className="text-slate-400 text-sm">{bi("Executive view — revenue, fleet & HR at a glance / एक नज़र में पूरा कारोबार")}</p>
         </div>
         <div className="flex gap-2">
           <Button onClick={openInvestors} variant="outline" className="border-slate-700 text-slate-300 hover:border-lime/50" data-testid="investor-emails-btn">
@@ -178,17 +179,6 @@ const CEODashboard = () => {
         <KPI icon={Tag} label="Total Bookings" value={bookings.total} sub={`${bookings.this_month} this month`} testid="kpi-bookings" />
         <KPI icon={Users} label="Customers" value={customers.total} sub={`+${customers.new_this_month} this month`} accent="text-amber" testid="kpi-customers" />
         <KPI icon={Building2} label="Operators" value={`${fleet.operators_active}/${fleet.operators_total}`} sub={`${fleet.aircraft_available}/${fleet.aircraft_total} aircraft available`} accent="text-purple-400" testid="kpi-operators" />
-      </div>
-
-      {/* Marketplace */}
-      <div>
-        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Plane className="h-4 w-4 text-lime" /> Aviation Exchange Marketplace</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <KPI icon={Tag} label="Active Listings" value={mp.listings_active} sub={`${mp.listings_sold} sold • ${mp.listings_pending} pending review`} testid="kpi-listings" />
-          <KPI icon={Gavel} label="Live Auctions" value={mp.auctions_live} sub={`${mp.total_bids} bids • ${mp.auction_watchers} watchers • ${fmtInr(mp.live_auction_bid_value_inr)}`} accent="text-red-400" testid="kpi-auctions" />
-          <KPI icon={PieIcon} label="Fractional Shares Sold" value={`${mp.fractional_shares_sold}/${mp.fractional_shares_total}`} sub={`${fmtInr(mp.fractional_allocated_value_inr)} allocated • ${mp.fractional_new_eois} new EOIs`} accent="text-amber-400" testid="kpi-fractional" />
-          <KPI icon={ClipboardCheck} label="Buyer Activity" value={mp.buyer_inquiries} sub={`inquiries • ${mp.inspections_pending} inspections pending`} accent="text-cyan-400" testid="kpi-buyer-activity" />
-        </div>
       </div>
 
       {/* People & HR */}

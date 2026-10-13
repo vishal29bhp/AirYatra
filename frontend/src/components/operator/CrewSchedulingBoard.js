@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -207,7 +208,7 @@ function CrewSchedulingBoard() {
             Crew Scheduling Board
           </h1>
           <p className="text-slate-400 text-sm mt-1">
-            Drag & drop bookings to assign pilots / पायलट असाइन करने के लिए बुकिंग खींचें
+            {bi("Drag & drop bookings to assign pilots / पायलट असाइन करने के लिए बुकिंग खींचें")}
           </p>
         </div>
 

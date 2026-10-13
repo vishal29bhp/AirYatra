@@ -5,18 +5,19 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 const EXPENSE_CATEGORIES = [
-  { id: 'travel', label: 'Travel / यात्रा' },
-  { id: 'food', label: 'Food / भोजन' },
-  { id: 'accommodation', label: 'Accommodation / आवास' },
-  { id: 'fuel', label: 'Fuel / ईंधन' },
+  { id: 'travel', label: bi('Travel / यात्रा') },
+  { id: 'food', label: bi('Food / भोजन') },
+  { id: 'accommodation', label: bi('Accommodation / आवास') },
+  { id: 'fuel', label: bi('Fuel / ईंधन') },
   { id: 'office_supplies', label: 'Office Supplies' },
   { id: 'client_entertainment', label: 'Client Entertainment' },
-  { id: 'training', label: 'Training / प्रशिक्षण' },
-  { id: 'medical', label: 'Medical / चिकित्सा' },
+  { id: 'training', label: bi('Training / प्रशिक्षण') },
+  { id: 'medical', label: bi('Medical / चिकित्सा') },
   { id: 'communication', label: 'Communication' },
-  { id: 'other', label: 'Other / अन्य' },
+  { id: 'other', label: bi('Other / अन्य') },
 ];
 
 export default function ExpenseReimbursement({ activeTab, user }) {
@@ -107,7 +108,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
   };
 
   const rejectExpense = async (expenseId, role) => {
-    const reason = prompt('Rejection reason / अस्वीकृति का कारण:');
+    const reason = prompt(bi('Rejection reason / अस्वीकृति का कारण:'));
     if (!reason) return;
     try {
       await api.put(`/hr/expense/${expenseId}/reject`, { role, reason });
@@ -143,11 +144,11 @@ export default function ExpenseReimbursement({ activeTab, user }) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-white">Expense Reimbursement / खर्च प्रतिपूर्ति</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Expense Reimbursement / खर्च प्रतिपूर्ति")}</h2>
           <p className="text-slate-400">Submit and track expense claims with document attachments</p>
         </div>
         <Button onClick={() => setShowForm(true)} className="bg-green-500 hover:bg-green-600">
-          <Plus className="h-4 w-4 mr-2" /> New Claim / नया क्लेम
+          <Plus className="h-4 w-4 mr-2" /> {bi("New Claim / नया क्लेम")}
         </Button>
       </div>
 
@@ -156,25 +157,25 @@ export default function ExpenseReimbursement({ activeTab, user }) {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <p className="text-2xl font-bold text-white">{expenses.filter(e => e.status === 'draft').length}</p>
-            <p className="text-slate-400 text-sm">Draft / ड्राफ्ट</p>
+            <p className="text-slate-400 text-sm">{bi("Draft / ड्राफ्ट")}</p>
           </CardContent>
         </Card>
         <Card className="bg-yellow-500/10 border-yellow-500/50">
           <CardContent className="pt-6">
             <p className="text-2xl font-bold text-yellow-400">{expenses.filter(e => e.status.includes('pending')).length}</p>
-            <p className="text-slate-400 text-sm">Pending / लंबित</p>
+            <p className="text-slate-400 text-sm">{bi("Pending / लंबित")}</p>
           </CardContent>
         </Card>
         <Card className="bg-green-500/10 border-green-500/50">
           <CardContent className="pt-6">
             <p className="text-2xl font-bold text-green-400">{expenses.filter(e => e.status === 'approved').length}</p>
-            <p className="text-slate-400 text-sm">Approved / स्वीकृत</p>
+            <p className="text-slate-400 text-sm">{bi("Approved / स्वीकृत")}</p>
           </CardContent>
         </Card>
         <Card className="bg-emerald-500/10 border-emerald-500/50">
           <CardContent className="pt-6">
             <p className="text-2xl font-bold text-emerald-400">₹{expenses.filter(e => e.status === 'approved' || e.status === 'added_to_salary').reduce((sum, e) => sum + e.amount, 0).toLocaleString()}</p>
-            <p className="text-slate-400 text-sm">Total Approved / कुल स्वीकृत</p>
+            <p className="text-slate-400 text-sm">{bi("Total Approved / कुल स्वीकृत")}</p>
           </CardContent>
         </Card>
       </div>
@@ -183,12 +184,12 @@ export default function ExpenseReimbursement({ activeTab, user }) {
       {showForm && (
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
-            <CardTitle className="text-white">New Expense Claim / नया खर्च क्लेम</CardTitle>
+            <CardTitle className="text-white">{bi("New Expense Claim / नया खर्च क्लेम")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label className="text-slate-300">Title / शीर्षक *</Label>
+                <Label className="text-slate-300">{bi("Title / शीर्षक *")}</Label>
                 <Input
                   className="bg-slate-700 border-slate-600 text-white"
                   placeholder="e.g., Client meeting travel"
@@ -197,7 +198,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                 />
               </div>
               <div>
-                <Label className="text-slate-300">Category / श्रेणी *</Label>
+                <Label className="text-slate-300">{bi("Category / श्रेणी *")}</Label>
                 <select
                   className="w-full bg-slate-700 border-slate-600 text-white rounded-md px-3 py-2"
                   value={form.category}
@@ -209,7 +210,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                 </select>
               </div>
               <div>
-                <Label className="text-slate-300">Amount (₹) / राशि *</Label>
+                <Label className="text-slate-300">{bi("Amount (₹) / राशि *")}</Label>
                 <Input
                   type="number"
                   className="bg-slate-700 border-slate-600 text-white"
@@ -219,7 +220,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                 />
               </div>
               <div>
-                <Label className="text-slate-300">Expense Date / खर्च की तारीख *</Label>
+                <Label className="text-slate-300">{bi("Expense Date / खर्च की तारीख *")}</Label>
                 <Input
                   type="date"
                   className="bg-slate-700 border-slate-600 text-white"
@@ -229,7 +230,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
               </div>
             </div>
             <div>
-              <Label className="text-slate-300">Description / विवरण</Label>
+              <Label className="text-slate-300">{bi("Description / विवरण")}</Label>
               <textarea
                 className="w-full bg-slate-700 border-slate-600 text-white rounded-md px-3 py-2"
                 rows={3}
@@ -240,7 +241,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
             </div>
             <div className="flex gap-2">
               <Button onClick={createExpense} className="bg-green-500 hover:bg-green-600">
-                Create Claim / क्लेम बनाएं
+                {bi("Create Claim / क्लेम बनाएं")}
               </Button>
               <Button variant="outline" onClick={() => setShowForm(false)}>
                 Cancel
@@ -255,7 +256,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
       {activeTab === 'pending_approvals' && pendingApprovals.length > 0 && (
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
-            <CardTitle className="text-white">Pending Approvals / लंबित अनुमोदन ({pendingApprovals.length})</CardTitle>
+            <CardTitle className="text-white">{bi("Pending Approvals / लंबित अनुमोदन (")}{pendingApprovals.length})</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -290,7 +291,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
       {/* My Expenses List */}
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">My Expense Claims / मेरे खर्च क्लेम</CardTitle>
+          <CardTitle className="text-white">{bi("My Expense Claims / मेरे खर्च क्लेम")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">

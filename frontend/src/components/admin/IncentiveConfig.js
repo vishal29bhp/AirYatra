@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function IncentiveConfig() {
   const [loading, setLoading] = useState(true);
@@ -70,7 +71,7 @@ function IncentiveConfig() {
     setSaving(true);
     try {
       await api.post('/hr/incentive-config', config);
-      toast.success('Incentive configuration saved! / इंसेंटिव कॉन्फ़िगरेशन सेव हो गया!');
+      toast.success(bi('Incentive configuration saved! / इंसेंटिव कॉन्फ़िगरेशन सेव हो गया!'));
     } catch (error) {
       toast.error('Failed to save configuration');
     } finally {
@@ -123,7 +124,7 @@ function IncentiveConfig() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Gift className="h-6 w-6 text-green-400" />
-            Incentive Management / इंसेंटिव प्रबंधन
+            {bi("Incentive Management / इंसेंटिव प्रबंधन")}
           </h2>
           <p className="text-slate-400 mt-1">
             Configure sales team incentives and bonuses
@@ -184,7 +185,7 @@ function IncentiveConfig() {
                   <Users className="h-5 w-5 text-amber" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Per Lead Incentive / लीड पर इंसेंटिव</h3>
+                  <h3 className="text-white font-semibold">{bi("Per Lead Incentive / लीड पर इंसेंटिव")}</h3>
                   <p className="text-slate-400 text-sm">Bonus for each new lead captured</p>
                 </div>
               </div>
@@ -232,7 +233,7 @@ function IncentiveConfig() {
                   <TrendingUp className="h-5 w-5 text-green-400" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Per Conversion Incentive / कन्वर्ज़न पर इंसेंटिव</h3>
+                  <h3 className="text-white font-semibold">{bi("Per Conversion Incentive / कन्वर्ज़न पर इंसेंटिव")}</h3>
                   <p className="text-slate-400 text-sm">Bonus for each lead converted to booking</p>
                 </div>
               </div>
@@ -279,7 +280,7 @@ function IncentiveConfig() {
                   <Percent className="h-5 w-5 text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Revenue Percentage / रेवेन्यू परसेंटेज</h3>
+                  <h3 className="text-white font-semibold">{bi("Revenue Percentage / रेवेन्यू परसेंटेज")}</h3>
                   <p className="text-slate-400 text-sm">Percentage of monthly revenue as incentive</p>
                 </div>
               </div>
@@ -327,7 +328,7 @@ function IncentiveConfig() {
                   <Target className="h-5 w-5 text-lime" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Target Achievement Bonus / टारगेट अचीवमेंट बोनस</h3>
+                  <h3 className="text-white font-semibold">{bi("Target Achievement Bonus / टारगेट अचीवमेंट बोनस")}</h3>
                   <p className="text-slate-400 text-sm">Slab-based bonus on target achievement</p>
                 </div>
               </div>

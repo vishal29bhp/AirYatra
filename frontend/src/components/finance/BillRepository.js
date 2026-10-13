@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -147,7 +148,7 @@ export default function BillRepository() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Archive className="h-7 w-7 text-indigo-400" />
-            Bill Repository / बिल भंडार
+            {bi("Bill Repository / बिल भंडार")}
           </h1>
           <p className="text-slate-400 mt-1">Searchable archive of all vendor invoices</p>
         </div>
@@ -342,7 +343,7 @@ export default function BillRepository() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-indigo-400" />
-              Add Bill / बिल जोड़ें
+              {bi("Add Bill / बिल जोड़ें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4 max-h-96 overflow-y-auto">
@@ -468,7 +469,7 @@ export default function BillRepository() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Eye className="h-5 w-5 text-indigo-400" />
-              Bill Details / बिल विवरण
+              {bi("Bill Details / बिल विवरण")}
             </DialogTitle>
           </DialogHeader>
           {selectedBill && (

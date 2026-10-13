@@ -6,6 +6,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { landingAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr, isHindi } from '../../lib/bilingual';
 
 // Required documents for village landing
 const REQUIRED_DOCUMENTS = [
@@ -51,27 +52,27 @@ const statusConfig = {
   pending: { 
     color: 'text-slate-400', 
     bg: 'bg-slate-500/20', 
-    label: 'Not Uploaded / अपलोड नहीं हुआ' 
+    label: bi('Not Uploaded / अपलोड नहीं हुआ') 
   },
   uploaded: { 
     color: 'text-amber', 
     bg: 'bg-amber/20', 
-    label: 'Uploaded - Pending Review / अपलोड - समीक्षा बाकी' 
+    label: bi('Uploaded - Pending Review / अपलोड - समीक्षा बाकी') 
   },
   under_review: { 
     color: 'text-yellow-400', 
     bg: 'bg-yellow-500/20', 
-    label: 'Under Review / समीक्षा में' 
+    label: bi('Under Review / समीक्षा में') 
   },
   approved: { 
     color: 'text-green-400', 
     bg: 'bg-green-500/20', 
-    label: 'Approved / स्वीकृत ✓' 
+    label: bi('Approved / स्वीकृत ✓') 
   },
   rejected: { 
     color: 'text-red-400', 
     bg: 'bg-red-500/20', 
-    label: 'Rejected / अस्वीकृत ✗' 
+    label: bi('Rejected / अस्वीकृत ✗') 
   }
 };
 
@@ -119,12 +120,12 @@ function VillageLandingDocuments({
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
     
     if (file.size > maxSize) {
-      toast.error('File size should be less than 5MB / फाइल साइज 5MB से कम होना चाहिए');
+      toast.error(bi('File size should be less than 5MB / फाइल साइज 5MB से कम होना चाहिए'));
       return;
     }
     
     if (!allowedTypes.includes(file.type)) {
-      toast.error('Only PDF, JPG, PNG files allowed / सिर्फ PDF, JPG, PNG फाइल');
+      toast.error(bi('Only PDF, JPG, PNG files allowed / सिर्फ PDF, JPG, PNG फाइल'));
       return;
     }
 
@@ -149,12 +150,12 @@ function VillageLandingDocuments({
       }));
 
       const docName = REQUIRED_DOCUMENTS.find(d => d.id === docType)?.name || docType;
-      toast.success(`${docName} uploaded successfully! / सफलतापूर्वक अपलोड हुआ!`);
+      toast.success(bi(`${docName} uploaded successfully! / सफलतापूर्वक अपलोड हुआ!`));
       
       if (onUpdate) onUpdate();
     } catch (error) {
       console.error('Upload error:', error);
-      toast.error(error.response?.data?.detail || 'Upload failed / अपलोड विफल');
+      toast.error(error.response?.data?.detail || bi('Upload failed / अपलोड विफल'));
     } finally {
       setUploading(prev => ({ ...prev, [docType]: false }));
     }
@@ -195,15 +196,10 @@ function VillageLandingDocuments({
           <AlertTriangle className="h-6 w-6 text-yellow-400 shrink-0" />
           <div className="flex-1">
             <h3 className="text-yellow-400 font-semibold text-lg">
-              Village Landing Documents / गांव लैंडिंग दस्तावेज़
+              {bi("Village Landing Documents / गांव लैंडिंग दस्तावेज़")}
             </h3>
             <p className="text-yellow-400/70 text-sm mt-1">
-              Please upload all required documents from authorities. 
-              Flight will be scheduled only after all documents are approved.
-            </p>
-            <p className="text-yellow-400/70 text-sm">
-              कृपया सभी आवश्यक दस्तावेज़ अधिकारियों से प्राप्त करके अपलोड करें।
-              सभी दस्तावेज़ स्वीकृत होने के बाद ही उड़ान निर्धारित की जाएगी।
+              {tr("Please upload all required documents from authorities. Flight will be scheduled only after all documents are approved.", "कृपया सभी आवश्यक दस्तावेज़ अधिकारियों से प्राप्त करके अपलोड करें। सभी दस्तावेज़ स्वीकृत होने के बाद ही उड़ान निर्धारित की जाएगी।")}
             </p>
           </div>
         </div>
@@ -251,12 +247,11 @@ function VillageLandingDocuments({
                 {/* Document Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-white font-medium">{doc.name}</h4>
+                    <h4 className="text-white font-medium">{tr(doc.name, doc.name_hi)}</h4>
                     {doc.required && (
                       <span className="text-red-400 text-xs">*Required</span>
                     )}
                   </div>
-                  <p className="text-slate-400 text-sm">{doc.name_hi}</p>
                   <p className="text-slate-500 text-xs mt-1">{doc.description}</p>
 
                   {/* Status Badge */}
@@ -342,14 +337,14 @@ function VillageLandingDocuments({
 
       {/* Help Note */}
       <div className="p-4 bg-slate-900/50 border-t border-slate-700">
-        <p className="text-slate-400 text-xs">
+        {!isHindi() && (<p className="text-slate-400 text-xs">
           📝 <strong>Note:</strong> Upload clear scanned copies or photos of documents. 
           Accepted formats: PDF, JPG, PNG (Max 5MB each).
-        </p>
-        <p className="text-slate-500 text-xs mt-1">
+        </p>)}
+        {isHindi() && (<p className="text-slate-500 text-xs mt-1">
           नोट: दस्तावेज़ों की स्पष्ट स्कैन कॉपी या फोटो अपलोड करें। 
           स्वीकृत प्रारूप: PDF, JPG, PNG (अधिकतम 5MB प्रत्येक)
-        </p>
+        </p>)}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -23,11 +24,11 @@ const formatINR = (amount) => {
 };
 
 const categoryLabels = {
-  fuel_expenses: 'Fuel / ईंधन',
-  maintenance: 'Maintenance / रखरखाव',
+  fuel_expenses: bi('Fuel / ईंधन'),
+  maintenance: bi('Maintenance / रखरखाव'),
   pilot_salaries: 'Pilot Salaries',
   crew_salaries: 'Crew Salaries',
-  insurance: 'Insurance / बीमा',
+  insurance: bi('Insurance / बीमा'),
   hangar_rental: 'Hangar Rental',
   vendor_payments: 'Vendor Payments',
   marketing: 'Marketing',
@@ -120,7 +121,7 @@ export default function BudgetVsActual() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Target className="h-7 w-7 text-amber" />
-            Budget vs Actual / बजट बनाम वास्तविक
+            {bi("Budget vs Actual / बजट बनाम वास्तविक")}
           </h1>
           <p className="text-slate-400 mt-1">Track planned vs actual spending across categories</p>
         </div>
@@ -213,7 +214,7 @@ export default function BudgetVsActual() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-amber" />
-            Budget by Category / श्रेणी के अनुसार बजट
+            {bi("Budget by Category / श्रेणी के अनुसार बजट")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -296,7 +297,7 @@ export default function BudgetVsActual() {
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
             <Calendar className="h-5 w-5 text-purple-400" />
-            6-Month Trend / 6 महीने का ट्रेंड
+            {bi("6-Month Trend / 6 महीने का ट्रेंड")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -344,7 +345,7 @@ export default function BudgetVsActual() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-amber" />
-              Set Budget / बजट सेट करें
+              {bi("Set Budget / बजट सेट करें")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">

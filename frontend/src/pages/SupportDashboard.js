@@ -9,52 +9,53 @@ import ReviewsManagement from '@/components/admin/ReviewsManagement';
 import KnowledgeBase from '@/components/admin/KnowledgeBase';
 import VoiceVideoSupport from '@/components/admin/VoiceVideoSupport';
 import AIChatbot from '@/components/admin/AIChatbot';
+import { bi, tr } from '../lib/bilingual';
 
 // Organized Navigation Structure - 5 Main Categories
 const navGroups = [
   {
     id: 'main',
-    label: 'Dashboard / डैशबोर्ड',
+    label: bi('Dashboard / डैशबोर्ड'),
     icon: Home,
     items: [
-      { id: 'overview', label: 'Overview / ओवरव्यू', icon: BarChart3 },
-      { id: 'open_tickets', label: 'Open Tickets / टिकट', icon: AlertTriangle, highlight: true },
+      { id: 'overview', label: bi('Overview / ओवरव्यू'), icon: BarChart3 },
+      { id: 'open_tickets', label: bi('Open Tickets / टिकट'), icon: AlertTriangle, highlight: true },
     ]
   },
   {
     id: 'tickets',
-    label: 'Tickets / टिकट',
+    label: bi('Tickets / टिकट'),
     icon: MessageSquare,
     items: [
-      { id: 'helpdesk', label: 'Helpdesk / हेल्पडेस्क', icon: MessageSquare, highlight: true },
-      { id: 'all_tickets', label: 'All Tickets / सभी टिकट', icon: FileText },
-      { id: 'my_tickets', label: 'My Tickets / मेरे टिकट', icon: Users },
-      { id: 'escalated', label: 'Escalated / एस्केलेटेड', icon: AlertTriangle },
+      { id: 'helpdesk', label: bi('Helpdesk / हेल्पडेस्क'), icon: MessageSquare, highlight: true },
+      { id: 'all_tickets', label: bi('All Tickets / सभी टिकट'), icon: FileText },
+      { id: 'my_tickets', label: bi('My Tickets / मेरे टिकट'), icon: Users },
+      { id: 'escalated', label: bi('Escalated / एस्केलेटेड'), icon: AlertTriangle },
     ]
   },
   {
     id: 'communication',
-    label: 'Communication / संचार',
+    label: bi('Communication / संचार'),
     icon: Phone,
     items: [
       { id: 'voice_video', label: 'Voice/Video Calls', icon: Video },
       { id: 'ai_chatbot', label: 'AI Chatbot', icon: Bot },
-      { id: 'live_chat', label: 'Live Chat / लाइव चैट', icon: MessageSquare },
+      { id: 'live_chat', label: bi('Live Chat / लाइव चैट'), icon: MessageSquare },
     ]
   },
   {
     id: 'feedback',
-    label: 'Feedback / फीडबैक',
+    label: bi('Feedback / फीडबैक'),
     icon: Star,
     items: [
-      { id: 'reviews', label: 'Reviews / समीक्षा', icon: Star },
-      { id: 'ratings', label: 'Ratings / रेटिंग', icon: Star },
-      { id: 'complaints', label: 'Complaints / शिकायतें', icon: AlertTriangle },
+      { id: 'reviews', label: bi('Reviews / समीक्षा'), icon: Star },
+      { id: 'ratings', label: bi('Ratings / रेटिंग'), icon: Star },
+      { id: 'complaints', label: bi('Complaints / शिकायतें'), icon: AlertTriangle },
     ]
   },
   {
     id: 'resources',
-    label: 'Resources / संसाधन',
+    label: bi('Resources / संसाधन'),
     icon: BookOpen,
     items: [
       { id: 'knowledge_base', label: 'Knowledge Base / FAQ', icon: BookOpen },
@@ -113,7 +114,7 @@ function SupportDashboardPage({ user, onLogout }) {
         return (
           <div className="space-y-6">
             <div>
-              <h1 className="text-2xl font-bold text-white">Support Dashboard / सपोर्ट डैशबोर्ड</h1>
+              <h1 className="text-2xl font-bold text-white">{bi("Support Dashboard / सपोर्ट डैशबोर्ड")}</h1>
               <p className="text-slate-400">Customer support and ticket management</p>
             </div>
 
@@ -122,22 +123,22 @@ function SupportDashboardPage({ user, onLogout }) {
               <div className="bg-red-500/20 rounded-lg p-4 border border-red-500/50">
                 <AlertTriangle className="h-5 w-5 text-red-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.open_tickets}</p>
-                <p className="text-slate-400 text-sm">Open Tickets / खुले टिकट</p>
+                <p className="text-slate-400 text-sm">{bi("Open Tickets / खुले टिकट")}</p>
               </div>
               <div className="bg-green-500/20 rounded-lg p-4 border border-green-500/50">
                 <CheckCircle className="h-5 w-5 text-green-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.resolved_today}</p>
-                <p className="text-slate-400 text-sm">Resolved Today / आज हल</p>
+                <p className="text-slate-400 text-sm">{bi("Resolved Today / आज हल")}</p>
               </div>
               <div className="bg-yellow-500/20 rounded-lg p-4 border border-yellow-500/50">
                 <Clock className="h-5 w-5 text-yellow-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.avg_response_time}</p>
-                <p className="text-slate-400 text-sm">Avg Response / औसत समय</p>
+                <p className="text-slate-400 text-sm">{bi("Avg Response / औसत समय")}</p>
               </div>
               <div className="bg-purple-500/20 rounded-lg p-4 border border-purple-500/50">
                 <Star className="h-5 w-5 text-purple-400 mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.satisfaction_rate}%</p>
-                <p className="text-slate-400 text-sm">Satisfaction / संतुष्टि</p>
+                <p className="text-slate-400 text-sm">{bi("Satisfaction / संतुष्टि")}</p>
               </div>
             </div>
 
@@ -145,18 +146,15 @@ function SupportDashboardPage({ user, onLogout }) {
             <div className="grid grid-cols-3 gap-4">
               <button onClick={() => setActiveTab('helpdesk')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <MessageSquare className="h-8 w-8 text-amber mb-3" />
-                <h3 className="text-lg font-semibold text-white">Open Helpdesk</h3>
-                <p className="text-slate-400 text-sm">टिकट देखें</p>
+                <h3 className="text-lg font-semibold text-white">{tr("Open Helpdesk", "टिकट देखें")}</h3>
               </button>
               <button onClick={() => setActiveTab('reviews')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <Star className="h-8 w-8 text-yellow-400 mb-3" />
-                <h3 className="text-lg font-semibold text-white">Manage Reviews</h3>
-                <p className="text-slate-400 text-sm">समीक्षाएं देखें</p>
+                <h3 className="text-lg font-semibold text-white">{tr("Manage Reviews", "समीक्षाएं देखें")}</h3>
               </button>
               <button onClick={() => setActiveTab('knowledge_base')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
                 <BookOpen className="h-8 w-8 text-green-400 mb-3" />
-                <h3 className="text-lg font-semibold text-white">Knowledge Base</h3>
-                <p className="text-slate-400 text-sm">FAQ प्रबंधित करें</p>
+                <h3 className="text-lg font-semibold text-white">{tr("Knowledge Base", "FAQ प्रबंधित करें")}</h3>
               </button>
             </div>
           </div>

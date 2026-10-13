@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const ITCManagement = () => {
   const [itcSummary, setItcSummary] = useState(null);
@@ -68,7 +69,7 @@ const ITCManagement = () => {
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-xl font-bold text-white">Input/Output Tax Credit</h3>
-          <p className="text-slate-400">ITC Management / आइटीसी प्रबंधन</p>
+          <p className="text-slate-400">{bi("ITC Management / आइटीसी प्रबंधन")}</p>
         </div>
         <div className="flex items-center space-x-4">
           <Select value={String(selectedMonth)} onValueChange={(v) => setSelectedMonth(Number(v))}>
@@ -142,7 +143,7 @@ const ITCManagement = () => {
           {/* ITC Flow Visualization */}
           <Card className="bg-slate-900 border-slate-700">
             <CardHeader>
-              <CardTitle className="text-white">ITC Flow / ITC प्रवाह</CardTitle>
+              <CardTitle className="text-white">{bi("ITC Flow / ITC प्रवाह")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-3 gap-8 items-center">

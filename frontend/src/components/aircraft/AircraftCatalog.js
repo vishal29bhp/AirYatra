@@ -16,6 +16,7 @@ import {
 import { toast } from 'sonner';
 import axios from 'axios';
 import AircraftDocumentManager from './AircraftDocumentManager';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -300,7 +301,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Plane className="h-5 w-5 text-lime" />
-            Basic Information / मूल जानकारी
+            {bi("Basic Information / मूल जानकारी")}
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -312,11 +313,11 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
                 className="w-full h-10 bg-slate-800 border border-slate-600 rounded-md text-white px-3"
                 required
               >
-                <option value="helicopter">Helicopter / हेलीकॉप्टर</option>
-                <option value="light_jet">Light Jet / लाइट जेट</option>
-                <option value="mid_jet">Mid Jet / मिड जेट</option>
-                <option value="heavy_jet">Heavy Jet / हैवी जेट</option>
-                <option value="turboprop">Turboprop / टर्बोप्रॉप</option>
+                <option value="helicopter">{bi("Helicopter / हेलीकॉप्टर")}</option>
+                <option value="light_jet">{bi("Light Jet / लाइट जेट")}</option>
+                <option value="mid_jet">{bi("Mid Jet / मिड जेट")}</option>
+                <option value="heavy_jet">{bi("Heavy Jet / हैवी जेट")}</option>
+                <option value="turboprop">{bi("Turboprop / टर्बोप्रॉप")}</option>
               </select>
             </div>
             <div>
@@ -378,7 +379,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Settings className="h-5 w-5 text-lime" />
-            Technical Specifications / तकनीकी विवरण
+            {bi("Technical Specifications / तकनीकी विवरण")}
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -389,9 +390,9 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
                 onChange={(e) => setFormData({ ...formData, engine_type: e.target.value })}
                 className="w-full h-10 bg-slate-800 border border-slate-600 rounded-md text-white px-3"
               >
-                <option value="turbine">Turbine / टर्बाइन</option>
-                <option value="twin_turbine">Twin Turbine / ट्विन टर्बाइन</option>
-                <option value="piston">Piston / पिस्टन</option>
+                <option value="turbine">{bi("Turbine / टर्बाइन")}</option>
+                <option value="twin_turbine">{bi("Twin Turbine / ट्विन टर्बाइन")}</option>
+                <option value="piston">{bi("Piston / पिस्टन")}</option>
               </select>
             </div>
             <div>
@@ -446,7 +447,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Capacity */}
-          <h4 className="text-white font-medium mt-4">Capacity / क्षमता</h4>
+          <h4 className="text-white font-medium mt-4">{bi("Capacity / क्षमता")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <Label className="text-white">Total Seats *</Label>
@@ -500,11 +501,11 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Star className="h-5 w-5 text-lime" />
-            Amenities & Comfort / सुविधाएं
+            {bi("Amenities & Comfort / सुविधाएं")}
           </h3>
           
           {/* Connectivity */}
-          <h4 className="text-slate-300 text-sm font-medium">Connectivity / कनेक्टिविटी</h4>
+          <h4 className="text-slate-300 text-sm font-medium">{bi("Connectivity / कनेक्टिविटी")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { key: 'wifi', label: 'WiFi', icon: Wifi },
@@ -527,7 +528,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Comfort */}
-          <h4 className="text-slate-300 text-sm font-medium mt-4">Comfort / आराम</h4>
+          <h4 className="text-slate-300 text-sm font-medium mt-4">{bi("Comfort / आराम")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { key: 'air_conditioning', label: 'AC', icon: Wind },
@@ -550,7 +551,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Food & Beverages */}
-          <h4 className="text-slate-300 text-sm font-medium mt-4">Food & Beverages / भोजन</h4>
+          <h4 className="text-slate-300 text-sm font-medium mt-4">{bi("Food & Beverages / भोजन")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { key: 'refreshments', label: 'Refreshments', icon: Coffee },
@@ -573,7 +574,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Facilities */}
-          <h4 className="text-slate-300 text-sm font-medium mt-4">Facilities / सुविधाएं</h4>
+          <h4 className="text-slate-300 text-sm font-medium mt-4">{bi("Facilities / सुविधाएं")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { key: 'lavatory', label: 'Lavatory', icon: Coffee },
@@ -601,7 +602,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Shield className="h-5 w-5 text-lime" />
-            Safety Equipment / सुरक्षा उपकरण
+            {bi("Safety Equipment / सुरक्षा उपकरण")}
           </h3>
           
           <div className="bg-lime/10 border border-lime/30 rounded-lg p-3 text-sm text-slate-300">
@@ -610,7 +611,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Core Safety */}
-          <h4 className="text-slate-300 text-sm font-medium">Core Safety / मूल सुरक्षा</h4>
+          <h4 className="text-slate-300 text-sm font-medium">{bi("Core Safety / मूल सुरक्षा")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
               { key: 'first_aid_kit', label: 'First Aid Kit' },
@@ -633,7 +634,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           </div>
           
           {/* Advanced Safety Systems */}
-          <h4 className="text-slate-300 text-sm font-medium mt-4">Advanced Systems / उन्नत प्रणाली</h4>
+          <h4 className="text-slate-300 text-sm font-medium mt-4">{bi("Advanced Systems / उन्नत प्रणाली")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
               { key: 'tcas', label: 'TCAS (Collision Avoidance)' },
@@ -677,7 +678,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           )}
           
           {/* Medical Equipment */}
-          <h4 className="text-slate-300 text-sm font-medium mt-4">Medical (Air Ambulance) / चिकित्सा</h4>
+          <h4 className="text-slate-300 text-sm font-medium mt-4">{bi("Medical (Air Ambulance) / चिकित्सा")}</h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
               { key: 'medical_equipment', label: 'Medical Equipment' },
@@ -705,7 +706,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           {/* Crew Configuration */}
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Users className="h-5 w-5 text-lime" />
-            Crew Configuration / क्रू विन्यास
+            {bi("Crew Configuration / क्रू विन्यास")}
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -743,7 +744,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           {/* Pricing */}
           <h3 className="text-white font-semibold flex items-center gap-2 mt-6">
             <IndianRupee className="h-5 w-5 text-lime" />
-            Pricing / मूल्य निर्धारण
+            {bi("Pricing / मूल्य निर्धारण")}
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -812,7 +813,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           {/* Description */}
           <h3 className="text-white font-semibold flex items-center gap-2 mt-6">
             <FileText className="h-5 w-5 text-lime" />
-            Description / विवरण
+            {bi("Description / विवरण")}
           </h3>
           
           <div>
@@ -1056,7 +1057,7 @@ export const OperatorFleetDashboard = () => {
       await axios.delete(`${API_URL}/api/aircraft/${aircraft.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      toast.success('Aircraft archived successfully / विमान संग्रहीत हो गया');
+      toast.success(bi('Aircraft archived successfully / विमान संग्रहीत हो गया'));
       fetchFleet();
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to archive');
@@ -1070,7 +1071,7 @@ export const OperatorFleetDashboard = () => {
       await axios.post(`${API_URL}/api/aircraft/${aircraft.id}/restore`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      toast.success('Aircraft restored successfully / विमान पुनर्स्थापित हो गया');
+      toast.success(bi('Aircraft restored successfully / विमान पुनर्स्थापित हो गया'));
       fetchFleet();
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to restore');
@@ -1092,7 +1093,7 @@ export const OperatorFleetDashboard = () => {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Plane className="h-6 w-6 text-lime" />
-            My Fleet / मेरा बेड़ा
+            {bi("My Fleet / मेरा बेड़ा")}
           </h2>
           <p className="text-slate-400 text-sm mt-1">
             Manage your aircraft catalog and verification
@@ -1160,7 +1161,7 @@ export const OperatorFleetDashboard = () => {
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-lime" />
-              Add New Aircraft / नया विमान जोड़ें
+              {bi("Add New Aircraft / नया विमान जोड़ें")}
             </CardTitle>
             <CardDescription>
               Fill in aircraft details for AirYatra verification
@@ -1210,7 +1211,7 @@ export const OperatorFleetDashboard = () => {
           <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
             <h3 className="text-white font-semibold flex items-center gap-2 mb-2">
               <Archive className="h-5 w-5 text-slate-400" />
-              Archived Aircraft / संग्रहीत विमान
+              {bi("Archived Aircraft / संग्रहीत विमान")}
             </h3>
             <p className="text-slate-400 text-sm">
               These aircraft are hidden from customers but can be restored anytime.

@@ -6,6 +6,7 @@ import {
 import { Button } from '@/components/ui/button';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function SchedulerStatus() {
   const [status, setStatus] = useState(null);
@@ -101,7 +102,7 @@ function SchedulerStatus() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Clock className="h-6 w-6 text-lime" />
-            Background Scheduler / बैकग्राउंड शेड्यूलर
+            {bi("Background Scheduler / बैकग्राउंड शेड्यूलर")}
           </h2>
           <p className="text-slate-400 mt-1">
             Automated tasks running in background
@@ -126,7 +127,7 @@ function SchedulerStatus() {
       <div className="bg-lime/10 border border-lime/30 rounded-sm p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lime font-medium">Quick Actions / त्वरित कार्रवाई</h3>
+            <h3 className="text-lime font-medium">{bi("Quick Actions / त्वरित कार्रवाई")}</h3>
             <p className="text-slate-400 text-sm mt-1">
               Manually trigger background jobs without waiting for schedule
             </p>
@@ -149,7 +150,7 @@ function SchedulerStatus() {
       {/* Scheduled Jobs */}
       <div className="bg-slate-800/50 rounded-sm border border-slate-700">
         <div className="p-4 border-b border-slate-700">
-          <h3 className="text-white font-semibold">Scheduled Jobs / निर्धारित कार्य</h3>
+          <h3 className="text-white font-semibold">{bi("Scheduled Jobs / निर्धारित कार्य")}</h3>
         </div>
         <div className="divide-y divide-slate-700">
           {status?.jobs?.map((job) => (

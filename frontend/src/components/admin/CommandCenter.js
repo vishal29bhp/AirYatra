@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -231,7 +232,7 @@ function CommandCenter({ user }) {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Shield className="h-6 w-6 text-lime" />
-            Command Center / कमांड सेंटर
+            {bi("Command Center / कमांड सेंटर")}
           </h2>
           <p className="text-slate-400 mt-1">Review and approve critical actions</p>
         </div>

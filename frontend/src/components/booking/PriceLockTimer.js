@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Clock, AlertTriangle, Lock, RefreshCw, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { bi, tr, isHindi } from '../../lib/bilingual';
 
 /**
  * Price Lock Timer Component
@@ -58,14 +59,14 @@ export const PriceLockTimer = ({
       // Show warning at 2 minutes
       if (remaining <= 120 && remaining > 0 && !showWarning) {
         setShowWarning(true);
-        toast.warning('⚠️ Price lock expiring in 2 minutes! / मूल्य लॉक 2 मिनट में समाप्त हो रहा है!');
+        toast.warning(bi('⚠️ Price lock expiring in 2 minutes! / मूल्य लॉक 2 मिनट में समाप्त हो रहा है!'));
       }
       
       // Handle expiry
       if (remaining <= 0 && !isExpired) {
         setIsExpired(true);
         clearInterval(interval);
-        toast.error('❌ Price lock expired! / मूल्य लॉक समाप्त हो गया!');
+        toast.error(bi('❌ Price lock expired! / मूल्य लॉक समाप्त हो गया!'));
         
         if (onExpire) {
           onExpire();
@@ -92,7 +93,7 @@ export const PriceLockTimer = ({
       await onExtend();
       setShowWarning(false);
       setIsExpired(false);
-      toast.success('✅ Price lock extended by 5 minutes! / मूल्य लॉक 5 मिनट बढ़ाया गया!');
+      toast.success(bi('✅ Price lock extended by 5 minutes! / मूल्य लॉक 5 मिनट बढ़ाया गया!'));
     } catch (error) {
       toast.error('Failed to extend price lock');
     } finally {
@@ -134,13 +135,8 @@ export const PriceLockTimer = ({
           </div>
           <div>
             <h4 className={`font-semibold ${isExpired ? 'text-red-400' : 'text-white'}`}>
-              {isExpired ? 'Price Lock Expired' : 'Price Locked'}
+              {isExpired ? tr('Price Lock Expired', 'मूल्य लॉक समाप्त हो गया') : tr('Price Locked', 'आपका मूल्य लॉक है')}
             </h4>
-            <p className="text-xs text-slate-400">
-              {isExpired 
-                ? 'मूल्य लॉक समाप्त हो गया' 
-                : 'आपका मूल्य लॉक है'}
-            </p>
           </div>
         </div>
         
@@ -150,7 +146,7 @@ export const PriceLockTimer = ({
             {formatTime(timeRemaining)}
           </div>
           <p className="text-xs text-slate-400">
-            {isExpired ? 'Expired' : 'Remaining / शेष समय'}
+            {isExpired ? 'Expired' : bi('Remaining / शेष समय')}
           </p>
         </div>
       </div>
@@ -173,7 +169,7 @@ export const PriceLockTimer = ({
       {/* Locked Amount */}
       {totalAmount && (
         <div className="flex items-center justify-between py-2 border-t border-slate-700/50 mt-2">
-          <span className="text-slate-400 text-sm">Locked Amount / लॉक्ड राशि</span>
+          <span className="text-slate-400 text-sm">{bi("Locked Amount / लॉक्ड राशि")}</span>
           <span className="text-white font-bold text-lg">
             ₹{totalAmount.toLocaleString('en-IN')}
           </span>
@@ -186,10 +182,7 @@ export const PriceLockTimer = ({
           <AlertTriangle className="h-5 w-5 text-lime flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-slate-300 text-sm font-medium">
-              Complete payment soon!
-            </p>
-            <p className="text-lime/70 text-xs">
-              जल्द ही भुगतान पूरा करें! Price may change after expiry.
+              {tr("Complete payment soon! The price may change after the lock expires.", "जल्द ही भुगतान पूरा करें! लॉक समाप्त होने के बाद कीमत बदल सकती है।")}
             </p>
           </div>
         </div>
@@ -198,13 +191,13 @@ export const PriceLockTimer = ({
       {/* Expired Message */}
       {isExpired && (
         <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 mt-3">
-          <p className="text-red-300 text-sm font-medium flex items-center gap-2">
+          {!isHindi() && (<p className="text-red-300 text-sm font-medium flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             Price lock has expired. Redirecting to booking page...
-          </p>
-          <p className="text-red-400/70 text-xs mt-1">
+          </p>)}
+          {isHindi() && (<p className="text-red-400/70 text-xs mt-1">
             मूल्य लॉक समाप्त हो गया। बुकिंग पेज पर रीडायरेक्ट हो रहा है...
-          </p>
+          </p>)}
         </div>
       )}
       
@@ -219,7 +212,7 @@ export const PriceLockTimer = ({
           {isExtending ? (
             <><RefreshCw className="h-4 w-4 mr-2 animate-spin" /> Extending...</>
           ) : (
-            <><Clock className="h-4 w-4 mr-2" /> Extend by 5 min / 5 मिनट बढ़ाएं</>
+            <><Clock className="h-4 w-4 mr-2" /> {bi("Extend by 5 min / 5 मिनट बढ़ाएं")}</>
           )}
         </Button>
       )}

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { tr } from '../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -182,11 +183,8 @@ function BlogListPage() {
                   {/* Content */}
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white mb-2 group-hover:text-lime transition-colors line-clamp-2">
-                      {post.title}
+                      {tr(post.title, post.title_hi)}
                     </h3>
-                    {post.title_hi && (
-                      <p className="text-lime/70 text-sm mb-2">{post.title_hi}</p>
-                    )}
                     <p className="text-slate-400 text-sm mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
@@ -316,11 +314,8 @@ function BlogPostPage() {
             {post.category}
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mt-6 mb-4">
-            {post.title}
+            {tr(post.title, post.title_hi)}
           </h1>
-          {post.title_hi && (
-            <p className="text-lime/80 text-xl mb-6">{post.title_hi}</p>
-          )}
 
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm">

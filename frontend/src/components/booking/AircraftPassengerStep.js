@@ -2,11 +2,12 @@ import React from 'react';
 import { Plane, Users, User, Baby, Minus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { bi } from '../../lib/bilingual';
 
 // Aircraft types configuration
 export const aircraftTypes = [
-  { id: 'helicopter', name: 'Helicopter / हेलीकॉप्टर', icon: '🚁', maxPassengers: 6 },
-  { id: 'chartered_plane', name: 'Chartered Plane / चार्टर्ड प्लेन', icon: '✈️', maxPassengers: 19 },
+  { id: 'helicopter', name: bi('Helicopter / हेलीकॉप्टर'), icon: '🚁', maxPassengers: 6 },
+  { id: 'chartered_plane', name: bi('Chartered Plane / चार्टर्ड प्लेन'), icon: '✈️', maxPassengers: 19 },
 ];
 
 const AircraftPassengerStep = ({ formData, onInputChange }) => {
@@ -37,7 +38,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
     <div className="space-y-6">
       {/* Aircraft Type Selection */}
       <div>
-        <Label className="text-white text-lg mb-4 block">Select Aircraft Type / वाहन प्रकार चुनें</Label>
+        <Label className="text-white text-lg mb-4 block">{bi("Select Aircraft Type / वाहन प्रकार चुनें")}</Label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {aircraftTypes.map((type) => (
             <button
@@ -63,7 +64,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
         <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
             <Users className="h-5 w-5 text-lime" />
-            Passengers / यात्री
+            {bi("Passengers / यात्री")}
           </h3>
           
           <div className="space-y-4">
@@ -72,7 +73,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-amber" />
                 <div>
-                  <p className="text-white">Adult Male / पुरुष</p>
+                  <p className="text-white">{bi("Adult Male / पुरुष")}</p>
                   <p className="text-slate-500 text-xs">18+ years</p>
                 </div>
               </div>
@@ -106,7 +107,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-pink-400" />
                 <div>
-                  <p className="text-white">Adult Female / महिला</p>
+                  <p className="text-white">{bi("Adult Female / महिला")}</p>
                   <p className="text-slate-500 text-xs">18+ years</p>
                 </div>
               </div>
@@ -140,7 +141,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
               <div className="flex items-center gap-3">
                 <Baby className="h-5 w-5 text-green-400" />
                 <div>
-                  <p className="text-white">Children / बच्चे</p>
+                  <p className="text-white">{bi("Children / बच्चे")}</p>
                   <p className="text-slate-500 text-xs">Up to 4 years (Free, max 2)</p>
                 </div>
               </div>

@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import api from '@/services/apiClient';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const formatINR = (amount) => {
   if (!amount && amount !== 0) return '₹0';
@@ -141,7 +142,7 @@ export default function MultiCurrencySupport() {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <Globe className="h-7 w-7 text-teal-400" />
-            Multi-Currency Support / बहु-मुद्रा समर्थन
+            {bi("Multi-Currency Support / बहु-मुद्रा समर्थन")}
           </h1>
           <p className="text-slate-400 mt-1">Live forex rates and international vendor payments</p>
         </div>
@@ -220,7 +221,7 @@ export default function MultiCurrencySupport() {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Calculator className="h-5 w-5 text-amber" />
-                Currency Converter / मुद्रा परिवर्तक
+                {bi("Currency Converter / मुद्रा परिवर्तक")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -419,7 +420,7 @@ export default function MultiCurrencySupport() {
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
               <Plus className="h-5 w-5 text-teal-400" />
-              Create Forex Payment / विदेशी मुद्रा भुगतान
+              {bi("Create Forex Payment / विदेशी मुद्रा भुगतान")}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">

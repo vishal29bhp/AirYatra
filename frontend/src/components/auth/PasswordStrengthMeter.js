@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Check, X, Shield, ShieldAlert, ShieldCheck, ShieldX } from 'lucide-react';
+import { bi } from '../../lib/bilingual';
 
 /**
  * Password Strength Meter Component
@@ -63,13 +64,13 @@ function PasswordStrengthMeter({ password = '', showRequirements = true }) {
     const finalScore = Math.min(100, percentage + bonus);
     
     if (finalScore < 30) {
-      return { score: finalScore, level: 'weak', label: 'Weak / कमज़ोर', color: 'bg-red-500' };
+      return { score: finalScore, level: 'weak', label: bi('Weak / कमज़ोर'), color: 'bg-red-500' };
     } else if (finalScore < 50) {
-      return { score: finalScore, level: 'fair', label: 'Fair / ठीक', color: 'bg-amber-500' };
+      return { score: finalScore, level: 'fair', label: bi('Fair / ठीक'), color: 'bg-amber-500' };
     } else if (finalScore < 80) {
-      return { score: finalScore, level: 'good', label: 'Good / अच्छा', color: 'bg-yellow-500' };
+      return { score: finalScore, level: 'good', label: bi('Good / अच्छा'), color: 'bg-yellow-500' };
     } else {
-      return { score: finalScore, level: 'strong', label: 'Strong / मज़बूत', color: 'bg-green-500' };
+      return { score: finalScore, level: 'strong', label: bi('Strong / मज़बूत'), color: 'bg-green-500' };
     }
   }, [password, requirements]);
 

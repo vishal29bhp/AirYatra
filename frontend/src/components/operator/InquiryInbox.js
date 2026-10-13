@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { quoteAPI, fleetAPI } from '../../services/api';
 import { toast } from 'sonner';
+import { isHindi } from '../../lib/bilingual';
 
 function InquiryInbox({ operator }) {
   const [inquiries, setInquiries] = useState([]);
@@ -223,13 +224,13 @@ function InquiryInbox({ operator }) {
                         <AlertTriangle className="h-5 w-5 text-yellow-400 shrink-0 mt-0.5" />
                         <div>
                           <p className="text-yellow-400 font-medium text-sm">Village Landing - Documents Required</p>
-                          <p className="text-yellow-400/70 text-xs mt-1">
+                          {!isHindi() && (<p className="text-yellow-400/70 text-xs mt-1">
                             Customer needs to upload: Collector NOC, Fire Dept, Police & SP/DCP Acknowledgments.
                             Flight only after all documents approved.
-                          </p>
-                          <p className="text-yellow-400/70 text-xs">
+                          </p>)}
+                          {isHindi() && (<p className="text-yellow-400/70 text-xs">
                             ग्राहक को दस्तावेज़ अपलोड करने होंगे। सभी दस्तावेज़ स्वीकृत होने के बाद ही उड़ान।
-                          </p>
+                          </p>)}
                         </div>
                       </div>
                     </div>

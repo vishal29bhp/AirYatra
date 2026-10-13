@@ -9,44 +9,45 @@ import RegionalOverview from '@/components/regional/RegionalOverview';
 import RegionalOperators from '@/components/regional/RegionalOperators';
 import RegionalBookings from '@/components/regional/RegionalBookings';
 import RegionalPermissions from '@/components/regional/RegionalPermissions';
+import { bi } from '../lib/bilingual';
 
 // Organized Navigation Structure - 4 Main Categories
 const navGroups = [
   {
     id: 'main',
-    label: 'Dashboard / डैशबोर्ड',
+    label: bi('Dashboard / डैशबोर्ड'),
     icon: LayoutDashboard,
     items: [
-      { id: 'overview', label: 'Overview / ओवरव्यू', icon: LayoutDashboard },
-      { id: 'reports', label: 'Reports / रिपोर्ट', icon: BarChart3 },
+      { id: 'overview', label: bi('Overview / ओवरव्यू'), icon: LayoutDashboard },
+      { id: 'reports', label: bi('Reports / रिपोर्ट'), icon: BarChart3 },
     ]
   },
   {
     id: 'management',
-    label: 'Management / प्रबंधन',
+    label: bi('Management / प्रबंधन'),
     icon: Building2,
     items: [
-      { id: 'operators', label: 'Operators / ऑपरेटर', icon: Users, highlight: true },
-      { id: 'bookings', label: 'Bookings / बुकिंग', icon: Calendar },
-      { id: 'approvals', label: 'Pending Approvals / अनुमोदन', icon: CheckSquare, highlight: true },
+      { id: 'operators', label: bi('Operators / ऑपरेटर'), icon: Users, highlight: true },
+      { id: 'bookings', label: bi('Bookings / बुकिंग'), icon: Calendar },
+      { id: 'approvals', label: bi('Pending Approvals / अनुमोदन'), icon: CheckSquare, highlight: true },
     ]
   },
   {
     id: 'permissions',
-    label: 'Permissions / अनुमतियां',
+    label: bi('Permissions / अनुमतियां'),
     icon: Shield,
     items: [
-      { id: 'permissions', label: 'Landing Permissions / लैंडिंग अनुमतियां', icon: Shield },
-      { id: 'village', label: 'Village Permissions / गांव की अनुमतियां', icon: MapPin },
+      { id: 'permissions', label: bi('Landing Permissions / लैंडिंग अनुमतियां'), icon: Shield },
+      { id: 'village', label: bi('Village Permissions / गांव की अनुमतियां'), icon: MapPin },
     ]
   },
   {
     id: 'account',
-    label: 'Account / खाता',
+    label: bi('Account / खाता'),
     icon: User,
     items: [
-      { id: 'profile', label: 'My Profile / प्रोफाइल', icon: User },
-      { id: 'settings', label: 'Settings / सेटिंग्स', icon: Settings },
+      { id: 'profile', label: bi('My Profile / प्रोफाइल'), icon: User },
+      { id: 'settings', label: bi('Settings / सेटिंग्स'), icon: Settings },
     ]
   },
 ];

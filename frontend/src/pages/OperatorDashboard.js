@@ -34,67 +34,68 @@ import MaintenanceCostTracker from '../components/operator/MaintenanceCostTracke
 import PilotDocumentUpload from '../components/operator/PilotDocumentUpload';
 import { OperatorAuctions } from '../components/auction/AuctionDashboard';
 import { OperatorFleetDashboard } from '../components/aircraft/AircraftCatalog';
+import { bi } from '../lib/bilingual';
 
 // Organized Navigation Structure - 5 Main Categories
 const navGroups = [
   {
     id: 'main',
-    label: 'Dashboard / डैशबोर्ड',
+    label: bi('Dashboard / डैशबोर्ड'),
     icon: Home,
     items: [
       { id: 'home', label: 'Overview', icon: Home, path: '/operator' },
-      { id: 'erp', label: 'ERP Command Center / ईआरपी', icon: BarChart3, path: '/operator/erp', highlight: true },
-      { id: 'revenue', label: 'Revenue Dashboard / राजस्व', icon: DollarSign, path: '/operator/revenue', highlight: true },
-      { id: 'fleet-analytics', label: 'Fleet Analytics / फ्लीट', icon: Plane, path: '/operator/fleet-analytics', highlight: true },
-      { id: 'new-inquiries', label: 'New Inquiries / नई पूछताछ', icon: Bell, path: '/operator/new-inquiries', highlight: true },
+      { id: 'erp', label: bi('ERP Command Center / ईआरपी'), icon: BarChart3, path: '/operator/erp', highlight: true },
+      { id: 'revenue', label: bi('Revenue Dashboard / राजस्व'), icon: DollarSign, path: '/operator/revenue', highlight: true },
+      { id: 'fleet-analytics', label: bi('Fleet Analytics / फ्लीट'), icon: Plane, path: '/operator/fleet-analytics', highlight: true },
+      { id: 'new-inquiries', label: bi('New Inquiries / नई पूछताछ'), icon: Bell, path: '/operator/new-inquiries', highlight: true },
     ]
   },
   {
     id: 'business',
-    label: 'Business / व्यापार',
+    label: bi('Business / व्यापार'),
     icon: Briefcase,
     items: [
-      { id: 'inquiries', label: 'All Inquiries / सभी पूछताछ', icon: MessageSquare, path: '/operator/inquiries' },
-      { id: 'live-auctions', label: 'Live Auctions / लाइव नीलामी', icon: Gavel, path: '/operator/auctions', highlight: true },
-      { id: 'quotes', label: 'Quote Requests / कोटेशन', icon: DollarSign, path: '/operator/quotes', highlight: true },
-      { id: 'journey-otp', label: 'Journey OTP / यात्रा OTP', icon: Key, path: '/operator/journey-otp', highlight: true },
+      { id: 'inquiries', label: bi('All Inquiries / सभी पूछताछ'), icon: MessageSquare, path: '/operator/inquiries' },
+      { id: 'live-auctions', label: bi('Live Auctions / लाइव नीलामी'), icon: Gavel, path: '/operator/auctions', highlight: true },
+      { id: 'quotes', label: bi('Quote Requests / कोटेशन'), icon: DollarSign, path: '/operator/quotes', highlight: true },
+      { id: 'journey-otp', label: bi('Journey OTP / यात्रा OTP'), icon: Key, path: '/operator/journey-otp', highlight: true },
     ]
   },
   {
     id: 'fleet',
-    label: 'Fleet & Crew / फ्लीट और क्रू',
+    label: bi('Fleet & Crew / फ्लीट और क्रू'),
     icon: Plane,
     items: [
-      { id: 'fleet', label: 'Fleet Management / फ्लीट', icon: Plane, path: '/operator/fleet' },
-      { id: 'aircraft-catalog', label: 'Aircraft Catalog / विमान सूची', icon: Shield, path: '/operator/aircraft-catalog', highlight: true },
-      { id: 'maintenance-calendar', label: 'Maintenance Calendar / रखरखाव', icon: Calendar, path: '/operator/maintenance-calendar', highlight: true },
-      { id: 'cost-tracker', label: 'Cost Tracker / लागत', icon: DollarSign, path: '/operator/cost-tracker', highlight: true },
-      { id: 'pilots', label: 'Pilots / पायलट', icon: Users, path: '/operator/pilots' },
-      { id: 'pilot-assignment', label: 'Pilot Assignment / असाइनमेंट', icon: UserPlus, path: '/operator/pilot-assignment', highlight: true },
-      { id: 'crew-scheduling', label: 'Crew Scheduling / शेड्यूलिंग', icon: Calendar, path: '/operator/crew-scheduling', highlight: true },
-      { id: 'pilot-documents', label: 'Pilot Documents / दस्तावेज़', icon: FileText, path: '/operator/pilot-documents', highlight: true },
+      { id: 'fleet', label: bi('Fleet Management / फ्लीट'), icon: Plane, path: '/operator/fleet' },
+      { id: 'aircraft-catalog', label: bi('Aircraft Catalog / विमान सूची'), icon: Shield, path: '/operator/aircraft-catalog', highlight: true },
+      { id: 'maintenance-calendar', label: bi('Maintenance Calendar / रखरखाव'), icon: Calendar, path: '/operator/maintenance-calendar', highlight: true },
+      { id: 'cost-tracker', label: bi('Cost Tracker / लागत'), icon: DollarSign, path: '/operator/cost-tracker', highlight: true },
+      { id: 'pilots', label: bi('Pilots / पायलट'), icon: Users, path: '/operator/pilots' },
+      { id: 'pilot-assignment', label: bi('Pilot Assignment / असाइनमेंट'), icon: UserPlus, path: '/operator/pilot-assignment', highlight: true },
+      { id: 'crew-scheduling', label: bi('Crew Scheduling / शेड्यूलिंग'), icon: Calendar, path: '/operator/crew-scheduling', highlight: true },
+      { id: 'pilot-documents', label: bi('Pilot Documents / दस्तावेज़'), icon: FileText, path: '/operator/pilot-documents', highlight: true },
     ]
   },
   {
     id: 'tracking',
-    label: 'Tracking & Records / ट्रैकिंग',
+    label: bi('Tracking & Records / ट्रैकिंग'),
     icon: Navigation,
     items: [
-      { id: 'live-tracking', label: 'Live Tracking / लाइव ट्रैकिंग', icon: MapPin, path: '/operator/live-tracking', highlight: true },
+      { id: 'live-tracking', label: bi('Live Tracking / लाइव ट्रैकिंग'), icon: MapPin, path: '/operator/live-tracking', highlight: true },
       { id: 'pilot-duty', label: 'Pilot Duty Tracker / FDTL', icon: Shield, path: '/operator/pilot-duty', highlight: true },
-      { id: 'flight-records', label: 'Flight Records / उड़ान रिकॉर्ड', icon: BookOpen, path: '/operator/flight-records' },
-      { id: 'fuel-records', label: 'Fuel Records / ईंधन रिकॉर्ड', icon: Fuel, path: '/operator/fuel-records' },
-      { id: 'landing-permissions', label: 'Landing Permissions / अनुमतियां', icon: Shield, path: '/operator/landing-permissions' },
+      { id: 'flight-records', label: bi('Flight Records / उड़ान रिकॉर्ड'), icon: BookOpen, path: '/operator/flight-records' },
+      { id: 'fuel-records', label: bi('Fuel Records / ईंधन रिकॉर्ड'), icon: Fuel, path: '/operator/fuel-records' },
+      { id: 'landing-permissions', label: bi('Landing Permissions / अनुमतियां'), icon: Shield, path: '/operator/landing-permissions' },
     ]
   },
   {
     id: 'account',
-    label: 'Account / खाता',
+    label: bi('Account / खाता'),
     icon: User,
     items: [
-      { id: 'pricing', label: 'Pricing Config / मूल्य', icon: DollarSign, path: '/operator/pricing', highlight: true },
-      { id: 'profile', label: 'Profile / प्रोफाइल', icon: User, path: '/operator/profile' },
-      { id: 'settings', label: 'Settings / सेटिंग्स', icon: Settings, path: '/operator/settings' },
+      { id: 'pricing', label: bi('Pricing Config / मूल्य'), icon: DollarSign, path: '/operator/pricing', highlight: true },
+      { id: 'profile', label: bi('Profile / प्रोफाइल'), icon: User, path: '/operator/profile' },
+      { id: 'settings', label: bi('Settings / सेटिंग्स'), icon: Settings, path: '/operator/settings' },
     ]
   },
 ];

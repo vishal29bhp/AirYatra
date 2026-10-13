@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
-  Plane, Shield, Users, TrendingUp, CheckCircle, Crown, Building2, Lock, Sparkles,
+  Plane, Shield, Users, TrendingUp, CheckCircle, Crown, Building2, Lock,
   ChevronLeft, ChevronRight, MapPin, Mail, Phone, Clock, Star, Award, 
   Briefcase, HeartHandshake, Globe, Headphones, FileCheck, Zap
 } from 'lucide-react';
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import LanguageSwitcher from '../components/shared/LanguageSwitcher';
 import TestimonialsSlider from '../components/landing/TestimonialsSlider';
 import InvestorInterestSection from '../components/landing/InvestorInterestSection';
+import { bi } from '../lib/bilingual';
 
 // Hero Slider Images
 const HERO_SLIDES = [
@@ -491,34 +492,7 @@ function LandingPage({ user }) {
             <p className="text-slate-400 text-lg">Complete aviation solutions for every stakeholder</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Aviation Exchange Card */}
-            <div className="bg-slate-800 p-8 rounded-sm border border-slate-700 hover:border-lime/50 transition-colors group">
-              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
-                <Sparkles className="h-10 w-10 text-lime" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">{t('landing.aviationExchange')}</h3>
-              <p className="text-slate-400 mb-6">
-                {t('landing.exchangeDesc')}
-              </p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.liveTracking')}
-                </li>
-                <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.instantQuotes')}
-                </li>
-                <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.securePayments')}
-                </li>
-              </ul>
-              <Link to="/exchange">
-                <Button className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-sm" data-testid="explore-exchange-btn">
-                  {t('landing.exploreExchange')}
-                </Button>
-              </Link>
-            </div>
-
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Corporate Card */}
             <div className="bg-slate-800 p-8 rounded-sm border border-slate-700 hover:border-lime/50 transition-colors group">
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
@@ -663,7 +637,6 @@ function LandingPage({ user }) {
               <h4 className="text-white font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li><Link to="/booking" className="text-slate-400 hover:text-lime text-sm transition-colors">Book a Flight</Link></li>
-                <li><Link to="/exchange" className="text-slate-400 hover:text-lime text-sm transition-colors">Aviation Exchange</Link></li>
                 <li><Link to="/corporate" className="text-slate-400 hover:text-lime text-sm transition-colors">Corporate Solutions</Link></li>
                 <li><a href="#services" className="text-slate-400 hover:text-lime text-sm transition-colors">Our Services</a></li>
               </ul>
@@ -681,11 +654,11 @@ function LandingPage({ user }) {
 
             {/* Legal */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Legal / कानूनी</h4>
+              <h4 className="text-white font-semibold mb-4">{bi("Legal / कानूनी")}</h4>
               <ul className="space-y-2">
-                <li><Link to="/legal/terms" className="text-slate-400 hover:text-lime text-sm transition-colors">Terms & Conditions / नियम एवं शर्तें</Link></li>
-                <li><Link to="/legal/privacy" className="text-slate-400 hover:text-lime text-sm transition-colors">Privacy Policy / गोपनीयता नीति</Link></li>
-                <li><Link to="/legal/cancellation" className="text-slate-400 hover:text-lime text-sm transition-colors">Refund & Cancellation / धनवापसी और रद्दीकरण</Link></li>
+                <li><Link to="/legal/terms" className="text-slate-400 hover:text-lime text-sm transition-colors">{bi("Terms & Conditions / नियम एवं शर्तें")}</Link></li>
+                <li><Link to="/legal/privacy" className="text-slate-400 hover:text-lime text-sm transition-colors">{bi("Privacy Policy / गोपनीयता नीति")}</Link></li>
+                <li><Link to="/legal/cancellation" className="text-slate-400 hover:text-lime text-sm transition-colors">{bi("Refund & Cancellation / धनवापसी और रद्दीकरण")}</Link></li>
               </ul>
             </div>
 

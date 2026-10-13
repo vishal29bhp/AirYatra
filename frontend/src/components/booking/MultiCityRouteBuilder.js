@@ -25,6 +25,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { bi, tr } from '../../lib/bilingual';
 
 /**
  * Sortable Leg Card Component
@@ -88,7 +89,7 @@ const SortableLegCard = ({
               {index + 1}
             </div>
             <span className="text-white font-medium">
-              Leg {index + 1} / पड़ाव {index + 1}
+              {tr(`Leg ${index + 1}`, `पड़ाव ${index + 1}`)}
               {index === 0 && <span className="text-green-400 text-xs ml-2">(Start)</span>}
               {index === legs.length - 1 && <span className="text-red-400 text-xs ml-2">(End)</span>}
             </span>
@@ -120,7 +121,7 @@ const SortableLegCard = ({
           <div>
             <Label className="text-slate-400 text-sm mb-2 block flex items-center gap-1">
               <MapPin className="h-3 w-3 text-green-400" />
-              From / से {index === 0 && <span className="text-red-400">*</span>}
+              {bi("From / से")} {index === 0 && <span className="text-red-400">*</span>}
             </Label>
             {index > 0 && legs[index - 1]?.to ? (
               // Auto-filled from previous leg's destination
@@ -145,7 +146,7 @@ const SortableLegCard = ({
           <div>
             <Label className="text-slate-400 text-sm mb-2 block flex items-center gap-1">
               <MapPin className="h-3 w-3 text-red-400" />
-              To / तक <span className="text-red-400">*</span>
+              {bi("To / तक")} <span className="text-red-400">*</span>
             </Label>
             <LandingPointSelector
               label="Select destination"
@@ -382,7 +383,7 @@ export const MultiCityRouteBuilder = ({
         <div>
           <h3 className="text-white font-semibold flex items-center gap-2">
             <Navigation className="h-5 w-5 text-lime" />
-            Multi-City Route Builder / बहु-शहर रूट बिल्डर
+            {bi("Multi-City Route Builder / बहु-शहर रूट बिल्डर")}
           </h3>
           <p className="text-slate-400 text-sm mt-1">
             Add {minLegs}-{maxLegs} destinations. Each additional leg gets {perLegDiscount}% off!
@@ -399,7 +400,7 @@ export const MultiCityRouteBuilder = ({
             {showMap ? 'Hide Map' : 'Show Map'}
           </Button>
           <Badge className="bg-amber/20 text-amber">
-            {legs.length} Legs / {legs.length} पड़ाव
+            {tr(`${legs.length} Legs`, `${legs.length} पड़ाव`)}
           </Badge>
         </div>
       </div>
@@ -418,7 +419,7 @@ export const MultiCityRouteBuilder = ({
       {/* Drag-Drop Hint */}
       <div className="flex items-center gap-2 text-slate-500 text-xs">
         <GripVertical className="h-4 w-4" />
-        <span>Drag legs to reorder your route / रूट क्रम बदलने के लिए खींचें</span>
+        <span>{bi("Drag legs to reorder your route / रूट क्रम बदलने के लिए खींचें")}</span>
       </div>
       
       {/* Route Legs with Drag-Drop */}
@@ -458,7 +459,7 @@ export const MultiCityRouteBuilder = ({
           className="w-full border-dashed border-slate-600 text-slate-400 hover:text-lime hover:border-lime"
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add Destination / गंतव्य जोड़ें ({legs.length}/{maxLegs})
+          {bi("Add Destination / गंतव्य जोड़ें (")}{legs.length}/{maxLegs})
         </Button>
       )}
       
@@ -468,7 +469,7 @@ export const MultiCityRouteBuilder = ({
           <CardContent className="p-4">
             <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
               <Calculator className="h-4 w-4 text-lime" />
-              Route Summary / रूट सारांश
+              {bi("Route Summary / रूट सारांश")}
             </h4>
             
             {/* Visual Route */}
@@ -521,8 +522,7 @@ export const MultiCityRouteBuilder = ({
       <div className="bg-amber/10 border border-amber/30 rounded-lg p-3 flex items-start gap-2 text-sm">
         <AlertCircle className="h-4 w-4 text-amber mt-0.5 flex-shrink-0" />
         <div className="text-slate-300">
-          <p>Multi-city flights chain automatically. Each destination becomes the next leg&apos;s starting point.</p>
-          <p className="text-amber/70 mt-1">बहु-शहर उड़ानें स्वचालित रूप से जुड़ती हैं।</p>
+          <p>{tr("Multi-city flights chain automatically. Each destination becomes the next leg's starting point.", 'बहु-शहर उड़ानें स्वचालित रूप से जुड़ती हैं।')}</p>
         </div>
       </div>
     </div>

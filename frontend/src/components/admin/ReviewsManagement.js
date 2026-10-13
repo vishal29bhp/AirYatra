@@ -7,6 +7,7 @@ import {
 import { Button } from '@/components/ui/button';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 function ReviewsManagement() {
   const [loading, setLoading] = useState(true);
@@ -84,7 +85,7 @@ function ReviewsManagement() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Star className="h-6 w-6 text-yellow-400" />
-            Reviews & Ratings / रिव्यूज़
+            {bi("Reviews & Ratings / रिव्यूज़")}
           </h2>
           <p className="text-slate-400 mt-1">Manage customer reviews and operator ratings</p>
         </div>

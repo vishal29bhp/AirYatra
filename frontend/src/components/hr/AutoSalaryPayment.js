@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 export default function AutoSalaryPayment({ user }) {
   const [calculations, setCalculations] = useState([]);
@@ -100,7 +101,7 @@ export default function AutoSalaryPayment({ user }) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-white">Auto Salary Payment / ऑटो वेतन भुगतान</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Auto Salary Payment / ऑटो वेतन भुगतान")}</h2>
           <p className="text-slate-400">Calculate salary based on attendance and process payments</p>
         </div>
       </div>
@@ -110,7 +111,7 @@ export default function AutoSalaryPayment({ user }) {
         <CardContent className="pt-6">
           <div className="flex items-end gap-4">
             <div>
-              <Label className="text-slate-300">Month / महीना</Label>
+              <Label className="text-slate-300">{bi("Month / महीना")}</Label>
               <select
                 className="w-40 bg-slate-700 border-slate-600 text-white rounded-md px-3 py-2"
                 value={selectedMonth}
@@ -122,7 +123,7 @@ export default function AutoSalaryPayment({ user }) {
               </select>
             </div>
             <div>
-              <Label className="text-slate-300">Year / वर्ष</Label>
+              <Label className="text-slate-300">{bi("Year / वर्ष")}</Label>
               <select
                 className="w-32 bg-slate-700 border-slate-600 text-white rounded-md px-3 py-2"
                 value={selectedYear}
@@ -134,10 +135,10 @@ export default function AutoSalaryPayment({ user }) {
               </select>
             </div>
             <Button onClick={calculateSalary} disabled={loading} className="bg-slate-700 hover:bg-slate-600">
-              <Calculator className="h-4 w-4 mr-2" /> Calculate Salary / वेतन गणना करें
+              <Calculator className="h-4 w-4 mr-2" /> {bi("Calculate Salary / वेतन गणना करें")}
             </Button>
             <Button onClick={addExpensesToSalary} variant="outline">
-              Add Approved Expenses / खर्च जोड़ें
+              {bi("Add Approved Expenses / खर्च जोड़ें")}
             </Button>
           </div>
         </CardContent>
@@ -146,7 +147,7 @@ export default function AutoSalaryPayment({ user }) {
       {/* Workflow Info */}
       <Card className="bg-amber/10 border-amber/50">
         <CardContent className="pt-6">
-          <h3 className="text-amber font-medium mb-3">Auto Salary Payment Workflow / ऑटो वेतन भुगतान प्रक्रिया</h3>
+          <h3 className="text-amber font-medium mb-3">{bi("Auto Salary Payment Workflow / ऑटो वेतन भुगतान प्रक्रिया")}</h3>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center text-slate-300">
               <span className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-white text-xs mr-2">1</span>
@@ -176,10 +177,10 @@ export default function AutoSalaryPayment({ user }) {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
             <div className="flex justify-between items-center">
-              <CardTitle className="text-white">Salary Calculations / वेतन गणना ({calculations.length} employees)</CardTitle>
+              <CardTitle className="text-white">{bi("Salary Calculations / वेतन गणना (")}{calculations.length} employees)</CardTitle>
               <div className="text-right">
                 <p className="text-2xl font-bold text-green-400">₹{calculations.reduce((sum, c) => sum + c.net_salary, 0).toLocaleString()}</p>
-                <p className="text-slate-400 text-sm">Total Payout / कुल भुगतान</p>
+                <p className="text-slate-400 text-sm">{bi("Total Payout / कुल भुगतान")}</p>
               </div>
             </div>
           </CardHeader>
@@ -223,7 +224,7 @@ export default function AutoSalaryPayment({ user }) {
             </div>
             <div className="mt-4 flex justify-end gap-2">
               <Button onClick={initiatePayment} disabled={loading} className="bg-green-500 hover:bg-green-600">
-                <BanknoteIcon className="h-4 w-4 mr-2" /> Initiate Payment / भुगतान शुरू करें
+                <BanknoteIcon className="h-4 w-4 mr-2" /> {bi("Initiate Payment / भुगतान शुरू करें")}
               </Button>
             </div>
           </CardContent>
@@ -234,7 +235,7 @@ export default function AutoSalaryPayment({ user }) {
       {showBankForm && (
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
-            <CardTitle className="text-white">Bank Details / बैंक विवरण</CardTitle>
+            <CardTitle className="text-white">{bi("Bank Details / बैंक विवरण")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -282,7 +283,7 @@ export default function AutoSalaryPayment({ user }) {
       {/* Payment History */}
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">Payment History / भुगतान इतिहास</CardTitle>
+          <CardTitle className="text-white">{bi("Payment History / भुगतान इतिहास")}</CardTitle>
         </CardHeader>
         <CardContent>
           {payments.length === 0 ? (

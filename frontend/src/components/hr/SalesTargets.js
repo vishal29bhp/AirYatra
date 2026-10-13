@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '@/services/apiClient';
+import { bi } from '../../lib/bilingual';
 
 export default function SalesTargets({ activeTab, user }) {
   const [targets, setTargets] = useState([]);
@@ -90,11 +91,11 @@ export default function SalesTargets({ activeTab, user }) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-white">Sales Targets / सेल्स टारगेट</h2>
+          <h2 className="text-2xl font-bold text-white">{bi("Sales Targets / सेल्स टारगेट")}</h2>
           <p className="text-slate-400">Manage sales targets and track achievements</p>
         </div>
         <Button onClick={() => setShowForm(true)} className="bg-lime text-black hover:bg-lime/90">
-          <Plus className="h-4 w-4 mr-2" /> New Target / नया टारगेट
+          <Plus className="h-4 w-4 mr-2" /> {bi("New Target / नया टारगेट")}
         </Button>
       </div>
 
@@ -102,7 +103,7 @@ export default function SalesTargets({ activeTab, user }) {
       {showForm && (
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
-            <CardTitle className="text-white">Create Sales Target / सेल्स टारगेट बनाएं</CardTitle>
+            <CardTitle className="text-white">{bi("Create Sales Target / सेल्स टारगेट बनाएं")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-3 gap-4">
@@ -202,7 +203,7 @@ export default function SalesTargets({ activeTab, user }) {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="text-white flex items-center">
-              <Trophy className="h-5 w-5 text-yellow-400 mr-2" /> Sales Leaderboard / सेल्स लीडरबोर्ड
+              <Trophy className="h-5 w-5 text-yellow-400 mr-2" /> {bi("Sales Leaderboard / सेल्स लीडरबोर्ड")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -244,7 +245,7 @@ export default function SalesTargets({ activeTab, user }) {
       {activeTab !== 'leaderboard' && (
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
-            <CardTitle className="text-white">Active Targets / सक्रिय टारगेट</CardTitle>
+            <CardTitle className="text-white">{bi("Active Targets / सक्रिय टारगेट")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -270,7 +271,7 @@ export default function SalesTargets({ activeTab, user }) {
                     <div className="space-y-3">
                       <div>
                         <div className="flex justify-between text-sm mb-1">
-                          <span className="text-slate-300">Revenue / राजस्व</span>
+                          <span className="text-slate-300">{bi("Revenue / राजस्व")}</span>
                           <span className="text-white">₹{target.revenue_achieved?.toLocaleString()} / ₹{target.revenue_target?.toLocaleString()}</span>
                         </div>
                         <div className="h-2 bg-slate-600 rounded-full overflow-hidden">
@@ -299,7 +300,7 @@ export default function SalesTargets({ activeTab, user }) {
 
                       {/* Incentive Slabs */}
                       <div className="mt-4 p-3 bg-slate-800 rounded">
-                        <p className="text-slate-300 text-sm mb-2">Incentive Slabs / इंसेंटिव स्लैब:</p>
+                        <p className="text-slate-300 text-sm mb-2">{bi("Incentive Slabs / इंसेंटिव स्लैब:")}</p>
                         <div className="flex gap-2 flex-wrap">
                           {target.incentive_slabs?.map((slab, idx) => (
                             <span key={idx} className={`px-2 py-1 rounded text-xs ${

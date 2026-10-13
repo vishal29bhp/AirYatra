@@ -7,6 +7,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -48,12 +49,12 @@ function RouteSuggestions({ user }) {
 
   const getPurposeLabel = (purpose) => {
     const labels = {
-      'pilgrimage': 'Pilgrimage / तीर्थ',
-      'business': 'Business / व्यापार',
-      'tourism': 'Tourism / पर्यटन',
-      'leisure': 'Leisure / आराम',
-      'wedding': 'Wedding / शादी',
-      'heritage': 'Heritage / विरासत'
+      'pilgrimage': bi('Pilgrimage / तीर्थ'),
+      'business': bi('Business / व्यापार'),
+      'tourism': bi('Tourism / पर्यटन'),
+      'leisure': bi('Leisure / आराम'),
+      'wedding': bi('Wedding / शादी'),
+      'heritage': bi('Heritage / विरासत')
     };
     return labels[purpose] || purpose;
   };
@@ -77,7 +78,7 @@ function RouteSuggestions({ user }) {
       <div className="text-center">
         <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
           <Sparkles className="h-6 w-6 text-yellow-400" />
-          Route Suggestions / मार्ग सुझाव
+          {bi("Route Suggestions / मार्ग सुझाव")}
         </h2>
         <p className="text-slate-400 mt-1">AI-powered recommendations based on your preferences</p>
       </div>
@@ -115,7 +116,7 @@ function RouteSuggestions({ user }) {
         <div>
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
             <Star className="h-5 w-5 text-yellow-400" />
-            For You / आपके लिए
+            {bi("For You / आपके लिए")}
             <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">Personalized</span>
           </h3>
           <div className="grid grid-cols-2 gap-4">
@@ -166,7 +167,7 @@ function RouteSuggestions({ user }) {
       <div>
         <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
           <TrendingUp className="h-5 w-5 text-green-400" />
-          Trending Routes / लोकप्रिय मार्ग
+          {bi("Trending Routes / लोकप्रिय मार्ग")}
         </h3>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           {data?.trending_routes?.map((route, idx) => (
@@ -216,13 +217,13 @@ function RouteSuggestions({ user }) {
       <div>
         <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
           <Plane className="h-5 w-5 text-amber" />
-          All Popular Routes / सभी लोकप्रिय मार्ग
+          {bi("All Popular Routes / सभी लोकप्रिय मार्ग")}
         </h3>
         <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead className="bg-slate-800">
               <tr>
-                <th className="text-left p-3 text-slate-400 font-medium">Route / मार्ग</th>
+                <th className="text-left p-3 text-slate-400 font-medium">{bi("Route / मार्ग")}</th>
                 <th className="text-left p-3 text-slate-400 font-medium">Type</th>
                 <th className="text-left p-3 text-slate-400 font-medium">Duration</th>
                 <th className="text-left p-3 text-slate-400 font-medium">Price Range</th>
@@ -275,7 +276,7 @@ function RouteSuggestions({ user }) {
       {/* User Preferences Summary */}
       {data?.user_preference?.total_bookings > 0 && (
         <div className="bg-slate-800/30 rounded-sm p-4 border border-slate-700">
-          <h4 className="text-slate-400 text-sm mb-2">Your Travel Profile / आपकी यात्रा प्रोफ़ाइल</h4>
+          <h4 className="text-slate-400 text-sm mb-2">{bi("Your Travel Profile / आपकी यात्रा प्रोफ़ाइल")}</h4>
           <div className="flex items-center gap-4">
             <span className="text-white">
               <Users className="h-4 w-4 inline mr-1 text-amber" />

@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function LoyaltyProgram() {
   const [loading, setLoading] = useState(true);
@@ -113,7 +114,7 @@ function LoyaltyProgram() {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Crown className="h-6 w-6 text-yellow-400" />
-            VIP & Loyalty Program / लॉयल्टी प्रोग्राम
+            {bi("VIP & Loyalty Program / लॉयल्टी प्रोग्राम")}
           </h2>
           <p className="text-slate-400 mt-1">Manage customer tiers, points, and corporate accounts</p>
         </div>
@@ -417,8 +418,7 @@ function LoyaltyProgram() {
                 <div className="flex items-center gap-3">
                   {tierIcons[tier.id]}
                   <div>
-                    <h3 className="text-xl font-bold">{tier.name}</h3>
-                    <p className="text-sm opacity-80">{tier.name_hi}</p>
+                    <h3 className="text-xl font-bold">{tr(tier.name, tier.name_hi)}</h3>
                   </div>
                 </div>
                 <span className="text-2xl font-bold">{tier.min_points?.toLocaleString()} pts</span>

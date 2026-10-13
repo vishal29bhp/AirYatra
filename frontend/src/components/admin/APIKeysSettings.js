@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import api from '../../services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function APIKeysSettings({ user }) {
   const [loading, setLoading] = useState(true);
@@ -56,7 +57,7 @@ function APIKeysSettings({ user }) {
     setSaving(true);
     try {
       await api.post('/settings/api-keys', settings);
-      toast.success('API settings saved successfully! / API सेटिंग्स सेव हो गईं!');
+      toast.success(bi('API settings saved successfully! / API सेटिंग्स सेव हो गईं!'));
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to save settings');
     } finally {
@@ -135,7 +136,7 @@ function APIKeysSettings({ user }) {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Key className="h-6 w-6 text-yellow-400" />
-            API Keys Configuration / API कुंजी विन्यास
+            {bi("API Keys Configuration / API कुंजी विन्यास")}
           </h2>
           <p className="text-slate-400 mt-1">
             Configure external verification APIs for GST and PAN
@@ -164,12 +165,9 @@ function APIKeysSettings({ user }) {
       <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 flex items-start gap-3">
         <AlertTriangle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-yellow-200 font-medium">Important Note / महत्वपूर्ण सूचना</p>
+          <p className="text-yellow-200 font-medium">{bi("Important Note / महत्वपूर्ण सूचना")}</p>
           <p className="text-yellow-200/70 text-sm mt-1">
-            API keys are sensitive. Keep them secure and never share. When APIs are disabled, the system uses sample/mocked data for testing.
-          </p>
-          <p className="text-yellow-200/70 text-sm">
-            API कुंजियाँ संवेदनशील हैं। उन्हें सुरक्षित रखें। जब API अक्षम होते हैं, सिस्टम परीक्षण के लिए नमूना डेटा का उपयोग करता है।
+            {tr("API keys are sensitive. Keep them secure and never share. When APIs are disabled, the system uses sample/mocked data for testing.", "API कुंजियाँ संवेदनशील हैं। उन्हें सुरक्षित रखें। जब API अक्षम होते हैं, सिस्टम परीक्षण के लिए नमूना डेटा का उपयोग करता है।")}
           </p>
         </div>
       </div>
@@ -179,7 +177,7 @@ function APIKeysSettings({ user }) {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <Shield className="h-5 w-5 text-amber" />
-            GST Verification API / GST सत्यापन API
+            {bi("GST Verification API / GST सत्यापन API")}
           </h3>
           <div className="flex items-center gap-3">
             {settings.gst_test_result && (
@@ -271,7 +269,7 @@ function APIKeysSettings({ user }) {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
-            PAN Verification API / PAN सत्यापन API
+            {bi("PAN Verification API / PAN सत्यापन API")}
           </h3>
           <div className="flex items-center gap-3">
             {settings.pan_test_result && (
@@ -362,7 +360,7 @@ function APIKeysSettings({ user }) {
       <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <TestTube className="h-5 w-5 text-purple-400" />
-          Sample Test Data / नमूना परीक्षण डेटा
+          {bi("Sample Test Data / नमूना परीक्षण डेटा")}
         </h3>
         <p className="text-slate-400 text-sm mb-4">
           Use these sample numbers for testing when APIs are disabled:

@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { landingAPI, adminAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi } from '../../lib/bilingual';
 
 const statusColors = {
   documents_pending: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
@@ -41,10 +42,10 @@ const statusLabels = {
 };
 
 const docTypeLabels = {
-  collector_noc: 'Collector NOC / कलेक्टर NOC',
-  fire_dept: 'Fire Dept. Acknowledgment / फायर विभाग की पावती',
-  police_station: 'Police Station Acknowledgment / थाना पावती',
-  sp_dcp: 'SP/DCP Acknowledgment / SP/DCP पावती',
+  collector_noc: bi('Collector NOC / कलेक्टर NOC'),
+  fire_dept: bi('Fire Dept. Acknowledgment / फायर विभाग की पावती'),
+  police_station: bi('Police Station Acknowledgment / थाना पावती'),
+  sp_dcp: bi('SP/DCP Acknowledgment / SP/DCP पावती'),
   sp_noc: 'Superintendent of Police NOC',
   fire_noc: 'Fire Department NOC',
   gram_panchayat: 'Gram Panchayat Consent',

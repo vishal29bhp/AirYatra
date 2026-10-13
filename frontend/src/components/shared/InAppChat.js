@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { chatAPI } from '@/services/api';
 import { toast } from 'sonner';
+import { bi, tr } from '../../lib/bilingual';
 
 function InAppChat({ user, bookingId }) {
   const [conversations, setConversations] = useState([]);
@@ -172,7 +173,7 @@ function InAppChat({ user, bookingId }) {
       {/* Conversations List */}
       <div className="w-80 border-r border-slate-800 flex flex-col">
         <div className="p-4 border-b border-slate-800">
-          <h3 className="text-lg font-semibold text-white mb-3">Messages / संदेश</h3>
+          <h3 className="text-lg font-semibold text-white mb-3">{bi("Messages / संदेश")}</h3>
           <div className="relative">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
             <Input
@@ -306,7 +307,7 @@ function InAppChat({ user, bookingId }) {
                 <Input
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Type a message... / संदेश लिखें..."
+                  placeholder={bi("Type a message... / संदेश लिखें...")}
                   className="flex-1 bg-slate-800 border-slate-700"
                   disabled={sending}
                 />
@@ -324,8 +325,7 @@ function InAppChat({ user, bookingId }) {
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
               <MessageSquare className="h-16 w-16 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400 text-lg">Select a conversation</p>
-              <p className="text-slate-500">संदेश देखने के लिए एक चैट चुनें</p>
+              <p className="text-slate-400 text-lg">{tr("Select a conversation", "संदेश देखने के लिए एक चैट चुनें")}</p>
             </div>
           </div>
         )}

@@ -4,6 +4,7 @@ import { CheckCircle2, Loader2, AlertCircle, Plane, Download, Sparkles } from 'l
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import confetti from 'canvas-confetti';
+import { bi, tr } from '../lib/bilingual';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -102,8 +103,8 @@ export default function PaymentSuccessPage() {
               <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
               <div className="absolute inset-0 h-16 w-16 mx-auto rounded-full bg-lime/20 animate-ping" />
             </div>
-            <h1 className="text-xl font-bold text-white">Confirming your payment...</h1>
-            <p className="text-slate-400 text-sm mt-2">भुगतान की पुष्टि हो रही है — please wait, don't close this page</p>
+            <h1 className="text-xl font-bold text-white">{tr("Confirming your payment...", "भुगतान की पुष्टि हो रही है...")}</h1>
+            <p className="text-slate-400 text-sm mt-2">{tr("Please wait and don't close this page.", "कृपया प्रतीक्षा करें, यह पेज बंद न करें।")}</p>
             <div className="mt-6 flex justify-center gap-1">
               {[0, 1, 2].map(i => (
                 <div 
@@ -139,10 +140,10 @@ export default function PaymentSuccessPage() {
             </div>
             
             <h1 className="text-2xl font-bold text-white mb-1">
-              Payment Successful! 
+              {tr("Payment Successful!", "भुगतान सफल!")}
               <span className="inline-block animate-bounce ml-2">🎉</span>
             </h1>
-            <p className="text-green-400 font-medium">भुगतान सफल — booking confirmed!</p>
+            <p className="text-green-400 font-medium">{tr("Booking confirmed!", "बुकिंग की पुष्टि हो गई!")}</p>
             
             {/* Amount display with animation */}
             {txn?.amount && (
@@ -166,7 +167,7 @@ export default function PaymentSuccessPage() {
                 data-testid="view-booking-btn"
               >
                 <Plane className="h-5 w-5 mr-2" />
-                View Booking / बुकिंग देखें
+                {bi("View Booking / बुकिंग देखें")}
               </Button>
               
               <Button 
@@ -188,13 +189,13 @@ export default function PaymentSuccessPage() {
                   } catch (e) { 
                     // Receipt download requires authentication
                     console.warn('Receipt download failed - login required:', e.message);
-                    alert('Please login to download receipt / रसीद डाउनलोड करने के लिए लॉगिन करें');
+                    alert(bi('Please login to download receipt / रसीद डाउनलोड करने के लिए लॉगिन करें'));
                   }
                 }}
                 className="w-full border-lime/50 text-lime hover:bg-lime/10 h-11"
               >
                 <Download className="h-4 w-4 mr-2" />
-                Download Receipt (PDF) / रसीद डाउनलोड
+                {bi("Download Receipt (PDF) / रसीद डाउनलोड")}
               </Button>
               
               <Button 
