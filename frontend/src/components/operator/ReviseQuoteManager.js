@@ -99,7 +99,7 @@ function ReviseQuoteManager({ operator }) {
   const getStatusColor = (status) => {
     switch (status) {
       case 'quote_requested': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'quote_sent': return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      case 'quote_sent': return 'bg-amber/20 text-amber border-amber/30';
       case 'accepted': return 'bg-green-500/20 text-green-400 border-green-500/30';
       case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30';
       default: return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
@@ -130,7 +130,7 @@ function ReviseQuoteManager({ operator }) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <DollarSign className="h-6 w-6 text-orange-400" />
+            <DollarSign className="h-6 w-6 text-lime" />
             Quote Requests / कोट अनुरोध
           </h2>
           <p className="text-slate-400 mt-1">Respond to customer quote requests with revised prices</p>
@@ -142,25 +142,25 @@ function ReviseQuoteManager({ operator }) {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+        <div className="p-4 rounded-sm bg-yellow-500/10 border border-yellow-500/30">
           <p className="text-2xl font-bold text-yellow-400">
             {quoteRequests.filter(r => r.status === 'quote_requested').length}
           </p>
           <p className="text-slate-400 text-sm">Pending Requests</p>
         </div>
-        <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30">
-          <p className="text-2xl font-bold text-blue-400">
+        <div className="p-4 rounded-sm bg-amber/10 border border-amber/30">
+          <p className="text-2xl font-bold text-amber">
             {quoteRequests.filter(r => r.status === 'quote_sent').length}
           </p>
           <p className="text-slate-400 text-sm">Quotes Sent</p>
         </div>
-        <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30">
+        <div className="p-4 rounded-sm bg-green-500/10 border border-green-500/30">
           <p className="text-2xl font-bold text-green-400">
             {quoteRequests.filter(r => r.status === 'accepted').length}
           </p>
           <p className="text-slate-400 text-sm">Accepted</p>
         </div>
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30">
+        <div className="p-4 rounded-sm bg-red-500/10 border border-red-500/30">
           <p className="text-2xl font-bold text-red-400">
             {quoteRequests.filter(r => r.status === 'rejected').length}
           </p>
@@ -180,7 +180,7 @@ function ReviseQuoteManager({ operator }) {
           {quoteRequests.map(request => (
             <div
               key={request.id}
-              className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all"
+              className="p-4 rounded-sm bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all"
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -212,7 +212,7 @@ function ReviseQuoteManager({ operator }) {
                   
                   <div className="flex items-center gap-4 text-sm">
                     <span className="text-slate-400">
-                      Customer Estimate: <span className="text-orange-400 font-medium">₹{(request.estimated_price || 0).toLocaleString()}</span>
+                      Customer Estimate: <span className="text-lime font-medium">₹{(request.estimated_price || 0).toLocaleString()}</span>
                     </span>
                     {request.your_quote && (
                       <span className="text-slate-400">
@@ -226,7 +226,7 @@ function ReviseQuoteManager({ operator }) {
                   {request.status === 'quote_requested' && (
                     <Button
                       onClick={() => handleOpenQuoteDialog(request)}
-                      className="bg-orange-500 hover:bg-orange-600"
+                      className="bg-lime text-black hover:bg-lime/90"
                     >
                       <Send className="h-4 w-4 mr-2" />
                       Send Quote
@@ -256,7 +256,7 @@ function ReviseQuoteManager({ operator }) {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-orange-400" />
+              <Calculator className="h-5 w-5 text-lime" />
               Send Revised Quote / संशोधित कोट भेजें
             </DialogTitle>
           </DialogHeader>
@@ -272,7 +272,7 @@ function ReviseQuoteManager({ operator }) {
               
               {/* Price Breakdown */}
               <div className="space-y-3">
-                <Label className="text-orange-400">Price Breakdown / मूल्य विवरण</Label>
+                <Label className="text-lime">Price Breakdown / मूल्य विवरण</Label>
                 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
@@ -333,7 +333,7 @@ function ReviseQuoteManager({ operator }) {
               
               {/* Final Quote Amount */}
               <div className="space-y-2">
-                <Label className="text-orange-400">Final Quote Amount / अंतिम कोट राशि *</Label>
+                <Label className="text-lime">Final Quote Amount / अंतिम कोट राशि *</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-2.5 text-slate-400">₹</span>
                   <Input
@@ -349,7 +349,7 @@ function ReviseQuoteManager({ operator }) {
                   variant="ghost"
                   size="sm"
                   onClick={() => setQuoteForm({ ...quoteForm, amount: calculateTotalFromBreakdown() })}
-                  className="text-blue-400"
+                  className="text-amber"
                 >
                   Use calculated total
                 </Button>
@@ -383,14 +383,14 @@ function ReviseQuoteManager({ operator }) {
               </div>
               
               {/* Comparison */}
-              <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
+              <div className="p-3 rounded-lg bg-lime/10 border border-lime/30">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400">Customer's Estimate:</span>
                   <span className="text-slate-300">₹{(selectedRequest.estimated_price || 0).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center mt-1">
-                  <span className="text-orange-400 font-medium">Your Quote:</span>
-                  <span className="text-orange-400 font-bold text-lg">₹{(parseFloat(quoteForm.amount) || 0).toLocaleString()}</span>
+                  <span className="text-lime font-medium">Your Quote:</span>
+                  <span className="text-lime font-bold text-lg">₹{(parseFloat(quoteForm.amount) || 0).toLocaleString()}</span>
                 </div>
                 {quoteForm.amount && selectedRequest.estimated_price && (
                   <p className="text-xs mt-2 text-slate-500">
@@ -409,7 +409,7 @@ function ReviseQuoteManager({ operator }) {
             <Button
               onClick={handleSubmitQuote}
               disabled={submitting || !quoteForm.amount}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {submitting ? (
                 <>

@@ -73,7 +73,7 @@ function PilotDutyWidget() {
     const percentage = Math.min((hours / maxHours) * 100, 100);
     let color = 'bg-green-500';
     if (hours > 12) color = 'bg-red-500';
-    else if (hours >= 8) color = 'bg-orange-500';
+    else if (hours >= 8) color = 'bg-amber-500';
     
     return (
       <div className="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
@@ -107,12 +107,12 @@ function PilotDutyWidget() {
           </div>
           <div className="text-2xl font-bold text-red-400 mt-1">{pilotData.summary.red_flag_count || 0}</div>
         </div>
-        <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
-          <div className="flex items-center gap-2 text-orange-400">
+        <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/30">
+          <div className="flex items-center gap-2 text-amber-400">
             <Clock className="h-4 w-4" />
             <span className="text-sm">Orange Flag (8-12h)</span>
           </div>
-          <div className="text-2xl font-bold text-orange-400 mt-1">{pilotData.summary.orange_flag_count || 0}</div>
+          <div className="text-2xl font-bold text-amber-400 mt-1">{pilotData.summary.orange_flag_count || 0}</div>
         </div>
         <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30">
           <div className="flex items-center gap-2 text-green-400">
@@ -131,7 +131,7 @@ function PilotDutyWidget() {
           {pilotData.pilots.map((pilot, idx) => (
             <div key={idx} className={`p-4 rounded-lg ${
               pilot.duty_flag === 'red' ? 'bg-red-500/10 border border-red-500/30' :
-              pilot.duty_flag === 'orange' ? 'bg-orange-500/10 border border-orange-500/30' :
+              pilot.duty_flag === 'orange' ? 'bg-amber-500/10 border border-amber-500/30' :
               'bg-slate-800/50 border border-slate-700'
             }`}>
               <div className="flex justify-between items-start mb-2">
@@ -139,7 +139,7 @@ function PilotDutyWidget() {
                   <div className="flex items-center gap-2">
                     <div className={`w-3 h-3 rounded-full ${
                       pilot.duty_flag === 'red' ? 'bg-red-500 animate-pulse' :
-                      pilot.duty_flag === 'orange' ? 'bg-orange-500' :
+                      pilot.duty_flag === 'orange' ? 'bg-amber-500' :
                       'bg-green-500'
                     }`} />
                     <span className="text-white font-medium">{pilot.pilot_name}</span>
@@ -152,7 +152,7 @@ function PilotDutyWidget() {
                 <div className="flex items-center gap-2">
                   <span className={`text-lg font-bold ${
                     pilot.duty_flag === 'red' ? 'text-red-400' :
-                    pilot.duty_flag === 'orange' ? 'text-orange-400' :
+                    pilot.duty_flag === 'orange' ? 'text-amber-400' :
                     'text-green-400'
                   }`}>
                     {pilot.last_24h_hours}h
@@ -194,7 +194,7 @@ function PilotDutyWidget() {
               <div className="mt-2 flex justify-between items-center">
                 <span className={`text-sm ${
                   pilot.duty_flag === 'red' ? 'text-red-400' :
-                  pilot.duty_flag === 'orange' ? 'text-orange-400' :
+                  pilot.duty_flag === 'orange' ? 'text-amber-400' :
                   'text-green-400'
                 }`}>
                   {pilot.duty_status}

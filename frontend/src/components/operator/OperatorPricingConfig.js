@@ -183,7 +183,7 @@ function OperatorPricingConfig() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-300">Loading pricing config...</span>
       </div>
     );
@@ -195,7 +195,7 @@ function OperatorPricingConfig() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <DollarSign className="h-6 w-6 text-orange-500" />
+            <DollarSign className="h-6 w-6 text-lime" />
             Pricing Configuration / मूल्य विन्यास
           </h2>
           <p className="text-slate-400 mt-1">Configure your helicopter pricing / हेलीकॉप्टर प्राइसिंग सेट करें</p>
@@ -219,7 +219,7 @@ function OperatorPricingConfig() {
                 onClick={() => setBasePricing(prev => ({ ...prev, pricing_type: type }))}
                 className={`p-3 rounded-lg border text-center transition-all ${
                   basePricing.pricing_type === type
-                    ? 'bg-orange-500/20 border-orange-500 text-orange-400'
+                    ? 'bg-lime/20 border-lime text-lime'
                     : 'bg-slate-700/50 border-slate-600 text-slate-300 hover:border-slate-500'
                 }`}
               >
@@ -255,7 +255,7 @@ function OperatorPricingConfig() {
           {/* Day Package Pricing */}
           <div className="bg-slate-700/30 rounded-lg p-4">
             <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-blue-400" />
+              <Clock className="h-4 w-4 text-amber" />
               Day Package Pricing / दिवस पैकेज
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -413,7 +413,7 @@ function OperatorPricingConfig() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <Settings className="h-5 w-5 text-blue-500" />
+            <Settings className="h-5 w-5 text-amber" />
             Additional Charges / अतिरिक्त शुल्क
           </CardTitle>
         </CardHeader>
@@ -467,7 +467,7 @@ function OperatorPricingConfig() {
           {/* Waiting Charges */}
           <div className="bg-slate-700/30 rounded-lg p-4">
             <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-              <Clock className="h-4 w-4 text-orange-400" />
+              <Clock className="h-4 w-4 text-lime" />
               Waiting / Ground Holding / प्रतीक्षा शुल्क
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -556,7 +556,7 @@ function OperatorPricingConfig() {
             </div>
           </div>
 
-          <Button onClick={saveAdditionalCharges} disabled={saving} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={saveAdditionalCharges} disabled={saving} className="bg-slate-700 hover:bg-slate-600">
             <Save className="h-4 w-4 mr-2" />
             {saving ? 'Saving...' : 'Save Additional Charges / अतिरिक्त शुल्क सेव करें'}
           </Button>
@@ -564,11 +564,11 @@ function OperatorPricingConfig() {
       </Card>
 
       {/* Info Box */}
-      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+      <div className="bg-amber/10 border border-amber/30 rounded-lg p-4">
         <div className="flex items-start gap-3">
-          <Info className="h-5 w-5 text-blue-400 mt-0.5" />
+          <Info className="h-5 w-5 text-amber mt-0.5" />
           <div>
-            <h4 className="text-blue-400 font-medium">How Pricing Works / प्राइसिंग कैसे काम करती है</h4>
+            <h4 className="text-amber font-medium">How Pricing Works / प्राइसिंग कैसे काम करती है</h4>
             <ul className="text-slate-300 text-sm mt-2 space-y-1">
               <li>• Base pricing is calculated using hourly rate or day packages</li>
               <li>• Dead-leg cost is added for helicopter positioning from base</li>

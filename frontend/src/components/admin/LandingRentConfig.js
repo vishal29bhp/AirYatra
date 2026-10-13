@@ -227,7 +227,7 @@ function LandingRentConfig() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
               <Check className="h-5 w-5 text-green-400" />
@@ -238,7 +238,7 @@ function LandingRentConfig() {
             </div>
           </div>
         </div>
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-yellow-500/20 rounded-lg">
               <DollarSign className="h-5 w-5 text-yellow-400" />
@@ -249,10 +249,10 @@ function LandingRentConfig() {
             </div>
           </div>
         </div>
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <MapPin className="h-5 w-5 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <MapPin className="h-5 w-5 text-amber" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{landingPoints.length}</p>
@@ -263,14 +263,14 @@ function LandingRentConfig() {
       </div>
 
       {/* Configured Rents Table */}
-      <div className="glass rounded-xl overflow-hidden">
+      <div className="glass rounded-sm overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-lg font-semibold text-white">Configured Landing Rents</h3>
         </div>
         
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 text-orange-400 animate-spin" />
+            <Loader2 className="h-8 w-8 text-lime animate-spin" />
           </div>
         ) : (
           <table className="w-full">
@@ -299,7 +299,7 @@ function LandingRentConfig() {
                     </div>
                   </td>
                   <td className="p-4">
-                    <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm">
+                    <span className="px-2 py-1 bg-amber/20 text-amber rounded text-sm">
                       {rentTypeLabels[config.rent_type]}
                     </span>
                   </td>
@@ -336,7 +336,7 @@ function LandingRentConfig() {
 
       {/* Pending Configuration */}
       {pointsWithoutConfig.length > 0 && (
-        <div className="glass rounded-xl overflow-hidden">
+        <div className="glass rounded-sm overflow-hidden">
           <div className="p-4 border-b border-slate-700">
             <h3 className="text-lg font-semibold text-white">Pending Rent Configuration</h3>
             <p className="text-sm text-slate-400">These landing points need rent configuration</p>
@@ -358,7 +358,7 @@ function LandingRentConfig() {
                     <p className="text-sm text-slate-400">{point.city}, {point.state}</p>
                   </div>
                 </div>
-                <Button size="sm" className="bg-orange-500 hover:bg-orange-600">
+                <Button size="sm" className="bg-lime text-black hover:bg-lime/90">
                   <Plus className="h-4 w-4 mr-1" /> Configure
                 </Button>
               </div>
@@ -538,7 +538,7 @@ function LandingRentConfig() {
               <Button variant="outline" onClick={() => setShowModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleCreate} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleCreate} className="bg-lime text-black hover:bg-lime/90">
                 Save Configuration
               </Button>
             </div>
@@ -609,13 +609,13 @@ function LandingRentConfig() {
               </Select>
             </div>
 
-            <Button onClick={handleCalculate} className="w-full bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleCalculate} className="w-full bg-lime text-black hover:bg-lime/90">
               Calculate Rent
             </Button>
 
             {/* Result */}
             {calcResult && (
-              <div className="mt-4 p-4 bg-slate-800 rounded-xl">
+              <div className="mt-4 p-4 bg-slate-800 rounded-sm">
                 <h4 className="text-white font-semibold mb-3">{calcResult.landing_point}</h4>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -638,7 +638,7 @@ function LandingRentConfig() {
                   </div>
                   <div className="flex justify-between pt-2 border-t border-slate-700">
                     <span className="text-white font-semibold">Total Rent</span>
-                    <span className="text-orange-400 font-bold text-lg">₹{calcResult.total_rent?.toLocaleString()}</span>
+                    <span className="text-lime font-bold text-lg">₹{calcResult.total_rent?.toLocaleString()}</span>
                   </div>
                 </div>
               </div>

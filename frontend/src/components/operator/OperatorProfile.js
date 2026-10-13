@@ -106,13 +106,13 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
       </div>
 
       {/* Company Header */}
-      <div className="glass p-6 rounded-xl mb-6">
+      <div className="glass p-6 rounded-sm mb-6">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold">
+            <div className="w-24 h-24 rounded-sm bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-3xl font-bold">
               {formData.company_name?.charAt(0)?.toUpperCase() || 'O'}
             </div>
-            <button className="absolute bottom-0 right-0 p-2 bg-blue-500 rounded-full text-white hover:bg-blue-600 transition-colors">
+            <button className="absolute bottom-0 right-0 p-2 bg-slate-700 rounded-full text-white hover:bg-slate-600 transition-colors">
               <Camera className="h-4 w-4" />
             </button>
           </div>
@@ -126,7 +126,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
                 </span>
               )}
               {operator?.license_number && (
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs flex items-center gap-1">
+                <span className="px-2 py-1 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                   <Shield className="h-3 w-3" /> Licensed
                 </span>
               )}
@@ -140,9 +140,9 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-blue-400" />
+            <Building2 className="h-5 w-5 text-amber" />
             Business Information / व्यवसाय जानकारी
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -205,7 +205,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         </div>
 
         {/* Address */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-green-400" />
             Address / पता
@@ -249,7 +249,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         </div>
 
         {/* License Details */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Award className="h-5 w-5 text-yellow-400" />
             License Details / लाइसेंस विवरण
@@ -277,7 +277,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
         </div>
 
         {/* Bank Details */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-purple-400" />
             Bank Details / बैंक विवरण
@@ -326,7 +326,7 @@ function OperatorProfile({ operator, onOperatorUpdate }) {
           <Button
             type="submit"
             disabled={saving}
-            className="bg-blue-500 hover:bg-blue-600 px-8"
+            className="bg-slate-700 hover:bg-slate-600 px-8"
           >
             {saving ? (
               <>

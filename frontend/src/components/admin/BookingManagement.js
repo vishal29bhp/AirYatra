@@ -124,7 +124,7 @@ function BookingManagement() {
               key={status}
               variant={filter === status ? 'default' : 'outline'}
               onClick={() => setFilter(status)}
-              className={`text-sm ${filter === status ? 'bg-orange-500 hover:bg-orange-600' : 'border-slate-600 text-slate-300'}`}
+              className={`text-sm ${filter === status ? 'bg-lime text-black hover:bg-lime/90' : 'border-slate-600 text-slate-300'}`}
             >
               {status.replace('_', ' ').charAt(0).toUpperCase() + status.replace('_', ' ').slice(1)}
             </Button>
@@ -136,7 +136,7 @@ function BookingManagement() {
       {loading ? (
         <div className="text-center py-12 text-slate-400">Loading bookings...</div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-slate-800">
+        <div className="overflow-x-auto rounded-sm border border-slate-800">
           <table className="w-full">
             <thead className="bg-slate-900/80">
               <tr>
@@ -320,7 +320,7 @@ function BookingManagement() {
               <select
                 value={reassignOperatorId}
                 onChange={(e) => setReassignOperatorId(e.target.value)}
-                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
               >
                 <option value="">Select an operator...</option>
                 {operators.map(op => (
@@ -334,7 +334,7 @@ function BookingManagement() {
               <textarea
                 value={reassignReason}
                 onChange={(e) => setReassignReason(e.target.value)}
-                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+                className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
                 rows={3}
                 placeholder="Reason for reassignment..."
               />
@@ -347,7 +347,7 @@ function BookingManagement() {
             <Button
               onClick={handleReassign}
               disabled={processing || !reassignOperatorId}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {processing ? 'Reassigning...' : 'Reassign'}
             </Button>

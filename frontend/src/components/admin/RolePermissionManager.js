@@ -114,7 +114,7 @@ function RolePermissionManager() {
     hr: 'bg-pink-500',
     finance: 'bg-emerald-500',
     marketing: 'bg-indigo-500',
-    operations: 'bg-orange-500',
+    operations: 'bg-amber-500',
     admin: 'bg-red-500',
     super_admin: 'bg-yellow-500'
   };
@@ -128,12 +128,12 @@ function RolePermissionManager() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-orange-400" />
+            <Shield className="h-6 w-6 text-lime" />
             Role & Permission Manager
           </h2>
           <p className="text-slate-400 mt-1">भूमिका और अनुमति प्रबंधन - Manage roles and their permissions</p>
         </div>
-        <Button onClick={() => setShowCreateDialog(true)} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={() => setShowCreateDialog(true)} className="bg-lime text-black hover:bg-lime/90">
           <Plus className="h-4 w-4 mr-2" /> Create Custom Role
         </Button>
       </div>
@@ -143,7 +143,7 @@ function RolePermissionManager() {
         <h3 className="text-lg font-semibold text-white">System Roles (सिस्टम भूमिकाएं)</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {systemRoles.map(role => (
-            <div key={role.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+            <div key={role.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className={`w-3 h-3 rounded-full ${roleColors[role.id] || 'bg-slate-500'}`}></span>
@@ -159,7 +159,7 @@ function RolePermissionManager() {
                   </span>
                 ))}
                 {role.permissions.length > 5 && (
-                  <span className="text-xs text-orange-400">+{role.permissions.length - 5} more</span>
+                  <span className="text-xs text-lime">+{role.permissions.length - 5} more</span>
                 )}
               </div>
             </div>
@@ -171,7 +171,7 @@ function RolePermissionManager() {
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-white">Custom Roles (कस्टम भूमिकाएं)</h3>
         {customRoles.length === 0 ? (
-          <div className="p-8 rounded-xl bg-slate-900/50 border border-dashed border-slate-700 text-center">
+          <div className="p-8 rounded-sm bg-slate-900/50 border border-dashed border-slate-700 text-center">
             <Shield className="h-12 w-12 text-slate-600 mx-auto mb-3" />
             <p className="text-slate-400">No custom roles created yet</p>
             <p className="text-slate-500 text-sm">Click "Create Custom Role" to add one</p>
@@ -179,7 +179,7 @@ function RolePermissionManager() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {customRoles.map(role => (
-              <div key={role.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+              <div key={role.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-cyan-500"></span>
@@ -212,12 +212,12 @@ function RolePermissionManager() {
       </div>
 
       {/* Permission Matrix Preview */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Permission Matrix (अनुमति मैट्रिक्स)</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Object.entries(permissionMatrix).map(([category, data]) => (
             <div key={category} className="space-y-2">
-              <h4 className="text-orange-400 font-medium flex items-center gap-2">
+              <h4 className="text-lime font-medium flex items-center gap-2">
                 <Shield className="h-4 w-4" />
                 {data.label} ({data.label_hi})
               </h4>
@@ -273,7 +273,7 @@ function RolePermissionManager() {
             
             {/* Permission Selection */}
             <div className="space-y-4">
-              <Label className="text-orange-400">Select Permissions * (अनुमतियां चुनें)</Label>
+              <Label className="text-lime">Select Permissions * (अनुमतियां चुनें)</Label>
               {Object.entries(permissionMatrix).map(([category, data]) => (
                 <div key={category} className="p-3 rounded-lg bg-slate-800/50 border border-slate-700">
                   <h5 className="text-white font-medium mb-2">{data.label}</h5>
@@ -298,7 +298,7 @@ function RolePermissionManager() {
           </div>
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowCreateDialog(false)}>Cancel</Button>
-            <Button onClick={handleCreateRole} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleCreateRole} className="bg-lime text-black hover:bg-lime/90">
               <Save className="h-4 w-4 mr-2" /> Create Role
             </Button>
           </DialogFooter>
@@ -340,7 +340,7 @@ function RolePermissionManager() {
             </div>
             
             <div className="space-y-4">
-              <Label className="text-orange-400">Permissions</Label>
+              <Label className="text-lime">Permissions</Label>
               {Object.entries(permissionMatrix).map(([category, data]) => (
                 <div key={category} className="p-3 rounded-lg bg-slate-800/50 border border-slate-700">
                   <h5 className="text-white font-medium mb-2">{data.label}</h5>
@@ -361,7 +361,7 @@ function RolePermissionManager() {
           </div>
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowEditDialog(false)}>Cancel</Button>
-            <Button onClick={handleUpdateRole} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleUpdateRole} className="bg-lime text-black hover:bg-lime/90">
               <Save className="h-4 w-4 mr-2" /> Update Role
             </Button>
           </DialogFooter>

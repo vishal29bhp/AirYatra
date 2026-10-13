@@ -47,7 +47,7 @@ function TwoFactorAuth() {
     } catch (error) { alert(error.response?.data?.detail || 'Failed'); }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-orange-500" /></div>;
+  if (loading) return <div className="flex items-center justify-center h-64"><RefreshCw className="h-8 w-8 animate-spin text-lime" /></div>;
 
   return (
     <div className="space-y-6">
@@ -101,7 +101,7 @@ function TwoFactorAuth() {
           <h2 className="text-lg font-semibold text-white mb-4">Security Tips</h2>
           <div className="space-y-3">
             <div className="flex items-start space-x-3 p-3 bg-slate-900 rounded-lg">
-              <Smartphone className="h-5 w-5 text-blue-400 mt-0.5" />
+              <Smartphone className="h-5 w-5 text-amber mt-0.5" />
               <div>
                 <p className="text-white font-medium">Use Authenticator App</p>
                 <p className="text-slate-400 text-sm">Google Authenticator or Authy recommended</p>
@@ -115,7 +115,7 @@ function TwoFactorAuth() {
               </div>
             </div>
             <div className="flex items-start space-x-3 p-3 bg-slate-900 rounded-lg">
-              <AlertTriangle className="h-5 w-5 text-orange-400 mt-0.5" />
+              <AlertTriangle className="h-5 w-5 text-lime mt-0.5" />
               <div>
                 <p className="text-white font-medium">Never Share Codes</p>
                 <p className="text-slate-400 text-sm">2FA codes are personal and time-sensitive</p>

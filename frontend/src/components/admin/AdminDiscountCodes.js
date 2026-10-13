@@ -195,22 +195,22 @@ function AdminDiscountCodes() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-500/30">
+        <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-sm p-4 border border-purple-500/30">
           <Tag className="h-6 w-6 text-purple-400 mb-2" />
           <p className="text-2xl font-bold text-white">{codes.length}</p>
           <p className="text-slate-400 text-sm">Total Codes</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <Check className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-2xl font-bold text-green-400">{codes.filter(c => c.is_active && !isExpired(c)).length}</p>
           <p className="text-slate-400 text-sm">Active Codes</p>
         </div>
-        <div className="bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl p-4 border border-orange-500/30">
-          <Users className="h-6 w-6 text-orange-400 mb-2" />
-          <p className="text-2xl font-bold text-orange-400">{codes.reduce((sum, c) => sum + (c.times_used || 0), 0)}</p>
+        <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
+          <Users className="h-6 w-6 text-lime mb-2" />
+          <p className="text-2xl font-bold text-lime">{codes.reduce((sum, c) => sum + (c.times_used || 0), 0)}</p>
           <p className="text-slate-400 text-sm">Total Uses</p>
         </div>
-        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-xl p-4 border border-red-500/30">
+        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-sm p-4 border border-red-500/30">
           <Clock className="h-6 w-6 text-red-400 mb-2" />
           <p className="text-2xl font-bold text-red-400">{codes.filter(c => isExpired(c)).length}</p>
           <p className="text-slate-400 text-sm">Expired</p>
@@ -262,7 +262,7 @@ function AdminDiscountCodes() {
       {/* Create/Edit Modal */}
       {showCreate && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
             <h3 className="text-xl font-bold text-white mb-4">
               {editingCode ? 'Edit Discount Code' : 'Create Discount Code'}
             </h3>
@@ -444,13 +444,13 @@ function AdminDiscountCodes() {
           <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
         </div>
       ) : filteredCodes.length === 0 ? (
-        <div className="text-center py-12 bg-slate-800/50 rounded-xl border border-slate-700">
+        <div className="text-center py-12 bg-slate-800/50 rounded-sm border border-slate-700">
           <Tag className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400">No discount codes found</p>
           <p className="text-slate-500 text-sm">Create your first promo code</p>
         </div>
       ) : (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead className="bg-slate-800">
               <tr>
@@ -540,7 +540,7 @@ function AdminDiscountCodes() {
                         onClick={() => startEdit(code)}
                         className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
                       >
-                        <Edit2 className="h-4 w-4 text-blue-400" />
+                        <Edit2 className="h-4 w-4 text-amber" />
                       </button>
                       <button
                         onClick={() => handleDelete(code.id)}

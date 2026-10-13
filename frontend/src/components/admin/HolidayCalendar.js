@@ -70,7 +70,7 @@ function HolidayCalendar() {
       {loading ? (
         <div className="text-slate-400 flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Loading...</div>
       ) : holidays.length === 0 ? (
-        <div className="bg-slate-800/50 rounded-xl p-10 text-center border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-10 text-center border border-slate-700">
           <CalendarDays className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-white font-medium">No holidays added for {year}</p>
           <p className="text-slate-400 text-sm">Add Diwali, Holi, Republic Day etc. — payroll will treat them as paid days</p>
@@ -80,7 +80,7 @@ function HolidayCalendar() {
           {holidays.map((h) => {
             const past = h.date < today;
             return (
-              <div key={h.id} className={`rounded-xl p-4 border flex items-center justify-between gap-3 ${past ? 'bg-slate-800/30 border-slate-700/50 opacity-60' : 'bg-slate-800/50 border-slate-700'}`} data-testid={`holiday-card-${h.id}`}>
+              <div key={h.id} className={`rounded-sm p-4 border flex items-center justify-between gap-3 ${past ? 'bg-slate-800/30 border-slate-700/50 opacity-60' : 'bg-slate-800/50 border-slate-700'}`} data-testid={`holiday-card-${h.id}`}>
                 <div className="flex items-center gap-3">
                   <div className="bg-purple-500/20 rounded-lg px-3 py-2 text-center min-w-[58px]">
                     <p className="text-purple-300 text-lg font-bold leading-none">{new Date(h.date + 'T00:00:00').getDate()}</p>

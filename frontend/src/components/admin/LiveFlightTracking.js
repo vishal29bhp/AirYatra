@@ -39,12 +39,12 @@ function LiveFlightTracking() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'preparing': return 'bg-blue-500';
+      case 'preparing': return 'bg-slate-700';
       case 'taxiing': return 'bg-yellow-500';
-      case 'takeoff': return 'bg-orange-500';
+      case 'takeoff': return 'bg-lime text-black';
       case 'cruising': return 'bg-green-500 animate-pulse';
       case 'descending': return 'bg-purple-500';
-      case 'landing': return 'bg-orange-500';
+      case 'landing': return 'bg-lime text-black';
       case 'landed': return 'bg-gray-500';
       default: return 'bg-slate-500';
     }
@@ -73,7 +73,7 @@ function LiveFlightTracking() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -103,14 +103,14 @@ function LiveFlightTracking() {
             <p className="text-3xl font-bold text-white">{dashboard.active_flights_count}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-blue-400 mb-2">
+            <div className="flex items-center space-x-2 text-amber mb-2">
               <Clock className="h-5 w-5" />
               <span className="text-sm">Flights Today</span>
             </div>
             <p className="text-2xl font-bold text-white">{dashboard.total_flights_today}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-orange-400 mb-2">
+            <div className="flex items-center space-x-2 text-lime mb-2">
               <Navigation className="h-5 w-5" />
               <span className="text-sm">Status</span>
             </div>
@@ -145,7 +145,7 @@ function LiveFlightTracking() {
                 key={flight.id}
                 onClick={() => viewFlight(flight.id)}
                 className={`p-4 cursor-pointer hover:bg-slate-700/50 transition-colors ${
-                  selectedFlight?.id === flight.id ? 'bg-orange-500/20 border-l-4 border-orange-500' : ''
+                  selectedFlight?.id === flight.id ? 'bg-lime/20 border-l-4 border-lime' : ''
                 }`}
               >
                 <div className="flex justify-between items-start">
@@ -176,7 +176,7 @@ function LiveFlightTracking() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center">
-                    <Plane className="h-5 w-5 mr-2 text-orange-400" />
+                    <Plane className="h-5 w-5 mr-2 text-lime" />
                     {selectedFlight.aircraft_registration}
                   </h2>
                   <p className="text-slate-400">Booking: {selectedFlight.booking_id?.slice(0, 8)}...</p>
@@ -188,7 +188,7 @@ function LiveFlightTracking() {
 
               <div className="bg-slate-900 rounded-lg h-64 flex items-center justify-center mb-6 relative">
                 <div className="text-center z-10">
-                  <MapPin className="h-16 w-16 mx-auto text-orange-500 mb-2" />
+                  <MapPin className="h-16 w-16 mx-auto text-lime mb-2" />
                   <p className="text-white font-medium">
                     {selectedFlight.current_position?.latitude?.toFixed(4)}, {selectedFlight.current_position?.longitude?.toFixed(4)}
                   </p>
@@ -196,7 +196,7 @@ function LiveFlightTracking() {
                     href={`https://www.google.com/maps?q=${selectedFlight.current_position?.latitude},${selectedFlight.current_position?.longitude}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-orange-400 text-sm hover:underline"
+                    className="text-lime text-sm hover:underline"
                   >
                     View on Google Maps →
                   </a>
@@ -205,7 +205,7 @@ function LiveFlightTracking() {
 
               <div className="grid grid-cols-4 gap-4">
                 <div className="bg-slate-900 rounded-lg p-4 text-center">
-                  <Navigation className="h-5 w-5 mx-auto text-blue-400 mb-2" />
+                  <Navigation className="h-5 w-5 mx-auto text-amber mb-2" />
                   <p className="text-2xl font-bold text-white">{Math.round(selectedFlight.current_position?.heading || 0)}°</p>
                   <p className="text-slate-400 text-xs">Heading</p>
                 </div>
@@ -215,7 +215,7 @@ function LiveFlightTracking() {
                   <p className="text-slate-400 text-xs">Altitude (ft)</p>
                 </div>
                 <div className="bg-slate-900 rounded-lg p-4 text-center">
-                  <Clock className="h-5 w-5 mx-auto text-orange-400 mb-2" />
+                  <Clock className="h-5 w-5 mx-auto text-lime mb-2" />
                   <p className="text-2xl font-bold text-white">{Math.round(selectedFlight.current_position?.speed_knots || 0)}</p>
                   <p className="text-slate-400 text-xs">Speed (kts)</p>
                 </div>

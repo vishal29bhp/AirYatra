@@ -42,7 +42,7 @@ function JourneyOTPManager({ operator }) {
     const colors = {
       confirmed: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
       pilot_enroute: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      pickup_verified: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+      pickup_verified: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
       in_flight: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
       awaiting_completion_otp: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
       completed: 'bg-green-500/20 text-green-400 border-green-500/30'
@@ -165,14 +165,14 @@ function JourneyOTPManager({ operator }) {
       </div>
 
       {/* Journey Flow Guide */}
-      <div className="p-4 rounded-lg bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-500/30">
+      <div className="p-4 rounded-lg bg-gradient-to-r to-purple-900/30 border border-amber/30">
         <h3 className="text-white font-semibold mb-3">Journey OTP Flow / यात्रा OTP प्रक्रिया</h3>
         <div className="flex items-center gap-2 text-sm flex-wrap">
-          <span className="px-3 py-1 rounded bg-blue-500/20 text-blue-400">1. Assign Pilot</span>
+          <span className="px-3 py-1 rounded bg-amber/20 text-amber">1. Assign Pilot</span>
           <span className="text-slate-500">→</span>
           <span className="px-3 py-1 rounded bg-yellow-500/20 text-yellow-400">2. Pickup OTP</span>
           <span className="text-slate-500">→</span>
-          <span className="px-3 py-1 rounded bg-orange-500/20 text-orange-400">3. Start Journey OTP</span>
+          <span className="px-3 py-1 rounded bg-lime/20 text-lime">3. Start Journey OTP</span>
           <span className="text-slate-500">→</span>
           <span className="px-3 py-1 rounded bg-purple-500/20 text-purple-400">4. In Flight</span>
           <span className="text-slate-500">→</span>
@@ -250,7 +250,7 @@ function JourneyOTPManager({ operator }) {
                     <Button
                       onClick={() => handleInitiatePickup(booking)}
                       disabled={!selectedPilot || processingOTP}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-slate-700 hover:bg-slate-600"
                     >
                       <Send className="h-4 w-4 mr-2" />
                       {processingOTP ? 'Sending...' : 'Initiate Pickup'}
@@ -273,7 +273,7 @@ function JourneyOTPManager({ operator }) {
                 {booking.journey_status === 'pickup_verified' && (
                   <Button
                     onClick={() => openOTPVerification(booking, 'start_journey')}
-                    className="bg-orange-600 hover:bg-orange-700"
+                    className="bg-lime text-black hover:bg-lime/90"
                   >
                     <Play className="h-4 w-4 mr-2" />
                     Enter Start Journey OTP
@@ -350,7 +350,7 @@ function JourneyOTPManager({ operator }) {
         <DialogContent className="bg-slate-900 border-slate-800">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Key className="h-5 w-5 text-orange-400" />
+              <Key className="h-5 w-5 text-lime" />
               Enter OTP / OTP दर्ज करें
             </DialogTitle>
           </DialogHeader>
@@ -389,7 +389,7 @@ function JourneyOTPManager({ operator }) {
             <Button 
               onClick={handleVerifyOTP} 
               disabled={processingOTP || otpInput.length !== 6}
-              className="bg-orange-600 hover:bg-orange-700"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {processingOTP ? 'Verifying...' : 'Verify OTP'}
             </Button>

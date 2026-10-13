@@ -90,14 +90,14 @@ function FleetMaintenance() {
   const priorityColors = {
     low: 'bg-slate-500',
     medium: 'bg-blue-500',
-    high: 'bg-orange-500',
+    high: 'bg-amber-500',
     critical: 'bg-red-500'
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -108,7 +108,7 @@ function FleetMaintenance() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Wrench className="h-6 w-6 text-orange-400" />
+            <Wrench className="h-6 w-6 text-lime" />
             Fleet Maintenance / फ्लीट मेंटेनेंस
           </h2>
           <p className="text-slate-400 mt-1">Aircraft maintenance scheduling, parts inventory & compliance</p>
@@ -134,7 +134,7 @@ function FleetMaintenance() {
               if (tab.id === 'compliance') loadCompliance();
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
-              activeTab === tab.id ? 'bg-orange-500 text-white' : 'text-slate-400 hover:bg-slate-800'
+              activeTab === tab.id ? 'bg-lime text-black' : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
             <tab.icon className="h-4 w-4" />
@@ -148,7 +148,7 @@ function FleetMaintenance() {
         <div className="space-y-6">
           {/* Alert Banner */}
           {(dashboard.overdue > 0 || dashboard.critical_priority > 0) && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-sm p-4">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
                 <div>
@@ -163,10 +163,10 @@ function FleetMaintenance() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <Calendar className="h-5 w-5 text-blue-400" />
+                <div className="p-2 bg-amber/20 rounded-lg">
+                  <Calendar className="h-5 w-5 text-amber" />
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs">Upcoming</p>
@@ -175,7 +175,7 @@ function FleetMaintenance() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-yellow-500/20 rounded-lg">
                   <Wrench className="h-5 w-5 text-yellow-400" />
@@ -187,7 +187,7 @@ function FleetMaintenance() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-red-500/20 rounded-lg">
                   <AlertTriangle className="h-5 w-5 text-red-400" />
@@ -199,19 +199,19 @@ function FleetMaintenance() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-orange-500/20 rounded-lg">
-                  <Clock className="h-5 w-5 text-orange-400" />
+                <div className="p-2 bg-lime/20 rounded-lg">
+                  <Clock className="h-5 w-5 text-lime" />
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs">Critical</p>
-                  <p className="text-orange-400 text-xl font-bold">{dashboard.critical_priority}</p>
+                  <p className="text-lime text-xl font-bold">{dashboard.critical_priority}</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-500/20 rounded-lg">
                   <Package className="h-5 w-5 text-purple-400" />
@@ -223,7 +223,7 @@ function FleetMaintenance() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <Shield className="h-5 w-5 text-green-400" />
@@ -237,7 +237,7 @@ function FleetMaintenance() {
           </div>
 
           {/* Recent Maintenance */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <h3 className="text-white font-semibold mb-4">Recent Maintenance</h3>
             <div className="space-y-3">
               {dashboard.recent_maintenance?.map(item => (
@@ -295,12 +295,12 @@ function FleetMaintenance() {
                 <option value="overhaul">Overhaul</option>
               </select>
             </div>
-            <Button className="bg-orange-500 hover:bg-orange-600">
+            <Button className="bg-lime text-black hover:bg-lime/90">
               <Plus className="h-4 w-4 mr-2" /> Schedule Maintenance
             </Button>
           </div>
 
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <table className="w-full">
               <thead className="bg-slate-900">
                 <tr>
@@ -380,7 +380,7 @@ function FleetMaintenance() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {parts.map(part => (
-              <div key={part.id} className={`bg-slate-800/50 rounded-xl p-4 border ${
+              <div key={part.id} className={`bg-slate-800/50 rounded-sm p-4 border ${
                 part.quantity <= part.min_quantity ? 'border-red-500/50' : 'border-slate-700'
               }`}>
                 <div className="flex items-start justify-between">
@@ -419,7 +419,7 @@ function FleetMaintenance() {
           </div>
 
           {parts.length === 0 && (
-            <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
               <Package className="h-12 w-12 text-slate-500 mx-auto mb-4" />
               <p className="text-white font-medium">No Parts in Inventory</p>
               <p className="text-slate-400 text-sm">Add parts to track inventory</p>
@@ -437,7 +437,7 @@ function FleetMaintenance() {
             </Button>
           </div>
 
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <table className="w-full">
               <thead className="bg-slate-900">
                 <tr>

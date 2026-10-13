@@ -202,7 +202,7 @@ function AttendancePayroll() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -272,7 +272,7 @@ function AttendancePayroll() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition ${
-              activeTab === tab.id ? 'bg-orange-500 text-white' : 'text-slate-400 hover:bg-slate-800'
+              activeTab === tab.id ? 'bg-lime text-black' : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
             <tab.icon className="h-4 w-4" />
@@ -307,18 +307,18 @@ function AttendancePayroll() {
           </div>
           {/* Summary */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <p className="text-slate-400 text-sm">Total Employees</p>
               <p className="text-white text-2xl font-bold">{attendanceReport.summary?.total_employees}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <p className="text-slate-400 text-sm">Avg. Present Days</p>
               <p className="text-green-400 text-2xl font-bold">{attendanceReport.summary?.avg_present_days}</p>
             </div>
           </div>
 
           {/* Employee List */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-slate-900/50">
@@ -374,7 +374,7 @@ function AttendancePayroll() {
       {activeTab === 'leaves' && (
         <div className="space-y-4">
           {pendingLeaves.length === 0 ? (
-            <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
               <Check className="h-12 w-12 text-green-400 mx-auto mb-4" />
               <p className="text-white font-medium">No pending leave requests</p>
               <p className="text-slate-400 text-sm">All leave applications have been processed</p>
@@ -382,7 +382,7 @@ function AttendancePayroll() {
           ) : (
             <div className="space-y-4">
               {pendingLeaves.map((leave, idx) => (
-                <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <div key={idx} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-white font-semibold">{leave.employee_name}</p>
@@ -427,10 +427,10 @@ function AttendancePayroll() {
       {activeTab === 'payroll' && (
         <div className="space-y-4">
           {/* Auto-run settings */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 flex flex-wrap items-center justify-between gap-3" data-testid="payroll-auto-run-card">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 flex flex-wrap items-center justify-between gap-3" data-testid="payroll-auto-run-card">
             <div>
               <p className="text-white font-medium flex items-center gap-2">
-                <RefreshCw className="h-4 w-4 text-orange-400" />
+                <RefreshCw className="h-4 w-4 text-lime" />
                 Payroll Auto-Run / ऑटो पेरोल
                 <span className={`px-2 py-0.5 rounded text-xs ${autoRun?.enabled ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
                   {autoRun?.enabled ? 'ON' : 'OFF'}
@@ -465,7 +465,7 @@ function AttendancePayroll() {
             <Button
               onClick={generatePayroll}
               disabled={generatingPayroll}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {generatingPayroll ? (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -478,13 +478,13 @@ function AttendancePayroll() {
 
           {/* Payroll Records */}
           {payrollRecords.length === 0 ? (
-            <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
               <FileText className="h-12 w-12 text-slate-500 mx-auto mb-4" />
               <p className="text-white font-medium">No payroll records</p>
               <p className="text-slate-400 text-sm">Click "Generate Payroll" to create salary slips</p>
             </div>
           ) : (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+            <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-slate-900/50">
@@ -523,7 +523,7 @@ function AttendancePayroll() {
                         <td className="p-4 text-center">
                           <span className={`px-2 py-1 rounded text-xs ${
                             record.status === 'paid' ? 'bg-green-500/20 text-green-400' :
-                            record.status === 'approved' ? 'bg-blue-500/20 text-blue-400' :
+                            record.status === 'approved' ? 'bg-amber/20 text-amber' :
                             'bg-yellow-500/20 text-yellow-400'
                           }`}>
                             {record.status?.toUpperCase()}
@@ -571,7 +571,7 @@ function AttendancePayroll() {
       {/* Config Tab */}
       {activeTab === 'config' && (
         <div className="space-y-6">
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-4">Salary Configuration</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

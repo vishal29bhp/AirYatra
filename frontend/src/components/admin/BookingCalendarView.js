@@ -136,7 +136,7 @@ export default function BookingCalendarView() {
     if (status === 'paid') {
       return <Badge className="bg-blue-500/20 text-blue-400 border-0"><CreditCard className="h-3 w-3 mr-1" />Advance Paid</Badge>;
     }
-    return <Badge className="bg-orange-500/20 text-orange-400 border-0"><AlertTriangle className="h-3 w-3 mr-1" />Payment Pending</Badge>;
+    return <Badge className="bg-amber-500/20 text-amber-400 border-0"><AlertTriangle className="h-3 w-3 mr-1" />Payment Pending</Badge>;
   };
 
   // Custom day render for calendar
@@ -155,14 +155,14 @@ export default function BookingCalendarView() {
             <div 
               key={i} 
               className={`w-1.5 h-1.5 rounded-full ${
-                allPaid ? 'bg-green-500' : hasPartial ? 'bg-blue-500' : 'bg-orange-500'
+                allPaid ? 'bg-green-500' : hasPartial ? 'bg-slate-700' : 'bg-amber-500'
               }`}
             />
           ))
         ) : (
           <div className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-            allPaid ? 'bg-green-500' : hasPartial ? 'bg-blue-500' : 'bg-orange-500'
-          } text-white`}>
+            allPaid ? 'bg-green-500 text-white' : hasPartial ? 'bg-slate-700 text-white' : 'bg-amber-500 text-black'
+          }`}>
             {dayBookings.length}
           </div>
         )}
@@ -193,7 +193,7 @@ export default function BookingCalendarView() {
       <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <CalendarIcon className="h-7 w-7 text-orange-500" />
+            <CalendarIcon className="h-7 w-7 text-lime" />
             Flight Calendar
           </h1>
           <p className="text-slate-400 mt-1">View all upcoming flights with payment status</p>
@@ -202,7 +202,7 @@ export default function BookingCalendarView() {
           <Button 
             onClick={sendBulkReminders}
             variant="outline"
-            className="border-orange-500 text-orange-400 hover:bg-orange-500/20"
+            className="border-lime text-lime hover:bg-lime/20"
             disabled={sendingReminders}
             data-testid="bulk-reminders-btn"
           >
@@ -265,8 +265,8 @@ export default function BookingCalendarView() {
                 onMonthChange={setCurrentMonth}
                 className="rounded-md"
                 classNames={{
-                  day_selected: "bg-orange-500 text-white hover:bg-orange-600",
-                  day_today: "bg-slate-700 text-orange-400",
+                  day_selected: "bg-lime text-black hover:bg-lime/90",
+                  day_today: "bg-slate-700 text-lime",
                   day: "relative h-10 w-10 text-slate-300 hover:bg-slate-700 rounded-lg",
                 }}
                 components={{
@@ -287,11 +287,11 @@ export default function BookingCalendarView() {
                 <span className="text-slate-400">Fully Paid</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
                 <span className="text-slate-400">Advance Paid</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-orange-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
                 <span className="text-slate-400">Payment Pending</span>
               </div>
             </div>
@@ -303,7 +303,7 @@ export default function BookingCalendarView() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <CardTitle className="text-white flex items-center gap-2">
-                <Plane className="h-5 w-5 text-orange-500" />
+                <Plane className="h-5 w-5 text-lime" />
                 {selectedDate.toLocaleDateString('en-IN', { 
                   weekday: 'long', 
                   day: 'numeric', 
@@ -311,7 +311,7 @@ export default function BookingCalendarView() {
                   year: 'numeric'
                 })}
                 {selectedDateBookings.length > 0 && (
-                  <Badge className="bg-orange-500/20 text-orange-400 border-0 ml-2">
+                  <Badge className="bg-amber-500/20 text-amber-400 border-0 ml-2">
                     {selectedDateBookings.length} flight{selectedDateBookings.length !== 1 ? 's' : ''}
                   </Badge>
                 )}
@@ -322,7 +322,7 @@ export default function BookingCalendarView() {
                 <Button 
                   size="sm" 
                   variant={filterStatus === 'all' ? 'default' : 'outline'}
-                  className={filterStatus === 'all' ? 'bg-orange-500' : 'border-slate-600 text-slate-400'}
+                  className={filterStatus === 'all' ? 'bg-lime text-black' : 'border-slate-600 text-slate-400'}
                   onClick={() => setFilterStatus('all')}
                 >
                   All
@@ -338,7 +338,7 @@ export default function BookingCalendarView() {
                 <Button 
                   size="sm" 
                   variant={filterStatus === 'pending' ? 'default' : 'outline'}
-                  className={filterStatus === 'pending' ? 'bg-orange-600' : 'border-slate-600 text-slate-400'}
+                  className={filterStatus === 'pending' ? 'bg-lime text-black' : 'border-slate-600 text-slate-400'}
                   onClick={() => setFilterStatus('pending')}
                 >
                   Pending
@@ -349,7 +349,7 @@ export default function BookingCalendarView() {
           <CardContent>
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+                <RefreshCw className="h-8 w-8 animate-spin text-lime" />
               </div>
             ) : filteredBookings.length === 0 ? (
               <div className="text-center py-12">
@@ -362,13 +362,13 @@ export default function BookingCalendarView() {
                 {filteredBookings.map((booking, idx) => (
                   <div 
                     key={idx}
-                    className="bg-slate-900/50 border border-slate-700 rounded-xl p-4 hover:border-orange-500/50 transition-colors"
+                    className="bg-slate-900/50 border border-slate-700 rounded-sm p-4 hover:border-lime/50 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         {/* Route */}
                         <div className="flex items-center gap-2 text-white font-semibold">
-                          <MapPin className="h-4 w-4 text-orange-500" />
+                          <MapPin className="h-4 w-4 text-lime" />
                           {booking.from_location || 'Origin'} → {booking.to_location || 'Destination'}
                         </div>
                         
@@ -384,7 +384,7 @@ export default function BookingCalendarView() {
                               {booking.departure_time}
                             </span>
                           )}
-                          <span className="text-orange-400 font-mono text-xs">
+                          <span className="text-lime font-mono text-xs">
                             #{booking.inquiry_number || booking.booking_number || booking.id?.slice(0, 8)}
                           </span>
                         </div>
@@ -404,7 +404,7 @@ export default function BookingCalendarView() {
                       <div className="text-right">
                         {getPaymentBadge(booking)}
                         {booking.payment_status === 'paid' && (
-                          <p className="text-xs text-orange-400 mt-1">50% pending</p>
+                          <p className="text-xs text-lime mt-1">50% pending</p>
                         )}
                       </div>
                     </div>

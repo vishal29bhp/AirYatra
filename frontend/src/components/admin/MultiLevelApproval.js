@@ -119,7 +119,7 @@ function MultiLevelApproval() {
     const colors = {
       1: 'bg-blue-500/20 text-blue-400',
       2: 'bg-purple-500/20 text-purple-400',
-      3: 'bg-orange-500/20 text-orange-400',
+      3: 'bg-amber-500/20 text-amber-400',
       4: 'bg-red-500/20 text-red-400'
     };
     const labels = {
@@ -140,7 +140,7 @@ function MultiLevelApproval() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <CheckCircle className="h-6 w-6 text-orange-400" />
+            <CheckCircle className="h-6 w-6 text-lime" />
             Multi-Level Approval Workflow
           </h2>
           <p className="text-slate-400 mt-1">बहु-स्तरीय अनुमोदन - Manage approval requests with escalation</p>
@@ -154,7 +154,7 @@ function MultiLevelApproval() {
       <div className="grid grid-cols-4 gap-4">
         <button
           onClick={() => setSelectedStatus('pending')}
-          className={`p-4 rounded-xl border transition-all ${selectedStatus === 'pending' ? 'bg-yellow-500/20 border-yellow-500' : 'bg-slate-900/50 border-slate-800'}`}
+          className={`p-4 rounded-sm border transition-all ${selectedStatus === 'pending' ? 'bg-yellow-500/20 border-yellow-500' : 'bg-slate-900/50 border-slate-800'}`}
         >
           <div className="flex items-center gap-3">
             <Clock className={`h-8 w-8 ${selectedStatus === 'pending' ? 'text-yellow-400' : 'text-slate-500'}`} />
@@ -166,7 +166,7 @@ function MultiLevelApproval() {
         </button>
         <button
           onClick={() => setSelectedStatus('approved')}
-          className={`p-4 rounded-xl border transition-all ${selectedStatus === 'approved' ? 'bg-green-500/20 border-green-500' : 'bg-slate-900/50 border-slate-800'}`}
+          className={`p-4 rounded-sm border transition-all ${selectedStatus === 'approved' ? 'bg-green-500/20 border-green-500' : 'bg-slate-900/50 border-slate-800'}`}
         >
           <div className="flex items-center gap-3">
             <CheckCircle className={`h-8 w-8 ${selectedStatus === 'approved' ? 'text-green-400' : 'text-slate-500'}`} />
@@ -178,7 +178,7 @@ function MultiLevelApproval() {
         </button>
         <button
           onClick={() => setSelectedStatus('rejected')}
-          className={`p-4 rounded-xl border transition-all ${selectedStatus === 'rejected' ? 'bg-red-500/20 border-red-500' : 'bg-slate-900/50 border-slate-800'}`}
+          className={`p-4 rounded-sm border transition-all ${selectedStatus === 'rejected' ? 'bg-red-500/20 border-red-500' : 'bg-slate-900/50 border-slate-800'}`}
         >
           <div className="flex items-center gap-3">
             <XCircle className={`h-8 w-8 ${selectedStatus === 'rejected' ? 'text-red-400' : 'text-slate-500'}`} />
@@ -190,7 +190,7 @@ function MultiLevelApproval() {
         </button>
         <button
           onClick={() => setSelectedStatus('escalated')}
-          className={`p-4 rounded-xl border transition-all ${selectedStatus === 'escalated' ? 'bg-purple-500/20 border-purple-500' : 'bg-slate-900/50 border-slate-800'}`}
+          className={`p-4 rounded-sm border transition-all ${selectedStatus === 'escalated' ? 'bg-purple-500/20 border-purple-500' : 'bg-slate-900/50 border-slate-800'}`}
         >
           <div className="flex items-center gap-3">
             <ArrowUp className={`h-8 w-8 ${selectedStatus === 'escalated' ? 'text-purple-400' : 'text-slate-500'}`} />
@@ -208,7 +208,7 @@ function MultiLevelApproval() {
           <button
             key={type.id}
             onClick={() => setSelectedType(type.id)}
-            className={`px-3 py-2 rounded-lg transition-all flex items-center gap-2 ${selectedType === type.id ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+            className={`px-3 py-2 rounded-lg transition-all flex items-center gap-2 ${selectedType === type.id ? 'bg-lime text-black' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
           >
             <span>{type.icon}</span>
             <span className="text-sm">{type.label.split('/')[0].trim()}</span>
@@ -227,7 +227,7 @@ function MultiLevelApproval() {
       ) : (
         <div className="space-y-4">
           {approvals.map(approval => (
-            <div key={approval.id} className={`p-4 rounded-xl bg-slate-900/50 border ${getStatusColor(approval.status)}`}>
+            <div key={approval.id} className={`p-4 rounded-sm bg-slate-900/50 border ${getStatusColor(approval.status)}`}>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
@@ -267,7 +267,7 @@ function MultiLevelApproval() {
                   {/* Expand for history */}
                   <button
                     onClick={() => setExpandedApproval(expandedApproval === approval.id ? null : approval.id)}
-                    className="text-sm text-orange-400 mt-2 flex items-center gap-1"
+                    className="text-sm text-lime mt-2 flex items-center gap-1"
                   >
                     {expandedApproval === approval.id ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                     View History

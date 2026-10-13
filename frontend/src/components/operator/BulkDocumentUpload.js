@@ -221,12 +221,12 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-900 rounded-2xl w-full max-w-3xl border border-slate-700 overflow-hidden max-h-[90vh] flex flex-col">
+      <div className="bg-slate-900 rounded-sm w-full max-w-3xl border border-slate-700 overflow-hidden max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="px-6 py-4 border-b border-slate-700 bg-slate-800/50 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <FolderUp className="h-5 w-5 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <FolderUp className="h-5 w-5 text-amber" />
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white">Bulk Document Upload</h3>
@@ -240,9 +240,9 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
 
         {/* Drop Zone */}
         <div 
-          className={`mx-6 mt-6 border-2 border-dashed rounded-xl p-8 text-center transition-all ${
+          className={`mx-6 mt-6 border-2 border-dashed rounded-sm p-8 text-center transition-all ${
             dragActive 
-              ? 'border-blue-500 bg-blue-500/10' 
+              ? 'border-amber bg-amber/10' 
               : 'border-slate-600 hover:border-slate-500'
           }`}
           onDragEnter={handleDrag}
@@ -250,7 +250,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
           onDragOver={handleDrag}
           onDrop={handleDrop}
         >
-          <Upload className={`h-12 w-12 mx-auto mb-4 ${dragActive ? 'text-blue-400' : 'text-slate-500'}`} />
+          <Upload className={`h-12 w-12 mx-auto mb-4 ${dragActive ? 'text-amber' : 'text-slate-500'}`} />
           <p className="text-white font-medium mb-2">
             {dragActive ? 'Drop files here...' : 'Drag & drop files here'}
           </p>
@@ -293,7 +293,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
                 <div className="flex items-center gap-2">
                   <div className="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-blue-500 transition-all duration-300"
+                      className="h-full bg-slate-700 transition-all duration-300"
                       style={{ width: `${overallProgress}%` }}
                     />
                   </div>
@@ -312,7 +312,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
                     className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
                       fileEntry.status === 'success' ? 'bg-green-500/10 border-green-500/30' :
                       fileEntry.status === 'error' ? 'bg-red-500/10 border-red-500/30' :
-                      fileEntry.status === 'uploading' ? 'bg-blue-500/10 border-blue-500/30' :
+                      fileEntry.status === 'uploading' ? 'bg-amber/10 border-amber/30' :
                       'bg-slate-800/50 border-slate-700'
                     }`}
                   >
@@ -323,7 +323,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
                       'bg-slate-700'
                     }`}>
                       {fileEntry.status === 'uploading' ? (
-                        <Loader2 className="h-5 w-5 text-blue-400 animate-spin" />
+                        <Loader2 className="h-5 w-5 text-amber animate-spin" />
                       ) : fileEntry.status === 'success' ? (
                         <CheckCircle className="h-5 w-5 text-green-400" />
                       ) : fileEntry.status === 'error' ? (
@@ -345,7 +345,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
                       {fileEntry.status === 'uploading' && (
                         <div className="w-full h-1 bg-slate-700 rounded-full mt-2 overflow-hidden">
                           <div 
-                            className="h-full bg-blue-500 transition-all duration-200"
+                            className="h-full bg-slate-700 transition-all duration-200"
                             style={{ width: `${fileEntry.progress}%` }}
                           />
                         </div>
@@ -405,7 +405,7 @@ function BulkDocumentUpload({ pilotId, pilotName, onComplete, onClose }) {
             <Button
               onClick={uploadAll}
               disabled={stats.pending === 0 || uploading}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               {uploading ? (
                 <>

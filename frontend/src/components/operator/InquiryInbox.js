@@ -129,7 +129,7 @@ function InquiryInbox({ operator }) {
                     </div>
                     <Button 
                       onClick={() => handleOpenQuoteDialog(inquiry)}
-                      className="bg-orange-500 hover:bg-orange-600"
+                      className="bg-lime text-black hover:bg-lime/90"
                       data-testid={`respond-btn-${inquiry.id}`}
                     >
                       <Send className="h-4 w-4 mr-2" />
@@ -150,7 +150,7 @@ function InquiryInbox({ operator }) {
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           {booking.pickup_landing_point_type === 'airport' && (
-                            <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded text-xs flex items-center gap-1">
+                            <span className="px-2 py-0.5 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                               <Plane className="h-3 w-3" /> Airport
                             </span>
                           )}
@@ -165,7 +165,7 @@ function InquiryInbox({ operator }) {
                             </span>
                           )}
                           {booking.pickup_landing_point_type === 'village_land' && (
-                            <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 rounded text-xs flex items-center gap-1">
+                            <span className="px-2 py-0.5 bg-lime/20 text-lime rounded text-xs flex items-center gap-1">
                               <TreePine className="h-3 w-3" /> Village Land
                             </span>
                           )}
@@ -187,7 +187,7 @@ function InquiryInbox({ operator }) {
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           {booking.drop_landing_point_type === 'airport' && (
-                            <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded text-xs flex items-center gap-1">
+                            <span className="px-2 py-0.5 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                               <Plane className="h-3 w-3" /> Airport
                             </span>
                           )}
@@ -202,7 +202,7 @@ function InquiryInbox({ operator }) {
                             </span>
                           )}
                           {booking.drop_landing_point_type === 'village_land' && (
-                            <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 rounded text-xs flex items-center gap-1">
+                            <span className="px-2 py-0.5 bg-lime/20 text-lime rounded text-xs flex items-center gap-1">
                               <TreePine className="h-3 w-3" /> Village Land
                             </span>
                           )}
@@ -259,10 +259,10 @@ function InquiryInbox({ operator }) {
                   )}
 
                   {booking.ai_price_suggestion && (
-                    <div className="mt-4 p-3 bg-blue-500/10 rounded border border-blue-500/30 flex items-start space-x-2">
-                      <Sparkles className="h-5 w-5 text-blue-400 mt-0.5" />
+                    <div className="mt-4 p-3 bg-amber/10 rounded border border-amber/30 flex items-start space-x-2">
+                      <Sparkles className="h-5 w-5 text-amber mt-0.5" />
                       <div>
-                        <p className="text-sm text-blue-300 font-medium">AI Price Suggestion</p>
+                        <p className="text-sm text-slate-300 font-medium">AI Price Suggestion</p>
                         <p className="text-lg font-bold text-white">
                           ₹{booking.ai_price_suggestion.total_estimated_price?.toLocaleString()}
                         </p>
@@ -362,7 +362,7 @@ function InquiryInbox({ operator }) {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" data-testid="submit-quote-btn">
+              <Button type="submit" className="w-full bg-lime text-black hover:bg-lime/90" data-testid="submit-quote-btn">
                 Submit Quote
               </Button>
             </form>

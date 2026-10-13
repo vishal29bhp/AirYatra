@@ -119,13 +119,13 @@ function InvoiceManagement() {
     sent: 'bg-blue-500',
     paid: 'bg-green-500',
     cancelled: 'bg-red-500',
-    overdue: 'bg-orange-500'
+    overdue: 'bg-amber-500'
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -177,7 +177,7 @@ function InvoiceManagement() {
         <div className="space-y-6">
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <IndianRupee className="h-6 w-6 text-green-400" />
@@ -189,7 +189,7 @@ function InvoiceManagement() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-yellow-500/20 rounded-lg">
                   <AlertTriangle className="h-6 w-6 text-yellow-400" />
@@ -201,7 +201,7 @@ function InvoiceManagement() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-red-500/20 rounded-lg">
                   <Calendar className="h-6 w-6 text-red-400" />
@@ -213,10 +213,10 @@ function InvoiceManagement() {
               </div>
             </div>
             
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <FileText className="h-6 w-6 text-blue-400" />
+                <div className="p-2 bg-amber/20 rounded-lg">
+                  <FileText className="h-6 w-6 text-amber" />
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm">Total Invoices</p>
@@ -227,7 +227,7 @@ function InvoiceManagement() {
           </div>
 
           {/* GST Summary */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <h3 className="text-white font-semibold mb-4">GST Summary (This Month)</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
@@ -280,7 +280,7 @@ function InvoiceManagement() {
           </div>
 
           {/* Invoice List */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <table className="w-full">
               <thead className="bg-slate-900">
                 <tr>
@@ -400,7 +400,7 @@ function InvoiceManagement() {
 
       {/* GST Reports Tab */}
       {activeTab === 'gst' && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-4">GST Report Generator</h3>
           <p className="text-slate-400 mb-6">Generate GST reports for tax filing (GSTR-1, GSTR-3B)</p>
           
@@ -433,7 +433,7 @@ function InvoiceManagement() {
 
       {/* Refunds Tab */}
       {activeTab === 'refunds' && (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <div className="p-4 border-b border-slate-700">
             <h3 className="text-white font-semibold">Refund Requests</h3>
           </div>
@@ -472,7 +472,7 @@ function InvoiceManagement() {
       {/* Create Invoice Modal */}
       {showCreateForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-900 rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 rounded-sm p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-white font-semibold text-lg mb-4">Create New Invoice</h3>
             
             <div className="space-y-4">

@@ -212,7 +212,7 @@ function DocumentTypeMaster() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <FileText className="h-6 w-6 text-orange-400" />
+            <FileText className="h-6 w-6 text-lime" />
             Document Type Master / दस्तावेज़ प्रकार मास्टर
           </h2>
           <p className="text-slate-400 mt-1">Manage document types for all categories</p>
@@ -221,7 +221,7 @@ function DocumentTypeMaster() {
           <Button onClick={seedDefaults} variant="outline" className="border-slate-600">
             <Settings className="h-4 w-4 mr-2" /> Seed Defaults
           </Button>
-          <Button onClick={() => { resetForm(); setEditingType(null); setShowAddModal(true); }} className="bg-orange-500 hover:bg-orange-600">
+          <Button onClick={() => { resetForm(); setEditingType(null); setShowAddModal(true); }} className="bg-lime text-black hover:bg-lime/90">
             <Plus className="h-4 w-4 mr-2" /> Add Type
           </Button>
         </div>
@@ -229,7 +229,7 @@ function DocumentTypeMaster() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 text-slate-400 mb-2">
             <FileText className="h-5 w-5" />
             <span className="text-sm">Total Types</span>
@@ -244,7 +244,7 @@ function DocumentTypeMaster() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`bg-slate-800/50 rounded-xl p-4 border transition-all text-left ${
+              className={`bg-slate-800/50 rounded-sm p-4 border transition-all text-left ${
                 selectedCategory === cat ? `border-${config.color}-500` : 'border-slate-700 hover:border-slate-600'
               }`}
             >
@@ -274,7 +274,7 @@ function DocumentTypeMaster() {
           <button
             onClick={() => setSelectedCategory('all')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              selectedCategory === 'all' ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+              selectedCategory === 'all' ? 'bg-lime text-black' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
             All ({stats.total})
@@ -284,7 +284,7 @@ function DocumentTypeMaster() {
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                selectedCategory === cat ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                selectedCategory === cat ? 'bg-lime text-black' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
               }`}
             >
               {config.label.split('/')[0]} ({stats.byCategory[cat] || 0})
@@ -301,10 +301,10 @@ function DocumentTypeMaster() {
       <div className="space-y-3">
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <RefreshCw className="h-8 w-8 animate-spin text-orange-400" />
+            <RefreshCw className="h-8 w-8 animate-spin text-lime" />
           </div>
         ) : filteredTypes.length === 0 ? (
-          <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+          <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
             <FileText className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 text-lg">No document types found</p>
             <p className="text-slate-500 text-sm mt-2">Click &quot;Seed Defaults&quot; to create standard document types</p>
@@ -318,7 +318,7 @@ function DocumentTypeMaster() {
             return (
               <div 
                 key={type.id}
-                className={`bg-slate-800/50 rounded-xl border transition-all ${
+                className={`bg-slate-800/50 rounded-sm border transition-all ${
                   type.is_active ? 'border-slate-700' : 'border-red-500/30 opacity-60'
                 }`}
               >
@@ -426,7 +426,7 @@ function DocumentTypeMaster() {
       {/* Add/Edit Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-2xl border border-slate-700 max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-2xl border border-slate-700 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-white">
                 {editingType ? 'Edit Document Type' : 'Add Document Type'}
@@ -576,7 +576,7 @@ function DocumentTypeMaster() {
                 <Button type="button" onClick={() => { setShowAddModal(false); setEditingType(null); }} variant="outline" className="flex-1 border-slate-600">
                   Cancel
                 </Button>
-                <Button type="submit" className="flex-1 bg-orange-500 hover:bg-orange-600">
+                <Button type="submit" className="flex-1 bg-lime text-black hover:bg-lime/90">
                   {editingType ? 'Update Type' : 'Create Type'}
                 </Button>
               </div>

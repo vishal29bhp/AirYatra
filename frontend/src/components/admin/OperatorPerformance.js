@@ -43,7 +43,7 @@ function OperatorPerformance() {
   const getPerformanceColor = (score) => {
     if (score >= 90) return 'text-green-400 bg-green-500/20';
     if (score >= 70) return 'text-yellow-400 bg-yellow-500/20';
-    if (score >= 50) return 'text-orange-400 bg-orange-500/20';
+    if (score >= 50) return 'text-lime bg-lime/20';
     return 'text-red-400 bg-red-500/20';
   };
 
@@ -63,7 +63,7 @@ function OperatorPerformance() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <TrendingUp className="h-6 w-6 text-orange-400" />
+            <TrendingUp className="h-6 w-6 text-lime" />
             Operator Performance
           </h2>
           <p className="text-slate-400 mt-1">ऑपरेटर प्रदर्शन - Track and manage operator metrics</p>
@@ -74,7 +74,7 @@ function OperatorPerformance() {
               key={period}
               variant={selectedPeriod === period ? 'default' : 'outline'}
               onClick={() => setSelectedPeriod(period)}
-              className={selectedPeriod === period ? 'bg-orange-500' : ''}
+              className={selectedPeriod === period ? 'bg-lime text-black' : ''}
             >
               {period === '7d' ? '7 Days' : period === '30d' ? '30 Days' : '90 Days'}
             </Button>
@@ -87,7 +87,7 @@ function OperatorPerformance() {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30">
+        <div className="p-4 rounded-sm bg-green-500/10 border border-green-500/30">
           <div className="flex items-center gap-3">
             <Award className="h-8 w-8 text-green-400" />
             <div>
@@ -98,7 +98,7 @@ function OperatorPerformance() {
             </div>
           </div>
         </div>
-        <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+        <div className="p-4 rounded-sm bg-yellow-500/10 border border-yellow-500/30">
           <div className="flex items-center gap-3">
             <Target className="h-8 w-8 text-yellow-400" />
             <div>
@@ -112,11 +112,11 @@ function OperatorPerformance() {
             </div>
           </div>
         </div>
-        <div className="p-4 rounded-xl bg-orange-500/10 border border-orange-500/30">
+        <div className="p-4 rounded-sm bg-lime/10 border border-lime/30">
           <div className="flex items-center gap-3">
-            <Clock className="h-8 w-8 text-orange-400" />
+            <Clock className="h-8 w-8 text-lime" />
             <div>
-              <p className="text-2xl font-bold text-orange-400">
+              <p className="text-2xl font-bold text-lime">
                 {operators.filter(o => {
                   const score = o.performance?.overall_score || 0;
                   return score >= 50 && score < 70;
@@ -126,7 +126,7 @@ function OperatorPerformance() {
             </div>
           </div>
         </div>
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30">
+        <div className="p-4 rounded-sm bg-red-500/10 border border-red-500/30">
           <div className="flex items-center gap-3">
             <AlertTriangle className="h-8 w-8 text-red-400" />
             <div>

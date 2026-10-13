@@ -68,7 +68,7 @@ function PilotDutyTracker() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-400" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -79,7 +79,7 @@ function PilotDutyTracker() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-blue-400" />
+            <Shield className="h-6 w-6 text-amber" />
             Pilot Duty Tracker / पायलट ड्यूटी ट्रैकर
           </h2>
           <p className="text-slate-400 mt-1">DGCA FDTL Compliance Dashboard</p>
@@ -91,22 +91,22 @@ function PilotDutyTracker() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-4 border border-blue-500/30">
-          <User className="h-6 w-6 text-blue-400 mb-2" />
+        <div className="bg-gradient-to-br to-cyan-500/20 rounded-sm p-4 border border-amber/30">
+          <User className="h-6 w-6 text-amber mb-2" />
           <p className="text-3xl font-bold text-white">{data?.summary?.total || 0}</p>
           <p className="text-slate-400 text-sm">Total Pilots / कुल पायलट</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
           <CheckCircle className="h-6 w-6 text-green-400 mb-2" />
           <p className="text-3xl font-bold text-green-400">{data?.summary?.ok || 0}</p>
           <p className="text-slate-400 text-sm">OK Status / सही स्थिति</p>
         </div>
-        <div className="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-sm p-4 border border-yellow-500/30">
           <AlertCircle className="h-6 w-6 text-yellow-400 mb-2" />
           <p className="text-3xl font-bold text-yellow-400">{data?.summary?.watch || 0}</p>
           <p className="text-slate-400 text-sm">Watch Status / निगरानी</p>
         </div>
-        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-xl p-4 border border-red-500/30">
+        <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-sm p-4 border border-red-500/30">
           <AlertTriangle className="h-6 w-6 text-red-400 mb-2" />
           <p className="text-3xl font-bold text-red-400">{data?.summary?.over || 0}</p>
           <p className="text-slate-400 text-sm">Over Limit / सीमा पार</p>
@@ -114,9 +114,9 @@ function PilotDutyTracker() {
       </div>
 
       {/* DGCA Limits Reference */}
-      <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
         <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-          <FileText className="h-5 w-5 text-blue-400" />
+          <FileText className="h-5 w-5 text-amber" />
           DGCA FDTL Limits / DGCA नियम
         </h3>
         <div className="grid grid-cols-4 gap-4 text-sm">
@@ -140,10 +140,10 @@ function PilotDutyTracker() {
       </div>
 
       {/* Pilots List */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Activity className="h-5 w-5 text-orange-400" />
+            <Activity className="h-5 w-5 text-lime" />
             Pilot Duty Status / पायलट ड्यूटी स्थिति
           </h3>
         </div>
@@ -228,7 +228,7 @@ function PilotDutyTracker() {
                       {/* Hours Breakdown */}
                       <div>
                         <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-                          <Timer className="h-4 w-4 text-blue-400" />
+                          <Timer className="h-4 w-4 text-amber" />
                           Flight Hours / उड़ान घंटे
                         </h4>
                         <div className="space-y-2">
@@ -260,7 +260,7 @@ function PilotDutyTracker() {
                       {/* Last Flight & Rest */}
                       <div>
                         <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-                          <Plane className="h-4 w-4 text-orange-400" />
+                          <Plane className="h-4 w-4 text-lime" />
                           Last Flight / अंतिम उड़ान
                         </h4>
                         <div className="space-y-2">

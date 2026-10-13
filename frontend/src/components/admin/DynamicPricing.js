@@ -80,7 +80,7 @@ function DynamicPricing() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -93,7 +93,7 @@ function DynamicPricing() {
           <h1 className="text-2xl font-bold text-white">Dynamic Pricing Engine</h1>
           <p className="text-slate-400">AI-powered price optimization based on demand, season, and more</p>
         </div>
-        <Button onClick={saveConfig} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={saveConfig} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
           <Save className="h-4 w-4 mr-2" />
           {saving ? 'Saving...' : 'Save Config'}
         </Button>
@@ -110,7 +110,7 @@ function DynamicPricing() {
             <p className="text-2xl font-bold text-white">{analysis.popular_routes?.length || 0}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-blue-400 mb-2">
+            <div className="flex items-center space-x-2 text-amber mb-2">
               <DollarSign className="h-5 w-5" />
               <span className="text-sm">Avg Booking Value</span>
             </div>
@@ -128,7 +128,7 @@ function DynamicPricing() {
             </p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-orange-400 mb-2">
+            <div className="flex items-center space-x-2 text-lime mb-2">
               <Settings className="h-5 w-5" />
               <span className="text-sm">Price Range</span>
             </div>
@@ -264,7 +264,7 @@ function DynamicPricing() {
                   />
                 </div>
               </div>
-              <Button onClick={calculateTestPrice} className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button onClick={calculateTestPrice} className="w-full bg-slate-700 hover:bg-slate-600">
                 Calculate Price
               </Button>
             </div>
@@ -283,7 +283,7 @@ function DynamicPricing() {
                 </div>
                 <div className="flex justify-between items-center text-lg font-bold border-t border-slate-700 pt-3">
                   <span className="text-white">Final Price</span>
-                  <span className="text-orange-400">₹{testResult.final_price?.toLocaleString()}</span>
+                  <span className="text-lime">₹{testResult.final_price?.toLocaleString()}</span>
                 </div>
                 {testResult.price_factors?.length > 0 && (
                   <div className="mt-3 space-y-1">
@@ -327,7 +327,7 @@ function DynamicPricing() {
                 <div key={idx} className="flex justify-between items-center p-2 bg-slate-900 rounded">
                   <span className="text-white">{festival.name}</span>
                   <span className="text-slate-400">{festival.date}</span>
-                  <span className="text-orange-400">{festival.multiplier}x</span>
+                  <span className="text-lime">{festival.multiplier}x</span>
                 </div>
               ))}
               {(!config?.festival_dates || config.festival_dates.length === 0) && (
@@ -356,7 +356,7 @@ function DynamicPricing() {
                   <tr key={idx} className="border-b border-slate-700">
                     <td className="py-3 text-white">{route.route}</td>
                     <td className="py-3 text-right text-slate-300">{route.bookings}</td>
-                    <td className="py-3 text-right text-orange-400">₹{route.avg_price?.toLocaleString()}</td>
+                    <td className="py-3 text-right text-lime">₹{route.avg_price?.toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>

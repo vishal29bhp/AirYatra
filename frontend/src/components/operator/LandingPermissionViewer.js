@@ -97,7 +97,7 @@ function LandingPermissionViewer({ operator }) {
                     onClick={() => handleBookingSelect(booking)}
                     className={`w-full text-left p-3 rounded-lg transition-all ${
                       selectedBooking?.id === booking.id
-                        ? 'bg-orange-500/20 border border-orange-500/30'
+                        ? 'bg-lime/20 border border-lime/30'
                         : 'bg-slate-800 hover:bg-slate-700'
                     }`}
                   >
@@ -158,7 +158,7 @@ function LandingPermissionViewer({ operator }) {
                             size="sm"
                             variant="outline"
                             onClick={() => handleViewDetail(permission)}
-                            className="border-orange-500/30 text-orange-400"
+                            className="border-lime/30 text-lime"
                           >
                             <Eye className="h-4 w-4" />
                           </Button>
@@ -204,7 +204,7 @@ function LandingPermissionViewer({ operator }) {
             <div className="space-y-6">
               {/* Location Info */}
               <div className="p-4 rounded-lg bg-slate-800">
-                <h4 className="text-orange-400 font-medium mb-2">Landing Location</h4>
+                <h4 className="text-lime font-medium mb-2">Landing Location</h4>
                 <p className="text-white">{selectedPermission.landing_location || 'Not specified'}</p>
                 {selectedPermission.latitude && selectedPermission.longitude && (
                   <div className="mt-2 p-2 bg-slate-700 rounded">
@@ -219,7 +219,7 @@ function LandingPermissionViewer({ operator }) {
               {/* Customer Info */}
               {selectedPermission.customer_name && (
                 <div className="p-4 rounded-lg bg-slate-800">
-                  <h4 className="text-orange-400 font-medium mb-2">Customer Information</h4>
+                  <h4 className="text-lime font-medium mb-2">Customer Information</h4>
                   <p className="text-white flex items-center"><User className="h-4 w-4 mr-2" />{selectedPermission.customer_name}</p>
                   {selectedPermission.customer_phone && (
                     <p className="text-slate-300 flex items-center mt-1"><Phone className="h-4 w-4 mr-2" />{selectedPermission.customer_phone}</p>
@@ -229,13 +229,13 @@ function LandingPermissionViewer({ operator }) {
 
               {/* Documents */}
               <div className="p-4 rounded-lg bg-slate-800">
-                <h4 className="text-orange-400 font-medium mb-3">Permission Documents</h4>
+                <h4 className="text-lime font-medium mb-3">Permission Documents</h4>
                 {selectedPermission.documents && selectedPermission.documents.length > 0 ? (
                   <div className="space-y-3">
                     {selectedPermission.documents.map((doc, idx) => (
                       <div key={idx} className="flex justify-between items-center p-3 bg-slate-700 rounded">
                         <div className="flex items-center">
-                          <FileText className="h-5 w-5 text-orange-400 mr-3" />
+                          <FileText className="h-5 w-5 text-lime mr-3" />
                           <div>
                             <p className="text-white">{doc.document_type?.replace(/_/g, ' ') || `Document ${idx + 1}`}</p>
                             <p className="text-xs text-slate-400">{doc.file_name || 'File'}</p>
@@ -246,7 +246,7 @@ function LandingPermissionViewer({ operator }) {
                             href={doc.download_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center px-3 py-1 bg-orange-500/20 text-orange-400 rounded hover:bg-orange-500/30"
+                            className="flex items-center px-3 py-1 bg-lime/20 text-lime rounded hover:bg-lime/30"
                           >
                             <Download className="h-4 w-4 mr-1" /> View
                           </a>
@@ -261,7 +261,7 @@ function LandingPermissionViewer({ operator }) {
 
               {/* Approval Info */}
               <div className="p-4 rounded-lg bg-slate-800">
-                <h4 className="text-orange-400 font-medium mb-2">Approval Status</h4>
+                <h4 className="text-lime font-medium mb-2">Approval Status</h4>
                 <div className="flex items-center space-x-2">
                   <span className={`px-3 py-1 rounded-full ${getStatusBadge(selectedPermission.approval_status)}`}>
                     {selectedPermission.approval_status || 'pending'}

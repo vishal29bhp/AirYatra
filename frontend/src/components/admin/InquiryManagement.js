@@ -11,7 +11,7 @@ const STATUS_COLORS = {
   quote_received: { bg: 'bg-blue-500/20', text: 'text-blue-400', label: 'Quote Received' },
   quote_accepted: { bg: 'bg-green-500/20', text: 'text-green-400', label: 'Accepted' },
   passenger_details_filled: { bg: 'bg-purple-500/20', text: 'text-purple-400', label: 'Details Filled' },
-  payment_pending: { bg: 'bg-orange-500/20', text: 'text-orange-400', label: 'Payment Pending' },
+  payment_pending: { bg: 'bg-amber-500/20', text: 'text-amber-400', label: 'Payment Pending' },
   confirmed: { bg: 'bg-green-600/20', text: 'text-green-500', label: 'Confirmed' },
   rejected: { bg: 'bg-red-500/20', text: 'text-red-400', label: 'Rejected' },
   expired: { bg: 'bg-slate-500/20', text: 'text-slate-400', label: 'Expired' },
@@ -87,7 +87,7 @@ function InquiryManagement() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Bell className="h-6 w-6 text-orange-400" />
+            <Bell className="h-6 w-6 text-lime" />
             Inquiry Management / इंक्वायरी प्रबंधन
           </h1>
           <p className="text-slate-400 text-sm mt-1">
@@ -102,19 +102,19 @@ function InquiryManagement() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <p className="text-slate-400 text-sm">Total Inquiries</p>
           <p className="text-white text-2xl font-bold">{stats.total}</p>
         </div>
-        <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-yellow-500/10 rounded-sm p-4 border border-yellow-500/30">
           <p className="text-yellow-400 text-sm">Pending</p>
           <p className="text-yellow-400 text-2xl font-bold">{stats.pending}</p>
         </div>
-        <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/30">
-          <p className="text-blue-400 text-sm">Quote Received</p>
-          <p className="text-blue-400 text-2xl font-bold">{stats.quote_received}</p>
+        <div className="bg-amber/10 rounded-sm p-4 border border-amber/30">
+          <p className="text-amber text-sm">Quote Received</p>
+          <p className="text-amber text-2xl font-bold">{stats.quote_received}</p>
         </div>
-        <div className="bg-green-500/10 rounded-xl p-4 border border-green-500/30">
+        <div className="bg-green-500/10 rounded-sm p-4 border border-green-500/30">
           <p className="text-green-400 text-sm">Accepted</p>
           <p className="text-green-400 text-2xl font-bold">{stats.accepted}</p>
         </div>
@@ -150,10 +150,10 @@ function InquiryManagement() {
       {/* Inquiries List */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="h-8 w-8 text-orange-400 animate-spin" />
+          <RefreshCw className="h-8 w-8 text-lime animate-spin" />
         </div>
       ) : filteredInquiries.length === 0 ? (
-        <div className="text-center py-16 bg-slate-800/50 rounded-xl border border-slate-700">
+        <div className="text-center py-16 bg-slate-800/50 rounded-sm border border-slate-700">
           <Bell className="h-16 w-16 text-slate-600 mx-auto mb-4" />
           <p className="text-slate-400 text-lg">No inquiries found</p>
           <p className="text-slate-500 text-sm mt-1">New inquiries will appear here</p>
@@ -163,14 +163,14 @@ function InquiryManagement() {
           {filteredInquiries.map((inquiry) => (
             <div
               key={inquiry.id}
-              className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-slate-600 transition-colors"
+              className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden hover:border-slate-600 transition-colors"
             >
               {/* Main Row */}
               <div className="p-4 flex items-center justify-between">
                 <div className="flex items-center gap-4 flex-1">
                   {/* Inquiry Number */}
                   <div className="min-w-[120px]">
-                    <p className="text-orange-400 font-mono font-bold">
+                    <p className="text-lime font-mono font-bold">
                       {inquiry.inquiry_number || inquiry.id?.slice(0, 8)}
                     </p>
                     <p className="text-slate-500 text-xs">
@@ -222,7 +222,7 @@ function InquiryManagement() {
                   <Button
                     size="sm"
                     onClick={() => openDetails(inquiry)}
-                    className="bg-orange-500 hover:bg-orange-600"
+                    className="bg-lime text-black hover:bg-lime/90"
                   >
                     <Eye className="h-4 w-4 mr-1" /> View
                   </Button>
@@ -270,7 +270,7 @@ function InquiryManagement() {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Bell className="h-5 w-5 text-orange-400" />
+              <Bell className="h-5 w-5 text-lime" />
               Inquiry Details / इंक्वायरी विवरण
             </DialogTitle>
           </DialogHeader>
@@ -341,13 +341,13 @@ function InquiryManagement() {
                     <p className="text-slate-500 text-xs">{selectedInquiry.drop_district}, {selectedInquiry.drop_state}</p>
                   </div>
                 </div>
-                <p className="text-orange-400 mt-2">Distance: {selectedInquiry.distance_km} KM</p>
+                <p className="text-lime mt-2">Distance: {selectedInquiry.distance_km} KM</p>
               </div>
 
               {/* Pricing */}
-              <div className="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
-                <h4 className="text-orange-400 font-semibold mb-2">Estimated Price</h4>
-                <p className="text-orange-400 text-3xl font-bold">
+              <div className="bg-lime/10 rounded-lg p-4 border border-lime/30">
+                <h4 className="text-lime font-semibold mb-2">Estimated Price</h4>
+                <p className="text-lime text-3xl font-bold">
                   ₹{(selectedInquiry.estimated_price || 0).toLocaleString()}
                 </p>
               </div>
@@ -360,7 +360,7 @@ function InquiryManagement() {
                     {selectedInquiry.operator_responses.map((response, idx) => (
                       <div key={idx} className="flex items-center justify-between p-2 bg-slate-800 rounded">
                         <span className="text-white">{response.operator_name}</span>
-                        <span className="text-orange-400">₹{response.amount?.toLocaleString()}</span>
+                        <span className="text-lime">₹{response.amount?.toLocaleString()}</span>
                       </div>
                     ))}
                   </div>

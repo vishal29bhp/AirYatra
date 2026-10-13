@@ -135,7 +135,7 @@ function InquiryNotifications({ operator }) {
       medical_emergency: 'bg-red-500/20 text-red-400',
       election_tour: 'bg-purple-500/20 text-purple-400',
       company_tour: 'bg-blue-500/20 text-blue-400',
-      temple_yatra: 'bg-orange-500/20 text-orange-400',
+      temple_yatra: 'bg-amber-500/20 text-amber-400',
       pilgrimage: 'bg-yellow-500/20 text-yellow-400',
       film_shooting: 'bg-cyan-500/20 text-cyan-400',
       general_tour: 'bg-green-500/20 text-green-400'
@@ -146,7 +146,7 @@ function InquiryNotifications({ operator }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <RefreshCw className="h-8 w-8 text-orange-400 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -156,7 +156,7 @@ function InquiryNotifications({ operator }) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Bell className="h-6 w-6 text-orange-400" />
+            <Bell className="h-6 w-6 text-lime" />
             New Booking Inquiries / नई बुकिंग पूछताछ
           </h2>
           <p className="text-slate-400 mt-1">
@@ -165,7 +165,7 @@ function InquiryNotifications({ operator }) {
         </div>
         <div className="flex items-center gap-3">
           {inquiries.length > 0 && (
-            <span className="px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 animate-pulse">
+            <span className="px-3 py-1 rounded-full bg-lime/20 text-lime animate-pulse">
               {inquiries.length} New
             </span>
           )}
@@ -176,7 +176,7 @@ function InquiryNotifications({ operator }) {
       </div>
 
       {inquiries.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/50 rounded-xl border border-slate-800">
+        <div className="text-center py-16 bg-slate-900/50 rounded-sm border border-slate-800">
           <Bell className="h-16 w-16 text-slate-600 mx-auto mb-4" />
           <p className="text-slate-400 text-lg">No new inquiries / कोई नई पूछताछ नहीं</p>
           <p className="text-slate-500 text-sm mt-2">
@@ -192,7 +192,7 @@ function InquiryNotifications({ operator }) {
             return (
               <div
                 key={inquiry.id}
-                className="rounded-xl bg-slate-900/50 border border-slate-800 overflow-hidden hover:border-orange-500/50 transition-all"
+                className="rounded-sm bg-slate-900/50 border border-slate-800 overflow-hidden hover:border-lime/50 transition-all"
               >
                 {/* Header */}
                 <div className="p-4 flex items-start justify-between">
@@ -225,7 +225,7 @@ function InquiryNotifications({ operator }) {
                       </div>
                       <div>
                         <p className="text-slate-500">Distance from you</p>
-                        <p className="text-orange-400 font-medium">{inquiry.distance_km || '?'} km</p>
+                        <p className="text-lime font-medium">{inquiry.distance_km || '?'} km</p>
                       </div>
                     </div>
                     
@@ -268,7 +268,7 @@ function InquiryNotifications({ operator }) {
                     </Button>
                     <Button
                       onClick={() => openReviseDialog(inquiry)}
-                      className="bg-orange-500 hover:bg-orange-600"
+                      className="bg-lime text-black hover:bg-lime/90"
                     >
                       <DollarSign className="h-4 w-4 mr-1" /> Revise Quote
                     </Button>
@@ -417,7 +417,7 @@ function InquiryNotifications({ operator }) {
         <DialogContent className="bg-slate-900 border-slate-800">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-orange-400" />
+              <DollarSign className="h-5 w-5 text-lime" />
               Send Revised Quote / संशोधित कोट भेजें
             </DialogTitle>
           </DialogHeader>
@@ -451,9 +451,9 @@ function InquiryNotifications({ operator }) {
             </div>
 
             {reviseData.amount && (
-              <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
-                <p className="text-orange-400 text-sm">Your Revised Quote:</p>
-                <p className="text-orange-400 text-2xl font-bold">
+              <div className="p-3 rounded-lg bg-lime/10 border border-lime/30">
+                <p className="text-lime text-sm">Your Revised Quote:</p>
+                <p className="text-lime text-2xl font-bold">
                   ₹{parseFloat(reviseData.amount || 0).toLocaleString()}
                 </p>
               </div>
@@ -464,7 +464,7 @@ function InquiryNotifications({ operator }) {
             <Button
               onClick={handleReviseQuote}
               disabled={processing || !reviseData.amount}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {processing ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <DollarSign className="h-4 w-4 mr-2" />}
               Send Revised Quote

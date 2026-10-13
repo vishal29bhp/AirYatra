@@ -93,7 +93,7 @@ function KnowledgeBase() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -107,7 +107,7 @@ function KnowledgeBase() {
           <p className="text-slate-400">Help center content management</p>
         </div>
         <div className="flex space-x-2">
-          <Button onClick={() => setShowArticleForm(true)} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={() => setShowArticleForm(true)} className="bg-slate-700 hover:bg-slate-600">
             <Plus className="h-4 w-4 mr-2" /> New Article
           </Button>
           <Button onClick={() => setShowFaqForm(true)} className="bg-green-600 hover:bg-green-700">
@@ -120,7 +120,7 @@ function KnowledgeBase() {
       {stats && (
         <div className="grid grid-cols-4 gap-4">
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-blue-400 mb-2">
+            <div className="flex items-center space-x-2 text-amber mb-2">
               <FileText className="h-5 w-5" />
               <span className="text-sm">Articles</span>
             </div>
@@ -141,7 +141,7 @@ function KnowledgeBase() {
             <p className="text-2xl font-bold text-white">{stats.total_videos || 0}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-orange-400 mb-2">
+            <div className="flex items-center space-x-2 text-lime mb-2">
               <Eye className="h-5 w-5" />
               <span className="text-sm">Total Views</span>
             </div>
@@ -173,7 +173,7 @@ function KnowledgeBase() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400 hover:text-white'}`}
+            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400 hover:text-white'}`}
           >
             {tab}
           </button>
@@ -189,7 +189,7 @@ function KnowledgeBase() {
                 <div>
                   <h3 className="text-white font-medium">{article.title}</h3>
                   <div className="flex items-center space-x-3 mt-1">
-                    <span className="text-xs px-2 py-1 bg-blue-500/20 text-blue-400 rounded">{getCategoryName(article.category)}</span>
+                    <span className="text-xs px-2 py-1 bg-amber/20 text-amber rounded">{getCategoryName(article.category)}</span>
                     {article.is_featured && <span className="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded">Featured</span>}
                     <span className="text-slate-500 text-xs"><Eye className="h-3 w-3 inline mr-1" />{article.views || 0} views</span>
                   </div>
@@ -262,8 +262,8 @@ function KnowledgeBase() {
           {categories.map(cat => (
             <div key={cat.id} className="bg-slate-800 rounded-lg p-4 border border-slate-700 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                  <BookOpen className="h-5 w-5 text-orange-400" />
+                <div className="w-10 h-10 bg-lime/20 rounded-lg flex items-center justify-center">
+                  <BookOpen className="h-5 w-5 text-lime" />
                 </div>
                 <div>
                   <h3 className="text-white font-medium">{cat.name}</h3>
@@ -319,7 +319,7 @@ function KnowledgeBase() {
             </div>
             <div className="flex justify-end space-x-3 mt-6">
               <Button variant="outline" onClick={() => setShowArticleForm(false)}>Cancel</Button>
-              <Button onClick={createArticle} className="bg-orange-500 hover:bg-orange-600">Create Article</Button>
+              <Button onClick={createArticle} className="bg-lime text-black hover:bg-lime/90">Create Article</Button>
             </div>
           </div>
         </div>

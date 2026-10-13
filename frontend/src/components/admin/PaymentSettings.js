@@ -85,7 +85,7 @@ function PaymentSettings() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 text-orange-400 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -96,21 +96,21 @@ function PaymentSettings() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <CreditCard className="h-6 w-6 text-orange-400" />
+            <CreditCard className="h-6 w-6 text-lime" />
             Payment Settings / भुगतान सेटिंग्स
           </h2>
           <p className="text-slate-400 text-sm mt-1">
             Configure advance payment percentages by booking purpose
           </p>
         </div>
-        <Button onClick={handleSave} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={handleSave} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
           {saving ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
           Save Settings
         </Button>
       </div>
 
       {/* Global Settings */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-lg font-semibold text-white mb-4">Global Settings / सामान्य सेटिंग्स</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
@@ -159,21 +159,21 @@ function PaymentSettings() {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/30">
-        <p className="text-blue-400 flex items-center gap-2">
+      <div className="bg-amber/10 rounded-sm p-4 border border-amber/30">
+        <p className="text-amber flex items-center gap-2">
           <AlertCircle className="h-5 w-5" />
           Set advance payment % for each booking purpose. 100% means full payment required, 50% means half advance.
         </p>
-        <p className="text-blue-300 text-sm mt-1">
+        <p className="text-slate-300 text-sm mt-1">
           प्रत्येक बुकिंग उद्देश्य के लिए अग्रिम भुगतान % सेट करें। 100% = पूरा भुगतान, 50% = आधा अग्रिम।
         </p>
       </div>
 
       {/* Payment Rules by Purpose */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <Plane className="h-5 w-5 text-orange-400" />
+            <Plane className="h-5 w-5 text-lime" />
             Payment Rules by Booking Purpose / बुकिंग उद्देश्य के अनुसार
           </h3>
         </div>
@@ -231,7 +231,7 @@ function PaymentSettings() {
 
       {/* Save Button (Bottom) */}
       <div className="flex justify-end">
-        <Button onClick={handleSave} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={handleSave} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
           {saving ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
           Save All Settings / सभी सेटिंग्स सहेजें
         </Button>

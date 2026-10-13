@@ -108,7 +108,7 @@ function PilotManagement({ operator }) {
         </div>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-orange-500 hover:bg-orange-600" data-testid="add-pilot-btn">
+            <Button className="bg-lime text-black hover:bg-lime/90" data-testid="add-pilot-btn">
               <Plus className="h-5 w-5 mr-2" />
               Add Pilot
             </Button>
@@ -194,7 +194,7 @@ function PilotManagement({ operator }) {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" data-testid="submit-pilot-btn">
+              <Button type="submit" className="w-full bg-lime text-black hover:bg-lime/90" data-testid="submit-pilot-btn">
                 Add Pilot
               </Button>
             </form>
@@ -210,7 +210,7 @@ function PilotManagement({ operator }) {
           <div className="text-center py-12">
             <Users className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 mb-4">No pilots added yet</p>
-            <Button onClick={() => setIsAddDialogOpen(true)} className="bg-orange-500 hover:bg-orange-600" data-testid="add-first-pilot-btn">
+            <Button onClick={() => setIsAddDialogOpen(true)} className="bg-lime text-black hover:bg-lime/90" data-testid="add-first-pilot-btn">
               Add Your First Pilot
             </Button>
           </div>
@@ -260,7 +260,7 @@ function PilotManagement({ operator }) {
                       size="sm"
                       variant="outline"
                       onClick={() => handleViewDocuments(pilot)}
-                      className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
+                      className="border-lime/30 text-lime hover:bg-lime/10"
                       data-testid={`view-docs-${pilot.id}`}
                     >
                       <FileText className="h-4 w-4 mr-2" />
@@ -285,8 +285,8 @@ function PilotManagement({ operator }) {
           
           <Tabs defaultValue="view" className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-slate-800">
-              <TabsTrigger value="view" className="data-[state=active]:bg-orange-500">View Documents</TabsTrigger>
-              <TabsTrigger value="upload" className="data-[state=active]:bg-orange-500">Upload New</TabsTrigger>
+              <TabsTrigger value="view" className="data-[state=active]:bg-lime">View Documents</TabsTrigger>
+              <TabsTrigger value="upload" className="data-[state=active]:bg-lime">Upload New</TabsTrigger>
             </TabsList>
             
             <TabsContent value="view" className="mt-4">

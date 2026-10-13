@@ -37,7 +37,7 @@ const typeColors = {
   airport: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   govt_helipad: 'bg-green-500/20 text-green-400 border-green-500/30',
   private_helipad: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  village_land: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  village_land: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
 };
 
 // Landing Type Labels
@@ -298,17 +298,17 @@ function LandingInfrastructure() {
           <h2 className="text-2xl font-bold text-white">Landing Infrastructure</h2>
           <p className="text-slate-400">Manage airports, helipads, and landing points</p>
         </div>
-        <Button onClick={() => setShowAddModal(true)} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={() => setShowAddModal(true)} className="bg-lime text-black hover:bg-lime/90">
           <Plus className="h-4 w-4 mr-2" /> Add Landing Point
         </Button>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Plane className="h-5 w-5 text-blue-400" />
+            <div className="p-2 bg-amber/20 rounded-lg">
+              <Plane className="h-5 w-5 text-amber" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.airports}</p>
@@ -316,7 +316,7 @@ function LandingInfrastructure() {
             </div>
           </div>
         </div>
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
               <Building2 className="h-5 w-5 text-green-400" />
@@ -327,7 +327,7 @@ function LandingInfrastructure() {
             </div>
           </div>
         </div>
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-purple-500/20 rounded-lg">
               <Building2 className="h-5 w-5 text-purple-400" />
@@ -338,10 +338,10 @@ function LandingInfrastructure() {
             </div>
           </div>
         </div>
-        <div className="glass p-4 rounded-xl">
+        <div className="glass p-4 rounded-sm">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <TreePine className="h-5 w-5 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <TreePine className="h-5 w-5 text-lime" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.village_lands}</p>
@@ -394,10 +394,10 @@ function LandingInfrastructure() {
       </div>
 
       {/* Table */}
-      <div className="glass rounded-xl overflow-hidden">
+      <div className="glass rounded-sm overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 text-orange-400 animate-spin" />
+            <Loader2 className="h-8 w-8 text-lime animate-spin" />
           </div>
         ) : (
           <table className="w-full">
@@ -447,7 +447,7 @@ function LandingInfrastructure() {
                         </span>
                       )}
                       {point.availability_calendar_required && (
-                        <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">
+                        <span className="px-2 py-1 bg-amber/20 text-amber rounded text-xs">
                           Calendar
                         </span>
                       )}
@@ -780,7 +780,7 @@ function LandingInfrastructure() {
               <Button variant="outline" onClick={() => { setShowAddModal(false); setShowEditModal(false); }}>
                 Cancel
               </Button>
-              <Button onClick={showEditModal ? handleUpdate : handleCreate} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={showEditModal ? handleUpdate : handleCreate} className="bg-lime text-black hover:bg-lime/90">
                 {showEditModal ? 'Update' : 'Create'} Landing Point
               </Button>
             </div>
@@ -848,7 +848,7 @@ function LandingInfrastructure() {
                     </span>
                   )}
                   {selectedPoint.availability_calendar_required && (
-                    <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">
+                    <span className="px-3 py-1 bg-amber/20 text-amber rounded-full text-sm">
                       📅 Calendar Required
                     </span>
                   )}

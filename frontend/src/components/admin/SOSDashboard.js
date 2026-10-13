@@ -62,7 +62,7 @@ function SOSDashboard() {
     switch (status) {
       case 'active': return 'bg-red-500 animate-pulse';
       case 'acknowledged': return 'bg-yellow-500';
-      case 'responding': return 'bg-blue-500';
+      case 'responding': return 'bg-slate-700';
       case 'resolved': return 'bg-green-500';
       case 'cancelled': return 'bg-slate-500';
       default: return 'bg-slate-500';
@@ -89,7 +89,7 @@ function SOSDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -136,7 +136,7 @@ function SOSDashboard() {
             <p className="text-3xl font-bold text-white">{dashboard.active_alerts}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-blue-400 mb-2">
+            <div className="flex items-center space-x-2 text-amber mb-2">
               <Bell className="h-5 w-5" />
               <span className="text-sm">Total Alerts</span>
             </div>
@@ -150,7 +150,7 @@ function SOSDashboard() {
             <p className="text-2xl font-bold text-white">{dashboard.resolved_today}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-orange-400 mb-2">
+            <div className="flex items-center space-x-2 text-lime mb-2">
               <Shield className="h-5 w-5" />
               <span className="text-sm">By Type</span>
             </div>
@@ -201,7 +201,7 @@ function SOSDashboard() {
                     <Button size="sm" variant="outline" onClick={() => viewAlertDetails(alert.id)}>
                       <Eye className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="default" className="bg-orange-500 hover:bg-orange-600" onClick={() => openUpdateModal(alert)}>
+                    <Button size="sm" variant="default" className="bg-lime text-black hover:bg-lime/90" onClick={() => openUpdateModal(alert)}>
                       <Edit className="h-4 w-4" />
                     </Button>
                   </div>
@@ -257,7 +257,7 @@ function SOSDashboard() {
             <div key={contact.name} className="bg-slate-900 rounded-lg p-4 text-center">
               <span className="text-2xl">{contact.icon}</span>
               <p className="text-white font-medium mt-2">{contact.name}</p>
-              <p className="text-orange-400 text-lg font-bold">{contact.number}</p>
+              <p className="text-lime text-lg font-bold">{contact.number}</p>
             </div>
           ))}
         </div>
@@ -308,7 +308,7 @@ function SOSDashboard() {
                     href={`https://www.google.com/maps?q=${selectedAlert.current_location?.lat},${selectedAlert.current_location?.lon}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-orange-400 text-sm hover:underline"
+                    className="text-lime text-sm hover:underline"
                   >
                     View on Map →
                   </a>
@@ -334,8 +334,8 @@ function SOSDashboard() {
             )}
 
             {selectedAlert.booking_info && (
-              <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                <p className="text-blue-400 text-sm mb-2">Related Booking</p>
+              <div className="mt-4 p-3 bg-amber/10 border border-amber/30 rounded-lg">
+                <p className="text-amber text-sm mb-2">Related Booking</p>
                 <p className="text-white">{selectedAlert.booking_info.booking_number}</p>
                 <p className="text-slate-300 text-sm">
                   {selectedAlert.booking_info.origin} → {selectedAlert.booking_info.destination}
@@ -356,7 +356,7 @@ function SOSDashboard() {
             )}
 
             <div className="flex justify-end mt-6">
-              <Button onClick={() => openUpdateModal(selectedAlert)} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={() => openUpdateModal(selectedAlert)} className="bg-lime text-black hover:bg-lime/90">
                 Update Status
               </Button>
             </div>
@@ -399,7 +399,7 @@ function SOSDashboard() {
 
             <div className="flex justify-end space-x-3 mt-6">
               <Button variant="outline" onClick={() => { setUpdateModal(false); setSelectedAlert(null); }}>Cancel</Button>
-              <Button onClick={updateAlert} className="bg-orange-500 hover:bg-orange-600">Update Alert</Button>
+              <Button onClick={updateAlert} className="bg-lime text-black hover:bg-lime/90">Update Alert</Button>
             </div>
           </div>
         </div>

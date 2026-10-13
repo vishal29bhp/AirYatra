@@ -193,7 +193,7 @@ function HelipadAvailability() {
       case 'maintenance':
         return 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400';
       case 'booked':
-        return 'bg-blue-500/20 border-blue-500/30 text-blue-400';
+        return 'bg-amber/20 border-amber/30 text-amber';
       default:
         return 'bg-slate-800/50';
     }
@@ -217,7 +217,7 @@ function HelipadAvailability() {
       </div>
 
       {/* Helipad Selector */}
-      <div className="glass p-4 rounded-xl">
+      <div className="glass p-4 rounded-sm">
         <Label className="text-slate-300 mb-2 block">Select Helipad</Label>
         <Select 
           value={selectedHelipad?.id || ''} 
@@ -243,7 +243,7 @@ function HelipadAvailability() {
       {selectedHelipad && (
         <>
           {/* Selected Helipad Info */}
-          <div className="glass p-4 rounded-xl flex items-center justify-between">
+          <div className="glass p-4 rounded-sm flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-purple-500/20 rounded-lg">
                 <Building2 className="h-6 w-6 text-purple-400" />
@@ -270,14 +270,14 @@ function HelipadAvailability() {
                 <span className="text-sm text-slate-400">Maintenance</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+                <span className="w-3 h-3 rounded-full bg-slate-700"></span>
                 <span className="text-sm text-slate-400">Booked</span>
               </div>
             </div>
           </div>
 
           {/* Calendar */}
-          <div className="glass rounded-xl overflow-hidden">
+          <div className="glass rounded-sm overflow-hidden">
             {/* Month Navigation */}
             <div className="flex items-center justify-between p-4 border-b border-slate-700">
               <Button variant="ghost" size="sm" onClick={prevMonth}>
@@ -294,7 +294,7 @@ function HelipadAvailability() {
             {/* Calendar Grid */}
             {loading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-8 w-8 text-orange-400 animate-spin" />
+                <Loader2 className="h-8 w-8 text-lime animate-spin" />
               </div>
             ) : (
               <div className="p-4">
@@ -317,7 +317,7 @@ function HelipadAvailability() {
                         ${dayInfo.isPadding ? 'bg-transparent border-transparent' : ''}
                         ${dayInfo.isPast && !dayInfo.isPadding ? 'opacity-50' : ''}
                         ${!dayInfo.isPadding && !dayInfo.isPast ? getSlotColor(dayInfo.slot) : ''}
-                        ${!dayInfo.isPadding && !dayInfo.isPast && !dayInfo.slot ? 'cursor-pointer hover:border-orange-500/50' : ''}
+                        ${!dayInfo.isPadding && !dayInfo.isPast && !dayInfo.slot ? 'cursor-pointer hover:border-lime/50' : ''}
                       `}
                       onClick={() => {
                         if (!dayInfo.isPadding && !dayInfo.isPast) {
@@ -431,7 +431,7 @@ function HelipadAvailability() {
               <Button variant="outline" onClick={() => setShowSlotModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleCreateSlot} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleCreateSlot} className="bg-lime text-black hover:bg-lime/90">
                 Save Availability
               </Button>
             </div>
@@ -499,7 +499,7 @@ function HelipadAvailability() {
               <Button variant="outline" onClick={() => setShowBulkModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleBulkCreate} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleBulkCreate} className="bg-lime text-black hover:bg-lime/90">
                 Apply to All Dates
               </Button>
             </div>

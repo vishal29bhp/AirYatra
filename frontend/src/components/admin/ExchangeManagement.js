@@ -18,7 +18,7 @@ const STATUS_STYLES = {
   active: 'bg-green-500/15 text-green-400 border-green-500/30',
   rejected: 'bg-red-500/15 text-red-400 border-red-500/30',
   sold: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-  in_auction: 'bg-orange-500/15 text-orange-400 border-orange-500/30',
+  in_auction: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
   new: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
   contacted: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
   approved: 'bg-green-500/15 text-green-400 border-green-500/30',
@@ -112,7 +112,7 @@ const ExchangeManagement = () => {
   const tabBtn = (id, label, Icon, count, badgeLabel = 'new') => (
     <button
       onClick={() => setTab(id)}
-      className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 border transition-all ${tab === id ? 'bg-orange-500 border-orange-500 text-white' : 'border-slate-700 text-slate-300 hover:border-orange-500/50'}`}
+      className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 border transition-all ${tab === id ? 'bg-lime border-lime text-black' : 'border-slate-700 text-slate-300 hover:border-lime/50'}`}
       data-testid={`exchange-tab-${id}`}
     >
       <Icon className="h-4 w-4" /> {label}
@@ -124,7 +124,7 @@ const ExchangeManagement = () => {
     <div className="space-y-6" data-testid="exchange-management">
       <div>
         <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Plane className="h-6 w-6 text-orange-500" /> Aviation Exchange
+          <Plane className="h-6 w-6 text-lime" /> Aviation Exchange
         </h1>
         <p className="text-slate-400 text-sm">Listings, auctions, inquiries, inspections & fractional ownership</p>
       </div>
@@ -143,17 +143,17 @@ const ExchangeManagement = () => {
         <div className="space-y-3" data-testid="exchange-listings-list">
           {listings.length === 0 && <p className="text-slate-500 text-center py-10">No listings yet.</p>}
           {listings.map(l => (
-            <div key={l.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4" data-testid={`admin-listing-${l.id}`}>
+            <div key={l.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4 flex flex-col sm:flex-row gap-4" data-testid={`admin-listing-${l.id}`}>
               <img src={l.image} alt={l.title} className="w-full sm:w-36 h-24 object-cover rounded-lg" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-white font-semibold">{l.title}</h3>
                   <Badge className={`border ${STATUS_STYLES[l.status] || ''}`} data-testid={`listing-status-${l.id}`}>{l.status.replace('_', ' ')}</Badge>
                   {l.featured && <Badge className="bg-amber-500/15 text-amber-400 border border-amber-500/30"><Star className="h-3 w-3 mr-1" /> Featured</Badge>}
-                  {l.enable_auction && l.status === 'pending_review' && <Badge className="bg-orange-500/15 text-orange-400 border border-orange-500/30"><Gavel className="h-3 w-3 mr-1" /> Auction on approve</Badge>}
+                  {l.enable_auction && l.status === 'pending_review' && <Badge className="bg-amber-500/15 text-amber-400 border border-amber-500/30"><Gavel className="h-3 w-3 mr-1" /> Auction on approve</Badge>}
                   {l.verified && <BadgeCheck className="h-4 w-4 text-green-400" />}
                 </div>
-                <p className="text-orange-400 font-bold text-sm mt-1">{formatCr(l.price_inr)}</p>
+                <p className="text-lime font-bold text-sm mt-1">{formatCr(l.price_inr)}</p>
                 <p className="text-slate-400 text-xs mt-1 flex items-center gap-3 flex-wrap">
                   <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {l.flight_hours?.toLocaleString()} hrs</span>
                   <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {l.location}</span>
@@ -174,7 +174,7 @@ const ExchangeManagement = () => {
                 )}
                 {l.status === 'active' && (
                   <>
-                    <Button size="sm" onClick={() => { setAuctionFor(l); setAuctionCfg({ ...AUCTION_DEFAULTS, start_cr: String((l.price_inr * 0.8) / 10000000), reserve_cr: String(l.price_inr / 10000000) }); }} disabled={!!acting} className="bg-orange-600 hover:bg-orange-700" data-testid={`start-auction-${l.id}`}>
+                    <Button size="sm" onClick={() => { setAuctionFor(l); setAuctionCfg({ ...AUCTION_DEFAULTS, start_cr: String((l.price_inr * 0.8) / 10000000), reserve_cr: String(l.price_inr / 10000000) }); }} disabled={!!acting} className="bg-lime text-black hover:bg-lime/90" data-testid={`start-auction-${l.id}`}>
                       <Gavel className="h-4 w-4 mr-1" /> Start Auction
                     </Button>
                     <Button
@@ -187,7 +187,7 @@ const ExchangeManagement = () => {
                     >
                       <Star className={`h-4 w-4 mr-1 ${l.featured ? 'fill-amber-400' : ''}`} /> {l.featured ? 'Unfeature' : 'Feature'}
                     </Button>
-                    <Button size="sm" variant="outline" onClick={() => setListingStatus(l.id, 'sold')} disabled={!!acting} className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10" data-testid={`sold-listing-${l.id}`}>
+                    <Button size="sm" variant="outline" onClick={() => setListingStatus(l.id, 'sold')} disabled={!!acting} className="border-amber/50 text-amber hover:bg-amber/10" data-testid={`sold-listing-${l.id}`}>
                       Mark Sold
                     </Button>
                   </>
@@ -209,7 +209,7 @@ const ExchangeManagement = () => {
         <div className="space-y-3" data-testid="exchange-inquiries-list">
           {inquiries.length === 0 && <p className="text-slate-500 text-center py-10">No buyer inquiries yet.</p>}
           {inquiries.map(i => (
-            <div key={i.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`admin-inquiry-${i.id}`}>
+            <div key={i.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`admin-inquiry-${i.id}`}>
               <div className="flex items-start justify-between gap-3 flex-wrap">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -226,7 +226,7 @@ const ExchangeManagement = () => {
                 </div>
                 <div className="flex gap-2 shrink-0">
                   {i.status === 'new' && (
-                    <Button size="sm" onClick={() => setInquiryStatus(i.id, 'contacted')} disabled={!!acting} className="bg-blue-600 hover:bg-blue-700" data-testid={`contact-inquiry-${i.id}`}>
+                    <Button size="sm" onClick={() => setInquiryStatus(i.id, 'contacted')} disabled={!!acting} className="bg-slate-700 hover:bg-slate-600" data-testid={`contact-inquiry-${i.id}`}>
                       Mark Contacted
                     </Button>
                   )}
@@ -246,7 +246,7 @@ const ExchangeManagement = () => {
             {(fractional.offerings || []).map(o => (
               <div key={o.id} className="bg-slate-900/70 border border-slate-800 rounded-lg px-4 py-2.5" data-testid={`offering-summary-${o.id}`}>
                 <p className="text-white text-sm font-medium">{o.title}</p>
-                <p className="text-xs mt-0.5"><span className="text-orange-400 font-bold">{o.shares_available}</span><span className="text-slate-400">/{o.total_shares} shares left • {formatCr(o.share_price_inr)}/share</span></p>
+                <p className="text-xs mt-0.5"><span className="text-lime font-bold">{o.shares_available}</span><span className="text-slate-400">/{o.total_shares} shares left • {formatCr(o.share_price_inr)}/share</span></p>
               </div>
             ))}
           </div>
@@ -254,12 +254,12 @@ const ExchangeManagement = () => {
           <div className="space-y-3">
             {(fractional.reservations || []).length === 0 && <p className="text-slate-500 text-center py-10">No share reservations yet.</p>}
             {(fractional.reservations || []).map(r => (
-              <div key={r.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`admin-reservation-${r.id}`}>
+              <div key={r.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`admin-reservation-${r.id}`}>
                 <div className="flex items-start justify-between gap-3 flex-wrap">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="text-white font-semibold">{r.title}</h3>
-                      <Badge className="bg-orange-500/15 text-orange-400 border border-orange-500/30">{r.shares} share{r.shares > 1 ? 's' : ''} • {formatCr(r.share_price_inr * r.shares)}</Badge>
+                      <Badge className="bg-amber-500/15 text-amber-400 border border-amber-500/30">{r.shares} share{r.shares > 1 ? 's' : ''} • {formatCr(r.share_price_inr * r.shares)}</Badge>
                       <Badge className={`border ${STATUS_STYLES[r.status] || ''}`} data-testid={`reservation-status-${r.id}`}>{r.status}</Badge>
                     </div>
                     {r.message && <p className="text-slate-300 text-sm mt-2 bg-slate-800/60 rounded-lg p-3">"{r.message}"</p>}
@@ -282,7 +282,7 @@ const ExchangeManagement = () => {
                       </>
                     )}
                     {r.status === 'new' && (
-                      <Button size="sm" variant="outline" onClick={() => setReservationStatus(r.id, 'contacted')} disabled={!!acting} className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10" data-testid={`contact-reservation-${r.id}`}>
+                      <Button size="sm" variant="outline" onClick={() => setReservationStatus(r.id, 'contacted')} disabled={!!acting} className="border-amber/50 text-amber hover:bg-amber/10" data-testid={`contact-reservation-${r.id}`}>
                         Mark Contacted
                       </Button>
                     )}
@@ -300,7 +300,7 @@ const ExchangeManagement = () => {
           {auctionFor && (
             <>
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-2"><Gavel className="h-5 w-5 text-orange-400" /> Start Auction — {auctionFor.title}</DialogTitle>
+                <DialogTitle className="flex items-center gap-2"><Gavel className="h-5 w-5 text-lime" /> Start Auction — {auctionFor.title}</DialogTitle>
                 <DialogDescription className="text-slate-400">Listing price: {formatCr(auctionFor.price_inr)}. Listing moves to auction mode until it ends.</DialogDescription>
               </DialogHeader>
               <div className="grid grid-cols-2 gap-3">
@@ -321,7 +321,7 @@ const ExchangeManagement = () => {
                   <Input type="number" value={auctionCfg.duration_hours} onChange={(e) => setAuctionCfg({ ...auctionCfg, duration_hours: e.target.value })} className="bg-slate-800 border-slate-600 text-white" data-testid="auction-duration-input" />
                 </div>
               </div>
-              <Button onClick={startAuction} disabled={acting === 'auction'} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="auction-submit-btn">
+              <Button onClick={startAuction} disabled={acting === 'auction'} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="auction-submit-btn">
                 {acting === 'auction' ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Gavel className="h-4 w-4 mr-2" />}
                 Go Live
               </Button>

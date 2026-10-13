@@ -194,7 +194,7 @@ function CommandCenter({ user }) {
       case 'critical':
         return <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs animate-pulse">CRITICAL</span>;
       case 'high':
-        return <span className="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs">HIGH</span>;
+        return <span className="px-2 py-1 bg-lime/20 text-lime rounded text-xs">HIGH</span>;
       case 'medium':
         return <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs">MEDIUM</span>;
       default:
@@ -230,7 +230,7 @@ function CommandCenter({ user }) {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-orange-400" />
+            <Shield className="h-6 w-6 text-lime" />
             Command Center / कमांड सेंटर
           </h2>
           <p className="text-slate-400 mt-1">Review and approve critical actions</p>
@@ -242,7 +242,7 @@ function CommandCenter({ user }) {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-xl p-4 border border-yellow-700/30">
+        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-sm p-4 border border-yellow-700/30">
           <div className="flex items-center gap-2 text-yellow-400 mb-2">
             <Clock className="h-5 w-5" />
             <span className="text-sm font-medium">Pending</span>
@@ -251,7 +251,7 @@ function CommandCenter({ user }) {
           <p className="text-xs text-slate-500">Awaiting review</p>
         </div>
 
-        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-xl p-4 border border-red-700/30">
+        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-sm p-4 border border-red-700/30">
           <div className="flex items-center gap-2 text-red-400 mb-2">
             <AlertTriangle className="h-5 w-5" />
             <span className="text-sm font-medium">Critical</span>
@@ -260,7 +260,7 @@ function CommandCenter({ user }) {
           <p className="text-xs text-slate-500">Needs immediate attention</p>
         </div>
 
-        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-xl p-4 border border-green-700/30">
+        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-sm p-4 border border-green-700/30">
           <div className="flex items-center gap-2 text-green-400 mb-2">
             <CheckCircle className="h-5 w-5" />
             <span className="text-sm font-medium">Approved</span>
@@ -269,7 +269,7 @@ function CommandCenter({ user }) {
           <p className="text-xs text-slate-500">This week</p>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-700">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 text-slate-400 mb-2">
             <XCircle className="h-5 w-5" />
             <span className="text-sm font-medium">Rejected</span>
@@ -286,7 +286,7 @@ function CommandCenter({ user }) {
             onClick={() => setSelectedTab('pending')}
             className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
               selectedTab === 'pending' 
-                ? 'bg-orange-500 text-white' 
+                ? 'bg-lime text-black' 
                 : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
@@ -296,7 +296,7 @@ function CommandCenter({ user }) {
             onClick={() => setSelectedTab('history')}
             className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
               selectedTab === 'history' 
-                ? 'bg-orange-500 text-white' 
+                ? 'bg-lime text-black' 
                 : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
@@ -331,13 +331,13 @@ function CommandCenter({ user }) {
       {/* Content */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="h-8 w-8 animate-spin text-orange-400" />
+          <RefreshCw className="h-8 w-8 animate-spin text-lime" />
         </div>
       ) : selectedTab === 'pending' ? (
         /* Pending Approvals */
         <div className="space-y-4">
           {filteredPending.length === 0 ? (
-            <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+            <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
               <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
               <p className="text-white text-lg font-medium">All Clear!</p>
               <p className="text-slate-400 mt-2">No pending approvals at the moment</p>
@@ -349,9 +349,9 @@ function CommandCenter({ user }) {
               return (
                 <div 
                   key={approval.id}
-                  className={`bg-slate-800/50 rounded-xl border transition-all ${
+                  className={`bg-slate-800/50 rounded-sm border transition-all ${
                     approval.priority === 'critical' ? 'border-red-500/50 animate-pulse' :
-                    approval.priority === 'high' ? 'border-orange-500/50' :
+                    approval.priority === 'high' ? 'border-lime/50' :
                     'border-slate-700'
                   }`}
                 >
@@ -412,7 +412,7 @@ function CommandCenter({ user }) {
         /* History */
         <div className="space-y-4">
           {filteredProcessed.length === 0 ? (
-            <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+            <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
               <History className="h-16 w-16 text-slate-600 mx-auto mb-4" />
               <p className="text-slate-400 text-lg">No approval history</p>
             </div>
@@ -423,7 +423,7 @@ function CommandCenter({ user }) {
               return (
                 <div 
                   key={approval.id}
-                  className="bg-slate-800/50 rounded-xl border border-slate-700"
+                  className="bg-slate-800/50 rounded-sm border border-slate-700"
                 >
                   <div className="p-4 flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -458,7 +458,7 @@ function CommandCenter({ user }) {
       {/* Detail/Reject Modal */}
       {showDetailModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-lg border border-slate-700">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-lg border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-white">Action Details</h3>
               <button onClick={() => { setShowDetailModal(null); setRejectionReason(''); }} className="text-slate-400 hover:text-white">

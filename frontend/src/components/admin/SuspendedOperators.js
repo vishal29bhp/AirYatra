@@ -94,8 +94,8 @@ function SuspendedOperators() {
             {suspendedOperators.filter(o => o.suspension_type === 'temporary').length}
           </p>
         </div>
-        <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30">
-          <p className="text-orange-400 text-sm">Permanent Suspensions</p>
+        <div className="p-4 rounded-lg bg-lime/10 border border-lime/30">
+          <p className="text-lime text-sm">Permanent Suspensions</p>
           <p className="text-2xl font-bold text-white">
             {suspendedOperators.filter(o => o.suspension_type === 'permanent').length}
           </p>
@@ -249,7 +249,7 @@ function SuspendedOperators() {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <History className="h-5 w-5 text-orange-400" />
+              <History className="h-5 w-5 text-lime" />
               Suspension History / निलंबन इतिहास
             </DialogTitle>
           </DialogHeader>

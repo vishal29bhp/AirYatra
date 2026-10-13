@@ -392,7 +392,7 @@ function PilotDocumentUpload({ pilotId = null }) {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Shield className="h-6 w-6 text-blue-400" />
+            <Shield className="h-6 w-6 text-amber" />
             Pilot Document Portal / पायलट दस्तावेज़ पोर्टल
           </h2>
           <p className="text-slate-400 mt-1">Manage licenses, medicals, certificates with expiry alerts</p>
@@ -406,7 +406,7 @@ function PilotDocumentUpload({ pilotId = null }) {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-700">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm p-4 border border-slate-700">
           <div className="flex items-center gap-2 text-slate-400 mb-2">
             <Users className="h-5 w-5" />
             <span className="text-sm">Total Pilots</span>
@@ -414,7 +414,7 @@ function PilotDocumentUpload({ pilotId = null }) {
           <p className="text-3xl font-bold text-white">{pilots.length}</p>
         </div>
         
-        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-xl p-4 border border-green-700/30">
+        <div className="bg-gradient-to-br from-green-900/30 to-slate-900 rounded-sm p-4 border border-green-700/30">
           <div className="flex items-center gap-2 text-green-400 mb-2">
             <FileText className="h-5 w-5" />
             <span className="text-sm">Total Documents</span>
@@ -422,7 +422,7 @@ function PilotDocumentUpload({ pilotId = null }) {
           <p className="text-3xl font-bold text-white">{totalDocs}</p>
         </div>
         
-        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-xl p-4 border border-yellow-700/30">
+        <div className="bg-gradient-to-br from-yellow-900/30 to-slate-900 rounded-sm p-4 border border-yellow-700/30">
           <div className="flex items-center gap-2 text-yellow-400 mb-2">
             <Clock className="h-5 w-5" />
             <span className="text-sm">Expiring Soon</span>
@@ -431,7 +431,7 @@ function PilotDocumentUpload({ pilotId = null }) {
           <p className="text-xs text-slate-500">Within 30 days</p>
         </div>
         
-        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-xl p-4 border border-red-700/30">
+        <div className="bg-gradient-to-br from-red-900/30 to-slate-900 rounded-sm p-4 border border-red-700/30">
           <div className="flex items-center gap-2 text-red-400 mb-2">
             <AlertTriangle className="h-5 w-5" />
             <span className="text-sm">Expired</span>
@@ -467,7 +467,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                 filterStatus === filter.id
                   ? filter.color === 'red' ? 'bg-red-500 text-white' :
                     filter.color === 'yellow' ? 'bg-yellow-500 text-black' :
-                    'bg-blue-500 text-white'
+                    'bg-slate-700 text-white'
                   : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
               }`}
             >
@@ -481,10 +481,10 @@ function PilotDocumentUpload({ pilotId = null }) {
       <div className="space-y-4">
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <RefreshCw className="h-8 w-8 animate-spin text-blue-400" />
+            <RefreshCw className="h-8 w-8 animate-spin text-amber" />
           </div>
         ) : filteredPilots.length === 0 ? (
-          <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+          <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
             <Users className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 text-lg">No pilots found</p>
           </div>
@@ -497,7 +497,7 @@ function PilotDocumentUpload({ pilotId = null }) {
             return (
               <div 
                 key={pilot.id} 
-                className={`bg-slate-800/50 rounded-xl border transition-all ${
+                className={`bg-slate-800/50 rounded-sm border transition-all ${
                   summary.expired > 0 ? 'border-red-500/50' :
                   summary.expiring > 0 ? 'border-yellow-500/50' :
                   'border-slate-700'
@@ -510,9 +510,9 @@ function PilotDocumentUpload({ pilotId = null }) {
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                      hasIssues ? 'bg-red-500/20' : 'bg-blue-500/20'
+                      hasIssues ? 'bg-red-500/20' : 'bg-amber/20'
                     }`}>
-                      <User className={`h-6 w-6 ${hasIssues ? 'text-red-400' : 'text-blue-400'}`} />
+                      <User className={`h-6 w-6 ${hasIssues ? 'text-red-400' : 'text-amber'}`} />
                     </div>
                     <div>
                       <h3 className="text-white font-semibold flex items-center gap-2">
@@ -551,7 +551,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                     <Button
                       size="sm"
                       onClick={(e) => { e.stopPropagation(); openUploadForPilot(pilot.id); }}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-slate-700 hover:bg-slate-600"
                     >
                       <Upload className="h-4 w-4 mr-1" /> Upload
                     </Button>
@@ -571,7 +571,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                         variant="outline"
                         onClick={(e) => { e.stopPropagation(); sendExpiryAlert(pilot.id); }}
                         disabled={sendingAlert === pilot.id}
-                        className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+                        className="border-lime text-lime hover:bg-lime/10"
                       >
                         {sendingAlert === pilot.id ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -601,7 +601,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                         <Button
                           size="sm"
                           onClick={() => openUploadForPilot(pilot.id)}
-                          className="mt-3 bg-blue-600 hover:bg-blue-700"
+                          className="mt-3 bg-slate-700 hover:bg-slate-600"
                         >
                           <Plus className="h-4 w-4 mr-1" /> Upload First Document
                         </Button>
@@ -626,7 +626,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                                 <tr key={doc.id} className="border-t border-slate-700/50 hover:bg-slate-800/30">
                                   <td className="p-3">
                                     <div className="flex items-center gap-2">
-                                      <FileText className="h-4 w-4 text-blue-400" />
+                                      <FileText className="h-4 w-4 text-amber" />
                                       <span className="text-white capitalize">{doc.document_type?.replace('_', ' ')}</span>
                                     </div>
                                   </td>
@@ -653,7 +653,7 @@ function PilotDocumentUpload({ pilotId = null }) {
                                       <span className={`font-bold ${
                                         daysLeft < 0 ? 'text-red-400' :
                                         daysLeft < 30 ? 'text-yellow-400' :
-                                        daysLeft < 90 ? 'text-blue-400' :
+                                        daysLeft < 90 ? 'text-amber' :
                                         'text-green-400'
                                       }`}>
                                         {daysLeft < 0 ? `${Math.abs(daysLeft)}d overdue` : `${daysLeft}d`}
@@ -672,15 +672,15 @@ function PilotDocumentUpload({ pilotId = null }) {
                                         className="p-1.5 hover:bg-slate-700 rounded transition-colors"
                                         title="Download"
                                       >
-                                        <Download className="h-4 w-4 text-blue-400" />
+                                        <Download className="h-4 w-4 text-amber" />
                                       </button>
                                       {(doc.verification_status === 'expired' || doc.verification_status === 'expiring_soon') && (
                                         <button
                                           onClick={() => sendExpiryAlert(pilot.id, doc.id)}
-                                          className="p-1.5 hover:bg-orange-500/20 rounded transition-colors"
+                                          className="p-1.5 hover:bg-lime/20 rounded transition-colors"
                                           title="Send Alert"
                                         >
-                                          <Bell className="h-4 w-4 text-orange-400" />
+                                          <Bell className="h-4 w-4 text-lime" />
                                         </button>
                                       )}
                                       <button
@@ -710,10 +710,10 @@ function PilotDocumentUpload({ pilotId = null }) {
       {/* Upload Modal */}
       {showUpload && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <Upload className="h-5 w-5 text-blue-400" />
+                <Upload className="h-5 w-5 text-amber" />
                 Upload Document / दस्तावेज़ अपलोड
               </h3>
               <button onClick={() => setShowUpload(false)} className="text-slate-400 hover:text-white">
@@ -824,10 +824,10 @@ function PilotDocumentUpload({ pilotId = null }) {
               {/* File Upload */}
               <div>
                 <Label className="text-white">File / फ़ाइल *</Label>
-                <div className="mt-1 border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-blue-500/50 transition-colors relative">
+                <div className="mt-1 border-2 border-dashed border-slate-600 rounded-lg p-6 text-center hover:border-amber/50 transition-colors relative">
                   {file ? (
                     <div className="flex items-center justify-center gap-3">
-                      <File className="h-8 w-8 text-blue-400" />
+                      <File className="h-8 w-8 text-amber" />
                       <div className="text-left">
                         <p className="text-white">{file.name}</p>
                         <p className="text-slate-500 text-sm">{(file.size / 1024).toFixed(1)} KB</p>
@@ -864,8 +864,8 @@ function PilotDocumentUpload({ pilotId = null }) {
               </div>
               
               {/* Alert Info */}
-              <div className="p-3 bg-orange-500/10 rounded-lg border border-orange-500/30">
-                <p className="text-orange-400 text-sm font-medium mb-1 flex items-center gap-2">
+              <div className="p-3 bg-lime/10 rounded-lg border border-lime/30">
+                <p className="text-lime text-sm font-medium mb-1 flex items-center gap-2">
                   <Bell className="h-4 w-4" /> Auto-Alert System
                 </p>
                 <ul className="text-slate-400 text-xs space-y-1">
@@ -883,7 +883,7 @@ function PilotDocumentUpload({ pilotId = null }) {
               <Button 
                 onClick={handleUpload} 
                 disabled={!file || !selectedPilot || uploading}
-                className="flex-1 bg-blue-600 hover:bg-blue-700"
+                className="flex-1 bg-slate-700 hover:bg-slate-600"
               >
                 {uploading ? (
                   <>

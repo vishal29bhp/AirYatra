@@ -36,7 +36,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
     green: 'bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30',
     purple: 'bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30',
     cyan: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-500/30',
-    orange: 'bg-orange-500/20 text-orange-400 border-orange-500/30 hover:bg-orange-500/30',
+    orange: 'bg-amber-500/20 text-amber-400 border-amber-500/30 hover:bg-amber-500/30',
     yellow: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30 hover:bg-yellow-500/30',
   };
 
@@ -45,7 +45,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
     green: 'text-green-400',
     purple: 'text-purple-400',
     cyan: 'text-cyan-400',
-    orange: 'text-orange-400',
+    orange: 'text-amber-400',
     yellow: 'text-yellow-400',
   };
 
@@ -75,7 +75,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
             <button
               key={index}
               onClick={() => handleCardClick(stat.navigateTo)}
-              className={`p-3 sm:p-4 rounded-xl border ${colorClasses[stat.color]} cursor-pointer transition-all duration-200 transform hover:scale-105 hover:shadow-lg text-left w-full group`}
+              className={`p-3 sm:p-4 rounded-sm border ${colorClasses[stat.color]} cursor-pointer transition-all duration-200 transform hover:scale-105 text-left w-full group`}
             >
               <div className="flex items-center justify-between">
                 <Icon className={`h-6 sm:h-8 w-6 sm:w-8 ${iconColorClasses[stat.color]}`} />
@@ -94,7 +94,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <button
           onClick={() => handleCardClick('settlements')}
-          className="p-6 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 hover:from-green-500/30 hover:to-green-600/20 transition-all duration-200 transform hover:scale-[1.02] text-left group"
+          className="p-6 rounded-sm bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 hover:from-green-500/30 hover:to-green-600/20 transition-all duration-200 transform hover:scale-[1.02] text-left group"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -109,11 +109,11 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
         </button>
         <button
           onClick={() => handleCardClick('settlements')}
-          className="p-6 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 hover:from-orange-500/30 hover:to-orange-600/20 transition-all duration-200 transform hover:scale-[1.02] text-left group"
+          className="p-6 rounded-sm bg-lime/20 border border-lime/30 transition-all duration-200 transform hover:scale-[1.02] text-left group"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <IndianRupee className="h-10 w-10 text-orange-400" />
+              <IndianRupee className="h-10 w-10 text-lime" />
               <div>
                 <p className="text-sm text-slate-400">Platform Commission</p>
                 <p className="text-2xl font-bold text-white">₹{(revenue.total_commission || 0).toLocaleString()}</p>
@@ -124,11 +124,11 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
         </button>
         <button
           onClick={() => handleCardClick('settlements')}
-          className="p-6 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 hover:from-blue-500/30 hover:to-blue-600/20 transition-all duration-200 transform hover:scale-[1.02] text-left group"
+          className="p-6 rounded-sm bg-gradient-to-br border border-amber/30 transition-all duration-200 transform hover:scale-[1.02] text-left group"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <IndianRupee className="h-10 w-10 text-blue-400" />
+              <IndianRupee className="h-10 w-10 text-amber" />
               <div>
                 <p className="text-sm text-slate-400">Operator Payouts</p>
                 <p className="text-2xl font-bold text-white">₹{(revenue.operator_payout || 0).toLocaleString()}</p>
@@ -142,12 +142,12 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
       {/* Recent Bookings & Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Bookings - CLICKABLE */}
-        <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-white">Recent Bookings</h3>
             <button 
               onClick={() => handleCardClick('bookings')}
-              className="text-sm text-orange-400 hover:text-orange-300 flex items-center gap-1"
+              className="text-sm text-lime hover:text-lime/80 flex items-center gap-1"
             >
               View All <ChevronRight className="h-4 w-4" />
             </button>
@@ -187,7 +187,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
                       <div className="text-right">
                         <span className={`px-2 py-1 rounded-full text-xs ${
                           booking.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                          booking.status === 'confirmed' ? 'bg-blue-500/20 text-blue-400' :
+                          booking.status === 'confirmed' ? 'bg-amber/20 text-amber' :
                           booking.status === 'cancelled' ? 'bg-red-500/20 text-red-400' :
                           'bg-yellow-500/20 text-yellow-400'
                         }`}>
@@ -245,7 +245,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
         </div>
 
         {/* Emergency Alerts */}
-        <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
             <AlertTriangle className="h-5 w-5 text-red-400 mr-2" />
             Emergency Alerts
@@ -266,7 +266,7 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
       </div>
 
       {/* Document Expiry Alerts */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Document Expiry Alerts (Next 30 Days)</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
@@ -285,18 +285,18 @@ function AdminOverview({ data, onRefresh, loading, onNavigate }) {
       </div>
 
       {/* Pilot Duty Hours Widget */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-          <Users className="h-5 w-5 text-orange-400" />
+          <Users className="h-5 w-5 text-lime" />
           Pilot Duty Hours Monitor
         </h3>
         <PilotDutyWidget />
       </div>
 
       {/* Booking Purpose Analytics */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-          <Target className="h-5 w-5 text-orange-400" />
+          <Target className="h-5 w-5 text-lime" />
           Booking Purpose Analytics / बुकिंग उद्देश्य विश्लेषण
         </h3>
         <BookingPurposeChart />

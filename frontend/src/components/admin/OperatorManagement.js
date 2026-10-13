@@ -220,7 +220,7 @@ function OperatorManagement() {
               size="sm"
               variant={filter === status ? 'default' : 'outline'}
               onClick={() => setFilter(status)}
-              className={filter === status ? 'bg-orange-500 hover:bg-orange-600' : 'border-slate-600 text-slate-300'}
+              className={filter === status ? 'bg-lime text-black hover:bg-lime/90' : 'border-slate-600 text-slate-300'}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}
             </Button>
@@ -249,7 +249,7 @@ function OperatorManagement() {
       </div>
 
       {/* Operators Table */}
-      <div className="bg-slate-900/50 rounded-xl border border-slate-800 overflow-hidden">
+      <div className="bg-slate-900/50 rounded-sm border border-slate-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -278,7 +278,7 @@ function OperatorManagement() {
                     <td className="px-4 py-3 text-sm text-slate-400">{index + 1}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <Building2 className="h-4 w-4 text-orange-400 flex-shrink-0" />
+                        <Building2 className="h-4 w-4 text-lime flex-shrink-0" />
                         <span className="text-white font-medium truncate max-w-[150px]">{operator.company_name}</span>
                       </div>
                     </td>
@@ -313,7 +313,7 @@ function OperatorManagement() {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="h-8 w-8 p-0 text-blue-400 hover:text-blue-300 hover:bg-blue-500/20"
+                          className="h-8 w-8 p-0 text-amber hover:text-amber hover:bg-amber/20"
                           onClick={() => openDetailsModal(operator)}
                           title="View Details"
                         >
@@ -363,7 +363,7 @@ function OperatorManagement() {
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <Building2 className="h-6 w-6 text-orange-400" />
+              <Building2 className="h-6 w-6 text-lime" />
               {selectedOperator?.company_name}
             </DialogTitle>
           </DialogHeader>
@@ -382,7 +382,7 @@ function OperatorManagement() {
 
               {/* Contact Information */}
               <div className="bg-slate-800/50 rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-orange-400 mb-3">Contact Information</h3>
+                <h3 className="text-sm font-semibold text-lime mb-3">Contact Information</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-slate-400" />
@@ -405,7 +405,7 @@ function OperatorManagement() {
 
               {/* Statistics */}
               <div className="bg-slate-800/50 rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-orange-400 mb-3">Statistics</h3>
+                <h3 className="text-sm font-semibold text-lime mb-3">Statistics</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-3 bg-slate-700/50 rounded-lg">
                     <Plane className="h-6 w-6 text-cyan-400 mx-auto mb-1" />
@@ -427,7 +427,7 @@ function OperatorManagement() {
 
               {/* Additional Details */}
               <div className="bg-slate-800/50 rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-orange-400 mb-3">Additional Details</h3>
+                <h3 className="text-sm font-semibold text-lime mb-3">Additional Details</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-slate-400">Operator ID</p>
@@ -463,7 +463,7 @@ function OperatorManagement() {
               {/* Verification Notes */}
               {selectedOperator.verification_notes && (
                 <div className="bg-slate-800/50 rounded-lg p-4">
-                  <h3 className="text-sm font-semibold text-orange-400 mb-2">Verification Notes</h3>
+                  <h3 className="text-sm font-semibold text-lime mb-2">Verification Notes</h3>
                   <p className="text-slate-300">{selectedOperator.verification_notes}</p>
                 </div>
               )}
@@ -522,7 +522,7 @@ function OperatorManagement() {
             <textarea
               value={verifyNotes}
               onChange={(e) => setVerifyNotes(e.target.value)}
-              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-orange-500 focus:outline-none"
+              className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:border-lime focus:outline-none"
               rows={3}
               placeholder="Add any notes for this decision..."
             />

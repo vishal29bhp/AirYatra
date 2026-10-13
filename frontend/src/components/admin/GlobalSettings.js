@@ -237,7 +237,7 @@ function GlobalSettings() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                 activeTab === tab.id
-                  ? 'bg-orange-500 text-white'
+                  ? 'bg-lime text-black'
                   : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
               }`}
             >
@@ -254,11 +254,11 @@ function GlobalSettings() {
         <>
           {/* Platform Settings */}
           {activeTab === 'platform' && (
-            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-6">
+            <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800 space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label className="flex items-center gap-2">
-                    <Percent className="h-4 w-4 text-orange-400" />
+                    <Percent className="h-4 w-4 text-lime" />
                     Platform Commission (%)
                   </Label>
                   <Input
@@ -271,7 +271,7 @@ function GlobalSettings() {
                 </div>
                 <div className="space-y-2">
                   <Label className="flex items-center gap-2">
-                    <Percent className="h-4 w-4 text-orange-400" />
+                    <Percent className="h-4 w-4 text-lime" />
                     Cancellation Fee (%)
                   </Label>
                   <Input
@@ -308,7 +308,7 @@ function GlobalSettings() {
                 </div>
                 <div className="space-y-2">
                   <Label className="flex items-center gap-2">
-                    <Percent className="h-4 w-4 text-blue-400" />
+                    <Percent className="h-4 w-4 text-amber" />
                     GST (%)
                   </Label>
                   <Input
@@ -332,7 +332,7 @@ function GlobalSettings() {
                   />
                 </div>
               </div>
-              <Button onClick={handleSavePlatformSettings} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleSavePlatformSettings} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
                 <Save className="h-4 w-4 mr-2" /> {saving ? 'Saving...' : 'Save Settings'}
               </Button>
             </div>
@@ -340,7 +340,7 @@ function GlobalSettings() {
 
           {/* Pricing Settings */}
           {activeTab === 'pricing' && (
-            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-6">
+            <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800 space-y-6">
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-white">Flight Pricing</h3>
               </div>
@@ -359,7 +359,7 @@ function GlobalSettings() {
                 </div>
                 <div className="space-y-2">
                   <Label className="flex items-center gap-2">
-                    <IndianRupee className="h-4 w-4 text-orange-400" />
+                    <IndianRupee className="h-4 w-4 text-lime" />
                     Rate per KM (after 50 km)
                   </Label>
                   <Input
@@ -399,7 +399,7 @@ function GlobalSettings() {
               {/* Insurance Settings */}
               <div className="mt-6 pt-6 border-t border-slate-700">
                 <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-blue-400" />
+                  <Shield className="h-5 w-5 text-amber" />
                   Insurance Settings
                 </h3>
                 <div className="grid grid-cols-2 gap-6">
@@ -463,7 +463,7 @@ function GlobalSettings() {
                 </div>
               </div>
 
-              <Button onClick={handleSavePricingSettings} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleSavePricingSettings} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
                 <Save className="h-4 w-4 mr-2" /> {saving ? 'Saving...' : 'Save Pricing Settings'}
               </Button>
             </div>
@@ -471,17 +471,17 @@ function GlobalSettings() {
 
           {/* Payment Rules by Purpose */}
           {activeTab === 'payment_rules' && (
-            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+            <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
               <PaymentSettings />
             </div>
           )}
 
           {/* Flight Types Settings */}
           {activeTab === 'flight_types' && (
-            <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-6">
+            <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800 space-y-6">
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <Plane className="h-5 w-5 text-orange-400" />
+                  <Plane className="h-5 w-5 text-lime" />
                   उड़ान प्रकार मूल्य निर्धारण (Flight Type Pricing)
                 </h3>
                 <p className="text-slate-400 text-sm mt-1">
@@ -505,7 +505,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.one_hour_flight_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, one_hour_flight_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -536,7 +536,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.two_hour_flight_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, two_hour_flight_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -567,7 +567,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.half_day_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, half_day_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -609,7 +609,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.full_day_single_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, full_day_single_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -651,7 +651,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.full_day_multi_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, full_day_multi_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -702,7 +702,7 @@ function GlobalSettings() {
                       type="checkbox"
                       checked={flightTypePricing.point_to_point_enabled !== false}
                       onChange={(e) => setFlightTypePricing({ ...flightTypePricing, point_to_point_enabled: e.target.checked })}
-                      className="w-5 h-5 accent-orange-500"
+                      className="w-5 h-5 accent-lime"
                     />
                   </label>
                 </div>
@@ -728,7 +728,7 @@ function GlobalSettings() {
                 </div>
               </div>
 
-              <Button onClick={handleSaveFlightTypePricing} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleSaveFlightTypePricing} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
                 <Save className="h-4 w-4 mr-2" /> {saving ? 'Saving...' : 'Save Flight Type Pricing / उड़ान प्रकार मूल्य सहेजें'}
               </Button>
             </div>
@@ -749,7 +749,7 @@ function GlobalSettings() {
               </div>
 
               {apiKeyFields.map((section, idx) => (
-                <div key={idx} className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+                <div key={idx} className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
                   <h3 className="text-lg font-semibold text-white mb-4">{section.section}</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {section.fields.map(field => (
@@ -791,7 +791,7 @@ function GlobalSettings() {
                 </div>
               ))}
 
-              <Button onClick={handleSaveApiKeys} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={handleSaveApiKeys} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
                 <Save className="h-4 w-4 mr-2" /> {saving ? 'Saving...' : 'Save API Keys'}
               </Button>
             </div>
@@ -800,7 +800,7 @@ function GlobalSettings() {
           {/* Terms & Conditions */}
           {activeTab === 'terms' && (
             <div className="space-y-6">
-              <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800 space-y-6">
+              <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800 space-y-6">
                 <h3 className="text-lg font-semibold text-white">Terms & Conditions Content</h3>
                 
                 <div className="space-y-4">
@@ -860,13 +860,13 @@ function GlobalSettings() {
                   </div>
                 </div>
 
-                <Button onClick={handleSaveTerms} disabled={saving} className="bg-orange-500 hover:bg-orange-600">
+                <Button onClick={handleSaveTerms} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
                   <Save className="h-4 w-4 mr-2" /> {saving ? 'Saving...' : 'Save Terms'}
                 </Button>
               </div>
 
               {/* Terms Agreements Log */}
-              <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+              <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
                 <h3 className="text-lg font-semibold text-white mb-4">Terms Agreement Records</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -890,7 +890,7 @@ function GlobalSettings() {
                           <tr key={idx} className="border-b border-slate-800">
                             <td className="py-3 px-4">
                               <span className={`px-2 py-1 rounded text-xs ${
-                                agreement.user_type === 'customer' ? 'bg-blue-500/20 text-blue-400' :
+                                agreement.user_type === 'customer' ? 'bg-amber/20 text-amber' :
                                 agreement.user_type === 'operator' ? 'bg-green-500/20 text-green-400' :
                                 'bg-purple-500/20 text-purple-400'
                               }`}>
@@ -920,13 +920,13 @@ function GlobalSettings() {
           {activeTab === 'regions' && (
             <div className="space-y-4">
               <div className="flex justify-end">
-                <Button onClick={() => setShowRegionDialog(true)} className="bg-orange-500 hover:bg-orange-600">
+                <Button onClick={() => setShowRegionDialog(true)} className="bg-lime text-black hover:bg-lime/90">
                   <Plus className="h-4 w-4 mr-2" /> Add Region
                 </Button>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {regions.map(region => (
-                  <div key={region.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div key={region.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-white font-semibold">{region.region_name}</h3>
@@ -952,18 +952,18 @@ function GlobalSettings() {
           {activeTab === 'templates' && (
             <div className="space-y-4">
               <div className="flex justify-end">
-                <Button onClick={() => setShowTemplateDialog(true)} className="bg-orange-500 hover:bg-orange-600">
+                <Button onClick={() => setShowTemplateDialog(true)} className="bg-lime text-black hover:bg-lime/90">
                   <Plus className="h-4 w-4 mr-2" /> Add Template
                 </Button>
               </div>
               <div className="space-y-4">
                 {templates.map(template => (
-                  <div key={template.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div key={template.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="flex items-center gap-2">
                           {template.template_type === 'email' ? (
-                            <Mail className="h-4 w-4 text-blue-400" />
+                            <Mail className="h-4 w-4 text-amber" />
                           ) : (
                             <MessageSquare className="h-4 w-4 text-green-400" />
                           )}
@@ -972,7 +972,7 @@ function GlobalSettings() {
                         <p className="text-sm text-slate-400 mt-1">{template.subject}</p>
                       </div>
                       <span className={`px-2 py-1 rounded-full text-xs ${
-                        template.template_type === 'email' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'
+                        template.template_type === 'email' ? 'bg-amber/20 text-amber' : 'bg-green-500/20 text-green-400'
                       }`}>
                         {template.template_type}
                       </span>
@@ -1022,7 +1022,7 @@ function GlobalSettings() {
           </div>
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowRegionDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddRegion} className="bg-orange-500 hover:bg-orange-600">Add Region</Button>
+            <Button onClick={handleAddRegion} className="bg-lime text-black hover:bg-lime/90">Add Region</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1077,7 +1077,7 @@ function GlobalSettings() {
           </div>
           <DialogFooter>
             <Button variant="ghost" onClick={() => setShowTemplateDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddTemplate} className="bg-orange-500 hover:bg-orange-600">Add Template</Button>
+            <Button onClick={handleAddTemplate} className="bg-lime text-black hover:bg-lime/90">Add Template</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

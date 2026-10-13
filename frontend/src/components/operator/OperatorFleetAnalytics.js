@@ -61,7 +61,7 @@ export default function OperatorFleetAnalytics({ operator }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="fleet-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -76,7 +76,7 @@ export default function OperatorFleetAnalytics({ operator }) {
       <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Activity className="h-7 w-7 text-blue-500" />
+            <Activity className="h-7 w-7 text-amber" />
             Fleet Analytics
           </h1>
           <p className="text-slate-400 mt-1">Monitor aircraft utilization, maintenance & performance</p>
@@ -93,15 +93,15 @@ export default function OperatorFleetAnalytics({ operator }) {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-blue-100 text-sm font-medium">Total Aircraft</p>
+                <p className="text-slate-300 text-sm font-medium">Total Aircraft</p>
                 <p className="text-3xl font-bold text-white mt-1">{summary.total_aircraft || 0}</p>
-                <p className="text-blue-200 text-sm mt-1">{summary.active_aircraft || 0} active</p>
+                <p className="text-slate-300 text-sm mt-1">{summary.active_aircraft || 0} active</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Plane className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -116,7 +116,7 @@ export default function OperatorFleetAnalytics({ operator }) {
                 <p className="text-3xl font-bold text-white mt-1">{summary.avg_utilization || 0}%</p>
                 <p className="text-green-200 text-sm mt-1">This month</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -131,22 +131,22 @@ export default function OperatorFleetAnalytics({ operator }) {
                 <p className="text-3xl font-bold text-white mt-1">{formatHours(summary.total_flight_hours)}</p>
                 <p className="text-purple-200 text-sm mt-1">All time</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Timer className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-orange-100 text-sm font-medium">Maintenance Due</p>
+                <p className="text-slate-300 text-sm font-medium">Maintenance Due</p>
                 <p className="text-3xl font-bold text-white mt-1">{summary.maintenance_due || 0}</p>
-                <p className="text-orange-200 text-sm mt-1">Aircraft need attention</p>
+                <p className="text-slate-300 text-sm mt-1">Aircraft need attention</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Wrench className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function OperatorFleetAnalytics({ operator }) {
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-blue-500" />
+                  <BarChart3 className="h-5 w-5 text-amber" />
                   Monthly Utilization Trend
                 </CardTitle>
               </CardHeader>
@@ -228,11 +228,11 @@ export default function OperatorFleetAnalytics({ operator }) {
                   </div>
                 ) : (
                   fleet.map((aircraft, idx) => (
-                    <div key={idx} className="bg-slate-900/50 rounded-xl p-4">
+                    <div key={idx} className="bg-slate-900/50 rounded-sm p-4">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                            <Plane className="h-5 w-5 text-blue-400" />
+                          <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center">
+                            <Plane className="h-5 w-5 text-amber" />
                           </div>
                           <div>
                             <p className="text-white font-semibold">{aircraft.registration || aircraft.name}</p>
@@ -261,7 +261,7 @@ export default function OperatorFleetAnalytics({ operator }) {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Wrench className="h-5 w-5 text-orange-500" />
+                <Wrench className="h-5 w-5 text-lime" />
                 Maintenance Schedule
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -294,7 +294,7 @@ export default function OperatorFleetAnalytics({ operator }) {
                           <tr key={idx} className="border-b border-slate-700/50 hover:bg-slate-700/30">
                             <td className="py-4 px-4">
                               <div className="flex items-center gap-3">
-                                <Plane className="h-5 w-5 text-blue-400" />
+                                <Plane className="h-5 w-5 text-amber" />
                                 <div>
                                   <p className="text-white font-medium">{aircraft.registration || aircraft.name}</p>
                                   <p className="text-slate-500 text-xs">{aircraft.model}</p>
@@ -341,7 +341,7 @@ export default function OperatorFleetAnalytics({ operator }) {
                 {fleet.map((aircraft, idx) => (
                   <div key={idx} className="flex items-center justify-between p-3 bg-slate-900/50 rounded-lg">
                     <div className="flex items-center gap-3">
-                      <Plane className="h-5 w-5 text-blue-400" />
+                      <Plane className="h-5 w-5 text-amber" />
                       <span className="text-white">{aircraft.registration || aircraft.name}</span>
                     </div>
                     <div className="text-right">

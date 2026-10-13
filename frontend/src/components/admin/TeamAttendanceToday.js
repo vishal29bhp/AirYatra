@@ -57,7 +57,7 @@ function TeamAttendanceToday() {
       </div>
 
       {data.is_holiday && (
-        <div className="bg-purple-500/15 border border-purple-500/40 rounded-xl p-4 flex items-center gap-3" data-testid="holiday-banner">
+        <div className="bg-purple-500/15 border border-purple-500/40 rounded-sm p-4 flex items-center gap-3" data-testid="holiday-banner">
           <PartyPopper className="h-6 w-6 text-purple-400" />
           <p className="text-white">Aaj company holiday hai: <b>{data.holiday_name}</b> 🎉</p>
         </div>
@@ -66,7 +66,7 @@ function TeamAttendanceToday() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {cards.map((c) => (
           <button key={c.key} onClick={() => setFilter(filter === c.key ? 'all' : c.key)}
-            className={`rounded-xl p-4 border text-left transition-transform hover:scale-[1.02] ${c.border} ${filter === c.key ? 'ring-2 ring-white/40' : ''}`}
+            className={`rounded-sm p-4 border text-left transition-transform hover:scale-[1.02] ${c.border} ${filter === c.key ? 'ring-2 ring-white/40' : ''}`}
             data-testid={`team-count-${c.key}`}>
             <p className={`text-3xl font-bold ${c.color}`}>{data.counts[c.key]}</p>
             <p className="text-slate-300 text-sm">{STATUS_META[c.key].label}</p>
@@ -74,7 +74,7 @@ function TeamAttendanceToday() {
         ))}
       </div>
 
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-x-auto">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-slate-900/50">
             <tr>

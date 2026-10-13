@@ -60,7 +60,7 @@ function CallRecordingSettings() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -98,11 +98,11 @@ function CallRecordingSettings() {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 flex items-start gap-3">
-        <AlertTriangle className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
+      <div className="bg-amber/10 border border-amber/30 rounded-sm p-4 flex items-start gap-3">
+        <AlertTriangle className="h-5 w-5 text-amber flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-blue-200 font-medium">How Call Recording Works</p>
-          <p className="text-blue-200/70 text-sm mt-1">
+          <p className="text-slate-300 font-medium">How Call Recording Works</p>
+          <p className="text-slate-300 text-sm mt-1">
             When a sales person makes a call from CRM, the call goes through your chosen provider 
             (Twilio/Exotel). The provider records the call and stores the recording URL, 
             which is then linked to the lead's call history in CRM.
@@ -111,7 +111,7 @@ function CallRecordingSettings() {
       </div>
 
       {/* Enable/Disable Toggle */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-white font-semibold">Call Recording</h3>
@@ -133,12 +133,12 @@ function CallRecordingSettings() {
       </div>
 
       {/* Provider Selection */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-4">Select Provider / प्रोवाइडर चुनें</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
             onClick={() => handleChange('call_provider', 'twilio')}
-            className={`p-4 rounded-xl border-2 transition-all text-left ${
+            className={`p-4 rounded-sm border-2 transition-all text-left ${
               settings.call_provider === 'twilio'
                 ? 'border-red-500 bg-red-500/10'
                 : 'border-slate-600 hover:border-slate-500'
@@ -160,14 +160,14 @@ function CallRecordingSettings() {
           
           <button
             onClick={() => handleChange('call_provider', 'exotel')}
-            className={`p-4 rounded-xl border-2 transition-all text-left ${
+            className={`p-4 rounded-sm border-2 transition-all text-left ${
               settings.call_provider === 'exotel'
-                ? 'border-blue-500 bg-blue-500/10'
+                ? 'border-amber bg-amber/10'
                 : 'border-slate-600 hover:border-slate-500'
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-amber/20 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">☎️</span>
               </div>
               <div>
@@ -175,7 +175,7 @@ function CallRecordingSettings() {
                 <p className="text-slate-400 text-xs">India-focused cloud telephony</p>
               </div>
               {settings.call_provider === 'exotel' && (
-                <CheckCircle className="h-5 w-5 text-blue-400 ml-auto" />
+                <CheckCircle className="h-5 w-5 text-amber ml-auto" />
               )}
             </div>
           </button>
@@ -184,7 +184,7 @@ function CallRecordingSettings() {
 
       {/* Twilio Configuration */}
       {settings.call_provider === 'twilio' && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-white font-semibold flex items-center gap-2">
               <span className="text-2xl">📞</span>
@@ -247,7 +247,7 @@ function CallRecordingSettings() {
 
       {/* Exotel Configuration */}
       {settings.call_provider === 'exotel' && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-white font-semibold flex items-center gap-2">
               <span className="text-2xl">☎️</span>
@@ -257,7 +257,7 @@ function CallRecordingSettings() {
               href="https://my.exotel.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+              className="text-amber hover:text-amber text-sm flex items-center gap-1"
             >
               Get API Keys <ExternalLink className="h-3 w-3" />
             </a>
@@ -305,10 +305,10 @@ function CallRecordingSettings() {
           
           <div className="mt-4 p-3 bg-slate-900/50 rounded-lg">
             <p className="text-slate-400 text-sm">
-              <span className="text-blue-400 font-medium">Setup Steps:</span>
+              <span className="text-amber font-medium">Setup Steps:</span>
             </p>
             <ol className="text-slate-400 text-sm mt-2 list-decimal list-inside space-y-1">
-              <li>Sign up at <a href="https://exotel.com" target="_blank" rel="noopener noreferrer" className="text-blue-400">exotel.com</a></li>
+              <li>Sign up at <a href="https://exotel.com" target="_blank" rel="noopener noreferrer" className="text-amber">exotel.com</a></li>
               <li>Get API credentials from Dashboard → Settings → API</li>
               <li>Purchase an Exophone (virtual number)</li>
               <li>Enable call recording in Exotel settings</li>
@@ -318,7 +318,7 @@ function CallRecordingSettings() {
       )}
 
       {/* Call Recording Features Info */}
-      <div className="bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-xl p-6 border border-green-500/30">
+      <div className="bg-gradient-to-br from-green-500/10 rounded-sm p-6 border border-green-500/30">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
           <Volume2 className="h-5 w-5 text-green-400" />
           Call Recording Features / कॉल रिकॉर्डिंग सुविधाएं
@@ -334,8 +334,8 @@ function CallRecordingSettings() {
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Volume2 className="h-4 w-4 text-blue-400" />
+            <div className="w-8 h-8 bg-amber/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Volume2 className="h-4 w-4 text-amber" />
             </div>
             <div>
               <p className="text-white font-medium text-sm">Auto Recording</p>
@@ -355,7 +355,7 @@ function CallRecordingSettings() {
       </div>
 
       {settings.call_recording_enabled !== 'true' && (
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4">
+        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-sm p-4">
           <p className="text-yellow-200 text-sm flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             Call recording is currently disabled. Enable it and configure your provider to start recording calls.

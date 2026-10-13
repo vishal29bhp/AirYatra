@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 const SEV = {
   doc_expired: { chip: 'bg-red-500/20 text-red-400 border-red-500/40', label: 'DOC EXPIRED' },
   overdue: { chip: 'bg-red-500/20 text-red-400 border-red-500/40', label: 'OVERDUE' },
-  hours_due: { chip: 'bg-orange-500/20 text-orange-400 border-orange-500/40', label: 'HOURS DUE' },
+  hours_due: { chip: 'bg-amber-500/20 text-amber-400 border-amber-500/40', label: 'HOURS DUE' },
   doc_expiring: { chip: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40', label: 'DOC EXPIRING' },
   due_soon: { chip: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40', label: 'DUE SOON' },
   hours_soon: { chip: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30', label: 'APPROACHING' },
@@ -180,7 +180,7 @@ function OperatorERP() {
   const kpiCards = [
     { label: 'Fleet / फ्लीट', value: kpis.fleet_size, icon: Plane, color: 'text-sky-400' },
     { label: 'Flights (month)', value: kpis.flights_this_month, icon: BookOpen, color: 'text-green-400' },
-    { label: 'Hours (month)', value: `${kpis.hours_this_month}h`, icon: Gauge, color: 'text-orange-400' },
+    { label: 'Hours (month)', value: `${kpis.hours_this_month}h`, icon: Gauge, color: 'text-amber-400' },
     { label: 'Revenue (month)', value: analytics ? `₹${(analytics.revenue_this_month || 0).toLocaleString()}` : '—', icon: TrendingUp, color: 'text-emerald-400' },
     { label: 'Open Maintenance', value: kpis.open_maintenance, icon: Wrench, color: 'text-yellow-400' },
     { label: 'Critical Alerts', value: kpis.critical_alerts, icon: AlertTriangle, color: kpis.critical_alerts > 0 ? 'text-red-400' : 'text-slate-400' },
@@ -205,7 +205,7 @@ function OperatorERP() {
 
       <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
         {kpiCards.map((k) => (
-          <div key={k.label} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700" data-testid={`erp-kpi-${k.label.split(' ')[0].toLowerCase()}`}>
+          <div key={k.label} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700" data-testid={`erp-kpi-${k.label.split(' ')[0].toLowerCase()}`}>
             <k.icon className={`h-5 w-5 mb-2 ${k.color}`} />
             <p className="text-2xl font-bold text-white">{k.value}</p>
             <p className="text-slate-400 text-xs">{k.label}</p>
@@ -217,7 +217,7 @@ function OperatorERP() {
       {analytics && (
         <div className="grid lg:grid-cols-2 gap-4" data-testid="erp-analytics-section">
           {/* Utilization Trend */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="utilization-trend-card">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="utilization-trend-card">
             <h2 className="text-white font-semibold mb-4 flex items-center gap-2"><TrendingUp className="h-4 w-4 text-emerald-400" />Fleet Utilization — Last 6 Months</h2>
             <div className="flex items-end gap-3 h-36">
               {(() => {
@@ -235,7 +235,7 @@ function OperatorERP() {
           </div>
 
           {/* Pilot Duty Hours (FDTL) */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="pilot-duty-card">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="pilot-duty-card">
             <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><UserCheck className="h-4 w-4 text-sky-400" />Pilot Duty Hours (This Month) — DGCA FDTL Watch</h2>
             {analytics.pilot_hours.length === 0 ? (
               <p className="text-slate-400 text-sm">No pilots added yet</p>
@@ -262,8 +262,8 @@ function OperatorERP() {
           </div>
 
           {/* Fuel Efficiency */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="fuel-efficiency-card">
-            <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Fuel className="h-4 w-4 text-orange-400" />Fuel Efficiency (6 months)</h2>
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="fuel-efficiency-card">
+            <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><Fuel className="h-4 w-4 text-lime" />Fuel Efficiency (6 months)</h2>
             <div className="space-y-2">
               {analytics.fuel_stats.map((f) => (
                 <div key={f.aircraft_id} className="flex items-center justify-between bg-slate-900/40 rounded-lg p-2.5 border border-slate-700/60">
@@ -272,7 +272,7 @@ function OperatorERP() {
                     <p className="text-slate-500 text-xs">{f.hours}h • {f.km} km • {f.fuel_liters}L</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-orange-400 font-bold">{f.liters_per_hour} L/hr</p>
+                    <p className="text-lime font-bold">{f.liters_per_hour} L/hr</p>
                     <p className="text-slate-500 text-[10px]">burn rate</p>
                   </div>
                 </div>
@@ -281,7 +281,7 @@ function OperatorERP() {
           </div>
 
           {/* Maintenance Costs */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="maintenance-cost-card">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="maintenance-cost-card">
             <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><BadgeIndianRupee className="h-4 w-4 text-yellow-400" />Maintenance Spend</h2>
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-slate-900/40 rounded-lg p-4 border border-slate-700/60 text-center">
@@ -299,8 +299,8 @@ function OperatorERP() {
       )}
 
       {/* Maintenance Alerts */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="maintenance-alerts-panel">
-        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-orange-400" />Maintenance Alerts / रखरखाव अलर्ट ({alerts.length})</h2>
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="maintenance-alerts-panel">
+        <h2 className="text-white font-semibold mb-3 flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-lime" />Maintenance Alerts / रखरखाव अलर्ट ({alerts.length})</h2>
         {alerts.length === 0 ? (
           <p className="text-green-400 text-sm flex items-center gap-2"><CheckCircle2 className="h-4 w-4" />All clear — koi maintenance alert nahi 🎉</p>
         ) : (
@@ -337,7 +337,7 @@ function OperatorERP() {
       {/* Fleet Health */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
         {fleet.map((a) => (
-          <div key={a.id} className="bg-slate-800/50 rounded-xl border border-slate-700 p-4" data-testid={`fleet-health-${a.id}`}>
+          <div key={a.id} className="bg-slate-800/50 rounded-sm border border-slate-700 p-4" data-testid={`fleet-health-${a.id}`}>
             <div className="flex items-center justify-between mb-2">
               <p className="text-white font-medium text-sm truncate">{a.label}</p>
               <span className={`px-2 py-0.5 rounded text-[10px] ${a.maintenance_status === 'operational' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>{a.maintenance_status?.toUpperCase()}</span>
@@ -353,7 +353,7 @@ function OperatorERP() {
 
       {/* Compliance Documents + Fuel Tracking */}
       <div className="grid lg:grid-cols-2 gap-4">
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="compliance-docs-panel">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="compliance-docs-panel">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-white font-semibold flex items-center gap-2"><FileCheck className="h-4 w-4 text-purple-400" />Compliance Docs / अनुपालन दस्तावेज़</h2>
             <Button size="sm" onClick={() => setDocOpen(true)} className="bg-purple-500 hover:bg-purple-600 h-8" data-testid="add-doc-btn">
@@ -386,17 +386,17 @@ function OperatorERP() {
           )}
         </div>
 
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5" data-testid="fuel-tracking-panel">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-5" data-testid="fuel-tracking-panel">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-white font-semibold flex items-center gap-2"><Fuel className="h-4 w-4 text-orange-400" />Fuel Purchases / ईंधन खरीद</h2>
-            <Button size="sm" onClick={() => setFuelOpen(true)} className="bg-orange-500 hover:bg-orange-600 h-8" data-testid="log-fuel-btn">
+            <h2 className="text-white font-semibold flex items-center gap-2"><Fuel className="h-4 w-4 text-lime" />Fuel Purchases / ईंधन खरीद</h2>
+            <Button size="sm" onClick={() => setFuelOpen(true)} className="bg-lime text-black hover:bg-lime/90 h-8" data-testid="log-fuel-btn">
               <Plus className="h-3.5 w-3.5 mr-1" />Log Purchase
             </Button>
           </div>
           {fuel?.this_month && (
             <div className="grid grid-cols-3 gap-2 mb-3">
               <div className="bg-slate-900/40 rounded-lg p-3 border border-slate-700/60 text-center">
-                <p className="text-orange-400 font-bold text-lg" data-testid="fuel-month-spend">₹{(fuel.this_month.spend || 0).toLocaleString()}</p>
+                <p className="text-lime font-bold text-lg" data-testid="fuel-month-spend">₹{(fuel.this_month.spend || 0).toLocaleString()}</p>
                 <p className="text-slate-500 text-[10px]">Spend this month</p>
               </div>
               <div className="bg-slate-900/40 rounded-lg p-3 border border-slate-700/60 text-center">
@@ -419,7 +419,7 @@ function OperatorERP() {
                     <p className="text-white text-sm">{r.aircraft_label} • {r.location}</p>
                     <p className="text-slate-500 text-xs">{(r.refill_date || '').slice(0, 10)} • {r.fuel_amount_liters}L @ ₹{r.cost_per_liter}/L</p>
                   </div>
-                  <p className="text-orange-400 font-semibold text-sm shrink-0">₹{(r.total_cost || 0).toLocaleString()}</p>
+                  <p className="text-lime font-semibold text-sm shrink-0">₹{(r.total_cost || 0).toLocaleString()}</p>
                 </div>
               ))}
             </div>
@@ -428,7 +428,7 @@ function OperatorERP() {
       </div>
 
       {/* Digital Logbook */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden" data-testid="flight-logbook-panel">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden" data-testid="flight-logbook-panel">
         <div className="p-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-700">
           <h2 className="text-white font-semibold flex items-center gap-2"><BookOpen className="h-4 w-4 text-sky-400" />Digital Flight Logbook / डिजिटल लॉगबुक</h2>
           <div className="flex items-center gap-3">
@@ -606,10 +606,10 @@ function OperatorERP() {
               <div><Label className="text-slate-300">Rate (₹/L) *</Label><Input type="number" value={fuelForm.cost_per_liter} onChange={(e) => setFuelForm({ ...fuelForm, cost_per_liter: e.target.value })} className="bg-slate-800 border-slate-700 mt-1" data-testid="fuel-rate-input" /></div>
             </div>
             {fuelForm.fuel_amount_liters && fuelForm.cost_per_liter && (
-              <p className="text-orange-400 text-sm font-semibold">Total: ₹{(Number(fuelForm.fuel_amount_liters) * Number(fuelForm.cost_per_liter)).toLocaleString()}</p>
+              <p className="text-lime text-sm font-semibold">Total: ₹{(Number(fuelForm.fuel_amount_liters) * Number(fuelForm.cost_per_liter)).toLocaleString()}</p>
             )}
             <div><Label className="text-slate-300">Date</Label><Input type="date" value={fuelForm.refill_date} onChange={(e) => setFuelForm({ ...fuelForm, refill_date: e.target.value })} className="bg-slate-800 border-slate-700 mt-1" data-testid="fuel-date-input" /></div>
-            <Button onClick={addFuel} disabled={saving} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="save-fuel-btn">
+            <Button onClick={addFuel} disabled={saving} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="save-fuel-btn">
               {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}Log Purchase
             </Button>
           </div>

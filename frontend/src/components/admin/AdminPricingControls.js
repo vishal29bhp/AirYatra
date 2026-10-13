@@ -226,7 +226,7 @@ function AdminPricingControls() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-300">Loading admin controls...</span>
       </div>
     );
@@ -238,14 +238,14 @@ function AdminPricingControls() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Settings className="h-6 w-6 text-orange-500" />
+            <Settings className="h-6 w-6 text-lime" />
             Admin Pricing Controls / एडमिन प्राइसिंग कंट्रोल
           </h2>
           <p className="text-slate-400 mt-1">
             Platform-wide pricing configuration (Operators cannot edit)
           </p>
         </div>
-        <Button onClick={saveControls} disabled={saving} className="bg-orange-600 hover:bg-orange-700">
+        <Button onClick={saveControls} disabled={saving} className="bg-lime text-black hover:bg-lime/90">
           <Save className="h-4 w-4 mr-2" />
           {saving ? 'Saving...' : 'Save All Changes'}
         </Button>
@@ -259,7 +259,7 @@ function AdminPricingControls() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
               activeTab === tab.id
-                ? 'bg-orange-500/20 text-orange-400 border border-orange-500'
+                ? 'bg-lime/20 text-lime border border-lime'
                 : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
             }`}
           >

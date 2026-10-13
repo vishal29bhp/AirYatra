@@ -159,7 +159,7 @@ function OperatorOnboarding({ user, onComplete }) {
 
           <Button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-6 text-lg"
+            className="w-full bg-lime hover:bg-lime/90 text-black py-6 text-lg"
             disabled={loading}
             data-testid="submit-profile-btn"
           >

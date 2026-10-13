@@ -72,7 +72,7 @@ function AIChatbot() {
             )}
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[70%] p-3 rounded-lg ${msg.role === 'user' ? 'bg-orange-500 text-white' : 'bg-slate-700 text-white'}`}>
+                <div className={`max-w-[70%] p-3 rounded-lg ${msg.role === 'user' ? 'bg-lime text-black' : 'bg-slate-700 text-white'}`}>
                   <p>{msg.content}</p>
                   {msg.role === 'bot' && (
                     <div className="flex justify-end space-x-2 mt-2">
@@ -98,14 +98,14 @@ function AIChatbot() {
           <div className="p-4 border-t border-slate-700">
             <div className="flex space-x-2">
               <Input value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && sendMessage()} placeholder="Type your message..." className="bg-slate-700 flex-1" />
-              <Button onClick={sendMessage} className="bg-orange-500" disabled={loading}><Send className="h-4 w-4" /></Button>
+              <Button onClick={sendMessage} className="bg-lime text-black" disabled={loading}><Send className="h-4 w-4" /></Button>
             </div>
           </div>
         </div>
 
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center">
-            <BookOpen className="h-5 w-5 mr-2 text-blue-400" /> Quick FAQs
+            <BookOpen className="h-5 w-5 mr-2 text-amber" /> Quick FAQs
           </h2>
           <div className="space-y-3">
             {faqs.map((faq, i) => (

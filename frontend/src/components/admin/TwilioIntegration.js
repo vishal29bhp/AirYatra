@@ -86,8 +86,8 @@ export default function TwilioIntegration() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-blue-500/20 rounded-lg">
-                <PhoneCall className="h-6 w-6 text-blue-400" />
+              <div className="p-3 bg-amber/20 rounded-lg">
+                <PhoneCall className="h-6 w-6 text-amber" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.total_calls || 0}</p>
@@ -128,8 +128,8 @@ export default function TwilioIntegration() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-orange-500/20 rounded-lg">
-                <Mic className="h-6 w-6 text-orange-400" />
+              <div className="p-3 bg-lime/20 rounded-lg">
+                <Mic className="h-6 w-6 text-lime" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.recordings_count || 0}</p>
@@ -197,7 +197,7 @@ export default function TwilioIntegration() {
               />
               <Label className="text-slate-300">Enable Call Recording</Label>
             </div>
-            <Button onClick={saveConfig} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={saveConfig} className="bg-lime text-black hover:bg-lime/90">
               Save Configuration
             </Button>
           </CardContent>

@@ -114,8 +114,8 @@ export default function ZohoIntegration() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-blue-500/20 rounded-lg">
-                <Users className="h-6 w-6 text-blue-400" />
+              <div className="p-3 bg-amber/20 rounded-lg">
+                <Users className="h-6 w-6 text-amber" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-white">{dashboard?.stats?.contacts_synced || 0}</p>
@@ -156,8 +156,8 @@ export default function ZohoIntegration() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-orange-500/20 rounded-lg">
-                <Cloud className="h-6 w-6 text-orange-400" />
+              <div className="p-3 bg-lime/20 rounded-lg">
+                <Cloud className="h-6 w-6 text-lime" />
               </div>
               <div>
                 <p className="text-sm font-bold text-white">
@@ -258,7 +258,7 @@ export default function ZohoIntegration() {
                 <span className="text-slate-300">Zoho CRM</span>
               </label>
             </div>
-            <Button onClick={saveConfig} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={saveConfig} className="bg-lime text-black hover:bg-lime/90">
               Save Configuration
             </Button>
           </CardContent>
@@ -275,7 +275,7 @@ export default function ZohoIntegration() {
             <Button 
               onClick={() => triggerSync('all')} 
               disabled={syncing}
-              className="bg-blue-500 hover:bg-blue-600"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
               Sync All
@@ -300,7 +300,7 @@ export default function ZohoIntegration() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center px-4 py-3 border-b-2 transition-colors ${
               activeTab === tab.id
-                ? 'border-orange-500 text-orange-400'
+                ? 'border-lime text-lime'
                 : 'border-transparent text-slate-400 hover:text-white'
             }`}
           >
@@ -321,8 +321,8 @@ export default function ZohoIntegration() {
                 contacts.map((contact, index) => (
                   <div key={index} className="flex items-center justify-between p-4 bg-slate-700/50 rounded-lg">
                     <div className="flex items-center space-x-4">
-                      <div className="p-2 rounded-full bg-blue-500/20">
-                        <Users className="h-4 w-4 text-blue-400" />
+                      <div className="p-2 rounded-full bg-amber/20">
+                        <Users className="h-4 w-4 text-amber" />
                       </div>
                       <div>
                         <p className="text-white font-medium">{contact.contact_name}</p>
@@ -380,7 +380,7 @@ export default function ZohoIntegration() {
                       </div>
                     </div>
                     <span className={`px-2 py-1 rounded text-xs ${
-                      lead.lead_status === 'Converted' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'
+                      lead.lead_status === 'Converted' ? 'bg-green-500/20 text-green-400' : 'bg-amber/20 text-amber'
                     }`}>
                       {lead.lead_status}
                     </span>

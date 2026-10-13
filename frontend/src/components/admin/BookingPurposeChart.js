@@ -29,7 +29,7 @@ function BookingPurposeChart() {
 
   const getBarColor = (index) => {
     const colors = [
-      'bg-orange-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500',
+      'bg-lime text-black', 'bg-slate-700', 'bg-green-500', 'bg-purple-500',
       'bg-pink-500', 'bg-yellow-500', 'bg-cyan-500', 'bg-red-500',
       'bg-indigo-500', 'bg-teal-500', 'bg-amber-500'
     ];
@@ -38,7 +38,7 @@ function BookingPurposeChart() {
 
   const getBarColorLight = (index) => {
     const colors = [
-      'bg-orange-500/20', 'bg-blue-500/20', 'bg-green-500/20', 'bg-purple-500/20',
+      'bg-lime/20', 'bg-amber/20', 'bg-green-500/20', 'bg-purple-500/20',
       'bg-pink-500/20', 'bg-yellow-500/20', 'bg-cyan-500/20', 'bg-red-500/20',
       'bg-indigo-500/20', 'bg-teal-500/20', 'bg-amber-500/20'
     ];
@@ -47,7 +47,7 @@ function BookingPurposeChart() {
 
   const getTextColor = (index) => {
     const colors = [
-      'text-orange-400', 'text-blue-400', 'text-green-400', 'text-purple-400',
+      'text-lime', 'text-amber', 'text-green-400', 'text-purple-400',
       'text-pink-400', 'text-yellow-400', 'text-cyan-400', 'text-red-400',
       'text-indigo-400', 'text-teal-400', 'text-amber-400'
     ];
@@ -69,7 +69,7 @@ function BookingPurposeChart() {
           onClick={() => setViewType('purpose')}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
             viewType === 'purpose'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-lime text-black'
               : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
           }`}
         >
@@ -80,7 +80,7 @@ function BookingPurposeChart() {
           onClick={() => setViewType('booking_for')}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
             viewType === 'booking_for'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-lime text-black'
               : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
           }`}
         >
@@ -130,7 +130,7 @@ function BookingPurposeChart() {
           {/* Summary Pie Chart Representation */}
           <div className="mt-6 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
             <h4 className="text-white font-medium mb-4 flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-orange-400" />
+              <TrendingUp className="h-4 w-4 text-lime" />
               Distribution Summary
             </h4>
             <div className="flex flex-wrap gap-3">

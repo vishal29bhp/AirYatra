@@ -111,7 +111,7 @@ function IncentiveConfig() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -140,7 +140,7 @@ function IncentiveConfig() {
         <button
           onClick={() => setActiveTab('config')}
           className={`px-4 py-2 rounded-lg transition ${
-            activeTab === 'config' ? 'bg-orange-500 text-white' : 'text-slate-400 hover:bg-slate-800'
+            activeTab === 'config' ? 'bg-lime text-black' : 'text-slate-400 hover:bg-slate-800'
           }`}
         >
           Configuration
@@ -148,7 +148,7 @@ function IncentiveConfig() {
         <button
           onClick={() => { setActiveTab('report'); loadReport(); }}
           className={`px-4 py-2 rounded-lg transition ${
-            activeTab === 'report' ? 'bg-orange-500 text-white' : 'text-slate-400 hover:bg-slate-800'
+            activeTab === 'report' ? 'bg-lime text-black' : 'text-slate-400 hover:bg-slate-800'
           }`}
         >
           Incentive Report
@@ -158,7 +158,7 @@ function IncentiveConfig() {
       {activeTab === 'config' && (
         <div className="space-y-6">
           {/* Master Toggle */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-white font-semibold">Incentives System</h3>
@@ -177,11 +177,11 @@ function IncentiveConfig() {
           </div>
 
           {/* Per Lead Incentive */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <Users className="h-5 w-5 text-blue-400" />
+                <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center">
+                  <Users className="h-5 w-5 text-amber" />
                 </div>
                 <div>
                   <h3 className="text-white font-semibold">Per Lead Incentive / लीड पर इंसेंटिव</h3>
@@ -225,7 +225,7 @@ function IncentiveConfig() {
           </div>
 
           {/* Per Conversion Incentive */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
@@ -272,7 +272,7 @@ function IncentiveConfig() {
           </div>
 
           {/* Revenue Percentage */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
@@ -320,11 +320,11 @@ function IncentiveConfig() {
           </div>
 
           {/* Target Achievement Slabs */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                  <Target className="h-5 w-5 text-orange-400" />
+                <div className="w-10 h-10 bg-lime/20 rounded-lg flex items-center justify-center">
+                  <Target className="h-5 w-5 text-lime" />
                 </div>
                 <div>
                   <h3 className="text-white font-semibold">Target Achievement Bonus / टारगेट अचीवमेंट बोनस</h3>
@@ -338,7 +338,7 @@ function IncentiveConfig() {
                   checked={config.target_bonus_enabled}
                   onChange={(e) => handleChange('target_bonus_enabled', e.target.checked)}
                 />
-                <div className="w-11 h-6 bg-slate-700 rounded-full peer peer-checked:bg-orange-500 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                <div className="w-11 h-6 bg-slate-700 rounded-full peer peer-checked:bg-lime after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
               </label>
             </div>
             
@@ -402,7 +402,7 @@ function IncentiveConfig() {
       {activeTab === 'report' && (
         <div className="space-y-6">
           {/* Month Selector */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <div className="flex items-center gap-4">
               <div>
                 <Label className="text-slate-300">Month</Label>
@@ -430,7 +430,7 @@ function IncentiveConfig() {
                   ))}
                 </select>
               </div>
-              <Button onClick={loadReport} className="bg-orange-500 hover:bg-orange-600">
+              <Button onClick={loadReport} className="bg-lime text-black hover:bg-lime/90">
                 <Calculator className="h-4 w-4 mr-2" /> Calculate
               </Button>
             </div>
@@ -439,7 +439,7 @@ function IncentiveConfig() {
           {/* Report Results */}
           {report && (
             <>
-              <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+              <div className="bg-green-500/10 border border-green-500/30 rounded-sm p-4">
                 <p className="text-green-400 text-lg font-semibold">
                   Total Incentives: ₹{report.total_incentives?.toLocaleString()}
                 </p>
@@ -448,7 +448,7 @@ function IncentiveConfig() {
 
               <div className="space-y-4">
                 {report.report?.map((emp, idx) => (
-                  <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                  <div key={idx} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <p className="text-white font-semibold">{emp.employee_name}</p>
@@ -465,7 +465,7 @@ function IncentiveConfig() {
                         <div className="bg-slate-900/50 p-3 rounded-lg">
                           <p className="text-slate-400">Leads</p>
                           <p className="text-white font-medium">{emp.leads.count} × ₹{emp.leads.rate}</p>
-                          <p className="text-blue-400">₹{emp.leads.amount}</p>
+                          <p className="text-amber">₹{emp.leads.amount}</p>
                         </div>
                       )}
                       {emp.conversions && (
@@ -486,7 +486,7 @@ function IncentiveConfig() {
                         <div className="bg-slate-900/50 p-3 rounded-lg">
                           <p className="text-slate-400">Target Bonus</p>
                           <p className="text-white font-medium">{emp.target_achievement.achievement_percent}% achieved</p>
-                          <p className="text-orange-400">₹{emp.target_achievement.amount}</p>
+                          <p className="text-lime">₹{emp.target_achievement.amount}</p>
                         </div>
                       )}
                     </div>

@@ -65,7 +65,7 @@ function InsuranceModule() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'submitted': return 'bg-blue-500/20 text-blue-400';
+      case 'submitted': return 'bg-amber/20 text-amber';
       case 'under_review': return 'bg-yellow-500/20 text-yellow-400';
       case 'approved': return 'bg-green-500/20 text-green-400';
       case 'rejected': return 'bg-red-500/20 text-red-400';
@@ -88,7 +88,7 @@ function InsuranceModule() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -110,7 +110,7 @@ function InsuranceModule() {
       {dashboard && (
         <div className="grid grid-cols-5 gap-4">
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-blue-400 mb-2">
+            <div className="flex items-center space-x-2 text-amber mb-2">
               <FileText className="h-5 w-5" />
               <span className="text-sm">Total Policies</span>
             </div>
@@ -124,7 +124,7 @@ function InsuranceModule() {
             <p className="text-2xl font-bold text-white">{dashboard.active_policies}</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-            <div className="flex items-center space-x-2 text-orange-400 mb-2">
+            <div className="flex items-center space-x-2 text-lime mb-2">
               <DollarSign className="h-5 w-5" />
               <span className="text-sm">Premium Collected</span>
             </div>
@@ -153,7 +153,7 @@ function InsuranceModule() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400 hover:text-white'}`}
+            className={`px-4 py-2 font-medium capitalize ${activeTab === tab ? 'text-lime border-b-2 border-lime' : 'text-slate-400 hover:text-white'}`}
           >
             {tab}
           </button>
@@ -194,7 +194,7 @@ function InsuranceModule() {
                       <p className="text-slate-400 text-sm">{getClaimTypeIcon(claim.claim_type)} {claim.claim_type}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-orange-400">₹{claim.amount_claimed?.toLocaleString()}</p>
+                      <p className="text-lime">₹{claim.amount_claimed?.toLocaleString()}</p>
                       <span className={`text-xs px-2 py-1 rounded ${getStatusColor(claim.status)}`}>
                         {claim.status}
                       </span>
@@ -217,7 +217,7 @@ function InsuranceModule() {
               <button
                 key={status}
                 onClick={() => loadFilteredClaims(status)}
-                className={`px-3 py-1 rounded-full text-sm ${claimFilter === status ? 'bg-orange-500 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'}`}
+                className={`px-3 py-1 rounded-full text-sm ${claimFilter === status ? 'bg-lime text-black' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'}`}
               >
                 {status || 'All'}
               </button>
@@ -246,7 +246,7 @@ function InsuranceModule() {
                       {getClaimTypeIcon(claim.claim_type)} {claim.claim_type}
                     </td>
                     <td className="p-4 text-slate-300">{claim.customer_name}</td>
-                    <td className="p-4 text-right text-orange-400">₹{claim.amount_claimed?.toLocaleString()}</td>
+                    <td className="p-4 text-right text-lime">₹{claim.amount_claimed?.toLocaleString()}</td>
                     <td className="p-4 text-right text-green-400">
                       {claim.approved_amount ? `₹${claim.approved_amount.toLocaleString()}` : '-'}
                     </td>
@@ -321,7 +321,7 @@ function InsuranceModule() {
 
             <div className="flex justify-end space-x-3 mt-6">
               <Button variant="outline" onClick={() => setUpdateModal(false)}>Cancel</Button>
-              <Button onClick={updateClaim} className="bg-orange-500 hover:bg-orange-600">Update</Button>
+              <Button onClick={updateClaim} className="bg-lime text-black hover:bg-lime/90">Update</Button>
             </div>
           </div>
         </div>

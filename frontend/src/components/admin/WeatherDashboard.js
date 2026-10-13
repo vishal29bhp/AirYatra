@@ -75,8 +75,8 @@ function WeatherDashboard() {
   const getWeatherIcon = (condition) => {
     const cond = (condition || '').toLowerCase();
     if (cond.includes('clear') || cond.includes('sun')) return <Sun className="h-12 w-12 text-yellow-400" />;
-    if (cond.includes('rain') || cond.includes('drizzle')) return <CloudRain className="h-12 w-12 text-blue-400" />;
-    if (cond.includes('snow')) return <CloudSnow className="h-12 w-12 text-blue-200" />;
+    if (cond.includes('rain') || cond.includes('drizzle')) return <CloudRain className="h-12 w-12 text-amber" />;
+    if (cond.includes('snow')) return <CloudSnow className="h-12 w-12 text-slate-300" />;
     if (cond.includes('thunder') || cond.includes('storm')) return <CloudLightning className="h-12 w-12 text-yellow-500" />;
     if (cond.includes('fog') || cond.includes('mist') || cond.includes('haze')) return <CloudFog className="h-12 w-12 text-slate-400" />;
     return <Cloud className="h-12 w-12 text-slate-400" />;
@@ -86,7 +86,7 @@ function WeatherDashboard() {
     switch (status) {
       case 'safe': return 'bg-green-500';
       case 'caution': return 'bg-yellow-500';
-      case 'warning': return 'bg-orange-500';
+      case 'warning': return 'bg-lime text-black';
       case 'danger': return 'bg-red-500';
       default: return 'bg-slate-500';
     }
@@ -96,7 +96,7 @@ function WeatherDashboard() {
     switch (status) {
       case 'safe': return 'text-green-400';
       case 'caution': return 'text-yellow-400';
-      case 'warning': return 'text-orange-400';
+      case 'warning': return 'text-lime';
       case 'danger': return 'text-red-400';
       default: return 'text-slate-400';
     }
@@ -108,7 +108,7 @@ function WeatherDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Cloud className="h-6 w-6 text-blue-400" />
+            <Cloud className="h-6 w-6 text-amber" />
             Weather & Flight Safety / मौसम
           </h2>
           <p className="text-slate-400 mt-1">Check weather conditions and flight safety assessments</p>
@@ -117,7 +117,7 @@ function WeatherDashboard() {
 
       {/* Active Alerts Banner */}
       {activeAlerts.length > 0 && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+        <div className="bg-red-500/10 border border-red-500/30 rounded-sm p-4">
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
             <div>
@@ -141,7 +141,7 @@ function WeatherDashboard() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
-              activeTab === tab.id ? 'bg-blue-500 text-white' : 'text-slate-400 hover:bg-slate-800'
+              activeTab === tab.id ? 'bg-slate-700 text-white' : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
             <tab.icon className="h-4 w-4" />
@@ -157,7 +157,7 @@ function WeatherDashboard() {
       {activeTab === 'current' && (
         <div className="space-y-6">
           {/* Location Input */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <Label className="text-slate-300">Latitude</Label>
@@ -182,7 +182,7 @@ function WeatherDashboard() {
                 />
               </div>
               <div className="flex items-end">
-                <Button onClick={loadCurrentWeather} disabled={loading} className="bg-blue-500 hover:bg-blue-600 w-full">
+                <Button onClick={loadCurrentWeather} disabled={loading} className="bg-slate-700 hover:bg-slate-600 w-full">
                   {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <RefreshCw className="h-4 w-4 mr-2" />}
                   Check Weather
                 </Button>
@@ -194,7 +194,7 @@ function WeatherDashboard() {
           {weather && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Current Conditions */}
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-white font-semibold text-lg">{weather.location?.name || 'Location'}</h3>
@@ -213,7 +213,7 @@ function WeatherDashboard() {
                 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="flex items-center gap-2">
-                    <Wind className="h-4 w-4 text-blue-400" />
+                    <Wind className="h-4 w-4 text-amber" />
                     <span className="text-slate-300 text-sm">{weather.current?.wind_speed_kmh} km/h</span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -236,7 +236,7 @@ function WeatherDashboard() {
               </div>
 
               {/* Flight Safety */}
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <h3 className="text-white font-semibold text-lg mb-4">Flight Safety Assessment</h3>
                 
                 <div className="flex items-center gap-4 mb-6">
@@ -258,14 +258,14 @@ function WeatherDashboard() {
                     {weather.flight_safety.alerts.map((alert, idx) => (
                       <div key={idx} className={`p-3 rounded-lg ${
                         alert.severity === 'critical' ? 'bg-red-500/20 border border-red-500/30' :
-                        alert.severity === 'high' ? 'bg-orange-500/20 border border-orange-500/30' :
+                        alert.severity === 'high' ? 'bg-lime/20 border border-lime/30' :
                         alert.severity === 'medium' ? 'bg-yellow-500/20 border border-yellow-500/30' :
                         'bg-slate-700/50'
                       }`}>
                         <div className="flex items-start gap-2">
                           <AlertTriangle className={`h-4 w-4 mt-0.5 ${
                             alert.severity === 'critical' ? 'text-red-400' :
-                            alert.severity === 'high' ? 'text-orange-400' :
+                            alert.severity === 'high' ? 'text-lime' :
                             'text-yellow-400'
                           }`} />
                           <p className="text-slate-200 text-sm">{alert.message}</p>
@@ -289,7 +289,7 @@ function WeatherDashboard() {
       {activeTab === 'route' && (
         <div className="space-y-6">
           {/* Route Input */}
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="text-white font-medium mb-3">Origin / उड़ान का स्थान</h4>
@@ -342,7 +342,7 @@ function WeatherDashboard() {
                 </div>
               </div>
             </div>
-            <Button onClick={loadRouteWeather} disabled={loading} className="bg-blue-500 hover:bg-blue-600 mt-4">
+            <Button onClick={loadRouteWeather} disabled={loading} className="bg-slate-700 hover:bg-slate-600 mt-4">
               {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Navigation className="h-4 w-4 mr-2" />}
               Check Route Weather
             </Button>
@@ -352,10 +352,10 @@ function WeatherDashboard() {
           {routeWeather && (
             <div className="space-y-4">
               {/* Overall Assessment */}
-              <div className={`rounded-xl p-6 border ${
+              <div className={`rounded-sm p-6 border ${
                 routeWeather.route_assessment?.overall_status === 'safe' ? 'bg-green-500/10 border-green-500/30' :
                 routeWeather.route_assessment?.overall_status === 'caution' ? 'bg-yellow-500/10 border-yellow-500/30' :
-                routeWeather.route_assessment?.overall_status === 'warning' ? 'bg-orange-500/10 border-orange-500/30' :
+                routeWeather.route_assessment?.overall_status === 'warning' ? 'bg-lime/10 border-lime/30' :
                 'bg-red-500/10 border-red-500/30'
               }`}>
                 <div className="flex items-center justify-between">
@@ -374,7 +374,7 @@ function WeatherDashboard() {
               {/* Origin & Destination */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Origin */}
-                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <h4 className="text-white font-medium mb-3 flex items-center gap-2">
                     <Navigation className="h-4 w-4 text-green-400" />
                     {routeWeather.origin?.name}
@@ -396,7 +396,7 @@ function WeatherDashboard() {
                 </div>
 
                 {/* Destination */}
-                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <h4 className="text-white font-medium mb-3 flex items-center gap-2">
                     <Navigation className="h-4 w-4 text-red-400" />
                     {routeWeather.destination?.name}
@@ -420,14 +420,14 @@ function WeatherDashboard() {
 
               {/* All Alerts */}
               {routeWeather.route_assessment?.alerts?.length > 0 && (
-                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <h4 className="text-white font-medium mb-3">Route Alerts ({routeWeather.route_assessment.alerts_count})</h4>
                   <div className="space-y-2">
                     {routeWeather.route_assessment.alerts.map((alert, idx) => (
                       <div key={idx} className="flex items-start gap-2 p-2 bg-slate-900/50 rounded">
                         <AlertTriangle className={`h-4 w-4 mt-0.5 ${
                           alert.severity === 'critical' ? 'text-red-400' :
-                          alert.severity === 'high' ? 'text-orange-400' :
+                          alert.severity === 'high' ? 'text-lime' :
                           'text-yellow-400'
                         }`} />
                         <div>
@@ -448,14 +448,14 @@ function WeatherDashboard() {
       {activeTab === 'alerts' && (
         <div className="space-y-4">
           {activeAlerts.length === 0 ? (
-            <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
               <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
               <p className="text-white font-medium">No Weather Alerts</p>
               <p className="text-slate-400 text-sm">All upcoming bookings have favorable weather conditions</p>
             </div>
           ) : (
             activeAlerts.map((alert, idx) => (
-              <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-red-500/30">
+              <div key={idx} className="bg-slate-800/50 rounded-sm p-4 border border-red-500/30">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-white font-medium">{alert.booking_number}</p>
@@ -466,7 +466,7 @@ function WeatherDashboard() {
                     <span className="text-white text-sm font-medium capitalize">{alert.weather_status}</span>
                   </div>
                 </div>
-                <p className="text-orange-400 text-sm mt-3">{alert.recommendation}</p>
+                <p className="text-lime text-sm mt-3">{alert.recommendation}</p>
               </div>
             ))
           )}

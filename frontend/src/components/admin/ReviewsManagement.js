@@ -72,7 +72,7 @@ function ReviewsManagement() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -144,7 +144,7 @@ function ReviewsManagement() {
         {reviews.map(review => (
           <div
             key={review.id}
-            className={`bg-slate-800/50 rounded-xl p-4 border ${
+            className={`bg-slate-800/50 rounded-sm p-4 border ${
               review.reported ? 'border-red-500/50' : 'border-slate-700'
             }`}
           >
@@ -269,7 +269,7 @@ function ReviewsManagement() {
         ))}
 
         {reviews.length === 0 && (
-          <div className="bg-slate-800/50 rounded-xl p-8 text-center border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-8 text-center border border-slate-700">
             <Star className="h-12 w-12 text-slate-500 mx-auto mb-4" />
             <p className="text-white font-medium">No reviews found</p>
             <p className="text-slate-400 text-sm">Reviews will appear here once customers submit them</p>

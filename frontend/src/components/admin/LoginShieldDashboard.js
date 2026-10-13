@@ -22,14 +22,14 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 const riskColors = {
   LOW: 'bg-green-500/20 text-green-400 border-green-500/30',
   MEDIUM: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  HIGH: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  HIGH: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
   CRITICAL: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 const riskBgColors = {
   LOW: 'bg-green-500',
   MEDIUM: 'bg-yellow-500',
-  HIGH: 'bg-orange-500',
+  HIGH: 'bg-amber-500',
   CRITICAL: 'bg-red-500',
 };
 
@@ -150,7 +150,7 @@ export default function LoginShieldDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <RefreshCw className="h-8 w-8 text-orange-500 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -162,7 +162,7 @@ export default function LoginShieldDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl">
+          <div className="p-3 bg-gradient-to-r from-red-500 rounded-sm">
             <Shield className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -222,11 +222,11 @@ export default function LoginShieldDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm">Open Incidents</p>
-                  <p className={`text-2xl font-bold ${stats.open_incidents > 0 ? 'text-orange-400' : 'text-green-400'}`}>
+                  <p className={`text-2xl font-bold ${stats.open_incidents > 0 ? 'text-lime' : 'text-green-400'}`}>
                     {stats.open_incidents}
                   </p>
                 </div>
-                <AlertTriangle className={`h-8 w-8 ${stats.open_incidents > 0 ? 'text-orange-400' : 'text-green-400'} opacity-50`} />
+                <AlertTriangle className={`h-8 w-8 ${stats.open_incidents > 0 ? 'text-lime' : 'text-green-400'} opacity-50`} />
               </div>
               <div className="mt-2 text-xs text-slate-500">
                 Requiring investigation
@@ -285,13 +285,13 @@ export default function LoginShieldDashboard() {
         <TabsList className="bg-slate-800 border-slate-700">
           <TabsTrigger 
             value="overview" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black"
           >
             High Risk Logins
           </TabsTrigger>
           <TabsTrigger 
             value="alerts" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white relative"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black relative"
           >
             Alerts
             {unreadAlerts > 0 && (
@@ -302,11 +302,11 @@ export default function LoginShieldDashboard() {
           </TabsTrigger>
           <TabsTrigger 
             value="incidents" 
-            className="data-[state=active]:bg-orange-500 data-[state=active]:text-white relative"
+            className="data-[state=active]:bg-lime data-[state=active]:text-black relative"
           >
             Incidents
             {incidents.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white text-xs rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-lime text-black text-xs rounded-full flex items-center justify-center">
                 {incidents.length}
               </span>
             )}
@@ -318,7 +318,7 @@ export default function LoginShieldDashboard() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <AlertTriangle className="h-5 w-5 text-lime" />
                 High Risk Login Attempts (24h)
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -357,14 +357,14 @@ export default function LoginShieldDashboard() {
                           <span className="flex items-center gap-1">
                             📍 {login.location.city}, {login.location.country}
                             {login.location.is_proxy && <span className="text-yellow-400 ml-1">(VPN)</span>}
-                            {login.location.is_hosting && <span className="text-orange-400 ml-1">(Datacenter)</span>}
+                            {login.location.is_hosting && <span className="text-lime ml-1">(Datacenter)</span>}
                           </span>
                         )}
                         <span className="flex items-center gap-1">
                           {login.action?.type === 'block' ? (
                             <XCircle className="h-3 w-3 text-red-400" />
                           ) : login.action?.type === 'alert' ? (
-                            <AlertCircle className="h-3 w-3 text-orange-400" />
+                            <AlertCircle className="h-3 w-3 text-lime" />
                           ) : (
                             <CheckCircle className="h-3 w-3 text-green-400" />
                           )}
@@ -457,7 +457,7 @@ export default function LoginShieldDashboard() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <FileText className="h-5 w-5 text-orange-500" />
+                <FileText className="h-5 w-5 text-lime" />
                 Open Security Incidents
               </CardTitle>
               <CardDescription className="text-slate-400">

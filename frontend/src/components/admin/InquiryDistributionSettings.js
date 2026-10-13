@@ -73,7 +73,7 @@ function InquiryDistributionSettings() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <Radio className="h-5 w-5 text-orange-400" />
+            <Radio className="h-5 w-5 text-lime" />
             Inquiry Distribution Rules / पूछताछ वितरण नियम
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -88,7 +88,7 @@ function InquiryDistributionSettings() {
       </div>
 
       {/* Enable/Disable Toggle */}
-      <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
         <div className="flex items-center justify-between">
           <div>
             <Label className="text-white font-medium">Enable Auto-Broadcast / ऑटो-ब्रॉडकास्ट सक्षम करें</Label>
@@ -104,8 +104,8 @@ function InquiryDistributionSettings() {
       </div>
 
       {/* Broadcast Radius */}
-      <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-        <Label className="text-orange-400 mb-3 block flex items-center gap-2">
+      <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
+        <Label className="text-lime mb-3 block flex items-center gap-2">
           <MapPin className="h-4 w-4" />
           Broadcast Radius (KM) / प्रसारण त्रिज्या
         </Label>
@@ -127,7 +127,7 @@ function InquiryDistributionSettings() {
               step="50"
               value={settings.broadcast_radius_km}
               onChange={(e) => setSettings({ ...settings, broadcast_radius_km: parseInt(e.target.value) })}
-              className="w-full accent-orange-500"
+              className="w-full accent-lime"
             />
             <div className="flex justify-between text-xs text-slate-500 mt-1">
               <span>50 km</span>
@@ -143,12 +143,12 @@ function InquiryDistributionSettings() {
       </div>
 
       {/* Notification Channels */}
-      <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 space-y-4">
-        <Label className="text-orange-400 block">Notification Channels / सूचना चैनल</Label>
+      <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800 space-y-4">
+        <Label className="text-lime block">Notification Channels / सूचना चैनल</Label>
         
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50">
           <div className="flex items-center gap-3">
-            <Bell className="h-5 w-5 text-blue-400" />
+            <Bell className="h-5 w-5 text-amber" />
             <div>
               <p className="text-white">In-App Notification</p>
               <p className="text-slate-400 text-sm">ऐप में सूचना</p>
@@ -177,7 +177,7 @@ function InquiryDistributionSettings() {
 
       {/* Additional Settings */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <Label className="text-slate-300 mb-2 block flex items-center gap-2">
             <Users className="h-4 w-4 text-slate-400" />
             Max Operators per Inquiry
@@ -193,7 +193,7 @@ function InquiryDistributionSettings() {
           <p className="text-slate-500 text-xs mt-1">Maximum operators to notify per inquiry</p>
         </div>
         
-        <div className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
           <Label className="text-slate-300 mb-2 block flex items-center gap-2">
             <Clock className="h-4 w-4 text-slate-400" />
             Auto-Expire Time (Minutes)
@@ -211,14 +211,14 @@ function InquiryDistributionSettings() {
       </div>
 
       {/* Save Button */}
-      <Button onClick={handleSave} disabled={saving} className="w-full bg-orange-500 hover:bg-orange-600">
+      <Button onClick={handleSave} disabled={saving} className="w-full bg-lime text-black hover:bg-lime/90">
         {saving ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
         {saving ? 'Saving...' : 'Save Settings / सेटिंग्स सहेजें'}
       </Button>
 
       {/* Test Broadcast Section */}
-      <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 space-y-4">
-        <Label className="text-blue-400 flex items-center gap-2">
+      <div className="p-4 rounded-sm bg-amber/10 border border-amber/30 space-y-4">
+        <Label className="text-amber flex items-center gap-2">
           <TestTube className="h-4 w-4" />
           Test Broadcast / प्रसारण परीक्षण
         </Label>
@@ -276,7 +276,7 @@ function InquiryDistributionSettings() {
                 {testResult.operators.map((op, idx) => (
                   <div key={idx} className="flex justify-between text-sm py-1 border-b border-slate-700">
                     <span className="text-slate-300">{op.company_name}</span>
-                    <span className="text-orange-400">{op.distance_km} km</span>
+                    <span className="text-lime">{op.distance_km} km</span>
                   </div>
                 ))}
               </div>
