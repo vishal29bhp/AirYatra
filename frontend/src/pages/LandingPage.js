@@ -95,24 +95,24 @@ function LandingPage({ user }) {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800" data-testid="landing-nav">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </div>
           
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="#services" className="text-slate-300 hover:text-orange-500 transition-colors">Services</a>
-            <Link to="/fleet" className="text-slate-300 hover:text-orange-500 transition-colors">Fleet</Link>
-            <Link to="/blog" className="text-slate-300 hover:text-orange-500 transition-colors">Blog</Link>
-            <a href="#about" className="text-slate-300 hover:text-orange-500 transition-colors">About</a>
-            <a href="#contact" className="text-slate-300 hover:text-orange-500 transition-colors">Contact</a>
+            <a href="#services" className="text-slate-300 hover:text-lime transition-colors">Services</a>
+            <Link to="/fleet" className="text-slate-300 hover:text-lime transition-colors">Fleet</Link>
+            <Link to="/blog" className="text-slate-300 hover:text-lime transition-colors">Blog</Link>
+            <a href="#about" className="text-slate-300 hover:text-lime transition-colors">About</a>
+            <a href="#contact" className="text-slate-300 hover:text-lime transition-colors">Contact</a>
           </div>
           
           <div className="flex items-center space-x-3">
             <LanguageSwitcher />
             {user ? (
               <Link to={`/${user.roles[0]}`}>
-                <Button variant="default" className="bg-orange-500 hover:bg-orange-600" data-testid="dashboard-btn">
+                <Button variant="default" className="bg-lime text-black hover:bg-lime/90 font-semibold rounded-sm" data-testid="dashboard-btn">
                   {t('nav.dashboard')}
                 </Button>
               </Link>
@@ -124,7 +124,7 @@ function LandingPage({ user }) {
                   </Button>
                 </Link>
                 <Link to="/booking">
-                  <Button className="bg-orange-500 hover:bg-orange-600" data-testid="book-now-btn">
+                  <Button className="bg-lime text-black hover:bg-lime/90 font-semibold rounded-sm" data-testid="book-now-btn">
                     {t('nav.bookNow')}
                   </Button>
                 </Link>
@@ -158,9 +158,8 @@ function LandingPage({ user }) {
         {/* Slide Content */}
         <div className="relative h-full flex items-center justify-center px-6">
           <div className="max-w-5xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 rounded-full px-4 py-2 mb-4">
-              <Sparkles className="h-4 w-4 text-orange-400" />
-              <span className="text-orange-400 text-sm font-medium">India&#39;s Premier Aviation Platform</span>
+            <div className="mb-4">
+              <span className="ay-overline">India&#39;s Premier Aviation Platform</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight animate-fade-in" data-testid="hero-title">
@@ -172,13 +171,13 @@ function LandingPage({ user }) {
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
               <Link to="/booking">
-                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-lg px-10 py-6 rounded-full" data-testid="hero-book-btn">
+                <Button size="lg" className="bg-lime text-black hover:bg-lime/90 font-semibold text-lg px-10 py-6 rounded-sm" data-testid="hero-book-btn">
                   <Plane className="mr-2 h-5 w-5" />
                   Book Your Flight
                 </Button>
               </Link>
               <Link to="/login">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 text-lg px-10 py-6 rounded-full" data-testid="become-operator-btn">
+                <Button size="lg" variant="outline" className="border-slate-600 bg-transparent text-white hover:bg-slate-800 text-lg px-10 py-6 rounded-sm" data-testid="become-operator-btn">
                   Become an Operator
                 </Button>
               </Link>
@@ -210,7 +209,7 @@ function LandingPage({ user }) {
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all ${
                 index === currentSlide 
-                  ? 'bg-orange-500 w-8' 
+                  ? 'bg-lime w-8' 
                   : 'bg-white/40 hover:bg-white/60'
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -223,7 +222,7 @@ function LandingPage({ user }) {
       <section id="services" className="py-24 px-6 bg-slate-900" data-testid="services-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Our Services</span>
+            <span className="ay-overline">Our Services</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
               Premium Aviation Solutions
             </h2>
@@ -234,9 +233,9 @@ function LandingPage({ user }) {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Service Card 1 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <Plane className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Plane className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Private Jet Charter</h3>
               <p className="text-slate-400 mb-4">
@@ -244,21 +243,21 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Flexible scheduling
+                  <CheckCircle className="h-4 w-4 text-lime" /> Flexible scheduling
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> VIP ground handling
+                  <CheckCircle className="h-4 w-4 text-lime" /> VIP ground handling
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> In-flight catering
+                  <CheckCircle className="h-4 w-4 text-lime" /> In-flight catering
                 </li>
               </ul>
             </div>
 
             {/* Service Card 2 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <Globe className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Globe className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Helicopter Services</h3>
               <p className="text-slate-400 mb-4">
@@ -266,21 +265,21 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> City-to-city transfers
+                  <CheckCircle className="h-4 w-4 text-lime" /> City-to-city transfers
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Scenic aerial tours
+                  <CheckCircle className="h-4 w-4 text-lime" /> Scenic aerial tours
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Medical evacuation
+                  <CheckCircle className="h-4 w-4 text-lime" /> Medical evacuation
                 </li>
               </ul>
             </div>
 
             {/* Service Card 3 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <Building2 className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Building2 className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Corporate Solutions</h3>
               <p className="text-slate-400 mb-4">
@@ -288,21 +287,21 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Corporate accounts
+                  <CheckCircle className="h-4 w-4 text-lime" /> Corporate accounts
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Travel analytics
+                  <CheckCircle className="h-4 w-4 text-lime" /> Travel analytics
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Dedicated manager
+                  <CheckCircle className="h-4 w-4 text-lime" /> Dedicated manager
                 </li>
               </ul>
             </div>
 
             {/* Service Card 4 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-green-500 to-green-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <FileCheck className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <FileCheck className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Aircraft Management</h3>
               <p className="text-slate-400 mb-4">
@@ -310,21 +309,21 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Maintenance scheduling
+                  <CheckCircle className="h-4 w-4 text-lime" /> Maintenance scheduling
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Crew management
+                  <CheckCircle className="h-4 w-4 text-lime" /> Crew management
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Revenue optimization
+                  <CheckCircle className="h-4 w-4 text-lime" /> Revenue optimization
                 </li>
               </ul>
             </div>
 
             {/* Service Card 5 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <Zap className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Zap className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Emergency Services</h3>
               <p className="text-slate-400 mb-4">
@@ -332,21 +331,21 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Air ambulance
+                  <CheckCircle className="h-4 w-4 text-lime" /> Air ambulance
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Organ transport
+                  <CheckCircle className="h-4 w-4 text-lime" /> Organ transport
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Disaster relief
+                  <CheckCircle className="h-4 w-4 text-lime" /> Disaster relief
                 </li>
               </ul>
             </div>
 
             {/* Service Card 6 */}
-            <div className="group bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all hover:-translate-y-1">
-              <div className="bg-gradient-to-br from-pink-500 to-pink-600 p-4 rounded-xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <HeartHandshake className="h-8 w-8 text-white" />
+            <div className="group bg-slate-800/50 border border-slate-700 rounded-sm p-8 hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <HeartHandshake className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Concierge Services</h3>
               <p className="text-slate-400 mb-4">
@@ -354,13 +353,13 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Luxury hotel booking
+                  <CheckCircle className="h-4 w-4 text-lime" /> Luxury hotel booking
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Limousine service
+                  <CheckCircle className="h-4 w-4 text-lime" /> Limousine service
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> Event coordination
+                  <CheckCircle className="h-4 w-4 text-lime" /> Event coordination
                 </li>
               </ul>
             </div>
@@ -374,7 +373,7 @@ function LandingPage({ user }) {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* About Content */}
             <div>
-              <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">About Us</span>
+              <span className="ay-overline">About Us</span>
               <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
                 India&#39;s Trusted Aviation Partner Since 2020
               </h2>
@@ -391,31 +390,31 @@ function LandingPage({ user }) {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-500">500+</div>
+                  <div className="text-4xl font-bold text-lime">500+</div>
                   <div className="text-slate-400 text-sm">Flights Completed</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-500">50+</div>
+                  <div className="text-4xl font-bold text-lime">50+</div>
                   <div className="text-slate-400 text-sm">Aircraft Fleet</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-500">100%</div>
+                  <div className="text-4xl font-bold text-lime">100%</div>
                   <div className="text-slate-400 text-sm">Safety Record</div>
                 </div>
               </div>
 
               {/* Badges */}
               <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-full">
+                <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
                   <Award className="h-5 w-5 text-yellow-500" />
                   <span className="text-slate-300 text-sm">DGCA Approved</span>
                 </div>
-                <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-full">
+                <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
                   <Shield className="h-5 w-5 text-green-500" />
                   <span className="text-slate-300 text-sm">ISO Certified</span>
                 </div>
-                <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-full">
-                  <Star className="h-5 w-5 text-orange-500" />
+                <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
+                  <Star className="h-5 w-5 text-lime" />
                   <span className="text-slate-300 text-sm">5-Star Rated</span>
                 </div>
               </div>
@@ -427,24 +426,24 @@ function LandingPage({ user }) {
                 <img 
                   src="https://images.unsplash.com/photo-1619659085985-f51a00f0160a?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
                   alt="Private Jet" 
-                  className="rounded-2xl w-full h-48 object-cover"
+                  className="rounded-sm w-full h-48 object-cover"
                 />
                 <img 
                   src="https://images.unsplash.com/photo-1625513123245-fcb02d69ad12?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
                   alt="Luxury Interior" 
-                  className="rounded-2xl w-full h-64 object-cover"
+                  className="rounded-sm w-full h-64 object-cover"
                 />
               </div>
               <div className="space-y-4 pt-8">
                 <img 
                   src="https://images.unsplash.com/photo-1782865423531-27f6fab92fe8?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
                   alt="Helicopter" 
-                  className="rounded-2xl w-full h-64 object-cover"
+                  className="rounded-sm w-full h-64 object-cover"
                 />
                 <img 
                   src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
                   alt="Aircraft" 
-                  className="rounded-2xl w-full h-48 object-cover"
+                  className="rounded-sm w-full h-48 object-cover"
                 />
               </div>
             </div>
@@ -460,21 +459,21 @@ function LandingPage({ user }) {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="glass p-8 rounded-lg text-center hover:scale-105 transition-transform">
-              <Shield className="h-12 w-12 text-orange-500 mb-4 mx-auto" />
+              <Shield className="h-12 w-12 text-lime mb-4 mx-auto" />
               <h3 className="text-2xl font-bold text-white mb-3">{t('landing.verifiedOperators')}</h3>
               <p className="text-slate-400">
                 {t('landing.verifiedOperatorsDesc')}
               </p>
             </div>
             <div className="glass p-8 rounded-lg text-center hover:scale-105 transition-transform">
-              <Users className="h-12 w-12 text-orange-500 mb-4 mx-auto" />
+              <Users className="h-12 w-12 text-lime mb-4 mx-auto" />
               <h3 className="text-2xl font-bold text-white mb-3">{t('landing.multipleOptions')}</h3>
               <p className="text-slate-400">
                 {t('landing.multipleOptionsDesc')}
               </p>
             </div>
             <div className="glass p-8 rounded-lg text-center hover:scale-105 transition-transform">
-              <TrendingUp className="h-12 w-12 text-orange-500 mb-4 mx-auto" />
+              <TrendingUp className="h-12 w-12 text-lime mb-4 mx-auto" />
               <h3 className="text-2xl font-bold text-white mb-3">{t('landing.transparentPricing')}</h3>
               <p className="text-slate-400">
                 {t('landing.transparentPricingDesc')}
@@ -494,9 +493,9 @@ function LandingPage({ user }) {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Aviation Exchange Card */}
-            <div className="glass p-8 rounded-2xl border border-slate-700 hover:border-orange-500/50 transition-all group">
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-4 rounded-xl w-fit mb-6">
-                <Sparkles className="h-10 w-10 text-white" />
+            <div className="bg-slate-800 p-8 rounded-sm border border-slate-700 hover:border-lime/50 transition-colors group">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Sparkles className="h-10 w-10 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">{t('landing.aviationExchange')}</h3>
               <p className="text-slate-400 mb-6">
@@ -504,26 +503,26 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.liveTracking')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.liveTracking')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.instantQuotes')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.instantQuotes')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.securePayments')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.securePayments')}
                 </li>
               </ul>
               <Link to="/exchange">
-                <Button className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:opacity-90" data-testid="explore-exchange-btn">
+                <Button className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-sm" data-testid="explore-exchange-btn">
                   {t('landing.exploreExchange')}
                 </Button>
               </Link>
             </div>
 
             {/* Corporate Card */}
-            <div className="glass p-8 rounded-2xl border border-slate-700 hover:border-orange-500/50 transition-all group">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-xl w-fit mb-6">
-                <Building2 className="h-10 w-10 text-white" />
+            <div className="bg-slate-800 p-8 rounded-sm border border-slate-700 hover:border-lime/50 transition-colors group">
+              <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
+                <Building2 className="h-10 w-10 text-lime" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">{t('landing.corporateSolutions')}</h3>
               <p className="text-slate-400 mb-6">
@@ -531,17 +530,17 @@ function LandingPage({ user }) {
               </p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.dedicatedManager')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.dedicatedManager')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.volumeDiscounts')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.volumeDiscounts')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-green-400" /> {t('landing.travelAnalytics')}
+                  <CheckCircle className="h-4 w-4 text-lime" /> {t('landing.travelAnalytics')}
                 </li>
               </ul>
               <Link to="/corporate">
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:opacity-90" data-testid="explore-corporate-btn">
+                <Button className="w-full bg-slate-700 hover:bg-slate-600 text-white rounded-sm" data-testid="explore-corporate-btn">
                   {t('landing.corporateRegistration')}
                 </Button>
               </Link>
@@ -557,16 +556,16 @@ function LandingPage({ user }) {
       <InvestorInterestSection />
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-orange-500 to-orange-600" data-testid="cta-section">
+      <section className="py-20 px-6 bg-lime" data-testid="cta-section">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-5xl font-black text-white" data-testid="cta-title">
+          <h2 className="text-5xl font-black text-black" data-testid="cta-title">
             {t('landing.readyTakeOff')}
           </h2>
-          <p className="text-xl text-white/90">
+          <p className="text-xl text-black/80">
             {t('landing.ctaSubtitle')}
           </p>
           <Link to="/booking">
-            <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white text-lg px-12 py-6 rounded-full" data-testid="cta-book-btn">
+            <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white text-lg px-12 py-6 rounded-sm" data-testid="cta-book-btn">
               {t('landing.startBooking')}
             </Button>
           </Link>
@@ -577,16 +576,16 @@ function LandingPage({ user }) {
       <section id="contact" className="py-20 px-6 bg-slate-900" data-testid="contact-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Contact Us</span>
+            <span className="ay-overline">Contact Us</span>
             <h2 className="text-4xl font-bold text-white mt-3 mb-4">Get In Touch</h2>
             <p className="text-slate-400">We are here to help with all your aviation needs</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Address Card */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center hover:border-orange-500/50 transition-all">
-              <div className="bg-orange-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <MapPin className="h-6 w-6 text-orange-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
+                <MapPin className="h-6 w-6 text-lime" />
               </div>
               <h3 className="text-white font-semibold mb-2">Head Office</h3>
               <p className="text-slate-400 text-sm leading-relaxed">
@@ -595,31 +594,31 @@ function LandingPage({ user }) {
             </div>
 
             {/* Email Card */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center hover:border-orange-500/50 transition-all">
-              <div className="bg-blue-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <Mail className="h-6 w-6 text-blue-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
+                <Mail className="h-6 w-6 text-lime" />
               </div>
               <h3 className="text-white font-semibold mb-2">Email Us</h3>
-              <a href={`mailto:${COMPANY_INFO.email}`} className="text-orange-400 hover:text-orange-300 text-sm">
+              <a href={`mailto:${COMPANY_INFO.email}`} className="text-amber hover:text-amber/80 text-sm">
                 {COMPANY_INFO.email}
               </a>
             </div>
 
             {/* Phone Card */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center hover:border-orange-500/50 transition-all">
-              <div className="bg-green-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <Phone className="h-6 w-6 text-green-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
+                <Phone className="h-6 w-6 text-lime" />
               </div>
               <h3 className="text-white font-semibold mb-2">Call Us</h3>
-              <a href={`tel:${COMPANY_INFO.phone}`} className="text-orange-400 hover:text-orange-300 text-sm">
+              <a href={`tel:${COMPANY_INFO.phone}`} className="text-amber hover:text-amber/80 text-sm">
                 {COMPANY_INFO.phone}
               </a>
             </div>
 
             {/* Hours Card */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center hover:border-orange-500/50 transition-all">
-              <div className="bg-purple-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <Clock className="h-6 w-6 text-purple-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center hover:border-lime/50 transition-colors">
+              <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
+                <Clock className="h-6 w-6 text-lime" />
               </div>
               <h3 className="text-white font-semibold mb-2">Working Hours</h3>
               <p className="text-slate-400 text-sm">
@@ -637,7 +636,7 @@ function LandingPage({ user }) {
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <Plane className="h-8 w-8 text-orange-500" />
+                <Plane className="h-8 w-8 text-lime" />
                 <span className="text-2xl font-bold text-white">AirYatra</span>
               </div>
               <p className="text-slate-400 text-sm mb-4">
@@ -663,10 +662,10 @@ function LandingPage({ user }) {
             <div>
               <h4 className="text-white font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><Link to="/booking" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Book a Flight</Link></li>
-                <li><Link to="/exchange" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Aviation Exchange</Link></li>
-                <li><Link to="/corporate" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Corporate Solutions</Link></li>
-                <li><a href="#services" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Our Services</a></li>
+                <li><Link to="/booking" className="text-slate-400 hover:text-lime text-sm transition-colors">Book a Flight</Link></li>
+                <li><Link to="/exchange" className="text-slate-400 hover:text-lime text-sm transition-colors">Aviation Exchange</Link></li>
+                <li><Link to="/corporate" className="text-slate-400 hover:text-lime text-sm transition-colors">Corporate Solutions</Link></li>
+                <li><a href="#services" className="text-slate-400 hover:text-lime text-sm transition-colors">Our Services</a></li>
               </ul>
             </div>
 
@@ -674,9 +673,9 @@ function LandingPage({ user }) {
             <div>
               <h4 className="text-white font-semibold mb-4">Support</h4>
               <ul className="space-y-2">
-                <li><a href="#contact" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Help Center</a></li>
-                <li><Link to="/about" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Safety Guidelines</Link></li>
-                <li><a href="mailto:care@airyatra.co.in" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Contact Support</a></li>
+                <li><a href="#contact" className="text-slate-400 hover:text-lime text-sm transition-colors">Help Center</a></li>
+                <li><Link to="/about" className="text-slate-400 hover:text-lime text-sm transition-colors">Safety Guidelines</Link></li>
+                <li><a href="mailto:care@airyatra.co.in" className="text-slate-400 hover:text-lime text-sm transition-colors">Contact Support</a></li>
               </ul>
             </div>
 
@@ -684,9 +683,9 @@ function LandingPage({ user }) {
             <div>
               <h4 className="text-white font-semibold mb-4">Legal / कानूनी</h4>
               <ul className="space-y-2">
-                <li><Link to="/legal/terms" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Terms & Conditions / नियम एवं शर्तें</Link></li>
-                <li><Link to="/legal/privacy" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Privacy Policy / गोपनीयता नीति</Link></li>
-                <li><Link to="/legal/cancellation" className="text-slate-400 hover:text-orange-500 text-sm transition-colors">Refund & Cancellation / धनवापसी और रद्दीकरण</Link></li>
+                <li><Link to="/legal/terms" className="text-slate-400 hover:text-lime text-sm transition-colors">Terms & Conditions / नियम एवं शर्तें</Link></li>
+                <li><Link to="/legal/privacy" className="text-slate-400 hover:text-lime text-sm transition-colors">Privacy Policy / गोपनीयता नीति</Link></li>
+                <li><Link to="/legal/cancellation" className="text-slate-400 hover:text-lime text-sm transition-colors">Refund & Cancellation / धनवापसी और रद्दीकरण</Link></li>
               </ul>
             </div>
 
@@ -695,18 +694,18 @@ function LandingPage({ user }) {
               <h4 className="text-white font-semibold mb-4">Contact</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 text-orange-500 mt-1 flex-shrink-0" />
+                  <MapPin className="h-4 w-4 text-lime mt-1 flex-shrink-0" />
                   <span className="text-slate-400 text-sm">{COMPANY_INFO.address}</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                  <a href={`mailto:${COMPANY_INFO.email}`} className="text-slate-400 hover:text-orange-500 text-sm transition-colors">
+                  <Mail className="h-4 w-4 text-lime flex-shrink-0" />
+                  <a href={`mailto:${COMPANY_INFO.email}`} className="text-slate-400 hover:text-lime text-sm transition-colors">
                     {COMPANY_INFO.email}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                  <a href={`tel:${COMPANY_INFO.phone}`} className="text-slate-400 hover:text-orange-500 text-sm transition-colors">
+                  <Phone className="h-4 w-4 text-lime flex-shrink-0" />
+                  <a href={`tel:${COMPANY_INFO.phone}`} className="text-slate-400 hover:text-lime text-sm transition-colors">
                     {COMPANY_INFO.phone}
                   </a>
                 </li>
@@ -718,11 +717,11 @@ function LandingPage({ user }) {
           <div className="border-t border-slate-800 pt-8">
             {/* Legal Links Row */}
             <div className="flex flex-wrap justify-center gap-4 mb-4 text-xs">
-              <Link to="/legal/terms" className="text-slate-500 hover:text-orange-400 transition-colors">Terms & Conditions</Link>
+              <Link to="/legal/terms" className="text-slate-500 hover:text-lime transition-colors">Terms & Conditions</Link>
               <span className="text-slate-700">|</span>
-              <Link to="/legal/privacy" className="text-slate-500 hover:text-orange-400 transition-colors">Privacy Policy</Link>
+              <Link to="/legal/privacy" className="text-slate-500 hover:text-lime transition-colors">Privacy Policy</Link>
               <span className="text-slate-700">|</span>
-              <Link to="/legal/cancellation" className="text-slate-500 hover:text-orange-400 transition-colors">Refund & Cancellation Policy</Link>
+              <Link to="/legal/cancellation" className="text-slate-500 hover:text-lime transition-colors">Refund & Cancellation Policy</Link>
             </div>
             
             {/* Copyright Row */}

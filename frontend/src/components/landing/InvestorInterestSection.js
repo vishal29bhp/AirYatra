@@ -66,7 +66,7 @@ function InvestorInterestSection() {
 
   if (submitted) {
     return (
-      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 to-slate-950" data-testid="investor-section">
+      <section className="py-20 px-6 bg-slate-950" data-testid="investor-section">
         <div className="max-w-2xl mx-auto text-center">
           <div className="bg-green-500/20 p-4 rounded-full w-fit mx-auto mb-6">
             <CheckCircle className="h-16 w-16 text-green-500" />
@@ -75,7 +75,7 @@ function InvestorInterestSection() {
           <p className="text-slate-400 mb-4">
             Your inquiry has been received. Our investment relations team will contact you within 24-48 hours.
           </p>
-          <p className="text-orange-400 text-sm">
+          <p className="text-amber text-sm">
             Reference ID: <span className="font-mono">{referenceId}</span>
           </p>
         </div>
@@ -84,12 +84,12 @@ function InvestorInterestSection() {
   }
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-br from-slate-900 to-slate-950" data-testid="investor-section">
+    <section className="py-20 px-6 bg-slate-950" data-testid="investor-section">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Info */}
           <div>
-            <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Investor Relations</span>
+            <span className="ay-overline">Investor Relations</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
               Invest in the Future of Indian Aviation
             </h2>
@@ -100,20 +100,20 @@ function InvestorInterestSection() {
 
             {/* Key Metrics */}
             <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <div className="text-3xl font-bold text-orange-500">500+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
+                <div className="text-3xl font-bold text-lime">500+</div>
                 <div className="text-slate-400 text-sm">Flights Completed</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <div className="text-3xl font-bold text-orange-500">40%</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
+                <div className="text-3xl font-bold text-lime">40%</div>
                 <div className="text-slate-400 text-sm">YoY Growth</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <div className="text-3xl font-bold text-orange-500">15+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
+                <div className="text-3xl font-bold text-lime">15+</div>
                 <div className="text-slate-400 text-sm">Cities Served</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                <div className="text-3xl font-bold text-orange-500">₹50Cr+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
+                <div className="text-3xl font-bold text-lime">₹50Cr+</div>
                 <div className="text-slate-400 text-sm">Revenue Target</div>
               </div>
             </div>
@@ -125,7 +125,7 @@ function InvestorInterestSection() {
           </div>
 
           {/* Right: Form */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8">
             <h3 className="text-2xl font-bold text-white mb-6">Express Your Interest</h3>
             
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -201,8 +201,8 @@ function InvestorInterestSection() {
                       onClick={() => setFormData(prev => ({ ...prev, investment_range: range.value }))}
                       className={`p-3 rounded-lg border text-sm font-medium transition-all ${
                         formData.investment_range === range.value
-                          ? 'bg-orange-500 border-orange-500 text-white'
-                          : 'bg-slate-900 border-slate-600 text-slate-300 hover:border-orange-500/50'
+                          ? 'bg-lime border-lime text-black'
+                          : 'bg-slate-900 border-slate-600 text-slate-300 hover:border-lime/50'
                       }`}
                     >
                       {range.label}
@@ -219,14 +219,14 @@ function InvestorInterestSection() {
                   onChange={handleChange}
                   placeholder="Tell us about your investment goals..."
                   rows={3}
-                  className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-lime"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white h-12"
+                className="w-full bg-lime text-black hover:bg-lime/90 font-semibold rounded-sm h-12"
               >
                 {loading ? (
                   'Submitting...'
