@@ -9,9 +9,9 @@ from fastapi.responses import Response
 from datetime import datetime, timezone
 from bson import ObjectId
 from database import get_database
+from services.file_storage import InvalidKeyError, file_store
 from routes.auth_routes import get_current_user
 from security_middleware import FileEncryption, AuditLogger
-import os
 import re
 
 router = APIRouter(prefix="/customer/kyc-documents", tags=["Customer KYC"])
@@ -28,9 +28,10 @@ def require_roles(allowed_roles: list):
         return current_user
     return role_checker
 
-# Secure upload directory (NOT in public static folder)
-UPLOAD_DIR = os.path.join(os.environ.get("UPLOAD_ROOT", "/app"), "secure_uploads", "kyc")
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+# Encrypted KYC files live in the private "kyc" storage area (local secure_uploads/kyc or Blob container kyc),
+# never in the public uploads area.
+def kyc_store():
+    return file_store("kyc")
 
 # Allowed MIME types 
 ALLOWED_MIME_TYPES = {
@@ -135,14 +136,12 @@ async def upload_kyc_document(
     # Generate secure unique filename using sanitized document_type
     # Add .enc extension for encrypted files
     unique_filename = f"{safe_doc_type}_{user_id}_{ObjectId()}{file_ext}.enc"
-    file_path = os.path.join(UPLOAD_DIR, unique_filename)
     
     # ENCRYPT file content before saving (AES-256)
     encrypted_content, encryption_metadata = file_encryptor.encrypt_file(file_content)
     
     # Save encrypted file
-    with open(file_path, 'wb') as f:
-        f.write(encrypted_content)
+    await kyc_store().put(unique_filename, encrypted_content, "application/octet-stream")
     
     # Sanitize document number (remove special chars for security)
     safe_doc_number = re.sub(r'[^a-zA-Z0-9\s-]', '', document_number)[:50]
@@ -179,9 +178,7 @@ async def upload_kyc_document(
         # Delete old file
         old_filename = existing.get("stored_filename")
         if old_filename:
-            old_path = os.path.join(UPLOAD_DIR, old_filename)
-            if os.path.exists(old_path):
-                os.remove(old_path)
+            await kyc_store().delete(old_filename)
         
         # Update existing record
         await db.customer_kyc_documents.update_one(
@@ -284,13 +281,11 @@ async def download_kyc_document(
     if doc["user_id"] != user_id and "admin" not in user_roles:
         raise HTTPException(status_code=403, detail="Access denied")
     
-    file_path = os.path.join(UPLOAD_DIR, doc.get("stored_filename", ""))
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="File not found")
-    
     # Read encrypted file
-    with open(file_path, 'rb') as f:
-        encrypted_content = f.read()
+    try:
+        encrypted_content, _ = await kyc_store().get(doc.get("stored_filename", ""))
+    except (FileNotFoundError, InvalidKeyError):
+        raise HTTPException(status_code=404, detail="File not found")
     
     # Decrypt file content
     try:
@@ -359,9 +354,7 @@ async def delete_kyc_document(
     # Delete file
     stored_filename = doc.get("stored_filename")
     if stored_filename:
-        file_path = os.path.join(UPLOAD_DIR, stored_filename)
-        if os.path.exists(file_path):
-            os.remove(file_path)
+        await kyc_store().delete(stored_filename)
     
     # Delete record
     await db.customer_kyc_documents.delete_one({"id": doc_id})
@@ -417,9 +410,7 @@ async def admin_delete_kyc_document(
     # Delete file
     stored_filename = doc.get("stored_filename")
     if stored_filename:
-        file_path = os.path.join(UPLOAD_DIR, stored_filename)
-        if os.path.exists(file_path):
-            os.remove(file_path)
+        await kyc_store().delete(stored_filename)
     
     # Delete record
     await db.customer_kyc_documents.delete_one({"id": doc_id})

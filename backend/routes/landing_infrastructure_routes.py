@@ -10,6 +10,7 @@ import math
 import logging
 
 from database import get_database
+from services.file_storage import LEGACY_UPLOADS_PREFIX, file_store, uploads_key_from_legacy_path
 from middleware import get_current_user, require_roles
 from models import (
     UserRole, 
@@ -853,12 +854,10 @@ async def upload_landing_document(
     # Save file
     file_extension = file.filename.split('.')[-1].lower()
     unique_filename = f"{doc_type}_{uuid4()}.{file_extension}"
-    upload_dir = f"/app/uploads/landing_documents/{landing_point_id}"
-    os.makedirs(upload_dir, exist_ok=True)
-    file_path = f"{upload_dir}/{unique_filename}"
-    
-    with open(file_path, "wb") as f:
-        f.write(contents)
+    # file_path keeps its historical /app/uploads/... form; the bytes go to the uploads storage area
+    upload_key = f"landing_documents/{landing_point_id}/{unique_filename}"
+    file_path = f"{LEGACY_UPLOADS_PREFIX}{upload_key}"
+    await file_store("uploads").put(upload_key, contents, file.content_type)
     
     file_url = f"/api/uploads/landing_documents/{landing_point_id}/{unique_filename}"
     
@@ -956,8 +955,9 @@ async def delete_landing_document(
         raise HTTPException(status_code=404, detail="Document not found")
     
     # Delete file
-    if document.get("file_path") and os.path.exists(document["file_path"]):
-        os.remove(document["file_path"])
+    upload_key = uploads_key_from_legacy_path(document.get("file_path"))
+    if upload_key:
+        await file_store("uploads").delete(upload_key)
     
     # Delete record
     await db.landing_documents.delete_one({"id": document_id})
@@ -1170,13 +1170,10 @@ async def upload_village_document_direct(
     file_extension = file.filename.split('.')[-1].lower()
     unique_filename = f"{document_type}_{uuid4()}.{file_extension}"
     
-    # Store file locally (in production, use S3)
-    upload_dir = f"/app/uploads/village_documents/{permission_id}"
-    os.makedirs(upload_dir, exist_ok=True)
-    file_path = f"{upload_dir}/{unique_filename}"
-    
-    with open(file_path, "wb") as f:
-        f.write(contents)
+    # file_path keeps its historical /app/uploads/... form; the bytes go to the uploads storage area
+    upload_key = f"village_documents/{permission_id}/{unique_filename}"
+    file_path = f"{LEGACY_UPLOADS_PREFIX}{upload_key}"
+    await file_store("uploads").put(upload_key, contents, file.content_type)
     
     # Generate accessible URL
     file_url = f"/api/uploads/village_documents/{permission_id}/{unique_filename}"

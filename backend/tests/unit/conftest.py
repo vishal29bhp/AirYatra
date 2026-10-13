@@ -4,6 +4,8 @@ Run from the repository root:  python -m pytest backend/tests/unit
 """
 import os
 import sys
+import types
+from unittest.mock import MagicMock
 import tempfile
 from pathlib import Path
 
@@ -29,3 +31,23 @@ from mongomock_motor import AsyncMongoMockClient  # noqa: E402
 def mock_db():
     """A fresh in-memory Motor-compatible database per test."""
     return AsyncMongoMockClient()["airyatra_unit_test"]
+
+
+def _stub_emergentintegrations():
+    """server.py imports Stripe checkout from the Emergent SDK, which is not on public PyPI."""
+    if "emergentintegrations" in sys.modules:
+        return
+    for name in ("emergentintegrations", "emergentintegrations.llm", "emergentintegrations.llm.chat",
+                 "emergentintegrations.payments", "emergentintegrations.payments.stripe",
+                 "emergentintegrations.payments.stripe.checkout"):
+        module = types.ModuleType(name)
+        module.__dict__.update({k: MagicMock(name=k) for k in (
+            "LlmChat", "UserMessage", "TextDelta", "StreamDone", "StripeCheckout", "CheckoutSessionRequest")})
+        sys.modules[name] = module
+
+
+@pytest.fixture(scope="module")
+def server():
+    _stub_emergentintegrations()
+    import server as server_module
+    return server_module

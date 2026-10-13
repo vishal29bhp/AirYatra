@@ -1,31 +1,9 @@
 """App wiring: readiness probe, CORS allow-list, scheduler only where enabled, and the worker lifecycle."""
 import asyncio
-import sys
-import types
 from unittest.mock import MagicMock
 
 import pytest
 from fastapi.testclient import TestClient
-
-
-def _stub_emergentintegrations():
-    """server.py imports Stripe checkout from the Emergent SDK, which is not on public PyPI."""
-    if "emergentintegrations" in sys.modules:
-        return
-    for name in ("emergentintegrations", "emergentintegrations.llm", "emergentintegrations.llm.chat",
-                 "emergentintegrations.payments", "emergentintegrations.payments.stripe",
-                 "emergentintegrations.payments.stripe.checkout"):
-        module = types.ModuleType(name)
-        module.__dict__.update({k: MagicMock(name=k) for k in (
-            "LlmChat", "UserMessage", "TextDelta", "StreamDone", "StripeCheckout", "CheckoutSessionRequest")})
-        sys.modules[name] = module
-
-
-@pytest.fixture(scope="module")
-def server():
-    _stub_emergentintegrations()
-    import server as server_module
-    return server_module
 
 
 class FakeDb:

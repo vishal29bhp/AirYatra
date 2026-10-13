@@ -15,7 +15,7 @@ approval in the project thread (master prompt Constraint 9).
 | Public uploads | `/app/uploads/**` | Blob container `uploads` | `tools/migration/verify_files.py` |
 | KYC files (encrypted `.enc`) | `/app/secure_uploads/kyc/**` | Blob container `kyc` | `verify_files.py --decrypt-check` |
 | Pilot documents | `/app/secure_uploads/pilot_documents/**` | Blob container `documents` | `verify_files.py` |
-| Document vault and exchange images | Emergent object store (`services/storage_service.py`), keys in `storage_path` / `thumb_storage_path` of `documents_vault`, `document_files`, `exchange_images` | Blob container `documents`, **same key as blob name** so stored paths stay unchanged | object copy tool (ships with the Phase 3b storage adapter) |
+| Document vault and exchange images | Emergent object store (`backend/services/emergent_object_store.py`), keys in `storage_path` / `thumb_storage_path` of `documents_vault`, `document_files`, `exchange_images` | Blob container `documents`, **same key as blob name** so stored paths stay unchanged | `tools/migration/copy_object_store.py` (copies and verifies by SHA-256) |
 | `FILE_ENCRYPTION_KEY` | Emergent environment | Key Vault secret `file-encryption-key` | decrypt check above |
 
 Allowed changes are additive only: new indexes and the write concern (`w: "majority"`, `journal: true`,
@@ -25,15 +25,14 @@ already in `backend/database.py`). No field renames, type changes, merges or val
 
 1. Terraform `prod` applied (see [infra/terraform/README.md](../../infra/terraform/README.md)) and the Atlas
    major version set to the source's major version (`atlas_mongo_major_version`).
-2. Phase 3b shipped: the app reads and writes files through the Blob storage adapter. Until then uploads
-   would land on a container's temporary disk and be lost on restart, so **cutover cannot happen before it**.
-3. The object-store copy tool from Phase 3b: it reads every `storage_path` above, copies each object from the
-   Emergent object store to Blob under the same name and compares SHA-256. Needs the current `EMERGENT_LLM_KEY` (it also unlocks the object store),
-   which is lost when the Emergent account closes, so this copy must finish before then.
+2. The app runs with `STORAGE_PROVIDER=azure_blob` (set by Terraform), so every upload goes to Blob through
+   `backend/services/file_storage.py`. With any other value uploads would land on a container's temporary disk.
+3. `EMERGENT_LLM_KEY` is still valid: it unlocks the Emergent object store, so the object copy below must finish
+   before the Emergent account closes.
 4. Read access to the source database: a `mongodump`-capable connection string from Emergent
    (`ASSUMPTION`: Emergent can provide one, or a full export with `_id`s and BSON types intact).
 5. A migration host inside the Azure VNet (a temporary VM or Container Apps job) with `mongodump`,
-   `mongorestore` (Database Tools 100.9+), `azcopy` 10 and Python 3.11. Atlas and Blob have no public
+   `mongorestore` (Database Tools 100.9+), `azcopy` 10 and Python 3.11 with `backend/requirements.txt` installed. Atlas and Blob have no public
    access, so the copy must run from inside the network.
 6. A temporary Atlas database user with the `restore` role for the copy, deleted after cutover.
    The app's own user stays `readWrite` only.
@@ -75,13 +74,17 @@ mkdir -p check/kyc && azcopy copy "https://$STORAGE.blob.core.windows.net/kyc/*"
 FILE_ENCRYPTION_KEY="$(az keyvault secret show --vault-name "$KV" -n file-encryption-key --query value -o tsv)" \
   python3 tools/migration/verify_files.py --source /app/secure_uploads/kyc --target check/kyc --decrypt-check
 # repeat verify_files.py (without --decrypt-check) for uploads and documents
-# then run the Phase 3b object-store copy and check for documents_vault, document_files and exchange_images
+
+# 5. Copy document-vault and exchange-image objects from the Emergent object store (same keys), verified by SHA-256.
+#    Safe to re-run; objects already copied are skipped.
+EMERGENT_LLM_KEY=... AZURE_STORAGE_ACCOUNT_URL="https://$STORAGE.blob.core.windows.net/" \
+  python3 tools/migration/copy_object_store.py --db "$SOURCE_DB" --json objects-report.json
 rm -rf check   # never leave decrypted-capable copies or KYC files on the host
 ```
 
-5. Point the **dev** environment at the copy and run the read-only regression smoke pack (login, search,
+6. Point the **dev** environment at the copy and run the read-only regression smoke pack (login, search,
    price estimate, booking list and detail, invoices, operator and admin dashboards). No writes.
-6. Record how long each step took. The freeze window is sized from these timings plus 50%.
+7. Record how long each step took. The freeze window is sized from these timings plus 50%.
 
 A rehearsal passes only if both reports say **PASS**: every collection matches (extra *new* indexes on
 the target are allowed), every file matches, and every KYC file decrypts.
@@ -96,7 +99,7 @@ the target are allowed), every file matches, and every KYC file decrypts.
 | T-24h | Claude | Lower the DNS TTL for `airyatra.com` to 300 s |
 | T-0 | Vishal | Maintenance banner on, writes frozen on Emergent, Emergent scheduler stopped |
 | T+5m | Claude | Final `mongodump`, `mongorestore`, `verify_migration.py --mode full` (must PASS) |
-| T+… | Claude | Final file copy with `azcopy sync --put-md5`, `verify_files.py` (must PASS) |
+| T+… | Claude | Final file copy with `azcopy sync --put-md5`, `verify_files.py`, `copy_object_store.py` (all must PASS) |
 | T+… | Claude | Additive indexes (Phase 3b index fix), then readiness check `GET /api/health/ready` |
 | T+… | Claude | Smoke tests through the Front Door URL with test accounts |
 | Go/no-go | Vishal | **APPROVAL**: switch DNS for `airyatra.com` to Front Door |
@@ -122,5 +125,6 @@ Decide go or rollback within 4 hours of the switch (RTO target).
 |---|---|---|
 | [`verify_migration.py`](../../tools/migration/verify_migration.py) | Same collections, counts, byte-identical documents (types, values, field order), source indexes present on target | `tools/migration/test_verify_migration.py` |
 | [`verify_files.py`](../../tools/migration/verify_files.py) | Same files with the same SHA-256; KYC files decrypt with the Key Vault key | `tools/migration/test_verify_files.py` |
+| [`copy_object_store.py`](../../tools/migration/copy_object_store.py) | Every object key referenced in MongoDB is in Blob under the same key, byte-identical | `tools/migration/test_copy_object_store.py` |
 
-Both only read. Exit code 0 means pass, 1 means a mismatch, so they can gate a pipeline step.
+The verifiers only read; the copier only adds to Blob and never deletes. Exit code 0 means pass, 1 means a mismatch, so they can gate a pipeline step.
