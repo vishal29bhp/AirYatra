@@ -177,8 +177,8 @@ function HRDashboard({ user, onLogout }) {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-4 gap-4">
-              <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-                <Users className="h-5 w-5 text-blue-400 mb-2" />
+              <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+                <Users className="h-5 w-5 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.total_employees}</p>
                 <p className="text-slate-400 text-sm">Total Employees / कुल कर्मचारी</p>
               </div>
@@ -207,12 +207,12 @@ function HRDashboard({ user, onLogout }) {
                 <p className="text-slate-400 text-sm">उपस्थिति दर्ज करें</p>
               </button>
               <button onClick={() => setActiveTab('expense_claims')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
-                <Receipt className="h-8 w-8 text-orange-400 mb-3" />
+                <Receipt className="h-8 w-8 text-lime mb-3" />
                 <h3 className="text-lg font-semibold text-white">Expense Claims</h3>
                 <p className="text-slate-400 text-sm">खर्च क्लेम प्रबंधित करें</p>
               </button>
               <button onClick={() => setActiveTab('auto_salary')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
-                <BanknoteIcon className="h-8 w-8 text-blue-400 mb-3" />
+                <BanknoteIcon className="h-8 w-8 text-amber mb-3" />
                 <h3 className="text-lg font-semibold text-white">Auto Salary</h3>
                 <p className="text-slate-400 text-sm">ऑटो सैलरी भुगतान</p>
               </button>

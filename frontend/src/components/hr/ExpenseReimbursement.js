@@ -266,7 +266,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                       <p className="text-white font-medium">{expense.expense_number}</p>
                       <p className="text-slate-400 text-sm">{expense.employee_name} • {expense.title}</p>
                       <p className="text-slate-400 text-sm">{expense.category} • {expense.expense_date}</p>
-                      <p className="text-lg font-bold text-orange-400 mt-1">₹{expense.amount.toLocaleString()}</p>
+                      <p className="text-lg font-bold text-lime mt-1">₹{expense.amount.toLocaleString()}</p>
                       {expense.documents?.length > 0 && (
                         <p className="text-green-400 text-sm mt-1">📎 {expense.documents.length} document(s) attached</p>
                       )}
@@ -309,14 +309,14 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                       </div>
                       <p className="text-slate-300">{expense.title}</p>
                       <p className="text-slate-400 text-sm">{expense.category} • {expense.expense_date}</p>
-                      <p className="text-lg font-bold text-orange-400 mt-1">₹{expense.amount.toLocaleString()}</p>
+                      <p className="text-lg font-bold text-lime mt-1">₹{expense.amount.toLocaleString()}</p>
                       
                       {/* Documents */}
                       <div className="mt-2">
                         {expense.documents?.length > 0 ? (
                           <div className="flex gap-2 flex-wrap">
                             {expense.documents.map((doc, idx) => (
-                              <a key={idx} href={doc.url} target="_blank" rel="noreferrer" className="text-blue-400 text-sm hover:underline flex items-center">
+                              <a key={idx} href={doc.url} target="_blank" rel="noreferrer" className="text-amber text-sm hover:underline flex items-center">
                                 <FileText className="h-3 w-3 mr-1" /> {doc.filename}
                               </a>
                             ))}
@@ -337,7 +337,7 @@ export default function ExpenseReimbursement({ activeTab, user }) {
                               accept="image/*,.pdf"
                               onChange={(e) => e.target.files?.[0] && uploadDocument(expense.id, e.target.files[0])}
                             />
-                            <span className="inline-flex items-center px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600">
+                            <span className="inline-flex items-center px-3 py-1 bg-slate-700 text-white rounded text-sm hover:bg-slate-600">
                               <Upload className="h-3 w-3 mr-1" /> Upload Doc
                             </span>
                           </label>

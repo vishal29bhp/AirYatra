@@ -20,7 +20,7 @@ const SERVICES = [
       'Wi-Fi and entertainment systems',
       'Dedicated flight coordinator'
     ],
-    color: 'from-orange-500 to-orange-600',
+    color: 'from-amber-500 to-amber-600',
     price: 'Starting from ₹3,50,000/hour'
   },
   {
@@ -112,7 +112,7 @@ function ServicesPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -123,7 +123,7 @@ function ServicesPage() {
               <Button variant="ghost" className="text-slate-300 hover:text-white">About</Button>
             </Link>
             <Link to="/booking">
-              <Button className="bg-orange-500 hover:bg-orange-600">Book Now</Button>
+              <Button className="bg-lime text-black hover:bg-lime/90">Book Now</Button>
             </Link>
           </div>
         </div>
@@ -132,7 +132,7 @@ function ServicesPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Our Services</span>
+          <span className="text-lime font-semibold text-sm uppercase tracking-wider">Our Services</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
             Premium Aviation Solutions
           </h1>
@@ -153,11 +153,11 @@ function ServicesPage() {
               >
                 {/* Content */}
                 <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className={`bg-gradient-to-br ${service.color} p-4 rounded-xl w-fit mb-6`}>
+                  <div className={`bg-gradient-to-br ${service.color} p-4 rounded-sm w-fit mb-6`}>
                     <service.icon className="h-10 w-10 text-white" />
                   </div>
                   <h2 className="text-3xl font-bold text-white mb-2">{service.title}</h2>
-                  <p className="text-orange-400 text-sm mb-4">{service.titleHi}</p>
+                  <p className="text-lime text-sm mb-4">{service.titleHi}</p>
                   <p className="text-slate-400 text-lg mb-6">{service.description}</p>
                   
                   <ul className="space-y-3 mb-6">
@@ -170,7 +170,7 @@ function ServicesPage() {
                   </ul>
                   
                   <div className="flex items-center gap-4">
-                    <span className="text-orange-500 font-semibold">{service.price}</span>
+                    <span className="text-lime font-semibold">{service.price}</span>
                     <Link to="/booking">
                       <Button className={`bg-gradient-to-r ${service.color}`}>
                         Enquire Now <ArrowRight className="ml-2 h-4 w-4" />
@@ -180,8 +180,8 @@ function ServicesPage() {
                 </div>
                 
                 {/* Image/Visual */}
-                <div className={`bg-slate-800/50 border border-slate-700 rounded-2xl p-8 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="aspect-video bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl flex items-center justify-center">
+                <div className={`bg-slate-800/50 border border-slate-700 rounded-sm p-8 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div className="aspect-video bg-gradient-to-br from-slate-700 to-slate-800 rounded-sm flex items-center justify-center">
                     <service.icon className="h-24 w-24 text-slate-600" />
                   </div>
                 </div>
@@ -192,7 +192,7 @@ function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-orange-500 to-orange-600">
+      <section className="py-20 px-6 bg-slate-800 border border-slate-700">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Experience Premium Aviation?</h2>
           <p className="text-white/90 text-lg mb-8">
@@ -218,7 +218,7 @@ function ServicesPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

@@ -162,7 +162,7 @@ const VendorCompliance = () => {
           <div className="grid grid-cols-4 gap-4">
             <Card className="bg-slate-800 border-slate-700">
               <CardContent className="pt-6">
-                <Users className="h-6 w-6 text-blue-400 mb-2" />
+                <Users className="h-6 w-6 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">{compliance.summary?.total_vendors}</p>
                 <p className="text-slate-400 text-sm">Total Vendors</p>
               </CardContent>
@@ -338,8 +338,8 @@ const VendorCompliance = () => {
                 />
               </div>
               
-              <Alert className="bg-blue-500/10 border-blue-500/30">
-                <AlertDescription className="text-blue-400 text-sm">
+              <Alert className="bg-amber/10 border-amber/30">
+                <AlertDescription className="text-amber text-sm">
                   An email will be sent to the vendor requesting them to file their GSTR-1 for the missing invoices.
                 </AlertDescription>
               </Alert>

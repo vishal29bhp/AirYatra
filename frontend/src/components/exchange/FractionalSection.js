@@ -57,8 +57,8 @@ export const FractionalSection = ({ user }) => {
 
   return (
     <div data-testid="fractional-section">
-      <div className="bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/20 rounded-2xl p-5 mb-8 flex items-start gap-3">
-        <PieChart className="h-6 w-6 text-orange-400 shrink-0 mt-0.5" />
+      <div className="bg-lime/10 to-transparent border border-lime/20 rounded-sm p-5 mb-8 flex items-start gap-3">
+        <PieChart className="h-6 w-6 text-lime shrink-0 mt-0.5" />
         <div>
           <h2 className="text-white font-bold">Own an aircraft at 1/8th the cost / एक-आठवें दाम पर विमान के मालिक बनें</h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -72,10 +72,10 @@ export const FractionalSection = ({ user }) => {
           const sold = o.total_shares - o.shares_available;
           const pct = Math.round((sold / o.total_shares) * 100);
           return (
-            <div key={o.id} className="bg-slate-900/70 rounded-2xl border border-slate-800 overflow-hidden hover:border-orange-500/50 transition-all" data-testid={`fractional-card-${o.id}`}>
+            <div key={o.id} className="bg-slate-900/70 rounded-sm border border-slate-800 overflow-hidden hover:border-lime/50 transition-all" data-testid={`fractional-card-${o.id}`}>
               <div className="relative h-44 overflow-hidden">
                 <img src={o.image} alt={o.title} className="w-full h-full object-cover" />
-                <Badge className="absolute top-3 left-3 bg-orange-500 text-white">
+                <Badge className="absolute top-3 left-3 bg-amber-500 text-black">
                   <Gem className="h-3 w-3 mr-1" /> 1/{o.total_shares} Share
                 </Badge>
               </div>
@@ -85,20 +85,20 @@ export const FractionalSection = ({ user }) => {
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <div className="bg-slate-800 rounded-lg p-2.5">
                     <p className="text-slate-500 text-[10px] uppercase">Per Share</p>
-                    <p className="text-orange-400 font-bold" data-testid={`share-price-${o.id}`}>{formatCr(o.share_price_inr)}</p>
+                    <p className="text-lime font-bold" data-testid={`share-price-${o.id}`}>{formatCr(o.share_price_inr)}</p>
                   </div>
                   <div className="bg-slate-800 rounded-lg p-2.5">
                     <p className="text-slate-500 text-[10px] uppercase">Flying Hours/yr</p>
-                    <p className="text-white font-bold flex items-center gap-1"><Clock className="h-3 w-3 text-orange-400" /> {o.hours_per_share} hrs</p>
+                    <p className="text-white font-bold flex items-center gap-1"><Clock className="h-3 w-3 text-lime" /> {o.hours_per_share} hrs</p>
                   </div>
                 </div>
                 <div className="mb-3">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-slate-400">{sold}/{o.total_shares} shares sold</span>
-                    <span className="text-orange-400 font-semibold" data-testid={`shares-left-${o.id}`}>{o.shares_available} left</span>
+                    <span className="text-lime font-semibold" data-testid={`shares-left-${o.id}`}>{o.shares_available} left</span>
                   </div>
                   <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-orange-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                    <div className="h-full bg-lime text-black rounded-full transition-all" style={{ width: `${pct}%` }} />
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -109,7 +109,7 @@ export const FractionalSection = ({ user }) => {
                 <Button
                   onClick={() => openReserve(o)}
                   disabled={o.shares_available === 0}
-                  className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50"
+                  className="w-full bg-lime text-black hover:bg-lime/90 disabled:opacity-50"
                   data-testid={`reserve-share-btn-${o.id}`}
                 >
                   {o.shares_available === 0 ? 'Fully Subscribed' : 'Reserve Share / शेयर रिज़र्व करें'}
@@ -158,7 +158,7 @@ export const FractionalSection = ({ user }) => {
                     data-testid="reserve-message-input"
                   />
                 </div>
-                <Button onClick={reserve} disabled={sending} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="reserve-submit-btn">
+                <Button onClick={reserve} disabled={sending} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="reserve-submit-btn">
                   {sending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
                   Submit Reservation
                 </Button>

@@ -58,7 +58,7 @@ function FavoritesBar({ user }) {
   return (
     <div className="bg-slate-800/50 border-b border-slate-700 px-4 py-2">
       <div className="flex items-center gap-2 overflow-x-auto">
-        <Pin className="h-4 w-4 text-orange-400 flex-shrink-0" />
+        <Pin className="h-4 w-4 text-lime flex-shrink-0" />
         {favorites.map(fav => (
           <button
             key={fav._id}
@@ -217,7 +217,7 @@ function FavoritesManager({ user, isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={onClose}>
       <div 
-        className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto"
+        className="bg-slate-900 border border-slate-700 rounded-sm p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">

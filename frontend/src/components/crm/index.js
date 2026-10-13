@@ -13,7 +13,7 @@ export const statusConfig = {
   contacted: { color: 'bg-yellow-500', label: 'Contacted' },
   qualified: { color: 'bg-purple-500', label: 'Qualified' },
   proposal_sent: { color: 'bg-indigo-500', label: 'Proposal Sent' },
-  negotiation: { color: 'bg-orange-500', label: 'Negotiation' },
+  negotiation: { color: 'bg-amber-500', label: 'Negotiation' },
   won: { color: 'bg-green-500', label: 'Won' },
   lost: { color: 'bg-red-500', label: 'Lost' },
   follow_up: { color: 'bg-cyan-500', label: 'Follow Up' },
@@ -22,7 +22,7 @@ export const statusConfig = {
 
 export const priorityConfig = {
   hot: { color: 'bg-red-500', label: '🔥 Hot' },
-  warm: { color: 'bg-orange-500', label: '☀️ Warm' },
+  warm: { color: 'bg-amber-500', label: '☀️ Warm' },
   cold: { color: 'bg-blue-500', label: '❄️ Cold' },
 };
 

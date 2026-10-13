@@ -170,7 +170,7 @@ const VendorBillPayment = () => {
     const config = {
       pending: { color: 'bg-yellow-500', icon: Clock },
       approved: { color: 'bg-blue-500', icon: CheckCircle },
-      unpaid: { color: 'bg-orange-500', icon: Clock },
+      unpaid: { color: 'bg-amber-500', icon: Clock },
       processing: { color: 'bg-blue-500', icon: RefreshCw },
       paid: { color: 'bg-green-500', icon: CheckCircle },
       cancelled: { color: 'bg-red-500', icon: XCircle }
@@ -510,8 +510,8 @@ const VendorBillPayment = () => {
                     className="bg-slate-800 border-slate-700 text-white"
                   />
                 </div>
-                <Alert className="bg-blue-500/10 border-blue-500/30">
-                  <AlertDescription className="text-blue-400 text-sm">
+                <Alert className="bg-amber/10 border-amber/30">
+                  <AlertDescription className="text-amber text-sm">
                     TDS will be automatically calculated based on vendor configuration
                   </AlertDescription>
                 </Alert>
@@ -648,7 +648,7 @@ const VendorBillPayment = () => {
                       <TableCell>{getStatusBadge(bill.payment_status || bill.status)}</TableCell>
                       <TableCell>
                         {bill.status === 'pending' && (
-                          <Button size="sm" onClick={() => approveBill(bill.id)} className="bg-blue-600">
+                          <Button size="sm" onClick={() => approveBill(bill.id)} className="bg-slate-700">
                             Approve
                           </Button>
                         )}

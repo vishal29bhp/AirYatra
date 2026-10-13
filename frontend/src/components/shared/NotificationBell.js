@@ -230,9 +230,9 @@ function NotificationBell({ user }) {
       case 'document_expiry': return 'text-red-400 bg-red-500/20';
       case 'booking_confirmed': return 'text-green-400 bg-green-500/20';
       case 'new_inquiry':
-      case 'quote_received': return 'text-blue-400 bg-blue-500/20';
+      case 'quote_received': return 'text-amber bg-amber/20';
       case 'system': return 'text-purple-400 bg-purple-500/20';
-      default: return 'text-orange-400 bg-orange-500/20';
+      default: return 'text-lime bg-lime/20';
     }
   };
 
@@ -284,7 +284,7 @@ function NotificationBell({ user }) {
     <div className="relative" ref={dropdownRef} data-testid="notification-bell">
       {/* Critical Security Alert Banner - Shows on top of screen */}
       {showCriticalBanner && criticalAlerts.length > 0 && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 shadow-lg animate-pulse">
+        <div className="fixed top-0 left-0 right-0 z-[9999] bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 animate-pulse">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-white/20 rounded-full">
@@ -331,7 +331,7 @@ function NotificationBell({ user }) {
         <Bell className={`h-5 w-5 ${criticalAlerts.length > 0 ? 'text-red-400 animate-bounce' : ''}`} />
         {(unreadCount > 0 || criticalAlerts.length > 0) && (
           <span className={`absolute -top-0.5 -right-0.5 w-5 h-5 ${
-            criticalAlerts.length > 0 ? 'bg-red-600' : 'bg-orange-500'
+            criticalAlerts.length > 0 ? 'bg-red-600' : 'bg-amber-500 text-black'
           } text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse`}>
             {criticalAlerts.length > 0 ? '!' : (unreadCount > 99 ? '99+' : unreadCount)}
           </span>
@@ -340,17 +340,17 @@ function NotificationBell({ user }) {
 
       {/* Dropdown Panel */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden"
+        <div className="absolute right-0 mt-2 w-96 bg-slate-900 border border-slate-700 rounded-sm z-50 overflow-hidden"
           style={{ maxHeight: 'calc(100vh - 100px)' }}>
           
           {/* Header */}
           <div className="px-4 py-3 border-b border-slate-700 bg-slate-800/50">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Bell className="h-5 w-5 text-orange-400" />
+                <Bell className="h-5 w-5 text-lime" />
                 <h3 className="text-white font-semibold">Notifications</h3>
                 {unreadCount > 0 && (
-                  <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 text-xs rounded-full">
+                  <span className="px-2 py-0.5 bg-lime/20 text-lime text-xs rounded-full">
                     {unreadCount} new
                   </span>
                 )}
@@ -388,7 +388,7 @@ function NotificationBell({ user }) {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 px-3 py-2 text-xs font-medium transition-all flex items-center justify-center gap-1.5 ${
                     isActive 
-                      ? 'text-orange-400 border-b-2 border-orange-400 bg-orange-500/10' 
+                      ? 'text-lime border-b-2 border-lime bg-lime/10' 
                       : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
                   }`}
                 >
@@ -396,7 +396,7 @@ function NotificationBell({ user }) {
                   <span>{tab.label}</span>
                   {count > 0 && (
                     <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isActive ? 'bg-orange-500/30' : 'bg-slate-600'
+                      isActive ? 'bg-lime/30' : 'bg-slate-600'
                     }`}>
                       {count}
                     </span>
@@ -464,7 +464,7 @@ function NotificationBell({ user }) {
 
             {loading ? (
               <div className="p-8 text-center">
-                <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
+                <div className="w-6 h-6 border-2 border-lime border-t-transparent rounded-full animate-spin mx-auto" />
                 <p className="text-slate-400 text-sm mt-2">Loading...</p>
               </div>
             ) : filteredNotifications.length === 0 ? (
@@ -503,7 +503,7 @@ function NotificationBell({ user }) {
                             {notification.title}
                           </p>
                           {isUnread && (
-                            <span className="w-2 h-2 bg-orange-500 rounded-full shrink-0 mt-1.5" />
+                            <span className="w-2 h-2 bg-lime text-black rounded-full shrink-0 mt-1.5" />
                           )}
                         </div>
                         <p className="text-xs text-slate-400 mt-0.5 line-clamp-2">
@@ -515,7 +515,7 @@ function NotificationBell({ user }) {
                             {formatTime(notification.created_at)}
                           </span>
                           {notification.reference_id && (
-                            <span className="text-[10px] text-orange-400">Click to view →</span>
+                            <span className="text-[10px] text-lime">Click to view →</span>
                           )}
                         </div>
                       </div>
@@ -545,7 +545,7 @@ function NotificationBell({ user }) {
                   navigate('/notifications');
                   setIsOpen(false);
                 }}
-                className="w-full text-sm text-orange-400 hover:text-orange-300 text-center py-1 rounded hover:bg-orange-500/10 transition-colors"
+                className="w-full text-sm text-lime hover:text-lime/80 text-center py-1 rounded hover:bg-lime/10 transition-colors"
               >
                 View all notifications →
               </button>

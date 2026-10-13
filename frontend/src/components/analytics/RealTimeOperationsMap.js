@@ -65,7 +65,7 @@ function RealTimeOperationsMap() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-400">Loading Operations Map...</span>
       </div>
     );
@@ -104,28 +104,28 @@ function RealTimeOperationsMap() {
       {/* Fleet Status Bar */}
       {data && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
             <div className="flex items-center gap-2">
-              <Plane className="h-5 w-5 text-blue-400" />
-              <p className="text-blue-400 text-sm">Total Fleet</p>
+              <Plane className="h-5 w-5 text-amber" />
+              <p className="text-amber text-sm">Total Fleet</p>
             </div>
             <p className="text-3xl font-bold text-white mt-2">{data.fleet_status.total}</p>
           </div>
-          <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
             <div className="flex items-center gap-2">
               <Activity className="h-5 w-5 text-green-400 animate-pulse" />
               <p className="text-green-400 text-sm">In Flight</p>
             </div>
             <p className="text-3xl font-bold text-white mt-2">{data.fleet_status.in_flight}</p>
           </div>
-          <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
+          <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
             <div className="flex items-center gap-2">
-              <Radio className="h-5 w-5 text-orange-400" />
-              <p className="text-orange-400 text-sm">Available</p>
+              <Radio className="h-5 w-5 text-lime" />
+              <p className="text-lime text-sm">Available</p>
             </div>
             <p className="text-3xl font-bold text-white mt-2">{data.fleet_status.available}</p>
           </div>
-          <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
             <div className="flex items-center gap-2">
               <Wifi className="h-5 w-5 text-purple-400" />
               <p className="text-purple-400 text-sm">Helipads Active</p>
@@ -137,7 +137,7 @@ function RealTimeOperationsMap() {
 
       {/* Weather Alerts */}
       {data?.weather_alerts?.length > 0 && (
-        <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-xl p-4">
+        <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-sm p-4">
           <h3 className="text-yellow-400 font-semibold flex items-center gap-2 mb-2">
             <AlertTriangle className="h-5 w-5" />
             Weather Alerts
@@ -159,7 +159,7 @@ function RealTimeOperationsMap() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Map Placeholder */}
-        <div className="lg:col-span-2 bg-slate-800/50 border border-slate-700 rounded-xl p-4 min-h-[500px]">
+        <div className="lg:col-span-2 bg-slate-800/50 border border-slate-700 rounded-sm p-4 min-h-[500px]">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-white">India Operations Map</h3>
             <span className="text-xs text-green-400 flex items-center gap-1">
@@ -218,10 +218,10 @@ function RealTimeOperationsMap() {
                 >
                   <div className="relative">
                     <Plane 
-                      className="h-6 w-6 text-orange-500" 
+                      className="h-6 w-6 text-lime" 
                       style={{ transform: `rotate(${flight.current_position.heading}deg)` }}
                     />
-                    <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-orange-400 font-mono">
+                    <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-lime font-mono">
                       {flight.aircraft}
                     </span>
                   </div>
@@ -242,7 +242,7 @@ function RealTimeOperationsMap() {
                   <span className="text-white">Limited Ops</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Plane className="h-3 w-3 text-orange-500" />
+                  <Plane className="h-3 w-3 text-lime" />
                   <span className="text-white">Active Flight</span>
                 </div>
               </div>
@@ -253,9 +253,9 @@ function RealTimeOperationsMap() {
         {/* Side Panel */}
         <div className="space-y-4">
           {/* Active Flights List */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Plane className="h-5 w-5 text-orange-500" />
+              <Plane className="h-5 w-5 text-lime" />
               Active Flights ({data?.active_flights.length || 0})
             </h3>
             <div className="space-y-3 max-h-[250px] overflow-y-auto">
@@ -265,12 +265,12 @@ function RealTimeOperationsMap() {
                   onClick={() => setSelectedFlight(flight)}
                   className={`p-3 rounded-lg cursor-pointer transition-colors ${
                     selectedFlight?.flight_id === flight.flight_id 
-                      ? 'bg-orange-600/20 border border-orange-500' 
+                      ? 'bg-lime/20 border border-lime' 
                       : 'bg-slate-700/50 hover:bg-slate-700'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-orange-400">{flight.flight_id}</span>
+                    <span className="font-mono text-lime">{flight.flight_id}</span>
                     <span className="text-xs bg-green-600 px-2 py-0.5 rounded">{flight.status}</span>
                   </div>
                   <div className="text-sm text-white mt-1">
@@ -282,7 +282,7 @@ function RealTimeOperationsMap() {
                   </div>
                   <div className="w-full bg-slate-600 rounded-full h-1.5 mt-2">
                     <div 
-                      className="bg-orange-500 h-1.5 rounded-full"
+                      className="bg-lime text-black h-1.5 rounded-full"
                       style={{ width: `${flight.progress_percent}%` }}
                     />
                   </div>
@@ -293,7 +293,7 @@ function RealTimeOperationsMap() {
 
           {/* Selected Helipad Details */}
           {selectedHelipad && (
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-semibold text-white">{selectedHelipad.name}</h3>
                 <button onClick={() => setSelectedHelipad(null)} className="text-slate-400 hover:text-white">✕</button>
@@ -322,7 +322,7 @@ function RealTimeOperationsMap() {
                       <span className="text-white">{selectedHelipad.weather.temperature}°C</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Wind className="h-4 w-4 text-blue-400" />
+                      <Wind className="h-4 w-4 text-amber" />
                       <span className="text-white">{selectedHelipad.weather.wind_speed} km/h</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -348,7 +348,7 @@ function RealTimeOperationsMap() {
 
           {/* Selected Flight Details */}
           {selectedFlight && (
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-semibold text-white font-mono">{selectedFlight.flight_id}</h3>
                 <button onClick={() => setSelectedFlight(null)} className="text-slate-400 hover:text-white">✕</button>
@@ -360,7 +360,7 @@ function RealTimeOperationsMap() {
                     <p className="text-xs text-slate-400">From</p>
                     <p className="text-white font-semibold">{selectedFlight.from.city}</p>
                   </div>
-                  <Navigation className="h-5 w-5 text-orange-500" />
+                  <Navigation className="h-5 w-5 text-lime" />
                   <div className="text-center">
                     <p className="text-xs text-slate-400">To</p>
                     <p className="text-white font-semibold">{selectedFlight.to.city}</p>
@@ -393,11 +393,11 @@ function RealTimeOperationsMap() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span className="text-slate-400">Progress</span>
-                    <span className="text-orange-400">{selectedFlight.progress_percent}%</span>
+                    <span className="text-lime">{selectedFlight.progress_percent}%</span>
                   </div>
                   <div className="w-full bg-slate-700 rounded-full h-2">
                     <div 
-                      className="bg-orange-500 h-2 rounded-full transition-all"
+                      className="bg-lime text-black h-2 rounded-full transition-all"
                       style={{ width: `${selectedFlight.progress_percent}%` }}
                     />
                   </div>

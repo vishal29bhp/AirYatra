@@ -88,7 +88,7 @@ export const SellAircraftForm = ({ open, onClose, user }) => {
               Our team will verify your aircraft details and publish it within 48 hours.
               {enableAuction ? ' Your auction will go live automatically once approved.' : " You'll receive an email once it's live."}
             </p>
-            <Button onClick={close} className="mt-6 bg-orange-500 hover:bg-orange-600" data-testid="sell-done-btn">Done</Button>
+            <Button onClick={close} className="mt-6 bg-lime text-black hover:bg-lime/90" data-testid="sell-done-btn">Done</Button>
           </div>
         ) : (
           <>
@@ -149,10 +149,10 @@ export const SellAircraftForm = ({ open, onClose, user }) => {
                 <Input value={form.features} onChange={set('features')} placeholder="Garmin G1000, Air Conditioning, Leather Interior" className={inputCls} data-testid="sell-features-input" />
               </div>
 
-              <div className="sm:col-span-2 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div className="sm:col-span-2 bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <label className="flex items-center gap-2 cursor-pointer" data-testid="sell-auction-toggle">
-                  <input type="checkbox" checked={enableAuction} onChange={(e) => setEnableAuction(e.target.checked)} className="accent-orange-500 h-4 w-4" />
-                  <Gavel className="h-4 w-4 text-orange-400" />
+                  <input type="checkbox" checked={enableAuction} onChange={(e) => setEnableAuction(e.target.checked)} className="accent-lime h-4 w-4" />
+                  <Gavel className="h-4 w-4 text-lime" />
                   <span className="text-sm text-white font-medium">Sell via Live Auction / नीलामी से बेचें</span>
                 </label>
                 <p className="text-slate-500 text-xs mt-1 ml-6">Auction goes live for 72 hours once approved. Get competitive bids from serious buyers.</p>
@@ -173,7 +173,7 @@ export const SellAircraftForm = ({ open, onClose, user }) => {
               <div className="sm:col-span-2">
                 <label className="text-xs text-slate-400">Aircraft Photo (max 8MB)</label>
                 <div className="flex items-center gap-3 mt-1">
-                  <label className="flex items-center gap-2 px-4 py-2 bg-slate-800 border border-dashed border-slate-600 rounded-lg cursor-pointer hover:border-orange-500/60 text-sm text-slate-300" data-testid="sell-photo-upload">
+                  <label className="flex items-center gap-2 px-4 py-2 bg-slate-800 border border-dashed border-slate-600 rounded-lg cursor-pointer hover:border-lime/60 text-sm text-slate-300" data-testid="sell-photo-upload">
                     {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
                     {uploading ? 'Uploading...' : imageUrl ? 'Change Photo' : 'Upload Photo'}
                     <input type="file" accept="image/*" className="hidden" onChange={uploadPhoto} disabled={uploading} />
@@ -183,7 +183,7 @@ export const SellAircraftForm = ({ open, onClose, user }) => {
               </div>
             </div>
 
-            <Button onClick={submit} disabled={submitting || uploading} className="w-full bg-orange-500 hover:bg-orange-600 mt-2" data-testid="sell-submit-btn">
+            <Button onClick={submit} disabled={submitting || uploading} className="w-full bg-lime text-black hover:bg-lime/90 mt-2" data-testid="sell-submit-btn">
               {submitting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               Submit for Review / समीक्षा के लिए भेजें
             </Button>

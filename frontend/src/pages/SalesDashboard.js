@@ -114,8 +114,8 @@ function SalesDashboard({ user, onLogout }) {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-5 gap-4">
-              <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-                <Users className="h-5 w-5 text-blue-400 mb-2" />
+              <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+                <Users className="h-5 w-5 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.total_leads}</p>
                 <p className="text-slate-400 text-sm">Total Leads / कुल लीड्स</p>
               </div>
@@ -134,8 +134,8 @@ function SalesDashboard({ user, onLogout }) {
                 <p className="text-2xl font-bold text-white">{stats.this_month_target}</p>
                 <p className="text-slate-400 text-sm">Target / लक्ष्य</p>
               </div>
-              <div className="bg-orange-500/20 rounded-lg p-4 border border-orange-500/50">
-                <Award className="h-5 w-5 text-orange-400 mb-2" />
+              <div className="bg-lime/20 rounded-lg p-4 border border-lime/50">
+                <Award className="h-5 w-5 text-lime mb-2" />
                 <p className="text-2xl font-bold text-white">{stats.achieved}</p>
                 <p className="text-slate-400 text-sm">Achieved / हासिल</p>
               </div>
@@ -147,7 +147,7 @@ function SalesDashboard({ user, onLogout }) {
               <div className="flex items-center space-x-4">
                 <div className="flex-1">
                   <div className="h-4 bg-slate-700 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-orange-500 to-yellow-500" style={{ width: `${(stats.achieved / stats.this_month_target) * 100}%` }} />
+                    <div className="h-full bg-slate-800 border border-slate-700" style={{ width: `${(stats.achieved / stats.this_month_target) * 100}%` }} />
                   </div>
                 </div>
                 <span className="text-white font-bold">{Math.round((stats.achieved / stats.this_month_target) * 100)}%</span>
@@ -158,7 +158,7 @@ function SalesDashboard({ user, onLogout }) {
             {/* Quick Actions */}
             <div className="grid grid-cols-3 gap-4">
               <button onClick={() => setActiveTab('crm_dashboard')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
-                <Users className="h-8 w-8 text-blue-400 mb-3" />
+                <Users className="h-8 w-8 text-amber mb-3" />
                 <h3 className="text-lg font-semibold text-white">View CRM</h3>
                 <p className="text-slate-400 text-sm">लीड्स देखें</p>
               </button>
@@ -186,13 +186,13 @@ function SalesDashboard({ user, onLogout }) {
       <nav className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <div className="max-w-full mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-blue-500" />
+            <Plane className="h-8 w-8 text-amber" />
             <span className="text-2xl font-bold text-white">AirYatra Sales</span>
           </div>
           <div className="flex items-center space-x-4">
             <NotificationBell user={user} />
             <span className="text-slate-300">Welcome, {user.full_name}</span>
-            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-blue-400">
+            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-amber">
               <LogOut className="h-5 w-5" />
             </Button>
           </div>
@@ -214,12 +214,12 @@ function SalesDashboard({ user, onLogout }) {
                     onClick={() => toggleGroup(group.id)}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all ${
                       isActiveGroup
-                        ? 'bg-blue-500/20 text-blue-400'
+                        ? 'bg-amber/20 text-amber'
                         : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center space-x-3">
-                      <GroupIcon className={`h-5 w-5 ${isActiveGroup ? 'text-blue-400' : ''}`} />
+                      <GroupIcon className={`h-5 w-5 ${isActiveGroup ? 'text-amber' : ''}`} />
                       <span className="font-medium text-sm">{group.label}</span>
                     </div>
                     {isExpanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
@@ -235,7 +235,7 @@ function SalesDashboard({ user, onLogout }) {
                             onClick={() => handleNavClick(item.id, group.id)}
                             className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
                               activeTab === item.id
-                                ? 'bg-blue-500 text-white'
+                                ? 'bg-slate-700 text-white'
                                 : item.highlight
                                   ? 'text-yellow-400 hover:bg-yellow-500/20'
                                   : 'text-slate-400 hover:bg-slate-800 hover:text-white'

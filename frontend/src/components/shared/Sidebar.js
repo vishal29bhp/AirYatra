@@ -174,14 +174,14 @@ export const CollapsibleNavGroup = ({
         title={isCollapsed ? label : undefined}
         className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all ${
           isActive
-            ? 'bg-orange-500/20 text-orange-400'
+            ? 'bg-lime/20 text-lime'
             : hasHighlight
               ? 'text-slate-200 hover:bg-slate-800'
               : 'text-slate-400 hover:bg-slate-800 hover:text-white'
         }`}
       >
         <div className="flex items-center space-x-3">
-          <GroupIcon className={`h-5 w-5 shrink-0 ${isActive ? 'text-orange-400' : ''}`} />
+          <GroupIcon className={`h-5 w-5 shrink-0 ${isActive ? 'text-lime' : ''}`} />
           {!isCollapsed && <span className="font-medium text-sm truncate">{label}</span>}
         </div>
         {!isCollapsed && (
@@ -218,7 +218,7 @@ export const NavItem = ({
       title={isCollapsed ? label : undefined}
       className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
         isActive
-          ? 'bg-orange-500 text-white'
+          ? 'bg-lime text-black'
           : highlight
             ? 'text-yellow-400 hover:bg-yellow-500/20'
             : 'text-slate-400 hover:bg-slate-800 hover:text-white'

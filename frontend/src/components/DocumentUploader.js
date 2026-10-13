@@ -109,7 +109,7 @@ function DocumentUploader({
       <Label className="text-white">{label}</Label>
       
       {!file ? (
-        <div className="border-2 border-dashed border-slate-700 rounded-lg p-8 text-center hover:border-orange-500 transition-colors">
+        <div className="border-2 border-dashed border-slate-700 rounded-lg p-8 text-center hover:border-lime transition-colors">
           <input
             type="file"
             accept={accept}
@@ -131,7 +131,7 @@ function DocumentUploader({
               {preview ? (
                 <img src={preview} alt="Preview" className="h-16 w-16 object-cover rounded" />
               ) : (
-                <FileText className="h-12 w-12 text-orange-500" />
+                <FileText className="h-12 w-12 text-lime" />
               )}
               <div>
                 <p className="text-white font-medium">{file.name}</p>
@@ -178,7 +178,7 @@ function DocumentUploader({
           <Button
             onClick={handleUpload}
             disabled={uploading}
-            className="w-full bg-orange-500 hover:bg-orange-600"
+            className="w-full bg-lime text-black hover:bg-lime/90"
             data-testid="upload-btn"
           >
             {uploading ? 'Uploading...' : 'Upload Document'}

@@ -181,10 +181,10 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
       </div>
 
       {/* Helipad Header */}
-      <div className="glass p-6 rounded-xl mb-6">
+      <div className="glass p-6 rounded-sm mb-6">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-3xl font-bold">
+            <div className="w-24 h-24 rounded-sm bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-3xl font-bold">
               <Building2 className="h-12 w-12" />
             </div>
           </div>
@@ -198,7 +198,7 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
                 </span>
               )}
               {helipadData?.is_verified && (
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs flex items-center gap-1">
+                <span className="px-2 py-1 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                   <Shield className="h-3 w-3" /> Verified
                 </span>
               )}
@@ -212,9 +212,9 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Owner Information */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <User className="h-5 w-5 text-blue-400" />
+            <User className="h-5 w-5 text-amber" />
             Owner Information / मालिक की जानकारी
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -255,7 +255,7 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
         </div>
 
         {/* Helipad Details */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Building2 className="h-5 w-5 text-purple-400" />
             Helipad Details / हेलीपैड विवरण
@@ -334,7 +334,7 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
         </div>
 
         {/* Facility Details */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
             Facility Details / सुविधा विवरण
@@ -396,7 +396,7 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
         </div>
 
         {/* Operating Hours */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <Clock className="h-5 w-5 text-yellow-400" />
             Operating Hours / कार्य समय
@@ -424,7 +424,7 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
         </div>
 
         {/* Rent Configuration */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <DollarSign className="h-5 w-5 text-green-400" />
             Rent Configuration / किराया विन्यास
@@ -474,9 +474,9 @@ function HelipadOwnerProfile({ user, helipadId, onUpdate }) {
         </div>
 
         {/* Bank Details */}
-        <div className="glass p-6 rounded-xl">
+        <div className="glass p-6 rounded-sm">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-blue-400" />
+            <FileText className="h-5 w-5 text-amber" />
             Bank Details / बैंक विवरण (For Rent Payments)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

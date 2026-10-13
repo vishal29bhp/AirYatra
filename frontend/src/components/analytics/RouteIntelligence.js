@@ -53,7 +53,7 @@ function RouteIntelligence() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-400">Loading Route Intelligence...</span>
       </div>
     );
@@ -71,7 +71,7 @@ function RouteIntelligence() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Map className="h-7 w-7 text-orange-500" />
+            <Map className="h-7 w-7 text-lime" />
             Route Intelligence Engine
           </h1>
           <p className="text-slate-400 text-sm mt-1">
@@ -92,7 +92,7 @@ function RouteIntelligence() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-t-lg transition-colors ${
               activeTab === tab.id 
-                ? 'bg-orange-600 text-white' 
+                ? 'bg-lime text-black' 
                 : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
@@ -107,28 +107,28 @@ function RouteIntelligence() {
         <div className="space-y-6">
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
-              <p className="text-orange-400 text-sm">Total Routes</p>
+            <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
+              <p className="text-lime text-sm">Total Routes</p>
               <p className="text-3xl font-bold text-white">{data.summary.total_routes}</p>
             </div>
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">Total Bookings</p>
               <p className="text-3xl font-bold text-white">{data.summary.total_bookings}</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Total Revenue</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Total Revenue</p>
               <p className="text-3xl font-bold text-white">₹{(data.summary.total_revenue / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <p className="text-purple-400 text-sm">Top Route</p>
               <p className="text-lg font-bold text-white truncate">{data.summary.top_route || 'N/A'}</p>
             </div>
           </div>
 
           {/* Top Routes Table */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Flame className="h-5 w-5 text-orange-500" />
+              <Flame className="h-5 w-5 text-lime" />
               Top 10 Popular Routes
             </h3>
             <div className="overflow-x-auto">
@@ -151,7 +151,7 @@ function RouteIntelligence() {
                         <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                           idx === 0 ? 'bg-yellow-500 text-black' :
                           idx === 1 ? 'bg-slate-400 text-black' :
-                          idx === 2 ? 'bg-orange-600' : 'bg-slate-700'
+                          idx === 2 ? 'bg-lime text-black' : 'bg-slate-700'
                         }`}>
                           {idx + 1}
                         </span>
@@ -183,7 +183,7 @@ function RouteIntelligence() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Monthly Trend Chart */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Monthly Booking Trend</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <AreaChart data={data.monthly_trend}>
@@ -200,7 +200,7 @@ function RouteIntelligence() {
             </div>
 
             {/* Seasonal Distribution */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Seasonal Distribution</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
@@ -238,7 +238,7 @@ function RouteIntelligence() {
           </div>
 
           {/* Demand Heatmap */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Target className="h-5 w-5 text-red-500" />
               City Demand Heatmap
@@ -249,12 +249,12 @@ function RouteIntelligence() {
                   key={city.city}
                   className={`p-3 rounded-lg text-center ${
                     idx === 0 ? 'bg-red-600/30 border border-red-500' :
-                    idx < 3 ? 'bg-orange-600/20 border border-orange-500/50' :
+                    idx < 3 ? 'bg-lime/20 border border-lime/50' :
                     'bg-slate-700/50'
                   }`}
                 >
                   <p className="font-semibold text-white">{city.city}</p>
-                  <p className="text-2xl font-bold text-orange-400">{city.total}</p>
+                  <p className="text-2xl font-bold text-lime">{city.total}</p>
                   <p className="text-xs text-slate-400">
                     ↑{city.outbound} ↓{city.inbound}
                   </p>
@@ -270,27 +270,27 @@ function RouteIntelligence() {
         <div className="space-y-6">
           {/* Summary */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">Total Revenue</p>
               <p className="text-3xl font-bold text-white">₹{(profitData.summary.total_revenue / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Total Profit</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Total Profit</p>
               <p className="text-3xl font-bold text-white">₹{(profitData.summary.total_profit / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <p className="text-purple-400 text-sm">Avg Margin</p>
               <p className="text-3xl font-bold text-white">{profitData.summary.avg_profit_margin}%</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
-              <p className="text-orange-400 text-sm">Routes Analyzed</p>
+            <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
+              <p className="text-lime text-sm">Routes Analyzed</p>
               <p className="text-3xl font-bold text-white">{profitData.summary.total_routes_analyzed}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Most Profitable */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                 <ArrowUpRight className="h-5 w-5 text-green-500" />
                 Most Profitable Routes
@@ -312,7 +312,7 @@ function RouteIntelligence() {
             </div>
 
             {/* Needs Optimization */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                 <ArrowDownRight className="h-5 w-5 text-red-500" />
                 Routes Needing Optimization
@@ -337,7 +337,7 @@ function RouteIntelligence() {
           </div>
 
           {/* Profit Chart */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Route Profit Comparison</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={profitData.all_routes.slice(0, 10)}>
@@ -362,15 +362,15 @@ function RouteIntelligence() {
         <div className="space-y-6">
           {/* Forecast Summary */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
-              <p className="text-orange-400 text-sm">Peak Day</p>
+            <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
+              <p className="text-lime text-sm">Peak Day</p>
               <p className="text-2xl font-bold text-white">{forecastData.forecast_summary.peak_day}</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Peak Month</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Peak Month</p>
               <p className="text-2xl font-bold text-white">{forecastData.forecast_summary.peak_month}</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <p className="text-purple-400 text-sm">Next High Demand</p>
               <p className="text-xl font-bold text-white">{forecastData.forecast_summary.next_high_demand_event}</p>
             </div>
@@ -378,7 +378,7 @@ function RouteIntelligence() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Day of Week Pattern */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Day of Week Pattern</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={forecastData.day_of_week_pattern}>
@@ -392,7 +392,7 @@ function RouteIntelligence() {
             </div>
 
             {/* Monthly Pattern */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Monthly Pattern</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={forecastData.monthly_pattern}>
@@ -407,7 +407,7 @@ function RouteIntelligence() {
           </div>
 
           {/* Upcoming Events */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-yellow-500" />
               Upcoming High Demand Events
@@ -438,7 +438,7 @@ function RouteIntelligence() {
           </div>
 
           {/* Pricing Recommendations */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <DollarSign className="h-5 w-5 text-green-500" />
               Pricing Recommendations
@@ -448,11 +448,11 @@ function RouteIntelligence() {
                 <div key={idx} className="flex items-start gap-4 bg-slate-700/50 rounded-lg p-4">
                   <div className={`w-2 h-full rounded ${
                     rec.recommendation.includes('Increase') || rec.recommendation.includes('Surge') 
-                      ? 'bg-green-500' : 'bg-blue-500'
+                      ? 'bg-green-500' : 'bg-slate-700'
                   }`} />
                   <div className="flex-1">
                     <p className="font-medium text-white">{rec.trigger}</p>
-                    <p className="text-orange-400">{rec.recommendation}</p>
+                    <p className="text-lime">{rec.recommendation}</p>
                     <p className="text-sm text-slate-400 mt-1">{rec.reason}</p>
                   </div>
                 </div>

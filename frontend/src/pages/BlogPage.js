@@ -79,7 +79,7 @@ function BlogListPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -90,7 +90,7 @@ function BlogListPage() {
               <Button variant="ghost" className="text-slate-300 hover:text-white">Fleet</Button>
             </Link>
             <Link to="/booking">
-              <Button className="bg-orange-500 hover:bg-orange-600">Book Now</Button>
+              <Button className="bg-lime text-black hover:bg-lime/90">Book Now</Button>
             </Link>
           </div>
         </div>
@@ -99,7 +99,7 @@ function BlogListPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-12 px-6 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Blog</span>
+          <span className="text-lime font-semibold text-sm uppercase tracking-wider">Blog</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
             Aviation Insights & Travel Tips
           </h1>
@@ -133,7 +133,7 @@ function BlogListPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-orange-500 text-white'
+                    ? 'bg-lime text-black'
                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                 }`}
               >
@@ -149,7 +149,7 @@ function BlogListPage() {
         <div className="max-w-7xl mx-auto">
           {loading ? (
             <div className="text-center py-20">
-              <div className="animate-spin h-12 w-12 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+              <div className="animate-spin h-12 w-12 border-4 border-lime border-t-transparent rounded-full mx-auto mb-4"></div>
               <p className="text-slate-400">Loading articles...</p>
             </div>
           ) : posts.length === 0 ? (
@@ -163,7 +163,7 @@ function BlogListPage() {
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all"
+                  className="group bg-slate-800/50 border border-slate-700 rounded-sm overflow-hidden hover:border-lime/50 transition-all"
                 >
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -173,7 +173,7 @@ function BlogListPage() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full capitalize">
+                      <span className="px-3 py-1 bg-lime text-black text-xs font-semibold rounded-full capitalize">
                         {post.category}
                       </span>
                     </div>
@@ -181,11 +181,11 @@ function BlogListPage() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors line-clamp-2">
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-lime transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     {post.title_hi && (
-                      <p className="text-orange-400/70 text-sm mb-2">{post.title_hi}</p>
+                      <p className="text-lime/70 text-sm mb-2">{post.title_hi}</p>
                     )}
                     <p className="text-slate-400 text-sm mb-4 line-clamp-2">
                       {post.excerpt}
@@ -203,7 +203,7 @@ function BlogListPage() {
                           {post.views || 0} views
                         </span>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-orange-500 group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="h-4 w-4 text-lime group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </Link>
@@ -217,7 +217,7 @@ function BlogListPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">
@@ -268,7 +268,7 @@ function BlogPostPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="animate-spin h-12 w-12 border-4 border-orange-500 border-t-transparent rounded-full"></div>
+        <div className="animate-spin h-12 w-12 border-4 border-lime border-t-transparent rounded-full"></div>
       </div>
     );
   }
@@ -283,7 +283,7 @@ function BlogPostPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -294,7 +294,7 @@ function BlogPostPage() {
               </Button>
             </Link>
             <Link to="/booking">
-              <Button className="bg-orange-500 hover:bg-orange-600">Book Now</Button>
+              <Button className="bg-lime text-black hover:bg-lime/90">Book Now</Button>
             </Link>
           </div>
         </div>
@@ -312,14 +312,14 @@ function BlogPostPage() {
         </div>
 
         <div className="max-w-4xl mx-auto px-6 -mt-32 relative z-10">
-          <span className="px-4 py-1.5 bg-orange-500 text-white text-sm font-semibold rounded-full capitalize">
+          <span className="px-4 py-1.5 bg-lime text-black text-sm font-semibold rounded-full capitalize">
             {post.category}
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mt-6 mb-4">
             {post.title}
           </h1>
           {post.title_hi && (
-            <p className="text-orange-400/80 text-xl mb-6">{post.title_hi}</p>
+            <p className="text-lime/80 text-xl mb-6">{post.title_hi}</p>
           )}
 
           {/* Meta */}
@@ -347,16 +347,16 @@ function BlogPostPage() {
       {/* Content */}
       <section className="py-12 px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-slate-800/30 border border-slate-700 rounded-2xl p-8 md:p-12">
+          <div className="bg-slate-800/30 border border-slate-700 rounded-sm p-8 md:p-12">
             <div 
               className="prose prose-invert prose-orange max-w-none
                 prose-headings:text-white prose-headings:font-bold
                 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
                 prose-p:text-slate-300 prose-p:leading-relaxed
-                prose-a:text-orange-400 prose-a:no-underline hover:prose-a:underline
+                prose-a:text-lime prose-a:no-underline hover:prose-a:underline
                 prose-strong:text-white
                 prose-ul:text-slate-300 prose-ol:text-slate-300
-                prose-li:marker:text-orange-500"
+                prose-li:marker:text-lime"
               dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>').replace(/## /g, '<h2>').replace(/# /g, '<h1>') }}
             />
           </div>
@@ -374,11 +374,11 @@ function BlogPostPage() {
           )}
 
           {/* CTA */}
-          <div className="mt-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 text-center">
+          <div className="mt-12 bg-slate-800 border border-slate-700 rounded-sm p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">Ready to Experience Private Aviation?</h3>
             <p className="text-white/90 mb-6">Book your first flight with AirYatra today</p>
             <Link to="/booking">
-              <Button size="lg" className="bg-white text-orange-600 hover:bg-slate-100">
+              <Button size="lg" className="bg-lime text-black hover:bg-lime/90">
                 Book a Flight
               </Button>
             </Link>
@@ -390,7 +390,7 @@ function BlogPostPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

@@ -133,7 +133,7 @@ export default function AutoReminders() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Bell className="h-7 w-7 text-orange-400" />
+            <Bell className="h-7 w-7 text-lime" />
             Auto Reminders / स्वचालित रिमाइंडर
           </h1>
           <p className="text-slate-400 mt-1">Configure automatic alerts for challan due dates</p>
@@ -153,7 +153,7 @@ export default function AutoReminders() {
             <Button 
               onClick={handleSendReminders}
               disabled={sending}
-              className="bg-orange-600 hover:bg-orange-700"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               {sending ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
               Send {pendingReminders.length} Reminders
@@ -161,7 +161,7 @@ export default function AutoReminders() {
           )}
           <Button 
             onClick={() => setShowConfigModal(true)}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-slate-700 hover:bg-slate-600"
           >
             <Plus className="h-4 w-4 mr-2" />
             Configure
@@ -171,7 +171,7 @@ export default function AutoReminders() {
 
       <Tabs defaultValue="pending" className="space-y-4">
         <TabsList className="bg-slate-800">
-          <TabsTrigger value="pending" className="data-[state=active]:bg-orange-600">
+          <TabsTrigger value="pending" className="data-[state=active]:bg-lime">
             Pending ({pendingReminders.length})
           </TabsTrigger>
           <TabsTrigger value="configs" className="data-[state=active]:bg-blue-600">
@@ -187,7 +187,7 @@ export default function AutoReminders() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-orange-400" />
+                <AlertTriangle className="h-5 w-5 text-amber-400" />
                 Pending Reminders / लंबित रिमाइंडर
               </CardTitle>
             </CardHeader>
@@ -251,7 +251,7 @@ export default function AutoReminders() {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Settings className="h-5 w-5 text-blue-400" />
+                <Settings className="h-5 w-5 text-amber" />
                 Reminder Configurations / रिमाइंडर कॉन्फ़िगरेशन
               </CardTitle>
             </CardHeader>
@@ -290,7 +290,7 @@ export default function AutoReminders() {
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Mail className={`h-4 w-4 ${config.email_enabled ? 'text-blue-400' : 'text-slate-500'}`} />
+                          <Mail className={`h-4 w-4 ${config.email_enabled ? 'text-amber' : 'text-slate-500'}`} />
                           <span className={config.email_enabled ? 'text-slate-300' : 'text-slate-500'}>
                             Email {config.email_enabled ? 'enabled' : 'disabled'}
                           </span>
@@ -369,7 +369,7 @@ export default function AutoReminders() {
         <DialogContent className="bg-slate-900 border-slate-700 max-w-lg">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Settings className="h-5 w-5 text-blue-400" />
+              <Settings className="h-5 w-5 text-amber" />
               Configure Reminder / रिमाइंडर कॉन्फ़िगर करें
             </DialogTitle>
           </DialogHeader>
@@ -400,7 +400,7 @@ export default function AutoReminders() {
                     onClick={() => toggleDaysBefore(day)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       newConfig.days_before.includes(day)
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-slate-700 text-white'
                         : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
                     }`}
                   >
@@ -412,7 +412,7 @@ export default function AutoReminders() {
 
             <div className="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
               <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-blue-400" />
+                <Mail className="h-5 w-5 text-amber" />
                 <span className="text-white">Email Notifications</span>
               </div>
               <Switch 
@@ -469,7 +469,7 @@ export default function AutoReminders() {
             <Button 
               onClick={handleSaveConfig}
               disabled={newConfig.days_before.length === 0}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               <CheckCircle className="h-4 w-4 mr-2" />
               Save Configuration

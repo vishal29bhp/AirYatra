@@ -32,7 +32,7 @@ export const CancellationPolicyTab = ({ controls, setControls, updateCancellatio
                 key={index} 
                 className={`bg-slate-700/30 rounded-lg p-4 border-l-4 ${
                   slab.charge_percent >= 75 ? 'border-red-500' :
-                  slab.charge_percent >= 50 ? 'border-orange-500' :
+                  slab.charge_percent >= 50 ? 'border-lime' :
                   slab.charge_percent >= 25 ? 'border-yellow-500' :
                   'border-green-500'
                 }`}
@@ -64,7 +64,7 @@ export const CancellationPolicyTab = ({ controls, setControls, updateCancellatio
                 <Badge 
                   className={`mt-2 ${
                     slab.charge_percent >= 75 ? 'bg-red-500/20 text-red-400' :
-                    slab.charge_percent >= 50 ? 'bg-orange-500/20 text-orange-400' :
+                    slab.charge_percent >= 50 ? 'bg-amber-500/20 text-amber-400' :
                     slab.charge_percent >= 25 ? 'bg-yellow-500/20 text-yellow-400' :
                     'bg-green-500/20 text-green-400'
                   }`}
@@ -79,7 +79,7 @@ export const CancellationPolicyTab = ({ controls, setControls, updateCancellatio
         {/* Weather Abort Refund */}
         <div className="bg-slate-700/30 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-3">
-            <Shield className="h-5 w-5 text-blue-400" />
+            <Shield className="h-5 w-5 text-amber" />
             <h4 className="text-white font-medium">Weather/Force Majeure Refund</h4>
           </div>
           <p className="text-slate-400 text-sm mb-3">
@@ -106,8 +106,8 @@ export const CancellationPolicyTab = ({ controls, setControls, updateCancellatio
         </div>
 
         {/* Cancellation Policy Preview */}
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-          <h4 className="text-blue-400 font-medium mb-3">Policy Preview / नीति पूर्वावलोकन</h4>
+        <div className="bg-amber/10 border border-amber/30 rounded-lg p-4">
+          <h4 className="text-amber font-medium mb-3">Policy Preview / नीति पूर्वावलोकन</h4>
           <div className="space-y-2 text-sm">
             {(controls.cancellation_slabs || []).map((slab, index) => (
               <div key={index} className="flex justify-between text-slate-300">
@@ -119,7 +119,7 @@ export const CancellationPolicyTab = ({ controls, setControls, updateCancellatio
                 </span>
               </div>
             ))}
-            <div className="flex justify-between text-blue-300 pt-2 border-t border-blue-500/30">
+            <div className="flex justify-between text-slate-300 pt-2 border-t border-amber/30">
               <span>Weather/Safety Cancellation</span>
               <span className="font-medium">{controls.weather_abort_refund_percent || 90}% refund</span>
             </div>

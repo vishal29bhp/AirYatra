@@ -57,7 +57,7 @@ function RegionalPermissions({ region }) {
       </div>
 
       {/* Stats */}
-      <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30">
+      <div className="p-4 rounded-sm bg-yellow-500/10 border border-yellow-500/30">
         <div className="flex items-center justify-between">
           <span className="text-slate-300">Pending Approvals</span>
           <span className="text-2xl font-bold text-yellow-400">{permissions.length}</span>
@@ -75,7 +75,7 @@ function RegionalPermissions({ region }) {
       ) : (
         <div className="space-y-4">
           {permissions.map((permission) => (
-            <div key={permission.id} className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+            <div key={permission.id} className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-white font-semibold">Landing Location: {permission.landing_location || 'Not specified'}</p>

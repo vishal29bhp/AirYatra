@@ -50,7 +50,7 @@ function OfflineIndicator() {
       <div className={`px-4 py-3 flex items-center justify-center gap-3 ${
         isOnline 
           ? 'bg-green-600' 
-          : 'bg-gradient-to-r from-red-600 to-orange-600'
+          : 'bg-gradient-to-r from-red-600'
       }`}>
         {isOnline ? (
           <>

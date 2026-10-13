@@ -126,14 +126,14 @@ export default function ExpenseAnalytics() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600/30 to-blue-800/30 border-blue-500/50">
+        <Card className="bg-gradient-to-br border-amber/50">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 text-sm">Avg Monthly</p>
+                <p className="text-slate-300 text-sm">Avg Monthly</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(analytics?.average_monthly)}</p>
               </div>
-              <Target className="h-10 w-10 text-blue-400 opacity-80" />
+              <Target className="h-10 w-10 text-amber opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -272,7 +272,7 @@ export default function ExpenseAnalytics() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-lg flex items-center gap-2">
-              <Filter className="h-5 w-5 text-blue-400" />
+              <Filter className="h-5 w-5 text-amber" />
               {selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Drilldown
             </CardTitle>
             <Button 

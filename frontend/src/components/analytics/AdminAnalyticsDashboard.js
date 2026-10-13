@@ -71,7 +71,7 @@ function AdminAnalyticsDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-400">Loading Analytics...</span>
       </div>
     );
@@ -89,7 +89,7 @@ function AdminAnalyticsDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <BarChart3 className="h-7 w-7 text-orange-500" />
+            <BarChart3 className="h-7 w-7 text-lime" />
             Admin Analytics Dashboard
           </h1>
           <p className="text-slate-400 text-sm mt-1">
@@ -130,7 +130,7 @@ function AdminAnalyticsDashboard() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-t-lg transition-colors ${
               activeTab === tab.id 
-                ? 'bg-orange-600 text-white' 
+                ? 'bg-lime text-black' 
                 : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
@@ -145,7 +145,7 @@ function AdminAnalyticsDashboard() {
         <div className="space-y-6">
           {/* KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <div className="flex items-center justify-between">
                 <p className="text-green-400 text-sm">Total Revenue</p>
                 <DollarSign className="h-5 w-5 text-green-400" />
@@ -153,14 +153,14 @@ function AdminAnalyticsDashboard() {
               <p className="text-3xl font-bold text-white mt-2">₹{(data.revenue.total / 100000).toFixed(1)}L</p>
               <p className="text-xs text-slate-400 mt-1">Avg: ₹{data.revenue.avg_booking_value.toLocaleString()}/booking</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
               <div className="flex items-center justify-between">
-                <p className="text-blue-400 text-sm">Total Bookings</p>
-                <TrendingUp className="h-5 w-5 text-blue-400" />
+                <p className="text-amber text-sm">Total Bookings</p>
+                <TrendingUp className="h-5 w-5 text-amber" />
               </div>
               <p className="text-3xl font-bold text-white mt-2">{data.bookings.total}</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <div className="flex items-center justify-between">
                 <p className="text-purple-400 text-sm">Total Customers</p>
                 <Users className="h-5 w-5 text-purple-400" />
@@ -168,10 +168,10 @@ function AdminAnalyticsDashboard() {
               <p className="text-3xl font-bold text-white mt-2">{data.customers.total}</p>
               <p className="text-xs text-green-400 mt-1">+{data.customers.new_in_period} new</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
+            <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
               <div className="flex items-center justify-between">
-                <p className="text-orange-400 text-sm">Active Fleet</p>
-                <BarChart3 className="h-5 w-5 text-orange-400" />
+                <p className="text-lime text-sm">Active Fleet</p>
+                <BarChart3 className="h-5 w-5 text-lime" />
               </div>
               <p className="text-3xl font-bold text-white mt-2">{data.operations.active_fleet}</p>
               <p className="text-xs text-slate-400 mt-1">{data.operations.total_pilots} pilots</p>
@@ -180,7 +180,7 @@ function AdminAnalyticsDashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Revenue Trend */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Revenue Trend</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <AreaChart data={data.revenue.trend}>
@@ -197,7 +197,7 @@ function AdminAnalyticsDashboard() {
             </div>
 
             {/* Conversion Funnel */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
               <h3 className="text-lg font-semibold text-white mb-4">Conversion Funnel</h3>
               <div className="space-y-3">
                 {data.bookings.conversion_funnel.map((stage, idx) => {
@@ -226,7 +226,7 @@ function AdminAnalyticsDashboard() {
           </div>
 
           {/* Top Routes */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Top Routes by Revenue</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={data.top_routes} layout="vertical">
@@ -250,7 +250,7 @@ function AdminAnalyticsDashboard() {
           {/* Customer Segments */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {Object.entries(data.customers.segments).map(([segment, count]) => (
-              <div key={segment} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div key={segment} className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <p className="text-slate-400 text-sm capitalize">{segment} Customers</p>
                 <p className="text-3xl font-bold text-white mt-2">{count}</p>
               </div>
@@ -258,7 +258,7 @@ function AdminAnalyticsDashboard() {
           </div>
 
           {/* Top Customers */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Top Customers by Revenue</h3>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -278,7 +278,7 @@ function AdminAnalyticsDashboard() {
                         <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                           idx === 0 ? 'bg-yellow-500 text-black' :
                           idx === 1 ? 'bg-slate-400 text-black' :
-                          idx === 2 ? 'bg-orange-600' : 'bg-slate-700'
+                          idx === 2 ? 'bg-lime text-black' : 'bg-slate-700'
                         }`}>
                           {idx + 1}
                         </span>
@@ -301,19 +301,19 @@ function AdminAnalyticsDashboard() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {exports.available_exports.map((exp) => (
-              <div key={exp.id} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div key={exp.id} className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="flex items-start justify-between">
                   <div>
                     <h4 className="font-semibold text-white flex items-center gap-2">
-                      <FileText className="h-5 w-5 text-blue-400" />
+                      <FileText className="h-5 w-5 text-amber" />
                       {exp.name}
                     </h4>
                     <p className="text-sm text-slate-400 mt-1">{exp.description}</p>
-                    <p className="text-xs text-orange-400 mt-2">{exp.record_count.toLocaleString()} records</p>
+                    <p className="text-xs text-lime mt-2">{exp.record_count.toLocaleString()} records</p>
                   </div>
                   <Button 
                     onClick={() => handleExport(exp.endpoint)}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-slate-700 hover:bg-slate-600"
                   >
                     <Download className="h-4 w-4 mr-2" />
                     CSV

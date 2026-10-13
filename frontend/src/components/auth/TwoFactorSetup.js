@@ -214,9 +214,9 @@ These codes allow you to access your account if you lose your phone.
 
   if (loading && !setupData) {
     return (
-      <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
+      <div className="bg-slate-900 rounded-sm border border-slate-800 p-6">
         <div className="flex items-center justify-center py-8">
-          <RefreshCw className="h-6 w-6 text-orange-500 animate-spin mr-2" />
+          <RefreshCw className="h-6 w-6 text-lime animate-spin mr-2" />
           <span className="text-slate-400">Loading 2FA status...</span>
         </div>
       </div>
@@ -224,11 +224,11 @@ These codes allow you to access your account if you lose your phone.
   }
 
   return (
-    <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden" data-testid="two-factor-setup">
+    <div className="bg-slate-900 rounded-sm border border-slate-800 overflow-hidden" data-testid="two-factor-setup">
       {/* Header */}
       <div className="p-4 border-b border-slate-800">
         <div className="flex items-center gap-2">
-          <Smartphone className="h-5 w-5 text-orange-500" />
+          <Smartphone className="h-5 w-5 text-lime" />
           <h3 className="text-lg font-semibold text-white">
             Two-Factor Authentication / दो-चरणीय प्रमाणीकरण
           </h3>
@@ -276,15 +276,15 @@ These codes allow you to access your account if you lose your phone.
             <h4 className="font-medium text-white mb-2">How it works / कैसे काम करता है:</h4>
             <ol className="text-sm text-slate-400 space-y-2">
               <li className="flex items-start gap-2">
-                <span className="bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
                 <span>Google Authenticator app download करें (iOS/Android)</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                 <span>QR code scan करें app में</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                <span className="bg-lime text-black text-xs w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
                 <span>6-digit code enter करें verify करने के लिए</span>
               </li>
             </ol>
@@ -292,7 +292,7 @@ These codes allow you to access your account if you lose your phone.
             <Button 
               onClick={startSetup}
               disabled={loading}
-              className="mt-4 bg-orange-500 hover:bg-orange-600"
+              className="mt-4 bg-lime text-black hover:bg-lime/90"
             >
               {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Key className="h-4 w-4 mr-2" />}
               Setup 2FA
@@ -321,7 +321,7 @@ These codes allow you to access your account if you lose your phone.
               <div className="mt-4">
                 <button
                   onClick={() => setShowSecret(!showSecret)}
-                  className="text-xs text-orange-400 hover:underline flex items-center gap-1 mx-auto"
+                  className="text-xs text-lime hover:underline flex items-center gap-1 mx-auto"
                 >
                   {showSecret ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                   {showSecret ? 'Hide secret key' : 'Can\'t scan? Enter manually'}
@@ -331,7 +331,7 @@ These codes allow you to access your account if you lose your phone.
                   <div className="mt-2 bg-slate-900 p-3 rounded border border-slate-700">
                     <p className="text-xs text-slate-500 mb-1">Secret Key:</p>
                     <div className="flex items-center gap-2">
-                      <code className="text-sm text-orange-400 font-mono">{setupData.secret}</code>
+                      <code className="text-sm text-lime font-mono">{setupData.secret}</code>
                       <button
                         onClick={() => copyToClipboard(setupData.secret, 'secret')}
                         className="p-1 hover:bg-slate-700 rounded"
@@ -393,7 +393,7 @@ These codes allow you to access your account if you lose your phone.
           <div className="bg-slate-800/50 rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-medium text-white flex items-center gap-2">
-                <Key className="h-4 w-4 text-orange-500" />
+                <Key className="h-4 w-4 text-lime" />
                 Recovery Codes
               </h4>
               <div className="flex gap-2">
@@ -460,7 +460,7 @@ These codes allow you to access your account if you lose your phone.
         {/* Disable Modal */}
         {showDisableModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 max-w-md w-full mx-4">
+            <div className="bg-slate-900 border border-slate-800 rounded-sm p-6 max-w-md w-full mx-4">
               <h3 className="text-lg font-semibold text-white mb-2">Disable 2FA</h3>
               <p className="text-sm text-slate-400 mb-4">
                 Are you sure? This will make your account less secure.

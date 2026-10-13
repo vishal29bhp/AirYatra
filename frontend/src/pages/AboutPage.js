@@ -35,7 +35,7 @@ function AboutPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -46,7 +46,7 @@ function AboutPage() {
               <Button variant="ghost" className="text-slate-300 hover:text-white">Services</Button>
             </Link>
             <Link to="/booking">
-              <Button className="bg-orange-500 hover:bg-orange-600">Book Now</Button>
+              <Button className="bg-lime text-black hover:bg-lime/90">Book Now</Button>
             </Link>
           </div>
         </div>
@@ -55,7 +55,7 @@ function AboutPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">About Us</span>
+          <span className="text-lime font-semibold text-sm uppercase tracking-wider">About Us</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
             India&#39;s Trusted Aviation Partner
           </h1>
@@ -88,20 +88,20 @@ function AboutPage() {
             
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-6">
-              <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 text-center">
-                <div className="text-5xl font-bold text-orange-500 mb-2">500+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8 text-center">
+                <div className="text-5xl font-bold text-lime mb-2">500+</div>
                 <div className="text-slate-400">Flights Completed</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 text-center">
-                <div className="text-5xl font-bold text-orange-500 mb-2">50+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8 text-center">
+                <div className="text-5xl font-bold text-lime mb-2">50+</div>
                 <div className="text-slate-400">Aircraft Fleet</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 text-center">
-                <div className="text-5xl font-bold text-orange-500 mb-2">15+</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8 text-center">
+                <div className="text-5xl font-bold text-lime mb-2">15+</div>
                 <div className="text-slate-400">Cities Served</div>
               </div>
-              <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8 text-center">
-                <div className="text-5xl font-bold text-orange-500 mb-2">100%</div>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8 text-center">
+                <div className="text-5xl font-bold text-lime mb-2">100%</div>
                 <div className="text-slate-400">Safety Record</div>
               </div>
             </div>
@@ -114,8 +114,8 @@ function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Mission */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8">
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-4 rounded-xl w-fit mb-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8">
+              <div className="bg-slate-800 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Target className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
@@ -126,8 +126,8 @@ function AboutPage() {
             </div>
 
             {/* Vision */}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-8">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-xl w-fit mb-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8">
+              <div className="bg-slate-800 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Star className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
@@ -157,15 +157,15 @@ function AboutPage() {
               <p className="text-slate-400 text-sm">Uncompromising commitment to aviation safety standards</p>
             </div>
             <div className="text-center">
-              <div className="bg-orange-500/20 p-4 rounded-full w-fit mx-auto mb-4">
-                <Award className="h-8 w-8 text-orange-500" />
+              <div className="bg-lime/20 p-4 rounded-full w-fit mx-auto mb-4">
+                <Award className="h-8 w-8 text-lime" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Excellence</h3>
               <p className="text-slate-400 text-sm">Striving for perfection in every flight operation</p>
             </div>
             <div className="text-center">
-              <div className="bg-blue-500/20 p-4 rounded-full w-fit mx-auto mb-4">
-                <Users className="h-8 w-8 text-blue-500" />
+              <div className="bg-amber/20 p-4 rounded-full w-fit mx-auto mb-4">
+                <Users className="h-8 w-8 text-amber" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Customer Focus</h3>
               <p className="text-slate-400 text-sm">Your satisfaction is our top priority</p>
@@ -192,10 +192,10 @@ function AboutPage() {
           <div className="space-y-8">
             {MILESTONES.map((milestone, index) => (
               <div key={index} className="flex items-center gap-6">
-                <div className="bg-orange-500 text-white font-bold px-4 py-2 rounded-lg min-w-[80px] text-center">
+                <div className="bg-lime text-black font-bold px-4 py-2 rounded-lg min-w-[80px] text-center">
                   {milestone.year}
                 </div>
-                <div className="flex-1 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+                <div className="flex-1 bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                   <h3 className="text-white font-semibold">{milestone.title}</h3>
                   <p className="text-slate-400 text-sm">{milestone.description}</p>
                 </div>
@@ -214,20 +214,20 @@ function AboutPage() {
           </div>
           
           <div className="flex flex-wrap justify-center gap-6">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl px-8 py-4 flex items-center gap-3">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm px-8 py-4 flex items-center gap-3">
               <Shield className="h-6 w-6 text-green-500" />
               <span className="text-white">DGCA Approved</span>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl px-8 py-4 flex items-center gap-3">
-              <Award className="h-6 w-6 text-blue-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm px-8 py-4 flex items-center gap-3">
+              <Award className="h-6 w-6 text-amber" />
               <span className="text-white">ISO 9001:2015</span>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl px-8 py-4 flex items-center gap-3">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm px-8 py-4 flex items-center gap-3">
               <Star className="h-6 w-6 text-yellow-500" />
               <span className="text-white">NSOP Certified</span>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl px-8 py-4 flex items-center gap-3">
-              <CheckCircle className="h-6 w-6 text-orange-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm px-8 py-4 flex items-center gap-3">
+              <CheckCircle className="h-6 w-6 text-lime" />
               <span className="text-white">IS-BAO Compliant</span>
             </div>
           </div>
@@ -243,32 +243,32 @@ function AboutPage() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-              <div className="bg-orange-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <MapPin className="h-6 w-6 text-orange-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center">
+              <div className="bg-lime/20 p-3 rounded-full w-fit mx-auto mb-4">
+                <MapPin className="h-6 w-6 text-lime" />
               </div>
               <h3 className="text-white font-semibold mb-2">Head Office</h3>
               <p className="text-slate-400 text-sm">{COMPANY_INFO.address}</p>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-              <div className="bg-blue-500/20 p-3 rounded-full w-fit mx-auto mb-4">
-                <Mail className="h-6 w-6 text-blue-500" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center">
+              <div className="bg-amber/20 p-3 rounded-full w-fit mx-auto mb-4">
+                <Mail className="h-6 w-6 text-amber" />
               </div>
               <h3 className="text-white font-semibold mb-2">Email</h3>
-              <a href={`mailto:${COMPANY_INFO.email}`} className="text-orange-400 hover:text-orange-300 text-sm">
+              <a href={`mailto:${COMPANY_INFO.email}`} className="text-lime hover:text-lime/80 text-sm">
                 {COMPANY_INFO.email}
               </a>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center">
               <div className="bg-green-500/20 p-3 rounded-full w-fit mx-auto mb-4">
                 <Phone className="h-6 w-6 text-green-500" />
               </div>
               <h3 className="text-white font-semibold mb-2">Phone</h3>
-              <a href={`tel:${COMPANY_INFO.phone}`} className="text-orange-400 hover:text-orange-300 text-sm">
+              <a href={`tel:${COMPANY_INFO.phone}`} className="text-lime hover:text-lime/80 text-sm">
                 {COMPANY_INFO.phone}
               </a>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6 text-center">
               <div className="bg-purple-500/20 p-3 rounded-full w-fit mx-auto mb-4">
                 <Clock className="h-6 w-6 text-purple-500" />
               </div>
@@ -280,7 +280,7 @@ function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-r from-orange-500 to-orange-600">
+      <section className="py-20 px-6 bg-slate-800 border border-slate-700">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Fly With Us?</h2>
           <p className="text-white/90 text-lg mb-8">
@@ -298,7 +298,7 @@ function AboutPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

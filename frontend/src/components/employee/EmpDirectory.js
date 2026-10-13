@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
-const AVATAR_COLORS = ['bg-sky-500', 'bg-green-500', 'bg-orange-500', 'bg-purple-500', 'bg-pink-500', 'bg-teal-500'];
+const AVATAR_COLORS = ['bg-sky-500', 'bg-green-500', 'bg-lime text-black', 'bg-purple-500', 'bg-pink-500', 'bg-teal-500'];
 const initials = (name = '') => name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
 
 export const EmpDirectory = ({ user }) => {
@@ -73,14 +73,14 @@ export const EmpDirectory = ({ user }) => {
       {loading ? (
         <div className="text-slate-400 flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Loading...</div>
       ) : filtered.length === 0 ? (
-        <div className="bg-slate-800/50 rounded-xl p-10 text-center border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-10 text-center border border-slate-700">
           <Users className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-white">No colleagues match "{q}"</p>
         </div>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((s, i) => (
-            <div key={s.id} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 hover:border-sky-500/50 transition-colors" data-testid={`directory-card-${s.id}`}>
+            <div key={s.id} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 hover:border-sky-500/50 transition-colors" data-testid={`directory-card-${s.id}`}>
               <div className="flex items-center gap-3">
                 {s.photo_url ? (
                   <img src={`${BACKEND}${s.photo_url}`} alt={s.full_name} className="h-14 w-14 rounded-full object-cover border-2 border-slate-600" />

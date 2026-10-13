@@ -118,7 +118,7 @@ function EmergentAuthCallback({ onLogin }) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-16 w-16 text-orange-500 animate-spin mx-auto mb-4" />
+          <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
           <h2 className="text-xl text-white">Signing you in...</h2>
           <p className="text-slate-400">आपको साइन इन किया जा रहा है...</p>
         </div>
@@ -145,7 +145,7 @@ function EmergentAuthCallback({ onLogin }) {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-slate-900 rounded-2xl p-8 border border-slate-800">
+      <div className="max-w-md w-full bg-slate-900 rounded-sm p-8 border border-slate-800">
         <div className="text-center mb-6">
           <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="h-10 w-10 text-green-500" />
@@ -162,17 +162,17 @@ function EmergentAuthCallback({ onLogin }) {
                 <img
                   src={userData.profile_picture || userData.picture}
                   alt={userData.full_name || userData.name}
-                  className="w-24 h-24 rounded-full border-4 border-orange-500"
+                  className="w-24 h-24 rounded-full border-4 border-lime"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-orange-500/20 flex items-center justify-center">
-                  <User className="h-12 w-12 text-orange-500" />
+                <div className="w-24 h-24 rounded-full bg-lime/20 flex items-center justify-center">
+                  <User className="h-12 w-12 text-lime" />
                 </div>
               )}
             </div>
 
             {/* User Details */}
-            <div className="space-y-3 bg-slate-800/50 rounded-xl p-4">
+            <div className="space-y-3 bg-slate-800/50 rounded-sm p-4">
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-slate-400" />
                 <div>
@@ -369,7 +369,7 @@ function GoogleAuthSuccess({ onLogin }) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-16 w-16 text-orange-500 animate-spin mx-auto mb-4" />
+          <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
           <h2 className="text-xl text-white">Signing you in...</h2>
           <p className="text-slate-400">आपको साइन इन किया जा रहा है...</p>
         </div>
@@ -396,7 +396,7 @@ function GoogleAuthSuccess({ onLogin }) {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-slate-900 rounded-2xl p-8 border border-slate-800">
+      <div className="max-w-md w-full bg-slate-900 rounded-sm p-8 border border-slate-800">
         <div className="text-center mb-6">
           <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="h-10 w-10 text-green-500" />
@@ -413,17 +413,17 @@ function GoogleAuthSuccess({ onLogin }) {
                 <img
                   src={userData.profile_picture}
                   alt={userData.full_name}
-                  className="w-24 h-24 rounded-full border-4 border-orange-500"
+                  className="w-24 h-24 rounded-full border-4 border-lime"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-orange-500/20 flex items-center justify-center">
-                  <User className="h-12 w-12 text-orange-500" />
+                <div className="w-24 h-24 rounded-full bg-lime/20 flex items-center justify-center">
+                  <User className="h-12 w-12 text-lime" />
                 </div>
               )}
             </div>
 
             {/* User Details */}
-            <div className="space-y-3 bg-slate-800/50 rounded-xl p-4">
+            <div className="space-y-3 bg-slate-800/50 rounded-sm p-4">
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-slate-400" />
                 <div>
@@ -492,7 +492,7 @@ function GoogleAuthError() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-slate-900 rounded-2xl p-8 border border-red-500/30 text-center">
+      <div className="max-w-md w-full bg-slate-900 rounded-sm p-8 border border-red-500/30 text-center">
         <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-4">
           <span className="text-3xl">❌</span>
         </div>
@@ -501,7 +501,7 @@ function GoogleAuthError() {
         <p className="text-slate-400 mt-1">प्रमाणीकरण में त्रुटि</p>
         
         <div className="mt-6 space-y-3">
-          <Button onClick={() => navigate('/login')} className="w-full bg-orange-500 hover:bg-orange-600">
+          <Button onClick={() => navigate('/login')} className="w-full bg-lime text-black hover:bg-lime/90">
             Try Again / पुनः प्रयास करें
           </Button>
           <Button onClick={() => navigate('/')} variant="outline" className="w-full">

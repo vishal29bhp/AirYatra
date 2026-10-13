@@ -11,7 +11,7 @@ export const AuditLogsTab = ({ auditLogs }) => {
   const getActionBadgeColor = (action) => {
     switch (action) {
       case 'create': return 'bg-green-500/20 text-green-400';
-      case 'update': return 'bg-blue-500/20 text-blue-400';
+      case 'update': return 'bg-amber/20 text-amber';
       case 'delete': return 'bg-red-500/20 text-red-400';
       default: return 'bg-slate-500/20 text-slate-400';
     }

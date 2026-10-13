@@ -64,19 +64,19 @@ export const EmpPayslips = () => {
       {loading ? (
         <div className="text-slate-400 flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Loading...</div>
       ) : !slip ? (
-        <div className="bg-slate-800/50 rounded-xl p-10 text-center border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-10 text-center border border-slate-700">
           <FileText className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-white font-medium">No payslip for this month / इस महीने की पर्ची नहीं मिली</p>
           <p className="text-slate-400 text-sm">Payroll may not be generated yet. Contact HR.</p>
         </div>
       ) : (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden" data-testid="payslip-card">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden" data-testid="payslip-card">
           <div className="bg-slate-900/70 p-5 flex items-center justify-between flex-wrap gap-3">
             <div>
               <p className="text-white font-semibold text-lg">{slip.period}</p>
               <p className="text-slate-400 text-sm">Days worked: {slip.effective_working_days} / {slip.working_days_in_month} • Status: <span className="uppercase text-sky-400">{slip.status}</span></p>
             </div>
-            <Button onClick={downloadPdf} disabled={downloading} className="bg-orange-500 hover:bg-orange-600" data-testid="download-payslip-btn">
+            <Button onClick={downloadPdf} disabled={downloading} className="bg-lime text-black hover:bg-lime/90" data-testid="download-payslip-btn">
               {downloading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Download className="h-4 w-4 mr-2" />}Download PDF
             </Button>
           </div>
@@ -100,9 +100,9 @@ export const EmpPayslips = () => {
               <div className="flex justify-between py-2 font-bold text-sm"><span className="text-white">Total Deductions</span><span className="text-red-400">₹{(slip.total_deductions || 0).toLocaleString()}</span></div>
             </div>
           </div>
-          <div className="bg-orange-500/15 border-t border-orange-500/40 p-4 flex justify-between items-center">
+          <div className="bg-lime/15 border-t border-lime/40 p-4 flex justify-between items-center">
             <span className="text-white font-semibold">NET SALARY / शुद्ध वेतन</span>
-            <span className="text-orange-400 text-2xl font-bold" data-testid="net-salary-amount">₹{(slip.net_salary || 0).toLocaleString()}</span>
+            <span className="text-lime text-2xl font-bold" data-testid="net-salary-amount">₹{(slip.net_salary || 0).toLocaleString()}</span>
           </div>
         </div>
       )}

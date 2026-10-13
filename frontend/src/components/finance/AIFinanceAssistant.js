@@ -168,16 +168,16 @@ export default function AIFinanceAssistant() {
             >
               <div className={`flex gap-3 max-w-[80%] ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  message.role === 'user' ? 'bg-blue-500' : 'bg-purple-500'
+                  message.role === 'user' ? 'bg-slate-700' : 'bg-purple-500'
                 }`}>
                   {message.role === 'user' ? 
                     <User className="h-4 w-4 text-white" /> :
                     <Bot className="h-4 w-4 text-white" />
                   }
                 </div>
-                <div className={`rounded-2xl px-4 py-3 ${
+                <div className={`rounded-sm px-4 py-3 ${
                   message.role === 'user' 
-                    ? 'bg-blue-600 text-white' 
+                    ? 'bg-slate-700 text-white' 
                     : 'bg-slate-900 text-slate-200 border border-slate-700'
                 }`}>
                   <p className="whitespace-pre-wrap">{message.content}</p>
@@ -194,7 +194,7 @@ export default function AIFinanceAssistant() {
                 <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center">
                   <Bot className="h-4 w-4 text-white" />
                 </div>
-                <div className="rounded-2xl px-4 py-3 bg-slate-900 border border-slate-700">
+                <div className="rounded-sm px-4 py-3 bg-slate-900 border border-slate-700">
                   <RefreshCw className="h-5 w-5 text-purple-400 animate-spin" />
                 </div>
               </div>
@@ -269,7 +269,7 @@ export default function AIFinanceAssistant() {
         </Card>
         <Card className="bg-slate-800/30 border-slate-700">
           <CardContent className="p-3 flex items-center gap-3">
-            <TrendingUp className="h-5 w-5 text-blue-400" />
+            <TrendingUp className="h-5 w-5 text-amber" />
             <div>
               <p className="text-xs text-slate-400">Quick: Today</p>
               <p className="text-sm text-white">Type &quot;today&quot;</p>

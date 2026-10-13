@@ -118,7 +118,7 @@ const BottomNav = ({ active, setActive }) => {
             onClick={() => setActive(item.id)}
             className={`flex flex-col items-center py-2 px-3 rounded-lg transition-colors ${
               active === item.id 
-                ? 'text-orange-500 bg-orange-500/10' 
+                ? 'text-lime bg-lime/10' 
                 : 'text-slate-400'
             }`}
           >
@@ -142,7 +142,7 @@ const EmergencyContactCard = ({ contacts, onSOS }) => {
   };
 
   return (
-    <div className="bg-red-900/20 border border-red-500/30 rounded-2xl p-4">
+    <div className="bg-red-900/20 border border-red-500/30 rounded-sm p-4">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-white font-semibold flex items-center gap-2">
           <Phone className="h-4 w-4 text-red-400" />
@@ -167,8 +167,8 @@ const EmergencyContactCard = ({ contacts, onSOS }) => {
               href={`tel:${contact.phone}`}
               className="flex items-center gap-3 bg-slate-800/60 rounded-lg p-2 mb-1"
             >
-              <div className="w-8 h-8 bg-orange-500/20 rounded-full flex items-center justify-center">
-                <Phone className="h-4 w-4 text-orange-400" />
+              <div className="w-8 h-8 bg-lime/20 rounded-full flex items-center justify-center">
+                <Phone className="h-4 w-4 text-lime" />
               </div>
               <div className="flex-1">
                 <p className="text-white text-sm">{contact.name}</p>
@@ -192,8 +192,8 @@ const EmergencyContactCard = ({ contacts, onSOS }) => {
               href={`tel:${contact.phone}`}
               className="flex items-center gap-3 bg-slate-800/60 rounded-lg p-2 mb-1"
             >
-              <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
-                <Plane className="h-4 w-4 text-blue-400" />
+              <div className="w-8 h-8 bg-amber/20 rounded-full flex items-center justify-center">
+                <Plane className="h-4 w-4 text-amber" />
               </div>
               <div className="flex-1">
                 <p className="text-white text-sm">{contact.name}</p>
@@ -241,7 +241,7 @@ const AvailabilityCalendar = ({ onClose }) => {
     available: 'bg-green-500',
     unavailable: 'bg-red-500',
     leave: 'bg-yellow-500',
-    sick: 'bg-orange-500',
+    sick: 'bg-amber-500',
     training: 'bg-blue-500',
     standby: 'bg-purple-500'
   };
@@ -250,7 +250,7 @@ const AvailabilityCalendar = ({ onClose }) => {
     { value: 'available', label: 'Available', color: 'text-green-400' },
     { value: 'unavailable', label: 'Unavailable', color: 'text-red-400' },
     { value: 'leave', label: 'Leave', color: 'text-yellow-400' },
-    { value: 'sick', label: 'Sick', color: 'text-orange-400' },
+    { value: 'sick', label: 'Sick', color: 'text-amber-400' },
     { value: 'training', label: 'Training', color: 'text-blue-400' },
     { value: 'standby', label: 'Standby', color: 'text-purple-400' }
   ];
@@ -349,19 +349,19 @@ const AvailabilityCalendar = ({ onClose }) => {
           onClick={() => !isPast && setSelectedDate(dateStr)}
           disabled={isPast}
           className={`h-10 rounded-lg text-sm font-medium relative transition-all ${
-            isSelected ? 'ring-2 ring-orange-500 ring-offset-2 ring-offset-slate-900' : ''
+            isSelected ? 'ring-2 ring-lime ring-offset-2 ring-offset-slate-900' : ''
           } ${isPast ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer hover:scale-105'} ${
-            isToday ? 'border-2 border-orange-400' : ''
+            isToday ? 'border-2 border-lime' : ''
           }`}
           style={{ backgroundColor: isPast ? '#334155' : undefined }}
         >
           <div className={`w-full h-full rounded-lg flex items-center justify-center ${
             !isPast ? (statusColors[dayData.status] || 'bg-green-500') + '/30' : ''
           }`}>
-            <span className={`${isToday ? 'text-orange-400 font-bold' : 'text-white'}`}>{day}</span>
+            <span className={`${isToday ? 'text-lime font-bold' : 'text-white'}`}>{day}</span>
           </div>
           {hasAssignment && (
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full border border-slate-900">
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-lime text-black rounded-full border border-slate-900">
               <Plane className="h-2 w-2 text-white absolute top-0.5 left-0.5" />
             </div>
           )}
@@ -384,7 +384,7 @@ const AvailabilityCalendar = ({ onClose }) => {
         {/* Header */}
         <div className="bg-slate-800 p-4 flex items-center justify-between sticky top-0">
           <div className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-orange-400" />
+            <Calendar className="h-5 w-5 text-lime" />
             <h3 className="text-white font-semibold">Availability Calendar</h3>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white">
@@ -435,8 +435,8 @@ const AvailabilityCalendar = ({ onClose }) => {
             <p className="text-red-400 font-bold">{stats.unavailable}</p>
             <p className="text-xs text-slate-400">Unavailable</p>
           </div>
-          <div className="bg-orange-500/10 rounded-lg p-2 text-center">
-            <p className="text-orange-400 font-bold">{stats.assignments}</p>
+          <div className="bg-lime/10 rounded-lg p-2 text-center">
+            <p className="text-lime font-bold">{stats.assignments}</p>
             <p className="text-xs text-slate-400">Flights</p>
           </div>
         </div>
@@ -445,7 +445,7 @@ const AvailabilityCalendar = ({ onClose }) => {
         <div className="flex-1 overflow-y-auto p-4">
           {loading ? (
             <div className="flex items-center justify-center py-10">
-              <RefreshCw className="h-6 w-6 text-orange-400 animate-spin" />
+              <RefreshCw className="h-6 w-6 text-lime animate-spin" />
             </div>
           ) : (
             <>
@@ -471,7 +471,7 @@ const AvailabilityCalendar = ({ onClose }) => {
               </div>
             ))}
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-orange-500 rounded-full flex items-center justify-center">
+              <div className="w-3 h-3 bg-lime text-black rounded-full flex items-center justify-center">
                 <Plane className="h-2 w-2 text-white" />
               </div>
               <span className="text-xs text-slate-400">Has Flight</span>
@@ -521,7 +521,7 @@ const AvailabilityCalendar = ({ onClose }) => {
               </Button>
               <Button 
                 onClick={handleSetAvailability}
-                className="flex-1 bg-orange-600 hover:bg-orange-700"
+                className="flex-1 bg-lime text-black hover:bg-lime/90"
               >
                 <CheckCircle className="h-4 w-4 mr-1" />
                 Confirm
@@ -538,24 +538,24 @@ const AvailabilityCalendar = ({ onClose }) => {
 const HomeTab = ({ pilot, stats, upcomingFlights, alerts, emergencyContacts, onSOS }) => (
   <div className="space-y-4 pb-20">
     {/* Welcome Card */}
-    <div className="bg-gradient-to-r from-orange-600 to-amber-600 rounded-2xl p-4">
-      <p className="text-orange-100 text-sm">Welcome back,</p>
+    <div className="bg-slate-800 border border-slate-700 rounded-sm p-4">
+      <p className="text-slate-300 text-sm">Welcome back,</p>
       <h2 className="text-white text-xl font-bold">{pilot?.full_name || 'Pilot'}</h2>
-      <p className="text-orange-100 text-sm mt-1">License: {pilot?.license_number || 'N/A'}</p>
+      <p className="text-slate-300 text-sm mt-1">License: {pilot?.license_number || 'N/A'}</p>
     </div>
 
     {/* Quick Stats */}
     <div className="grid grid-cols-3 gap-3">
-      <div className="bg-slate-800 rounded-xl p-3 text-center">
+      <div className="bg-slate-800 rounded-sm p-3 text-center">
         <p className="text-2xl font-bold text-white">{stats?.total_flights || 0}</p>
         <p className="text-xs text-slate-400">Total Flights</p>
       </div>
-      <div className="bg-slate-800 rounded-xl p-3 text-center">
+      <div className="bg-slate-800 rounded-sm p-3 text-center">
         <p className="text-2xl font-bold text-green-400">{stats?.hours_this_month || 0}h</p>
         <p className="text-xs text-slate-400">This Month</p>
       </div>
-      <div className="bg-slate-800 rounded-xl p-3 text-center">
-        <p className="text-2xl font-bold text-orange-400">{stats?.duty_hours_remaining || 0}h</p>
+      <div className="bg-slate-800 rounded-sm p-3 text-center">
+        <p className="text-2xl font-bold text-lime">{stats?.duty_hours_remaining || 0}h</p>
         <p className="text-xs text-slate-400">FDTL Left</p>
       </div>
     </div>
@@ -567,21 +567,21 @@ const HomeTab = ({ pilot, stats, upcomingFlights, alerts, emergencyContacts, onS
     {alerts?.length > 0 && (
       <div className="space-y-2">
         <h3 className="text-white font-semibold flex items-center gap-2">
-          <Bell className="h-4 w-4 text-orange-500" />
+          <Bell className="h-4 w-4 text-lime" />
           Alerts
         </h3>
         {alerts.map((alert, idx) => (
           <div 
             key={idx}
-            className={`p-3 rounded-xl flex items-center gap-3 ${
+            className={`p-3 rounded-sm flex items-center gap-3 ${
               alert.type === 'critical' ? 'bg-red-600/20 border border-red-500/50' :
               alert.type === 'warning' ? 'bg-yellow-600/20 border border-yellow-500/50' :
-              'bg-blue-600/20 border border-blue-500/50'
+              'bg-amber/20 border border-amber/50'
             }`}
           >
             <AlertTriangle className={`h-5 w-5 ${
               alert.type === 'critical' ? 'text-red-400' :
-              alert.type === 'warning' ? 'text-yellow-400' : 'text-blue-400'
+              alert.type === 'warning' ? 'text-yellow-400' : 'text-amber'
             }`} />
             <div className="flex-1">
               <p className="text-white text-sm font-medium">{alert.title}</p>
@@ -595,15 +595,15 @@ const HomeTab = ({ pilot, stats, upcomingFlights, alerts, emergencyContacts, onS
     {/* Upcoming Flights */}
     <div>
       <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-        <Calendar className="h-4 w-4 text-orange-500" />
+        <Calendar className="h-4 w-4 text-lime" />
         Upcoming Assignments
       </h3>
       {upcomingFlights?.length > 0 ? (
         <div className="space-y-2">
           {upcomingFlights.map((flight, idx) => (
-            <div key={idx} className="bg-slate-800 rounded-xl p-3">
+            <div key={idx} className="bg-slate-800 rounded-sm p-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-orange-400 font-mono text-sm">{flight.flight_id || `FL-${idx}`}</span>
+                <span className="text-lime font-mono text-sm">{flight.flight_id || `FL-${idx}`}</span>
                 <span className="text-xs bg-slate-700 px-2 py-1 rounded">{flight.date}</span>
               </div>
               <div className="flex items-center gap-2 text-white">
@@ -643,7 +643,7 @@ const DutyTab = ({ dutyStatus, onCheckIn, onCheckOut }) => {
   return (
     <div className="space-y-4 pb-20">
       {/* FDTL Status Card */}
-      <div className={`rounded-2xl p-4 ${isOnDuty ? 'bg-green-600/20 border border-green-500' : 'bg-slate-800'}`}>
+      <div className={`rounded-sm p-4 ${isOnDuty ? 'bg-green-600/20 border border-green-500' : 'bg-slate-800'}`}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-white font-semibold">FDTL Status</h3>
           <span className={`px-3 py-1 rounded-full text-xs font-bold ${
@@ -659,7 +659,7 @@ const DutyTab = ({ dutyStatus, onCheckIn, onCheckOut }) => {
             <p className="text-white text-lg font-bold">{dutyStatus?.fdp_used || 0}h / 14h</p>
             <div className="w-full bg-slate-700 rounded-full h-2 mt-1">
               <div 
-                className="bg-orange-500 h-2 rounded-full"
+                className="bg-lime text-black h-2 rounded-full"
                 style={{ width: `${Math.min(100, ((dutyStatus?.fdp_used || 0) / 14) * 100)}%` }}
               />
             </div>
@@ -669,7 +669,7 @@ const DutyTab = ({ dutyStatus, onCheckIn, onCheckOut }) => {
             <p className="text-white text-lg font-bold">{dutyStatus?.flight_time_24h || 0}h / 8h</p>
             <div className="w-full bg-slate-700 rounded-full h-2 mt-1">
               <div 
-                className="bg-blue-500 h-2 rounded-full"
+                className="bg-slate-700 h-2 rounded-full"
                 style={{ width: `${Math.min(100, ((dutyStatus?.flight_time_24h || 0) / 8) * 100)}%` }}
               />
             </div>
@@ -709,12 +709,12 @@ const DutyTab = ({ dutyStatus, onCheckIn, onCheckOut }) => {
         <h3 className="text-white font-semibold mb-3">Recent Duty Logs</h3>
         <div className="space-y-2">
           {(dutyStatus?.recent_logs || []).slice(0, 5).map((log, idx) => (
-            <div key={idx} className="bg-slate-800 rounded-xl p-3 flex items-center justify-between">
+            <div key={idx} className="bg-slate-800 rounded-sm p-3 flex items-center justify-between">
               <div>
                 <p className="text-white text-sm">{log.date}</p>
                 <p className="text-slate-400 text-xs">{log.type}</p>
               </div>
-              <span className="text-orange-400 font-mono">{log.hours}h</span>
+              <span className="text-lime font-mono">{log.hours}h</span>
             </div>
           ))}
         </div>
@@ -808,7 +808,7 @@ const DocumentsTab = ({ documents, onRefresh, onUploadDocument }) => {
           return (
             <div 
               key={idx}
-              className={`bg-slate-800 rounded-xl p-4 border-l-4 ${
+              className={`bg-slate-800 rounded-sm p-4 border-l-4 ${
                 isExpired ? 'border-red-500' :
                 isExpiringSoon ? 'border-yellow-500' :
                 'border-green-500'
@@ -845,7 +845,7 @@ const DocumentsTab = ({ documents, onRefresh, onUploadDocument }) => {
       {/* Upload Document Button */}
       <Button 
         onClick={() => setShowUpload(!showUpload)}
-        className="w-full bg-orange-600 hover:bg-orange-700"
+        className="w-full bg-lime text-black hover:bg-lime/90"
       >
         <Plus className="h-4 w-4 mr-2" />
         {showUpload ? 'Cancel' : 'Upload New Document'}
@@ -853,7 +853,7 @@ const DocumentsTab = ({ documents, onRefresh, onUploadDocument }) => {
 
       {/* Upload Form */}
       {showUpload && (
-        <div className="bg-slate-800 rounded-xl p-4 space-y-4 animate-in slide-in-from-bottom">
+        <div className="bg-slate-800 rounded-sm p-4 space-y-4 animate-in slide-in-from-bottom">
           <h4 className="text-white font-semibold">Upload Document</h4>
           
           <div>
@@ -912,7 +912,7 @@ const DocumentsTab = ({ documents, onRefresh, onUploadDocument }) => {
               type="file"
               accept=".pdf,.jpg,.jpeg,.png"
               onChange={handleFileChange}
-              className="w-full bg-slate-700 text-white rounded-lg px-3 py-2 mt-1 border border-slate-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:bg-orange-600 file:text-white"
+              className="w-full bg-slate-700 text-white rounded-lg px-3 py-2 mt-1 border border-slate-600 file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:bg-lime file:text-black"
             />
             {uploadForm.file && (
               <p className="text-xs text-green-400 mt-1">Selected: {uploadForm.file.name}</p>
@@ -1058,9 +1058,9 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
     <div className="space-y-4 pb-20">
       {/* Upcoming Flights with Pre-Flight Button */}
       {upcomingFlights?.length > 0 && (
-        <div className="bg-slate-800/50 rounded-xl p-4">
+        <div className="bg-slate-800/50 rounded-sm p-4">
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-            <Plane className="h-4 w-4 text-orange-400" />
+            <Plane className="h-4 w-4 text-lime" />
             Pre-Flight Check Required
           </h3>
           <div className="space-y-2">
@@ -1088,7 +1088,7 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
       <div className="flex items-center justify-between">
         <h3 className="text-white font-semibold">Flight Logs</h3>
         <div className="flex gap-2">
-          <Button onClick={onAddLog} size="sm" className="bg-orange-600 hover:bg-orange-700">
+          <Button onClick={onAddLog} size="sm" className="bg-lime text-black hover:bg-lime/90">
             <Plus className="h-4 w-4 mr-1" />
             Add
           </Button>
@@ -1162,9 +1162,9 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
       {/* Flight Logs */}
       <div className="space-y-3">
         {flightLogs?.map((log, idx) => (
-          <div key={idx} className="bg-slate-800 rounded-xl p-4">
+          <div key={idx} className="bg-slate-800 rounded-sm p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-orange-400 font-mono">{log.flight_id}</span>
+              <span className="text-lime font-mono">{log.flight_id}</span>
               <span className="text-xs text-slate-400">{log.date}</span>
             </div>
             <div className="flex items-center gap-2 text-white mb-2">
@@ -1209,7 +1209,7 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
 
             {/* Weather Card */}
             {weatherData && (
-              <div className={`mx-4 mt-3 p-3 rounded-xl border ${
+              <div className={`mx-4 mt-3 p-3 rounded-sm border ${
                 weatherData.route_status === 'GO' 
                   ? 'bg-green-500/10 border-green-500/30' 
                   : weatherData.route_status === 'CAUTION'
@@ -1253,8 +1253,8 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
               </div>
             )}
             {loadingWeather && (
-              <div className="mx-4 mt-3 p-3 bg-slate-800 rounded-xl text-center">
-                <RefreshCw className="h-4 w-4 animate-spin inline mr-2 text-orange-400" />
+              <div className="mx-4 mt-3 p-3 bg-slate-800 rounded-sm text-center">
+                <RefreshCw className="h-4 w-4 animate-spin inline mr-2 text-lime" />
                 <span className="text-slate-400 text-sm">Loading weather...</span>
               </div>
             )}
@@ -1263,7 +1263,7 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
             <div className="px-4 py-2 bg-slate-800/50">
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-orange-500 to-green-500 transition-all"
+                  className="h-full bg-slate-800 border border-slate-700 transition-all"
                   style={{ width: `${totalItems > 0 ? (checkedCount / totalItems) * 100 : 0}%` }}
                 />
               </div>
@@ -1273,7 +1273,7 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {checklist.map((category, catIdx) => (
                 <div key={catIdx}>
-                  <h4 className="text-orange-400 font-semibold text-sm mb-2">{category.category}</h4>
+                  <h4 className="text-lime font-semibold text-sm mb-2">{category.category}</h4>
                   <div className="space-y-2">
                     {category.items.map((item, itemIdx) => (
                       <button
@@ -1358,7 +1358,7 @@ const FlightsTab = ({ flightLogs, upcomingFlights, onAddLog }) => {
 const ProfileTab = ({ pilot, onLogout, notificationsEnabled, onEnableNotifications, isOnline, onOpenAvailability }) => (
   <div className="space-y-4 pb-20">
     {/* Connection Status */}
-    <div className={`rounded-xl p-3 flex items-center gap-2 ${isOnline ? 'bg-green-500/10 border border-green-500/30' : 'bg-yellow-500/10 border border-yellow-500/30'}`}>
+    <div className={`rounded-sm p-3 flex items-center gap-2 ${isOnline ? 'bg-green-500/10 border border-green-500/30' : 'bg-yellow-500/10 border border-yellow-500/30'}`}>
       {isOnline ? (
         <>
           <Wifi className="h-4 w-4 text-green-400" />
@@ -1373,8 +1373,8 @@ const ProfileTab = ({ pilot, onLogout, notificationsEnabled, onEnableNotificatio
     </div>
 
     {/* Profile Card */}
-    <div className="bg-slate-800 rounded-2xl p-4 text-center">
-      <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto flex items-center justify-center">
+    <div className="bg-slate-800 rounded-sm p-4 text-center">
+      <div className="w-20 h-20 bg-slate-800 border border-slate-700 rounded-full mx-auto flex items-center justify-center">
         <User className="h-10 w-10 text-white" />
       </div>
       <h2 className="text-white text-xl font-bold mt-3">{pilot?.full_name}</h2>
@@ -1394,24 +1394,24 @@ const ProfileTab = ({ pilot, onLogout, notificationsEnabled, onEnableNotificatio
     {/* Availability Calendar Button */}
     <button 
       onClick={onOpenAvailability}
-      className="w-full bg-gradient-to-r from-orange-600 to-amber-600 rounded-xl p-4 flex items-center justify-between hover:opacity-90 transition-opacity"
+      className="w-full bg-lime text-black rounded-sm p-4 flex items-center justify-between hover:opacity-90 transition-opacity"
       data-testid="availability-calendar-btn"
     >
       <div className="flex items-center gap-3">
         <Calendar className="h-5 w-5 text-white" />
         <div className="text-left">
           <span className="text-white font-medium block">Availability Calendar</span>
-          <span className="text-orange-100 text-xs">Mark your available dates</span>
+          <span className="text-slate-300 text-xs">Mark your available dates</span>
         </div>
       </div>
       <ChevronRight className="h-5 w-5 text-white" />
     </button>
 
     {/* Push Notifications */}
-    <div className="bg-slate-800 rounded-xl p-4">
+    <div className="bg-slate-800 rounded-sm p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <BellRing className="h-5 w-5 text-orange-400" />
+          <BellRing className="h-5 w-5 text-lime" />
           <div>
             <p className="text-white font-medium">Push Notifications</p>
             <p className="text-xs text-slate-400">Duty alerts & document reminders</p>
@@ -1423,7 +1423,7 @@ const ProfileTab = ({ pilot, onLogout, notificationsEnabled, onEnableNotificatio
           <Button 
             size="sm" 
             onClick={onEnableNotifications}
-            className="bg-orange-500 hover:bg-orange-600 h-8"
+            className="bg-lime text-black hover:bg-lime/90 h-8"
           >
             Enable
           </Button>
@@ -1433,14 +1433,14 @@ const ProfileTab = ({ pilot, onLogout, notificationsEnabled, onEnableNotificatio
 
     {/* Quick Links */}
     <div className="space-y-2">
-      <button className="w-full bg-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <button className="w-full bg-slate-800 rounded-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Shield className="h-5 w-5 text-blue-400" />
+          <Shield className="h-5 w-5 text-amber" />
           <span className="text-white">Medical Certificate</span>
         </div>
         <ChevronRight className="h-5 w-5 text-slate-400" />
       </button>
-      <button className="w-full bg-slate-800 rounded-xl p-4 flex items-center justify-between">
+      <button className="w-full bg-slate-800 rounded-sm p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Settings className="h-5 w-5 text-slate-400" />
           <span className="text-white">Settings</span>
@@ -1625,7 +1625,7 @@ function PilotMobilePortal() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <Plane className="h-12 w-12 text-orange-500 animate-pulse mx-auto" />
+          <Plane className="h-12 w-12 text-lime animate-pulse mx-auto" />
           <p className="text-slate-400 mt-4">Loading...</p>
         </div>
       </div>
@@ -1638,7 +1638,7 @@ function PilotMobilePortal() {
       <header className="sticky top-0 bg-slate-900 border-b border-slate-800 px-4 py-3 z-40">
         <div className="flex items-center justify-between max-w-lg mx-auto">
           <div className="flex items-center gap-2">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="font-bold text-lg">AirYatra Pilot</span>
           </div>
           <button onClick={fetchAllData}>
@@ -1712,7 +1712,7 @@ function PilotMobilePortal() {
 
       {/* Offline Data Badge */}
       {isOfflineData && isOnline && (
-        <div className="fixed top-14 left-0 right-0 bg-blue-500/90 text-white text-center py-1 text-xs font-medium z-40">
+        <div className="fixed top-14 left-0 right-0 bg-amber/90 text-white text-center py-1 text-xs font-medium z-40">
           Showing cached data - Pull to refresh
         </div>
       )}

@@ -65,7 +65,7 @@ function PasswordStrengthMeter({ password = '', showRequirements = true }) {
     if (finalScore < 30) {
       return { score: finalScore, level: 'weak', label: 'Weak / कमज़ोर', color: 'bg-red-500' };
     } else if (finalScore < 50) {
-      return { score: finalScore, level: 'fair', label: 'Fair / ठीक', color: 'bg-orange-500' };
+      return { score: finalScore, level: 'fair', label: 'Fair / ठीक', color: 'bg-amber-500' };
     } else if (finalScore < 80) {
       return { score: finalScore, level: 'good', label: 'Good / अच्छा', color: 'bg-yellow-500' };
     } else {
@@ -95,7 +95,7 @@ function PasswordStrengthMeter({ password = '', showRequirements = true }) {
             <div className="flex items-center gap-1.5">
               <ShieldIcon className={`h-3.5 w-3.5 ${
                 strength.level === 'weak' ? 'text-red-400' :
-                strength.level === 'fair' ? 'text-orange-400' :
+                strength.level === 'fair' ? 'text-lime' :
                 strength.level === 'good' ? 'text-yellow-400' :
                 strength.level === 'strong' ? 'text-green-400' : 'text-slate-400'
               }`} />
@@ -103,7 +103,7 @@ function PasswordStrengthMeter({ password = '', showRequirements = true }) {
             </div>
             <span className={`font-medium ${
               strength.level === 'weak' ? 'text-red-400' :
-              strength.level === 'fair' ? 'text-orange-400' :
+              strength.level === 'fair' ? 'text-lime' :
               strength.level === 'good' ? 'text-yellow-400' :
               strength.level === 'strong' ? 'text-green-400' : 'text-slate-400'
             }`}>

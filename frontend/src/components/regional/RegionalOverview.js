@@ -44,7 +44,7 @@ function RegionalOverview({ profile }) {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-purple-500/20 border border-purple-500/30">
+        <div className="p-4 rounded-sm bg-purple-500/20 border border-purple-500/30">
           <div className="flex items-center justify-between">
             <Users className="h-8 w-8 text-purple-400" />
             <span className="text-3xl font-bold text-white">{stats.total_operators || 0}</span>
@@ -53,7 +53,7 @@ function RegionalOverview({ profile }) {
           <p className="text-xs text-purple-400">{stats.active_operators || 0} active</p>
         </div>
         
-        <div className="p-4 rounded-xl bg-yellow-500/20 border border-yellow-500/30">
+        <div className="p-4 rounded-sm bg-yellow-500/20 border border-yellow-500/30">
           <div className="flex items-center justify-between">
             <Plane className="h-8 w-8 text-yellow-400" />
             <span className="text-3xl font-bold text-white">{stats.pending_operator_approvals || 0}</span>
@@ -61,16 +61,16 @@ function RegionalOverview({ profile }) {
           <p className="text-sm mt-2 text-slate-300">Pending Approvals</p>
         </div>
         
-        <div className="p-4 rounded-xl bg-blue-500/20 border border-blue-500/30">
+        <div className="p-4 rounded-sm bg-amber/20 border border-amber/30">
           <div className="flex items-center justify-between">
-            <Calendar className="h-8 w-8 text-blue-400" />
+            <Calendar className="h-8 w-8 text-amber" />
             <span className="text-3xl font-bold text-white">{stats.total_bookings || 0}</span>
           </div>
           <p className="text-sm mt-2 text-slate-300">Total Bookings</p>
-          <p className="text-xs text-blue-400">{stats.today_bookings || 0} today</p>
+          <p className="text-xs text-amber">{stats.today_bookings || 0} today</p>
         </div>
         
-        <div className="p-4 rounded-xl bg-green-500/20 border border-green-500/30">
+        <div className="p-4 rounded-sm bg-green-500/20 border border-green-500/30">
           <div className="flex items-center justify-between">
             <IndianRupee className="h-8 w-8 text-green-400" />
             <span className="text-2xl font-bold text-white">₹{(revenue.total_revenue || 0).toLocaleString()}</span>
@@ -81,7 +81,7 @@ function RegionalOverview({ profile }) {
 
       {/* Pending Operators */}
       {data?.pending_operators && data.pending_operators.length > 0 && (
-        <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+        <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
           <h3 className="text-lg font-semibold text-white mb-4">Pending Operator Approvals</h3>
           <div className="space-y-3">
             {data.pending_operators.map((op, index) => (
@@ -100,7 +100,7 @@ function RegionalOverview({ profile }) {
       )}
 
       {/* Recent Bookings */}
-      <div className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+      <div className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
         <h3 className="text-lg font-semibold text-white mb-4">Recent Bookings</h3>
         <div className="space-y-3">
           {data?.recent_bookings && data.recent_bookings.length > 0 ? (
@@ -112,7 +112,7 @@ function RegionalOverview({ profile }) {
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs ${
                   booking.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                  booking.status === 'confirmed' ? 'bg-blue-500/20 text-blue-400' :
+                  booking.status === 'confirmed' ? 'bg-amber/20 text-amber' :
                   'bg-yellow-500/20 text-yellow-400'
                 }`}>
                   {booking.status}

@@ -145,7 +145,7 @@ const CorporateDashboard = ({ user }) => {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime"></div>
       </div>
     );
   }
@@ -156,7 +156,7 @@ const CorporateDashboard = ({ user }) => {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <Building2 className="h-16 w-16 text-orange-500 mx-auto mb-4" />
+            <Building2 className="h-16 w-16 text-lime mx-auto mb-4" />
             <h1 className="text-3xl font-bold text-white mb-2">Corporate Travel Console</h1>
             <p className="text-slate-400">Centralized travel management for your organization</p>
           </div>
@@ -168,7 +168,7 @@ const CorporateDashboard = ({ user }) => {
                 <p className="text-slate-400 mb-6">Register your company to access corporate travel features</p>
                 <Button 
                   data-testid="register-corporate-btn"
-                  className="bg-orange-500 hover:bg-orange-600"
+                  className="bg-lime text-black hover:bg-lime/90"
                   onClick={() => setShowRegister(true)}
                 >
                   <Plus className="h-4 w-4 mr-2" /> Register Corporate Account
@@ -309,7 +309,7 @@ const CorporateDashboard = ({ user }) => {
                     <Button type="button" variant="outline" onClick={() => setShowRegister(false)} className="flex-1">
                       Cancel
                     </Button>
-                    <Button type="submit" data-testid="submit-registration-btn" className="flex-1 bg-orange-500 hover:bg-orange-600">
+                    <Button type="submit" data-testid="submit-registration-btn" className="flex-1 bg-lime text-black hover:bg-lime/90">
                       Submit Registration
                     </Button>
                   </div>
@@ -344,7 +344,7 @@ const CorporateDashboard = ({ user }) => {
               key={tab}
               data-testid={`tab-${tab}`}
               variant={activeTab === tab ? 'default' : 'outline'}
-              className={activeTab === tab ? 'bg-orange-500' : 'border-slate-600 text-slate-300'}
+              className={activeTab === tab ? 'bg-lime text-black' : 'border-slate-600 text-slate-300'}
               onClick={() => setActiveTab(tab)}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -364,7 +364,7 @@ const CorporateDashboard = ({ user }) => {
                       <p className="text-slate-400 text-sm">Total Employees</p>
                       <p className="text-3xl font-bold text-white">{employees.length}</p>
                     </div>
-                    <Users className="h-10 w-10 text-blue-400" />
+                    <Users className="h-10 w-10 text-amber" />
                   </div>
                 </CardContent>
               </Card>
@@ -476,7 +476,7 @@ const CorporateDashboard = ({ user }) => {
               </div>
               <Button 
                 data-testid="add-employee-btn"
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
                 onClick={() => setShowAddEmployee(true)}
               >
                 <Plus className="h-4 w-4 mr-2" /> Add Employee
@@ -485,7 +485,7 @@ const CorporateDashboard = ({ user }) => {
 
             {/* Add Employee Form */}
             {showAddEmployee && (
-              <Card className="bg-slate-800/50 border-orange-500/50">
+              <Card className="bg-slate-800/50 border-lime/50">
                 <CardHeader>
                   <CardTitle className="text-white">Add New Employee</CardTitle>
                 </CardHeader>
@@ -542,7 +542,7 @@ const CorporateDashboard = ({ user }) => {
                     </div>
                     <div className="flex gap-4">
                       <Button type="button" variant="outline" onClick={() => setShowAddEmployee(false)}>Cancel</Button>
-                      <Button type="submit" data-testid="submit-employee-btn" className="bg-orange-500">Add Employee</Button>
+                      <Button type="submit" data-testid="submit-employee-btn" className="bg-lime text-black">Add Employee</Button>
                     </div>
                   </form>
                 </CardContent>
@@ -743,7 +743,7 @@ const CorporateDashboard = ({ user }) => {
               <Card className="bg-slate-800/50 border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
-                    <FileText className="h-10 w-10 text-blue-400" />
+                    <FileText className="h-10 w-10 text-amber" />
                     <div>
                       <p className="text-slate-400 text-sm">Total Bookings</p>
                       <p className="text-2xl font-bold text-white">{analytics.total_bookings}</p>
@@ -763,7 +763,7 @@ const CorporateDashboard = ({ user }) => {
                   {analytics.top_travelers?.map((traveler, idx) => (
                     <div key={idx} className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
                       <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white font-bold">
+                        <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-white font-bold">
                           {idx + 1}
                         </div>
                         <div>

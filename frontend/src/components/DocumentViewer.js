@@ -69,7 +69,7 @@ function DocumentViewer({ documents, onDelete, onRefresh }) {
                     />
                   </button>
                 ) : (
-                  <FileText className="h-12 w-12 text-orange-500 flex-shrink-0" />
+                  <FileText className="h-12 w-12 text-lime flex-shrink-0" />
                 )}
                 
                 <div className="flex-1 min-w-0">
@@ -90,7 +90,7 @@ function DocumentViewer({ documents, onDelete, onRefresh }) {
                       {expiryStatus.status === 'expired' ? (
                         <AlertTriangle className="h-4 w-4 text-red-400" />
                       ) : expiryStatus.status === 'expiring' ? (
-                        <AlertTriangle className="h-4 w-4 text-orange-400" />
+                        <AlertTriangle className="h-4 w-4 text-amber-400" />
                       ) : (
                         <CheckCircle className="h-4 w-4 text-green-400" />
                       )}
@@ -102,8 +102,8 @@ function DocumentViewer({ documents, onDelete, onRefresh }) {
                   )}
 
                   {doc.ai_verification && (
-                    <div className="mt-2 p-2 bg-blue-500/10 rounded border border-blue-500/30">
-                      <p className="text-blue-300 text-xs">
+                    <div className="mt-2 p-2 bg-amber/10 rounded border border-amber/30">
+                      <p className="text-slate-300 text-xs">
                         AI Verified: {doc.ai_verification.is_valid ? '✓ Valid' : '✗ Issues Found'}
                       </p>
                     </div>
@@ -116,7 +116,7 @@ function DocumentViewer({ documents, onDelete, onRefresh }) {
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="text-orange-400 hover:text-orange-300"
+                    className="text-lime hover:text-lime/80"
                     data-testid={`download-btn-${doc.id}`}
                   >
                     <Download className="h-4 w-4" />

@@ -167,19 +167,19 @@ function HelipadOwnerDashboard({ user, setUser }) {
           <div className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">Total Bookings / कुल बुकिंग</p>
                     <p className="text-2xl font-bold text-white mt-1">{stats.total_bookings}</p>
                   </div>
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                    <Plane className="h-6 w-6 text-blue-400" />
+                  <div className="w-12 h-12 rounded-lg bg-amber/20 flex items-center justify-center">
+                    <Plane className="h-6 w-6 text-amber" />
                   </div>
                 </div>
               </div>
               
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">Pending / लंबित</p>
@@ -191,7 +191,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
                 </div>
               </div>
               
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">Total Revenue / कुल राजस्व</p>
@@ -203,7 +203,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
                 </div>
               </div>
               
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm">This Month / इस महीने</p>
@@ -217,7 +217,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
             </div>
 
             {/* Helipad Info */}
-            <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                 <Building2 className="h-5 w-5 text-purple-400" />
                 Your Helipad / आपका हेलीपैड
@@ -246,7 +246,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
             </div>
 
             {/* Recent Bookings */}
-            <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-white">Recent Bookings / हाल की बुकिंग</h3>
                 <Button variant="ghost" className="text-purple-400" onClick={() => setActiveTab('bookings')}>
@@ -284,9 +284,9 @@ function HelipadOwnerDashboard({ user, setUser }) {
 
       case 'bookings':
         return (
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Plane className="h-5 w-5 text-blue-400" />
+              <Plane className="h-5 w-5 text-amber" />
               All Bookings / सभी बुकिंग
             </h3>
             
@@ -336,7 +336,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
 
       case 'calendar':
         return (
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Calendar className="h-5 w-5 text-green-400" />
               Manage Availability / उपलब्धता प्रबंधित करें
@@ -355,7 +355,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
 
       case 'settings':
         return (
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Settings className="h-5 w-5 text-slate-400" />
               Settings / सेटिंग्स
@@ -384,7 +384,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
 
       default:
         return (
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 text-center py-12">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700 text-center py-12">
             <p className="text-slate-400">Coming soon / जल्द आ रहा है</p>
           </div>
         );
@@ -397,7 +397,7 @@ function HelipadOwnerDashboard({ user, setUser }) {
       <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
         <div className="max-w-full mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-sm bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
               <Building2 className="h-6 w-6 text-white" />
             </div>
             <div>

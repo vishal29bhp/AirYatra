@@ -107,12 +107,12 @@ const ITCManagement = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-blue-500/20 border-blue-500/30">
+            <Card className="bg-amber/20 border-amber/30">
               <CardContent className="pt-6">
-                <TrendingDown className="h-6 w-6 text-blue-400 mb-2" />
+                <TrendingDown className="h-6 w-6 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">₹{itcSummary.input_tax?.total?.toLocaleString()}</p>
                 <p className="text-slate-400 text-sm">Input Tax (ITC)</p>
-                <p className="text-blue-400 text-xs">{itcSummary.input_tax?.bill_count} bills</p>
+                <p className="text-amber text-xs">{itcSummary.input_tax?.bill_count} bills</p>
               </CardContent>
             </Card>
             
@@ -176,9 +176,9 @@ const ITCManagement = () => {
 
                 {/* Input */}
                 <div className="text-center">
-                  <div className="bg-blue-500/20 rounded-lg p-4 mb-3">
+                  <div className="bg-amber/20 rounded-lg p-4 mb-3">
                     <p className="text-slate-400 text-sm">Input Tax (ITC)</p>
-                    <p className="text-blue-400 text-2xl font-bold">₹{itcSummary.input_tax?.total?.toLocaleString()}</p>
+                    <p className="text-amber text-2xl font-bold">₹{itcSummary.input_tax?.total?.toLocaleString()}</p>
                     <div className="mt-2 space-y-1 text-xs">
                       <div className="flex justify-between">
                         <span className="text-slate-400">CGST:</span>
@@ -255,9 +255,9 @@ const ITCManagement = () => {
                           <TableCell className="text-slate-300">{bill.vendor_name}</TableCell>
                           <TableCell className="text-slate-400 font-mono text-sm">{bill.vendor_gstin || '-'}</TableCell>
                           <TableCell className="text-white">₹{bill.taxable_value?.toLocaleString()}</TableCell>
-                          <TableCell className="text-blue-400">₹{bill.cgst?.toLocaleString()}</TableCell>
+                          <TableCell className="text-amber">₹{bill.cgst?.toLocaleString()}</TableCell>
                           <TableCell className="text-purple-400">₹{bill.sgst?.toLocaleString()}</TableCell>
-                          <TableCell className="text-orange-400">₹{bill.igst?.toLocaleString()}</TableCell>
+                          <TableCell className="text-lime">₹{bill.igst?.toLocaleString()}</TableCell>
                           <TableCell>
                             {bill.gstr2a_matched ? (
                               <Badge className="bg-green-500"><CheckCircle className="h-3 w-3 mr-1" />Matched</Badge>
@@ -307,9 +307,9 @@ const ITCManagement = () => {
                           <TableCell className="text-slate-300">{inv.customer_name}</TableCell>
                           <TableCell className="text-slate-400 font-mono text-sm">{inv.customer_gstin || 'B2C'}</TableCell>
                           <TableCell className="text-white">₹{inv.taxable_value?.toLocaleString()}</TableCell>
-                          <TableCell className="text-blue-400">₹{inv.cgst?.toLocaleString()}</TableCell>
+                          <TableCell className="text-amber">₹{inv.cgst?.toLocaleString()}</TableCell>
                           <TableCell className="text-purple-400">₹{inv.sgst?.toLocaleString()}</TableCell>
-                          <TableCell className="text-orange-400">₹{inv.igst?.toLocaleString()}</TableCell>
+                          <TableCell className="text-lime">₹{inv.igst?.toLocaleString()}</TableCell>
                           <TableCell>
                             {inv.gstr1_reported ? (
                               <Badge className="bg-green-500"><CheckCircle className="h-3 w-3 mr-1" />Reported</Badge>

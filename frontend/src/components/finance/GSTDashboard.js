@@ -101,9 +101,9 @@ const GSTDashboard = () => {
                   </CardContent>
                 </Card>
                 
-                <Card className="bg-blue-500/20 border-blue-500/30">
+                <Card className="bg-amber/20 border-amber/30">
                   <CardContent className="pt-6">
-                    <TrendingDown className="h-8 w-8 text-blue-400 mb-2" />
+                    <TrendingDown className="h-8 w-8 text-amber mb-2" />
                     <p className="text-3xl font-bold text-white">₹{(dashboard.itc_summary?.input_gst || 0).toLocaleString()}</p>
                     <p className="text-slate-400 text-sm">Input GST (ITC) / इनपुट GST</p>
                   </CardContent>
@@ -132,7 +132,7 @@ const GSTDashboard = () => {
                 <Card className="bg-slate-900 border-slate-700">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center">
-                      <FileText className="h-5 w-5 mr-2 text-blue-400" />
+                      <FileText className="h-5 w-5 mr-2 text-amber" />
                       Filing Status / फाइलिंग स्थिति
                     </CardTitle>
                   </CardHeader>
@@ -156,7 +156,7 @@ const GSTDashboard = () => {
                       </div>
                     )}
                     
-                    <Button onClick={() => setActiveTab('returns')} className="w-full bg-blue-600">
+                    <Button onClick={() => setActiveTab('returns')} className="w-full bg-slate-700">
                       Manage Returns
                     </Button>
                   </CardContent>
@@ -226,7 +226,7 @@ const GSTDashboard = () => {
                           <span className="text-white">₹{((dashboard.itc_summary?.output_gst || 0) / 2).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-blue-400">Input</span>
+                          <span className="text-amber">Input</span>
                           <span className="text-white">₹{((dashboard.itc_summary?.input_gst || 0) / 2).toLocaleString()}</span>
                         </div>
                       </div>
@@ -239,7 +239,7 @@ const GSTDashboard = () => {
                           <span className="text-white">₹{((dashboard.itc_summary?.output_gst || 0) / 2).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-blue-400">Input</span>
+                          <span className="text-amber">Input</span>
                           <span className="text-white">₹{((dashboard.itc_summary?.input_gst || 0) / 2).toLocaleString()}</span>
                         </div>
                       </div>
@@ -252,7 +252,7 @@ const GSTDashboard = () => {
                           <span className="text-white">₹0</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-blue-400">Input</span>
+                          <span className="text-amber">Input</span>
                           <span className="text-white">₹0</span>
                         </div>
                       </div>

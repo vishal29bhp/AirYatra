@@ -115,7 +115,7 @@ const BulkSalaryPayment = () => {
   const getStatusBadge = (status) => {
     const statusConfig = {
       pending_approval: { color: 'bg-yellow-500', icon: Clock, text: 'Pending Approval' },
-      pending_hr: { color: 'bg-orange-500', icon: Clock, text: 'Pending HR' },
+      pending_hr: { color: 'bg-amber-500', icon: Clock, text: 'Pending HR' },
       pending_finance: { color: 'bg-blue-500', icon: Clock, text: 'Pending Finance' },
       pending_admin: { color: 'bg-purple-500', icon: Clock, text: 'Pending Admin' },
       approved: { color: 'bg-green-500', icon: CheckCircle, text: 'Approved' },
@@ -238,8 +238,8 @@ const BulkSalaryPayment = () => {
                 </Select>
               </div>
 
-              <Alert className="bg-blue-500/10 border-blue-500/30">
-                <AlertDescription className="text-blue-400 text-sm">
+              <Alert className="bg-amber/10 border-amber/30">
+                <AlertDescription className="text-amber text-sm">
                   <strong>Approval Flow:</strong> HR → Finance → Admin → Auto Transfer
                 </AlertDescription>
               </Alert>
@@ -298,7 +298,7 @@ const BulkSalaryPayment = () => {
                       </Button>
                     )}
                     {approval.status === 'pending_finance' && (
-                      <Button onClick={() => handleApproval(approval.id, 'approve', 'finance')} size="sm" className="bg-blue-600">
+                      <Button onClick={() => handleApproval(approval.id, 'approve', 'finance')} size="sm" className="bg-slate-700">
                         Finance Approve
                       </Button>
                     )}
@@ -351,7 +351,7 @@ const BulkSalaryPayment = () => {
                   </TableCell>
                   <TableCell className="text-slate-300">
                     <div className="flex items-center">
-                      <Users className="h-4 w-4 mr-2 text-blue-400" />
+                      <Users className="h-4 w-4 mr-2 text-amber" />
                       {run.employee_count}
                     </div>
                   </TableCell>

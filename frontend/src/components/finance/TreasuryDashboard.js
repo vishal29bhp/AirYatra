@@ -106,12 +106,12 @@ export default function TreasuryDashboard() {
               className={`p-3 rounded-lg flex items-center gap-3 ${
                 alert.type === 'danger' ? 'bg-red-500/20 border border-red-500/50' :
                 alert.type === 'warning' ? 'bg-yellow-500/20 border border-yellow-500/50' :
-                'bg-blue-500/20 border border-blue-500/50'
+                'bg-amber/20 border border-amber/50'
               }`}
             >
               <AlertTriangle className={`h-5 w-5 ${
                 alert.type === 'danger' ? 'text-red-400' :
-                alert.type === 'warning' ? 'text-yellow-400' : 'text-blue-400'
+                alert.type === 'warning' ? 'text-yellow-400' : 'text-amber'
               }`} />
               <span className="text-white text-sm">{alert.message}</span>
               <span className={`ml-auto text-xs px-2 py-0.5 rounded ${
@@ -138,15 +138,15 @@ export default function TreasuryDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600/30 to-blue-800/30 border-blue-500/50">
+        <Card className="bg-gradient-to-br border-amber/50">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 text-sm">Bank Balance / बैंक</p>
+                <p className="text-slate-300 text-sm">Bank Balance / बैंक</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(summary?.total_bank_balance)}</p>
-                <p className="text-xs text-blue-300 mt-1">{bankAccounts.length} accounts</p>
+                <p className="text-xs text-slate-300 mt-1">{bankAccounts.length} accounts</p>
               </div>
-              <Building2 className="h-10 w-10 text-blue-400 opacity-80" />
+              <Building2 className="h-10 w-10 text-amber opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -163,11 +163,11 @@ export default function TreasuryDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-600/30 to-orange-800/30 border-orange-500/50">
+        <Card className="bg-lime/20 border-lime/50">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-orange-200 text-sm">Net Today / आज का</p>
+                <p className="text-slate-300 text-sm">Net Today / आज का</p>
                 <p className={`text-3xl font-bold mt-1 ${(summary?.net_today || 0) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                   {(summary?.net_today || 0) >= 0 ? '+' : ''}{formatINR(summary?.net_today)}
                 </p>
@@ -222,7 +222,7 @@ export default function TreasuryDashboard() {
 
         <Card className="bg-slate-800/50 border-slate-700 hover:border-yellow-500/50 cursor-pointer transition-colors">
           <CardContent className="p-4 text-center">
-            <FileText className="h-6 w-6 text-orange-400 mx-auto mb-2" />
+            <FileText className="h-6 w-6 text-lime mx-auto mb-2" />
             <p className="text-2xl font-bold text-white">{pending?.tds || 0}</p>
             <p className="text-xs text-slate-400">TDS Pending</p>
           </CardContent>
@@ -230,7 +230,7 @@ export default function TreasuryDashboard() {
 
         <Card className="bg-slate-800/50 border-slate-700 hover:border-yellow-500/50 cursor-pointer transition-colors">
           <CardContent className="p-4 text-center">
-            <Building2 className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+            <Building2 className="h-6 w-6 text-amber mx-auto mb-2" />
             <p className="text-2xl font-bold text-white">{pending?.vendor_payments || 0}</p>
             <p className="text-xs text-slate-400">Vendor Bills</p>
             <p className="text-xs text-slate-500">{formatINR(pending?.vendor_amount)}</p>
@@ -260,7 +260,7 @@ export default function TreasuryDashboard() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-blue-400" />
+            <Building2 className="h-5 w-5 text-amber" />
             Bank Accounts / बैंक खाते
           </CardTitle>
           <Button 
@@ -329,7 +329,7 @@ export default function TreasuryDashboard() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-blue-400" />
+              <BarChart3 className="h-5 w-5 text-amber" />
               Monthly Performance / मासिक प्रदर्शन
             </CardTitle>
           </CardHeader>
@@ -362,24 +362,24 @@ export default function TreasuryDashboard() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-orange-400" />
+              <Calendar className="h-5 w-5 text-lime" />
               Upcoming (30 Days) / आगामी
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-orange-400" />
+                <CreditCard className="h-5 w-5 text-lime" />
                 <span className="text-slate-300">EMIs ({upcoming?.emi_count || 0})</span>
               </div>
-              <span className="text-orange-400 font-semibold">{formatINR(upcoming?.emi_amount)}</span>
+              <span className="text-lime font-semibold">{formatINR(upcoming?.emi_amount)}</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <FileText className="h-5 w-5 text-blue-400" />
+                <FileText className="h-5 w-5 text-amber" />
                 <span className="text-slate-300">Insurance ({upcoming?.insurance_count || 0})</span>
               </div>
-              <span className="text-blue-400 font-semibold">{formatINR(upcoming?.insurance_amount)}</span>
+              <span className="text-amber font-semibold">{formatINR(upcoming?.insurance_amount)}</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
               <div className="flex items-center gap-3">
@@ -446,9 +446,9 @@ function AddBankAccountModal({ onClose, onSuccess }) {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-      <div className="bg-slate-800 rounded-xl p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
+      <div className="bg-slate-800 rounded-sm p-6 w-full max-w-lg border border-slate-700 max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <Building2 className="h-6 w-6 text-blue-400" />
+          <Building2 className="h-6 w-6 text-amber" />
           Add Bank Account / बैंक खाता जोड़ें
         </h2>
         

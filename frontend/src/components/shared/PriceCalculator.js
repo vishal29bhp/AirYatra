@@ -129,7 +129,7 @@ function PriceCalculator({
 
   if (compact) {
     return (
-      <div className="p-4 rounded-lg bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30">
+      <div className="p-4 rounded-lg bg-lime/20 border border-lime/30">
         <div className="flex justify-between items-center">
           <div>
             <p className="text-slate-400 text-sm">Estimated Price</p>
@@ -143,8 +143,8 @@ function PriceCalculator({
           </div>
         </div>
         {priceEstimate && (
-          <div className="mt-3 pt-3 border-t border-orange-500/20">
-            <p className="text-sm text-orange-400">
+          <div className="mt-3 pt-3 border-t border-lime/20">
+            <p className="text-sm text-lime">
               Advance Payment ({priceEstimate.advance_percent}%): {formatCurrency(priceEstimate.advance_amount)}
             </p>
           </div>
@@ -156,7 +156,7 @@ function PriceCalculator({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 text-white">
-        <Calculator className="h-5 w-5 text-orange-400" />
+        <Calculator className="h-5 w-5 text-lime" />
         <h3 className="font-semibold">Price Calculator</h3>
       </div>
 
@@ -167,7 +167,7 @@ function PriceCalculator({
             <MapPin className="h-4 w-4 text-green-400" />
             <span className="text-slate-400 text-sm">{pickupLocation?.area || pickupLocation?.district}</span>
           </div>
-          <Plane className="h-4 w-4 text-orange-400" />
+          <Plane className="h-4 w-4 text-lime" />
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-red-400" />
             <span className="text-slate-400 text-sm">{dropLocation?.area || dropLocation?.district}</span>
@@ -182,7 +182,7 @@ function PriceCalculator({
       {showWaitingTime && (
         <div className="space-y-2">
           <Label className="text-white flex items-center gap-2">
-            <Clock className="h-4 w-4 text-orange-400" />
+            <Clock className="h-4 w-4 text-lime" />
             Waiting Time (Hours)
           </Label>
           <Input
@@ -237,15 +237,15 @@ function PriceCalculator({
             
             <div className="flex justify-between border-t border-slate-700 pt-2">
               <span className="text-white font-semibold">Total Price</span>
-              <span className="text-xl font-bold text-orange-400">{formatCurrency(priceEstimate.total_price)}</span>
+              <span className="text-xl font-bold text-lime">{formatCurrency(priceEstimate.total_price)}</span>
             </div>
           </div>
 
           {/* Advance Payment */}
-          <div className="mt-4 p-3 rounded-lg bg-orange-500/20 border border-orange-500/30">
+          <div className="mt-4 p-3 rounded-lg bg-lime/20 border border-lime/30">
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-orange-400 font-medium">Advance Payment Required</p>
+                <p className="text-amber-400 font-medium">Advance Payment Required</p>
                 <p className="text-slate-400 text-sm">({priceEstimate.advance_percent}% of total)</p>
               </div>
               <p className="text-2xl font-bold text-white">{formatCurrency(priceEstimate.advance_amount)}</p>

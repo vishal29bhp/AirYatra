@@ -96,7 +96,7 @@ const ApprovalWorkflow = ({ userRole }) => {
 
   const getStatusBadge = (status) => {
     const config = {
-      pending_hr: { color: 'bg-orange-500', icon: Users, text: 'Pending HR' },
+      pending_hr: { color: 'bg-amber-500', icon: Users, text: 'Pending HR' },
       pending_finance: { color: 'bg-blue-500', icon: Banknote, text: 'Pending Finance' },
       pending_admin: { color: 'bg-purple-500', icon: Shield, text: 'Pending Admin' },
       approved: { color: 'bg-green-500', icon: CheckCircle, text: 'Approved' },
@@ -161,16 +161,16 @@ const ApprovalWorkflow = ({ userRole }) => {
         <CardContent className="py-6">
           <div className="flex items-center justify-center space-x-4">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-orange-500/20 flex items-center justify-center mx-auto">
-                <Users className="h-8 w-8 text-orange-400" />
+              <div className="w-16 h-16 rounded-full bg-lime/20 flex items-center justify-center mx-auto">
+                <Users className="h-8 w-8 text-lime" />
               </div>
               <p className="text-white mt-2 font-medium">HR</p>
               <p className="text-slate-400 text-xs">First Level</p>
             </div>
             <ArrowRight className="h-6 w-6 text-slate-600" />
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto">
-                <Banknote className="h-8 w-8 text-blue-400" />
+              <div className="w-16 h-16 rounded-full bg-amber/20 flex items-center justify-center mx-auto">
+                <Banknote className="h-8 w-8 text-amber" />
               </div>
               <p className="text-white mt-2 font-medium">Finance</p>
               <p className="text-slate-400 text-xs">Second Level</p>

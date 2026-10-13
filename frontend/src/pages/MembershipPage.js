@@ -146,7 +146,7 @@ const MembershipPage = ({ user }) => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime"></div>
       </div>
     );
   }
@@ -160,12 +160,12 @@ const MembershipPage = ({ user }) => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="h-6 w-6 text-orange-500" />
-            <span className="text-orange-500 font-semibold uppercase tracking-wider">Premium Membership</span>
-            <Sparkles className="h-6 w-6 text-orange-500" />
+            <Sparkles className="h-6 w-6 text-lime" />
+            <span className="text-lime font-semibold uppercase tracking-wider">Premium Membership</span>
+            <Sparkles className="h-6 w-6 text-lime" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            AirYatra <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">BLACK</span> Membership
+            AirYatra <span className="bg-slate-800 border border-slate-700 bg-clip-text text-transparent">BLACK</span> Membership
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Unlock exclusive benefits, priority booking, and luxury experiences with our premium membership tiers
@@ -174,10 +174,10 @@ const MembershipPage = ({ user }) => {
 
         {/* Current Membership Status */}
         {userMembership && (
-          <div className={`mb-12 p-6 rounded-2xl bg-gradient-to-r ${tierColors[userMembership.tier]} shadow-2xl`}>
+          <div className={`mb-12 p-6 rounded-sm bg-gradient-to-r ${tierColors[userMembership.tier]} `}>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-white/20 rounded-xl">
+                <div className="p-3 bg-white/20 rounded-sm">
                   {tierIcons[userMembership.tier]}
                 </div>
                 <div>
@@ -217,15 +217,15 @@ const MembershipPage = ({ user }) => {
               <Card 
                 key={tierKey}
                 data-testid={`membership-tier-${tierKey}`}
-                className={`relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl
-                  ${isCurrentTier ? 'ring-2 ring-orange-500' : ''} 
+                className={`relative overflow-hidden transition-all duration-300 hover:scale-105 
+                  ${isCurrentTier ? 'ring-2 ring-lime' : ''} 
                   ${tierKey === 'black' ? 'bg-slate-950 border-slate-700' : 'bg-slate-800/50 border-slate-700'}
                 `}
               >
                 {/* Popular Badge */}
                 {tierKey === 'platinum' && (
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-orange-500 text-white">Most Popular</Badge>
+                    <Badge className="bg-amber-500 text-black">Most Popular</Badge>
                   </div>
                 )}
                 
@@ -236,7 +236,7 @@ const MembershipPage = ({ user }) => {
                 )}
 
                 <CardHeader className="text-center pb-2">
-                  <div className={`inline-flex mx-auto p-4 rounded-2xl bg-gradient-to-br ${tierColors[tierKey]} text-white mb-4`}>
+                  <div className={`inline-flex mx-auto p-4 rounded-sm bg-gradient-to-br ${tierColors[tierKey]} text-white mb-4`}>
                     {tierIcons[tierKey]}
                   </div>
                   <CardTitle className="text-white text-2xl">{tier.name}</CardTitle>
@@ -260,11 +260,11 @@ const MembershipPage = ({ user }) => {
                   {/* Key Stats */}
                   <div className="grid grid-cols-2 gap-3">
                     <div className="bg-slate-700/50 rounded-lg p-3 text-center">
-                      <p className="text-2xl font-bold text-orange-400">{tier.discount_percent}%</p>
+                      <p className="text-2xl font-bold text-lime">{tier.discount_percent}%</p>
                       <p className="text-xs text-slate-400">Discount</p>
                     </div>
                     <div className="bg-slate-700/50 rounded-lg p-3 text-center">
-                      <p className="text-2xl font-bold text-orange-400">{tier.loyalty_multiplier}x</p>
+                      <p className="text-2xl font-bold text-lime">{tier.loyalty_multiplier}x</p>
                       <p className="text-xs text-slate-400">Points</p>
                     </div>
                   </div>
@@ -278,7 +278,7 @@ const MembershipPage = ({ user }) => {
                       </div>
                     ))}
                     {tier.benefits.length > 5 && (
-                      <p className="text-orange-400 text-sm font-medium">
+                      <p className="text-lime text-sm font-medium">
                         + {tier.benefits.length - 5} more benefits
                       </p>
                     )}
@@ -432,13 +432,13 @@ const MembershipPage = ({ user }) => {
 
         {/* CTA Section */}
         {!userMembership && (
-          <div className="mt-16 text-center bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-2xl p-8 border border-orange-500/30">
-            <Gift className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+          <div className="mt-16 text-center bg-lime/20 rounded-sm p-8 border border-lime/30">
+            <Gift className="h-12 w-12 text-lime mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">Not sure which plan is right for you?</h3>
             <p className="text-slate-400 mb-6">Start with Silver and upgrade anytime. Your benefits start immediately!</p>
             <Button 
               data-testid="cta-subscribe-silver"
-              className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-6 text-lg"
+              className="bg-lime text-black px-8 py-6 text-lg"
               onClick={() => handleSubscribe('silver')}
             >
               Start with Silver Membership

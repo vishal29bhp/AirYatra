@@ -78,7 +78,7 @@ export default function SalesTargets({ activeTab, user }) {
   const getProgressColor = (percent) => {
     if (percent >= 100) return 'bg-green-500';
     if (percent >= 80) return 'bg-yellow-500';
-    if (percent >= 50) return 'bg-orange-500';
+    if (percent >= 50) return 'bg-lime text-black';
     return 'bg-red-500';
   };
 
@@ -93,7 +93,7 @@ export default function SalesTargets({ activeTab, user }) {
           <h2 className="text-2xl font-bold text-white">Sales Targets / सेल्स टारगेट</h2>
           <p className="text-slate-400">Manage sales targets and track achievements</p>
         </div>
-        <Button onClick={() => setShowForm(true)} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={() => setShowForm(true)} className="bg-lime text-black hover:bg-lime/90">
           <Plus className="h-4 w-4 mr-2" /> New Target / नया टारगेट
         </Button>
       </div>
@@ -190,7 +190,7 @@ export default function SalesTargets({ activeTab, user }) {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button onClick={createTarget} className="bg-orange-500 hover:bg-orange-600">Create Target</Button>
+              <Button onClick={createTarget} className="bg-lime text-black hover:bg-lime/90">Create Target</Button>
               <Button variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
             </div>
           </CardContent>
@@ -214,14 +214,14 @@ export default function SalesTargets({ activeTab, user }) {
                   <div key={index} className={`p-4 rounded-lg flex items-center justify-between ${
                     index === 0 ? 'bg-yellow-500/20 border border-yellow-500/50' :
                     index === 1 ? 'bg-slate-400/20 border border-slate-400/50' :
-                    index === 2 ? 'bg-orange-700/20 border border-orange-700/50' :
+                    index === 2 ? 'bg-lime/20 border border-lime/50' :
                     'bg-slate-700/50'
                   }`}>
                     <div className="flex items-center gap-4">
                       <span className={`text-2xl font-bold ${
                         index === 0 ? 'text-yellow-400' :
                         index === 1 ? 'text-slate-300' :
-                        index === 2 ? 'text-orange-400' : 'text-slate-400'
+                        index === 2 ? 'text-lime' : 'text-slate-400'
                       }`}>#{entry.rank}</span>
                       <div>
                         <p className="text-white font-medium">{entry.employee_name}</p>
@@ -259,7 +259,7 @@ export default function SalesTargets({ activeTab, user }) {
                         <p className="text-slate-400 text-sm">{target.period_start} to {target.period_end}</p>
                       </div>
                       <div className="text-right">
-                        <p className={`text-2xl font-bold ${target.revenue_percent >= 100 ? 'text-green-400' : 'text-orange-400'}`}>
+                        <p className={`text-2xl font-bold ${target.revenue_percent >= 100 ? 'text-green-400' : 'text-lime'}`}>
                           {target.revenue_percent}%
                         </p>
                         <p className="text-slate-400 text-sm">Achievement</p>

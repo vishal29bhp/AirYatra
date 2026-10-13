@@ -155,7 +155,7 @@ How can I assist you today?
   }
 
   return (
-    <div className={`fixed bottom-6 right-6 bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 z-50 transition-all duration-300 ${
+    <div className={`fixed bottom-6 right-6 bg-slate-900 rounded-sm border border-slate-700 z-50 transition-all duration-300 ${
       isMinimized ? 'w-80 h-14' : 'w-96 h-[500px]'
     }`}>
       {/* Header */}
@@ -209,7 +209,7 @@ How can I assist you today?
                 
                 {/* Message */}
                 <div className={`max-w-[80%] ${message.role === 'user' ? 'text-right' : ''}`}>
-                  <div className={`p-3 rounded-2xl ${
+                  <div className={`p-3 rounded-sm ${
                     message.role === 'user'
                       ? 'bg-slate-700 text-white rounded-tr-sm'
                       : 'bg-slate-800 text-slate-100 rounded-tl-sm'
@@ -235,7 +235,7 @@ How can I assist you today?
                 <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
                   <Bot className="h-4 w-4 text-lime" />
                 </div>
-                <div className="bg-slate-800 p-3 rounded-2xl rounded-tl-sm">
+                <div className="bg-slate-800 p-3 rounded-sm rounded-tl-sm">
                   <div className="flex gap-1">
                     <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                     <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />

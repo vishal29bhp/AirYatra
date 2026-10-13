@@ -31,7 +31,7 @@ const LEAD_STATUSES = [
   { value: 'contacted', label: 'Contacted', color: 'bg-yellow-500' },
   { value: 'qualified', label: 'Qualified', color: 'bg-purple-500' },
   { value: 'proposal_sent', label: 'Proposal Sent', color: 'bg-indigo-500' },
-  { value: 'negotiation', label: 'Negotiation', color: 'bg-orange-500' },
+  { value: 'negotiation', label: 'Negotiation', color: 'bg-amber-500' },
   { value: 'won', label: 'Won', color: 'bg-green-500' },
   { value: 'lost', label: 'Lost', color: 'bg-red-500' },
   { value: 'follow_up', label: 'Follow Up', color: 'bg-cyan-500' },
@@ -113,7 +113,7 @@ const CRMLeadModal = ({ lead, onClose, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-2xl my-8">
+      <div className="bg-slate-900 border border-slate-700 rounded-sm w-full max-w-2xl my-8">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-700">
           <h2 className="text-xl font-bold text-white">
@@ -224,7 +224,7 @@ const CRMLeadModal = ({ lead, onClose, onSuccess }) => {
           {/* Travel Details */}
           <div className="p-4 bg-slate-800 rounded-lg space-y-4">
             <h3 className="text-white font-medium flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-orange-400" /> Travel Details
+              <MapPin className="h-4 w-4 text-lime" /> Travel Details
             </h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -313,7 +313,7 @@ const CRMLeadModal = ({ lead, onClose, onSuccess }) => {
             <Button 
               type="submit" 
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600"
+              className="flex-1 bg-lime text-black hover:bg-lime/90"
             >
               {loading ? (
                 <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Saving...</>

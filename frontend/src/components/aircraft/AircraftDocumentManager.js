@@ -90,8 +90,8 @@ const FileUploadZone = ({ onFileSelect, accept, label, icon: Icon }) => {
     <div
       className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all ${
         dragActive 
-          ? 'border-orange-500 bg-orange-500/10' 
-          : 'border-slate-600 hover:border-orange-500/50'
+          ? 'border-lime bg-lime/10' 
+          : 'border-slate-600 hover:border-lime/50'
       }`}
       onDragEnter={handleDrag}
       onDragLeave={handleDrag}
@@ -213,7 +213,7 @@ const DocumentUploadModal = ({ aircraft, category, documentType, onClose, onSucc
           ) : (
             <div className="p-3 bg-slate-800 rounded-lg flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FileText className="h-8 w-8 text-orange-400" />
+                <FileText className="h-8 w-8 text-lime" />
                 <div>
                   <p className="text-white text-sm truncate max-w-[200px]">{file.name}</p>
                   <p className="text-slate-400 text-xs">{(file.size / 1024).toFixed(1)} KB</p>
@@ -296,7 +296,7 @@ const DocumentUploadModal = ({ aircraft, category, documentType, onClose, onSucc
             <Button
               onClick={handleUpload}
               disabled={!file || uploading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600"
+              className="flex-1 bg-lime text-black hover:bg-lime/90"
               data-testid="upload-document-submit"
             >
               {uploading ? (
@@ -428,8 +428,8 @@ const PhotoUploadModal = ({ aircraft, photoCategory, onClose, onSuccess }) => {
           {/* Tips */}
           <div className="p-3 bg-slate-800 rounded-lg">
             <p className="text-slate-400 text-sm">
-              <strong className="text-orange-400">Tips:</strong> Use high-quality images. 
-              Minimum 1920x1080 recommended. {photoCategory.required && <Badge className="ml-2 bg-orange-500">Required</Badge>}
+              <strong className="text-lime">Tips:</strong> Use high-quality images. 
+              Minimum 1920x1080 recommended. {photoCategory.required && <Badge className="ml-2 bg-amber-500">Required</Badge>}
             </p>
           </div>
 
@@ -441,7 +441,7 @@ const PhotoUploadModal = ({ aircraft, photoCategory, onClose, onSuccess }) => {
             <Button
               onClick={handleUpload}
               disabled={!file || uploading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600"
+              className="flex-1 bg-lime text-black hover:bg-lime/90"
               data-testid="upload-photo-submit"
             >
               {uploading ? (
@@ -534,7 +534,7 @@ const PhotoGalleryLightbox = ({ photos, initialIndex, onClose }) => {
       >
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="h-12 w-12 text-orange-400 animate-spin" />
+            <Loader2 className="h-12 w-12 text-lime animate-spin" />
           </div>
         )}
         
@@ -653,7 +653,7 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -700,10 +700,10 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
 
       <Tabs defaultValue="documents" className="space-y-4">
         <TabsList className="bg-slate-800">
-          <TabsTrigger value="documents" className="data-[state=active]:bg-orange-500">
+          <TabsTrigger value="documents" className="data-[state=active]:bg-lime">
             <FileText className="h-4 w-4 mr-2" /> Documents ({documents.length})
           </TabsTrigger>
-          <TabsTrigger value="photos" className="data-[state=active]:bg-orange-500">
+          <TabsTrigger value="photos" className="data-[state=active]:bg-lime">
             <Camera className="h-4 w-4 mr-2" /> Photos ({photos.length})
           </TabsTrigger>
         </TabsList>
@@ -741,7 +741,7 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
                         </div>
                         <div className="flex items-center gap-2">
                           {docType.required && !existingDoc && (
-                            <Badge className="bg-orange-500 text-white text-xs">Required</Badge>
+                            <Badge className="bg-amber-500 text-black text-xs">Required</Badge>
                           )}
                           {existingDoc ? (
                             <>
@@ -764,7 +764,7 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
                             <Button
                               size="sm"
                               onClick={() => setUploadModal({ category: categoryKey, documentType: docType })}
-                              className="bg-orange-500 hover:bg-orange-600"
+                              className="bg-lime text-black hover:bg-lime/90"
                             >
                               <Upload className="h-4 w-4 mr-1" /> Upload
                             </Button>
@@ -844,7 +844,7 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
                     </div>
                   ) : (
                     <div 
-                      className="h-36 bg-slate-800 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-700 transition-colors border-2 border-dashed border-slate-600 hover:border-orange-500/50"
+                      className="h-36 bg-slate-800 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-700 transition-colors border-2 border-dashed border-slate-600 hover:border-lime/50"
                       onClick={() => setPhotoModal(photoCategory)}
                     >
                       <Camera className="h-10 w-10 text-slate-500 mb-2" />
@@ -857,7 +857,7 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
                         <p className="text-white text-sm font-medium">{photoCategory.label.split('/')[0]}</p>
                         <p className="text-slate-500 text-xs">{photoCategory.label.split('/')[1] || ''}</p>
                         {photoCategory.required && !existingPhoto && (
-                          <Badge className="bg-orange-500 text-white text-xs mt-1">Required</Badge>
+                          <Badge className="bg-amber-500 text-black text-xs mt-1">Required</Badge>
                         )}
                       </div>
                       {existingPhoto && (
@@ -892,8 +892,8 @@ const AircraftDocumentManager = ({ aircraft, onUpdate }) => {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="p-2 bg-orange-500/20 rounded-lg">
-                    <Camera className="h-6 w-6 text-orange-400" />
+                  <div className="p-2 bg-lime/20 rounded-lg">
+                    <Camera className="h-6 w-6 text-lime" />
                   </div>
                   <div>
                     <p className="text-white font-medium">Photo Upload Progress</p>

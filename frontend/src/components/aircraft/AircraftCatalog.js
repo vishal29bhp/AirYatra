@@ -70,7 +70,7 @@ const ExpiryAlert = ({ status, daysRemaining, documentType }) => {
   const config = {
     expired: { color: 'bg-red-500', text: 'EXPIRED', urgent: true },
     critical: { color: 'bg-red-500', text: `${daysRemaining} days left`, urgent: true },
-    urgent: { color: 'bg-orange-500', text: `${daysRemaining} days left`, urgent: true },
+    urgent: { color: 'bg-amber-500', text: `${daysRemaining} days left`, urgent: true },
     warning: { color: 'bg-yellow-500', text: `${daysRemaining} days left`, urgent: false },
     attention: { color: 'bg-blue-500', text: `${daysRemaining} days left`, urgent: false },
     notice: { color: 'bg-slate-500', text: `${daysRemaining} days left`, urgent: false }
@@ -287,7 +287,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
             variant={activeSection === idx ? 'default' : 'outline'}
             size="sm"
             onClick={() => setActiveSection(idx)}
-            className={activeSection === idx ? 'bg-orange-500' : ''}
+            className={activeSection === idx ? 'bg-lime text-black' : ''}
           >
             <section.icon className="h-4 w-4 mr-1" />
             {section.title}
@@ -299,7 +299,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
       {activeSection === 0 && (
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Plane className="h-5 w-5 text-orange-400" />
+            <Plane className="h-5 w-5 text-lime" />
             Basic Information / मूल जानकारी
           </h3>
           
@@ -377,7 +377,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
       {activeSection === 1 && (
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Settings className="h-5 w-5 text-orange-400" />
+            <Settings className="h-5 w-5 text-lime" />
             Technical Specifications / तकनीकी विवरण
           </h3>
           
@@ -499,7 +499,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
       {activeSection === 2 && (
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Star className="h-5 w-5 text-orange-400" />
+            <Star className="h-5 w-5 text-lime" />
             Amenities & Comfort / सुविधाएं
           </h3>
           
@@ -600,11 +600,11 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
       {activeSection === 3 && (
         <div className="space-y-4">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Shield className="h-5 w-5 text-orange-400" />
+            <Shield className="h-5 w-5 text-lime" />
             Safety Equipment / सुरक्षा उपकरण
           </h3>
           
-          <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-sm text-orange-200">
+          <div className="bg-lime/10 border border-lime/30 rounded-lg p-3 text-sm text-slate-300">
             <AlertTriangle className="h-4 w-4 inline mr-2" />
             Higher safety equipment = Better &quot;Verified by AirYatra&quot; badge &amp; customer trust
           </div>
@@ -646,12 +646,12 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
               <div 
                 key={key}
                 className={`flex items-center gap-2 p-3 rounded-lg cursor-pointer transition-all ${
-                  formData[key] ? 'bg-blue-500/20 border border-blue-500/50' : 'bg-slate-800 border border-slate-700'
+                  formData[key] ? 'bg-amber/20 border border-amber/50' : 'bg-slate-800 border border-slate-700'
                 }`}
                 onClick={() => setFormData({ ...formData, [key]: !formData[key] })}
               >
                 <Checkbox checked={formData[key]} />
-                <Shield className="h-4 w-4 text-blue-400" />
+                <Shield className="h-4 w-4 text-amber" />
                 <span className="text-sm text-white">{label}</span>
               </div>
             ))}
@@ -704,7 +704,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
         <div className="space-y-4">
           {/* Crew Configuration */}
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Users className="h-5 w-5 text-orange-400" />
+            <Users className="h-5 w-5 text-lime" />
             Crew Configuration / क्रू विन्यास
           </h3>
           
@@ -742,7 +742,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           
           {/* Pricing */}
           <h3 className="text-white font-semibold flex items-center gap-2 mt-6">
-            <IndianRupee className="h-5 w-5 text-orange-400" />
+            <IndianRupee className="h-5 w-5 text-lime" />
             Pricing / मूल्य निर्धारण
           </h3>
           
@@ -811,7 +811,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           
           {/* Description */}
           <h3 className="text-white font-semibold flex items-center gap-2 mt-6">
-            <FileText className="h-5 w-5 text-orange-400" />
+            <FileText className="h-5 w-5 text-lime" />
             Description / विवरण
           </h3>
           
@@ -853,7 +853,7 @@ const CreateAircraftForm = ({ onSuccess, onCancel }) => {
           <Button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-orange-500 hover:bg-orange-600"
+            className="flex-1 bg-lime text-black hover:bg-lime/90"
             data-testid="create-aircraft-submit"
           >
             {loading ? (
@@ -906,7 +906,7 @@ const AircraftCard = ({ aircraft, onEdit, onManageDocs, onArchive, isPublic = fa
               {basic_info.registration_number} • {basic_info.year_of_manufacture}
             </p>
           </div>
-          <Badge variant="outline" className="text-orange-400 border-orange-400">
+          <Badge variant="outline" className="text-amber-400 border-amber-400">
             {basic_info.aircraft_type}
           </Badge>
         </div>
@@ -993,7 +993,7 @@ const AircraftCard = ({ aircraft, onEdit, onManageDocs, onArchive, isPublic = fa
         )}
         
         {isPublic && (
-          <Button className="w-full bg-orange-500 hover:bg-orange-600">
+          <Button className="w-full bg-lime text-black hover:bg-lime/90">
             <Eye className="h-4 w-4 mr-2" /> View Details
           </Button>
         )}
@@ -1080,7 +1080,7 @@ export const OperatorFleetDashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -1091,7 +1091,7 @@ export const OperatorFleetDashboard = () => {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Plane className="h-6 w-6 text-orange-400" />
+            <Plane className="h-6 w-6 text-lime" />
             My Fleet / मेरा बेड़ा
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -1116,7 +1116,7 @@ export const OperatorFleetDashboard = () => {
           </Button>
           <Button 
             onClick={() => setShowCreateForm(true)} 
-            className="bg-orange-500 hover:bg-orange-600"
+            className="bg-lime text-black hover:bg-lime/90"
             data-testid="add-aircraft-btn"
           >
             <Plus className="h-4 w-4 mr-2" /> Add Aircraft
@@ -1147,7 +1147,7 @@ export const OperatorFleetDashboard = () => {
           </Card>
           <Card className="bg-slate-900 border-slate-700">
             <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-blue-400">{stats.published}</div>
+              <div className="text-3xl font-bold text-amber">{stats.published}</div>
               <div className="text-slate-400 text-sm">Published</div>
             </CardContent>
           </Card>
@@ -1156,10 +1156,10 @@ export const OperatorFleetDashboard = () => {
       
       {/* Create Form */}
       {showCreateForm && (
-        <Card className="bg-slate-900 border-orange-500/50">
+        <Card className="bg-slate-900 border-lime/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Plus className="h-5 w-5 text-orange-400" />
+              <Plus className="h-5 w-5 text-lime" />
               Add New Aircraft / नया विमान जोड़ें
             </CardTitle>
             <CardDescription>
@@ -1184,7 +1184,7 @@ export const OperatorFleetDashboard = () => {
                 <Plane className="h-16 w-16 text-slate-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">No Aircraft Yet</h3>
                 <p className="text-slate-400 mb-4">Add your first aircraft to start receiving bookings</p>
-                <Button onClick={() => setShowCreateForm(true)} className="bg-orange-500 hover:bg-orange-600">
+                <Button onClick={() => setShowCreateForm(true)} className="bg-lime text-black hover:bg-lime/90">
                   <Plus className="h-4 w-4 mr-2" /> Add Aircraft
                 </Button>
               </CardContent>
@@ -1271,7 +1271,7 @@ export const OperatorFleetDashboard = () => {
             <CardHeader className="flex flex-row items-center justify-between sticky top-0 bg-slate-900 z-10">
               <div>
                 <CardTitle className="text-white flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-orange-400" />
+                  <Shield className="h-5 w-5 text-lime" />
                   Aircraft Documents & Photos
                 </CardTitle>
                 <CardDescription>

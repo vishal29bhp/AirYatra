@@ -101,14 +101,14 @@ export const EmpLeave = ({ onChanged }) => {
 
       <div className="grid grid-cols-3 gap-4">
         {balances.map((b) => (
-          <div key={b.key} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 text-center">
+          <div key={b.key} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 text-center">
             <p className={`text-2xl font-bold ${b.color}`}>{(bal[b.key] || 0) - (bal[`${b.key}_used`] || 0)}</p>
             <p className="text-slate-400 text-xs">{b.label} left of {bal[b.key] || 0}</p>
           </div>
         ))}
       </div>
 
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         {!data?.leaves?.length ? (
           <div className="p-8 text-center text-slate-400"><CalendarDays className="h-10 w-10 mx-auto mb-2 text-slate-600" />No leave applications yet / अभी कोई आवेदन नहीं</div>
         ) : (

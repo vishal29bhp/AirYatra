@@ -94,8 +94,8 @@ export const RoleSelectionModal = ({
         <CardContent className="p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="h-16 w-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Building2 className="h-8 w-8 text-orange-400" />
+            <div className="h-16 w-16 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Building2 className="h-8 w-8 text-lime" />
             </div>
             <h2 className="text-2xl font-bold text-white">
               Welcome to AirYatra! 🎉
@@ -142,30 +142,30 @@ export const RoleSelectionModal = ({
                 <button
                   key={role.id}
                   onClick={() => setSelectedRole(role.id)}
-                  className={`relative text-left p-6 rounded-xl border-2 transition-all ${
+                  className={`relative text-left p-6 rounded-sm border-2 transition-all ${
                     isSelected
                       ? role.color === 'blue'
-                        ? 'bg-blue-500/10 border-blue-500'
-                        : 'bg-orange-500/10 border-orange-500'
+                        ? 'bg-amber/10 border-amber'
+                        : 'bg-lime/10 border-lime'
                       : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
                   }`}
                 >
                   {/* Badge */}
                   {role.badge && (
-                    <Badge className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs">
+                    <Badge className="absolute -top-2 -right-2 bg-amber-500 text-black text-xs">
                       {role.badge}
                     </Badge>
                   )}
                   
                   {/* Icon */}
-                  <div className={`h-12 w-12 rounded-xl flex items-center justify-center mb-4 ${
+                  <div className={`h-12 w-12 rounded-sm flex items-center justify-center mb-4 ${
                     isSelected
-                      ? role.color === 'blue' ? 'bg-blue-500/20' : 'bg-orange-500/20'
+                      ? role.color === 'blue' ? 'bg-amber/20' : 'bg-lime/20'
                       : 'bg-slate-700'
                   }`}>
                     <Icon className={`h-6 w-6 ${
                       isSelected
-                        ? role.color === 'blue' ? 'text-blue-400' : 'text-orange-400'
+                        ? role.color === 'blue' ? 'text-amber' : 'text-lime'
                         : 'text-slate-400'
                     }`} />
                   </div>
@@ -189,7 +189,7 @@ export const RoleSelectionModal = ({
                       <li key={idx} className="text-sm text-slate-400 flex items-center gap-2">
                         <Check className={`h-3 w-3 ${
                           isSelected
-                            ? role.color === 'blue' ? 'text-blue-400' : 'text-orange-400'
+                            ? role.color === 'blue' ? 'text-amber' : 'text-lime'
                             : 'text-slate-500'
                         }`} />
                         {feature}
@@ -200,7 +200,7 @@ export const RoleSelectionModal = ({
                   {/* Selection Indicator */}
                   {isSelected && (
                     <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center ${
-                      role.color === 'blue' ? 'bg-blue-500' : 'bg-orange-500'
+                      role.color === 'blue' ? 'bg-slate-700' : 'bg-lime text-black'
                     }`}>
                       <Check className="h-4 w-4 text-white" />
                     </div>
@@ -223,8 +223,8 @@ export const RoleSelectionModal = ({
             disabled={!selectedRole || loading}
             className={`w-full py-6 text-lg ${
               selectedRole === 'operator'
-                ? 'bg-orange-500 hover:bg-orange-600'
-                : 'bg-blue-500 hover:bg-blue-600'
+                ? 'bg-lime text-black hover:bg-lime/90'
+                : 'bg-slate-700 hover:bg-slate-600'
             }`}
           >
             {loading ? (
