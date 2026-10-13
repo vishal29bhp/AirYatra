@@ -35,6 +35,5 @@ jobs:
         run: python -m pytest tools/audit tools/migration -q -p no:cacheprovider
       - name: Bandit (high severity fails the build)
         run: bandit -q -r . -x ./tests -lll -iii
-      - name: pip-audit (report only)
-        continue-on-error: true
+      - name: pip-audit (known vulnerabilities fail the build)
         run: pip-audit -r /tmp/requirements-ci.txt
