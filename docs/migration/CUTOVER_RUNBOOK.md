@@ -15,6 +15,7 @@ approval in the project thread (master prompt Constraint 9).
 | Public uploads | `/app/uploads/**` | Blob container `uploads` | `tools/migration/verify_files.py` |
 | KYC files (encrypted `.enc`) | `/app/secure_uploads/kyc/**` | Blob container `kyc` | `verify_files.py --decrypt-check` |
 | Pilot documents | `/app/secure_uploads/pilot_documents/**` | Blob container `documents` | `verify_files.py` |
+| Document vault and exchange images | Emergent object store (`services/storage_service.py`), keys in `storage_path` / `thumb_storage_path` of `documents_vault`, `document_files`, `exchange_images` | Blob container `documents`, **same key as blob name** so stored paths stay unchanged | object copy tool (ships with the Phase 3b storage adapter) |
 | `FILE_ENCRYPTION_KEY` | Emergent environment | Key Vault secret `file-encryption-key` | decrypt check above |
 
 Allowed changes are additive only: new indexes and the write concern (`w: "majority"`, `journal: true`,
@@ -26,12 +27,15 @@ already in `backend/database.py`). No field renames, type changes, merges or val
    major version set to the source's major version (`atlas_mongo_major_version`).
 2. Phase 3b shipped: the app reads and writes files through the Blob storage adapter. Until then uploads
    would land on a container's temporary disk and be lost on restart, so **cutover cannot happen before it**.
-3. Read access to the source database: a `mongodump`-capable connection string from Emergent
+3. The object-store copy tool from Phase 3b: it reads every `storage_path` above, copies each object from the
+   Emergent object store to Blob under the same name and compares SHA-256. Needs the current `EMERGENT_LLM_KEY` (it also unlocks the object store),
+   which is lost when the Emergent account closes, so this copy must finish before then.
+4. Read access to the source database: a `mongodump`-capable connection string from Emergent
    (`ASSUMPTION`: Emergent can provide one, or a full export with `_id`s and BSON types intact).
-4. A migration host inside the Azure VNet (a temporary VM or Container Apps job) with `mongodump`,
+5. A migration host inside the Azure VNet (a temporary VM or Container Apps job) with `mongodump`,
    `mongorestore` (Database Tools 100.9+), `azcopy` 10 and Python 3.11. Atlas and Blob have no public
    access, so the copy must run from inside the network.
-5. A temporary Atlas database user with the `restore` role for the copy, deleted after cutover.
+6. A temporary Atlas database user with the `restore` role for the copy, deleted after cutover.
    The app's own user stays `readWrite` only.
 
 ## Environment on the migration host
@@ -71,6 +75,7 @@ mkdir -p check/kyc && azcopy copy "https://$STORAGE.blob.core.windows.net/kyc/*"
 FILE_ENCRYPTION_KEY="$(az keyvault secret show --vault-name "$KV" -n file-encryption-key --query value -o tsv)" \
   python3 tools/migration/verify_files.py --source /app/secure_uploads/kyc --target check/kyc --decrypt-check
 # repeat verify_files.py (without --decrypt-check) for uploads and documents
+# then run the Phase 3b object-store copy and check for documents_vault, document_files and exchange_images
 rm -rf check   # never leave decrypted-capable copies or KYC files on the host
 ```
 
