@@ -229,6 +229,7 @@ module "container_apps" {
     STORAGE_PROVIDER                      = "azure_blob"
     AZURE_STORAGE_ACCOUNT_URL             = module.storage.blob_endpoint
     LLM_PROVIDER                          = "azure_openai"
+    STRIPE_PROVIDER                       = "stripe"
     AZURE_OPENAI_ENDPOINT                 = module.openai.endpoint
     AZURE_OPENAI_DEPLOYMENT               = keys(var.openai_deployments)[0]
     REDIS_HOST                            = module.redis.hostname

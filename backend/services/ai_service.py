@@ -7,21 +7,22 @@ from datetime import datetime
 import logging
 logger = logging.getLogger(__name__)
 
-try:
-    from emergentintegrations.llm.chat import LlmChat, UserMessage
-    from uuid import uuid4 as _uuid4
-    EMERGENT_AVAILABLE = True
-    logger.info("emergentintegrations (LlmChat) loaded successfully")
+from uuid import uuid4 as _uuid4
 
-    def _make_chat(api_key: str, system_prompt: str, session_id: str = None):
-        return LlmChat(
-            api_key=api_key,
-            session_id=session_id or f"ai-{_uuid4()}",
-            system_message=system_prompt
-        ).with_model("openai", "gpt-5.4")
-except ImportError:
-    EMERGENT_AVAILABLE = False
-    logger.info("emergentintegrations not available, AI features will use mock responses")
+from services.llm_provider import LlmChat, UserMessage, llm_configured
+
+# LLM_PROVIDER selects Emergent (default) or Azure OpenAI; without a configured provider the
+# service answers with its built-in mock responses, as before.
+LLM_AVAILABLE = llm_configured()
+logger.info("LLM provider configured: %s", LLM_AVAILABLE)
+
+
+def _make_chat(api_key: str, system_prompt: str, session_id: str = None):
+    return LlmChat(
+        api_key=api_key,
+        session_id=session_id or f"ai-{_uuid4()}",
+        system_message=system_prompt
+    ).with_model("openai", "gpt-5.4")
 
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "")  # never hard-code a fallback key
 
@@ -100,7 +101,7 @@ Provide your response in this exact JSON format:
 
 Only respond with valid JSON, no additional text."""
 
-        if EMERGENT_AVAILABLE:
+        if LLM_AVAILABLE:
             try:
                 chat = _make_chat(
                     self.emergent_key,
@@ -238,7 +239,7 @@ Provide 5 recommended routes with this JSON format:
 
 Only respond with valid JSON."""
 
-        if EMERGENT_AVAILABLE:
+        if LLM_AVAILABLE:
             try:
                 chat = Chat(
                     emergent_api_key=self.emergent_key,
@@ -326,7 +327,7 @@ Customer's new message: {user_message}
 
 Respond helpfully and professionally. Keep response under 200 words."""
         
-        if EMERGENT_AVAILABLE:
+        if LLM_AVAILABLE:
             try:
                 chat = _make_chat(self.emergent_key, self.chatbot_system_prompt)
                 response = await chat.send_message(UserMessage(text=prompt))
@@ -444,7 +445,7 @@ Total Amount: ₹{booking.get('total_amount', 0):,}
 
 Keep it under 150 words total."""
         
-        if EMERGENT_AVAILABLE:
+        if LLM_AVAILABLE:
             try:
                 chat = Chat(
                     emergent_api_key=self.emergent_key,

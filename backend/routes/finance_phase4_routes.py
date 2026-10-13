@@ -222,12 +222,12 @@ Guidelines:
 6. Provide actionable insights when relevant"""
 
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
+        from services.llm_provider import LlmChat, UserMessage, llm_configured
         from dotenv import load_dotenv
         load_dotenv()
         
         api_key = os.environ.get("EMERGENT_LLM_KEY")
-        if not api_key:
+        if not llm_configured():
             return {"response": "AI Assistant unavailable - API key not configured", "success": False}
         
         chat = LlmChat(
@@ -276,12 +276,12 @@ Respond in Hinglish. Be helpful and concise."""
 
     async def generate():
         try:
-            from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+            from services.llm_provider import LlmChat, UserMessage, TextDelta, StreamDone, llm_configured
             from dotenv import load_dotenv
             load_dotenv()
             
             api_key = os.environ.get("EMERGENT_LLM_KEY")
-            if not api_key:
+            if not llm_configured():
                 yield f"data: {json.dumps({'error': 'API key not configured'})}\n\n"
                 return
             
