@@ -9,6 +9,11 @@ from services.email_service import EmailService
 from services.login_shield_service import login_shield
 from services.totp_service import totp_service
 from services.account_lockout_service import account_lockout_service
+from services.emergent_auth_service import (
+    emergent_session_verifier,
+    EmergentAuthError,
+    EmergentAuthDisabledError,
+)
 import uuid
 import os
 from datetime import datetime, timezone, timedelta
@@ -1601,10 +1606,16 @@ async def regenerate_recovery_codes(current_user: dict = Depends(get_current_use
 # ========== EMERGENT-MANAGED GOOGLE OAUTH ==========
 
 class EmergentAuthRequest(BaseModel):
-    """Request from frontend after Emergent OAuth callback"""
-    emergent_user: dict  # User data from Emergent auth service
+    """Request from frontend after Emergent OAuth callback.
+
+    Only ``session_id`` is used to identify the user: the API looks it up with Emergent itself.
+    ``emergent_user`` and ``session_token`` are still accepted so older clients get a clear 401
+    instead of a validation error, but their contents are never trusted.
+    """
+    session_id: Optional[str] = None
+    emergent_user: Optional[dict] = None
     device_info: Optional[dict] = None
-    session_token: str  # Emergent session token
+    session_token: Optional[str] = None
 
 
 @router.post("/google/emergent-callback")
@@ -1627,11 +1638,18 @@ async def emergent_google_callback(
     """
     db = get_database()
     
+    # SECURITY: identity comes from Emergent (server-to-server), never from the request body.
     try:
-        emergent_user = request.emergent_user
+        emergent_user = await emergent_session_verifier.verify(request.session_id)
+    except EmergentAuthDisabledError:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
+    except EmergentAuthError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Google sign-in could not be verified")
+    
+    try:
         device_info = request.device_info or {}
         
-        # Extract user info from Emergent response
+        # Extract user info from the verified Emergent profile
         google_email = emergent_user.get("email")
         google_name = emergent_user.get("name", "")
         google_picture = emergent_user.get("picture", "")
@@ -1718,7 +1736,7 @@ async def emergent_google_callback(
         await db.user_sessions.insert_one({
             "user_id": user_id,
             "session_token": hash_token(access_token),
-            "emergent_session_token": request.session_token,
+            "emergent_session_token": emergent_user.get("session_token"),
             "auth_provider": "google_emergent",
             "device_info": device_info,
             "ip_address": fastapi_request.client.host if fastapi_request.client else None,
@@ -1727,9 +1745,9 @@ async def emergent_google_callback(
         })
         
         # Log audit event
-        await AuditLogger.log(
-            db=db,
+        await AuditLogger(db).log(
             action="google_oauth_login",
+            category=AuditLogger.CATEGORY_AUTH,
             user_id=user_id,
             resource_type="auth",
             details={

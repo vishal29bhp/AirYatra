@@ -1,12 +1,14 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 from pathlib import Path
 import os
 import logging
-from database import connect_to_mongo, close_mongo_connection
+from config import settings
+from database import connect_to_mongo, close_mongo_connection, get_database
 from scheduler import start_scheduler, stop_scheduler
 
 # High-Performance Modules (50K+ users)
@@ -172,13 +174,14 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS middleware - SECURITY: Use specific origins, not '*' in production
-# Set CORS_ORIGINS in .env to restrict allowed origins
-allowed_origins = os.environ.get('CORS_ORIGINS', 'https://aviation-erp-2.preview.emergentagent.com').split(',')
+# CORS middleware - SECURITY: explicit allow-list from CORS_ORIGINS (comma-separated).
+# No hosted default: production refuses to start without it, local runs allow the CRA dev server.
+if settings.is_production and not settings.allowed_cors_origins:
+    raise ValueError("SECURITY ERROR: CORS_ORIGINS must be set in production")
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=allowed_origins,
+    allow_origins=settings.allowed_cors_origins,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type", "X-Requested-With"],
 )
@@ -405,15 +408,17 @@ api_router.include_router(emergency_booking_routes.router)
 app.include_router(api_router)
 
 # Create uploads directory for village documents
-uploads_dir = Path("/app/uploads")
-uploads_dir.mkdir(exist_ok=True)
+# UPLOAD_ROOT defaults to the existing /app layout; tests and other hosts point it elsewhere.
+upload_root = Path(os.environ.get("UPLOAD_ROOT", "/app"))
+uploads_dir = upload_root / "uploads"
+uploads_dir.mkdir(parents=True, exist_ok=True)
 village_docs_dir = uploads_dir / "village_documents"
 village_docs_dir.mkdir(exist_ok=True)
 
 # SECURITY: Create secure upload directory for sensitive files (KYC, etc.)
 # These are NOT served via static mount - use authenticated download endpoints
-secure_uploads_dir = Path("/app/secure_uploads")
-secure_uploads_dir.mkdir(exist_ok=True)
+secure_uploads_dir = upload_root / "secure_uploads"
+secure_uploads_dir.mkdir(parents=True, exist_ok=True)
 (secure_uploads_dir / "kyc").mkdir(exist_ok=True)
 (secure_uploads_dir / "pilot_documents").mkdir(exist_ok=True)
 
@@ -438,6 +443,17 @@ async def health_check():
             "keepalive"
         ]
     }
+
+# Readiness: only report ready when the database answers, so Container Apps keeps traffic on the
+# previous revision until a new one can actually serve requests.
+@app.get("/health/ready")
+async def readiness_check():
+    try:
+        await get_database().command("ping")
+    except Exception as exc:
+        logger.warning(f"Readiness check failed: {type(exc).__name__}")
+        return JSONResponse(status_code=503, content={"status": "not_ready", "service": "airyatra-api"})
+    return {"status": "ready", "service": "airyatra-api"}
 
 # Performance stats endpoint
 @app.get("/api/performance/stats")
@@ -477,7 +493,12 @@ async def startup_event():
     except Exception as e:
         logger.warning(f"Security middleware init warning: {e}")
     
-    start_scheduler()
+    # On Azure the scheduler runs in the single-replica worker (worker.py) and SCHEDULER_ENABLED=false
+    # here, so jobs never run once per API replica. Default true keeps single-process setups unchanged.
+    if settings.scheduler_enabled:
+        start_scheduler()
+    else:
+        logger.info("Scheduler disabled in this process (SCHEDULER_ENABLED=false)")
     
     logger.info("AirYatra API started - Ready for 50K+ concurrent users!")
 
@@ -485,7 +506,8 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     logger.info("Shutting down AirYatra API...")
-    stop_scheduler()
+    if settings.scheduler_enabled:
+        stop_scheduler()
     await close_mongo_connection()
     logger.info("AirYatra API shut down successfully")
 

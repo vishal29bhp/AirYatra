@@ -29,7 +29,7 @@ def require_roles(allowed_roles: list):
     return role_checker
 
 # Secure upload directory (NOT in public static folder)
-UPLOAD_DIR = "/app/secure_uploads/kyc"
+UPLOAD_DIR = os.path.join(os.environ.get("UPLOAD_ROOT", "/app"), "secure_uploads", "kyc")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Allowed MIME types 

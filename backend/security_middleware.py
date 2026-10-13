@@ -16,6 +16,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import base64
 import os
+import logging
 import json
 import hashlib
 from typing import Optional
@@ -421,10 +422,16 @@ class FileEncryption:
         - Secret manager (AWS KMS, Azure Key Vault, etc.)
         - Hardware Security Module (HSM)
         """
-        self.master_key = master_key or os.environ.get(
-            'FILE_ENCRYPTION_KEY',
-            self._generate_key()
-        )
+        self.master_key = master_key or os.environ.get('FILE_ENCRYPTION_KEY')
+        if not self.master_key:
+            # SECURITY: a random per-process key makes every encrypted KYC file unreadable after a
+            # restart or on another replica. Production must use the one key held in Key Vault.
+            if os.environ.get('APP_ENV', '').strip().lower() in {'prod', 'production', 'staging'}:
+                raise ValueError("SECURITY ERROR: FILE_ENCRYPTION_KEY environment variable is required in production")
+            logging.getLogger(__name__).warning(
+                "FILE_ENCRYPTION_KEY not set: using a temporary key; encrypted files will not survive a restart"
+            )
+            self.master_key = self._generate_key()
         self.fernet = self._create_fernet()
     
     def _generate_key(self) -> str:

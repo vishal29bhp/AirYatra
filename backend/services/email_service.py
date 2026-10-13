@@ -1346,12 +1346,15 @@ class EmailService:
     def __init__(self):
         self.config = SMTP_CONFIG
         self.templates = EMAIL_TEMPLATES
-        self.jinja_env = Environment(loader=BaseLoader())
+        # HTML bodies escape user-supplied values (names, addresses); subjects are plain text.
+        self.jinja_env = Environment(loader=BaseLoader(), autoescape=True)
+        self.text_env = Environment(loader=BaseLoader(), autoescape=False)  # nosec B701 - plain-text subject lines only
         
-    def _render_template(self, template_str: str, data: Dict[str, Any]) -> str:
+    def _render_template(self, template_str: str, data: Dict[str, Any], html: bool = True) -> str:
         """Render Jinja2 template with data"""
         try:
-            template = self.jinja_env.from_string(template_str)
+            env = self.jinja_env if html else self.text_env
+            template = env.from_string(template_str)
             return template.render(**data)
         except Exception as e:
             logger.error(f"Template rendering error: {e}")
@@ -1465,7 +1468,7 @@ class EmailService:
         template = self.templates[template_name]
         
         # Render subject and body
-        subject = self._render_template(template['subject'], data)
+        subject = self._render_template(template['subject'], data, html=False)
         body = self._render_template(template['body'], data)
         
         return await self.send_email(to_email, subject, body, cc, bcc)
