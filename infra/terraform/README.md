@@ -76,8 +76,8 @@ terraform apply tfplan
 3. **Custom domain** (optional): add `custom_domains` in tfvars, apply, then create the `_dnsauth` TXT records from
    `terraform output custom_domain_validation_tokens` and a CNAME to `terraform output frontdoor_endpoint`.
 4. **GitHub Actions**: create GitHub environments `dev` and `prod` (add yourself as a required reviewer on `prod`)
-   with variables `AZURE_CLIENT_ID` (`terraform output github_actions_client_id`), `AZURE_TENANT_ID`,
-   `AZURE_SUBSCRIPTION_ID`. No client secret is needed.
+   and add every entry of `terraform output github_actions_variables` as an environment variable. No client secret
+   is needed. Deploys then run from the **Deploy to Azure** workflow ([docs/operations/DEPLOY.md](../../docs/operations/DEPLOY.md)).
 5. Restart the container apps so they pick up the new secret values:
    `az containerapp revision restart` (or deploy a new image).
 

@@ -18,3 +18,9 @@ output "profile_resource_guid" {
   description = "Sent by Front Door as X-Azure-FDID; the API trusts X-Azure-ClientIP only when it matches."
   value       = azurerm_cdn_frontdoor_profile.this.resource_guid
 }
+output "profile_name" {
+  value = azurerm_cdn_frontdoor_profile.this.name
+}
+output "endpoint_name" {
+  value = azurerm_cdn_frontdoor_endpoint.this.name
+}

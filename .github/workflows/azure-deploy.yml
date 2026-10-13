@@ -1,0 +1,134 @@
+# Deploys AirYatra to Azure. Runbook: docs/operations/DEPLOY.md (rollback: ROLLBACK.md).
+# Runs only when started by hand. The "prod" GitHub environment requires a reviewer's approval before the job starts.
+# Auth is GitHub OIDC to a managed identity scoped to one resource group: no Azure secret is stored in GitHub.
+name: Deploy to Azure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        options: [dev, prod]
+        required: true
+      image_tag:
+        description: Roll back to an image already in the registry (its git SHA). Leave empty to build this commit.
+        type: string
+        required: false
+        default: ""
+      deploy_api:
+        description: Deploy the API and worker
+        type: boolean
+        default: true
+      deploy_frontend:
+        description: Deploy the web app
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 45
+    env:
+      RG: ${{ vars.AZURE_RESOURCE_GROUP }}
+      ACR: ${{ vars.ACR_LOGIN_SERVER }}
+      API_APP: ${{ vars.API_APP_NAME }}
+      WORKER_APP: ${{ vars.WORKER_APP_NAME }}
+      PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+      TAG: ${{ inputs.image_tag != '' && inputs.image_tag || github.sha }}
+    steps:
+      - name: Check the image tag is a commit SHA
+        run: |
+          if ! [[ "$TAG" =~ ^[0-9a-f]{7,40}$ ]]; then echo "::error::image_tag must be a git commit SHA"; exit 1; fi
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.image_tag != '' && inputs.image_tag || github.sha }}
+
+      - name: Sign in to Azure (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Record the images running now (for rollback)
+        if: inputs.deploy_api
+        run: |
+          for app in "$API_APP" "$WORKER_APP"; do
+            echo "$app: $(az containerapp show -n "$app" -g "$RG" --query 'properties.template.containers[0].image' -o tsv)" | tee -a "$GITHUB_STEP_SUMMARY"
+          done
+
+      - name: Build, scan and push the API image
+        if: inputs.deploy_api && inputs.image_tag == ''
+        run: |
+          IMAGE="$ACR/airyatra-api:$TAG"
+          docker build -t "$IMAGE" backend
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.58.1 \
+            image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --no-progress "$IMAGE"
+          az acr login --name "${ACR%%.*}"
+          docker push "$IMAGE"
+
+      - name: Check the rollback image exists
+        if: inputs.deploy_api && inputs.image_tag != ''
+        run: az acr repository show --name "${ACR%%.*}" --image "airyatra-api:$TAG" -o none
+
+      - name: Roll the API and the worker to the new image
+        if: inputs.deploy_api
+        run: |
+          IMAGE="$ACR/airyatra-api:$TAG"
+          az containerapp update -n "$API_APP" -g "$RG" --image "$IMAGE" -o none
+          az containerapp update -n "$WORKER_APP" -g "$RG" --image "$IMAGE" -o none
+
+      - name: Wait until the new API revision is healthy
+        if: inputs.deploy_api
+        run: |
+          for i in $(seq 1 40); do
+            state=$(az containerapp revision list -n "$API_APP" -g "$RG" \
+              --query "[?properties.active && contains(properties.template.containers[0].image, ':$TAG')].properties.runningState | [0]" -o tsv)
+            echo "attempt $i: revision state=${state:-pending}"
+            if [ "$state" = "Running" ] || [ "$state" = "RunningAtMaxScale" ]; then
+              curl -fsS --max-time 10 "$PUBLIC_URL/health" && exit 0
+            fi
+            if [ "$state" = "Failed" ] || [ "$state" = "Degraded" ]; then
+              echo "::error::New revision is $state. Roll back: docs/operations/ROLLBACK.md"; exit 1
+            fi
+            sleep 15
+          done
+          echo "::error::New revision did not become healthy in 10 minutes. Roll back: docs/operations/ROLLBACK.md"
+          exit 1
+
+      - uses: actions/setup-node@v4
+        if: inputs.deploy_frontend
+        with:
+          node-version: "20"
+
+      - name: Build the web app
+        if: inputs.deploy_frontend
+        working-directory: frontend
+        env:
+          REACT_APP_BACKEND_URL: ${{ vars.PUBLIC_URL }}
+          CI: "false"
+          GENERATE_SOURCEMAP: "false"
+        run: |
+          npm install --legacy-peer-deps --no-audit --no-fund
+          # CRA 5 needs ajv 8 at the top level; without a lockfile npm can resolve ajv 6 there.
+          npm install --no-save --legacy-peer-deps ajv@8
+          npx craco build
+
+      - name: Upload the web app and purge the edge cache
+        if: inputs.deploy_frontend
+        run: |
+          az storage blob upload-batch --auth-mode login --account-name "${{ vars.WEB_STORAGE_ACCOUNT }}" \
+            --destination '$web' --source frontend/build --overwrite -o none
+          az afd endpoint purge -g "$RG" --profile-name "${{ vars.FRONTDOOR_PROFILE }}" \
+            --endpoint-name "${{ vars.FRONTDOOR_ENDPOINT }}" --content-paths '/*' --no-wait
