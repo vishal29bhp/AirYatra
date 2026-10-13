@@ -31,7 +31,7 @@ variable "api_private_link" {
   default = null
 }
 variable "custom_domains" {
-  description = "Optional custom host names, e.g. [\"airyatra.com\", \"www.airyatra.com\"]. DNS validation is a manual step."
+  description = "Optional custom host names, e.g. [\"airyatra.co.in\", \"www.airyatra.co.in\"]. DNS validation is a manual step."
   type        = list(string)
   default     = []
 }

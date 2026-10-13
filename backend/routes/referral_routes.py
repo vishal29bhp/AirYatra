@@ -334,7 +334,7 @@ async def _send_referral_bonus_email(email_service, referrer_email: str, referre
                 
                 <p>Keep sharing your referral code to earn more rewards! Every successful referral earns you ₹500.</p>
                 
-                <a href="https://airyatra.com/customer" class="cta">View Your Wallet →</a>
+                <a href="https://airyatra.co.in/customer" class="cta">View Your Wallet →</a>
                 
                 <p style="color: #64748b; font-size: 13px;">
                     Use your wallet balance on your next booking for instant discount!
