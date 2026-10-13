@@ -22,6 +22,9 @@ output "registry_login_server" {
 output "web_storage_account_name" {
   value = module.frontdoor.web_storage_account_name
 }
+output "data_storage_account_name" {
+  value = module.storage.name
+}
 output "key_vault_uri" {
   value = module.keyvault.uri
 }

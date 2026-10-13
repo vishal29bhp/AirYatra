@@ -263,7 +263,7 @@ Move prod to the stage 2 settings (table in the Terraform README) when **any** h
 - [x] High-level and low-level sequence diagrams
 - [x] Terraform for dev and prod, validated and policy-scanned
 - [ ] Apply to Azure (Vishal, steps in the Terraform README)
-- [ ] Phase 2 migration tooling (counts, hashes, index parity)
+- [x] Phase 2 migration tooling (counts, hashes, index parity): [cutover runbook](../migration/CUTOVER_RUNBOOK.md)
 - [ ] Phase 3 code refurbishment (adapters, containers, worker, security fixes)
 - [ ] Phase 4 Vaayu Prive UI theme
 - [ ] Phase 5 go-live

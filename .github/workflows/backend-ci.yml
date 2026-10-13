@@ -2,10 +2,10 @@ name: backend-ci
 
 on:
   pull_request:
-    paths: ["backend/**", ".github/workflows/backend-ci.yml"]
+    paths: ["backend/**", "tools/**", ".github/workflows/backend-ci.yml"]
   push:
     branches: [main]
-    paths: ["backend/**", ".github/workflows/backend-ci.yml"]
+    paths: ["backend/**", "tools/**", ".github/workflows/backend-ci.yml"]
 
 permissions:
   contents: read
@@ -30,6 +30,9 @@ jobs:
           python -m pip install -r /tmp/requirements-ci.txt -r requirements-dev.txt
       - name: Unit tests
         run: python -m pytest tests/unit -q --cov=. --cov-report=term --cov-report=xml
+      - name: Audit and migration tool tests
+        working-directory: .
+        run: python -m pytest tools/audit tools/migration -q -p no:cacheprovider
       - name: Bandit (high severity fails the build)
         run: bandit -q -r . -x ./tests -lll -iii
       - name: pip-audit (report only)

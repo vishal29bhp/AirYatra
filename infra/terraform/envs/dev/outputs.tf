@@ -19,6 +19,9 @@ output "registry_login_server" {
 output "web_storage_account_name" {
   value = module.platform.web_storage_account_name
 }
+output "data_storage_account_name" {
+  value = module.platform.data_storage_account_name
+}
 output "key_vault_uri" {
   value = module.platform.key_vault_uri
 }
