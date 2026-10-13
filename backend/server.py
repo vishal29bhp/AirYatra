@@ -408,15 +408,17 @@ api_router.include_router(emergency_booking_routes.router)
 app.include_router(api_router)
 
 # Create uploads directory for village documents
-uploads_dir = Path("/app/uploads")
-uploads_dir.mkdir(exist_ok=True)
+# UPLOAD_ROOT defaults to the existing /app layout; tests and other hosts point it elsewhere.
+upload_root = Path(os.environ.get("UPLOAD_ROOT", "/app"))
+uploads_dir = upload_root / "uploads"
+uploads_dir.mkdir(parents=True, exist_ok=True)
 village_docs_dir = uploads_dir / "village_documents"
 village_docs_dir.mkdir(exist_ok=True)
 
 # SECURITY: Create secure upload directory for sensitive files (KYC, etc.)
 # These are NOT served via static mount - use authenticated download endpoints
-secure_uploads_dir = Path("/app/secure_uploads")
-secure_uploads_dir.mkdir(exist_ok=True)
+secure_uploads_dir = upload_root / "secure_uploads"
+secure_uploads_dir.mkdir(parents=True, exist_ok=True)
 (secure_uploads_dir / "kyc").mkdir(exist_ok=True)
 (secure_uploads_dir / "pilot_documents").mkdir(exist_ok=True)
 
