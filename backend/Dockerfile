@@ -17,7 +17,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     WEB_CONCURRENCY=2 \
     UPLOAD_ROOT=/tmp/airyatra
-RUN groupadd --system --gid 10001 airyatra \
+# The base image's own setuptools/wheel carry fixed CVEs (vendored jaraco.context, wheel); upgrade them.
+RUN pip install --no-cache-dir --disable-pip-version-check --upgrade setuptools==84.0.0 wheel==0.48.0 \
+ && groupadd --system --gid 10001 airyatra \
  && useradd --system --uid 10001 --gid airyatra --no-create-home --shell /usr/sbin/nologin airyatra
 COPY --from=deps /install /usr/local
 WORKDIR /app/backend

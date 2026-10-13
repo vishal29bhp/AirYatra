@@ -20,7 +20,7 @@ backend_env = dotenv_values("/app/backend/.env")
 JWT_SECRET = backend_env.get("JWT_SECRET_KEY")
 JWT_ALG = backend_env.get("JWT_ALGORITHM", "HS256")
 
-from jose import jwt  # noqa: E402
+import jwt  # noqa: E402
 
 OPERATOR_USER_ID = "80fd3f1d-b6de-48c7-adf4-48df7ea849d7"
 ADMIN_USER_ID = "601a4741-f347-4ce8-845e-6cbd91bf9a78"

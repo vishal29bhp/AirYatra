@@ -1,5 +1,6 @@
 from passlib.context import CryptContext
-from jose import JWTError, jwt
+import jwt
+from jwt import PyJWTError as JWTError
 from datetime import datetime, timedelta
 from typing import Optional
 from config import settings
