@@ -84,7 +84,7 @@ export default function PaymentLinkPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-orange-500 mx-auto mb-4" />
+          <Loader2 className="h-12 w-12 animate-spin text-lime mx-auto mb-4" />
           <p className="text-slate-400">Verifying payment link...</p>
         </div>
       </div>
@@ -108,8 +108,8 @@ export default function PaymentLinkPage() {
               </>
             ) : error.type === 'expired' ? (
               <>
-                <div className="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-10 w-10 text-orange-500" />
+                <div className="w-20 h-20 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="h-10 w-10 text-lime" />
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-2">Link Expired</h2>
                 <p className="text-slate-400 mb-6">{error.message}</p>
@@ -140,14 +140,14 @@ export default function PaymentLinkPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
         <Card className="w-full max-w-md bg-slate-800/80 border-slate-700 backdrop-blur-lg">
           <CardContent className="pt-8 pb-8 text-center">
-            <div className="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="h-10 w-10 text-orange-500" />
+            <div className="w-20 h-20 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle className="h-10 w-10 text-lime" />
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Payment Cancelled</h2>
             <p className="text-slate-400 mb-6">Your payment was not completed.</p>
             <Button 
               onClick={() => window.location.href = `/pay/${token}`}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               Try Again
             </Button>
@@ -163,8 +163,8 @@ export default function PaymentLinkPage() {
       {/* Header */}
       <div className="text-center pt-8 pb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-            <Plane className="h-6 w-6 text-white" />
+          <div className="w-10 h-10 bg-slate-800 border border-slate-700 rounded-sm flex items-center justify-center">
+            <Plane className="h-6 w-6 text-lime" />
           </div>
           <span className="text-2xl font-bold text-white">AirYatra</span>
         </div>
@@ -174,9 +174,9 @@ export default function PaymentLinkPage() {
       {/* Main Card */}
       <Card className="w-full max-w-lg mx-auto bg-slate-800/80 border-slate-700 backdrop-blur-lg overflow-hidden">
         {/* Gradient Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-center">
+        <div className="bg-slate-900 border-b border-slate-700 p-6 text-center">
           <h1 className="text-xl font-bold text-white mb-1">Complete Your Payment</h1>
-          <p className="text-orange-100 text-sm">Secure payment powered by Stripe</p>
+          <p className="text-slate-300 text-sm">Secure payment powered by Stripe</p>
         </div>
 
         <CardContent className="p-6 space-y-6">
@@ -187,16 +187,16 @@ export default function PaymentLinkPage() {
           </div>
 
           {/* Booking Details */}
-          <div className="bg-slate-900/50 rounded-xl p-4 space-y-3">
+          <div className="bg-slate-900/50 rounded-sm p-4 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-slate-400 text-sm">Booking Ref</span>
-              <Badge className="bg-orange-500/20 text-orange-400 border-0 font-mono">
+              <Badge className="bg-lime/20 text-lime border-0 font-mono">
                 #{data?.inquiry_number}
               </Badge>
             </div>
             
             <div className="flex items-center gap-3 py-2">
-              <MapPin className="h-5 w-5 text-orange-500 shrink-0" />
+              <MapPin className="h-5 w-5 text-lime shrink-0" />
               <div className="flex-1">
                 <p className="text-white font-medium">{data?.route}</p>
               </div>
@@ -225,9 +225,9 @@ export default function PaymentLinkPage() {
               <span className="text-green-400">- {formatCurrency(data?.already_paid)}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 bg-gradient-to-r from-orange-500/10 to-orange-600/10 rounded-lg px-3 -mx-3">
+            <div className="flex justify-between items-center py-3 bg-lime/10 rounded-lg px-3 -mx-3">
               <span className="text-white font-semibold">Balance Due</span>
-              <span className="text-2xl font-bold text-orange-400">{formatCurrency(data?.remaining_balance)}</span>
+              <span className="text-2xl font-bold text-lime">{formatCurrency(data?.remaining_balance)}</span>
             </div>
           </div>
 

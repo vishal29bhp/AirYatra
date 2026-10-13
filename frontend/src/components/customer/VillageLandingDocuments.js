@@ -54,8 +54,8 @@ const statusConfig = {
     label: 'Not Uploaded / अपलोड नहीं हुआ' 
   },
   uploaded: { 
-    color: 'text-blue-400', 
-    bg: 'bg-blue-500/20', 
+    color: 'text-amber', 
+    bg: 'bg-amber/20', 
     label: 'Uploaded - Pending Review / अपलोड - समीक्षा बाकी' 
   },
   under_review: { 
@@ -182,13 +182,13 @@ function VillageLandingDocuments({
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+    <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
       {/* Header */}
       <div className="p-4 bg-yellow-500/10 border-b border-yellow-500/30">
         <div className="flex items-start gap-3">
@@ -230,7 +230,7 @@ function VillageLandingDocuments({
               className={`p-4 rounded-lg border ${
                 docStatus === 'approved' ? 'border-green-500/30 bg-green-500/5' :
                 docStatus === 'rejected' ? 'border-red-500/30 bg-red-500/5' :
-                docStatus === 'uploaded' || docStatus === 'under_review' ? 'border-blue-500/30 bg-blue-500/5' :
+                docStatus === 'uploaded' || docStatus === 'under_review' ? 'border-amber/30 bg-amber/5' :
                 'border-slate-600 bg-slate-800/30'
               }`}
             >
@@ -284,7 +284,7 @@ function VillageLandingDocuments({
                           href={uploadedDoc.file_url} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-blue-400 hover:text-blue-300"
+                          className="text-amber hover:text-amber"
                         >
                           <Eye className="h-4 w-4" />
                         </a>
@@ -307,7 +307,7 @@ function VillageLandingDocuments({
                       <div className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                         isUploading 
                           ? 'bg-slate-600 text-slate-400' 
-                          : 'bg-orange-500 hover:bg-orange-600 text-white'
+                          : 'bg-lime hover:bg-lime/90 text-black'
                       }`}>
                         {isUploading ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -325,12 +325,12 @@ function VillageLandingDocuments({
                 {/* Approved/Under Review Status */}
                 {(docStatus === 'approved' || docStatus === 'under_review' || docStatus === 'uploaded') && (
                   <div className={`flex items-center gap-2 px-3 py-2 rounded-lg ${
-                    docStatus === 'approved' ? 'bg-green-500/20' : 'bg-blue-500/20'
+                    docStatus === 'approved' ? 'bg-green-500/20' : 'bg-amber/20'
                   }`}>
                     {docStatus === 'approved' ? (
                       <Check className="h-5 w-5 text-green-400" />
                     ) : (
-                      <Clock className="h-5 w-5 text-blue-400" />
+                      <Clock className="h-5 w-5 text-amber" />
                     )}
                   </div>
                 )}

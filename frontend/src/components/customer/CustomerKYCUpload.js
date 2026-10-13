@@ -249,7 +249,7 @@ function CustomerKYCUpload({ user }) {
       </div>
 
       {/* KYC Status Card */}
-      <div className={`rounded-xl p-6 border ${
+      <div className={`rounded-sm p-6 border ${
         kycComplete 
           ? 'bg-green-900/20 border-green-700/30' 
           : 'bg-yellow-900/20 border-yellow-700/30'
@@ -283,7 +283,7 @@ function CustomerKYCUpload({ user }) {
             <RefreshCw className="h-8 w-8 animate-spin text-green-400" />
           </div>
         ) : documents.length === 0 ? (
-          <div className="bg-slate-800/50 rounded-xl p-12 border border-slate-700 text-center">
+          <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
             <FileText className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <p className="text-slate-400 text-lg">No documents uploaded yet</p>
             <p className="text-slate-500 text-sm mt-2">Upload Aadhar, PAN, or Passport for verification</p>
@@ -298,7 +298,7 @@ function CustomerKYCUpload({ user }) {
               return (
                 <div 
                   key={doc.id} 
-                  className={`bg-slate-800/50 rounded-xl p-4 border transition-all ${
+                  className={`bg-slate-800/50 rounded-sm p-4 border transition-all ${
                     doc.verification_status === 'verified' ? 'border-green-700/30' :
                     doc.verification_status === 'rejected' ? 'border-red-700/30' :
                     'border-slate-700'
@@ -307,10 +307,10 @@ function CustomerKYCUpload({ user }) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                        doc.verification_status === 'verified' ? 'bg-green-500/20' : 'bg-blue-500/20'
+                        doc.verification_status === 'verified' ? 'bg-green-500/20' : 'bg-amber/20'
                       }`}>
                         <CreditCard className={`h-6 w-6 ${
-                          doc.verification_status === 'verified' ? 'text-green-400' : 'text-blue-400'
+                          doc.verification_status === 'verified' ? 'text-green-400' : 'text-amber'
                         }`} />
                       </div>
                       <div>
@@ -368,7 +368,7 @@ function CustomerKYCUpload({ user }) {
       </div>
 
       {/* Available Document Types */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-lg font-semibold text-white mb-4">Accepted Documents / स्वीकृत दस्तावेज़</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {documentTypes.map(type => {
@@ -379,7 +379,7 @@ function CustomerKYCUpload({ user }) {
                 key={type.code}
                 className={`p-3 rounded-lg border ${
                   isVerified ? 'bg-green-500/10 border-green-500/30' :
-                  isUploaded ? 'bg-blue-500/10 border-blue-500/30' :
+                  isUploaded ? 'bg-amber/10 border-amber/30' :
                   'bg-slate-900/50 border-slate-700'
                 }`}
               >
@@ -388,7 +388,7 @@ function CustomerKYCUpload({ user }) {
                   {isVerified ? (
                     <CheckCircle className="h-4 w-4 text-green-400" />
                   ) : isUploaded ? (
-                    <Clock className="h-4 w-4 text-blue-400" />
+                    <Clock className="h-4 w-4 text-amber" />
                   ) : null}
                 </div>
                 {type.name_hi && <p className="text-slate-400 text-xs">{type.name_hi}</p>}
@@ -407,7 +407,7 @@ function CustomerKYCUpload({ user }) {
       {/* Upload Modal */}
       {showUpload && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-xl p-6 w-full max-w-md border border-slate-700">
+          <div className="bg-slate-900 rounded-sm p-6 w-full max-w-md border border-slate-700">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <Upload className="h-5 w-5 text-green-400" />

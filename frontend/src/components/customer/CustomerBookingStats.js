@@ -79,7 +79,7 @@ export default function CustomerBookingStats({ user }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="stats-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -95,7 +95,7 @@ export default function CustomerBookingStats({ user }) {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <TrendingUp className="h-7 w-7 text-orange-500" />
+            <TrendingUp className="h-7 w-7 text-lime" />
             My Flight Stats
           </h1>
           <p className="text-slate-400 mt-1">Your journey with AirYatra</p>
@@ -157,7 +157,7 @@ export default function CustomerBookingStats({ user }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="p-5 text-center">
-            <Plane className="h-8 w-8 text-orange-500 mx-auto mb-2" />
+            <Plane className="h-8 w-8 text-lime mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.total_flights || 0}</p>
             <p className="text-slate-400 text-sm">Total Flights</p>
           </CardContent>
@@ -165,7 +165,7 @@ export default function CustomerBookingStats({ user }) {
 
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="p-5 text-center">
-            <MapPin className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+            <MapPin className="h-8 w-8 text-amber mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.unique_routes || 0}</p>
             <p className="text-slate-400 text-sm">Unique Routes</p>
           </CardContent>
@@ -232,7 +232,7 @@ export default function CustomerBookingStats({ user }) {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-orange-500" />
+              <Calendar className="h-5 w-5 text-lime" />
               Recent Flights
             </CardTitle>
           </CardHeader>
@@ -242,7 +242,7 @@ export default function CustomerBookingStats({ user }) {
                 <Plane className="h-12 w-12 mx-auto mb-3 opacity-50" />
                 <p>No flights yet</p>
                 <Button 
-                  className="mt-4 bg-orange-500 hover:bg-orange-600"
+                  className="mt-4 bg-lime text-black hover:bg-lime/90"
                   onClick={() => window.location.href = '/booking'}
                 >
                   Book Your First Flight
@@ -253,11 +253,11 @@ export default function CustomerBookingStats({ user }) {
                 {stats.recent_flights.slice(0, 5).map((flight, idx) => (
                   <div 
                     key={idx}
-                    className="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl hover:bg-slate-900/70 transition-colors"
+                    className="flex items-center justify-between p-3 bg-slate-900/50 rounded-sm hover:bg-slate-900/70 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                        <Plane className="h-5 w-5 text-orange-400" />
+                      <div className="w-10 h-10 bg-lime/20 rounded-lg flex items-center justify-center">
+                        <Plane className="h-5 w-5 text-lime" />
                       </div>
                       <div>
                         <p className="text-white font-medium text-sm">
@@ -274,8 +274,8 @@ export default function CustomerBookingStats({ user }) {
                       </p>
                       <Badge className={`text-xs border-0 ${
                         flight.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                        flight.status === 'confirmed' ? 'bg-blue-500/20 text-blue-400' :
-                        'bg-orange-500/20 text-orange-400'
+                        flight.status === 'confirmed' ? 'bg-amber/20 text-amber' :
+                        'bg-lime/20 text-lime'
                       }`}>
                         {flight.status}
                       </Badge>
@@ -304,7 +304,7 @@ export default function CustomerBookingStats({ user }) {
               return (
                 <div 
                   key={idx}
-                  className={`p-4 rounded-xl border-2 transition-all ${
+                  className={`p-4 rounded-sm border-2 transition-all ${
                     idx === tierIndex 
                       ? `bg-gradient-to-br ${tier.color} border-white/30` 
                       : isCurrentOrPast 

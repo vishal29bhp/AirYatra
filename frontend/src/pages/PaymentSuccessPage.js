@@ -95,12 +95,12 @@ export default function PaymentSuccessPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4 overflow-hidden" data-testid="payment-success-page">
-      <div className="max-w-md w-full bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 text-center relative">
+      <div className="max-w-md w-full bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-sm p-8 text-center relative">
         {state === 'checking' && (
           <>
             <div className="relative">
-              <Loader2 className="h-16 w-16 text-orange-400 animate-spin mx-auto mb-4" />
-              <div className="absolute inset-0 h-16 w-16 mx-auto rounded-full bg-orange-400/20 animate-ping" />
+              <Loader2 className="h-16 w-16 text-lime animate-spin mx-auto mb-4" />
+              <div className="absolute inset-0 h-16 w-16 mx-auto rounded-full bg-lime/20 animate-ping" />
             </div>
             <h1 className="text-xl font-bold text-white">Confirming your payment...</h1>
             <p className="text-slate-400 text-sm mt-2">भुगतान की पुष्टि हो रही है — please wait, don't close this page</p>
@@ -108,7 +108,7 @@ export default function PaymentSuccessPage() {
               {[0, 1, 2].map(i => (
                 <div 
                   key={i} 
-                  className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-lime text-black rounded-full animate-bounce"
                   style={{ animationDelay: `${i * 0.15}s` }}
                 />
               ))}
@@ -135,7 +135,7 @@ export default function PaymentSuccessPage() {
               
               {/* Sparkles */}
               <Sparkles className="absolute top-0 right-1/4 h-6 w-6 text-yellow-400 animate-pulse" />
-              <Sparkles className="absolute bottom-2 left-1/4 h-5 w-5 text-orange-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <Sparkles className="absolute bottom-2 left-1/4 h-5 w-5 text-lime animate-pulse" style={{ animationDelay: '0.5s' }} />
             </div>
             
             <h1 className="text-2xl font-bold text-white mb-1">
@@ -146,7 +146,7 @@ export default function PaymentSuccessPage() {
             
             {/* Amount display with animation */}
             {txn?.amount && (
-              <div className="mt-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
+              <div className="mt-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
                 <p className="text-slate-400 text-sm">Amount Paid</p>
                 <p className="text-3xl font-bold text-green-400 mt-1">
                   ₹{Number(txn.amount).toLocaleString()}
@@ -162,7 +162,7 @@ export default function PaymentSuccessPage() {
             <div className="mt-6 space-y-3">
               <Button 
                 onClick={() => navigate(txn?.booking_id ? `/customer/inquiry/${txn.booking_id}` : '/customer')} 
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-12 text-base font-semibold shadow-lg shadow-green-500/25" 
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 h-12 text-base font-semibold shadow-green-500/25" 
                 data-testid="view-booking-btn"
               >
                 <Plane className="h-5 w-5 mr-2" />
@@ -191,7 +191,7 @@ export default function PaymentSuccessPage() {
                     alert('Please login to download receipt / रसीद डाउनलोड करने के लिए लॉगिन करें');
                   }
                 }}
-                className="w-full border-orange-500/50 text-orange-400 hover:bg-orange-500/10 h-11"
+                className="w-full border-lime/50 text-lime hover:bg-lime/10 h-11"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Download Receipt (PDF) / रसीद डाउनलोड
@@ -219,7 +219,7 @@ export default function PaymentSuccessPage() {
             <p className="text-slate-400 text-sm mt-2">Koi charge nahi hua hai. Dobara try karein.</p>
             <Button 
               onClick={() => navigate(txn?.booking_id ? `/customer/payment/${txn.booking_id}` : '/customer')} 
-              className="w-full mt-6 bg-orange-500 hover:bg-orange-600"
+              className="w-full mt-6 bg-lime text-black hover:bg-lime/90"
             >
               Try Again
             </Button>
@@ -235,7 +235,7 @@ export default function PaymentSuccessPage() {
             </p>
             <Button 
               onClick={() => navigate('/customer')} 
-              className="w-full mt-6 bg-orange-500 hover:bg-orange-600"
+              className="w-full mt-6 bg-lime text-black hover:bg-lime/90"
             >
               Go to Dashboard
             </Button>

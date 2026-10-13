@@ -62,13 +62,13 @@ function CustomerProfile({ user, onUserUpdate }) {
       </div>
 
       {/* Profile Picture */}
-      <div className="glass p-6 rounded-xl mb-6">
+      <div className="glass p-6 rounded-sm mb-6">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white text-3xl font-bold">
+            <div className="w-24 h-24 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-3xl font-bold">
               {formData.full_name?.charAt(0)?.toUpperCase() || 'U'}
             </div>
-            <button className="absolute bottom-0 right-0 p-2 bg-orange-500 rounded-full text-white hover:bg-orange-600 transition-colors">
+            <button className="absolute bottom-0 right-0 p-2 bg-lime rounded-full text-black hover:bg-lime/90 transition-colors">
               <Camera className="h-4 w-4" />
             </button>
           </div>
@@ -85,7 +85,7 @@ function CustomerProfile({ user, onUserUpdate }) {
       </div>
 
       {/* Edit Form */}
-      <form onSubmit={handleSubmit} className="glass p-6 rounded-xl space-y-6">
+      <form onSubmit={handleSubmit} className="glass p-6 rounded-sm space-y-6">
         <h3 className="text-lg font-semibold text-white mb-4">Personal Information / व्यक्तिगत जानकारी</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -191,7 +191,7 @@ function CustomerProfile({ user, onUserUpdate }) {
           <Button
             type="submit"
             disabled={saving}
-            className="w-full md:w-auto bg-orange-500 hover:bg-orange-600"
+            className="w-full md:w-auto bg-lime text-black hover:bg-lime/90"
           >
             {saving ? (
               <>

@@ -170,7 +170,7 @@ const EmergencyBookingForm = ({
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Emergency Header */}
-      <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+      <div className="bg-red-500/10 border border-red-500/30 rounded-sm p-4">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-red-500/20 rounded-full animate-pulse">
             <Siren className="h-6 w-6 text-red-400" />
@@ -205,14 +205,14 @@ const EmergencyBookingForm = ({
                   className={`p-4 rounded-lg border-2 transition-all text-left ${
                     formData.urgency_level === key
                       ? key === 'critical' ? 'border-red-500 bg-red-500/20' :
-                        key === 'high' ? 'border-orange-500 bg-orange-500/20' :
+                        key === 'high' ? 'border-lime bg-lime/20' :
                         'border-yellow-500 bg-yellow-500/20'
                       : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
                   }`}
                 >
                   <div className={`text-lg font-bold ${
                     key === 'critical' ? 'text-red-400' :
-                    key === 'high' ? 'text-orange-400' : 'text-yellow-400'
+                    key === 'high' ? 'text-lime' : 'text-yellow-400'
                   }`}>
                     {value.label}
                   </div>
@@ -242,7 +242,7 @@ const EmergencyBookingForm = ({
                   onClick={() => handleInputChange('urgency_reason', key)}
                   className={`p-3 rounded-lg border-2 transition-all text-left flex items-center gap-3 ${
                     formData.urgency_reason === key
-                      ? 'border-orange-500 bg-orange-500/20'
+                      ? 'border-lime bg-lime/20'
                       : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
                   }`}
                 >
@@ -297,7 +297,7 @@ const EmergencyBookingForm = ({
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader className="pb-2">
             <CardTitle className="text-white text-base flex items-center gap-2">
-              <Users className="h-4 w-4 text-blue-400" />
+              <Users className="h-4 w-4 text-amber" />
               Flight Details / उड़ान विवरण
             </CardTitle>
           </CardHeader>

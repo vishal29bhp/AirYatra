@@ -102,7 +102,7 @@ export default function FlightPriceHistory({ user }) {
         <CardContent className="p-4">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-orange-500" />
+              <MapPin className="h-5 w-5 text-lime" />
               <span className="text-slate-400">Select Route:</span>
             </div>
             <Select
@@ -129,17 +129,17 @@ export default function FlightPriceHistory({ user }) {
 
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+          <RefreshCw className="h-8 w-8 animate-spin text-lime" />
         </div>
       ) : (
         <>
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-0">
+            <Card className="bg-slate-800 border border-slate-700">
               <CardContent className="p-5">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-blue-100 text-sm font-medium">Current Price</p>
+                    <p className="text-slate-300 text-sm font-medium">Current Price</p>
                     <p className="text-3xl font-bold text-white mt-1">
                       {formatCurrency(priceData?.current_price)}
                     </p>
@@ -148,7 +148,7 @@ export default function FlightPriceHistory({ user }) {
                       <span className="text-sm">{Math.abs(priceData?.trend_percent || 0)}% vs last month</span>
                     </div>
                   </div>
-                  <div className="p-3 bg-white/20 rounded-xl">
+                  <div className="p-3 bg-white/20 rounded-sm">
                     <DollarSign className="h-6 w-6 text-white" />
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function FlightPriceHistory({ user }) {
                     </p>
                     <p className="text-green-200 text-sm mt-1">{priceData?.lowest_month || 'N/A'}</p>
                   </div>
-                  <div className="p-3 bg-white/20 rounded-xl">
+                  <div className="p-3 bg-white/20 rounded-sm">
                     <TrendingDown className="h-6 w-6 text-white" />
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export default function FlightPriceHistory({ user }) {
                     </p>
                     <p className="text-red-200 text-sm mt-1">{priceData?.highest_month || 'N/A'}</p>
                   </div>
-                  <div className="p-3 bg-white/20 rounded-xl">
+                  <div className="p-3 bg-white/20 rounded-sm">
                     <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                 </div>
@@ -199,7 +199,7 @@ export default function FlightPriceHistory({ user }) {
                     </p>
                     <p className="text-purple-200 text-sm mt-1">Last 6 months</p>
                   </div>
-                  <div className="p-3 bg-white/20 rounded-xl">
+                  <div className="p-3 bg-white/20 rounded-sm">
                     <Minus className="h-6 w-6 text-white" />
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function FlightPriceHistory({ user }) {
             <Card className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
               <CardContent className="p-5">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-green-500/20 rounded-xl">
+                  <div className="p-3 bg-green-500/20 rounded-sm">
                     <Sparkles className="h-8 w-8 text-green-400" />
                   </div>
                   <div className="flex-1">
@@ -234,7 +234,7 @@ export default function FlightPriceHistory({ user }) {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-orange-500" />
+                <Calendar className="h-5 w-5 text-lime" />
                 Price History (Last 6 Months)
               </CardTitle>
               <CardDescription className="text-slate-400">
@@ -279,27 +279,27 @@ export default function FlightPriceHistory({ user }) {
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Clock className="h-5 w-5 text-blue-500" />
+                <Clock className="h-5 w-5 text-amber" />
                 Booking Tips
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-slate-900/50 rounded-xl p-4">
-                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
-                    <Calendar className="h-5 w-5 text-blue-400" />
+                <div className="bg-slate-900/50 rounded-sm p-4">
+                  <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center mb-3">
+                    <Calendar className="h-5 w-5 text-amber" />
                   </div>
                   <h4 className="text-white font-semibold mb-1">Book Early</h4>
                   <p className="text-slate-400 text-sm">Book 2-4 weeks in advance for better rates and availability</p>
                 </div>
-                <div className="bg-slate-900/50 rounded-xl p-4">
+                <div className="bg-slate-900/50 rounded-sm p-4">
                   <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
                     <TrendingDown className="h-5 w-5 text-green-400" />
                   </div>
                   <h4 className="text-white font-semibold mb-1">Avoid Peak Season</h4>
                   <p className="text-slate-400 text-sm">Prices are higher during festivals and long weekends</p>
                 </div>
-                <div className="bg-slate-900/50 rounded-xl p-4">
+                <div className="bg-slate-900/50 rounded-sm p-4">
                   <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-3">
                     <Sparkles className="h-5 w-5 text-purple-400" />
                   </div>

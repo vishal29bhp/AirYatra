@@ -36,7 +36,7 @@ const BookingPurposeStep = ({ formData, onInputChange }) => {
       {/* Udan Prakar / Flight Type */}
       <div>
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
-          <Plane className="h-5 w-5 text-orange-400" />
+          <Plane className="h-5 w-5 text-lime" />
           Flight Type / उड़ान प्रकार
         </Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -47,7 +47,7 @@ const BookingPurposeStep = ({ formData, onInputChange }) => {
               onClick={() => onInputChange('udan_prakar', option.id)}
               className={`p-4 rounded-lg border transition-all text-center ${
                 formData.udan_prakar === option.id
-                  ? 'border-orange-500 bg-orange-500/10 text-orange-400'
+                  ? 'border-lime bg-lime/10 text-lime'
                   : 'border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-600'
               }`}
             >
@@ -60,7 +60,7 @@ const BookingPurposeStep = ({ formData, onInputChange }) => {
       {/* Booking For */}
       <div>
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
-          <Briefcase className="h-5 w-5 text-blue-400" />
+          <Briefcase className="h-5 w-5 text-amber" />
           Booking For / बुकिंग किसके लिए
         </Label>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -71,7 +71,7 @@ const BookingPurposeStep = ({ formData, onInputChange }) => {
               onClick={() => onInputChange('booking_for', option.id)}
               className={`p-4 rounded-lg border transition-all text-center ${
                 formData.booking_for === option.id
-                  ? 'border-blue-500 bg-blue-500/10 text-blue-400'
+                  ? 'border-amber bg-amber/10 text-amber'
                   : 'border-slate-700 bg-slate-800/50 text-slate-300 hover:border-slate-600'
               }`}
             >

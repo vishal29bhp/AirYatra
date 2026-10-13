@@ -64,7 +64,7 @@ const SortableLegCard = ({
       className={`bg-slate-800/50 border-slate-700 ${
         index === 0 ? 'border-l-4 border-l-green-500' : 
         index === legs.length - 1 ? 'border-l-4 border-l-red-500' : ''
-      } ${isDragging ? 'shadow-2xl ring-2 ring-orange-500' : ''}`}
+      } ${isDragging ? 'ring-2 ring-lime' : ''}`}
     >
       <CardContent className="p-4">
         {/* Leg Header */}
@@ -83,7 +83,7 @@ const SortableLegCard = ({
             <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${
               index === 0 ? 'bg-green-500/20 text-green-400' :
               index === legs.length - 1 ? 'bg-red-500/20 text-red-400' :
-              'bg-orange-500/20 text-orange-400'
+              'bg-lime/20 text-lime'
             }`}>
               {index + 1}
             </div>
@@ -172,7 +172,7 @@ const SortableLegCard = ({
                 ~{Math.round(leg.distance / 200 * 60)} min
               </span>
             </div>
-            <span className="text-orange-400 font-medium">
+            <span className="text-lime font-medium">
               ₹{leg.price?.toLocaleString('en-IN') || 0}
             </span>
           </div>
@@ -381,7 +381,7 @@ export const MultiCityRouteBuilder = ({
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <Navigation className="h-5 w-5 text-orange-400" />
+            <Navigation className="h-5 w-5 text-lime" />
             Multi-City Route Builder / बहु-शहर रूट बिल्डर
           </h3>
           <p className="text-slate-400 text-sm mt-1">
@@ -393,12 +393,12 @@ export const MultiCityRouteBuilder = ({
             variant="outline"
             size="sm"
             onClick={() => setShowMap(!showMap)}
-            className={`border-slate-600 ${showMap ? 'bg-blue-500/20 text-blue-400' : ''}`}
+            className={`border-slate-600 ${showMap ? 'bg-amber/20 text-amber' : ''}`}
           >
             <Map className="h-4 w-4 mr-1" />
             {showMap ? 'Hide Map' : 'Show Map'}
           </Button>
-          <Badge className="bg-blue-500/20 text-blue-400">
+          <Badge className="bg-amber/20 text-amber">
             {legs.length} Legs / {legs.length} पड़ाव
           </Badge>
         </div>
@@ -455,7 +455,7 @@ export const MultiCityRouteBuilder = ({
         <Button
           variant="outline"
           onClick={addLeg}
-          className="w-full border-dashed border-slate-600 text-slate-400 hover:text-orange-400 hover:border-orange-500"
+          className="w-full border-dashed border-slate-600 text-slate-400 hover:text-lime hover:border-lime"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add Destination / गंतव्य जोड़ें ({legs.length}/{maxLegs})
@@ -464,10 +464,10 @@ export const MultiCityRouteBuilder = ({
       
       {/* Route Summary */}
       {totalDistance > 0 && (
-        <Card className="bg-gradient-to-r from-orange-500/10 to-orange-600/5 border-orange-500/30">
+        <Card className="bg-lime/10 border-lime/30">
           <CardContent className="p-4">
             <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <Calculator className="h-4 w-4 text-orange-400" />
+              <Calculator className="h-4 w-4 text-lime" />
               Route Summary / रूट सारांश
             </h4>
             
@@ -510,7 +510,7 @@ export const MultiCityRouteBuilder = ({
               </div>
               <div className="text-center">
                 <p className="text-slate-400 text-xs">Total Price</p>
-                <p className="text-orange-400 text-xl font-bold">₹{totalPrice.toLocaleString('en-IN')}</p>
+                <p className="text-lime text-xl font-bold">₹{totalPrice.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </CardContent>
@@ -518,11 +518,11 @@ export const MultiCityRouteBuilder = ({
       )}
       
       {/* Info */}
-      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 flex items-start gap-2 text-sm">
-        <AlertCircle className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
-        <div className="text-blue-300">
+      <div className="bg-amber/10 border border-amber/30 rounded-lg p-3 flex items-start gap-2 text-sm">
+        <AlertCircle className="h-4 w-4 text-amber mt-0.5 flex-shrink-0" />
+        <div className="text-slate-300">
           <p>Multi-city flights chain automatically. Each destination becomes the next leg&apos;s starting point.</p>
-          <p className="text-blue-400/70 mt-1">बहु-शहर उड़ानें स्वचालित रूप से जुड़ती हैं।</p>
+          <p className="text-amber/70 mt-1">बहु-शहर उड़ानें स्वचालित रूप से जुड़ती हैं।</p>
         </div>
       </div>
     </div>

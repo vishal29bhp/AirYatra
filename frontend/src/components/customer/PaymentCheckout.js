@@ -159,7 +159,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
       </div>
 
       {/* Amount Display */}
-      <div className="p-6 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 text-center" data-testid="payment-amount-card">
+      <div className="p-6 rounded-sm bg-lime/20 border border-lime/30 text-center" data-testid="payment-amount-card">
         <p className="text-slate-400">Total Amount</p>
         {discount > 0 ? (
           <>
@@ -176,9 +176,9 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
       </div>
 
       {/* Loyalty Voucher */}
-      <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700" data-testid="voucher-section">
+      <div className="p-4 rounded-sm bg-slate-800/50 border border-slate-700" data-testid="voucher-section">
         <p className="text-white font-medium mb-2 flex items-center gap-2">
-          <Ticket className="h-4 w-4 text-orange-400" /> Apply Loyalty Voucher / वाउचर लगाएं
+          <Ticket className="h-4 w-4 text-lime" /> Apply Loyalty Voucher / वाउचर लगाएं
         </p>
         {appliedVoucher ? (
           <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2" data-testid="applied-voucher">
@@ -206,7 +206,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
               <Button
                 onClick={() => applyVoucher(voucherCode)}
                 disabled={applying || !voucherCode.trim()}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
                 data-testid="apply-voucher-btn"
               >
                 {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
@@ -220,7 +220,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
                     <button
                       key={v.id}
                       onClick={() => applyVoucher(v.code)}
-                      className="px-3 py-1 rounded-full border border-orange-500/40 text-orange-400 text-xs hover:bg-orange-500/10 flex items-center gap-1"
+                      className="px-3 py-1 rounded-full border border-lime/40 text-lime text-xs hover:bg-lime/10 flex items-center gap-1"
                       data-testid={`voucher-chip-${v.code}`}
                     >
                       {v.reward_icon} ₹{v.value.toLocaleString()} off
@@ -248,21 +248,21 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
                 disabled={isDisabled}
                 className={`w-full p-4 rounded-lg border flex items-center justify-between transition-all ${
                   selectedMethod === method.id
-                    ? 'bg-orange-500/20 border-orange-500/50'
+                    ? 'bg-lime/20 border-lime/50'
                     : isDisabled
                     ? 'bg-slate-800/50 border-slate-700 opacity-50 cursor-not-allowed'
                     : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <Icon className={`h-6 w-6 ${selectedMethod === method.id ? 'text-orange-400' : 'text-slate-400'}`} />
+                  <Icon className={`h-6 w-6 ${selectedMethod === method.id ? 'text-lime' : 'text-slate-400'}`} />
                   <div className="text-left">
                     <p className="text-white font-medium">{method.name}</p>
                     <p className="text-sm text-slate-400">{method.description}</p>
                   </div>
                 </div>
                 {selectedMethod === method.id && (
-                  <Check className="h-5 w-5 text-orange-400" />
+                  <Check className="h-5 w-5 text-lime" />
                 )}
               </button>
             );
@@ -281,7 +281,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
           Cancel
         </Button>
         <Button
-          className="flex-1 bg-orange-500 hover:bg-orange-600"
+          className="flex-1 bg-lime text-black hover:bg-lime/90"
           onClick={handlePayment}
           disabled={processing}
           data-testid="pay-now-btn"

@@ -44,9 +44,9 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
               key={type.id}
               type="button"
               onClick={() => onInputChange('aircraft_type', type.id)}
-              className={`p-6 rounded-xl border-2 transition-all text-left ${
+              className={`p-6 rounded-sm border-2 transition-all text-left ${
                 formData.aircraft_type === type.id
-                  ? 'border-orange-500 bg-orange-500/10'
+                  ? 'border-lime bg-lime/10'
                   : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
               }`}
             >
@@ -60,9 +60,9 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
 
       {/* Passenger Count */}
       {formData.aircraft_type && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
-            <Users className="h-5 w-5 text-orange-400" />
+            <Users className="h-5 w-5 text-lime" />
             Passengers / यात्री
           </h3>
           
@@ -70,7 +70,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
             {/* Male Adults */}
             <div className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <User className="h-5 w-5 text-blue-400" />
+                <User className="h-5 w-5 text-amber" />
                 <div>
                   <p className="text-white">Adult Male / पुरुष</p>
                   <p className="text-slate-500 text-xs">18+ years</p>
@@ -171,8 +171,8 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
           </div>
 
           {/* Summary */}
-          <div className="mt-4 p-3 bg-orange-500/10 rounded-lg border border-orange-500/30">
-            <p className="text-orange-400 text-sm">
+          <div className="mt-4 p-3 bg-lime/10 rounded-lg border border-lime/30">
+            <p className="text-lime text-sm">
               <strong>Total:</strong> {totalAdults} Adult(s) + {formData.children_count || 0} Child(ren)
               <span className="text-slate-400 ml-2">({maxPassengers - totalAdults} seats available)</span>
             </p>

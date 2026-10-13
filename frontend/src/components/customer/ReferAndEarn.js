@@ -142,17 +142,17 @@ function ReferAndEarn({ user }) {
         <div className="space-y-6">
           {/* Stats Cards */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 text-center border border-slate-700">
-              <Users className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+            <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
+              <Users className="h-6 w-6 text-amber mx-auto mb-2" />
               <p className="text-2xl font-bold text-white">{stats?.total_referrals || 0}</p>
               <p className="text-slate-400 text-xs">Total Referrals</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
               <Check className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <p className="text-2xl font-bold text-green-400">{stats?.successful_referrals || 0}</p>
               <p className="text-slate-400 text-xs">Successful</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 text-center border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
               <IndianRupee className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
               <p className="text-2xl font-bold text-yellow-400">₹{stats?.total_earnings || 0}</p>
               <p className="text-slate-400 text-xs">Total Earned</p>
@@ -160,7 +160,7 @@ function ReferAndEarn({ user }) {
           </div>
 
           {/* Referral Code Box */}
-          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-xl p-6 border border-purple-500/30">
+          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-sm p-6 border border-purple-500/30">
             <p className="text-slate-300 text-sm mb-2">Your Referral Code / आपका रेफरल कोड</p>
             <div className="flex items-center gap-3">
               <div className="flex-1 bg-slate-900/50 rounded-lg px-4 py-3 font-mono text-2xl text-white tracking-wider">
@@ -176,7 +176,7 @@ function ReferAndEarn({ user }) {
           </div>
 
           {/* Share Link */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <p className="text-slate-300 text-sm mb-2">Share Link / लिंक शेयर करें</p>
             <div className="flex items-center gap-2">
               <Input
@@ -214,7 +214,7 @@ function ReferAndEarn({ user }) {
           </div>
 
           {/* How it Works */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-4">How it Works / कैसे काम करता है</h3>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
@@ -247,7 +247,7 @@ function ReferAndEarn({ user }) {
       {activeTab === 'wallet' && (
         <div className="space-y-6">
           {/* Wallet Balance */}
-          <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 rounded-xl p-6 border border-green-500/30 text-center">
+          <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 rounded-sm p-6 border border-green-500/30 text-center">
             <Wallet className="h-10 w-10 text-green-400 mx-auto mb-3" />
             <p className="text-slate-300 text-sm">Wallet Balance / वॉलेट बैलेंस</p>
             <p className="text-4xl font-bold text-white mt-2">₹{wallet?.balance?.toLocaleString() || 0}</p>
@@ -256,20 +256,20 @@ function ReferAndEarn({ user }) {
 
           {/* Wallet Stats */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <TrendingUp className="h-5 w-5 text-green-400 mb-2" />
               <p className="text-slate-400 text-sm">Total Earned</p>
               <p className="text-xl font-bold text-green-400">₹{wallet?.total_earned?.toLocaleString() || 0}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <IndianRupee className="h-5 w-5 text-orange-400 mb-2" />
+            <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
+              <IndianRupee className="h-5 w-5 text-lime mb-2" />
               <p className="text-slate-400 text-sm">Total Used</p>
-              <p className="text-xl font-bold text-orange-400">₹{wallet?.total_used?.toLocaleString() || 0}</p>
+              <p className="text-xl font-bold text-lime">₹{wallet?.total_used?.toLocaleString() || 0}</p>
             </div>
           </div>
 
           {/* Recent Transactions */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-4">Recent Transactions / हाल के लेन-देन</h3>
             {wallet?.transactions?.length > 0 ? (
               <div className="space-y-3">
@@ -307,7 +307,7 @@ function ReferAndEarn({ user }) {
 
       {/* History Tab */}
       {activeTab === 'history' && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-4">Referral History / रेफरल इतिहास</h3>
           {stats?.recent_referrals?.length > 0 ? (
             <div className="space-y-3">
@@ -351,7 +351,7 @@ function ReferAndEarn({ user }) {
       {activeTab === 'leaderboard' && (
         <div className="space-y-6">
           {/* Rewards Info */}
-          <div className="bg-gradient-to-r from-yellow-500/10 via-slate-500/10 to-orange-500/10 rounded-xl p-4 border border-yellow-500/30">
+          <div className="bg-gradient-to-r from-yellow-500/10 via-slate-500/10 rounded-sm p-4 border border-yellow-500/30">
             <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
               <Trophy className="h-5 w-5 text-yellow-400" />
               Monthly Rewards / मासिक पुरस्कार
@@ -367,9 +367,9 @@ function ReferAndEarn({ user }) {
                 <p className="text-slate-300 font-bold">₹500</p>
                 <p className="text-slate-400 text-xs">2nd Place / दूसरा स्थान</p>
               </div>
-              <div className="p-3 bg-orange-500/20 rounded-lg border border-orange-500/30">
-                <Award className="h-6 w-6 text-orange-400 mx-auto mb-1" />
-                <p className="text-orange-400 font-bold">₹250</p>
+              <div className="p-3 bg-lime/20 rounded-lg border border-lime/30">
+                <Award className="h-6 w-6 text-lime mx-auto mb-1" />
+                <p className="text-lime font-bold">₹250</p>
                 <p className="text-slate-400 text-xs">3rd Place / तीसरा स्थान</p>
               </div>
             </div>
@@ -397,7 +397,7 @@ function ReferAndEarn({ user }) {
 
           {/* Current User Rank */}
           {leaderboard?.current_user && (
-            <div className="bg-purple-500/10 rounded-xl p-4 border border-purple-500/30">
+            <div className="bg-purple-500/10 rounded-sm p-4 border border-purple-500/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold text-lg">
@@ -417,7 +417,7 @@ function ReferAndEarn({ user }) {
           )}
 
           {/* Leaderboard List */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
             <div className="p-4 border-b border-slate-700">
               <h3 className="text-white font-semibold flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-yellow-400" />
@@ -436,14 +436,14 @@ function ReferAndEarn({ user }) {
                     } ${idx < 3 ? 'bg-gradient-to-r' : ''} ${
                       idx === 0 ? 'from-yellow-500/10 to-transparent' : 
                       idx === 1 ? 'from-slate-400/10 to-transparent' : 
-                      idx === 2 ? 'from-orange-500/10 to-transparent' : ''
+                      idx === 2 ? 'to-transparent' : ''
                     }`}
                   >
                     {/* Rank */}
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                       idx === 0 ? 'bg-yellow-500 text-black' :
                       idx === 1 ? 'bg-slate-400 text-black' :
-                      idx === 2 ? 'bg-orange-500 text-black' :
+                      idx === 2 ? 'bg-lime text-black' :
                       'bg-slate-700 text-slate-400'
                     }`}>
                       {idx === 0 ? <Crown className="h-5 w-5" /> :

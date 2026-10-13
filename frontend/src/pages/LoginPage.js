@@ -251,7 +251,7 @@ function LoginPage({ setUser }) {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 mb-4" data-testid="logo-link">
-            <Plane className="h-10 w-10 text-orange-500" />
+            <Plane className="h-10 w-10 text-lime" />
             <span className="text-3xl font-bold text-white">AirYatra</span>
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2" data-testid="auth-title">
@@ -331,8 +331,8 @@ function LoginPage({ setUser }) {
           <form onSubmit={handleOtpSubmit} className="glass p-8 rounded-lg space-y-6" data-testid="otp-form">
             {/* OTP Icon */}
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto flex items-center justify-center mb-4">
-                <Shield className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 bg-slate-800 border border-slate-700 rounded-full mx-auto flex items-center justify-center mb-4">
+                <Shield className="h-8 w-8 text-lime" />
               </div>
               <p className="text-slate-400 text-sm">
                 Enter the 6-digit code sent to<br/>
@@ -352,7 +352,7 @@ function LoginPage({ setUser }) {
                   value={digit}
                   onChange={(e) => handleOtpChange(index, e.target.value)}
                   onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                  className="w-12 h-14 text-center text-2xl font-bold bg-slate-800 border-2 border-slate-600 rounded-lg text-white focus:border-orange-500 focus:outline-none transition-colors"
+                  className="w-12 h-14 text-center text-2xl font-bold bg-slate-800 border-2 border-slate-600 rounded-lg text-white focus:border-lime focus:outline-none transition-colors"
                   data-testid={`otp-input-${index}`}
                   autoFocus={index === 0}
                 />
@@ -365,10 +365,10 @@ function LoginPage({ setUser }) {
                 id="trustDevice"
                 checked={trustDevice}
                 onCheckedChange={setTrustDevice}
-                className="border-orange-500 data-[state=checked]:bg-orange-500"
+                className="border-lime data-[state=checked]:bg-lime"
               />
               <label htmlFor="trustDevice" className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
-                <Smartphone className="h-4 w-4 text-orange-400" />
+                <Smartphone className="h-4 w-4 text-lime" />
                 Trust this device for 30 days
               </label>
             </div>
@@ -377,7 +377,7 @@ function LoginPage({ setUser }) {
             <Button
               type="submit"
               disabled={loading || otpCode.join('').length !== 6}
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white h-12"
+              className="w-full bg-lime text-black h-12"
               data-testid="verify-otp-btn"
             >
               {loading ? (
@@ -396,7 +396,7 @@ function LoginPage({ setUser }) {
                 type="button"
                 onClick={handleResendOtp}
                 disabled={otpCooldown > 0 || loading}
-                className={`text-sm ${otpCooldown > 0 ? 'text-slate-500' : 'text-orange-400 hover:text-orange-300'}`}
+                className={`text-sm ${otpCooldown > 0 ? 'text-slate-500' : 'text-lime hover:text-lime/80'}`}
               >
                 {otpCooldown > 0 
                   ? `Resend OTP in ${otpCooldown}s` 
@@ -530,7 +530,7 @@ function LoginPage({ setUser }) {
 
           <Button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-6 text-lg"
+            className="w-full bg-lime hover:bg-lime/90 text-black py-6 text-lg"
             disabled={loading}
             data-testid="submit-btn"
           >
@@ -558,7 +558,7 @@ function LoginPage({ setUser }) {
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-orange-500 hover:text-orange-400 text-sm"
+              className="text-lime hover:text-lime/80 text-sm"
               data-testid="toggle-auth-btn"
             >
               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Login"}

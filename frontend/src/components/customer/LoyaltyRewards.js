@@ -19,11 +19,11 @@ const StatusHeader = ({ status }) => {
   if (!status) return null;
   const { profile, current_tier, next_tier, points_to_next_tier, progress_percent, earning } = status;
   return (
-    <div className="bg-slate-800/50 rounded-2xl border border-slate-700 p-6 mb-6" data-testid="loyalty-status-card">
+    <div className="bg-slate-800/50 rounded-sm border border-slate-700 p-6 mb-6" data-testid="loyalty-status-card">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         <div>
           <p className="text-slate-400 text-sm uppercase">Available Points / उपलब्ध पॉइंट्स</p>
-          <p className="text-4xl font-black text-orange-400" data-testid="available-points">
+          <p className="text-4xl font-black text-lime" data-testid="available-points">
             {(profile?.available_points || 0).toLocaleString()}
           </p>
           <p className="text-slate-500 text-xs mt-1">Lifetime: {(profile?.lifetime_points || 0).toLocaleString()} pts</p>
@@ -49,14 +49,14 @@ const StatusHeader = ({ status }) => {
             <span>{points_to_next_tier.toLocaleString()} pts to {next_tier.name}</span>
           </div>
           <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full transition-all" style={{ width: `${progress_percent}%` }} />
+            <div className="h-full bg-slate-800 border border-slate-700 rounded-full transition-all" style={{ width: `${progress_percent}%` }} />
           </div>
         </div>
       )}
       <div className="mt-4 pt-4 border-t border-slate-700 flex flex-wrap gap-3 text-xs">
         <span className="text-slate-400">{earning?.earn_rate} spent ×</span>
         {Object.entries(earning?.tier_multipliers || {}).map(([tier, mult]) => (
-          <span key={tier} className={`px-2 py-0.5 rounded-full border ${current_tier?.id === tier ? 'border-orange-500 text-orange-400' : 'border-slate-600 text-slate-400'}`}>
+          <span key={tier} className={`px-2 py-0.5 rounded-full border ${current_tier?.id === tier ? 'border-lime text-lime' : 'border-slate-600 text-slate-400'}`}>
             {tier.charAt(0).toUpperCase() + tier.slice(1)} {mult}x
           </span>
         ))}
@@ -67,7 +67,7 @@ const StatusHeader = ({ status }) => {
 };
 
 const RewardCard = ({ reward, onRedeem }) => (
-  <div className={`bg-slate-800/50 rounded-xl border p-5 flex flex-col ${reward.can_redeem ? 'border-orange-500/40 hover:border-orange-500' : 'border-slate-700'} transition-all`} data-testid={`reward-card-${reward.id}`}>
+  <div className={`bg-slate-800/50 rounded-sm border p-5 flex flex-col ${reward.can_redeem ? 'border-lime/40 hover:border-lime' : 'border-slate-700'} transition-all`} data-testid={`reward-card-${reward.id}`}>
     <div className="flex items-start justify-between mb-3">
       <span className="text-3xl">{reward.icon}</span>
       {reward.tier_locked && (
@@ -77,14 +77,14 @@ const RewardCard = ({ reward, onRedeem }) => (
     <h4 className="text-white font-semibold">{reward.name}</h4>
     <p className="text-slate-400 text-xs mt-1 flex-1">{reward.description}</p>
     <div className="flex items-center justify-between mt-4">
-      <span className="text-orange-400 font-bold flex items-center gap-1">
-        <Star className="h-4 w-4 fill-orange-400" /> {reward.points_cost.toLocaleString()}
+      <span className="text-lime font-bold flex items-center gap-1">
+        <Star className="h-4 w-4 fill-lime" /> {reward.points_cost.toLocaleString()}
       </span>
       <Button
         size="sm"
         disabled={!reward.can_redeem}
         onClick={() => onRedeem(reward)}
-        className={reward.can_redeem ? 'bg-orange-500 hover:bg-orange-600' : 'bg-slate-700 text-slate-500'}
+        className={reward.can_redeem ? 'bg-lime text-black hover:bg-lime/90' : 'bg-slate-700 text-slate-500'}
         data-testid={`redeem-btn-${reward.id}`}
       >
         Redeem
@@ -114,7 +114,7 @@ const VoucherRow = ({ voucher }) => {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <button onClick={copyCode} className="flex items-center gap-1 px-3 py-1 bg-slate-900 rounded-lg border border-slate-600 text-orange-400 font-mono text-sm hover:border-orange-500" data-testid={`voucher-code-${voucher.code}`}>
+        <button onClick={copyCode} className="flex items-center gap-1 px-3 py-1 bg-slate-900 rounded-lg border border-slate-600 text-lime font-mono text-sm hover:border-lime" data-testid={`voucher-code-${voucher.code}`}>
           {voucher.code} {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
         </button>
         <Badge className={statusColors[voucher.status] || statusColors.active}>{voucher.status}</Badge>
@@ -175,7 +175,7 @@ export default function LoyaltyRewards({ user }) {
   return (
     <div className="max-w-6xl mx-auto" data-testid="loyalty-rewards-page">
       <h1 className="text-3xl font-bold text-white mb-1 flex items-center gap-2">
-        <Star className="h-7 w-7 text-orange-500" /> VIP Points & Rewards / पॉइंट्स और रिवॉर्ड्स
+        <Star className="h-7 w-7 text-lime" /> VIP Points & Rewards / पॉइंट्स और रिवॉर्ड्स
       </h1>
       <p className="text-slate-400 mb-6">Earn points on every flight. Redeem for vouchers & experiences.</p>
 
@@ -184,7 +184,7 @@ export default function LoyaltyRewards({ user }) {
       {/* Rewards Catalog */}
       <div className="mb-8">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <Gift className="h-5 w-5 text-orange-400" /> Rewards Catalog / रिवॉर्ड्स
+          <Gift className="h-5 w-5 text-lime" /> Rewards Catalog / रिवॉर्ड्स
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="rewards-catalog">
           {rewards.map(r => <RewardCard key={r.id} reward={r} onRedeem={setConfirmReward} />)}
@@ -208,7 +208,7 @@ export default function LoyaltyRewards({ user }) {
       {/* Points History */}
       <div>
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <History className="h-5 w-5 text-blue-400" /> Points History / पॉइंट्स इतिहास
+          <History className="h-5 w-5 text-amber" /> Points History / पॉइंट्स इतिहास
         </h2>
         {history.length === 0 ? (
           <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-history">
@@ -242,7 +242,7 @@ export default function LoyaltyRewards({ user }) {
               <span className="text-2xl">{confirmReward?.icon}</span> Redeem {confirmReward?.name}?
             </DialogTitle>
             <DialogDescription className="text-slate-400">
-              This will deduct <span className="text-orange-400 font-bold">{confirmReward?.points_cost?.toLocaleString()} points</span> from your balance.
+              This will deduct <span className="text-lime font-bold">{confirmReward?.points_cost?.toLocaleString()} points</span> from your balance.
               You will receive a voucher code valid for {confirmReward?.validity_days || 90} days.
             </DialogDescription>
           </DialogHeader>
@@ -250,7 +250,7 @@ export default function LoyaltyRewards({ user }) {
             <Button variant="outline" onClick={() => setConfirmReward(null)} className="border-slate-600 text-slate-300" data-testid="cancel-redeem-btn">
               Cancel
             </Button>
-            <Button onClick={handleRedeem} disabled={redeeming} className="bg-orange-500 hover:bg-orange-600" data-testid="confirm-redeem-btn">
+            <Button onClick={handleRedeem} disabled={redeeming} className="bg-lime text-black hover:bg-lime/90" data-testid="confirm-redeem-btn">
               {redeeming ? 'Redeeming...' : 'Confirm Redeem'}
             </Button>
           </DialogFooter>

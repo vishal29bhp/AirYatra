@@ -68,7 +68,7 @@ function GlobalNav({ user, showBack = true }) {
           onClick={goBack}
           size="sm"
           variant="outline"
-          className="bg-slate-800/80 backdrop-blur-sm border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white shadow-lg"
+          className="bg-slate-800/80 backdrop-blur-sm border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
           {t('nav.back')}
@@ -77,7 +77,7 @@ function GlobalNav({ user, showBack = true }) {
       <Button
         onClick={goHome}
         size="sm"
-        className="bg-orange-500/90 backdrop-blur-sm hover:bg-orange-600 text-white shadow-lg"
+        className="bg-lime/90 backdrop-blur-sm hover:bg-lime/90 text-white"
       >
         <Home className="h-4 w-4 mr-1" />
         {t('nav.home')}

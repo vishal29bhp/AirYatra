@@ -38,9 +38,9 @@ function RouteSuggestions({ user }) {
   const getPurposeIcon = (purpose) => {
     switch (purpose) {
       case 'pilgrimage': return <Heart className="h-4 w-4 text-pink-400" />;
-      case 'business': return <Building2 className="h-4 w-4 text-blue-400" />;
+      case 'business': return <Building2 className="h-4 w-4 text-amber" />;
       case 'tourism': return <Star className="h-4 w-4 text-yellow-400" />;
-      case 'leisure': return <Sun className="h-4 w-4 text-orange-400" />;
+      case 'leisure': return <Sun className="h-4 w-4 text-lime" />;
       case 'wedding': return <Gift className="h-4 w-4 text-red-400" />;
       default: return <Plane className="h-4 w-4 text-slate-400" />;
     }
@@ -66,7 +66,7 @@ function RouteSuggestions({ user }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -84,11 +84,11 @@ function RouteSuggestions({ user }) {
 
       {/* Seasonal Suggestion Banner */}
       {data?.seasonal_suggestion && (
-        <div className="bg-gradient-to-r from-orange-500/20 via-red-500/20 to-pink-500/20 rounded-xl p-4 border border-orange-500/30">
+        <div className="bg-lime/20 rounded-sm p-4 border border-lime/30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-orange-500/30 flex items-center justify-center">
-                <Gift className="h-6 w-6 text-orange-400" />
+              <div className="w-12 h-12 rounded-full bg-lime/30 flex items-center justify-center">
+                <Gift className="h-6 w-6 text-lime" />
               </div>
               <div>
                 <h3 className="text-white font-bold">{data.seasonal_suggestion.title}</h3>
@@ -101,7 +101,7 @@ function RouteSuggestions({ user }) {
             {data.seasonal_suggestion.route && (
               <Button 
                 onClick={() => handleBookRoute(data.seasonal_suggestion.route)}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
               >
                 Book Now <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
@@ -122,7 +122,7 @@ function RouteSuggestions({ user }) {
             {data.personalized_routes.map((route, idx) => (
               <div 
                 key={idx}
-                className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-xl p-4 border border-yellow-500/30 hover:border-yellow-500/50 transition-all cursor-pointer group"
+                className="bg-gradient-to-br from-yellow-500/10 rounded-sm p-4 border border-yellow-500/30 hover:border-yellow-500/50 transition-all cursor-pointer group"
                 onClick={() => handleBookRoute(route)}
               >
                 <div className="flex items-start justify-between mb-3">
@@ -172,7 +172,7 @@ function RouteSuggestions({ user }) {
           {data?.trending_routes?.map((route, idx) => (
             <div 
               key={idx}
-              className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 hover:border-orange-500/50 transition-all cursor-pointer group"
+              className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 hover:border-lime/50 transition-all cursor-pointer group"
               onClick={() => handleBookRoute(route)}
             >
               <div className="flex items-start justify-between mb-3">
@@ -188,7 +188,7 @@ function RouteSuggestions({ user }) {
               
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-white font-semibold">{route.from}</span>
-                <Navigation className="h-4 w-4 text-orange-400" />
+                <Navigation className="h-4 w-4 text-lime" />
                 <span className="text-white font-semibold">{route.to}</span>
               </div>
               
@@ -203,7 +203,7 @@ function RouteSuggestions({ user }) {
               
               <div className="mt-3 pt-3 border-t border-slate-700 flex items-center justify-between">
                 <span className="text-slate-500 text-xs">Best: {route.best_time}</span>
-                <Button size="sm" variant="ghost" className="text-orange-400 opacity-0 group-hover:opacity-100 transition-opacity h-7 px-2">
+                <Button size="sm" variant="ghost" className="text-lime opacity-0 group-hover:opacity-100 transition-opacity h-7 px-2">
                   Book <ChevronRight className="h-3 w-3" />
                 </Button>
               </div>
@@ -215,10 +215,10 @@ function RouteSuggestions({ user }) {
       {/* All Popular Routes */}
       <div>
         <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-          <Plane className="h-5 w-5 text-blue-400" />
+          <Plane className="h-5 w-5 text-amber" />
           All Popular Routes / सभी लोकप्रिय मार्ग
         </h3>
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
           <table className="w-full">
             <thead className="bg-slate-800">
               <tr>
@@ -236,7 +236,7 @@ function RouteSuggestions({ user }) {
                   <td className="p-3">
                     <div className="flex items-center gap-2">
                       <span className="text-white">{route.from}</span>
-                      <ChevronRight className="h-4 w-4 text-orange-400" />
+                      <ChevronRight className="h-4 w-4 text-lime" />
                       <span className="text-white">{route.to}</span>
                     </div>
                   </td>
@@ -253,7 +253,7 @@ function RouteSuggestions({ user }) {
                     <Button 
                       size="sm" 
                       onClick={() => handleBookRoute(route)}
-                      className="bg-orange-500 hover:bg-orange-600"
+                      className="bg-lime text-black hover:bg-lime/90"
                     >
                       Book
                     </Button>
@@ -267,18 +267,18 @@ function RouteSuggestions({ user }) {
 
       {/* Booking Tip */}
       {data?.booking_tip && (
-        <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/30 text-center">
-          <p className="text-blue-400">💡 {data.booking_tip}</p>
+        <div className="bg-amber/10 rounded-sm p-4 border border-amber/30 text-center">
+          <p className="text-amber">💡 {data.booking_tip}</p>
         </div>
       )}
 
       {/* User Preferences Summary */}
       {data?.user_preference?.total_bookings > 0 && (
-        <div className="bg-slate-800/30 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/30 rounded-sm p-4 border border-slate-700">
           <h4 className="text-slate-400 text-sm mb-2">Your Travel Profile / आपकी यात्रा प्रोफ़ाइल</h4>
           <div className="flex items-center gap-4">
             <span className="text-white">
-              <Users className="h-4 w-4 inline mr-1 text-blue-400" />
+              <Users className="h-4 w-4 inline mr-1 text-amber" />
               {data.user_preference.total_bookings} bookings
             </span>
             <span className="text-white">

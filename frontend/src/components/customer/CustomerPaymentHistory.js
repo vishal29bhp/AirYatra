@@ -125,7 +125,7 @@ export default function CustomerPaymentHistory({ user }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="payments-loading">
-        <RefreshCw className="h-8 w-8 animate-spin text-orange-500" />
+        <RefreshCw className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -136,7 +136,7 @@ export default function CustomerPaymentHistory({ user }) {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Wallet className="h-7 w-7 text-orange-500" />
+            <Wallet className="h-7 w-7 text-lime" />
             Payment History
           </h1>
           <p className="text-slate-400 mt-1">View all your payments and download receipts</p>
@@ -161,39 +161,39 @@ export default function CustomerPaymentHistory({ user }) {
                 <p className="text-3xl font-bold text-white mt-1">{formatCurrency(totalPaid)}</p>
                 <p className="text-green-200 text-sm mt-1">{transactions.length} bookings</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <CheckCircle className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-orange-100 text-sm font-medium">Pending Balance</p>
+                <p className="text-slate-300 text-sm font-medium">Pending Balance</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatCurrency(totalPending)}</p>
-                <p className="text-orange-200 text-sm mt-1">Remaining to pay</p>
+                <p className="text-slate-300 text-sm mt-1">Remaining to pay</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Clock className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-0">
+        <Card className="bg-slate-800 border border-slate-700">
           <CardContent className="p-5">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-blue-100 text-sm font-medium">Total Receipts</p>
+                <p className="text-slate-300 text-sm font-medium">Total Receipts</p>
                 <p className="text-3xl font-bold text-white mt-1">
                   {transactions.reduce((sum, t) => sum + t.transactions.filter(tx => tx.payment_status === 'paid').length, 0)}
                 </p>
-                <p className="text-blue-200 text-sm mt-1">Available for download</p>
+                <p className="text-slate-300 text-sm mt-1">Available for download</p>
               </div>
-              <div className="p-3 bg-white/20 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-sm">
                 <Receipt className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -209,7 +209,7 @@ export default function CustomerPaymentHistory({ user }) {
             <h3 className="text-xl font-semibold text-white mb-2">No Payment History</h3>
             <p className="text-slate-400">Your payment transactions will appear here once you make a booking.</p>
             <Button 
-              className="mt-6 bg-orange-500 hover:bg-orange-600"
+              className="mt-6 bg-lime text-black hover:bg-lime/90"
               onClick={() => window.location.href = '/booking'}
             >
               <Plane className="h-4 w-4 mr-2" />
@@ -224,15 +224,15 @@ export default function CustomerPaymentHistory({ user }) {
               {/* Booking Header */}
               <div className="bg-slate-700/50 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
-                    <Plane className="h-6 w-6 text-orange-400" />
+                  <div className="w-12 h-12 bg-lime/20 rounded-sm flex items-center justify-center">
+                    <Plane className="h-6 w-6 text-lime" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-white font-semibold">
                         {item.booking.from_location || 'Origin'} → {item.booking.to_location || 'Destination'}
                       </span>
-                      <Badge className="bg-orange-500/20 text-orange-400 border-0 text-xs">
+                      <Badge className="bg-lime/20 text-lime border-0 text-xs">
                         #{item.booking.inquiry_number || item.booking.id?.slice(0, 8)}
                       </Badge>
                     </div>
@@ -248,7 +248,7 @@ export default function CustomerPaymentHistory({ user }) {
                   <p className="text-slate-400 text-sm">Total Amount</p>
                   <p className="text-xl font-bold text-white">{formatCurrency(item.summary?.total_amount)}</p>
                   {item.summary?.remaining > 0 && (
-                    <Badge className="bg-orange-500/20 text-orange-400 border-0 mt-1">
+                    <Badge className="bg-lime/20 text-lime border-0 mt-1">
                       {formatCurrency(item.summary.remaining)} pending
                     </Badge>
                   )}
@@ -283,7 +283,7 @@ export default function CustomerPaymentHistory({ user }) {
                           <Badge className={`border-0 ${
                             txn.payment_type === 'balance' 
                               ? 'bg-purple-500/20 text-purple-400' 
-                              : 'bg-blue-500/20 text-blue-400'
+                              : 'bg-amber/20 text-amber'
                           }`}>
                             {txn.payment_type === 'balance' ? 'Balance' : 'Advance'}
                           </Badge>
@@ -320,7 +320,7 @@ export default function CustomerPaymentHistory({ user }) {
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="h-8 px-3 text-orange-400 hover:bg-orange-500/20"
+                              className="h-8 px-3 text-lime hover:bg-lime/20"
                               onClick={() => downloadReceipt(txn.session_id, txn.id)}
                               disabled={downloading[txn.id]}
                               data-testid={`download-receipt-${tIdx}`}

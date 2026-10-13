@@ -13,8 +13,8 @@ import { toast } from 'sonner';
 const typeConfig = {
   airport: { 
     icon: Plane, 
-    color: 'text-blue-400', 
-    bg: 'bg-blue-500/20',
+    color: 'text-amber', 
+    bg: 'bg-amber/20',
     label: 'Airport / एयरपोर्ट'
   },
   govt_helipad: { 
@@ -31,8 +31,8 @@ const typeConfig = {
   },
   village_land: { 
     icon: TreePine, 
-    color: 'text-orange-400', 
-    bg: 'bg-orange-500/20',
+    color: 'text-lime', 
+    bg: 'bg-lime/20',
     label: 'Village Land / गांव की जमीन'
   },
 };
@@ -297,7 +297,7 @@ function LandingPointSelector({
           className="pl-10 pr-10 bg-slate-800 border-slate-600 text-white"
         />
         {loading && (
-          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-orange-400 animate-spin" />
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime animate-spin" />
         )}
         {selectedPoint && !loading && (
           <button
@@ -311,7 +311,7 @@ function LandingPointSelector({
 
       {/* Search Results Dropdown */}
       {showDropdown && searchResults.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-600 rounded-xl shadow-xl max-h-80 overflow-y-auto">
+        <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-600 rounded-sm max-h-80 overflow-y-auto">
           {searchResults.map((point) => (
             <button
               key={point.id}
@@ -345,7 +345,7 @@ function LandingPointSelector({
                   )}
                   
                   {point.availability_calendar_required && (
-                    <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded text-xs flex items-center gap-1">
+                    <span className="px-2 py-0.5 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       Calendar
                     </span>
@@ -405,7 +405,7 @@ function LandingPointSelector({
 
       {/* No results message - Show Village Area Option */}
       {showDropdown && searchTerm.length >= 2 && searchResults.length === 0 && !loading && !showVillageInput && (
-        <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-600 rounded-xl p-4">
+        <div className="absolute z-50 w-full mt-2 bg-slate-800 border border-slate-600 rounded-sm p-4">
           <div className="text-center mb-4">
             <MapPin className="h-8 w-8 text-slate-500 mx-auto mb-2" />
             <p className="text-slate-400">No landing points found / कोई लैंडिंग पॉइंट नहीं मिला</p>
@@ -418,18 +418,18 @@ function LandingPointSelector({
                 setShowVillageInput(true);
                 setShowDropdown(false);
               }}
-              className="w-full p-3 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 rounded-lg flex items-center gap-3 transition-colors"
+              className="w-full p-3 bg-lime/10 hover:bg-lime/20 border border-lime/30 rounded-lg flex items-center gap-3 transition-colors"
             >
-              <div className="p-2 bg-orange-500/20 rounded-lg">
-                <TreePine className="h-5 w-5 text-orange-400" />
+              <div className="p-2 bg-lime/20 rounded-lg">
+                <TreePine className="h-5 w-5 text-lime" />
               </div>
               <div className="text-left flex-1">
-                <p className="text-orange-400 font-medium">Select Village Area / गांव क्षेत्र चुनें</p>
-                <p className="text-orange-400/70 text-xs">
+                <p className="text-lime font-medium">Select Village Area / गांव क्षेत्र चुनें</p>
+                <p className="text-lime/70 text-xs">
                   Enter PIN Code to select your village / पिन कोड दर्ज करें
                 </p>
               </div>
-              <ChevronDown className="h-4 w-4 text-orange-400 rotate-[-90deg]" />
+              <ChevronDown className="h-4 w-4 text-lime rotate-[-90deg]" />
             </button>
           </div>
         </div>
@@ -437,14 +437,14 @@ function LandingPointSelector({
 
       {/* Village Area Input Form */}
       {showVillageInput && (
-        <div className="mt-3 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
+        <div className="mt-3 p-4 bg-lime/10 border border-lime/30 rounded-sm">
           <div className="flex items-start gap-3 mb-4">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <TreePine className="h-5 w-5 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <TreePine className="h-5 w-5 text-lime" />
             </div>
             <div>
-              <h4 className="text-orange-400 font-medium">Select Village Area / गांव क्षेत्र चुनें</h4>
-              <p className="text-orange-400/70 text-xs">
+              <h4 className="text-lime font-medium">Select Village Area / गांव क्षेत्र चुनें</h4>
+              <p className="text-lime/70 text-xs">
                 Enter your village PIN code to get location details
               </p>
             </div>
@@ -464,7 +464,7 @@ function LandingPointSelector({
                   className="bg-slate-800 border-slate-600 text-white"
                 />
                 {loadingPincode && (
-                  <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-orange-400 animate-spin" />
+                  <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-lime animate-spin" />
                 )}
               </div>
             </div>
@@ -504,7 +504,7 @@ function LandingPointSelector({
                 type="button"
                 onClick={handleSelectVillageArea}
                 disabled={!villageData.area || loadingPincode}
-                className="flex-1 bg-orange-500 hover:bg-orange-600"
+                className="flex-1 bg-lime text-black hover:bg-lime/90"
               >
                 <Check className="h-4 w-4 mr-2" />
                 Select This Location

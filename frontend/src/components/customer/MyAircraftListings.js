@@ -12,7 +12,7 @@ const STATUS_STYLES = {
   pending_review: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
   active: 'bg-green-500/15 text-green-400 border-green-500/30',
   rejected: 'bg-red-500/15 text-red-400 border-red-500/30',
-  sold: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+  sold: 'bg-amber/15 text-amber border-amber/30',
 };
 
 const STATUS_LABELS = {
@@ -44,11 +44,11 @@ export const MyAircraftListings = ({ user }) => {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Plane className="h-6 w-6 text-orange-500" /> My Aircraft Listings / मेरे विमान
+            <Plane className="h-6 w-6 text-lime" /> My Aircraft Listings / मेरे विमान
           </h1>
           <p className="text-slate-400 text-sm">Track your listings, views and buyer inquiries</p>
         </div>
-        <Button onClick={() => navigate('/exchange')} className="bg-orange-500 hover:bg-orange-600" data-testid="list-new-aircraft-btn">
+        <Button onClick={() => navigate('/exchange')} className="bg-lime text-black hover:bg-lime/90" data-testid="list-new-aircraft-btn">
           <PlusCircle className="h-4 w-4 mr-2" /> List New Aircraft
         </Button>
       </div>
@@ -59,8 +59,8 @@ export const MyAircraftListings = ({ user }) => {
           ['Total Views', data?.total_views || 0, Eye],
           ['Inquiries', data?.total_inquiries || 0, MessageSquare],
         ].map(([label, value, Icon]) => (
-          <div key={label} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`seller-stat-${label.toLowerCase().replace(' ', '-')}`}>
-            <Icon className="h-5 w-5 text-orange-400 mb-2" />
+          <div key={label} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`seller-stat-${label.toLowerCase().replace(' ', '-')}`}>
+            <Icon className="h-5 w-5 text-lime mb-2" />
             <p className="text-2xl font-bold text-white">{value}</p>
             <p className="text-slate-400 text-xs">{label}</p>
           </div>
@@ -68,18 +68,18 @@ export const MyAircraftListings = ({ user }) => {
       </div>
 
       {listings.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-2xl" data-testid="no-my-listings">
+        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-sm" data-testid="no-my-listings">
           <Plane className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400">You haven't listed any aircraft yet.</p>
           <p className="text-slate-500 text-sm mt-1">List your helicopter, jet or turboprop on India's first aircraft resale marketplace — free!</p>
-          <Button onClick={() => navigate('/exchange')} className="mt-4 bg-orange-500 hover:bg-orange-600" data-testid="empty-list-aircraft-btn">
+          <Button onClick={() => navigate('/exchange')} className="mt-4 bg-lime text-black hover:bg-lime/90" data-testid="empty-list-aircraft-btn">
             <PlusCircle className="h-4 w-4 mr-2" /> Sell Your Aircraft
           </Button>
         </div>
       ) : (
         <div className="space-y-3">
           {listings.map(l => (
-            <div key={l.id} className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden" data-testid={`my-listing-${l.id}`}>
+            <div key={l.id} className="bg-slate-900/70 border border-slate-800 rounded-sm overflow-hidden" data-testid={`my-listing-${l.id}`}>
               <div className="p-4 flex flex-col sm:flex-row gap-4">
                 <img src={l.image} alt={l.title} className="w-full sm:w-32 h-22 sm:h-20 object-cover rounded-lg" />
                 <div className="flex-1 min-w-0">
@@ -88,7 +88,7 @@ export const MyAircraftListings = ({ user }) => {
                     <Badge className={`border ${STATUS_STYLES[l.status] || ''}`} data-testid={`my-listing-status-${l.id}`}>{STATUS_LABELS[l.status] || l.status}</Badge>
                     {l.featured && <Badge className="bg-amber-500/15 text-amber-400 border border-amber-500/30"><Star className="h-3 w-3 mr-1" /> Featured</Badge>}
                   </div>
-                  <p className="text-orange-400 font-bold text-sm mt-1">{formatCr(l.price_inr)}</p>
+                  <p className="text-lime font-bold text-sm mt-1">{formatCr(l.price_inr)}</p>
                   <p className="text-slate-400 text-xs mt-1 flex items-center gap-4">
                     <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {l.views || 0} views</span>
                     <span className="flex items-center gap-1"><MessageSquare className="h-3 w-3" /> {(l.inquiries || []).length} inquiries</span>
@@ -98,7 +98,7 @@ export const MyAircraftListings = ({ user }) => {
                 {(l.inquiries || []).length > 0 && (
                   <button
                     onClick={() => setExpanded(expanded === l.id ? null : l.id)}
-                    className="text-orange-400 text-sm flex items-center gap-1 shrink-0 self-start hover:text-orange-300"
+                    className="text-lime text-sm flex items-center gap-1 shrink-0 self-start hover:text-lime/80"
                     data-testid={`toggle-inquiries-${l.id}`}
                   >
                     {expanded === l.id ? <>Hide <ChevronUp className="h-4 w-4" /></> : <>View Inquiries <ChevronDown className="h-4 w-4" /></>}
@@ -112,7 +112,7 @@ export const MyAircraftListings = ({ user }) => {
                       navigator.clipboard.writeText(`${window.location.origin}/exchange/listing/${l.id}`)
                         .then(() => toast.success('Public link copied — promote it anywhere! / लिंक कॉपी हो गया'));
                     }}
-                    className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 shrink-0 self-start"
+                    className="border-lime/50 text-lime hover:bg-lime/10 shrink-0 self-start"
                     data-testid={`share-listing-${l.id}`}
                   >
                     <Share2 className="h-4 w-4 mr-1" /> Share

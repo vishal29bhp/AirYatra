@@ -10,7 +10,7 @@ const formatCr = (p) => `₹${(p / 10000000).toFixed(p % 10000000 === 0 ? 0 : 1)
 
 const STATUS_STYLES = {
   new: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
-  contacted: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+  contacted: 'bg-amber/15 text-amber border-amber/30',
   approved: 'bg-green-500/15 text-green-400 border-green-500/30',
   rejected: 'bg-red-500/15 text-red-400 border-red-500/30',
 };
@@ -63,7 +63,7 @@ export const MyInvestments = ({ user }) => {
     <div className="max-w-5xl mx-auto space-y-6" data-testid="my-investments">
       <div>
         <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <PieChart className="h-6 w-6 text-orange-500" /> My Investments / मेरा निवेश
+          <PieChart className="h-6 w-6 text-lime" /> My Investments / मेरा निवेश
         </h1>
         <p className="text-slate-400 text-sm">Your fractional aircraft ownership portfolio</p>
       </div>
@@ -74,7 +74,7 @@ export const MyInvestments = ({ user }) => {
           ['Approved Shares', reservations.filter(r => r.status === 'approved').reduce((s, r) => s + r.shares, 0)],
           ['Portfolio Value', approvedValue > 0 ? formatCr(approvedValue) : '—'],
         ].map(([label, value]) => (
-          <div key={label} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4" data-testid={`investment-stat-${label.toLowerCase().replace(' ', '-')}`}>
+          <div key={label} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4" data-testid={`investment-stat-${label.toLowerCase().replace(' ', '-')}`}>
             <p className="text-2xl font-bold text-white">{value}</p>
             <p className="text-slate-400 text-xs">{label}</p>
           </div>
@@ -82,25 +82,25 @@ export const MyInvestments = ({ user }) => {
       </div>
 
       {reservations.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-2xl" data-testid="no-investments">
+        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-sm" data-testid="no-investments">
           <Gem className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400">You don't have any fractional investments yet.</p>
           <p className="text-slate-500 text-sm mt-1">Own an aircraft at 1/8th the cost — with guaranteed flying hours every year.</p>
-          <Button onClick={() => navigate('/exchange')} className="mt-4 bg-orange-500 hover:bg-orange-600" data-testid="explore-fractional-btn">
+          <Button onClick={() => navigate('/exchange')} className="mt-4 bg-lime text-black hover:bg-lime/90" data-testid="explore-fractional-btn">
             <PieChart className="h-4 w-4 mr-2" /> Explore Fractional Ownership
           </Button>
         </div>
       ) : (
         <div className="space-y-3">
           {reservations.map(r => (
-            <div key={r.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4" data-testid={`investment-${r.id}`}>
+            <div key={r.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4 flex flex-col sm:flex-row gap-4" data-testid={`investment-${r.id}`}>
               {r.aircraft_image && <img src={r.aircraft_image} alt={r.title} className="w-full sm:w-32 h-20 object-cover rounded-lg" />}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-white font-semibold">{r.title}</h3>
                   <Badge className={`border ${STATUS_STYLES[r.status] || ''}`} data-testid={`investment-status-${r.id}`}>{STATUS_LABELS[r.status] || r.status}</Badge>
                 </div>
-                <p className="text-orange-400 font-bold text-sm mt-1">
+                <p className="text-lime font-bold text-sm mt-1">
                   {r.shares} × 1/{r.total_shares || 8} share{r.shares > 1 ? 's' : ''} • {formatCr(r.share_price_inr * r.shares)}
                 </p>
                 <p className="text-slate-400 text-xs mt-1 flex items-center gap-3 flex-wrap">

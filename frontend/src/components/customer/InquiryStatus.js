@@ -128,7 +128,7 @@ function InquiryStatus({ user }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <RefreshCw className="h-8 w-8 text-orange-400 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -180,14 +180,14 @@ function InquiryStatus({ user }) {
           <h1 className="text-3xl font-bold text-white mb-2">
             Inquiry Status / इंक्वायरी स्थिति
           </h1>
-          <p className="text-orange-400 font-mono text-lg">
+          <p className="text-lime font-mono text-lg">
             {inquiry.inquiry_number || inquiry.id?.slice(0, 8)}
           </p>
         </div>
 
         {/* ========== BOOKING SUMMARY CARD ========== */}
-        <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-6 border border-orange-500/30 mb-8 shadow-lg">
-          <h2 className="text-lg font-bold text-orange-400 mb-4 flex items-center gap-2">
+        <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-sm p-6 border border-lime/30 mb-8">
+          <h2 className="text-lg font-bold text-lime mb-4 flex items-center gap-2">
             <FileText className="h-5 w-5" /> Booking Details / बुकिंग विवरण
           </h2>
           
@@ -200,13 +200,13 @@ function InquiryStatus({ user }) {
             <div className="bg-slate-800/50 rounded-lg p-3">
               <p className="text-slate-400 text-xs mb-1">Passengers / यात्री</p>
               <p className="text-white font-bold text-sm flex items-center gap-1">
-                <Users className="h-4 w-4 text-blue-400" /> {inquiry.total_passengers || inquiry.adults_male + inquiry.adults_female || 1}
+                <Users className="h-4 w-4 text-amber" /> {inquiry.total_passengers || inquiry.adults_male + inquiry.adults_female || 1}
               </p>
             </div>
             <div className="bg-slate-800/50 rounded-lg p-3">
               <p className="text-slate-400 text-xs mb-1">Aircraft / विमान</p>
               <p className="text-white font-bold text-sm flex items-center gap-1">
-                <Plane className="h-4 w-4 text-orange-400" /> {inquiry.aircraft_type === 'helicopter' ? 'Helicopter' : 'Plane'}
+                <Plane className="h-4 w-4 text-lime" /> {inquiry.aircraft_type === 'helicopter' ? 'Helicopter' : 'Plane'}
               </p>
             </div>
             <div className="bg-slate-800/50 rounded-lg p-3">
@@ -229,7 +229,7 @@ function InquiryStatus({ user }) {
               
               <div className="flex items-center text-slate-600">
                 <div className="w-8 h-0.5 bg-slate-600"></div>
-                <Plane className="h-5 w-5 mx-2 text-orange-400 rotate-90" />
+                <Plane className="h-5 w-5 mx-2 text-lime rotate-90" />
                 <div className="w-8 h-0.5 bg-slate-600"></div>
               </div>
               
@@ -246,15 +246,15 @@ function InquiryStatus({ user }) {
 
           {/* Date, Time & Price Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-orange-500/10 rounded-lg p-3 border border-orange-500/20">
+            <div className="bg-lime/10 rounded-lg p-3 border border-lime/20">
               <p className="text-slate-400 text-xs mb-1">Travel Date / यात्रा तारीख</p>
-              <p className="text-orange-400 font-bold text-sm flex items-center gap-1">
+              <p className="text-lime font-bold text-sm flex items-center gap-1">
                 <Calendar className="h-4 w-4" /> {formatDate(inquiry.departure_date)}
               </p>
             </div>
-            <div className="bg-blue-500/10 rounded-lg p-3 border border-blue-500/20">
+            <div className="bg-amber/10 rounded-lg p-3 border border-amber/20">
               <p className="text-slate-400 text-xs mb-1">Pickup Time / समय</p>
-              <p className="text-blue-400 font-bold text-sm flex items-center gap-1">
+              <p className="text-amber font-bold text-sm flex items-center gap-1">
                 <Clock className="h-4 w-4" /> {formatTime(inquiry.pickup_time)}
               </p>
             </div>
@@ -301,7 +301,7 @@ function InquiryStatus({ user }) {
         {/* ========== END BOOKING SUMMARY CARD ========== */}
 
         {/* Progress Steps */}
-        <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 mb-8">
+        <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-8">
           <div className="flex items-center justify-between overflow-x-auto pb-2">
             {STATUS_STEPS.map((step, index) => {
               const StepIcon = step.icon;
@@ -314,13 +314,13 @@ function InquiryStatus({ user }) {
                   <div className="flex flex-col items-center min-w-[80px]">
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                       isCompleted ? 'bg-green-500 text-white' :
-                      isCurrent ? 'bg-orange-500 text-white ring-4 ring-orange-500/30' :
+                      isCurrent ? 'bg-lime text-black ring-4 ring-lime/30' :
                       'bg-slate-700 text-slate-400'
                     }`}>
                       {isCompleted ? <Check className="h-6 w-6" /> : <StepIcon className="h-6 w-6" />}
                     </div>
                     <span className={`text-xs mt-2 text-center ${
-                      isCurrent ? 'text-orange-400 font-medium' : 
+                      isCurrent ? 'text-lime font-medium' : 
                       isCompleted ? 'text-green-400' : 'text-slate-500'
                     }`}>
                       {step.label}
@@ -339,10 +339,10 @@ function InquiryStatus({ user }) {
         </div>
 
         {/* Current Status Message */}
-        <div className={`rounded-xl p-6 mb-8 border ${
+        <div className={`rounded-sm p-6 mb-8 border ${
           inquiry.status === 'confirmed' ? 'bg-green-500/10 border-green-500/30' :
           inquiry.status === 'pending_acceptance' ? 'bg-yellow-500/10 border-yellow-500/30' :
-          'bg-orange-500/10 border-orange-500/30'
+          'bg-lime/10 border-lime/30'
         }`}>
           {inquiry.status === 'pending_acceptance' && (
             <div className="text-center">
@@ -361,8 +361,8 @@ function InquiryStatus({ user }) {
 
           {inquiry.status === 'quote_received' && (
             <div className="text-center">
-              <Bell className="h-12 w-12 text-blue-400 mx-auto mb-3" />
-              <h3 className="text-xl font-bold text-blue-400">
+              <Bell className="h-12 w-12 text-amber mx-auto mb-3" />
+              <h3 className="text-xl font-bold text-amber">
                 Quotes Received! / कोट प्राप्त!
               </h3>
               <p className="text-slate-300 mt-2">
@@ -370,7 +370,7 @@ function InquiryStatus({ user }) {
               </p>
               <Button 
                 onClick={() => setShowQuotesDialog(true)} 
-                className="mt-4 bg-blue-500 hover:bg-blue-600"
+                className="mt-4 bg-slate-700 hover:bg-slate-600"
               >
                 <DollarSign className="h-4 w-4 mr-2" /> View Quotes ({quotes.length})
               </Button>
@@ -388,7 +388,7 @@ function InquiryStatus({ user }) {
               </p>
               <Button 
                 onClick={() => setShowPassengerForm(true)} 
-                className="mt-4 bg-orange-500 hover:bg-orange-600"
+                className="mt-4 bg-lime text-black hover:bg-lime/90"
               >
                 <Users className="h-4 w-4 mr-2" /> Fill Passenger Details
               </Button>
@@ -397,8 +397,8 @@ function InquiryStatus({ user }) {
 
           {inquiry.status === 'passenger_details_filled' && (
             <div className="text-center">
-              <CreditCard className="h-12 w-12 text-orange-400 mx-auto mb-3" />
-              <h3 className="text-xl font-bold text-orange-400">
+              <CreditCard className="h-12 w-12 text-lime mx-auto mb-3" />
+              <h3 className="text-xl font-bold text-lime">
                 Proceed to Payment / भुगतान करें
               </h3>
               <p className="text-slate-300 mt-2">
@@ -406,7 +406,7 @@ function InquiryStatus({ user }) {
               </p>
               <div className="mt-4 p-4 bg-slate-800/50 rounded-lg inline-block">
                 <p className="text-slate-400 text-sm">Amount to Pay:</p>
-                <p className="text-orange-400 text-3xl font-bold">
+                <p className="text-lime text-3xl font-bold">
                   ₹{(paymentInfo?.advance_amount || inquiry.estimated_price)?.toLocaleString()}
                 </p>
                 {paymentInfo?.advance_percent < 100 && (
@@ -455,7 +455,7 @@ function InquiryStatus({ user }) {
 
         {/* Village Landing Info for Non-Confirmed Status */}
         {inquiry.permission_required && inquiry.status !== 'confirmed' && (
-          <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30 mb-8">
+          <div className="bg-yellow-500/10 rounded-sm p-4 border border-yellow-500/30 mb-8">
             <div className="flex items-start gap-3">
               <TreePine className="h-6 w-6 text-yellow-400 shrink-0" />
               <div>
@@ -478,7 +478,7 @@ function InquiryStatus({ user }) {
 
         {/* Payments & Receipts */}
         {ledger && ledger.transactions?.length > 0 && (
-          <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 mb-8" data-testid="payments-receipts-section">
+          <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-8" data-testid="payments-receipts-section">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <CreditCard className="h-5 w-5 text-green-400" />
               Payments & Receipts / भुगतान और रसीदें
@@ -503,10 +503,10 @@ function InquiryStatus({ user }) {
               <p className="text-slate-400 text-sm">
                 Paid: <span className="text-green-400 font-semibold">₹{Number(ledger.paid_total).toLocaleString()}</span>
                 <span className="mx-2">•</span>
-                Remaining: <span className={`font-semibold ${ledger.remaining_due > 0 ? 'text-orange-400' : 'text-green-400'}`}>₹{Number(ledger.remaining_due).toLocaleString()}</span>
+                Remaining: <span className={`font-semibold ${ledger.remaining_due > 0 ? 'text-lime' : 'text-green-400'}`}>₹{Number(ledger.remaining_due).toLocaleString()}</span>
               </p>
               {ledger.remaining_due > 0 && ledger.payment_status === 'paid' && (
-                <Button onClick={() => navigate(`/customer/payment/${inquiryId}?type=balance`)} className="bg-orange-500 hover:bg-orange-600" data-testid="pay-remaining-btn">
+                <Button onClick={() => navigate(`/customer/payment/${inquiryId}?type=balance`)} className="bg-lime text-black hover:bg-lime/90" data-testid="pay-remaining-btn">
                   <CreditCard className="h-4 w-4 mr-2" />Pay Remaining ₹{Number(ledger.remaining_due).toLocaleString()}
                 </Button>
               )}
@@ -518,9 +518,9 @@ function InquiryStatus({ user }) {
         )}
 
         {/* Booking Summary */}
-        <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800">
+        <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-orange-400" />
+            <FileText className="h-5 w-5 text-lime" />
             Booking Summary / बुकिंग सारांश
           </h3>
           
@@ -547,7 +547,7 @@ function InquiryStatus({ user }) {
             </div>
             <div>
               <p className="text-slate-500">Distance</p>
-              <p className="text-orange-400 font-bold">{inquiry.distance_km} KM</p>
+              <p className="text-lime font-bold">{inquiry.distance_km} KM</p>
             </div>
           </div>
 
@@ -575,7 +575,7 @@ function InquiryStatus({ user }) {
           {/* Estimated Price */}
           <div className="mt-4 pt-4 border-t border-slate-700 flex justify-between items-center">
             <span className="text-slate-400">Estimated Amount:</span>
-            <span className="text-orange-400 text-2xl font-bold">
+            <span className="text-lime text-2xl font-bold">
               ₹{(inquiry.accepted_quote?.amount || inquiry.estimated_price || 0).toLocaleString()}
             </span>
           </div>
@@ -594,7 +594,7 @@ function InquiryStatus({ user }) {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-lg">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-orange-400" />
+              <DollarSign className="h-5 w-5 text-lime" />
               Operator Quotes / ऑपरेटर कोट्स
             </DialogTitle>
           </DialogHeader>
@@ -603,7 +603,7 @@ function InquiryStatus({ user }) {
               <p className="text-slate-400 text-center py-8">No quotes received yet</p>
             ) : (
               quotes.map((quote, idx) => (
-                <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                <div key={idx} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-white font-semibold">{quote.operator_name || 'Operator'}</p>
@@ -612,7 +612,7 @@ function InquiryStatus({ user }) {
                       )}
                     </div>
                     <div className="text-right">
-                      <p className="text-orange-400 text-2xl font-bold">
+                      <p className="text-lime text-2xl font-bold">
                         ₹{quote.amount?.toLocaleString()}
                       </p>
                     </div>
@@ -642,7 +642,7 @@ function InquiryStatus({ user }) {
         <DialogContent className="bg-slate-900 border-slate-800 max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Users className="h-5 w-5 text-orange-400" />
+              <Users className="h-5 w-5 text-lime" />
               Passenger Details / यात्री विवरण
             </DialogTitle>
           </DialogHeader>

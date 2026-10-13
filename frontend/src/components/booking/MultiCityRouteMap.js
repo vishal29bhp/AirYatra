@@ -159,11 +159,11 @@ const MultiCityRouteMap = ({
   // Show placeholder map when no coordinates yet
   if (legs.length === 0 || coordinates.length === 0) {
     return (
-      <div className={`bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden ${className}`}>
+      <div className={`bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden ${className}`}>
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-slate-700">
           <div className="flex items-center gap-2">
-            <Navigation className="h-5 w-5 text-orange-400" />
+            <Navigation className="h-5 w-5 text-lime" />
             <span className="text-white font-medium">Route Map / रूट मैप</span>
             <Badge className="bg-slate-600 text-slate-300 ml-2">
               Select destinations
@@ -190,7 +190,7 @@ const MultiCityRouteMap = ({
           {/* Overlay message */}
           <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
             <div className="text-center">
-              <MapPin className="h-10 w-10 mx-auto mb-2 text-orange-400 opacity-70" />
+              <MapPin className="h-10 w-10 mx-auto mb-2 text-lime opacity-70" />
               <p className="text-white font-medium">Add destinations to see route</p>
               <p className="text-slate-400 text-sm mt-1">रूट देखने के लिए गंतव्य जोड़ें</p>
             </div>
@@ -201,13 +201,13 @@ const MultiCityRouteMap = ({
   }
 
   return (
-    <div className={`bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden ${className}`}>
+    <div className={`bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-slate-700">
         <div className="flex items-center gap-2">
-          <Navigation className="h-5 w-5 text-orange-400" />
+          <Navigation className="h-5 w-5 text-lime" />
           <span className="text-white font-medium">Route Map / रूट मैप</span>
-          <Badge className="bg-blue-500/20 text-blue-400 ml-2">
+          <Badge className="bg-amber/20 text-amber ml-2">
             {legs.length} Legs
           </Badge>
         </div>
@@ -289,7 +289,7 @@ const MultiCityRouteMap = ({
               <span className="text-slate-300">Start</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 rounded-full bg-orange-500" />
+              <div className="w-3 h-3 rounded-full bg-lime text-black" />
               <span className="text-slate-300">Stop</span>
             </div>
             <div className="flex items-center gap-1">
@@ -316,7 +316,7 @@ const MultiCityRouteMap = ({
               <div className="flex items-center gap-1 flex-shrink-0">
                 <div className="h-px w-4 bg-slate-600" />
                 <div className="flex flex-col items-center">
-                  <Plane className="h-3 w-3 text-orange-400 rotate-90" />
+                  <Plane className="h-3 w-3 text-lime rotate-90" />
                   <span className="text-[10px] text-slate-500">{leg.distance || 0}km</span>
                 </div>
                 <div className="h-px w-4 bg-slate-600" />
@@ -346,7 +346,7 @@ const MultiCityRouteMap = ({
               ~{Math.round(totalDistance / 200 * 60)} min
             </span>
           </div>
-          <span className="text-orange-400 font-semibold">
+          <span className="text-lime font-semibold">
             ₹{totalPrice.toLocaleString('en-IN')}
           </span>
         </div>

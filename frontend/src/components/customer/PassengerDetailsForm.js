@@ -124,9 +124,9 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-orange-500/10 rounded-xl p-4 border border-orange-500/30">
+      <div className="bg-lime/10 rounded-sm p-4 border border-lime/30">
         <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <Users className="h-6 w-6 text-orange-400" />
+          <Users className="h-6 w-6 text-lime" />
           Passenger Details / यात्री विवरण
         </h2>
         <p className="text-slate-400 text-sm mt-1">
@@ -136,11 +136,11 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
 
       {/* Weight Summary */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <p className="text-slate-400 text-sm">Total Passenger Weight</p>
           <p className="text-white text-2xl font-bold">{totalWeight} kg</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           <p className="text-slate-400 text-sm">Total Luggage Weight</p>
           <p className="text-white text-2xl font-bold">{totalLuggageWeight} kg</p>
         </div>
@@ -151,8 +151,8 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
         {passengers.map((passenger, index) => (
           <div 
             key={index} 
-            className={`bg-slate-800/50 rounded-xl border transition-all ${
-              expandedPassenger === index ? 'border-orange-500' : 'border-slate-700'
+            className={`bg-slate-800/50 rounded-sm border transition-all ${
+              expandedPassenger === index ? 'border-lime' : 'border-slate-700'
             }`}
           >
             {/* Header */}
@@ -162,9 +162,9 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
             >
               <div className="flex items-center gap-3">
                 {passenger.type === 'child' ? (
-                  <Baby className="h-5 w-5 text-blue-400" />
+                  <Baby className="h-5 w-5 text-amber" />
                 ) : passenger.gender === 'male' ? (
-                  <User className="h-5 w-5 text-blue-400" />
+                  <User className="h-5 w-5 text-amber" />
                 ) : (
                   <User className="h-5 w-5 text-pink-400" />
                 )}
@@ -347,7 +347,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
         <Button
           onClick={handleSubmit}
           disabled={loading}
-          className="flex-1 bg-orange-500 hover:bg-orange-600"
+          className="flex-1 bg-lime text-black hover:bg-lime/90"
         >
           {loading ? (
             <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Saving...</>

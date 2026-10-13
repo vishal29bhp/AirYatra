@@ -65,21 +65,21 @@ export const MyWatchlist = ({ user }) => {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Bell className="h-6 w-6 text-orange-500" /> My Watchlist / मेरी वॉचलिस्ट
+            <Bell className="h-6 w-6 text-lime" /> My Watchlist / मेरी वॉचलिस्ट
           </h1>
           <p className="text-slate-400 text-sm">Auctions you're watching — we email you before they end</p>
         </div>
-        <Button onClick={() => navigate('/exchange?mode=auctions')} className="bg-orange-500 hover:bg-orange-600" data-testid="explore-auctions-btn">
+        <Button onClick={() => navigate('/exchange?mode=auctions')} className="bg-lime text-black hover:bg-lime/90" data-testid="explore-auctions-btn">
           <Gavel className="h-4 w-4 mr-2" /> Explore Auctions
         </Button>
       </div>
 
       {auctions.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-2xl" data-testid="no-watchlist">
+        <div className="text-center py-16 bg-slate-900/50 border border-dashed border-slate-700 rounded-sm" data-testid="no-watchlist">
           <Bell className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400">You're not watching any auctions yet.</p>
           <p className="text-slate-500 text-sm mt-1">Tap the bell on any live auction — we'll remind you before the hammer falls!</p>
-          <Button onClick={() => navigate('/exchange?mode=auctions')} className="mt-4 bg-orange-500 hover:bg-orange-600" data-testid="empty-explore-auctions-btn">
+          <Button onClick={() => navigate('/exchange?mode=auctions')} className="mt-4 bg-lime text-black hover:bg-lime/90" data-testid="empty-explore-auctions-btn">
             <Gavel className="h-4 w-4 mr-2" /> Browse Live Auctions
           </Button>
         </div>
@@ -89,7 +89,7 @@ export const MyWatchlist = ({ user }) => {
             const tl = a.status === 'live' ? timeLeft(a.ends_at, now) : null;
             const r = RESULT_LABELS[a.result];
             return (
-              <div key={a.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-4" data-testid={`watchlist-item-${a.id}`}>
+              <div key={a.id} className="bg-slate-900/70 border border-slate-800 rounded-sm p-4 flex flex-col sm:flex-row gap-4" data-testid={`watchlist-item-${a.id}`}>
                 <img src={a.image} alt={a.title} className="w-full sm:w-36 h-24 object-cover rounded-lg" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -105,7 +105,7 @@ export const MyWatchlist = ({ user }) => {
                       </Badge>
                     )}
                   </div>
-                  <p className="text-orange-400 font-bold text-sm mt-1">
+                  <p className="text-lime font-bold text-sm mt-1">
                     {a.bid_count > 0 ? formatCr(a.current_bid_inr) : `Starts at ${formatCr(a.starting_bid_inr)}`}
                     <span className="text-slate-500 font-normal ml-2">{a.bid_count} bid{a.bid_count !== 1 ? 's' : ''}</span>
                   </p>
@@ -113,7 +113,7 @@ export const MyWatchlist = ({ user }) => {
                     <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {a.location}</span>
                     {a.status === 'live' && (
                       <span className="flex items-center gap-1 font-mono text-white" data-testid={`watchlist-timer-${a.id}`}>
-                        <Clock className="h-3 w-3 text-orange-400" /> {tl || 'Ending...'}
+                        <Clock className="h-3 w-3 text-lime" /> {tl || 'Ending...'}
                       </span>
                     )}
                     {(a.watchers || 0) > 0 && <span className="flex items-center gap-1"><Eye className="h-3 w-3" /> {a.watchers} watching</span>}
@@ -122,7 +122,7 @@ export const MyWatchlist = ({ user }) => {
                 </div>
                 <div className="flex sm:flex-col gap-2 shrink-0 self-center">
                   {a.status === 'live' && (
-                    <Button size="sm" onClick={() => navigate('/exchange?mode=auctions')} className="bg-orange-500 hover:bg-orange-600" data-testid={`bid-now-${a.id}`}>
+                    <Button size="sm" onClick={() => navigate('/exchange?mode=auctions')} className="bg-lime text-black hover:bg-lime/90" data-testid={`bid-now-${a.id}`}>
                       <Gavel className="h-4 w-4 mr-1" /> Bid Now
                     </Button>
                   )}

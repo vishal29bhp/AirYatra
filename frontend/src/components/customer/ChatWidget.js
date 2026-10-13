@@ -83,12 +83,12 @@ function ChatWidget({ user }) {
   };
 
   return (
-    <div className="flex h-[600px] rounded-xl overflow-hidden border border-slate-700" data-testid="chat-widget">
+    <div className="flex h-[600px] rounded-sm overflow-hidden border border-slate-700" data-testid="chat-widget">
       {/* Conversations List */}
       <div className="w-80 bg-slate-900 border-r border-slate-700">
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-orange-400" />
+            <MessageSquare className="h-5 w-5 text-lime" />
             Messages
           </h3>
         </div>
@@ -113,7 +113,7 @@ function ChatWidget({ user }) {
                     <p className="text-sm text-slate-400">{conv.route}</p>
                   </div>
                   {conv.unread_count > 0 && (
-                    <span className="px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">
+                    <span className="px-2 py-0.5 bg-lime text-black text-xs rounded-full">
                       {conv.unread_count}
                     </span>
                   )}
@@ -153,7 +153,7 @@ function ChatWidget({ user }) {
                         {!isMe && (
                           <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center">
                             {msg.sender_type === 'operator' ? (
-                              <Plane className="h-3 w-3 text-orange-400" />
+                              <Plane className="h-3 w-3 text-lime" />
                             ) : (
                               <User className="h-3 w-3 text-slate-400" />
                             )}
@@ -165,7 +165,7 @@ function ChatWidget({ user }) {
                       </div>
                       <div
                         className={`p-3 rounded-lg ${isMe
-                            ? 'bg-orange-500 text-white'
+                            ? 'bg-lime text-black'
                             : 'bg-slate-800 text-slate-200'
                           }`}
                       >
@@ -193,7 +193,7 @@ function ChatWidget({ user }) {
                   placeholder="Type a message..."
                   className="flex-1 bg-slate-800 border-slate-700 text-white"
                 />
-                <Button type="submit" disabled={sending || !newMessage.trim()} className="bg-orange-500 hover:bg-orange-600">
+                <Button type="submit" disabled={sending || !newMessage.trim()} className="bg-lime text-black hover:bg-lime/90">
                   <Send className="h-5 w-5" />
                 </Button>
               </div>
