@@ -141,7 +141,7 @@ resource "azurerm_container_app" "api" {
         content {
           transport        = "HTTP"
           port             = var.api_port
-          path             = var.health_path
+          path             = var.readiness_path
           interval_seconds = 10
         }
       }
