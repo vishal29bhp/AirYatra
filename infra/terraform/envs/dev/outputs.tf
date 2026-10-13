@@ -31,3 +31,7 @@ output "github_actions_client_id" {
 output "custom_domain_validation_tokens" {
   value = module.platform.custom_domain_validation_tokens
 }
+output "github_actions_variables" {
+  description = "Set each of these as a variable on the matching GitHub environment."
+  value       = module.platform.github_actions_variables
+}
