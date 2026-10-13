@@ -2,86 +2,106 @@
   "design_system": {
     "identity": {
       "name": "AirYatra Design System",
-      "archetype": "Aero-Swiss Precision",
-      "core_values": ["Safety", "Reliability", "Luxury", "Technical Precision"],
-      "vibe": "A blend of Swiss Air Traffic Control (functional, high contrast) and Private Aviation Concierge (warm, exclusive)."
+      "theme_source": "Vaayu Prive Gamma deck (look only; the product name stays AirYatra). See docs/AirYatra_Refurbish_Master_Prompt.md section C.4.",
+      "archetype": "Night-flight premium",
+      "core_values": [
+        "Safety",
+        "Trust",
+        "Luxury",
+        "Technical precision"
+      ],
+      "vibe": "Dark, premium night-flight luxury with a single high-energy lime accent; editorial, data-forward, safety and trust first."
     },
     "typography": {
       "font_family": {
-        "headings": "Chivo, sans-serif",
-        "body": "Public Sans, sans-serif",
+        "headings": "Barlow Condensed, sans-serif",
+        "body": "IBM Plex Sans, sans-serif",
         "mono": "JetBrains Mono, monospace"
       },
+      "tailwind": {
+        "headings": "font-heading",
+        "body": "font-sans (default)",
+        "mono": "font-mono"
+      },
       "weights": {
-        "headings": "700 (Bold) or 900 (Black) for impact, 300 (Light) for elegance",
-        "body": "400 (Regular), 500 (Medium)"
+        "headings": "800 (ExtraBold) for h1/h2, 700 for h3",
+        "body": "400 (Regular), 600 (SemiBold)",
+        "mono": "500 (Medium), 600 (SemiBold)"
       },
       "usage_rules": [
-        "Headings > 32px must use tracking-tight (-0.02em).",
-        "Overlines (labels) must be Uppercase, text-xs, tracking-widest (0.2em).",
-        "Do not use Inter for headings. Use Chivo for that technical, sturdy aero look."
+        "h1 and h2 are Barlow Condensed 800, UPPERCASE, line-height 1.05 (set globally in index.css).",
+        "Overlines: a short lime bar, then a JetBrains Mono uppercase label in muted text, then the headline. Use the .ay-overline class.",
+        "Use JetBrains Mono for numbers, codes (PNR, flight no., tail no.), prices in tables and card titles.",
+        "Never set long body copy in Barlow Condensed."
       ],
-      "installation": "Import from Google Fonts: https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      "installation": "Loaded in public/index.html from Google Fonts with display=swap: Barlow Condensed 700/800, IBM Plex Sans 400/500/600, JetBrains Mono 500/600."
     },
     "colors": {
       "palette": {
-        "primary": {
-          "name": "Aviation Navy",
-          "hex": "#0F172A",
-          "tailwind": "bg-slate-900",
-          "usage": "Primary buttons, active states, dark mode backgrounds"
+        "page": {
+          "hex": "#17111F",
+          "tailwind": "bg-slate-900 / bg-background",
+          "usage": "Page background (deepest)"
         },
-        "secondary": {
-          "name": "Cloud White",
-          "hex": "#F8FAFC",
-          "tailwind": "bg-slate-50",
-          "usage": "Light mode backgrounds, cards"
+        "surface": {
+          "hex": "#221A2D",
+          "tailwind": "bg-slate-800 / bg-card",
+          "usage": "Cards, panels, text boxes over photos"
         },
-        "accent": {
-          "name": "Safety Orange",
-          "hex": "#F97316",
-          "tailwind": "bg-orange-500",
-          "usage": "Critical CTAs (Book Now), Alerts. Use sparingly (max 10% of screen)."
+        "raised": {
+          "hex": "#3A3046",
+          "tailwind": "bg-slate-700 / border-slate-700 / border-border",
+          "usage": "Borders, dividers, secondary panels"
         },
-        "neutral": {
-          "name": "Fuselage Grey",
-          "hex": "#64748B",
+        "text_primary": {
+          "hex": "#F2EEF6",
+          "tailwind": "text-slate-100 / text-foreground",
+          "usage": "Headlines and body on dark"
+        },
+        "text_secondary": {
+          "hex": "#D0C9DA",
+          "tailwind": "text-slate-300",
+          "usage": "Body copy, descriptions"
+        },
+        "text_muted": {
+          "hex": "#A69DB3",
+          "tailwind": "text-slate-400",
+          "usage": "Labels, captions"
+        },
+        "text_subtle": {
+          "hex": "#8B819C",
           "tailwind": "text-slate-500",
-          "usage": "Secondary text, borders"
+          "usage": "Tertiary text; still AA on page and cards"
         },
-        "technical": {
-          "name": "Blueprint Blue",
-          "hex": "#38BDF8",
-          "tailwind": "text-sky-400",
-          "usage": "Grid lines, active borders, technical markers"
+        "lime": {
+          "hex": "#C8F23C",
+          "tailwind": "bg-lime text-lime-foreground / bg-primary text-primary-foreground",
+          "usage": "One primary action or highlight per view (Book now, selected fare, Safety Score). Text on lime is always #000000."
+        },
+        "amber": {
+          "hex": "#FFB000",
+          "tailwind": "text-amber",
+          "usage": "Links and small highlights only: warnings, rating stars"
+        },
+        "destructive": {
+          "hex": "#DC2626",
+          "tailwind": "bg-destructive",
+          "usage": "Errors and destructive actions, white text"
         }
       },
-      "gradients": {
-        "hero_overlay": "linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.8) 100%)",
-        "glass_surface": "linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)"
-      },
+      "slate_remap": "tailwind.config.js maps the whole slate scale onto the aubergine scale (50 #F8F6FA ... 950 #0F0B15), so existing slate-* classes follow the theme.",
+      "light_theme": "Invert surfaces: #F2EEF6 page, #FFFFFF cards, #17111F text, #5A5068 muted text. Lime only as a fill with black text (lime text on white fails contrast).",
       "rules": [
-        "Never use pure black (#000000). Use Slate-950 (#020617).",
-        "Dark mode is 'Cockpit Mode': Deep Slate backgrounds with high-contrast neon blue/orange accents.",
-        "Light mode is 'Hangar Mode': Stark white/grey with deep navy text."
+        "Dark is the default theme.",
+        "Do not hard-code hex values in components; use the tokens above.",
+        "Lime is never used for large text blocks or as text on light backgrounds.",
+        "Every text/background pair must meet WCAG AA; ratios are listed in docs/design/THEME.md."
       ]
     },
     "visual_enhancers": {
-      "glassmorphism": {
-        "style": "Cockpit Glass",
-        "css": "backdrop-blur-md bg-white/5 border border-white/10 shadow-xl",
-        "usage": "Floating headers, modal overlays, dashboard widgets"
-      },
-      "borders": {
-        "style": "Technical",
-        "css": "border border-slate-200 dark:border-slate-800",
-        "special": "Add 'corner markers' (pseudo-elements) to important cards to look like a HUD."
-      },
-      "shadows": {
-        "elevation_1": "shadow-sm",
-        "elevation_2": "shadow-[0_8px_30px_rgb(0,0,0,0.12)]",
-        "glow": "shadow-[0_0_15px_rgba(56,189,248,0.3)] (Use for active states in dark mode)"
-      }
+      "borders": "1px solid #3A3046 (border-border).",
+      "shadows": "None. Flat fills.",
+      "glassmorphism": "Not used. Over photos, use a solid #221A2D panel instead."
     },
     "layout_strategy": {
       "spacing": {
@@ -99,21 +119,21 @@
     },
     "components": {
       "buttons": {
-        "primary": "bg-slate-900 text-white hover:bg-slate-800 rounded-sm px-8 py-3 font-medium tracking-wide shadow-lg hover:shadow-xl transition-all",
-        "secondary": "bg-transparent border border-slate-300 text-slate-900 hover:bg-slate-50 rounded-sm px-8 py-3",
-        "accent": "bg-orange-500 text-white hover:bg-orange-600 rounded-sm px-8 py-3 shadow-orange-500/20"
+        "primary": "bg-primary text-primary-foreground (lime with black text), square corners (rounded-sm), font-semibold.",
+        "secondary": "bg-secondary text-secondary-foreground with border-border.",
+        "ghost": "text-foreground hover:bg-accent."
       },
       "cards": {
-        "base": "bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-lg p-6 shadow-sm hover:shadow-md transition-all",
-        "glass": "backdrop-blur-xl bg-white/70 dark:bg-slate-900/70 border border-white/20"
+        "default": "bg-card border border-border rounded-sm, no shadow.",
+        "featured": "One lime card per grid: bg-lime text-black."
       },
       "inputs": {
-        "style": "h-12 bg-slate-50 border-slate-200 focus:ring-2 focus:ring-slate-900 rounded-sm"
+        "default": "bg-background border-input rounded-sm, focus ring in lime (ring-ring)."
       }
     },
     "motion": {
-      "transitions": "transition-all duration-300 ease-out",
-      "hover_effects": "translate-y-[-2px] shadow-lg",
+      "transitions": "transition-colors duration-200 ease-out",
+      "hover_effects": "Colour change only; no lift or shadow.",
       "page_load": "opacity-0 animate-in fade-in slide-in-from-bottom-4 duration-700"
     },
     "media": {
@@ -149,16 +169,18 @@
             "category": "interior_luxury"
           }
         ]
-      }
+      },
+      "style": "Real aviation photography: helicopters on the apron at golden hour, private jets, pilots walking to aircraft, engineers servicing engines. Full-bleed photo with a solid dark panel for text, or photo left and dark content right."
     },
+    "iconography": "Lucide-React thin line icons, lime on dark for feature grids.",
     "universal_guidelines": [
-      "Do not use gradients for backgrounds unless it's a subtle noise texture.",
       "Use 'sonner' for all toast notifications.",
       "All interactive elements must have data-testid attributes.",
       "Use Lucide-React for icons.",
-      "For Dashboards: Use the 'Control Room' grid. High density, no wasted space.",
-      "For Marketing: Use the 'Tetris' grid. Asymmetry and large imagery.",
-      "Dark mode is mandatory for the Operator Dashboard to reduce eye strain during night ops."
+      "For Dashboards: dense 4-column grid, gap-4, full width.",
+      "For Marketing: asymmetric grid with large photography.",
+      "Dark mode is the default everywhere and mandatory for the Operator Dashboard.",
+      "Mobile-first at 360px; meet WCAG 2.1 AA."
     ]
   }
 }
