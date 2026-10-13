@@ -26,8 +26,8 @@ def restore_config():
 
 
 def test_cors_origins_come_from_env_list(monkeypatch):
-    settings = load_settings(monkeypatch, APP_ENV="prod", CORS_ORIGINS="https://airyatra.com, https://www.airyatra.com")
-    assert settings.allowed_cors_origins == ["https://airyatra.com", "https://www.airyatra.com"]
+    settings = load_settings(monkeypatch, APP_ENV="prod", CORS_ORIGINS="https://airyatra.co.in, https://www.airyatra.co.in")
+    assert settings.allowed_cors_origins == ["https://airyatra.co.in", "https://www.airyatra.co.in"]
 
 
 def test_no_hosted_cors_default_in_production(monkeypatch):

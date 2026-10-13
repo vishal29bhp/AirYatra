@@ -244,7 +244,7 @@ You agree to indemnify and hold harmless AirYatra, its directors, employees, and
 Company Name: Lucuma Corporation Pvt. Ltd.
 Brand: AirYatra (a unit of Lucuma Corporation Pvt. Ltd.)
 Address: Pune, Maharashtra, India
-Website: www.airyatra.com
+Website: www.airyatra.co.in
 Email: care@airyatra.co.in
 Phone: +91-XXXXXXXXXX
 

@@ -1178,7 +1178,7 @@ async def send_pilot_document_expiry_email(operator_email: str, operator_name: s
                     </tbody>
                 </table>
                 
-                <a href="https://airyatra.com/operator/pilots" class="cta">
+                <a href="https://airyatra.co.in/operator/pilots" class="cta">
                     Manage Pilot Documents →
                 </a>
                 

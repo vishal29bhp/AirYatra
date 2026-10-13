@@ -31,7 +31,7 @@ sequenceDiagram
     participant KV as Key Vault
     participant AI as App Insights
 
-    U->>AFD: GET https://airyatra.com/booking
+    U->>AFD: GET https://airyatra.co.in/booking
     AFD->>AFD: TLS, WAF rules (OWASP, bot, rate limit)
     AFD->>WEB: /booking has no extension, rewrite to /index.html
     WEB-->>AFD: index.html + hashed JS/CSS (cached at edge)
@@ -258,7 +258,7 @@ sequenceDiagram
     TOOL->>OLD: final dump
     TOOL->>ATL: final restore + verify again
     TOOL->>ATL: add new indexes (additive only)
-    V->>DNS: switch airyatra.com to Front Door (written approval)
+    V->>DNS: switch airyatra.co.in to Front Door (written approval)
     NEW-->>V: smoke tests green
     alt anything fails
         V->>DNS: point back to Emergent, unfreeze

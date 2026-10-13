@@ -127,7 +127,7 @@ WORKERS=8
 MAX_CONNECTIONS=200
 
 # Frontend
-REACT_APP_BACKEND_URL=https://api.airyatra.com
+REACT_APP_BACKEND_URL=https://api.airyatra.co.in
 ```
 
 ## 📈 Capacity Planning

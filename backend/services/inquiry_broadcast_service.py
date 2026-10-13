@@ -413,7 +413,7 @@ async def send_whatsapp_notification(operator: dict, notification_data: dict, in
 
 🔔 Please accept or reject this inquiry from your AirYatra Operator App.
 
-▶️ Open App: https://airyatra.com/operator/inquiries/{inquiry_id}"""
+▶️ Open App: https://airyatra.co.in/operator/inquiries/{inquiry_id}"""
 
     try:
         # Use notification service
