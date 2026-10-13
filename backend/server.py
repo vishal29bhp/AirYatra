@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter
-from fastapi.staticfiles import StaticFiles
+from fastapi import Response
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -8,6 +8,7 @@ from pathlib import Path
 import os
 import logging
 from config import settings
+from services.file_storage import InvalidKeyError, file_store
 from database import connect_to_mongo, close_mongo_connection, get_database
 from scheduler import start_scheduler, stop_scheduler
 
@@ -407,24 +408,17 @@ api_router.include_router(emergency_booking_routes.router)
 # Include API router in main app
 app.include_router(api_router)
 
-# Create uploads directory for village documents
-# UPLOAD_ROOT defaults to the existing /app layout; tests and other hosts point it elsewhere.
-upload_root = Path(os.environ.get("UPLOAD_ROOT", "/app"))
-uploads_dir = upload_root / "uploads"
-uploads_dir.mkdir(parents=True, exist_ok=True)
-village_docs_dir = uploads_dir / "village_documents"
-village_docs_dir.mkdir(exist_ok=True)
+# Uploaded files are read through the storage adapter (local disk or Azure Blob, STORAGE_PROVIDER).
+# /api/uploads/... serves the NON-SENSITIVE "uploads" area only, with the same URLs as before.
+# KYC and other sensitive files live in separate areas and use authenticated download endpoints.
+@app.get("/api/uploads/{key:path}", include_in_schema=False)
+async def serve_upload(key: str):
+    try:
+        content, content_type = await file_store("uploads").get(key)
+    except (FileNotFoundError, InvalidKeyError):
+        return JSONResponse(status_code=404, content={"detail": "Not Found"})
+    return Response(content=content, media_type=content_type, headers={"X-Content-Type-Options": "nosniff"})
 
-# SECURITY: Create secure upload directory for sensitive files (KYC, etc.)
-# These are NOT served via static mount - use authenticated download endpoints
-secure_uploads_dir = upload_root / "secure_uploads"
-secure_uploads_dir.mkdir(parents=True, exist_ok=True)
-(secure_uploads_dir / "kyc").mkdir(exist_ok=True)
-(secure_uploads_dir / "pilot_documents").mkdir(exist_ok=True)
-
-# Mount static files for NON-SENSITIVE uploads only (general assets, NOT KYC/documents)
-# WARNING: Do NOT put sensitive files in /app/uploads - use secure_uploads instead
-app.mount("/api/uploads", StaticFiles(directory=str(uploads_dir)), name="uploads")
 
 # Health check endpoint
 @app.get("/health")

@@ -12,6 +12,7 @@ from enum import Enum
 import os
 import base64
 from database import get_database
+from services.file_storage import file_store
 from middleware import get_current_user, require_roles
 from models import UserRole
 
@@ -371,16 +372,10 @@ async def upload_expense_document(
     # Read file content
     content = await file.read()
     
-    # Save to uploads directory
-    upload_dir = "/app/uploads/expense_documents"
-    os.makedirs(upload_dir, exist_ok=True)
-    
+    # Save to the uploads storage area
     file_ext = file.filename.split(".")[-1] if "." in file.filename else "pdf"
     saved_filename = f"{expense_id}_{str(uuid4())[:8]}.{file_ext}"
-    file_path = f"{upload_dir}/{saved_filename}"
-    
-    with open(file_path, "wb") as f:
-        f.write(content)
+    await file_store("uploads").put(f"expense_documents/{saved_filename}", content, file.content_type)
     
     document = {
         "id": str(uuid4()),

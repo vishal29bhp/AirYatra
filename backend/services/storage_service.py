@@ -1,48 +1,28 @@
-import os
-import asyncio
-import requests
-from dotenv import load_dotenv
+"""Object storage for the document vault and exchange images.
 
-load_dotenv()
+Same functions and return shapes as before. With ``STORAGE_PROVIDER=legacy`` (the default) calls go
+to the Emergent object store exactly as today; otherwise the bytes go to the backend chosen in
+``services/file_storage.py``. Keys are unchanged, so ``storage_path`` values already in MongoDB keep
+working after migration.
+"""
+from typing import Tuple
 
-STORAGE_URL = "https://integrations.emergentagent.com/objstore/api/v1/storage"
-EMERGENT_KEY = os.environ.get("EMERGENT_LLM_KEY")
-APP_NAME = "airyatra"
-
-_storage_key = None
-
-
-def _init():
-    global _storage_key
-    if _storage_key:
-        return _storage_key
-    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": EMERGENT_KEY}, timeout=30)
-    resp.raise_for_status()
-    _storage_key = resp.json()["storage_key"]
-    return _storage_key
+from services import emergent_object_store
+from services.file_storage import file_store, get_file_storage
 
 
-def _put(path: str, data: bytes, content_type: str) -> dict:
-    key = _init()
-    resp = requests.put(
-        f"{STORAGE_URL}/objects/{path}",
-        headers={"X-Storage-Key": key, "Content-Type": content_type},
-        data=data, timeout=120,
-    )
-    resp.raise_for_status()
-    return resp.json()
-
-
-def _get(path: str):
-    key = _init()
-    resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
-    resp.raise_for_status()
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+def _legacy() -> bool:
+    return get_file_storage().provider == "legacy"
 
 
 async def put_object(path: str, data: bytes, content_type: str) -> dict:
-    return await asyncio.to_thread(_put, path, data, content_type)
+    if _legacy():
+        return await emergent_object_store.put_object(path, data, content_type)
+    key = await file_store("objects").put(path, data, content_type)
+    return {"path": key, "size": len(data)}
 
 
-async def get_object(path: str):
-    return await asyncio.to_thread(_get, path)
+async def get_object(path: str) -> Tuple[bytes, str]:
+    if _legacy():
+        return await emergent_object_store.get_object(path)
+    return await file_store("objects").get(path)

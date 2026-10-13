@@ -64,6 +64,11 @@ class Settings(BaseSettings):
         'EMERGENT_AUTH_SESSION_URL',
         'https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data',
     )
+    # Where uploaded files live: legacy = local disk + Emergent object store (today), local = disk only,
+    # azure_blob = Azure Blob Storage with the app's managed identity.
+    storage_provider: str = os.getenv('STORAGE_PROVIDER', 'legacy')
+    azure_storage_account_url: str = os.getenv('AZURE_STORAGE_ACCOUNT_URL', '')
+    upload_root: str = os.getenv('UPLOAD_ROOT', '/app')
 
     @model_validator(mode="after")
     def _never_mock_payments_in_production(self) -> "Settings":

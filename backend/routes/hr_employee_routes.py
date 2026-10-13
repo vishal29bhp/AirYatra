@@ -7,8 +7,8 @@ from typing import Optional
 from datetime import datetime, timezone
 from uuid import uuid4
 import io
-import os
 from database import get_database
+from services.file_storage import file_store
 from middleware import get_current_user, require_roles
 from models import UserRole
 from auth import get_password_hash
@@ -150,14 +150,11 @@ async def upload_attendance_selfie(
     if len(content) > 8 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="Selfie too large (max 8MB)")
 
-    upload_dir = "/app/uploads/attendance_selfies"
-    os.makedirs(upload_dir, exist_ok=True)
     ext = file.filename.split(".")[-1].lower() if "." in (file.filename or "") else "jpg"
     if ext not in ["jpg", "jpeg", "png", "webp"]:
         ext = "jpg"
     fname = f"{attendance_id}_{uuid4().hex[:8]}.{ext}"
-    with open(f"{upload_dir}/{fname}", "wb") as f:
-        f.write(content)
+    await file_store("uploads").put(f"attendance_selfies/{fname}", content, file.content_type)
 
     selfie_url = f"/api/uploads/attendance_selfies/{fname}"
     await db.attendance.update_one({"id": attendance_id}, {"$set": {"selfie_url": selfie_url}})
@@ -394,14 +391,11 @@ async def upload_profile_photo(
     content = await file.read()
     if len(content) > 5 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="Photo too large (max 5MB)")
-    upload_dir = "/app/uploads/profile_photos"
-    os.makedirs(upload_dir, exist_ok=True)
     ext = file.filename.split(".")[-1].lower() if "." in (file.filename or "") else "jpg"
     if ext not in ["jpg", "jpeg", "png", "webp"]:
         ext = "jpg"
     fname = f"{current_user['id']}_{uuid4().hex[:8]}.{ext}"
-    with open(f"{upload_dir}/{fname}", "wb") as f:
-        f.write(content)
+    await file_store("uploads").put(f"profile_photos/{fname}", content, file.content_type)
     photo_url = f"/api/uploads/profile_photos/{fname}"
     await db.users.update_one({"id": current_user["id"]}, {"$set": {"photo_url": photo_url}})
     return {"message": "Photo updated / फोटो अपडेट हो गई", "photo_url": photo_url}
