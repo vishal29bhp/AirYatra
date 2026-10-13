@@ -200,7 +200,7 @@ async def chat_with_ai_stream(
     import json as _json
     import os as _os
     from fastapi.responses import StreamingResponse
-    from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+    from services.llm_provider import LlmChat, UserMessage, TextDelta, StreamDone
     
     user_id = current_user["id"]
     conversation_id = request.conversation_id or str(uuid4())

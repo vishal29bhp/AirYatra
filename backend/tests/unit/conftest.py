@@ -51,3 +51,7 @@ def server():
     _stub_emergentintegrations()
     import server as server_module
     return server_module
+
+
+# The Emergent SDK is never installed in CI; stub it for every test, whatever the order.
+_stub_emergentintegrations()

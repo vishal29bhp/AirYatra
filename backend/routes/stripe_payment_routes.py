@@ -9,12 +9,12 @@ from uuid import uuid4
 import os
 from database import get_database
 from middleware import get_current_user
-from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionRequest
+from services.stripe_checkout import StripeCheckout, CheckoutSessionRequest
 
 router = APIRouter(tags=["Stripe Payments"])
 
 
-def _get_stripe(request: Request) -> StripeCheckout:
+def _get_stripe(request: Request):
     host_url = str(request.base_url)
     return StripeCheckout(api_key=os.environ["STRIPE_API_KEY"], webhook_url=f"{host_url}api/webhook/stripe")
 

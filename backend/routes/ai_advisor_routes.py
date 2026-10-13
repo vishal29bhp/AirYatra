@@ -16,7 +16,7 @@ import json
 import asyncio
 
 # Emergent LLM Integration
-from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+from services.llm_provider import LlmChat, UserMessage, TextDelta, StreamDone, llm_configured
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -197,7 +197,7 @@ async def chat_with_advisor(
     if not any(role in user_roles for role in ["admin", "ceo"]):
         raise HTTPException(status_code=403, detail="Access denied. CEO/Admin role required.")
     
-    if not EMERGENT_LLM_KEY:
+    if not llm_configured():
         raise HTTPException(status_code=500, detail="AI service not configured")
     
     # Get business context
@@ -279,7 +279,7 @@ async def chat_with_advisor_stream(
     if not any(role in user_roles for role in ["admin", "ceo"]):
         raise HTTPException(status_code=403, detail="Access denied. CEO/Admin role required.")
     
-    if not EMERGENT_LLM_KEY:
+    if not llm_configured():
         raise HTTPException(status_code=500, detail="AI service not configured")
     
     # Get business context
@@ -410,7 +410,7 @@ async def generate_marketing_content(
     if not any(role in user_roles for role in ["admin", "ceo", "operator"]):
         raise HTTPException(status_code=403, detail="Access denied")
     
-    if not EMERGENT_LLM_KEY:
+    if not llm_configured():
         raise HTTPException(status_code=500, detail="AI service not configured")
     
     content_instructions = {

@@ -3,22 +3,14 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
-# Try to import emergentintegrations, fallback to mock if not available
-EMERGENT_AVAILABLE = False
-try:
-    from emergentintegrations.llm.chat import LlmChat, UserMessage
-    EMERGENT_AVAILABLE = True
-except ImportError:
-    logger.info("emergentintegrations not available, AI features will use mock responses")
-    LlmChat = None
-    UserMessage = None
+from services.llm_provider import LlmChat, UserMessage, llm_configured
 
 class AIService:
     def __init__(self):
         self.api_key = settings.emergent_llm_key if hasattr(settings, 'emergent_llm_key') else ""
         self.model = "openai"
         self.model_name = "gpt-5.1"
-        self.available = EMERGENT_AVAILABLE and bool(self.api_key)
+        self.available = llm_configured()
     
     async def get_price_suggestion(self, route_data: dict) -> dict:
         """Get AI-powered price suggestion for a route"""
