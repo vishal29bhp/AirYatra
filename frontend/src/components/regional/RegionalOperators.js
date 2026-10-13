@@ -99,7 +99,7 @@ function RegionalOperators({ region }) {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {filteredOperators.map((operator) => (
-            <div key={operator.id} className="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+            <div key={operator.id} className="p-6 rounded-sm bg-slate-900/50 border border-slate-800">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-semibold text-white flex items-center gap-2">

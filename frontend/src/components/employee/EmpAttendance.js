@@ -92,12 +92,12 @@ export const EmpAttendance = ({ onChanged }) => {
       <h1 className="text-2xl font-bold text-white">Attendance / उपस्थिति</h1>
 
       {todayHoliday && (
-        <div className="bg-purple-500/15 border border-purple-500/40 rounded-xl p-4 text-white" data-testid="emp-holiday-banner">
+        <div className="bg-purple-500/15 border border-purple-500/40 rounded-sm p-4 text-white" data-testid="emp-holiday-banner">
           🎉 Aaj company holiday hai: <b>{todayHoliday.name}</b> — check-in optional hai, yeh paid day hai
         </div>
       )}
 
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700 flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-slate-400 text-sm">Today / आज • {today}</p>
           <p className="text-white text-lg font-semibold">
@@ -111,7 +111,7 @@ export const EmpAttendance = ({ onChanged }) => {
             </Button>
           )}
           {checkedIn && (
-            <Button onClick={() => mark('check-out')} disabled={acting} className="bg-orange-500 hover:bg-orange-600" data-testid="check-out-btn">
+            <Button onClick={() => mark('check-out')} disabled={acting} className="bg-lime text-black hover:bg-lime/90" data-testid="check-out-btn">
               {acting ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <LogOut className="h-4 w-4 mr-2" />} Check Out / चेक-आउट
             </Button>
           )}
@@ -153,7 +153,7 @@ export const EmpAttendance = ({ onChanged }) => {
       </div>
 
       {upcoming.length > 0 && (
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700" data-testid="upcoming-holidays-card">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700" data-testid="upcoming-holidays-card">
           <p className="text-purple-400 font-semibold text-sm mb-2">Upcoming Holidays / आने वाली छुट्टियां</p>
           <div className="flex flex-wrap gap-3">
             {upcoming.map((h) => (
@@ -165,7 +165,7 @@ export const EmpAttendance = ({ onChanged }) => {
         </div>
       )}
 
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         {!data?.attendance?.length ? (
           <div className="p-8 text-center text-slate-400"><Clock className="h-10 w-10 mx-auto mb-2 text-slate-600" />No attendance records this month</div>
         ) : (

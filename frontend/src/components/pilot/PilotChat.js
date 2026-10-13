@@ -127,9 +127,9 @@ function PilotChat({ isOpen, onClose, user }) {
 
   return (
     <div className="fixed inset-0 bg-black/60 z-50 flex items-end justify-center sm:items-center">
-      <div className="bg-slate-900 w-full max-w-md h-[80vh] sm:h-[600px] rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden border border-slate-700 shadow-2xl">
+      <div className="bg-slate-900 w-full max-w-md h-[80vh] sm:h-[600px] rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden border border-slate-700">
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-600 to-orange-500 p-4 flex items-center justify-between">
+        <div className="bg-slate-800 border border-slate-700 p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
               <MessageCircle className="h-5 w-5 text-white" />
@@ -176,9 +176,9 @@ function PilotChat({ isOpen, onClose, user }) {
                     {!isOwnMessage && (
                       <p className="text-xs text-slate-500 mb-1 ml-1">{msg.sender_name}</p>
                     )}
-                    <div className={`rounded-2xl px-4 py-2 ${
+                    <div className={`rounded-sm px-4 py-2 ${
                       isOwnMessage 
-                        ? 'bg-orange-600 text-white rounded-br-md' 
+                        ? 'bg-lime text-black rounded-br-md' 
                         : 'bg-slate-800 text-white rounded-bl-md'
                     }`}>
                       <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
@@ -228,12 +228,12 @@ function PilotChat({ isOpen, onClose, user }) {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 bg-slate-700 text-white rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+            className="flex-1 bg-slate-700 text-white rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-lime text-sm"
           />
           <Button 
             type="submit"
             disabled={!newMessage.trim() || sending}
-            className="bg-orange-600 hover:bg-orange-700 rounded-full w-10 h-10 p-0"
+            className="bg-lime text-black hover:bg-lime/90 rounded-full w-10 h-10 p-0"
           >
             <Send className="h-4 w-4" />
           </Button>
@@ -277,7 +277,7 @@ export function PilotChatButton({ user }) {
           setIsOpen(true);
           setUnreadCount(0);
         }}
-        className="fixed bottom-24 right-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-40"
+        className="fixed bottom-24 right-4 bg-lime text-black p-3 rounded-full transition-all duration-300 hover:scale-110 z-40"
         title="Chat with Operations"
       >
         <div className="relative">

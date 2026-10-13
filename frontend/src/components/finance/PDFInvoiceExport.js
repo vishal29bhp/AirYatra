@@ -126,7 +126,7 @@ export default function PDFInvoiceExport() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Eye className="h-5 w-5 text-blue-400" />
+            <Eye className="h-5 w-5 text-amber" />
             Invoice Preview / इनवॉइस पूर्वावलोकन
           </CardTitle>
         </CardHeader>
@@ -134,7 +134,7 @@ export default function PDFInvoiceExport() {
           <div className="bg-white rounded-lg p-8 text-gray-900">
             {/* Company Header */}
             <div className="text-center border-b pb-4 mb-4">
-              <h2 className="text-2xl font-bold text-blue-900">✈️ AirYatra</h2>
+              <h2 className="text-2xl font-bold text-amber">✈️ AirYatra</h2>
               <p className="text-sm text-gray-500">India&apos;s Premium Helicopter Booking Platform</p>
               <p className="text-xs text-gray-400 mt-1">
                 GSTIN: 27AABCU9603R1ZM | CIN: U62200MH2024PTC123456
@@ -142,7 +142,7 @@ export default function PDFInvoiceExport() {
             </div>
             
             {/* Invoice Title */}
-            <div className="bg-blue-900 text-white text-center py-2 mb-4 rounded">
+            <div className="bg-slate-800 text-white text-center py-2 mb-4 rounded">
               <h3 className="text-lg font-semibold">TAX INVOICE</h3>
             </div>
             
@@ -160,7 +160,7 @@ export default function PDFInvoiceExport() {
             
             {/* Bill To */}
             <div className="mb-4">
-              <h4 className="text-sm font-semibold text-blue-900 mb-1">BILL TO:</h4>
+              <h4 className="text-sm font-semibold text-amber mb-1">BILL TO:</h4>
               <p className="font-medium">{invoiceData.customer_name || 'Customer Name'}</p>
               <p className="text-sm text-gray-600 whitespace-pre-line">
                 {invoiceData.customer_address || 'Customer Address'}
@@ -173,7 +173,7 @@ export default function PDFInvoiceExport() {
             {/* Items Table */}
             <table className="w-full text-sm mb-4">
               <thead>
-                <tr className="bg-blue-900 text-white">
+                <tr className="bg-slate-800 text-white">
                   <th className="p-2 text-left">S.No</th>
                   <th className="p-2 text-left">Description</th>
                   <th className="p-2 text-center">HSN</th>
@@ -211,7 +211,7 @@ export default function PDFInvoiceExport() {
                   <span>SGST ({gstRate/2}%):</span>
                   <span>{formatINR(gstAmount/2)}</span>
                 </div>
-                <div className="flex justify-between py-2 border-t font-bold text-blue-900 bg-blue-50">
+                <div className="flex justify-between py-2 border-t font-bold text-amber bg-slate-800">
                   <span>Grand Total:</span>
                   <span>{formatINR(total)}</span>
                 </div>
@@ -221,7 +221,7 @@ export default function PDFInvoiceExport() {
             {/* Footer */}
             <div className="mt-6 pt-4 border-t text-center text-xs text-gray-500">
               <p>This is a computer-generated invoice. No signature required.</p>
-              <p className="text-blue-900 mt-1">Thank you for flying with AirYatra! ✈️</p>
+              <p className="text-amber mt-1">Thank you for flying with AirYatra! ✈️</p>
             </div>
           </div>
         </CardContent>

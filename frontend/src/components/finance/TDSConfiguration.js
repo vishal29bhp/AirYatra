@@ -240,8 +240,8 @@ const TDSConfiguration = () => {
                       </Alert>
                     )}
                     {calcResult.below_threshold && (
-                      <Alert className="bg-blue-500/10 border-blue-500/30">
-                        <AlertDescription className="text-blue-400 text-sm">
+                      <Alert className="bg-amber/10 border-amber/30">
+                        <AlertDescription className="text-amber text-sm">
                           ℹ️ Amount below threshold (₹{calcResult.threshold?.toLocaleString()}). No TDS applicable.
                         </AlertDescription>
                       </Alert>
@@ -335,9 +335,9 @@ const TDSConfiguration = () => {
       </div>
 
       {/* Info Alert */}
-      <Alert className="bg-blue-500/10 border-blue-500/30">
-        <Info className="h-4 w-4 text-blue-400" />
-        <AlertDescription className="text-blue-400">
+      <Alert className="bg-amber/10 border-amber/30">
+        <Info className="h-4 w-4 text-amber" />
+        <AlertDescription className="text-amber">
           TDS rates are as per Income Tax Act. Surcharge applies for payments exceeding ₹1 Crore. Health & Education Cess of 4% applies on TDS + Surcharge.
         </AlertDescription>
       </Alert>

@@ -305,7 +305,7 @@ export default function ScheduledReportsManager() {
                     size="sm"
                     onClick={() => handleTriggerSync('razorpay')}
                     disabled={syncing}
-                    className="border-blue-500/50 text-blue-300 hover:bg-blue-500/20"
+                    className="border-amber/50 text-slate-300 hover:bg-amber/20"
                   >
                     Sync Razorpay
                   </Button>
@@ -365,8 +365,8 @@ export default function ScheduledReportsManager() {
                   {/* Razorpay Status */}
                   <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                        <Building2 className="h-5 w-5 text-blue-400" />
+                      <div className="w-10 h-10 rounded-lg bg-amber/20 flex items-center justify-center">
+                        <Building2 className="h-5 w-5 text-amber" />
                       </div>
                       <div>
                         <h4 className="text-white font-medium">Razorpay</h4>

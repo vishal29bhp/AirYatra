@@ -27,7 +27,7 @@ const formatCr = (price) => `₹${(price / 10000000).toFixed(price % 10000000 ==
 
 const ListingCard = ({ listing, onView }) => (
   <div
-    className="bg-slate-900/70 rounded-2xl border border-slate-800 overflow-hidden hover:border-orange-500/50 hover:-translate-y-1 transition-all cursor-pointer group"
+    className="bg-slate-900/70 rounded-sm border border-slate-800 overflow-hidden hover:border-lime/50 hover:-translate-y-1 transition-all cursor-pointer group"
     onClick={() => onView(listing)}
     data-testid={`listing-card-${listing.id}`}
   >
@@ -38,7 +38,7 @@ const ListingCard = ({ listing, onView }) => (
           <BadgeCheck className="h-3 w-3" /> Verified
         </Badge>
       )}
-      <div className="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur px-3 py-1 rounded-full text-orange-400 font-bold" data-testid={`listing-price-${listing.id}`}>
+      <div className="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur px-3 py-1 rounded-full text-lime font-bold" data-testid={`listing-price-${listing.id}`}>
         {formatCr(listing.price_inr)}
       </div>
     </div>
@@ -46,9 +46,9 @@ const ListingCard = ({ listing, onView }) => (
       <h3 className="text-white font-bold text-lg">{listing.title}</h3>
       <p className="text-slate-500 text-xs mb-3">{listing.year} • {listing.seller_name}</p>
       <div className="flex flex-wrap gap-3 text-xs text-slate-400">
-        <span className="flex items-center gap-1"><Clock className="h-3 w-3 text-orange-400" /> {listing.flight_hours.toLocaleString()} hrs</span>
-        <span className="flex items-center gap-1"><Users className="h-3 w-3 text-orange-400" /> {listing.seats} seats</span>
-        <span className="flex items-center gap-1"><MapPin className="h-3 w-3 text-orange-400" /> {listing.location.split(',')[0]}</span>
+        <span className="flex items-center gap-1"><Clock className="h-3 w-3 text-lime" /> {listing.flight_hours.toLocaleString()} hrs</span>
+        <span className="flex items-center gap-1"><Users className="h-3 w-3 text-lime" /> {listing.seats} seats</span>
+        <span className="flex items-center gap-1"><MapPin className="h-3 w-3 text-lime" /> {listing.location.split(',')[0]}</span>
       </div>
     </div>
   </div>
@@ -65,10 +65,10 @@ const FeaturedStrip = ({ featured, onView }) => (
         <div
           key={l.id}
           onClick={() => onView(l)}
-          className="min-w-[300px] snap-start cursor-pointer rounded-2xl p-[1.5px] bg-gradient-to-br from-amber-400/70 via-orange-500/40 to-amber-400/70 hover:-translate-y-1 transition-transform"
+          className="min-w-[300px] snap-start cursor-pointer rounded-sm p-[1.5px] bg-gradient-to-br from-amber-400/70 to-amber-400/70 hover:-translate-y-1 transition-transform"
           data-testid={`featured-card-${l.id}`}
         >
-          <div className="bg-slate-900 rounded-2xl overflow-hidden h-full">
+          <div className="bg-slate-900 rounded-sm overflow-hidden h-full">
             <div className="relative h-36 overflow-hidden">
               <img src={l.image} alt={l.title} className="w-full h-full object-cover" />
               <Badge className="absolute top-2 left-2 bg-amber-400 text-slate-900 font-bold">
@@ -168,7 +168,7 @@ export default function AviationExchangePage({ user }) {
   const modeBtn = (id, label, Icon, testid) => (
     <button
       onClick={() => setMode(id)}
-      className={`px-5 py-2 rounded-full text-sm flex items-center gap-2 transition-all ${mode === id ? 'bg-orange-500 text-white' : 'text-slate-400 hover:text-white'}`}
+      className={`px-5 py-2 rounded-full text-sm flex items-center gap-2 transition-all ${mode === id ? 'bg-lime text-black' : 'text-slate-400 hover:text-white'}`}
       data-testid={testid}
     >
       <Icon className="h-4 w-4" /> {label}
@@ -185,15 +185,15 @@ export default function AviationExchangePage({ user }) {
               <ArrowLeft className="h-4 w-4" /> Home
             </Link>
             <div className="flex items-center gap-2">
-              <Plane className="h-6 w-6 text-orange-500" />
-              <span className="text-xl font-bold text-white">Aviation <span className="text-orange-500">Exchange</span></span>
+              <Plane className="h-6 w-6 text-lime" />
+              <span className="text-xl font-bold text-white">Aviation <span className="text-lime">Exchange</span></span>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Badge className="bg-orange-500/15 text-orange-400 border border-orange-500/30 hidden sm:flex">
+            <Badge className="bg-amber-500/15 text-amber-400 border border-amber-500/30 hidden sm:flex">
               <TrendingUp className="h-3 w-3 mr-1" /> India's First Aircraft Resale Marketplace
             </Badge>
-            <Button onClick={openSell} className="bg-orange-500 hover:bg-orange-600" data-testid="sell-aircraft-btn">
+            <Button onClick={openSell} className="bg-lime text-black hover:bg-lime/90" data-testid="sell-aircraft-btn">
               <PlusCircle className="h-4 w-4 mr-2" /> Sell Aircraft
             </Button>
           </div>
@@ -203,12 +203,12 @@ export default function AviationExchangePage({ user }) {
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 pt-10 pb-6">
         <h1 className="text-4xl sm:text-5xl font-black text-white">
-          Buy & Sell Aircraft,<br /><span className="text-orange-500">The Smart Way</span>
+          Buy & Sell Aircraft,<br /><span className="text-lime">The Smart Way</span>
         </h1>
         <p className="text-slate-400 mt-3 max-w-2xl">
           Pre-owned helicopters, private jets and turboprops — verified sellers, transparent pricing, DGCA documentation support. / सत्यापित विक्रेता, पारदर्शी कीमतें।
         </p>
-        <Button onClick={openSell} variant="outline" className="mt-4 border-orange-500/50 text-orange-400 hover:bg-orange-500/10" data-testid="sell-aircraft-hero-btn">
+        <Button onClick={openSell} variant="outline" className="mt-4 border-lime/50 text-lime hover:bg-lime/10" data-testid="sell-aircraft-hero-btn">
           <PlusCircle className="h-4 w-4 mr-2" /> List Your Aircraft for Free / अपना विमान लिस्ट करें
         </Button>
       </div>
@@ -242,7 +242,7 @@ export default function AviationExchangePage({ user }) {
                 <button
                   key={c.id}
                   onClick={() => setCategory(c.id)}
-                  className={`px-4 py-2 rounded-full text-sm border transition-all ${category === c.id ? 'bg-orange-500 border-orange-500 text-white' : 'border-slate-700 text-slate-300 hover:border-orange-500/50'}`}
+                  className={`px-4 py-2 rounded-full text-sm border transition-all ${category === c.id ? 'bg-lime border-lime text-black' : 'border-slate-700 text-slate-300 hover:border-lime/50'}`}
                   data-testid={`category-${c.id}`}
                 >
                   {c.label}
@@ -295,13 +295,13 @@ export default function AviationExchangePage({ user }) {
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="listing-detail-dialog">
           {selected && (
             <>
-              <img src={selected.image} alt={selected.title} className="w-full h-56 object-cover rounded-xl" />
+              <img src={selected.image} alt={selected.title} className="w-full h-56 object-cover rounded-sm" />
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2 text-2xl">
                   {selected.title}
                   {selected.verified && <BadgeCheck className="h-5 w-5 text-green-400" />}
                 </DialogTitle>
-                <DialogDescription className="text-orange-400 text-xl font-bold">
+                <DialogDescription className="text-lime text-xl font-bold">
                   {formatCr(selected.price_inr)}
                 </DialogDescription>
               </DialogHeader>
@@ -325,7 +325,7 @@ export default function AviationExchangePage({ user }) {
               <Button
                 onClick={openInspection}
                 variant="outline"
-                className="w-full border-orange-500/50 text-orange-400 hover:bg-orange-500/10"
+                className="w-full border-lime/50 text-lime hover:bg-lime/10"
                 data-testid="book-inspection-btn"
               >
                 <ClipboardCheck className="h-4 w-4 mr-2" /> Book Pre-Purchase Inspection / निरीक्षण बुक करें
@@ -336,7 +336,7 @@ export default function AviationExchangePage({ user }) {
                     .then(() => toast.success('Public link copied — share it anywhere! / लिंक कॉपी हो गया'));
                 }}
                 variant="outline"
-                className="w-full border-slate-700 text-slate-300 hover:border-orange-500/50 hover:text-orange-400"
+                className="w-full border-slate-700 text-slate-300 hover:border-lime/50 hover:text-lime"
                 data-testid="share-listing-btn"
               >
                 <Share2 className="h-4 w-4 mr-2" /> Share This Listing / लिस्टिंग शेयर करें
@@ -353,7 +353,7 @@ export default function AviationExchangePage({ user }) {
                 <Button
                   onClick={sendInquiry}
                   disabled={sending || !inquiryMsg.trim()}
-                  className="w-full mt-2 bg-orange-500 hover:bg-orange-600"
+                  className="w-full mt-2 bg-lime text-black hover:bg-lime/90"
                   data-testid="send-inquiry-btn"
                 >
                   {sending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}

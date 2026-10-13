@@ -272,7 +272,7 @@ export default function BankReconciliation() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-blue-400" />
+            <BarChart3 className="h-5 w-5 text-amber" />
             Balance Comparison / बैलेंस तुलना
           </CardTitle>
         </CardHeader>

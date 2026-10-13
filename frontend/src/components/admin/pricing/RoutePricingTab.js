@@ -22,7 +22,7 @@ export const RoutePricingTab = ({
     <Card className="bg-slate-800/50 border-slate-700">
       <CardHeader>
         <CardTitle className="text-white flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-blue-500" />
+          <MapPin className="h-5 w-5 text-amber" />
           Route-Based Pricing / रूट-आधारित मूल्य
         </CardTitle>
       </CardHeader>
@@ -79,7 +79,7 @@ export const RoutePricingTab = ({
               />
             </div>
             <div className="flex items-end">
-              <Button onClick={addRoute} disabled={saving} className="bg-blue-600 hover:bg-blue-700 w-full">
+              <Button onClick={addRoute} disabled={saving} className="bg-slate-700 hover:bg-slate-600 w-full">
                 <Plus className="h-4 w-4 mr-1" /> Add
               </Button>
             </div>
@@ -106,8 +106,8 @@ export const RoutePricingTab = ({
                   className="bg-slate-700/30 rounded-lg p-3 flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                      <Navigation className="h-5 w-5 text-blue-400" />
+                    <div className="h-10 w-10 bg-amber/20 rounded-lg flex items-center justify-center">
+                      <Navigation className="h-5 w-5 text-amber" />
                     </div>
                     <div>
                       <p className="text-white font-medium text-sm">
@@ -133,8 +133,8 @@ export const RoutePricingTab = ({
         </div>
 
         {/* Popular Routes Suggestion */}
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-          <h4 className="text-blue-400 text-sm font-medium mb-2">
+        <div className="bg-amber/10 border border-amber/30 rounded-lg p-4">
+          <h4 className="text-amber text-sm font-medium mb-2">
             Suggested Popular Routes in India
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ export const RoutePricingTab = ({
                 key={`${suggestion.from}-${suggestion.to}`}
                 variant="outline"
                 size="sm"
-                className="text-xs border-blue-500/30 text-blue-300 hover:bg-blue-500/10"
+                className="text-xs border-amber/30 text-slate-300 hover:bg-amber/10"
                 onClick={() => setNewRoute({
                   route_from: suggestion.from,
                   route_to: suggestion.to,

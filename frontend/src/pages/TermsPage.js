@@ -10,7 +10,7 @@ function TermsPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -30,7 +30,7 @@ function TermsPage() {
           <p className="text-slate-400 mb-4">Last Updated: August 2026</p>
           
           <div className="prose prose-invert max-w-none space-y-8">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">1. Acceptance of Terms</h2>
               <p className="text-slate-400">
                 By accessing and using AirYatra&#39;s services, you agree to be bound by these Terms of Service 
@@ -39,7 +39,7 @@ function TermsPage() {
               </p>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">2. Services</h2>
               <p className="text-slate-400 mb-3">
                 AirYatra provides a platform connecting customers with verified aviation operators for:
@@ -53,7 +53,7 @@ function TermsPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">3. Booking and Payments</h2>
               <p className="text-slate-400 mb-3">
                 All bookings are subject to availability and confirmation by the operator. Payment terms:
@@ -66,7 +66,7 @@ function TermsPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">4. User Responsibilities</h2>
               <p className="text-slate-400 mb-3">Users agree to:</p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
@@ -78,7 +78,7 @@ function TermsPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">5. Liability</h2>
               <p className="text-slate-400">
                 AirYatra acts as an intermediary platform. While we verify all operators, 
@@ -88,11 +88,11 @@ function TermsPage() {
               </p>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">6. Contact</h2>
               <p className="text-slate-400">
                 For questions about these terms, please contact us at{' '}
-                <a href="mailto:airyatraadmin@gmail.com" className="text-orange-400 hover:text-orange-300">
+                <a href="mailto:airyatraadmin@gmail.com" className="text-lime hover:text-lime/80">
                   airyatraadmin@gmail.com
                 </a>
               </p>
@@ -105,7 +105,7 @@ function TermsPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

@@ -72,7 +72,7 @@ function RegionalBookings({ region }) {
       ) : (
         <div className="space-y-4">
           {bookings.map((booking) => (
-            <div key={booking.id} className="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+            <div key={booking.id} className="p-4 rounded-sm bg-slate-900/50 border border-slate-800">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-white font-semibold">{booking.booking_number || `#${booking.id?.slice(0,8)}`}</p>

@@ -16,14 +16,14 @@ const NOTIFICATION_TYPES = [
   { id: 'sms', label: 'SMS', icon: MessageSquare, color: 'text-green-400' },
   { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle, color: 'text-emerald-400' },
   { id: 'push', label: 'Push', icon: Smartphone, color: 'text-purple-400' },
-  { id: 'approval', label: 'Approvals', icon: Shield, color: 'text-orange-400' },
+  { id: 'approval', label: 'Approvals', icon: Shield, color: 'text-amber-400' },
   { id: 'alert', label: 'Alerts', icon: AlertTriangle, color: 'text-red-400' },
 ];
 
 const PRIORITY_COLORS = {
   low: 'bg-slate-500',
   normal: 'bg-blue-500',
-  high: 'bg-orange-500',
+  high: 'bg-amber-500',
   urgent: 'bg-red-500 animate-pulse'
 };
 
@@ -130,11 +130,11 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-end p-4" onClick={onClose}>
       <div 
-        className="w-full max-w-md bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden mt-16 mr-4"
+        className="w-full max-w-md bg-slate-900 border border-slate-700 rounded-sm overflow-hidden mt-16 mr-4"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-4">
+        <div className="bg-slate-800 border border-slate-700 p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Bell className="h-6 w-6 text-white" />
@@ -177,7 +177,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
                 onClick={() => setActiveFilter(type.id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                   activeFilter === type.id 
-                    ? 'bg-orange-500 text-white' 
+                    ? 'bg-lime text-black' 
                     : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                 }`}
               >
@@ -185,7 +185,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
                 {type.label}
                 {count > 0 && (
                   <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-                    activeFilter === type.id ? 'bg-white/20' : 'bg-orange-500/20 text-orange-400'
+                    activeFilter === type.id ? 'bg-white/20' : 'bg-lime/20 text-lime'
                   }`}>
                     {count}
                   </span>
@@ -202,7 +202,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
               variant="ghost" 
               size="sm" 
               onClick={markAllAsRead}
-              className="text-orange-400 hover:text-orange-300 text-xs"
+              className="text-lime hover:text-lime/80 text-xs"
             >
               <CheckCircle className="h-3.5 w-3.5 mr-1" />
               Mark all as read
@@ -230,7 +230,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
                   <div 
                     key={notification._id}
                     className={`p-4 hover:bg-slate-800/50 transition-colors ${
-                      !notification.is_read ? 'bg-slate-800/30 border-l-2 border-orange-500' : ''
+                      !notification.is_read ? 'bg-slate-800/30 border-l-2 border-lime' : ''
                     }`}
                   >
                     <div className="flex gap-3">
@@ -286,7 +286,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
                         {notification.action_url && (
                           <a 
                             href={notification.action_url}
-                            className="inline-block mt-2 text-xs text-orange-400 hover:text-orange-300"
+                            className="inline-block mt-2 text-xs text-lime hover:text-lime/80"
                           >
                             {notification.action_label || 'View Details'} →
                           </a>
@@ -302,7 +302,7 @@ function GlobalNotificationCenter({ user, isOpen, onClose }) {
 
         {/* Footer */}
         <div className="p-3 bg-slate-800 border-t border-slate-700 text-center">
-          <a href="/notifications" className="text-sm text-orange-400 hover:text-orange-300">
+          <a href="/notifications" className="text-sm text-lime hover:text-lime/80">
             View All Notifications →
           </a>
         </div>

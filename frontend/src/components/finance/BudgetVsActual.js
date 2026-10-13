@@ -100,7 +100,7 @@ export default function BudgetVsActual() {
     if (planned === 0) return 'text-slate-400';
     const percent = (variance / planned) * 100;
     if (percent > 20) return 'text-green-400';
-    if (percent > 0) return 'text-blue-400';
+    if (percent > 0) return 'text-amber';
     if (percent > -10) return 'text-yellow-400';
     return 'text-red-400';
   };
@@ -119,7 +119,7 @@ export default function BudgetVsActual() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Target className="h-7 w-7 text-blue-400" />
+            <Target className="h-7 w-7 text-amber" />
             Budget vs Actual / बजट बनाम वास्तविक
           </h1>
           <p className="text-slate-400 mt-1">Track planned vs actual spending across categories</p>
@@ -143,7 +143,7 @@ export default function BudgetVsActual() {
           </Button>
           <Button 
             onClick={() => setShowAddModal(true)}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-slate-700 hover:bg-slate-600"
           >
             <Plus className="h-4 w-4 mr-2" />
             Set Budget
@@ -153,14 +153,14 @@ export default function BudgetVsActual() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-blue-600/30 to-blue-800/30 border-blue-500/50">
+        <Card className="bg-gradient-to-br border-amber/50">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 text-sm">Total Budget</p>
+                <p className="text-slate-300 text-sm">Total Budget</p>
                 <p className="text-3xl font-bold text-white mt-1">{formatINR(summary.total_planned)}</p>
               </div>
-              <Target className="h-10 w-10 text-blue-400 opacity-80" />
+              <Target className="h-10 w-10 text-amber opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -212,7 +212,7 @@ export default function BudgetVsActual() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-blue-400" />
+            <BarChart3 className="h-5 w-5 text-amber" />
             Budget by Category / श्रेणी के अनुसार बजट
           </CardTitle>
         </CardHeader>
@@ -310,7 +310,7 @@ export default function BudgetVsActual() {
                 <div key={idx} className="flex-1 flex flex-col items-center">
                   <div className="flex gap-1 items-end h-36 w-full">
                     <div 
-                      className="flex-1 bg-blue-500/30 rounded-t"
+                      className="flex-1 bg-amber/30 rounded-t"
                       style={{ height: `${plannedHeight}%` }}
                       title={`Planned: ${formatINR(month.planned)}`}
                     />
@@ -327,7 +327,7 @@ export default function BudgetVsActual() {
           </div>
           <div className="flex justify-center gap-6 mt-4">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500/30 rounded" />
+              <div className="w-3 h-3 bg-amber/30 rounded" />
               <span className="text-xs text-slate-400">Planned</span>
             </div>
             <div className="flex items-center gap-2">
@@ -343,7 +343,7 @@ export default function BudgetVsActual() {
         <DialogContent className="bg-slate-900 border-slate-700">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Plus className="h-5 w-5 text-blue-400" />
+              <Plus className="h-5 w-5 text-amber" />
               Set Budget / बजट सेट करें
             </DialogTitle>
           </DialogHeader>
@@ -402,7 +402,7 @@ export default function BudgetVsActual() {
             <Button 
               onClick={handleCreateBudget}
               disabled={!newBudget.category || !newBudget.planned_amount}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               <Plus className="h-4 w-4 mr-2" />
               Set Budget

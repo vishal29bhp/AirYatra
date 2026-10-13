@@ -219,7 +219,7 @@ export default function MultiCurrencySupport() {
           <Card className="bg-slate-800/50 border-slate-700 max-w-2xl mx-auto">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Calculator className="h-5 w-5 text-blue-400" />
+                <Calculator className="h-5 w-5 text-amber" />
                 Currency Converter / मुद्रा परिवर्तक
               </CardTitle>
             </CardHeader>
@@ -292,7 +292,7 @@ export default function MultiCurrencySupport() {
               <Button 
                 onClick={handleConvert}
                 disabled={!amount || parseFloat(amount) <= 0}
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-slate-700 hover:bg-slate-600"
               >
                 <Calculator className="h-4 w-4 mr-2" />
                 Convert

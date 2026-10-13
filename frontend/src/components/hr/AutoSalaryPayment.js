@@ -133,7 +133,7 @@ export default function AutoSalaryPayment({ user }) {
                 ))}
               </select>
             </div>
-            <Button onClick={calculateSalary} disabled={loading} className="bg-blue-500 hover:bg-blue-600">
+            <Button onClick={calculateSalary} disabled={loading} className="bg-slate-700 hover:bg-slate-600">
               <Calculator className="h-4 w-4 mr-2" /> Calculate Salary / वेतन गणना करें
             </Button>
             <Button onClick={addExpensesToSalary} variant="outline">
@@ -144,22 +144,22 @@ export default function AutoSalaryPayment({ user }) {
       </Card>
 
       {/* Workflow Info */}
-      <Card className="bg-blue-500/10 border-blue-500/50">
+      <Card className="bg-amber/10 border-amber/50">
         <CardContent className="pt-6">
-          <h3 className="text-blue-400 font-medium mb-3">Auto Salary Payment Workflow / ऑटो वेतन भुगतान प्रक्रिया</h3>
+          <h3 className="text-amber font-medium mb-3">Auto Salary Payment Workflow / ऑटो वेतन भुगतान प्रक्रिया</h3>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center text-slate-300">
-              <span className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs mr-2">1</span>
+              <span className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-white text-xs mr-2">1</span>
               Calculate Salary
             </div>
             <span className="text-slate-600">→</span>
             <div className="flex items-center text-slate-300">
-              <span className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs mr-2">2</span>
+              <span className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-white text-xs mr-2">2</span>
               HR Approval
             </div>
             <span className="text-slate-600">→</span>
             <div className="flex items-center text-slate-300">
-              <span className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs mr-2">3</span>
+              <span className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-white text-xs mr-2">3</span>
               Admin Approval
             </div>
             <span className="text-slate-600">→</span>
@@ -212,7 +212,7 @@ export default function AutoSalaryPayment({ user }) {
                       </td>
                       <td className="text-right text-white">₹{calc.basic?.toLocaleString()}</td>
                       <td className="text-right text-white">₹{(calc.hra + calc.allowances)?.toLocaleString()}</td>
-                      <td className="text-right text-blue-400">₹{calc.incentives?.toLocaleString()}</td>
+                      <td className="text-right text-amber">₹{calc.incentives?.toLocaleString()}</td>
                       <td className="text-right text-purple-400">₹{calc.reimbursements?.toLocaleString()}</td>
                       <td className="text-right text-red-400">-₹{calc.total_deductions?.toLocaleString()}</td>
                       <td className="text-right font-bold text-green-400">₹{calc.net_salary?.toLocaleString()}</td>

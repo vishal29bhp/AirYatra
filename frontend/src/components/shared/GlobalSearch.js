@@ -10,7 +10,7 @@ const CATEGORIES = {
   bookings: { icon: Plane, label: 'Bookings', color: 'text-blue-400 bg-blue-500/20', path: '/admin/bookings' },
   customers: { icon: Users, label: 'Customers', color: 'text-green-400 bg-green-500/20', path: '/admin/users' },
   operators: { icon: Building2, label: 'Operators', color: 'text-purple-400 bg-purple-500/20', path: '/admin/operators' },
-  invoices: { icon: FileText, label: 'Invoices', color: 'text-orange-400 bg-orange-500/20', path: '/admin/invoices' },
+  invoices: { icon: FileText, label: 'Invoices', color: 'text-amber-400 bg-amber-500/20', path: '/admin/invoices' },
   aircraft: { icon: Plane, label: 'Aircraft', color: 'text-cyan-400 bg-cyan-500/20', path: '/admin/fleet' },
   pilots: { icon: Users, label: 'Pilots', color: 'text-yellow-400 bg-yellow-500/20', path: '/operator/pilots' },
   inquiries: { icon: FileText, label: 'Inquiries', color: 'text-pink-400 bg-pink-500/20', path: '/admin/inquiries' },
@@ -232,7 +232,7 @@ function GlobalSearch({ user }) {
         onMouseEnter={() => setSelectedIndex(index)}
         className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all ${
           isSelected 
-            ? 'bg-orange-500/10 border-l-2 border-orange-500' 
+            ? 'bg-lime/10 border-l-2 border-lime' 
             : 'border-l-2 border-transparent hover:bg-slate-800/50'
         }`}
       >
@@ -269,7 +269,7 @@ function GlobalSearch({ user }) {
             </kbd>
           )}
           {isSelected && (
-            <ArrowRight className="h-4 w-4 text-orange-400" />
+            <ArrowRight className="h-4 w-4 text-lime" />
           )}
         </div>
       </button>
@@ -302,7 +302,7 @@ function GlobalSearch({ user }) {
           
           {/* Modal */}
           <div 
-            className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-sm overflow-hidden"
             style={{ animation: 'slideDown 0.2s ease-out' }}
           >
             {/* Search Input */}
@@ -318,7 +318,7 @@ function GlobalSearch({ user }) {
                 className="flex-1 bg-transparent text-white text-lg placeholder:text-slate-500 focus:outline-none"
                 data-testid="global-search-input"
               />
-              {loading && <Loader2 className="h-5 w-5 text-orange-400 animate-spin" />}
+              {loading && <Loader2 className="h-5 w-5 text-lime animate-spin" />}
               {query && (
                 <button onClick={() => setQuery('')} className="text-slate-400 hover:text-white">
                   <X className="h-5 w-5" />
@@ -359,7 +359,7 @@ function GlobalSearch({ user }) {
                 <>
                   {loading ? (
                     <div className="py-12 text-center">
-                      <Loader2 className="h-8 w-8 text-orange-400 animate-spin mx-auto" />
+                      <Loader2 className="h-8 w-8 text-lime animate-spin mx-auto" />
                       <p className="text-slate-400 mt-2">Searching...</p>
                     </div>
                   ) : results.length === 0 ? (

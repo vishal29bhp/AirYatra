@@ -71,7 +71,7 @@ function LoginActivityLog({ user }) {
     } else if (browserLower.includes('safari')) {
       return { color: 'bg-cyan-500/20 text-cyan-400', icon: '🧭' };
     } else if (browserLower.includes('firefox')) {
-      return { color: 'bg-orange-500/20 text-orange-400', icon: '🦊' };
+      return { color: 'bg-amber-500/20 text-amber-400', icon: '🦊' };
     } else if (browserLower.includes('edge')) {
       return { color: 'bg-green-500/20 text-green-400', icon: '📐' };
     }
@@ -154,9 +154,9 @@ function LoginActivityLog({ user }) {
 
   if (loading) {
     return (
-      <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
+      <div className="bg-slate-900 rounded-sm border border-slate-800 p-6">
         <div className="flex items-center justify-center py-8">
-          <RefreshCw className="h-6 w-6 text-orange-500 animate-spin mr-2" />
+          <RefreshCw className="h-6 w-6 text-lime animate-spin mr-2" />
           <span className="text-slate-400">Loading login history...</span>
         </div>
       </div>
@@ -165,13 +165,13 @@ function LoginActivityLog({ user }) {
 
   if (error) {
     return (
-      <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
+      <div className="bg-slate-900 rounded-sm border border-slate-800 p-6">
         <div className="text-center py-8">
           <AlertTriangle className="h-12 w-12 text-red-400 mx-auto mb-3" />
           <p className="text-red-400">{error}</p>
           <Button 
             onClick={fetchLoginActivity}
-            className="mt-4 bg-orange-500 hover:bg-orange-600"
+            className="mt-4 bg-lime text-black hover:bg-lime/90"
           >
             Retry
           </Button>
@@ -181,11 +181,11 @@ function LoginActivityLog({ user }) {
   }
 
   return (
-    <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden" data-testid="login-activity-log">
+    <div className="bg-slate-900 rounded-sm border border-slate-800 overflow-hidden" data-testid="login-activity-log">
       {/* Header */}
       <div className="p-4 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Shield className="h-5 w-5 text-orange-500" />
+          <Shield className="h-5 w-5 text-lime" />
           <h3 className="text-lg font-semibold text-white">Login Activity / लॉगिन गतिविधि</h3>
         </div>
         <Button 

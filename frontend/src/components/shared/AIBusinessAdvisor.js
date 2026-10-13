@@ -15,7 +15,7 @@ const QUICK_PROMPTS = [
   { id: 'profit_analysis', label: 'Profit Analysis', icon: DollarSign, color: 'text-yellow-400' },
   { id: 'marketing_ideas', label: 'Marketing Ideas', icon: Megaphone, color: 'text-purple-400' },
   { id: 'hr_summary', label: 'HR Summary', icon: Users, color: 'text-blue-400' },
-  { id: 'customer_insights', label: 'Customer Insights', icon: Building2, color: 'text-orange-400' },
+  { id: 'customer_insights', label: 'Customer Insights', icon: Building2, color: 'text-amber-400' },
   { id: 'weekly_briefing', label: 'Weekly Brief', icon: Sparkles, color: 'text-pink-400' },
 ];
 
@@ -179,7 +179,7 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
     return (
       <button
         onClick={onToggle}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform z-50 group"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-lime text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform z-50 group"
         title="AI Business Advisor"
       >
         <Bot className="h-7 w-7 text-white" />
@@ -192,14 +192,14 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
 
   return (
     <div 
-      className={`fixed bottom-6 right-6 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl z-50 flex flex-col transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 bg-slate-900 border border-slate-700 rounded-sm z-50 flex flex-col transition-all duration-300 ${
         isMinimized ? 'w-80 h-14' : 'w-96 h-[600px] max-h-[80vh]'
       }`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700 bg-gradient-to-r from-orange-600/20 to-amber-600/20 rounded-t-2xl">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700 bg-lime/20 rounded-t-2xl">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center">
             <Bot className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -260,9 +260,9 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div 
-                  className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
+                  className={`max-w-[85%] rounded-sm px-4 py-2.5 ${
                     msg.role === 'user' 
-                      ? 'bg-orange-600 text-white rounded-br-md' 
+                      ? 'bg-lime text-black rounded-br-md' 
                       : msg.isError 
                         ? 'bg-red-900/30 text-red-300 rounded-bl-md border border-red-800'
                         : 'bg-slate-800 text-slate-200 rounded-bl-md'
@@ -303,7 +303,7 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
             
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-slate-800 rounded-2xl rounded-bl-md px-4 py-3">
+                <div className="bg-slate-800 rounded-sm rounded-bl-md px-4 py-3">
                   <div className="flex items-center gap-2 text-slate-400">
                     <Loader2 className="h-4 w-4 animate-spin" />
                     <span className="text-sm">Analyzing...</span>
@@ -317,7 +317,7 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
 
           {/* Input */}
           <div className="p-3 border-t border-slate-700">
-            <div className="flex items-center gap-2 bg-slate-800 rounded-xl px-3 py-2">
+            <div className="flex items-center gap-2 bg-slate-800 rounded-sm px-3 py-2">
               <input
                 ref={inputRef}
                 type="text"
@@ -331,7 +331,7 @@ Neeche quick prompts use karein ya apna sawaal poochein!`,
               <button
                 onClick={() => sendMessage(inputValue)}
                 disabled={!inputValue.trim() || loading}
-                className="p-2 bg-orange-600 hover:bg-orange-700 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg text-white transition-colors"
+                className="p-2 bg-lime hover:bg-lime/90 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg text-black transition-colors"
               >
                 <Send className="h-4 w-4" />
               </button>

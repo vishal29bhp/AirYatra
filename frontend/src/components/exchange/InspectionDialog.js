@@ -40,7 +40,7 @@ export const InspectionDialog = ({ listing, open, onClose }) => {
       <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-md" data-testid="inspection-dialog">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <ClipboardCheck className="h-5 w-5 text-orange-400" /> Book Pre-Purchase Inspection
+            <ClipboardCheck className="h-5 w-5 text-lime" /> Book Pre-Purchase Inspection
           </DialogTitle>
           <DialogDescription className="text-slate-400">
             {listing?.title} • {listing?.location}. Our aviation expert accompanies you — free for serious buyers.
@@ -85,7 +85,7 @@ export const InspectionDialog = ({ listing, open, onClose }) => {
               data-testid="inspection-notes-input"
             />
           </div>
-          <Button onClick={submit} disabled={sending} className="w-full bg-orange-500 hover:bg-orange-600" data-testid="inspection-submit-btn">
+          <Button onClick={submit} disabled={sending} className="w-full bg-lime text-black hover:bg-lime/90" data-testid="inspection-submit-btn">
             {sending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <ClipboardCheck className="h-4 w-4 mr-2" />}
             Request Inspection Slot
           </Button>

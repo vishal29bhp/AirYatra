@@ -6,14 +6,14 @@ import React from 'react';
 import { Users, Target, ListChecks, TrendingUp } from 'lucide-react';
 
 const StatsCard = ({ title, value, icon: Icon, color, subtitle, trend }) => (
-  <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 hover:border-slate-600 transition-colors">
+  <div className="bg-slate-900 border border-slate-700 rounded-sm p-4 hover:border-slate-600 transition-colors">
     <div className="flex items-start justify-between">
       <div>
         <p className="text-slate-400 text-sm">{title}</p>
         <p className={`text-3xl font-bold mt-1 ${color || 'text-white'}`}>{value}</p>
         {subtitle && <p className="text-slate-500 text-xs mt-1">{subtitle}</p>}
       </div>
-      <div className={`p-3 rounded-lg ${color?.includes('green') ? 'bg-green-500/20' : color?.includes('orange') ? 'bg-orange-500/20' : color?.includes('blue') ? 'bg-blue-500/20' : 'bg-slate-800'}`}>
+      <div className={`p-3 rounded-lg ${color?.includes('green') ? 'bg-green-500/20' : color?.includes('orange') ? 'bg-amber-500/20' : color?.includes('blue') ? 'bg-amber/20' : 'bg-slate-800'}`}>
         <Icon className={`h-6 w-6 ${color || 'text-slate-400'}`} />
       </div>
     </div>
@@ -37,14 +37,14 @@ const CRMStatsCards = ({ dashboard }) => {
         title="Total Leads"
         value={dashboard.total_leads || 0}
         icon={Users}
-        color="text-blue-400"
+        color="text-amber"
         subtitle={`${dashboard.today_leads || 0} today`}
       />
       <StatsCard
         title="Hot Leads"
         value={dashboard.hot_leads || 0}
         icon={Target}
-        color="text-orange-400"
+        color="text-lime"
         subtitle="Need immediate attention"
       />
       <StatsCard

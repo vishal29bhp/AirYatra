@@ -19,7 +19,7 @@ const statusConfig = {
   contacted: { color: 'bg-yellow-500', label: 'Contacted' },
   qualified: { color: 'bg-purple-500', label: 'Qualified' },
   proposal_sent: { color: 'bg-indigo-500', label: 'Proposal Sent' },
-  negotiation: { color: 'bg-orange-500', label: 'Negotiation' },
+  negotiation: { color: 'bg-amber-500', label: 'Negotiation' },
   won: { color: 'bg-green-500', label: 'Won' },
   lost: { color: 'bg-red-500', label: 'Lost' },
   follow_up: { color: 'bg-cyan-500', label: 'Follow Up' },
@@ -28,7 +28,7 @@ const statusConfig = {
 
 const priorityConfig = {
   hot: { color: 'bg-red-500', label: '🔥 Hot' },
-  warm: { color: 'bg-orange-500', label: '☀️ Warm' },
+  warm: { color: 'bg-amber-500', label: '☀️ Warm' },
   cold: { color: 'bg-blue-500', label: '❄️ Cold' },
 };
 
@@ -119,7 +119,7 @@ const LeadCard = ({ lead, onEdit, onCall, onView }) => {
           <Button 
             size="sm" 
             variant="ghost" 
-            className="text-slate-400 hover:text-blue-400"
+            className="text-slate-400 hover:text-amber"
             onClick={(e) => { e.stopPropagation(); onEdit && onEdit(lead); }}
           >
             <Edit2 className="h-4 w-4" />
@@ -194,7 +194,7 @@ const CRMLeadsList = ({
             variant="outline" 
             size="icon"
             onClick={() => setShowFilters(!showFilters)}
-            className={showFilters ? 'border-orange-500 text-orange-400' : ''}
+            className={showFilters ? 'border-lime text-lime' : ''}
           >
             <Filter className="h-4 w-4" />
           </Button>
@@ -202,7 +202,7 @@ const CRMLeadsList = ({
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
           </Button>
         </div>
-        <Button onClick={onAddNew} className="bg-orange-500 hover:bg-orange-600">
+        <Button onClick={onAddNew} className="bg-lime text-black hover:bg-lime/90">
           + Add Lead
         </Button>
       </div>
@@ -261,13 +261,13 @@ const CRMLeadsList = ({
       {/* Leads Grid */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+          <Loader2 className="h-8 w-8 animate-spin text-lime" />
         </div>
       ) : filteredLeads.length === 0 ? (
         <div className="text-center py-12 bg-slate-900 rounded-lg border border-slate-700">
           <User className="h-12 w-12 text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400">No leads found</p>
-          <Button onClick={onAddNew} className="mt-4 bg-orange-500 hover:bg-orange-600">
+          <Button onClick={onAddNew} className="mt-4 bg-lime text-black hover:bg-lime/90">
             Add Your First Lead
           </Button>
         </div>

@@ -33,28 +33,28 @@ function Overview({ overview, goTo }) {
         </p>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <button onClick={() => goTo('attendance')} className="bg-sky-500/15 rounded-xl p-5 border border-sky-500/40 text-left hover:bg-sky-500/25 transition-colors" data-testid="overview-attendance-card">
+        <button onClick={() => goTo('attendance')} className="bg-sky-500/15 rounded-sm p-5 border border-sky-500/40 text-left hover:bg-sky-500/25 transition-colors" data-testid="overview-attendance-card">
           <Clock className="h-5 w-5 text-sky-400 mb-2" />
           <p className="text-xl font-bold text-white">{today_attendance ? (today_attendance.check_out_time ? 'Checked Out' : 'Checked In') : 'Not Marked'}</p>
           <p className="text-slate-400 text-sm">Today / आज • {month_summary.present_days} days this month</p>
         </button>
-        <button onClick={() => goTo('leave')} className="bg-green-500/15 rounded-xl p-5 border border-green-500/40 text-left hover:bg-green-500/25 transition-colors" data-testid="overview-leave-card">
+        <button onClick={() => goTo('leave')} className="bg-green-500/15 rounded-sm p-5 border border-green-500/40 text-left hover:bg-green-500/25 transition-colors" data-testid="overview-leave-card">
           <CalendarDays className="h-5 w-5 text-green-400 mb-2" />
           <p className="text-xl font-bold text-white">{leaveLeft} days</p>
           <p className="text-slate-400 text-sm">Leave Balance / शेष छुट्टी</p>
         </button>
-        <button onClick={() => goTo('payslips')} className="bg-orange-500/15 rounded-xl p-5 border border-orange-500/40 text-left hover:bg-orange-500/25 transition-colors" data-testid="overview-payslip-card">
-          <BadgeIndianRupee className="h-5 w-5 text-orange-400 mb-2" />
+        <button onClick={() => goTo('payslips')} className="bg-lime/15 rounded-sm p-5 border border-lime/40 text-left hover:bg-lime/25 transition-colors" data-testid="overview-payslip-card">
+          <BadgeIndianRupee className="h-5 w-5 text-lime mb-2" />
           <p className="text-xl font-bold text-white">{latest_payslip ? `₹${latest_payslip.net_salary?.toLocaleString()}` : gross_salary ? `₹${gross_salary.toLocaleString()}` : '—'}</p>
           <p className="text-slate-400 text-sm">{latest_payslip ? `${latest_payslip.period} • ${latest_payslip.status}` : 'Gross Salary / मासिक वेतन'}</p>
         </button>
-        <button onClick={() => goTo('expenses')} className="bg-purple-500/15 rounded-xl p-5 border border-purple-500/40 text-left hover:bg-purple-500/25 transition-colors" data-testid="overview-expense-card">
+        <button onClick={() => goTo('expenses')} className="bg-purple-500/15 rounded-sm p-5 border border-purple-500/40 text-left hover:bg-purple-500/25 transition-colors" data-testid="overview-expense-card">
           <Receipt className="h-5 w-5 text-purple-400 mb-2" />
           <p className="text-xl font-bold text-white">₹{expenses.pending_amount?.toLocaleString()}</p>
           <p className="text-slate-400 text-sm">Pending Claims / लंबित क्लेम ({expenses.total_claims})</p>
         </button>
       </div>
-      <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-5 border border-slate-700">
         <h3 className="text-white font-semibold mb-3">This Month / इस महीने</h3>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div><p className="text-2xl font-bold text-sky-400">{month_summary.present_days}</p><p className="text-slate-400 text-xs">Present Days</p></div>

@@ -26,7 +26,7 @@ const actionColors = {
   update: 'bg-blue-500/20 text-blue-400',
   delete: 'bg-red-500/20 text-red-400',
   approve: 'bg-purple-500/20 text-purple-400',
-  reject: 'bg-orange-500/20 text-orange-400',
+  reject: 'bg-amber-500/20 text-amber-400',
   view: 'bg-slate-500/20 text-slate-400'
 };
 
@@ -177,7 +177,7 @@ export default function AuditTrailDashboard() {
         <Card className="bg-slate-800/50 border-slate-700">
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-blue-400" />
+              <BarChart3 className="h-4 w-4 text-amber" />
               Activity by Module
             </CardTitle>
           </CardHeader>

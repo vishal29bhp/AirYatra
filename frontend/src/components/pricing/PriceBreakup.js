@@ -83,7 +83,7 @@ export const PriceLockTimer = ({ lockId, onExpire, onLockData }) => {
   if (loading) {
     return (
       <div className="flex items-center justify-center p-4">
-        <Loader2 className="h-5 w-5 animate-spin text-orange-400" />
+        <Loader2 className="h-5 w-5 animate-spin text-lime" />
       </div>
     );
   }
@@ -94,14 +94,14 @@ export const PriceLockTimer = ({ lockId, onExpire, onLockData }) => {
   const isExpired = timeLeft.expired;
   
   return (
-    <Card className={`border-2 ${isExpired ? 'bg-red-500/10 border-red-500' : isUrgent ? 'bg-orange-500/10 border-orange-500' : 'bg-green-500/10 border-green-500'}`}>
+    <Card className={`border-2 ${isExpired ? 'bg-red-500/10 border-red-500' : isUrgent ? 'bg-amber-500/10 border-amber-500' : 'bg-green-500/10 border-green-500'}`}>
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {isExpired ? (
               <AlertTriangle className="h-8 w-8 text-red-400" />
             ) : (
-              <Lock className={`h-8 w-8 ${isUrgent ? 'text-orange-400 animate-pulse' : 'text-green-400'}`} />
+              <Lock className={`h-8 w-8 ${isUrgent ? 'text-amber-400 animate-pulse' : 'text-green-400'}`} />
             )}
             <div>
               <h3 className="text-white font-semibold">
@@ -118,7 +118,7 @@ export const PriceLockTimer = ({ lockId, onExpire, onLockData }) => {
           
           <div className="text-right">
             <div className={`text-4xl font-mono font-bold ${
-              isExpired ? 'text-red-400' : isUrgent ? 'text-orange-400 animate-pulse' : 'text-green-400'
+              isExpired ? 'text-red-400' : isUrgent ? 'text-amber-400 animate-pulse' : 'text-green-400'
             }`}>
               {isExpired ? '00:00' : `${String(timeLeft.minutes).padStart(2, '0')}:${String(timeLeft.seconds).padStart(2, '0')}`}
             </div>
@@ -203,7 +203,7 @@ export const CustomerPriceBreakup = ({
     return (
       <Card className="bg-slate-900 border-slate-700">
         <CardContent className="p-4 flex items-center justify-center">
-          <Loader2 className="h-5 w-5 animate-spin text-orange-400" />
+          <Loader2 className="h-5 w-5 animate-spin text-lime" />
         </CardContent>
       </Card>
     );
@@ -216,7 +216,7 @@ export const CustomerPriceBreakup = ({
       <CardHeader className="pb-2">
         <CardTitle className="text-white flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-orange-400" />
+            <Receipt className="h-5 w-5 text-lime" />
             Price Breakup / मूल्य विवरण
           </span>
           <Button 
@@ -348,7 +348,7 @@ export const OperatorSettlementView = ({
     return (
       <Card className="bg-slate-900 border-slate-700">
         <CardContent className="p-4 flex items-center justify-center">
-          <Loader2 className="h-5 w-5 animate-spin text-orange-400" />
+          <Loader2 className="h-5 w-5 animate-spin text-lime" />
         </CardContent>
       </Card>
     );
@@ -436,8 +436,8 @@ export const OperatorSettlementView = ({
         </div>
         
         {/* Settlement Info */}
-        <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg text-sm">
-          <div className="flex items-center gap-2 text-blue-400 mb-1">
+        <div className="mt-4 p-3 bg-amber/10 border border-amber/30 rounded-lg text-sm">
+          <div className="flex items-center gap-2 text-amber mb-1">
             <Clock className="h-4 w-4" />
             <span className="font-medium">Settlement Timeline</span>
           </div>

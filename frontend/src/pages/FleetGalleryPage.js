@@ -62,7 +62,7 @@ function FleetGalleryPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -73,7 +73,7 @@ function FleetGalleryPage() {
               <Button variant="ghost" className="text-slate-300 hover:text-white">Services</Button>
             </Link>
             <Link to="/booking">
-              <Button className="bg-orange-500 hover:bg-orange-600">Book Now</Button>
+              <Button className="bg-lime text-black hover:bg-lime/90">Book Now</Button>
             </Link>
           </div>
         </div>
@@ -82,7 +82,7 @@ function FleetGalleryPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-6 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-wider">Our Fleet</span>
+          <span className="text-lime font-semibold text-sm uppercase tracking-wider">Our Fleet</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-4 mb-6">
             World-Class Aircraft Fleet
           </h1>
@@ -103,7 +103,7 @@ function FleetGalleryPage() {
               onClick={() => setSelectedType('all')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedType === 'all'
-                  ? 'bg-orange-500 text-white'
+                  ? 'bg-lime text-black'
                   : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
@@ -116,7 +116,7 @@ function FleetGalleryPage() {
                 onClick={() => setSelectedType(type)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedType === type
-                    ? 'bg-orange-500 text-white'
+                    ? 'bg-lime text-black'
                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                 }`}
               >
@@ -132,7 +132,7 @@ function FleetGalleryPage() {
         <div className="max-w-7xl mx-auto">
           {loading ? (
             <div className="text-center py-20">
-              <div className="animate-spin h-12 w-12 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+              <div className="animate-spin h-12 w-12 border-4 border-lime border-t-transparent rounded-full mx-auto mb-4"></div>
               <p className="text-slate-400">Loading fleet...</p>
             </div>
           ) : filteredAircraft.length === 0 ? (
@@ -145,7 +145,7 @@ function FleetGalleryPage() {
               {filteredAircraft.map((craft) => (
                 <div
                   key={craft.id}
-                  className="group bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all cursor-pointer"
+                  className="group bg-slate-800/50 border border-slate-700 rounded-sm overflow-hidden hover:border-lime/50 transition-all cursor-pointer"
                   onClick={() => setSelectedAircraft(craft)}
                 >
                   {/* Image */}
@@ -157,7 +157,7 @@ function FleetGalleryPage() {
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        craft.type === 'jet' ? 'bg-blue-500' :
+                        craft.type === 'jet' ? 'bg-slate-700' :
                         craft.type === 'helicopter' ? 'bg-green-500' :
                         'bg-purple-500'
                       } text-white`}>
@@ -181,17 +181,17 @@ function FleetGalleryPage() {
                     {/* Specs */}
                     <div className="grid grid-cols-3 gap-4 mb-4">
                       <div className="text-center">
-                        <Users className="h-5 w-5 text-orange-500 mx-auto mb-1" />
+                        <Users className="h-5 w-5 text-lime mx-auto mb-1" />
                         <p className="text-white font-semibold">{craft.capacity}</p>
                         <p className="text-slate-500 text-xs">Passengers</p>
                       </div>
                       <div className="text-center">
-                        <MapPin className="h-5 w-5 text-orange-500 mx-auto mb-1" />
+                        <MapPin className="h-5 w-5 text-lime mx-auto mb-1" />
                         <p className="text-white font-semibold">{craft.range_km}</p>
                         <p className="text-slate-500 text-xs">Range (km)</p>
                       </div>
                       <div className="text-center">
-                        <Gauge className="h-5 w-5 text-orange-500 mx-auto mb-1" />
+                        <Gauge className="h-5 w-5 text-lime mx-auto mb-1" />
                         <p className="text-white font-semibold">{craft.speed_kmh}</p>
                         <p className="text-slate-500 text-xs">Speed (km/h)</p>
                       </div>
@@ -201,9 +201,9 @@ function FleetGalleryPage() {
                     <div className="flex items-center justify-between pt-4 border-t border-slate-700">
                       <div>
                         <p className="text-slate-400 text-xs">Starting from</p>
-                        <p className="text-orange-500 font-bold">{craft.hourly_rate}</p>
+                        <p className="text-lime font-bold">{craft.hourly_rate}</p>
                       </div>
-                      <Button size="sm" className="bg-orange-500 hover:bg-orange-600">
+                      <Button size="sm" className="bg-lime text-black hover:bg-lime/90">
                         View Details
                       </Button>
                     </div>
@@ -218,7 +218,7 @@ function FleetGalleryPage() {
       {/* Aircraft Detail Modal */}
       {selectedAircraft && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedAircraft(null)}>
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+          <div className="bg-slate-900 border border-slate-700 rounded-sm max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             {/* Modal Header */}
             <div className="relative h-72">
               <img
@@ -234,7 +234,7 @@ function FleetGalleryPage() {
               </button>
               <div className="absolute bottom-4 left-4">
                 <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                  selectedAircraft.type === 'jet' ? 'bg-blue-500' :
+                  selectedAircraft.type === 'jet' ? 'bg-slate-700' :
                   selectedAircraft.type === 'helicopter' ? 'bg-green-500' :
                   'bg-purple-500'
                 } text-white`}>
@@ -250,23 +250,23 @@ function FleetGalleryPage() {
 
               {/* Specs Grid */}
               <div className="grid grid-cols-4 gap-4 mb-8">
-                <div className="bg-slate-800 rounded-xl p-4 text-center">
-                  <Users className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+                <div className="bg-slate-800 rounded-sm p-4 text-center">
+                  <Users className="h-6 w-6 text-lime mx-auto mb-2" />
                   <p className="text-2xl font-bold text-white">{selectedAircraft.capacity}</p>
                   <p className="text-slate-400 text-sm">Passengers</p>
                 </div>
-                <div className="bg-slate-800 rounded-xl p-4 text-center">
-                  <MapPin className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+                <div className="bg-slate-800 rounded-sm p-4 text-center">
+                  <MapPin className="h-6 w-6 text-lime mx-auto mb-2" />
                   <p className="text-2xl font-bold text-white">{selectedAircraft.range_km}</p>
                   <p className="text-slate-400 text-sm">Range (km)</p>
                 </div>
-                <div className="bg-slate-800 rounded-xl p-4 text-center">
-                  <Gauge className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+                <div className="bg-slate-800 rounded-sm p-4 text-center">
+                  <Gauge className="h-6 w-6 text-lime mx-auto mb-2" />
                   <p className="text-2xl font-bold text-white">{selectedAircraft.speed_kmh}</p>
                   <p className="text-slate-400 text-sm">Speed (km/h)</p>
                 </div>
-                <div className="bg-slate-800 rounded-xl p-4 text-center">
-                  <Fuel className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+                <div className="bg-slate-800 rounded-sm p-4 text-center">
+                  <Fuel className="h-6 w-6 text-lime mx-auto mb-2" />
                   <p className="text-2xl font-bold text-white">{selectedAircraft.hourly_rate?.split('/')[0] || 'On Request'}</p>
                   <p className="text-slate-400 text-sm">Per Hour</p>
                 </div>
@@ -288,7 +288,7 @@ function FleetGalleryPage() {
               {/* CTA */}
               <div className="flex gap-4">
                 <Link to="/booking" className="flex-1">
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 h-12">
+                  <Button className="w-full bg-lime text-black hover:bg-lime/90 h-12">
                     <Plane className="mr-2 h-5 w-5" />
                     Book This Aircraft
                   </Button>
@@ -306,7 +306,7 @@ function FleetGalleryPage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-orange-500 to-orange-600">
+      <section className="py-20 px-6 bg-slate-800 border border-slate-700">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to Fly?</h2>
           <p className="text-white/90 text-lg mb-8">
@@ -332,7 +332,7 @@ function FleetGalleryPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

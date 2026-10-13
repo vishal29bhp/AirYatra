@@ -49,7 +49,7 @@ function SmartHangarManagement() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-400">Loading Hangar Data...</span>
       </div>
     );
@@ -70,7 +70,7 @@ function SmartHangarManagement() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Warehouse className="h-7 w-7 text-blue-500" />
+            <Warehouse className="h-7 w-7 text-amber" />
             Smart Hangar Management
           </h1>
           <p className="text-slate-400 text-sm mt-1">
@@ -78,7 +78,7 @@ function SmartHangarManagement() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button onClick={() => setBookingDialog(true)} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={() => setBookingDialog(true)} className="bg-slate-700 hover:bg-slate-600">
             <Plus className="h-4 w-4 mr-2" />
             Book Slot
           </Button>
@@ -92,23 +92,23 @@ function SmartHangarManagement() {
       {/* Summary Cards */}
       {occupancy && (
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-            <p className="text-blue-400 text-sm">Total Hangars</p>
+          <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+            <p className="text-amber text-sm">Total Hangars</p>
             <p className="text-3xl font-bold text-white">{occupancy.summary.total_hangars}</p>
           </div>
-          <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
             <p className="text-green-400 text-sm">Total Capacity</p>
             <p className="text-3xl font-bold text-white">{occupancy.summary.total_capacity}</p>
           </div>
-          <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
-            <p className="text-orange-400 text-sm">Occupied</p>
+          <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
+            <p className="text-lime text-sm">Occupied</p>
             <p className="text-3xl font-bold text-white">{occupancy.summary.total_occupied}</p>
           </div>
-          <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
             <p className="text-purple-400 text-sm">Available</p>
             <p className="text-3xl font-bold text-white">{occupancy.summary.total_available}</p>
           </div>
-          <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-800/20 border border-cyan-600/30 rounded-xl p-4">
+          <div className="bg-gradient-to-br from-cyan-600/20 to-cyan-800/20 border border-cyan-600/30 rounded-sm p-4">
             <p className="text-cyan-400 text-sm">Occupancy Rate</p>
             <p className="text-3xl font-bold text-white">{occupancy.summary.overall_occupancy_percentage}%</p>
           </div>
@@ -123,7 +123,7 @@ function SmartHangarManagement() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-t-lg transition-colors ${
               activeTab === tab.id 
-                ? 'bg-blue-600 text-white' 
+                ? 'bg-slate-700 text-white' 
                 : 'text-slate-400 hover:bg-slate-800'
             }`}
           >
@@ -137,7 +137,7 @@ function SmartHangarManagement() {
       {activeTab === 'occupancy' && occupancy && (
         <div className="space-y-6">
           {/* Occupancy Chart */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Hangar Occupancy Overview</h3>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={occupancy.occupancy}>
@@ -156,7 +156,7 @@ function SmartHangarManagement() {
           {/* Hangar Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {occupancy.occupancy.map((hangar) => (
-              <div key={hangar.hangar_id} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div key={hangar.hangar_id} className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h4 className="font-semibold text-white">{hangar.name}</h4>
@@ -206,7 +206,7 @@ function SmartHangarManagement() {
                     <p className="text-xs text-slate-400 mb-2">Parked Aircraft:</p>
                     <div className="flex flex-wrap gap-1">
                       {hangar.parked_aircraft.map((a, i) => (
-                        <span key={i} className="px-2 py-0.5 bg-orange-600/20 text-orange-400 rounded text-xs font-mono">
+                        <span key={i} className="px-2 py-0.5 bg-lime/20 text-lime rounded text-xs font-mono">
                           {a.aircraft_registration}
                         </span>
                       ))}
@@ -222,7 +222,7 @@ function SmartHangarManagement() {
 
                 <Button 
                   onClick={() => { setSelectedHangar(hangar); setBookingDialog(true); }}
-                  className="w-full mt-3 bg-blue-600/20 text-blue-400 hover:bg-blue-600/30"
+                  className="w-full mt-3 bg-amber/20 text-amber hover:bg-amber/30"
                   variant="ghost"
                   disabled={hangar.available === 0}
                 >
@@ -239,24 +239,24 @@ function SmartHangarManagement() {
         <div className="space-y-6">
           {/* Inventory Summary */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Total Items</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Total Items</p>
               <p className="text-3xl font-bold text-white">{inventory.summary.total_items}</p>
             </div>
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">Total Value</p>
               <p className="text-3xl font-bold text-white">₹{(inventory.summary.total_value / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-red-600/20 to-red-800/20 border border-red-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-red-600/20 to-red-800/20 border border-red-600/30 rounded-sm p-4">
               <p className="text-red-400 text-sm">Low Stock Alerts</p>
               <p className="text-3xl font-bold text-white">{inventory.summary.low_stock_count}</p>
             </div>
           </div>
 
           {/* Inventory Table */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Boxes className="h-5 w-5 text-blue-500" />
+              <Boxes className="h-5 w-5 text-amber" />
               Inventory Items
             </h3>
             <div className="overflow-x-auto">
@@ -314,18 +314,18 @@ function SmartHangarManagement() {
         <div className="space-y-6">
           {/* Revenue Card */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">This Month Revenue</p>
               <p className="text-3xl font-bold text-white">₹{(dashboard.revenue?.this_month / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Total Bookings (This Month)</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Total Bookings (This Month)</p>
               <p className="text-3xl font-bold text-white">{dashboard.revenue?.total_bookings}</p>
             </div>
           </div>
 
           {/* Upcoming Bookings */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Calendar className="h-5 w-5 text-purple-500" />
               Upcoming Bookings (Next 7 Days)
@@ -336,8 +336,8 @@ function SmartHangarManagement() {
                 {dashboard.upcoming_bookings.map((booking) => (
                   <div key={booking.id} className="flex items-center justify-between bg-slate-700/50 rounded-lg p-3">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center">
-                        <PlaneTakeoff className="h-5 w-5 text-blue-400" />
+                      <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center">
+                        <PlaneTakeoff className="h-5 w-5 text-amber" />
                       </div>
                       <div>
                         <p className="font-semibold text-white">{booking.aircraft_registration}</p>
@@ -346,7 +346,7 @@ function SmartHangarManagement() {
                     </div>
                     <div className="text-right">
                       <p className="text-white">{booking.start_date} → {booking.end_date}</p>
-                      <p className="text-sm text-orange-400">{booking.purpose}</p>
+                      <p className="text-sm text-lime">{booking.purpose}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-green-400 font-bold">₹{booking.total_cost?.toLocaleString()}</p>
@@ -372,7 +372,7 @@ function SmartHangarManagement() {
             <p className="text-slate-400">
               {selectedHangar ? `Booking for: ${selectedHangar.name}` : 'Select a hangar from the list'}
             </p>
-            <p className="text-sm text-orange-400">
+            <p className="text-sm text-lime">
               Feature coming soon - Contact admin for manual booking
             </p>
           </div>

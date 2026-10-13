@@ -58,7 +58,7 @@ function PredictiveMaintenance() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
         <span className="ml-2 text-slate-400">Analyzing fleet data with AI...</span>
       </div>
     );
@@ -73,7 +73,7 @@ function PredictiveMaintenance() {
   const getRiskIcon = (level) => {
     switch(level) {
       case 'critical': return <AlertTriangle className="h-5 w-5 text-red-500" />;
-      case 'high': return <AlertTriangle className="h-5 w-5 text-orange-500" />;
+      case 'high': return <AlertTriangle className="h-5 w-5 text-amber-400" />;
       case 'medium': return <Clock className="h-5 w-5 text-yellow-500" />;
       default: return <CheckCircle className="h-5 w-5 text-green-500" />;
     }
@@ -121,23 +121,23 @@ function PredictiveMaintenance() {
         <div className="space-y-6">
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Total Aircraft</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Total Aircraft</p>
               <p className="text-3xl font-bold text-white">{predictions.summary.total_aircraft}</p>
             </div>
-            <div className="bg-gradient-to-br from-red-600/20 to-red-800/20 border border-red-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-red-600/20 to-red-800/20 border border-red-600/30 rounded-sm p-4">
               <p className="text-red-400 text-sm">Critical Alerts</p>
               <p className="text-3xl font-bold text-white">{predictions.summary.critical_alerts}</p>
             </div>
-            <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 border border-yellow-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 border border-yellow-600/30 rounded-sm p-4">
               <p className="text-yellow-400 text-sm">Medium Alerts</p>
               <p className="text-3xl font-bold text-white">{predictions.summary.medium_alerts}</p>
             </div>
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">Healthy Aircraft</p>
               <p className="text-3xl font-bold text-white">{predictions.summary.healthy_aircraft}</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <p className="text-purple-400 text-sm">Fleet Health</p>
               <p className="text-3xl font-bold text-white">{predictions.summary.fleet_health_score}%</p>
             </div>
@@ -146,23 +146,23 @@ function PredictiveMaintenance() {
           {/* AI Insights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {predictions.ai_insights.map((insight, idx) => (
-              <div key={idx} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div key={idx} className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  {insight.type === 'trend' && <TrendingUp className="h-5 w-5 text-blue-500" />}
+                  {insight.type === 'trend' && <TrendingUp className="h-5 w-5 text-amber" />}
                   {insight.type === 'optimization' && <Zap className="h-5 w-5 text-yellow-500" />}
                   {insight.type === 'prediction' && <Activity className="h-5 w-5 text-purple-500" />}
                   <h4 className="font-semibold text-white">{insight.title}</h4>
                 </div>
                 <p className="text-slate-300 text-sm">{insight.insight}</p>
-                <p className="text-orange-400 text-xs mt-2">→ {insight.action}</p>
+                <p className="text-lime text-xs mt-2">→ {insight.action}</p>
               </div>
             ))}
           </div>
 
           {/* Predictions Table */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Wrench className="h-5 w-5 text-orange-500" />
+              <Wrench className="h-5 w-5 text-lime" />
               Aircraft Maintenance Predictions
             </h3>
             <div className="overflow-x-auto">
@@ -214,7 +214,7 @@ function PredictiveMaintenance() {
           </div>
 
           {/* Risk Distribution Chart */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Risk Distribution</h3>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -251,10 +251,10 @@ function PredictiveMaintenance() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {components.aircraft_components.map((aircraft) => (
-              <div key={aircraft.aircraft_id} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+              <div key={aircraft.aircraft_id} className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <span className="font-mono bg-orange-600 px-2 py-1 rounded text-sm">
+                    <span className="font-mono bg-lime text-black px-2 py-1 rounded text-sm">
                       {aircraft.registration}
                     </span>
                   </h3>
@@ -302,26 +302,26 @@ function PredictiveMaintenance() {
         <div className="space-y-6">
           {/* Summary */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-600/30 rounded-sm p-4">
               <p className="text-green-400 text-sm">Total Forecast ({costForecast.summary.forecast_period_months}mo)</p>
               <p className="text-2xl font-bold text-white">₹{(costForecast.summary.total_forecast_cost / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-600/30 rounded-xl p-4">
-              <p className="text-blue-400 text-sm">Avg Monthly</p>
+            <div className="bg-gradient-to-br border border-amber/30 rounded-sm p-4">
+              <p className="text-amber text-sm">Avg Monthly</p>
               <p className="text-2xl font-bold text-white">₹{(costForecast.summary.avg_monthly_cost / 100000).toFixed(1)}L</p>
             </div>
-            <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-600/30 rounded-xl p-4">
-              <p className="text-orange-400 text-sm">Fleet Size</p>
+            <div className="bg-lime/20 border border-lime/30 rounded-sm p-4">
+              <p className="text-lime text-sm">Fleet Size</p>
               <p className="text-2xl font-bold text-white">{costForecast.summary.fleet_size}</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-600/30 rounded-sm p-4">
               <p className="text-purple-400 text-sm">Cost/Aircraft/Month</p>
               <p className="text-2xl font-bold text-white">₹{(costForecast.summary.cost_per_aircraft / 1000).toFixed(0)}K</p>
             </div>
           </div>
 
           {/* Cost Forecast Chart */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">6-Month Cost Forecast</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={costForecast.forecast}>
@@ -338,14 +338,14 @@ function PredictiveMaintenance() {
           </div>
 
           {/* Budget Recommendations */}
-          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
             <h3 className="text-lg font-semibold text-white mb-4">Budget Allocation Recommendations</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {costForecast.budget_recommendations.map((rec) => (
                 <div key={rec.category} className="bg-slate-700/50 rounded-lg p-4">
                   <p className="text-slate-400 text-sm">{rec.category}</p>
                   <p className="text-2xl font-bold text-white">₹{(rec.amount / 100000).toFixed(1)}L</p>
-                  <p className="text-orange-400 text-sm">{rec.percentage}% of total</p>
+                  <p className="text-lime text-sm">{rec.percentage}% of total</p>
                 </div>
               ))}
             </div>

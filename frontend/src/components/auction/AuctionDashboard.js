@@ -30,7 +30,7 @@ const StatusBadge = ({ status }) => {
     quote_selected: { color: 'bg-blue-500', label: 'Quote Selected', icon: CheckCircle },
     confirmed: { color: 'bg-purple-500', label: 'Confirmed', icon: CheckCircle },
     cancelled: { color: 'bg-red-500', label: 'Cancelled', icon: XCircle },
-    expired: { color: 'bg-orange-500', label: 'Expired', icon: AlertCircle },
+    expired: { color: 'bg-amber-500', label: 'Expired', icon: AlertCircle },
   };
   
   const config = statusConfig[status] || statusConfig.active;
@@ -267,7 +267,7 @@ export const CreateAuctionForm = ({ onSuccess, onCancel }) => {
         <Button
           type="submit"
           disabled={loading}
-          className="flex-1 bg-orange-500 hover:bg-orange-600"
+          className="flex-1 bg-lime text-black hover:bg-lime/90"
           data-testid="create-auction-submit"
         >
           {loading ? (
@@ -332,7 +332,7 @@ export const CustomerAuctions = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -343,7 +343,7 @@ export const CustomerAuctions = () => {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Gavel className="h-6 w-6 text-orange-400" />
+            <Gavel className="h-6 w-6 text-lime" />
             My Auctions / मेरी नीलामियाँ
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -356,7 +356,7 @@ export const CustomerAuctions = () => {
           </Button>
           <Button 
             onClick={() => setShowCreateForm(true)} 
-            className="bg-orange-500 hover:bg-orange-600"
+            className="bg-lime text-black hover:bg-lime/90"
             data-testid="create-auction-btn"
           >
             <Gavel className="h-4 w-4 mr-2" /> New Auction
@@ -366,10 +366,10 @@ export const CustomerAuctions = () => {
       
       {/* Create Form Modal */}
       {showCreateForm && (
-        <Card className="bg-slate-900 border-orange-500/50">
+        <Card className="bg-slate-900 border-lime/50">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Gavel className="h-5 w-5 text-orange-400" />
+              <Gavel className="h-5 w-5 text-lime" />
               Create New Auction / नई नीलामी बनाएं
             </CardTitle>
             <CardDescription>
@@ -392,7 +392,7 @@ export const CustomerAuctions = () => {
             <Gavel className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">No Active Auctions</h3>
             <p className="text-slate-400 mb-4">Create an auction to get quotes from operators</p>
-            <Button onClick={() => setShowCreateForm(true)} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={() => setShowCreateForm(true)} className="bg-lime text-black hover:bg-lime/90">
               <Gavel className="h-4 w-4 mr-2" /> Create Auction
             </Button>
           </CardContent>
@@ -417,7 +417,7 @@ export const CustomerAuctions = () => {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-xl font-semibold text-white">
-                      <MapPin className="h-5 w-5 text-orange-400" />
+                      <MapPin className="h-5 w-5 text-lime" />
                       {auction.origin}
                       <ChevronRight className="h-5 w-5 text-slate-500" />
                       {auction.destination}
@@ -450,7 +450,7 @@ export const CustomerAuctions = () => {
                     )}
                     <div className="flex items-center gap-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-400">{auction.quotes_count}</div>
+                        <div className="text-2xl font-bold text-lime">{auction.quotes_count}</div>
                         <div className="text-xs text-slate-400">Quotes</div>
                       </div>
                       {auction.lowest_quote && (
@@ -504,7 +504,7 @@ export const CustomerAuctions = () => {
                               <Button
                                 size="sm"
                                 onClick={() => handleSelectQuote(auction.id, quote.id)}
-                                className={idx === 0 ? 'bg-green-500 hover:bg-green-600' : 'bg-orange-500 hover:bg-orange-600'}
+                                className={idx === 0 ? 'bg-green-500 hover:bg-green-600' : 'bg-lime text-black hover:bg-lime/90'}
                                 data-testid={`select-quote-${idx}`}
                               >
                                 Select
@@ -529,7 +529,7 @@ export const CustomerAuctions = () => {
                 {/* No Quotes Yet */}
                 {(!auction.quotes || auction.quotes.length === 0) && auction.status === 'active' && (
                   <div className="mt-4 border-t border-slate-700 pt-4 text-center">
-                    <Loader2 className="h-6 w-6 animate-spin text-orange-400 mx-auto mb-2" />
+                    <Loader2 className="h-6 w-6 animate-spin text-lime mx-auto mb-2" />
                     <p className="text-slate-400">Waiting for operator quotes...</p>
                     <p className="text-slate-500 text-sm">Operators have been notified</p>
                   </div>
@@ -800,7 +800,7 @@ export const OperatorAuctions = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-lime" />
       </div>
     );
   }
@@ -811,7 +811,7 @@ export const OperatorAuctions = () => {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Gavel className="h-6 w-6 text-orange-400" />
+            <Gavel className="h-6 w-6 text-lime" />
             Live Auctions / लाइव नीलामियाँ
           </h2>
           <p className="text-slate-400 text-sm mt-1">
@@ -853,7 +853,7 @@ export const OperatorAuctions = () => {
                     </div>
                     
                     <div className="flex items-center gap-2 text-xl font-semibold text-white mb-2">
-                      <MapPin className="h-5 w-5 text-orange-400" />
+                      <MapPin className="h-5 w-5 text-lime" />
                       {auction.origin}
                       <ChevronRight className="h-5 w-5 text-slate-500" />
                       {auction.destination}
@@ -906,7 +906,7 @@ export const OperatorAuctions = () => {
                     ) : (
                       <Button
                         onClick={() => setSelectedAuction(auction)}
-                        className="bg-orange-500 hover:bg-orange-600"
+                        className="bg-lime text-black hover:bg-lime/90"
                         data-testid={`quote-auction-${auction.id.slice(0,8)}`}
                       >
                         <Send className="h-4 w-4 mr-2" /> Submit Quote
@@ -926,7 +926,7 @@ export const OperatorAuctions = () => {
           <Card className="bg-slate-900 border-slate-700 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
-                <Send className="h-5 w-5 text-orange-400" />
+                <Send className="h-5 w-5 text-lime" />
                 Submit Quote for {selectedAuction.origin} → {selectedAuction.destination}
               </CardTitle>
               <CardDescription>

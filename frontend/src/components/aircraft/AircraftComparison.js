@@ -33,7 +33,7 @@ const FeatureBadge = ({ hasFeature, label }) => {
 
 const ScoreBar = ({ score, label, color = 'orange' }) => {
   const colors = {
-    orange: 'bg-orange-500',
+    orange: 'bg-amber-500',
     green: 'bg-green-500',
     blue: 'bg-blue-500',
     purple: 'bg-purple-500'
@@ -65,7 +65,7 @@ const ComparisonRow = ({ label, values, type = 'text', highlight = null }) => {
         <td 
           key={idx} 
           className={`py-3 px-4 text-center ${
-            highlight === idx ? 'bg-orange-500/10 text-orange-400 font-semibold' : 'text-white'
+            highlight === idx ? 'bg-lime/10 text-lime font-semibold' : 'text-white'
           }`}
         >
           {type === 'boolean' ? (
@@ -95,17 +95,17 @@ const AircraftSelector = ({ aircraft, selectedIds, onToggle, maxSelections = 4 }
     <Card 
       className={`cursor-pointer transition-all ${
         isSelected 
-          ? 'bg-orange-500/10 border-orange-500' 
+          ? 'bg-lime/10 border-lime' 
           : isDisabled 
             ? 'bg-slate-900/50 border-slate-800 opacity-50 cursor-not-allowed' 
-            : 'bg-slate-900 border-slate-700 hover:border-orange-500/50'
+            : 'bg-slate-900 border-slate-700 hover:border-lime/50'
       }`}
       onClick={() => !isDisabled && onToggle(aircraft.id)}
     >
       <CardContent className="p-4 flex items-center gap-4">
         <Checkbox checked={isSelected} disabled={isDisabled} />
         <div className="h-12 w-12 bg-slate-800 rounded-lg flex items-center justify-center">
-          <Plane className="h-6 w-6 text-orange-400" />
+          <Plane className="h-6 w-6 text-lime" />
         </div>
         <div className="flex-1">
           <h4 className="text-white font-medium">
@@ -194,7 +194,7 @@ export const AircraftComparison = ({ onClose }) => {
         <CardHeader className="flex flex-row items-center justify-between sticky top-0 bg-slate-900 z-10 border-b border-slate-700">
           <div>
             <CardTitle className="text-white flex items-center gap-2">
-              <Scale className="h-5 w-5 text-orange-400" />
+              <Scale className="h-5 w-5 text-lime" />
               AI Smart Comparison / स्मार्ट तुलना
             </CardTitle>
             <CardDescription>
@@ -217,7 +217,7 @@ export const AircraftComparison = ({ onClose }) => {
                 <Button
                   onClick={runComparison}
                   disabled={selectedIds.length < 2 || loadingComparison}
-                  className="bg-orange-500 hover:bg-orange-600"
+                  className="bg-lime text-black hover:bg-lime/90"
                 >
                   {loadingComparison ? (
                     <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Comparing...</>
@@ -229,7 +229,7 @@ export const AircraftComparison = ({ onClose }) => {
               
               {loading ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-orange-400" />
+                  <Loader2 className="h-8 w-8 animate-spin text-lime" />
                 </div>
               ) : (
                 <div className="grid md:grid-cols-2 gap-3">
@@ -277,22 +277,22 @@ export const AircraftComparison = ({ onClose }) => {
                     </Badge>
                   </CardContent>
                 </Card>
-                <Card className="bg-blue-500/10 border-blue-500/30">
+                <Card className="bg-amber/10 border-amber/30">
                   <CardContent className="p-4 text-center">
-                    <Star className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                    <p className="text-blue-400 font-semibold">Best Amenities</p>
+                    <Star className="h-6 w-6 text-amber mx-auto mb-2" />
+                    <p className="text-amber font-semibold">Best Amenities</p>
                     <p className="text-white text-sm">{comparisonData.highlights?.best_amenities?.name}</p>
                     <Badge className="mt-1 bg-blue-500/20 text-blue-300">
                       Score: {comparisonData.highlights?.best_amenities?.score}%
                     </Badge>
                   </CardContent>
                 </Card>
-                <Card className="bg-orange-500/10 border-orange-500/30">
+                <Card className="bg-lime/10 border-lime/30">
                   <CardContent className="p-4 text-center">
-                    <IndianRupee className="h-6 w-6 text-orange-400 mx-auto mb-2" />
-                    <p className="text-orange-400 font-semibold">Best Value</p>
+                    <IndianRupee className="h-6 w-6 text-lime mx-auto mb-2" />
+                    <p className="text-lime font-semibold">Best Value</p>
                     <p className="text-white text-sm">{comparisonData.highlights?.best_value?.name}</p>
-                    <Badge className="mt-1 bg-orange-500/20 text-orange-300">
+                    <Badge className="mt-1 bg-amber-500/20 text-amber-300">
                       {comparisonData.highlights?.best_value?.price}
                     </Badge>
                   </CardContent>
@@ -307,7 +307,7 @@ export const AircraftComparison = ({ onClose }) => {
                     variant={activeTab === tab ? 'default' : 'ghost'}
                     size="sm"
                     onClick={() => setActiveTab(tab)}
-                    className={activeTab === tab ? 'bg-orange-500' : ''}
+                    className={activeTab === tab ? 'bg-lime text-black' : ''}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
                   </Button>
@@ -503,7 +503,7 @@ export const AircraftComparison = ({ onClose }) => {
                 {comparisonData.comparison?.map((aircraft, idx) => (
                   <Button 
                     key={idx}
-                    className="flex-1 bg-orange-500 hover:bg-orange-600"
+                    className="flex-1 bg-lime text-black hover:bg-lime/90"
                   >
                     Book {aircraft.name}
                   </Button>

@@ -109,14 +109,14 @@ export default function FinanceAnalyticsDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-600/30 to-blue-800/30 border-blue-500/50">
+        <Card className="bg-gradient-to-br border-amber/50">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 text-xs">{collectionSummary?.week?.label}</p>
+                <p className="text-slate-300 text-xs">{collectionSummary?.week?.label}</p>
                 <p className="text-2xl font-bold text-white mt-1">{formatINR(collectionSummary?.week?.amount)}</p>
               </div>
-              <TrendingUp className="h-8 w-8 text-blue-400 opacity-80" />
+              <TrendingUp className="h-8 w-8 text-amber opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -145,14 +145,14 @@ export default function FinanceAnalyticsDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-600/30 to-orange-800/30 border-orange-500/50">
+        <Card className="bg-lime/20 border-lime/50">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-orange-200 text-xs">Pending ({collectionSummary?.pending_balance?.count})</p>
+                <p className="text-slate-300 text-xs">Pending ({collectionSummary?.pending_balance?.count})</p>
                 <p className="text-2xl font-bold text-white mt-1">{formatINR(collectionSummary?.pending_balance?.amount)}</p>
               </div>
-              <AlertTriangle className="h-8 w-8 text-orange-400 opacity-80" />
+              <AlertTriangle className="h-8 w-8 text-amber-400 opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -340,9 +340,9 @@ export default function FinanceAnalyticsDashboard() {
                   <p className="text-green-300 text-sm">Settled</p>
                   <p className="text-2xl font-bold text-green-400">{formatINR(reconciliation?.summary?.total_settled)}</p>
                 </div>
-                <div className="p-4 bg-orange-500/10 rounded-lg border border-orange-500/30">
-                  <p className="text-orange-300 text-sm">Pending Settlement</p>
-                  <p className="text-2xl font-bold text-orange-400">{formatINR(reconciliation?.summary?.pending_settlement)}</p>
+                <div className="p-4 bg-lime/10 rounded-lg border border-lime/30">
+                  <p className="text-slate-300 text-sm">Pending Settlement</p>
+                  <p className="text-2xl font-bold text-amber-400">{formatINR(reconciliation?.summary?.pending_settlement)}</p>
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t border-slate-700">
                   <span className="text-slate-400">Settlement Rate</span>
@@ -356,7 +356,7 @@ export default function FinanceAnalyticsDashboard() {
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-blue-400" />
+                  <Building2 className="h-5 w-5 text-amber" />
                   By Gateway
                 </CardTitle>
               </CardHeader>
@@ -385,7 +385,7 @@ export default function FinanceAnalyticsDashboard() {
                         <p className="text-white font-semibold">{formatINR(data.settled)}</p>
                       </div>
                       <div>
-                        <p className="text-orange-400">Pending</p>
+                        <p className="text-amber-400">Pending</p>
                         <p className="text-white font-semibold">{formatINR(data.pending)}</p>
                       </div>
                     </div>
@@ -414,12 +414,12 @@ export default function FinanceAnalyticsDashboard() {
                     key={idx}
                     className={`p-3 rounded-lg border ${
                       alert.type === 'warning' 
-                        ? 'bg-orange-500/10 border-orange-500/30' 
-                        : 'bg-blue-500/10 border-blue-500/30'
+                        ? 'bg-lime/10 border-lime/30' 
+                        : 'bg-amber/10 border-amber/30'
                     }`}
                   >
                     <p className={`font-medium ${
-                      alert.type === 'warning' ? 'text-orange-300' : 'text-blue-300'
+                      alert.type === 'warning' ? 'text-slate-300' : 'text-slate-300'
                     }`}>
                       {alert.message}
                     </p>
@@ -459,7 +459,7 @@ export default function FinanceAnalyticsDashboard() {
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                           idx === 0 ? 'bg-yellow-500/20 text-yellow-400' :
                           idx === 1 ? 'bg-slate-400/20 text-slate-300' :
-                          idx === 2 ? 'bg-orange-500/20 text-orange-400' :
+                          idx === 2 ? 'bg-lime/20 text-lime' :
                           'bg-slate-700 text-slate-400'
                         }`}>
                           {idx < 3 ? (

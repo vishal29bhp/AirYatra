@@ -71,7 +71,7 @@ export const ContextMenu = ({
       {isOpen && (
         <div
           ref={menuRef}
-          className={`absolute z-50 mt-1 min-w-[180px] bg-slate-800 border border-slate-700 rounded-xl shadow-xl overflow-hidden ${positionClasses[position]}`}
+          className={`absolute z-50 mt-1 min-w-[180px] bg-slate-800 border border-slate-700 rounded-sm overflow-hidden ${positionClasses[position]}`}
           style={{ animation: 'fadeIn 0.15s ease-out' }}
         >
           <div className="py-1">

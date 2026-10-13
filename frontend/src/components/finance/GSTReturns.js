@@ -178,8 +178,8 @@ const GSTReturns = () => {
                   </Select>
                 </div>
               </div>
-              <Alert className="bg-blue-500/10 border-blue-500/30">
-                <AlertDescription className="text-blue-400 text-sm">
+              <Alert className="bg-amber/10 border-amber/30">
+                <AlertDescription className="text-amber text-sm">
                   GST data will be auto-calculated from invoices and vendor bills.
                 </AlertDescription>
               </Alert>

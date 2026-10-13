@@ -25,7 +25,7 @@ const challanTypes = [
   { value: 'GST', label: 'GST (Goods & Services Tax)', color: 'bg-blue-500' },
   { value: 'TDS', label: 'TDS (Tax Deducted at Source)', color: 'bg-purple-500' },
   { value: 'PF', label: 'PF (Provident Fund)', color: 'bg-green-500' },
-  { value: 'ESIC', label: 'ESIC (Employee State Insurance)', color: 'bg-orange-500' },
+  { value: 'ESIC', label: 'ESIC (Employee State Insurance)', color: 'bg-amber-500' },
   { value: 'PT', label: 'PT (Professional Tax)', color: 'bg-yellow-500' },
   { value: 'IT', label: 'IT (Income Tax Advance)', color: 'bg-red-500' }
 ];
@@ -139,7 +139,7 @@ export default function GovernmentChallans() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <FileText className="h-7 w-7 text-blue-400" />
+            <FileText className="h-7 w-7 text-amber" />
             Government Challans / सरकारी चालान
           </h1>
           <p className="text-slate-400 mt-1">GST, TDS, PF, ESIC compliance management</p>
@@ -157,7 +157,7 @@ export default function GovernmentChallans() {
           </Button>
           <Button 
             onClick={() => setShowAddModal(true)}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-slate-700 hover:bg-slate-600"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add Challan
@@ -197,7 +197,7 @@ export default function GovernmentChallans() {
             <Card 
               key={type.value}
               className={`bg-slate-800/50 border-slate-700 cursor-pointer hover:border-slate-500 transition-colors ${
-                selectedType === type.value ? 'ring-2 ring-blue-500' : ''
+                selectedType === type.value ? 'ring-2 ring-lime' : ''
               }`}
               onClick={() => setSelectedType(selectedType === type.value ? 'all' : type.value)}
             >
@@ -245,7 +245,7 @@ export default function GovernmentChallans() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-blue-400" />
+            <Receipt className="h-5 w-5 text-amber" />
             Challans List ({filteredChallans.length})
           </CardTitle>
         </CardHeader>
@@ -317,7 +317,7 @@ export default function GovernmentChallans() {
         <DialogContent className="bg-slate-900 border-slate-700">
           <DialogHeader>
             <DialogTitle className="text-white flex items-center gap-2">
-              <Plus className="h-5 w-5 text-blue-400" />
+              <Plus className="h-5 w-5 text-amber" />
               Add New Challan / नया चालान जोड़ें
             </DialogTitle>
           </DialogHeader>
@@ -387,7 +387,7 @@ export default function GovernmentChallans() {
             <Button 
               onClick={handleCreateChallan}
               disabled={!newChallan.period || !newChallan.due_date || !newChallan.amount}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-slate-700 hover:bg-slate-600"
             >
               <Plus className="h-4 w-4 mr-2" />
               Create Challan

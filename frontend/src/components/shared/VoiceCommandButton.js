@@ -188,7 +188,7 @@ function VoiceCommandButton({ onCommand, className = '' }) {
       {/* Voice Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+          <div className="bg-slate-900 border border-slate-700 rounded-sm p-8 max-w-md w-full mx-4 text-center">
             {/* Close button */}
             <Button
               variant="ghost"
@@ -204,7 +204,7 @@ function VoiceCommandButton({ onCommand, className = '' }) {
               isListening ? 'bg-red-500/20 animate-pulse' : 'bg-green-500/20'
             }`}>
               {isProcessing ? (
-                <Loader2 className="h-12 w-12 text-orange-500 animate-spin" />
+                <Loader2 className="h-12 w-12 text-lime animate-spin" />
               ) : isListening ? (
                 <Mic className="h-12 w-12 text-red-500" />
               ) : (

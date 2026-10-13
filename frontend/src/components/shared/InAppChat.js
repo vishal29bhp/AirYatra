@@ -162,13 +162,13 @@ function InAppChat({ user, bookingId }) {
       case 'sending': return <Clock className="h-3 w-3 text-slate-500" />;
       case 'sent': return <Check className="h-3 w-3 text-slate-400" />;
       case 'delivered': return <CheckCheck className="h-3 w-3 text-slate-400" />;
-      case 'read': return <CheckCheck className="h-3 w-3 text-blue-400" />;
+      case 'read': return <CheckCheck className="h-3 w-3 text-amber" />;
       default: return null;
     }
   };
 
   return (
-    <div className="h-[calc(100vh-200px)] flex rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+    <div className="h-[calc(100vh-200px)] flex rounded-sm overflow-hidden bg-slate-900 border border-slate-800">
       {/* Conversations List */}
       <div className="w-80 border-r border-slate-800 flex flex-col">
         <div className="p-4 border-b border-slate-800">
@@ -202,7 +202,7 @@ function InAppChat({ user, bookingId }) {
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
                     <span className="text-white font-medium">
                       {conv.other_party_name?.charAt(0) || 'U'}
                     </span>
@@ -213,10 +213,10 @@ function InAppChat({ user, bookingId }) {
                       <span className="text-xs text-slate-500">{formatTime(conv.last_message_at)}</span>
                     </div>
                     <p className="text-sm text-slate-400 truncate">{conv.last_message || 'No messages'}</p>
-                    <p className="text-xs text-orange-400">#{conv.booking_number}</p>
+                    <p className="text-xs text-lime">#{conv.booking_number}</p>
                   </div>
                   {conv.unread_count > 0 && (
-                    <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">
+                    <span className="bg-lime text-black text-xs px-2 py-0.5 rounded-full">
                       {conv.unread_count}
                     </span>
                   )}
@@ -234,7 +234,7 @@ function InAppChat({ user, bookingId }) {
             {/* Chat Header */}
             <div className="p-4 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
                   <span className="text-white font-medium">
                     {activeConversation.other_party_name?.charAt(0) || 'U'}
                   </span>
@@ -278,9 +278,9 @@ function InAppChat({ user, bookingId }) {
                         {!isOwn && (
                           <p className="text-xs text-slate-500 mb-1">{message.sender_name}</p>
                         )}
-                        <div className={`rounded-2xl px-4 py-2 ${
+                        <div className={`rounded-sm px-4 py-2 ${
                           isOwn 
-                            ? 'bg-orange-500 text-white rounded-tr-sm' 
+                            ? 'bg-lime text-black rounded-tr-sm' 
                             : 'bg-slate-800 text-white rounded-tl-sm'
                         }`}>
                           <p className="text-sm">{message.content}</p>
@@ -313,7 +313,7 @@ function InAppChat({ user, bookingId }) {
                 <Button 
                   type="submit" 
                   disabled={!newMessage.trim() || sending}
-                  className="bg-orange-500 hover:bg-orange-600"
+                  className="bg-lime text-black hover:bg-lime/90"
                 >
                   <Send className="h-5 w-5" />
                 </Button>

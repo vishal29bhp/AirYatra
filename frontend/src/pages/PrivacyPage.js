@@ -10,7 +10,7 @@ function PrivacyPage() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-2xl font-bold text-white tracking-tight">AirYatra</span>
           </Link>
           <div className="flex items-center space-x-4">
@@ -31,27 +31,27 @@ function PrivacyPage() {
 
           {/* Quick Overview */}
           <div className="grid md:grid-cols-3 gap-4 mb-12">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-center">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4 text-center">
               <Shield className="h-8 w-8 text-green-500 mx-auto mb-2" />
               <p className="text-white font-medium">Data Protected</p>
               <p className="text-slate-400 text-sm">256-bit encryption</p>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-center">
-              <Lock className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4 text-center">
+              <Lock className="h-8 w-8 text-amber mx-auto mb-2" />
               <p className="text-white font-medium">Secure Storage</p>
               <p className="text-slate-400 text-sm">ISO certified servers</p>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-center">
-              <Eye className="h-8 w-8 text-orange-500 mx-auto mb-2" />
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4 text-center">
+              <Eye className="h-8 w-8 text-lime mx-auto mb-2" />
               <p className="text-white font-medium">Transparent</p>
               <p className="text-slate-400 text-sm">No hidden tracking</p>
             </div>
           </div>
           
           <div className="prose prose-invert max-w-none space-y-8">
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <Database className="h-5 w-5 text-orange-500" />
+                <Database className="h-5 w-5 text-lime" />
                 Information We Collect
               </h2>
               <p className="text-slate-400 mb-3">We collect information that you provide directly:</p>
@@ -64,7 +64,7 @@ function PrivacyPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">How We Use Your Information</h2>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
                 <li>Process and manage your flight bookings</li>
@@ -76,7 +76,7 @@ function PrivacyPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">Information Sharing</h2>
               <p className="text-slate-400 mb-3">We share your information only with:</p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
@@ -90,7 +90,7 @@ function PrivacyPage() {
               </p>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">Data Security</h2>
               <p className="text-slate-400">
                 We implement industry-standard security measures including:
@@ -104,7 +104,7 @@ function PrivacyPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">Your Rights</h2>
               <p className="text-slate-400 mb-3">You have the right to:</p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
@@ -116,7 +116,7 @@ function PrivacyPage() {
               </ul>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4">Cookies</h2>
               <p className="text-slate-400">
                 We use essential cookies to provide our services and analytics cookies 
@@ -125,19 +125,19 @@ function PrivacyPage() {
               </p>
             </div>
 
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-6">
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <Mail className="h-5 w-5 text-orange-500" />
+                <Mail className="h-5 w-5 text-lime" />
                 Contact Us
               </h2>
               <p className="text-slate-400">
                 For privacy-related inquiries or to exercise your rights, contact our 
                 Data Protection Officer at{' '}
-                <a href="mailto:privacy@airyatra.com" className="text-orange-400 hover:text-orange-300">
+                <a href="mailto:privacy@airyatra.com" className="text-lime hover:text-lime/80">
                   privacy@airyatra.com
                 </a>
                 {' '}or{' '}
-                <a href="mailto:airyatraadmin@gmail.com" className="text-orange-400 hover:text-orange-300">
+                <a href="mailto:airyatraadmin@gmail.com" className="text-lime hover:text-lime/80">
                   airyatraadmin@gmail.com
                 </a>
               </p>
@@ -150,7 +150,7 @@ function PrivacyPage() {
       <footer className="bg-slate-950 py-12 px-6 border-t border-slate-800">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Plane className="h-6 w-6 text-orange-500" />
+            <Plane className="h-6 w-6 text-lime" />
             <span className="text-xl font-bold text-white">AirYatra</span>
           </div>
           <p className="text-slate-400 text-sm">

@@ -121,21 +121,21 @@ export const EmpExpenses = ({ onChanged }) => {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 text-center">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 text-center">
           <p className="text-2xl font-bold text-yellow-400">₹{(summary.total_pending || 0).toLocaleString()}</p>
           <p className="text-slate-400 text-xs">Pending / लंबित</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 text-center">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 text-center">
           <p className="text-2xl font-bold text-green-400">₹{(summary.total_approved || 0).toLocaleString()}</p>
           <p className="text-slate-400 text-xs">Approved / स्वीकृत</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 text-center">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 text-center">
           <p className="text-2xl font-bold text-sky-400">₹{(summary.total_paid || 0).toLocaleString()}</p>
           <p className="text-slate-400 text-xs">Reimbursed / भुगतान</p>
         </div>
       </div>
 
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-sm border border-slate-700 overflow-hidden">
         {!data?.expenses?.length ? (
           <div className="p-8 text-center text-slate-400"><Receipt className="h-10 w-10 mx-auto mb-2 text-slate-600" />No expense claims yet / अभी कोई क्लेम नहीं</div>
         ) : (

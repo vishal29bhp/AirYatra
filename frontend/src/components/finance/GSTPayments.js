@@ -301,9 +301,9 @@ const GSTPayments = () => {
             <p className="text-slate-400 text-sm">Total Paid</p>
           </CardContent>
         </Card>
-        <Card className="bg-blue-500/20 border-blue-500/30">
+        <Card className="bg-amber/20 border-amber/30">
           <CardContent className="pt-6">
-            <Receipt className="h-6 w-6 text-blue-400 mb-2" />
+            <Receipt className="h-6 w-6 text-amber mb-2" />
             <p className="text-2xl font-bold text-white">₹{(summary.total_cgst || 0).toLocaleString()}</p>
             <p className="text-slate-400 text-sm">CGST Paid</p>
           </CardContent>
@@ -315,9 +315,9 @@ const GSTPayments = () => {
             <p className="text-slate-400 text-sm">SGST Paid</p>
           </CardContent>
         </Card>
-        <Card className="bg-orange-500/20 border-orange-500/30">
+        <Card className="bg-lime/20 border-lime/30">
           <CardContent className="pt-6">
-            <Receipt className="h-6 w-6 text-orange-400 mb-2" />
+            <Receipt className="h-6 w-6 text-lime mb-2" />
             <p className="text-2xl font-bold text-white">₹{(summary.total_igst || 0).toLocaleString()}</p>
             <p className="text-slate-400 text-sm">IGST Paid</p>
           </CardContent>
@@ -354,9 +354,9 @@ const GSTPayments = () => {
                       {payment.return_type}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-blue-400">₹{payment.cgst_paid?.toLocaleString()}</TableCell>
+                  <TableCell className="text-amber">₹{payment.cgst_paid?.toLocaleString()}</TableCell>
                   <TableCell className="text-purple-400">₹{payment.sgst_paid?.toLocaleString()}</TableCell>
-                  <TableCell className="text-orange-400">₹{payment.igst_paid?.toLocaleString()}</TableCell>
+                  <TableCell className="text-lime">₹{payment.igst_paid?.toLocaleString()}</TableCell>
                   <TableCell className="text-emerald-400 font-semibold">₹{payment.total_paid?.toLocaleString()}</TableCell>
                   <TableCell className="text-slate-300 capitalize">{payment.payment_mode}</TableCell>
                   <TableCell className="text-slate-400 text-sm">

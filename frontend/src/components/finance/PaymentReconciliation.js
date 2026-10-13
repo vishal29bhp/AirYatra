@@ -251,9 +251,9 @@ export default function PaymentReconciliation() {
           <CardContent className="p-4 flex items-center justify-between">
             <div>
               <p className="text-slate-400 text-sm">Unmatched Amount</p>
-              <p className="text-2xl font-bold text-orange-400">{formatINR(summary?.amounts?.total_unmatched)}</p>
+              <p className="text-2xl font-bold text-lime">{formatINR(summary?.amounts?.total_unmatched)}</p>
             </div>
-            <AlertTriangle className="h-10 w-10 text-orange-500/30" />
+            <AlertTriangle className="h-10 w-10 text-amber-500/30" />
           </CardContent>
         </Card>
       </div>
@@ -264,7 +264,7 @@ export default function PaymentReconciliation() {
           <Card key={gw} className="bg-slate-800/50 border-slate-700">
             <CardContent className="p-4">
               <div className="flex items-center gap-3 mb-3">
-                <Building2 className={`h-5 w-5 ${gw === 'stripe' ? 'text-indigo-400' : 'text-blue-400'}`} />
+                <Building2 className={`h-5 w-5 ${gw === 'stripe' ? 'text-indigo-400' : 'text-amber'}`} />
                 <span className="text-white font-medium capitalize">{gw}</span>
               </div>
               <div className="grid grid-cols-2 gap-4 text-sm">

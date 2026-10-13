@@ -111,7 +111,7 @@ export default function ComplianceDashboard() {
 
       {/* Critical Alerts */}
       {critical_deadlines && critical_deadlines.length > 0 && (
-        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/50 rounded-xl p-4">
+        <div className="bg-gradient-to-r from-red-500/20 border border-red-500/50 rounded-sm p-4">
           <div className="flex items-center gap-2 mb-3">
             <Bell className="h-5 w-5 text-red-400 animate-pulse" />
             <h3 className="text-white font-semibold">Critical Deadlines / महत्वपूर्ण समय सीमा</h3>
@@ -180,7 +180,7 @@ export default function ComplianceDashboard() {
         <Card className="col-span-2 bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-blue-400" />
+              <BarChart3 className="h-5 w-5 text-amber" />
               Compliance Summary / अनुपालन सारांश
             </CardTitle>
           </CardHeader>
@@ -265,7 +265,7 @@ export default function ComplianceDashboard() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-orange-400" />
+            <Calendar className="h-5 w-5 text-lime" />
             Compliance Calendar / अनुपालन कैलेंडर
           </CardTitle>
         </CardHeader>

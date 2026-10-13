@@ -73,12 +73,12 @@ function KeyboardShortcutsPanel() {
       />
       
       {/* Panel */}
-      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-sm overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700 bg-slate-800/50">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <Keyboard className="h-5 w-5 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <Keyboard className="h-5 w-5 text-lime" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">Keyboard Shortcuts</h2>
@@ -98,7 +98,7 @@ function KeyboardShortcutsPanel() {
           <div className="grid md:grid-cols-2 gap-6">
             {shortcuts.map((section) => (
               <div key={section.category}>
-                <h3 className="text-sm font-medium text-orange-400 uppercase tracking-wider mb-3">
+                <h3 className="text-sm font-medium text-lime uppercase tracking-wider mb-3">
                   {section.category}
                 </h3>
                 <div className="space-y-2">
@@ -126,19 +126,19 @@ function KeyboardShortcutsPanel() {
           </div>
 
           {/* Pro Tips */}
-          <div className="mt-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
-            <h4 className="text-sm font-medium text-orange-400 mb-2">Pro Tips</h4>
+          <div className="mt-6 p-4 bg-lime/10 border border-lime/30 rounded-sm">
+            <h4 className="text-sm font-medium text-lime mb-2">Pro Tips</h4>
             <ul className="text-sm text-slate-300 space-y-1">
               <li className="flex items-center gap-2">
-                <span className="w-1 h-1 bg-orange-400 rounded-full" />
+                <span className="w-1 h-1 bg-lime rounded-full" />
                 Press <KeyBadge>?</KeyBadge> anytime to open this panel
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1 h-1 bg-orange-400 rounded-full" />
+                <span className="w-1 h-1 bg-lime rounded-full" />
                 Use <KeyBadge>Ctrl</KeyBadge> + <KeyBadge>K</KeyBadge> for quick search
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1 h-1 bg-orange-400 rounded-full" />
+                <span className="w-1 h-1 bg-lime rounded-full" />
                 Shortcuts work everywhere except input fields
               </li>
             </ul>

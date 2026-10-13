@@ -73,7 +73,7 @@ export default function FinanceCommandCenter() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Activity className="h-7 w-7 text-orange-400" />
+            <Activity className="h-7 w-7 text-lime" />
             Finance Command Center / वित्त कमांड सेंटर
           </h1>
           <p className="text-slate-400 mt-1">24x7 Real-time financial monitoring & AI insights</p>
@@ -102,24 +102,24 @@ export default function FinanceCommandCenter() {
           {ai_insights.map((insight, idx) => (
             <div 
               key={idx}
-              className={`p-4 rounded-xl flex items-start gap-4 ${
+              className={`p-4 rounded-sm flex items-start gap-4 ${
                 insight.type === 'danger' ? 'bg-gradient-to-r from-red-500/20 to-red-900/20 border border-red-500/50' :
                 insight.type === 'warning' ? 'bg-gradient-to-r from-yellow-500/20 to-yellow-900/20 border border-yellow-500/50' :
                 insight.type === 'success' ? 'bg-gradient-to-r from-green-500/20 to-green-900/20 border border-green-500/50' :
-                'bg-gradient-to-r from-blue-500/20 to-blue-900/20 border border-blue-500/50'
+                'bg-gradient-to-r border border-amber/50'
               }`}
             >
               <div className={`p-2 rounded-lg ${
                 insight.type === 'danger' ? 'bg-red-500/30' :
                 insight.type === 'warning' ? 'bg-yellow-500/30' :
                 insight.type === 'success' ? 'bg-green-500/30' :
-                'bg-blue-500/30'
+                'bg-amber/30'
               }`}>
                 <Zap className={`h-5 w-5 ${
                   insight.type === 'danger' ? 'text-red-400' :
                   insight.type === 'warning' ? 'text-yellow-400' :
                   insight.type === 'success' ? 'text-green-400' :
-                  'text-blue-400'
+                  'text-amber'
                 }`} />
               </div>
               <div>
@@ -223,7 +223,7 @@ export default function FinanceCommandCenter() {
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className={`p-4 rounded-xl ${
+              <div className={`p-4 rounded-sm ${
                 forecast?.health === 'good' ? 'bg-emerald-500/20' :
                 forecast?.health === 'warning' ? 'bg-yellow-500/20' :
                 'bg-red-500/20'
@@ -333,7 +333,7 @@ export default function FinanceCommandCenter() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-blue-400" />
+            <Receipt className="h-5 w-5 text-amber" />
             Recent Transactions / हाल के लेनदेन
           </CardTitle>
           <div className="flex items-center gap-2">
@@ -341,7 +341,7 @@ export default function FinanceCommandCenter() {
               variant={activeFilter === 'all' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setActiveFilter('all')}
-              className={activeFilter === 'all' ? 'bg-blue-600' : 'border-slate-600'}
+              className={activeFilter === 'all' ? 'bg-slate-700' : 'border-slate-600'}
             >
               All
             </Button>

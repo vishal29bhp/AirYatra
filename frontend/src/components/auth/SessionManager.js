@@ -173,7 +173,7 @@ export default function SessionManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <RefreshCw className="h-8 w-8 text-orange-500 animate-spin" />
+        <RefreshCw className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -184,7 +184,7 @@ export default function SessionManager() {
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
-            <Shield className="h-5 w-5 text-orange-500" />
+            <Shield className="h-5 w-5 text-lime" />
             Security Overview
           </CardTitle>
           <CardDescription className="text-slate-400">
@@ -198,7 +198,7 @@ export default function SessionManager() {
               <p className="text-sm text-slate-400">Active Sessions</p>
             </div>
             <div className="bg-slate-700/50 rounded-lg p-4 text-center">
-              <p className="text-3xl font-bold text-blue-400">{trustedDevices.length}</p>
+              <p className="text-3xl font-bold text-amber">{trustedDevices.length}</p>
               <p className="text-sm text-slate-400">Trusted Devices</p>
             </div>
             <div className="bg-slate-700/50 rounded-lg p-4 text-center">
@@ -212,7 +212,7 @@ export default function SessionManager() {
           {/* OTP Toggle */}
           <div className="mt-6 p-4 bg-slate-700/30 rounded-lg flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Shield className="h-5 w-5 text-orange-400" />
+              <Shield className="h-5 w-5 text-lime" />
               <div>
                 <p className="text-white font-medium">Email OTP on Login</p>
                 <p className="text-xs text-slate-400">Require OTP verification for new devices</p>
@@ -232,7 +232,7 @@ export default function SessionManager() {
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle className="text-white flex items-center gap-2">
-              <Globe className="h-5 w-5 text-blue-500" />
+              <Globe className="h-5 w-5 text-amber" />
               Active Sessions
             </CardTitle>
             <CardDescription className="text-slate-400">

@@ -90,7 +90,7 @@ const PDFDocumentViewer = ({
         {/* Header */}
         <div className="flex items-center justify-between p-3 bg-slate-800 border-b border-slate-700">
           <div className="flex items-center gap-3">
-            <FileText className="h-5 w-5 text-orange-400" />
+            <FileText className="h-5 w-5 text-lime" />
             <div>
               <h3 className="text-white font-medium truncate max-w-[300px]">
                 {document.name || document.file_name}
@@ -173,7 +173,7 @@ const PDFDocumentViewer = ({
         <div className="flex-1 bg-slate-900 overflow-auto" style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top center' }}>
           {loading ? (
             <div className="flex items-center justify-center h-full">
-              <Loader2 className="h-12 w-12 text-orange-400 animate-spin" />
+              <Loader2 className="h-12 w-12 text-lime animate-spin" />
             </div>
           ) : error ? (
             <div className="flex flex-col items-center justify-center h-full text-slate-400">
@@ -266,7 +266,7 @@ const PDFEmbed = ({ url, fileId, onError, onLoad }) => {
   if (!blobUrl) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="h-12 w-12 text-orange-400 animate-spin" />
+        <Loader2 className="h-12 w-12 text-lime animate-spin" />
       </div>
     );
   }

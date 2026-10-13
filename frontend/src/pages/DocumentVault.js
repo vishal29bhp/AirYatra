@@ -184,7 +184,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'active': return 'bg-green-500';
-      case 'verified': return 'bg-blue-500';
+      case 'verified': return 'bg-slate-700';
       case 'expiring_soon': return 'bg-amber-500';
       case 'expired': return 'bg-red-500';
       case 'pending_verification': return 'bg-purple-500';
@@ -194,14 +194,14 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
 
   const getFileIcon = (fileType) => {
     if (fileType?.includes('pdf')) return <FileType className="h-8 w-8 text-red-400" />;
-    if (fileType?.includes('image')) return <FileImage className="h-8 w-8 text-blue-400" />;
+    if (fileType?.includes('image')) return <FileImage className="h-8 w-8 text-amber" />;
     return <FileText className="h-8 w-8 text-slate-400" />;
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-lime"></div>
       </div>
     );
   }
@@ -213,14 +213,14 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-              <Lock className="h-8 w-8 text-orange-500" />
+              <Lock className="h-8 w-8 text-lime" />
               Smart Document Vault
             </h1>
             <p className="text-slate-400">Secure, encrypted storage for all your important documents</p>
           </div>
           <Button 
             data-testid="upload-document-btn"
-            className="bg-orange-500 hover:bg-orange-600"
+            className="bg-lime text-black hover:bg-lime/90"
             onClick={() => setShowUpload(true)}
           >
             <Upload className="h-4 w-4 mr-2" /> Upload Document
@@ -232,7 +232,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="p-4 text-center">
-                <FileText className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+                <FileText className="h-6 w-6 text-amber mx-auto mb-2" />
                 <p className="text-2xl font-bold text-white">{statistics.total_documents}</p>
                 <p className="text-xs text-slate-400">Total Documents</p>
               </CardContent>
@@ -333,14 +333,14 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
           <div className="flex border border-slate-700 rounded-md overflow-hidden">
             <Button 
               variant={viewMode === 'grid' ? 'default' : 'ghost'}
-              className={viewMode === 'grid' ? 'bg-orange-500' : 'text-slate-400'}
+              className={viewMode === 'grid' ? 'bg-lime text-black' : 'text-slate-400'}
               onClick={() => setViewMode('grid')}
             >
               <Grid className="h-4 w-4" />
             </Button>
             <Button 
               variant={viewMode === 'list' ? 'default' : 'ghost'}
-              className={viewMode === 'list' ? 'bg-orange-500' : 'text-slate-400'}
+              className={viewMode === 'list' ? 'bg-lime text-black' : 'text-slate-400'}
               onClick={() => setViewMode('list')}
             >
               <List className="h-4 w-4" />
@@ -364,7 +364,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
               <CardContent>
                 <form onSubmit={handleUpload} className="space-y-4">
                   {/* File Input */}
-                  <div className="border-2 border-dashed border-slate-600 rounded-lg p-8 text-center hover:border-orange-500 transition-colors cursor-pointer"
+                  <div className="border-2 border-dashed border-slate-600 rounded-lg p-8 text-center hover:border-lime transition-colors cursor-pointer"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <input 
@@ -382,7 +382,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
                   {uploadProgress > 0 && (
                     <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-orange-500 transition-all duration-300"
+                        className="h-full bg-lime text-black transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
                       />
                     </div>
@@ -484,7 +484,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
                     <Button type="button" variant="outline" onClick={() => setShowUpload(false)} className="flex-1">
                       Cancel
                     </Button>
-                    <Button type="submit" data-testid="submit-upload-btn" className="flex-1 bg-orange-500 hover:bg-orange-600">
+                    <Button type="submit" data-testid="submit-upload-btn" className="flex-1 bg-lime text-black hover:bg-lime/90">
                       Upload Document
                     </Button>
                   </div>
@@ -501,7 +501,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
               <Card 
                 key={doc.document_id} 
                 data-testid={`document-${doc.document_id}`}
-                className="bg-slate-800/50 border-slate-700 hover:border-orange-500/50 transition-colors cursor-pointer group"
+                className="bg-slate-800/50 border-slate-700 hover:border-lime/50 transition-colors cursor-pointer group"
                 onClick={() => setSelectedDoc(doc)}
               >
                 <CardContent className="p-4">
@@ -614,7 +614,7 @@ const DocumentVault = ({ user, ownerType = 'user' }) => {
               <h3 className="text-xl font-semibold text-white mb-2">No Documents Yet</h3>
               <p className="text-slate-400 mb-6">Upload your first document to get started</p>
               <Button 
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
                 onClick={() => setShowUpload(true)}
               >
                 <Upload className="h-4 w-4 mr-2" /> Upload Document

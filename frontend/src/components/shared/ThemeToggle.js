@@ -144,7 +144,7 @@ export const ThemeSelector = ({ className = '' }) => {
             onClick={() => setTheme(option.value === 'system' ? systemPreference : option.value)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
               isActive
-                ? 'bg-orange-500 text-white'
+                ? 'bg-lime text-black'
                 : 'text-slate-400 hover:text-white hover:bg-slate-700'
             }`}
           >

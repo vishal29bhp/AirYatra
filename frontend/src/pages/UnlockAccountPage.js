@@ -78,8 +78,8 @@ const UnlockAccountPage = () => {
                 <XCircle className="h-10 w-10 text-red-400" />
               </div>
             ) : (
-              <div className="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center">
-                <Lock className="h-10 w-10 text-orange-400" />
+              <div className="w-20 h-20 bg-lime/20 rounded-full flex items-center justify-center">
+                <Lock className="h-10 w-10 text-lime" />
               </div>
             )}
           </div>
@@ -144,7 +144,7 @@ const UnlockAccountPage = () => {
 
           {status === 'loading' && (
             <div className="flex flex-col items-center py-8">
-              <Loader2 className="h-12 w-12 text-orange-400 animate-spin mb-4" />
+              <Loader2 className="h-12 w-12 text-lime animate-spin mb-4" />
               <p className="text-slate-400">Unlocking your account...</p>
             </div>
           )}
@@ -165,7 +165,7 @@ const UnlockAccountPage = () => {
               
               <Button 
                 onClick={goToLogin}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                className="w-full bg-lime hover:bg-lime/90 text-black"
                 size="lg"
               >
                 Go to Login
@@ -207,7 +207,7 @@ const UnlockAccountPage = () => {
           {status !== 'loading' && (
             <div className="p-4 bg-slate-800 rounded-lg mt-6">
               <div className="flex items-center gap-2 mb-3">
-                <Shield className="h-5 w-5 text-blue-400" />
+                <Shield className="h-5 w-5 text-amber" />
                 <h4 className="text-white font-medium">Security Tips</h4>
               </div>
               <ul className="text-slate-400 text-sm space-y-2">

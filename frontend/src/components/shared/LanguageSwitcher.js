@@ -20,10 +20,10 @@ export const LanguageSwitcher = () => {
         <Button
           size="sm"
           variant="outline"
-          className="bg-slate-800/80 backdrop-blur-sm border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white shadow-lg"
+          className="bg-slate-800/80 backdrop-blur-sm border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white"
           data-testid="language-switcher-btn"
         >
-          <Globe className="h-4 w-4 mr-1.5 text-orange-500" />
+          <Globe className="h-4 w-4 mr-1.5 text-lime" />
           {current.native}
         </Button>
       </DropdownMenuTrigger>
@@ -41,7 +41,7 @@ export const LanguageSwitcher = () => {
           >
             <span>{lang.native}</span>
             <span className="text-slate-500 text-xs">{lang.name}</span>
-            {current.code === lang.code && <Check className="h-4 w-4 ml-auto text-orange-500" />}
+            {current.code === lang.code && <Check className="h-4 w-4 ml-auto text-lime" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

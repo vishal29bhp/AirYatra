@@ -414,8 +414,8 @@ function FinanceDashboard({ user, onLogout }) {
                 <p className="text-2xl font-bold text-white">₹{(stats.pending_settlements / 1000).toFixed(0)}K</p>
                 <p className="text-slate-400 text-sm">Pending Settlements</p>
               </div>
-              <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
-                <BarChart3 className="h-5 w-5 text-blue-400 mb-2" />
+              <div className="bg-amber/20 rounded-lg p-4 border border-amber/50">
+                <BarChart3 className="h-5 w-5 text-amber mb-2" />
                 <p className="text-2xl font-bold text-white">₹{(stats.this_month / 100000).toFixed(1)}L</p>
                 <p className="text-slate-400 text-sm">This Month / इस महीने</p>
               </div>
@@ -439,12 +439,12 @@ function FinanceDashboard({ user, onLogout }) {
                 <p className="text-slate-400 text-sm">बल्क सैलरी भुगतान</p>
               </button>
               <button onClick={() => setActiveTab('vendor_bills')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
-                <Receipt className="h-8 w-8 text-orange-400 mb-3" />
+                <Receipt className="h-8 w-8 text-lime mb-3" />
                 <h3 className="text-lg font-semibold text-white">Vendor Payments</h3>
                 <p className="text-slate-400 text-sm">TDS के साथ वेंडर भुगतान</p>
               </button>
               <button onClick={() => setActiveTab('invoices')} className="bg-slate-800 rounded-lg p-6 border border-slate-700 hover:bg-slate-700 text-left">
-                <FileText className="h-8 w-8 text-blue-400 mb-3" />
+                <FileText className="h-8 w-8 text-amber mb-3" />
                 <h3 className="text-lg font-semibold text-white">Manage Invoices</h3>
                 <p className="text-slate-400 text-sm">चालान प्रबंधित करें</p>
               </button>
@@ -463,15 +463,15 @@ function FinanceDashboard({ user, onLogout }) {
               </h2>
               <div className="flex items-center justify-center space-x-4 py-4">
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center mx-auto">
-                    <Users className="h-6 w-6 text-orange-400" />
+                  <div className="w-12 h-12 rounded-full bg-lime/20 flex items-center justify-center mx-auto">
+                    <Users className="h-6 w-6 text-lime" />
                   </div>
                   <p className="text-white mt-2 text-sm">HR</p>
                 </div>
                 <ChevronRight className="h-5 w-5 text-slate-600" />
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto">
-                    <BanknoteIcon className="h-6 w-6 text-blue-400" />
+                  <div className="w-12 h-12 rounded-full bg-amber/20 flex items-center justify-center mx-auto">
+                    <BanknoteIcon className="h-6 w-6 text-amber" />
                   </div>
                   <p className="text-white mt-2 text-sm">Finance</p>
                 </div>
