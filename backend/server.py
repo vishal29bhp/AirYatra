@@ -8,6 +8,7 @@ from pathlib import Path
 import os
 import logging
 from config import settings
+from front_door import FrontDoorClientIPMiddleware
 from services.file_storage import InvalidKeyError, file_store
 from database import connect_to_mongo, close_mongo_connection, get_database
 from scheduler import start_scheduler, stop_scheduler
@@ -204,6 +205,10 @@ app.add_middleware(FastRateLimitMiddleware)
 
 # 5. Multi-Layer Response Caching - L1 (memory) + L2 (Redis)
 app.add_middleware(FastCacheMiddleware)
+
+# 6. Outermost: real client IP behind Azure Front Door (only for our own profile id), so the
+#    rate limits, lockout and audit logs above all see the caller, not Front Door.
+app.add_middleware(FrontDoorClientIPMiddleware, front_door_id=settings.front_door_id)
 
 # Create API router with /api prefix
 api_router = APIRouter(prefix="/api")

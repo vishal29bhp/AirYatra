@@ -74,8 +74,14 @@ variable "worker_command" {
   default     = ["python", "worker.py"]
 }
 variable "health_path" {
-  type    = string
-  default = "/health"
+  description = "Liveness: the process answers."
+  type        = string
+  default     = "/health"
+}
+variable "readiness_path" {
+  description = "Readiness: the database answers too, so traffic waits until a new revision can serve it."
+  type        = string
+  default     = "/health/ready"
 }
 
 variable "env_vars" {

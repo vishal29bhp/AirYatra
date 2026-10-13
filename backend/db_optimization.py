@@ -5,8 +5,6 @@ Performance indexes for high-traffic scenarios
 
 import asyncio
 import logging
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
 
 logger = logging.getLogger(__name__)
 
@@ -100,33 +98,56 @@ INDEXES = {
 }
 
 
+def needs_review(index_def) -> str:
+    """Why an index must not be created automatically, or '' if it is safe.
+
+    Creating an index must never change data or make a write fail that works today:
+    TTL indexes delete documents, unique indexes reject inserts (including several documents
+    without the field), and geo/text indexes reject documents whose field is malformed.
+    """
+    if "expireAfterSeconds" in index_def:
+        return "TTL index deletes documents"
+    if index_def.get("unique"):
+        return "unique index can reject inserts"
+    if any(not isinstance(direction, int) for _, direction in index_def["keys"]):
+        return "special index type can reject documents"
+    return ""
+
+
 async def create_indexes(db):
-    """Create all indexes for optimal performance"""
+    """Create the plain performance indexes; skip (and report) the ones that need review."""
     created_count = 0
     
     for collection_name, indexes in INDEXES.items():
         collection = db[collection_name]
         
         for index_def in indexes:
+            reason = needs_review(index_def)
+            if reason:
+                logger.info(f"Index {index_def['name']} on {collection_name} skipped: {reason} (needs review)")
+                continue
             try:
                 keys = index_def["keys"]
                 options = {k: v for k, v in index_def.items() if k != "keys"}
-                
                 await collection.create_index(keys, **options)
                 created_count += 1
                 logger.info(f"Created index {index_def.get('name', 'unnamed')} on {collection_name}")
             except Exception as e:
-                # Index might already exist or collection doesn't exist yet
-                logger.debug(f"Index creation note for {collection_name}: {e}")
+                # Same name with other options already exists, or similar: report it, don't stop.
+                logger.warning(f"Index {index_def.get('name', 'unnamed')} on {collection_name} not created: {e}")
     
     return created_count
 
 
-async def optimize_database():
-    """Run all database optimizations"""
-    mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-    client = AsyncIOMotorClient(mongo_url)
-    db = client.airyatra
+async def optimize_database(db=None):
+    """Run all database optimizations on the application database (DB_NAME).
+
+    Indexes used to be created on a hard-coded ``airyatra`` database, so the database the app
+    actually uses (DB_NAME, default ``airyatra_db``) never received them.
+    """
+    if db is None:
+        from database import get_database
+        db = get_database()
     
     logger.info("Starting database optimization...")
     
@@ -141,6 +162,15 @@ async def optimize_database():
 
 
 # Run optimization on startup
+async def _main():
+    from database import close_mongo_connection, connect_to_mongo
+    await connect_to_mongo()
+    try:
+        print(await optimize_database())
+    finally:
+        await close_mongo_connection()
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    asyncio.run(optimize_database())
+    asyncio.run(_main())

@@ -69,6 +69,8 @@ class Settings(BaseSettings):
     storage_provider: str = os.getenv('STORAGE_PROVIDER', 'legacy')
     azure_storage_account_url: str = os.getenv('AZURE_STORAGE_ACCOUNT_URL', '')
     upload_root: str = os.getenv('UPLOAD_ROOT', '/app')
+    # Azure Front Door profile id (X-Azure-FDID). When set, X-Azure-ClientIP from that profile is the client IP.
+    front_door_id: str = os.getenv('FRONT_DOOR_ID', '')
 
     @model_validator(mode="after")
     def _never_mock_payments_in_production(self) -> "Settings":
