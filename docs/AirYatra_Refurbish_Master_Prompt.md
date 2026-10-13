@@ -1,6 +1,6 @@
 # AirYatra Refurbishment: Master Prompt (RCTFC + TAF)
 
-> How to use: paste everything below the line into Claude (or any capable coding model) with the AirYatra repository attached or checked out. Section C.4 carries the theme extracted from the Vaayu Prive deck. Run it phase by phase: the model is told to stop at each phase gate for your approval. Section Q (testing) is a standing rule; paste it again at the start of any later development session so it is applied every time.
+> How to use: paste everything below the line into Claude (or any capable coding model) with the AirYatra repository attached or checked out. Section C.4 carries the theme extracted from the Vaayu Prive deck. Run it phase by phase: the model is told to stop at each phase gate for your approval. Sections Q (testing), E (object-oriented design) and S (security) are standing rules; paste them again at the start of any later development session so they are applied every time.
 
 ---
 
@@ -87,7 +87,7 @@ Deliver in five phases. **Stop at the end of each phase and wait for my approval
 **Phase 0: Discovery and audit (read-only)**
 1. Inventory every MongoDB collection, its fields, value formats (dates as strings vs `datetime`, money as float vs int paise, enum strings, ID strategy `_id` vs `id` UUID) and existing indexes. Produce a data dictionary. Do not modify anything.
 2. Inventory every external dependency on Emergent (`emergentintegrations`, Emergent object storage, Emergent-managed Google OAuth, `*.emergentagent.com` URLs) and every third-party integration.
-3. Security audit: secrets in code (e.g. hard-coded LLM fallback key), committed sensitive files (`secure_uploads/`, `uploads/`, `memory/test_credentials.md`), token storage, CORS, rate limiting, webhook signature checks, PII/KYC handling, Mongo `journal: False`.
+3. Security audit (feeds Section S.1): secrets in code (e.g. hard-coded LLM fallback key), committed sensitive files (`secure_uploads/`, `uploads/`, `memory/test_credentials.md`), token storage, CORS, rate limiting, webhook signature checks, PII/KYC handling, Mongo `journal: False`.
 4. Map duplicate or dead code (`ai_service.py` in two places, overlapping performance middlewares, unused workflows) and the routes the front end actually calls.
 
 **Phase 1: Target Azure architecture**
@@ -131,7 +131,7 @@ Provide a capacity and cost model for both stages (SKUs, replica counts, DB tier
 **Phase 5: Go-live and operations**
 - Run the full performance suite against the Q.3 targets at 1K and 20K profiles, the full regression pack, and manual UAT with sign-off.
 - Backup and DR: point-in-time restore, RPO ≤ 15 min, RTO ≤ 4 h, tested restore.
-- Security sign-off: OWASP ASVS L2 checklist, penetration test scope, DPDP compliance notes for KYC and consent.
+- Security sign-off per Section S: ASVS L2/L3 checklist, external penetration test closed out, DPDP compliance notes for KYC and consent, incident-response drill done.
 - Runbooks: deploy, rollback, rotate secrets, scale up, incident response.
 
 ---
@@ -191,6 +191,8 @@ A release that misses a target needs my written sign-off with the reason.
 - [ ] Perf impact considered; perf smoke run if a hot path, query or index changed.
 - [ ] All CI gates green; coverage did not drop.
 - [ ] Test evidence (commands run, results, screenshots where relevant) included in the PR description.
+- [ ] Code follows the object-oriented layering in Section E (no business logic in routers, no DB access outside repositories).
+- [ ] Security Definition of Done in S.6 met.
 
 ### Q.6 Test deliverables per phase
 | Phase | Testing deliverable |
@@ -201,6 +203,105 @@ A release that misses a target needs my written sign-off with the reason.
 | 3 | Characterisation tests first, then unit and integration suites for Q.2 journeys; existing live tests converted; contract tests for every replaced Emergent adapter (storage, LLM, OAuth). |
 | 4 | Component tests for themed UI, visual regression baselines, accessibility tests (axe-core in Playwright), manual UX review checklist against Vaayu Prive. |
 | 5 | Full performance suite (Q.3) at 1K and 20K profiles, DR restore test, UAT sign-off, release regression report. |
+
+---
+
+## E. ENGINEERING STANDARD: OBJECT-ORIENTED DESIGN (applies to every change, for the life of the project)
+
+All new and refactored code follows object-oriented design with SOLID principles. Today much of the back end is route functions that talk to MongoDB directly across ~130 route modules; refactor toward the layers below module by module, behind the frozen API contract, with characterisation tests first (Section Q).
+
+### E.1 Back end (Python / FastAPI) layering
+| Layer | Responsibility | OOP shape |
+|---|---|---|
+| **API / Router** | HTTP only: parse request, call a service, map result to response, map domain errors to HTTP codes. No business logic, no DB calls. | Thin route functions or class-based routers that receive services by dependency injection (`Depends`). |
+| **Service (use case)** | Business rules: pricing, booking, payment, settlement, KYC, approvals. Transaction and orchestration logic. | One class per bounded context, e.g. `BookingService`, `PricingEngine`, `PaymentService`, `SettlementService`, `KycService`. Constructor-injected dependencies. |
+| **Domain model** | Entities and value objects with behaviour and invariants (e.g. `Booking.cancel()`, `Money`, `FlightLeg`, `GstBreakup`). | Pydantic models or dataclasses with methods; value objects immutable. Field names and stored values match the existing Mongo documents exactly. |
+| **Repository** | All persistence. The only layer that knows MongoDB. | `BaseRepository[T]` abstract class with typed subclasses per collection (`BookingRepository`, `UserRepository`, ...). Enforces projection, pagination limits, tenant/owner filters and indexes. |
+| **Adapter / Gateway** | External systems: payments, SMS/WhatsApp, email, storage, LLM, OAuth, weather, accounting. | Abstract interface (`abc.ABC` or `typing.Protocol`), e.g. `PaymentGateway`, `StorageProvider`, `LlmProvider`, `NotificationChannel`; concrete classes `RazorpayGateway`, `StripeGateway`, `AzureBlobStorage`, `AzureOpenAiProvider`. Selected by configuration (Strategy/Factory). |
+| **Cross-cutting** | Auth, authorisation, audit logging, rate limiting, caching, error handling, observability. | Middleware and policy classes (`AuthorizationPolicy`, `AuditLogger`), decorators where idiomatic. |
+
+### E.2 Principles and patterns
+- **SOLID**: single responsibility per class; open for extension via new strategy classes (e.g. a new payment gateway or pricing rule) without editing existing ones; substitutable subclasses; small focused interfaces; depend on abstractions, injected through a composition root (FastAPI `Depends` or a DI container).
+- Use patterns where they remove duplication, not for their own sake: Strategy (pricing rules, payment gateways, notification channels), Factory (gateway/provider selection), Repository, Unit of Work (multi-document transactions), Observer/domain events (booking confirmed → invoice, notification, loyalty points), State (booking and approval lifecycles), Template Method (report and document generation).
+- Encapsulation: no module-level global state or singletons holding mutable data; configuration via a typed `Settings` class; no direct `db.<collection>` access outside repositories.
+- Full type hints; `mypy --strict` on new modules; `ruff` and `black` clean. Custom exception hierarchy (`AirYatraError` → `NotFoundError`, `ValidationError`, `AuthorizationError`, `PaymentError`, ...) mapped to HTTP responses in one place.
+- Remove duplication found in Phase 0 (two `ai_service.py`, overlapping performance middlewares) by consolidating into one class each.
+- Complexity limits: functions ≤ 40 lines and cyclomatic complexity ≤ 10 (enforced by linter); classes cohesive, files ≤ 400 lines unless justified.
+
+### E.3 Front end (React)
+Idiomatic React uses function components and hooks, not class components, so OOP applies to the non-UI layer:
+- Migrate to **TypeScript** incrementally; typed interfaces for every API request/response and domain object.
+- **API client classes** per domain (`BookingApi`, `PaymentApi`, `AuthApi`) built on one `HttpClient` class that owns base URL, auth, retries, error mapping and CSRF handling. Components never call `axios` directly.
+- Domain logic (fare display, validation, formatting) lives in typed classes or pure modules, unit-tested without the DOM.
+- Components are small and presentational; state and side effects sit in custom hooks or a store; shared UI in the themed design system (Section C.4).
+
+### E.4 Enforcement
+Lint rules, `mypy`, import-boundary checks (e.g. `import-linter`: routers may not import repositories or Motor directly) and code review enforce this section in CI. A PR that breaks a layer boundary fails the build.
+
+---
+
+## S. SECURITY STANDARD: HARDENING AGAINST ATTACK (applies to every change, for the life of the project)
+
+AirYatra handles identity documents (Aadhaar, PAN, passports), payments and payouts, and live flight operations, so it is a high-value target. Security is a release gate, not a later phase. Design for defence in depth and assume any single control can fail. Target **OWASP ASVS Level 2** for the whole app and **Level 3** for auth, payments, payouts and KYC.
+
+### S.1 Fix what exists first (from the repo audit, Phase 0)
+- Remove the hard-coded fallback LLM key in `backend/services/ai_service.py`; rotate every key that has ever been in the repo (Emergent, Razorpay, RazorpayX, Stripe, Cashfree, Twilio, SMTP, SendGrid, Google, JWT secret).
+- Remove `secure_uploads/`, `uploads/` and `memory/test_credentials.md` from the repo and **purge them from git history** (git-filter-repo), after moving needed files to Azure Blob; history rewrite and live-key rotation need my approval per Constraint 9. Treat any KYC file ever committed as exposed and assess DPDP breach-notification duty.
+- Replace the default CORS origin `*.preview.emergentagent.com` with an explicit allow-list from configuration.
+- Move JWTs out of `localStorage` into `HttpOnly; Secure; SameSite` cookies with CSRF protection, or document the compensating controls if not done.
+- Turn on Mongo journaling and majority write concern.
+- Add `.gitignore` rules, pre-commit secret scanning (gitleaks) and GitHub secret scanning with push protection.
+
+### S.2 OWASP Top 10 (2021) controls
+| Risk | Required controls in AirYatra |
+|---|---|
+| **A01 Broken access control** | Deny by default. Central `AuthorizationPolicy` checks role **and** ownership on every route (customer sees only own bookings, operator only own fleet, etc.). Prevent IDOR by scoping every repository query by owner/tenant; never trust IDs from the client alone. Admin routes on a separate router with step-up MFA. Automated negative tests per role (Q.2 item 9). |
+| **A02 Cryptographic failures** | TLS 1.2+ everywhere (HSTS with preload); encryption at rest for DB, Blob, Redis, backups; KYC files additionally encrypted at application level with keys in Key Vault (envelope encryption, rotation). Passwords with bcrypt (cost ≥ 12) or Argon2id. No sensitive data in URLs, logs or analytics. |
+| **A03 Injection** | Pydantic validation on every input with strict types and length limits; reject unknown fields. **NoSQL injection**: never pass raw client dicts into Mongo queries, block `$`-prefixed keys and operators from user input, no `$where` or server-side JS. Escape output; no `dangerouslySetInnerHTML` without DOMPurify. Parameterised shell/OS calls only, ideally none. |
+| **A04 Insecure design** | Threat model (STRIDE) for booking, payment, payout, KYC, SOS and admin flows in Phase 1. Business-logic abuse cases: price tampering (server recomputes every fare), coupon/referral abuse, double-spend on refunds, race conditions on seat/slot booking (atomic updates, idempotency keys). |
+| **A05 Security misconfiguration** | IaC-only infrastructure with policy checks (Azure Policy, Checkov/tfsec). No debug mode, stack traces or `/docs` OpenAPI UI public in prod. Security headers: CSP (no `unsafe-inline` scripts), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `frame-ancestors 'none'`. Hardened, minimal, non-root container images. |
+| **A06 Vulnerable components** | Pin dependencies; Dependabot/Renovate; `pip-audit`, `npm audit`, container image scanning (Defender for Containers / Trivy) block on High/Critical. Remove unused packages (the backend has many dev tools pinned in runtime requirements). SBOM generated per release. |
+| **A07 Identification and authentication failures** | MFA (TOTP, existing) mandatory for admin, finance, operator and HR roles, optional for customers. Short-lived access tokens (≤ 15 min) plus rotating refresh tokens with reuse detection and server-side revocation. Account lockout and login shield (existing) backed by Redis so they work across replicas. Password policy per NIST 800-63B with breached-password check. OTP: rate-limited, single-use, 5-minute expiry, constant-time compare. Google OAuth with `state`, PKCE and nonce. Session invalidation on password change and logout everywhere. |
+| **A08 Software and data integrity failures** | Verify signatures on every webhook (Razorpay, RazorpayX, Stripe, Cashfree, Twilio) and reject replays via timestamp + idempotency store. Signed container images and protected `main` branch with required reviews and checks. CI uses OIDC to Azure, no long-lived cloud secrets. |
+| **A09 Logging and monitoring failures** | Structured audit log (who, what, when, from where) for logins, role changes, payments, refunds, payouts, KYC access and admin actions, written to append-only storage. PII masked in logs. Alerts in Microsoft Sentinel / Defender for suspicious logins, privilege changes, payout spikes and WAF blocks. |
+| **A10 Server-side request forgery** | No user-supplied URLs fetched server-side, or an allow-list of hosts. Outbound traffic from Container Apps restricted through NAT/firewall to the integrations actually used. |
+
+### S.3 Application-level protections
+- **Rate limiting and abuse control**: per IP and per user on login, OTP, signup, password reset, search, quote and AI endpoints (Redis-backed), plus Front Door WAF rate rules and bot protection. CAPTCHA (e.g. Cloudflare Turnstile or reCAPTCHA) after repeated failures.
+- **File uploads**: allow-list MIME types and extensions verified by content (magic bytes), size limits, malware scanning (Defender for Storage), random object names, private containers, short-lived SAS URLs for download, never served from the app domain.
+- **Payments**: amounts always computed server-side; idempotency keys on create-order, capture, refund and payout; maker-checker approval for payouts and refunds above a threshold; reconciliation job flags mismatches.
+- **AI features**: guard against prompt injection (system prompt isolation, no tool access to sensitive data without authorisation checks, output filtering); never send KYC or payment data to the LLM.
+- **WebSockets**: authenticate on connect, authorise per room, validate and size-limit messages, rate limit.
+- **Data protection (DPDP Act 2023)**: consent capture and withdrawal, purpose limitation, data minimisation, retention schedules, right to access/erase where the law allows, breach-response runbook, data-processing agreements with every third party.
+- **Secure error handling**: generic messages to clients, detailed errors only in logs with a correlation ID.
+
+### S.4 Azure platform controls
+- **Identity**: Microsoft Entra ID for staff and operators of the platform, Privileged Identity Management for just-in-time admin, conditional access, no shared accounts. **Managed identities** for every service-to-service call; no connection strings with passwords where avoidable.
+- **Secrets**: Azure Key Vault (RBAC mode, soft delete and purge protection), referenced by Container Apps; automatic rotation where supported.
+- **Network**: VNet-integrated Container Apps environment; **private endpoints** for MongoDB/Cosmos, Redis, Blob, Key Vault, Azure OpenAI; public network access disabled on data services; NSGs with least privilege.
+- **Edge**: Azure Front Door Premium with WAF (OWASP managed rule set, bot manager, geo/rate rules), TLS termination, DDoS protection on the origin network.
+- **Posture**: Microsoft Defender for Cloud (servers/containers, storage, Key Vault, databases, APIs) with the secure score tracked; Azure Policy for guardrails (deny public IPs, require private endpoints, require encryption, allowed regions India only).
+- **Backup and recovery**: immutable backups and point-in-time restore so a ransomware or malicious-delete event is recoverable.
+
+### S.5 Security testing (adds to Section Q)
+| Activity | When |
+|---|---|
+| SAST: CodeQL, Bandit, Semgrep (OWASP rules), ESLint security plugin | Every PR, blocking on High |
+| Secret scanning: gitleaks pre-commit + GitHub push protection | Every commit |
+| Dependency and container scanning | Every PR and nightly |
+| DAST: OWASP ZAP baseline on `staging`, authenticated full scan weekly | Nightly / weekly |
+| Security unit and integration tests: authZ per role, IDOR, NoSQL injection payloads, webhook signature rejection, rate limits, file-upload rejection | Every PR (part of the regression pack) |
+| Threat model review | Every new feature that touches auth, money, KYC or admin |
+| External penetration test (CERT-In empanelled auditor) | Before go-live, then yearly and after major changes |
+| Incident response drill and secret-rotation drill | Before go-live, then twice a year |
+
+### S.6 Security Definition of Done (added to Q.5)
+- [ ] Inputs validated, outputs encoded, queries scoped by owner/role; no raw client data in Mongo filters.
+- [ ] AuthN/AuthZ checks present and covered by negative tests.
+- [ ] No secrets, PII or tokens in code, logs, URLs or error messages.
+- [ ] SAST, dependency, secret and container scans clean (no High/Critical).
+- [ ] Threat model updated if the change touches auth, money, KYC, file upload or admin.
+- [ ] Audit logging added for sensitive actions.
 
 ---
 
@@ -229,7 +330,9 @@ Format each loop as:
   - E2E: passed/failed
   - Performance (if applicable): p95, error rate vs Q.3 targets
   - Manual test cases added/updated:
-- Definition of Done (Q.5): met | not met + why
+- Definition of Done (Q.5 + S.6): met | not met + why
+- OOP check (Section E layering, SOLID, types, lint): pass | fail + why
+- Security check (Section S controls touched, scans run, results): pass | fail + why
 - Constraint check (data unchanged / name AirYatra / no secrets / API unchanged): pass | fail + why
 - Open questions for Vishal:
 - Phase gate: waiting for approval to start Phase N+1
@@ -245,10 +348,11 @@ For each phase, return:
 3. **Architecture diagram** in Mermaid (Phase 1), with stage-1 and stage-2 variants.
 4. **Decision log (ADR-style table):** decision, options, choice, reason, reversibility.
 5. **Capacity and cost table** (Phase 1): component, SKU at 1K, SKU at 20K, monthly cost each.
-6. **Test report:** what was tested at each level (unit, integration, regression, E2E, manual, performance), results, coverage, and any gaps with a plan to close them.
-7. **Risk register:** risk, likelihood, impact, mitigation, owner.
-8. **Artifacts:** file paths for any code, Bicep, workflow, script or token file produced, with short descriptions.
-9. **Checklist** of what is done and what is next.
+6. **Security report:** threats considered, controls applied (OWASP item by item where relevant), scan results, open risks.
+7. **Test report:** what was tested at each level (unit, integration, regression, E2E, manual, performance), results, coverage, and any gaps with a plan to close them.
+8. **Risk register:** risk, likelihood, impact, mitigation, owner.
+9. **Artifacts:** file paths for any code, Bicep, workflow, script or token file produced, with short descriptions.
+10. **Checklist** of what is done and what is next.
 
 Use Markdown, tables over prose where possible, and code blocks with language tags. Keep explanations tight; no marketing language.
 
@@ -267,7 +371,9 @@ Use Markdown, tables over prose where possible, and code blocks with language ta
 9. **No destructive or production action** (deleting data, DNS cutover, rotating live payment keys) without my explicit written approval in the conversation.
 10. **Accessibility and performance** targets in Phase 4 and Phase 5 are acceptance criteria, not suggestions.
 11. **Testing is mandatory, every time.** No code change is proposed or merged without the tests required by Section Q and the Definition of Done. This applies to the refurbishment and to all later feature work and bug fixes.
-12. If any instruction conflicts with another, stop and ask instead of picking silently.
+12. **Object-oriented code, every time.** All new and refactored code follows Section E. Any exception needs a written reason in the PR.
+13. **Security hardening, every time.** Every change meets Section S; a High or Critical security finding blocks the release. Security is never traded for speed without my written approval.
+14. If any instruction conflicts with another, stop and ask instead of picking silently.
 
 ---
 
