@@ -57,7 +57,7 @@ export const BookingTypeSelector = ({
     <div className={`space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <label className="text-white font-medium flex items-center gap-2">
-          <Route className="h-5 w-5 text-orange-400" />
+          <Route className="h-5 w-5 text-lime" />
           Booking Type / बुकिंग प्रकार
         </label>
         {selected && (
@@ -87,11 +87,11 @@ export const BookingTypeSelector = ({
               onMouseEnter={() => setHoveredType(type.value)}
               onMouseLeave={() => setHoveredType(null)}
               disabled={!isAvailable}
-              className={`relative p-3 rounded-xl border text-center transition-all duration-200 ${
+              className={`relative p-3 rounded-sm border text-center transition-all duration-200 ${
                 isSelected
-                  ? 'bg-orange-500/20 border-orange-500 text-orange-400 scale-105 shadow-lg shadow-orange-500/20'
+                  ? 'bg-lime/20 border-lime text-lime scale-105'
                   : isAvailable
-                    ? 'bg-slate-800 border-slate-700 text-slate-300 hover:border-orange-500/50 hover:bg-slate-700'
+                    ? 'bg-slate-800 border-slate-700 text-slate-300 hover:border-lime/50 hover:bg-slate-700'
                     : 'bg-slate-900 border-slate-800 text-slate-600 cursor-not-allowed opacity-50'
               }`}
             >
@@ -112,7 +112,7 @@ export const BookingTypeSelector = ({
                       ? 'bg-green-500/20 text-green-400' 
                       : type.priority 
                         ? 'bg-red-500/20 text-red-400'
-                        : 'bg-blue-500/20 text-blue-400'
+                        : 'bg-amber/20 text-amber'
                   }`}
                 >
                   {type.discountHint}
@@ -121,14 +121,14 @@ export const BookingTypeSelector = ({
               
               {/* Selected Checkmark */}
               {isSelected && (
-                <div className="absolute -top-2 -right-2 h-5 w-5 bg-orange-500 rounded-full flex items-center justify-center">
-                  <CheckCircle className="h-3 w-3 text-white" />
+                <div className="absolute -top-2 -right-2 h-5 w-5 bg-lime text-black rounded-full flex items-center justify-center">
+                  <CheckCircle className="h-3 w-3 text-black" />
                 </div>
               )}
               
               {/* Min Passengers Warning */}
               {!isAvailable && type.minPassengers && (
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded-xl">
+                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded-sm">
                   <span className="text-xs text-slate-400">
                     {type.minPassengers}+ pax
                   </span>
@@ -141,7 +141,7 @@ export const BookingTypeSelector = ({
       
       {/* Selected Type Details */}
       {selected && (
-        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
           {(() => {
             const type = bookingTypes.find(t => t.value === selected);
             if (!type) return null;
@@ -150,8 +150,8 @@ export const BookingTypeSelector = ({
             
             return (
               <div className="flex items-start gap-4">
-                <div className={`h-12 w-12 rounded-xl flex items-center justify-center text-2xl ${
-                  type.priority ? 'bg-red-500/20' : 'bg-orange-500/20'
+                <div className={`h-12 w-12 rounded-sm flex items-center justify-center text-2xl ${
+                  type.priority ? 'bg-red-500/20' : 'bg-lime/20'
                 }`}>
                   {type.icon}
                 </div>
@@ -184,7 +184,7 @@ export const BookingTypeSelector = ({
                       </Badge>
                     )}
                     {type.customQuote && (
-                      <Badge variant="outline" className="text-blue-400 border-blue-400/50 text-xs">
+                      <Badge variant="outline" className="text-amber border-amber/50 text-xs">
                         <Info className="h-3 w-3 mr-1" /> Custom Quote
                       </Badge>
                     )}
@@ -202,7 +202,7 @@ export const BookingTypeSelector = ({
                       <Badge className={`mt-1 ${
                         type.multiplier < 1.0 
                           ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-orange-500/20 text-orange-400'
+                          : 'bg-lime/20 text-lime'
                       }`}>
                         {type.multiplier < 1.0 
                           ? `${Math.round((1 - type.multiplier) * 100)}% off` 

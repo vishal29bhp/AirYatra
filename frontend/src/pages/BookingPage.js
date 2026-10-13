@@ -43,13 +43,13 @@ const CustomerProfileCard = ({ user }) => {
   if (!user) return null;
   
   return (
-    <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 mb-6">
+    <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700 mb-6">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full bg-orange-500/20 flex items-center justify-center overflow-hidden">
+        <div className="w-16 h-16 rounded-full bg-lime/20 flex items-center justify-center overflow-hidden">
           {user.profile_picture ? (
             <img src={user.profile_picture} alt={user.full_name} className="w-full h-full object-cover" />
           ) : (
-            <UserCircle className="h-10 w-10 text-orange-400" />
+            <UserCircle className="h-10 w-10 text-lime" />
           )}
         </div>
         <div className="flex-1">
@@ -923,9 +923,9 @@ function BookingPage({ user }) {
             <button
               key={type.value}
               onClick={() => handleInputChange('aircraft_type', type.value)}
-              className={`p-6 rounded-xl border-2 transition-all text-left ${
+              className={`p-6 rounded-sm border-2 transition-all text-left ${
                 formData.aircraft_type === type.value
-                  ? 'border-orange-500 bg-orange-500/10'
+                  ? 'border-lime bg-lime/10'
                   : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
               }`}
             >
@@ -938,9 +938,9 @@ function BookingPage({ user }) {
       </div>
 
       {/* Adult Passengers */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-          <Users className="h-5 w-5 text-orange-400" />
+          <Users className="h-5 w-5 text-lime" />
           {t('bookingForm.adultPassengers')}
         </h3>
         
@@ -1001,15 +1001,15 @@ function BookingPage({ user }) {
         {/* Total Adults */}
         <div className="mt-4 pt-4 border-t border-slate-700">
           <p className="text-slate-400">
-            {t('bookingForm.totalAdults')}: <span className="text-orange-400 font-bold text-xl">{formData.total_passengers}</span>
+            {t('bookingForm.totalAdults')}: <span className="text-lime font-bold text-xl">{formData.total_passengers}</span>
           </p>
         </div>
       </div>
 
       {/* Children */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-          <Baby className="h-5 w-5 text-blue-400" />
+          <Baby className="h-5 w-5 text-amber" />
           {t('bookingForm.children')}
         </h3>
         <p className="text-green-400 text-sm mb-4">✨ {t('bookingForm.childrenFree')}</p>
@@ -1057,7 +1057,7 @@ function BookingPage({ user }) {
         <Button
           variant="outline"
           onClick={() => setShowCompareModal(true)}
-          className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10"
+          className="border-amber/50 text-amber hover:bg-amber/10"
           data-testid="compare-aircraft-btn"
         >
           <Scale className="h-4 w-4 mr-2" />
@@ -1091,7 +1091,7 @@ function BookingPage({ user }) {
       )}
       
       {/* NEW: Booking Type Selector (9 types) */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <BookingTypeSelector
           selected={formData.booking_type}
           onSelect={(type) => handleInputChange('booking_type', type)}
@@ -1102,15 +1102,15 @@ function BookingPage({ user }) {
       </div>
 
       {/* Udan Ka Prakar - Dropdown */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-3 block flex items-center gap-2">
-          <Plane className="h-5 w-5 text-orange-400" />
+          <Plane className="h-5 w-5 text-lime" />
           {t('bookingForm.flightType')} <span className="text-red-500">*</span>
         </Label>
         <select
           value={formData.udan_prakar}
           onChange={(e) => handleInputChange('udan_prakar', e.target.value)}
-          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-xl text-white text-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 cursor-pointer"
+          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-sm text-white text-lg focus:border-lime focus:ring-2 focus:ring-lime/20 cursor-pointer"
         >
           <option value="" className="bg-slate-900">{t('bookingForm.selectOption')}</option>
           {udanPrakarOptions.map(option => (
@@ -1120,7 +1120,7 @@ function BookingPage({ user }) {
           ))}
         </select>
         {formData.udan_prakar && (
-          <p className="mt-2 text-orange-400 text-sm flex items-center gap-2">
+          <p className="mt-2 text-lime text-sm flex items-center gap-2">
             <Check className="h-4 w-4" />
             {t('bookingForm.selected')}: {t(`options.${formData.udan_prakar}`)}
           </p>
@@ -1128,15 +1128,15 @@ function BookingPage({ user }) {
       </div>
 
       {/* Booking For - Dropdown */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-3 block flex items-center gap-2">
-          <User className="h-5 w-5 text-blue-400" />
+          <User className="h-5 w-5 text-amber" />
           {t('bookingForm.bookingFor')} <span className="text-red-500">*</span>
         </Label>
         <select
           value={formData.booking_for}
           onChange={(e) => handleInputChange('booking_for', e.target.value)}
-          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-xl text-white text-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 cursor-pointer"
+          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-sm text-white text-lg focus:border-lime focus:ring-2 focus:ring-lime/20 cursor-pointer"
         >
           <option value="" className="bg-slate-900">{t('bookingForm.selectOption')}</option>
           {bookingForOptions.map(option => (
@@ -1146,7 +1146,7 @@ function BookingPage({ user }) {
           ))}
         </select>
         {formData.booking_for && (
-          <p className="mt-2 text-blue-400 text-sm flex items-center gap-2">
+          <p className="mt-2 text-amber text-sm flex items-center gap-2">
             <Check className="h-4 w-4" />
             {t('bookingForm.selected')}: {t(`options.${formData.booking_for}`)}
           </p>
@@ -1154,7 +1154,7 @@ function BookingPage({ user }) {
       </div>
 
       {/* Booking Purpose - Dropdown */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-3 block flex items-center gap-2">
           <Target className="h-5 w-5 text-green-400" />
           {t('bookingForm.bookingPurpose')} <span className="text-red-500">*</span>
@@ -1162,7 +1162,7 @@ function BookingPage({ user }) {
         <select
           value={formData.booking_purpose}
           onChange={(e) => handleInputChange('booking_purpose', e.target.value)}
-          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-xl text-white text-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 cursor-pointer"
+          className="w-full p-4 bg-slate-900 border border-slate-600 rounded-sm text-white text-lg focus:border-lime focus:ring-2 focus:ring-lime/20 cursor-pointer"
         >
           <option value="" className="bg-slate-900">{t('bookingForm.selectOption')}</option>
           {bookingPurposeOptions.map(option => (
@@ -1195,7 +1195,7 @@ function BookingPage({ user }) {
     <div className="space-y-6">
       {/* Multi-City Route Builder (for multi_city booking type) */}
       {formData.booking_type === 'multi_city' ? (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <MultiCityRouteBuilder
             routes={multiCityRoutes.legs}
             onRoutesChange={(data) => {
@@ -1214,7 +1214,7 @@ function BookingPage({ user }) {
       ) : (
         <>
           {/* Pickup Location - Landing Point Selector */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <Navigation className="h-5 w-5 text-green-400" />
               {t('bookingForm.pickupLocation')}
@@ -1230,7 +1230,7 @@ function BookingPage({ user }) {
           </div>
 
           {/* Drop Location - Landing Point Selector */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+          <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <MapPin className="h-5 w-5 text-red-400" />
               {t('bookingForm.dropLocation')}
@@ -1249,15 +1249,15 @@ function BookingPage({ user }) {
 
       {/* Distance Display */}
       {distanceKm > 0 && (
-        <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/30 text-center">
-          <p className="text-blue-400 text-sm">{t('bookingForm.estimatedDistance')}</p>
+        <div className="bg-amber/10 rounded-sm p-4 border border-amber/30 text-center">
+          <p className="text-amber text-sm">{t('bookingForm.estimatedDistance')}</p>
           <p className="text-white text-3xl font-bold">{distanceKm} KM</p>
         </div>
       )}
 
       {/* Permission Warning */}
       {permissionRequired && (
-        <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-yellow-500/10 rounded-sm p-4 border border-yellow-500/30">
           <div className="flex items-start gap-3">
             <AlertCircle className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
@@ -1381,9 +1381,9 @@ function BookingPage({ user }) {
       )}
 
       {/* Summary Card */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-          <Briefcase className="h-5 w-5 text-orange-400" />
+          <Briefcase className="h-5 w-5 text-lime" />
           {t('bookingForm.bookingSummary')}
         </h3>
         
@@ -1425,7 +1425,7 @@ function BookingPage({ user }) {
           </div>
           
           <div className="text-slate-400">{t('bookingForm.distanceLabel')}</div>
-          <div className="text-orange-400 font-bold">{distanceKm} KM</div>
+          <div className="text-lime font-bold">{distanceKm} KM</div>
           
           <div className="text-slate-400">{t('bookingForm.dateTimeLabel')}</div>
           <div className="text-white">{formData.departure_date} {t('bookingForm.at')} {formData.pickup_time}</div>
@@ -1434,7 +1434,7 @@ function BookingPage({ user }) {
 
       {/* Permission Required Warning */}
       {permissionRequired && (
-        <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30">
+        <div className="bg-yellow-500/10 rounded-sm p-4 border border-yellow-500/30">
           <div className="flex items-start gap-3">
             <AlertCircle className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
@@ -1449,9 +1449,9 @@ function BookingPage({ user }) {
 
       {/* Price Breakdown */}
       {priceEstimate && (
-        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-xl p-6 border border-orange-500/30">
+        <div className="bg-lime/10 rounded-sm p-6 border border-lime/30">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-orange-400" />
+            <Calculator className="h-5 w-5 text-lime" />
             {t('bookingForm.priceBreakdown')}
             {priceEstimate.calculation_id && (
               <span className="text-xs text-slate-500 ml-auto">ID: {priceEstimate.calculation_id}</span>
@@ -1461,7 +1461,7 @@ function BookingPage({ user }) {
           <div className="space-y-2 text-sm">
             {/* Base Charges Section */}
             <div className="bg-slate-800/50 rounded-lg p-3 mb-3">
-              <p className="text-orange-400 font-semibold mb-2 text-xs uppercase tracking-wide">{t('bookingForm.baseFlightCost')}</p>
+              <p className="text-lime font-semibold mb-2 text-xs uppercase tracking-wide">{t('bookingForm.baseFlightCost')}</p>
               <div className="space-y-1">
                 <div className="flex justify-between text-slate-300">
                   <span>{t('bookingForm.flightCost')} ({distanceKm} km):</span>
@@ -1533,7 +1533,7 @@ function BookingPage({ user }) {
 
             {/* Platform Fees & Charges */}
             <div className="bg-slate-800/50 rounded-lg p-3 mb-3">
-              <p className="text-blue-400 font-semibold mb-2 text-xs uppercase tracking-wide">{t('bookingForm.platformFees')}</p>
+              <p className="text-amber font-semibold mb-2 text-xs uppercase tracking-wide">{t('bookingForm.platformFees')}</p>
               <div className="space-y-1">
                 <div className="flex justify-between text-slate-300">
                   <span>{t('bookingForm.convenienceFee')} ({priceEstimate.convenience_fee_percent || 5}%):</span>
@@ -1619,16 +1619,16 @@ function BookingPage({ user }) {
             </div>
 
             {/* Grand Total */}
-            <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-lg p-4 border border-orange-500/40">
+            <div className="bg-lime/20 rounded-lg p-4 border border-lime/40">
               <div className="flex justify-between items-center">
                 <div>
                   <span className="text-white font-bold text-lg">{t('bookingForm.grandTotal')}</span>
                   <span className="text-slate-400 text-xs block">({t('bookingForm.inclusiveTaxes')})</span>
                 </div>
-                <span className="text-orange-400 font-bold text-2xl">₹{(priceEstimate.total || 0).toLocaleString()}</span>
+                <span className="text-lime font-bold text-2xl">₹{(priceEstimate.total || 0).toLocaleString()}</span>
               </div>
               {priceEstimate.operator_payout > 0 && (
-                <div className="mt-2 pt-2 border-t border-orange-500/30 flex justify-between text-xs text-slate-400">
+                <div className="mt-2 pt-2 border-t border-lime/30 flex justify-between text-xs text-slate-400">
                   <span>{t('bookingForm.operatorReceives')}:</span>
                   <span>₹{priceEstimate.operator_payout?.toLocaleString()}</span>
                 </div>
@@ -1719,7 +1719,7 @@ function BookingPage({ user }) {
               
               {/* Wallet Balance */}
               {walletBalance > 0 && (
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
+                <div className="p-3 bg-amber/10 rounded-lg border border-amber/30">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Checkbox
@@ -1731,7 +1731,7 @@ function BookingPage({ user }) {
                         Use Wallet Balance / वॉलेट बैलेंस उपयोग करें
                       </label>
                     </div>
-                    <span className="text-blue-400 font-bold">₹{walletBalance.toLocaleString()}</span>
+                    <span className="text-amber font-bold">₹{walletBalance.toLocaleString()}</span>
                   </div>
                 </div>
               )}
@@ -1792,7 +1792,7 @@ function BookingPage({ user }) {
       </div>
 
       {/* =============== MANDATORY LEGAL CONSENTS =============== */}
-      <div className="bg-slate-800/50 rounded-xl p-5 border border-amber-500/30 mt-6">
+      <div className="bg-slate-800/50 rounded-sm p-5 border border-amber-500/30 mt-6">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
           <Scale className="h-5 w-5 text-amber-400" />
           Mandatory Consents / अनिवार्य सहमतियाँ
@@ -1823,13 +1823,13 @@ function BookingPage({ user }) {
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
                   I confirm that I have carefully read and understood the AirYatra{' '}
-                  <a href="/legal/terms" target="_blank" rel="noopener noreferrer" className="text-orange-400 underline hover:text-orange-300" onClick={(e) => e.stopPropagation()}>
+                  <a href="/legal/terms" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
                     Terms & Conditions <ExternalLink className="h-3 w-3 inline" />
                   </a>, {' '}
-                  <a href="/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-400 underline hover:text-orange-300" onClick={(e) => e.stopPropagation()}>
+                  <a href="/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
                     Privacy Policy <ExternalLink className="h-3 w-3 inline" />
                   </a>, and {' '}
-                  <a href="/legal/cancellation" target="_blank" rel="noopener noreferrer" className="text-orange-400 underline hover:text-orange-300" onClick={(e) => e.stopPropagation()}>
+                  <a href="/legal/cancellation" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
                     Cancellation Policy <ExternalLink className="h-3 w-3 inline" />
                   </a>.
                 </p>
@@ -1889,7 +1889,7 @@ function BookingPage({ user }) {
               />
               <div className="flex-1">
                 <label htmlFor="consent-platform" className="text-white text-sm font-medium cursor-pointer">
-                  <Building2 className="h-4 w-4 inline mr-2 text-blue-400" />
+                  <Building2 className="h-4 w-4 inline mr-2 text-amber" />
                   Platform Role / प्लेटफ़ॉर्म की भूमिका
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
@@ -1995,7 +1995,7 @@ function BookingPage({ user }) {
             ? 'bg-slate-600 cursor-not-allowed' 
             : permissionRequired 
               ? 'bg-yellow-500 hover:bg-yellow-600' 
-              : 'bg-orange-500 hover:bg-orange-600'
+              : 'bg-lime text-black hover:bg-lime/90'
         }`}
       >
         {submitting ? (
@@ -2052,7 +2052,7 @@ function BookingPage({ user }) {
         <BookingStepIndicator currentStep={currentStep} steps={steps} />
 
         {/* Form Content */}
-        <div className="bg-slate-900/50 rounded-2xl p-6 md:p-8 border border-slate-800">
+        <div className="bg-slate-900/50 rounded-sm p-6 md:p-8 border border-slate-800">
           {renderCurrentStep()}
 
           {/* Navigation Buttons */}
@@ -2070,7 +2070,7 @@ function BookingPage({ user }) {
               
               <Button
                 onClick={nextStep}
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-lime text-black hover:bg-lime/90"
               >
                 {t('booking.next')}
                 <ChevronRight className="h-4 w-4 ml-2" />
@@ -2094,7 +2094,7 @@ function BookingPage({ user }) {
 
         {/* Login Prompt */}
         {!user && (
-          <div className="mt-6 p-4 bg-amber-500/10 rounded-xl border border-amber-500/30 text-center">
+          <div className="mt-6 p-4 bg-amber-500/10 rounded-sm border border-amber-500/30 text-center">
             <p className="text-amber-400">
               ⚠️ {t('booking.loginPrompt')}
             </p>
@@ -2140,7 +2140,7 @@ function BookingPage({ user }) {
           }}
           tabIndex={0}
         >
-          <div className="bg-slate-900 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6">
+          <div className="bg-slate-900 rounded-sm w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6">
             <EmergencyBookingForm
               user={user}
               onSuccess={(data) => {

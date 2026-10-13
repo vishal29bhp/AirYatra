@@ -202,17 +202,17 @@ function CustomerDashboard({ user, onLogout }) {
 
             {/* Quick Stats */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <div className="bg-slate-800/50 p-6 rounded-sm border border-slate-700">
                 <div className="text-slate-400 text-sm uppercase mb-2">Total Bookings / कुल बुकिंग</div>
                 <div className="text-3xl font-bold text-white" data-testid="total-bookings">{bookings.length}</div>
               </div>
-              <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <div className="bg-slate-800/50 p-6 rounded-sm border border-slate-700">
                 <div className="text-slate-400 text-sm uppercase mb-2">Pending / लंबित</div>
-                <div className="text-3xl font-bold text-orange-500" data-testid="pending-bookings">
+                <div className="text-3xl font-bold text-lime" data-testid="pending-bookings">
                   {bookings.filter(b => b.status === 'pending_quotes' || b.status === 'quotes_received').length}
                 </div>
               </div>
-              <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <div className="bg-slate-800/50 p-6 rounded-sm border border-slate-700">
                 <div className="text-slate-400 text-sm uppercase mb-2">Completed / पूर्ण</div>
                 <div className="text-3xl font-bold text-green-500" data-testid="completed-bookings">
                   {bookings.filter(b => b.status === 'completed').length}
@@ -222,25 +222,25 @@ function CustomerDashboard({ user, onLogout }) {
 
             {/* Quick Actions */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <Link to="/booking" className="bg-gradient-to-r from-orange-500 to-orange-600 p-6 rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all">
-                <Calendar className="h-8 w-8 text-white mb-3" />
-                <h3 className="text-xl font-bold text-white mb-1">Book a Flight / फ्लाइट बुक करें</h3>
-                <p className="text-orange-100">Charter your private jet or helicopter</p>
+              <Link to="/booking" className="bg-lime text-black p-6 rounded-sm transition-all">
+                <Calendar className="h-8 w-8 text-black mb-3" />
+                <h3 className="text-xl font-bold text-black mb-1">Book a Flight / फ्लाइट बुक करें</h3>
+                <p className="text-black/70">Charter your private jet or helicopter</p>
               </Link>
-              <button onClick={() => { setActiveTab('trips'); navigate('/customer/trips'); }} className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-700/50 transition-all text-left">
-                <MapPin className="h-8 w-8 text-blue-400 mb-3" />
+              <button onClick={() => { setActiveTab('trips'); navigate('/customer/trips'); }} className="bg-slate-800/50 p-6 rounded-sm border border-slate-700 hover:bg-slate-700/50 transition-all text-left">
+                <MapPin className="h-8 w-8 text-amber mb-3" />
                 <h3 className="text-xl font-bold text-white mb-1">View My Trips / यात्राएं देखें</h3>
                 <p className="text-slate-400">Track and manage your bookings</p>
               </button>
             </div>
 
             {/* Recent Bookings */}
-            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+            <div className="bg-slate-800/50 p-6 rounded-sm border border-slate-700">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-white">Recent Bookings / हाल की बुकिंग</h2>
                 <Button 
                   variant="outline" 
-                  className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+                  className="border-lime text-lime hover:bg-lime/10"
                   onClick={() => { setActiveTab('trips'); navigate('/customer/trips'); }}
                 >
                   View All
@@ -253,7 +253,7 @@ function CustomerDashboard({ user, onLogout }) {
                   <Plane className="h-16 w-16 mx-auto text-slate-600 mb-4" />
                   <p className="text-slate-400 mb-4">No bookings yet / अभी कोई बुकिंग नहीं</p>
                   <Link to="/booking">
-                    <Button className="bg-orange-500 hover:bg-orange-600" data-testid="create-first-booking-btn">
+                    <Button className="bg-lime text-black hover:bg-lime/90" data-testid="create-first-booking-btn">
                       Create Your First Booking
                     </Button>
                   </Link>
@@ -268,7 +268,7 @@ function CustomerDashboard({ user, onLogout }) {
                         {
                           id: 'view',
                           icon: Eye,
-                          color: 'bg-blue-500',
+                          color: 'bg-slate-700',
                           onClick: () => navigate(`/customer/inquiry/${booking.id}`)
                         },
                         ...(booking.status !== 'cancelled' && booking.status !== 'completed' ? [{
@@ -290,7 +290,7 @@ function CustomerDashboard({ user, onLogout }) {
                           <span className={`px-3 py-1 rounded-full text-xs ${
                             booking.status === 'completed' ? 'bg-green-500/20 text-green-400' :
                             booking.status === 'cancelled' ? 'bg-red-500/20 text-red-400' :
-                            'bg-orange-500/20 text-orange-400'
+                            'bg-lime/20 text-lime'
                           }`} data-testid={`booking-status-${booking.id}`}>
                             {booking.status.replace(/_/g, ' ')}
                           </span>
@@ -321,14 +321,14 @@ function CustomerDashboard({ user, onLogout }) {
               onClick={sidebar.toggleMobile} 
               isOpen={sidebar.isMobileOpen}
             />
-            <Plane className="h-8 w-8 text-orange-500" />
+            <Plane className="h-8 w-8 text-lime" />
             <span className="text-xl lg:text-2xl font-bold text-white">AirYatra</span>
           </div>
           <div className="flex items-center space-x-2 lg:space-x-4">
             <GlobalSearch user={user} />
             <NotificationBell user={user} />
             <span className="text-slate-300 hidden sm:inline text-sm lg:text-base" data-testid="user-name">{user.full_name}</span>
-            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-orange-400" data-testid="logout-btn">
+            <Button variant="ghost" onClick={onLogout} className="text-white hover:text-lime" data-testid="logout-btn">
               <LogOut className="h-5 w-5" />
             </Button>
           </div>
@@ -370,7 +370,7 @@ function CustomerDashboard({ user, onLogout }) {
                       title={sidebar.effectiveCollapsed ? item.label : undefined}
                       className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
                         activeTab === item.id
-                          ? 'bg-orange-500 text-white'
+                          ? 'bg-lime text-black'
                           : item.highlight
                             ? 'text-yellow-400 hover:bg-yellow-500/20'
                             : 'text-slate-400 hover:bg-slate-800 hover:text-white'

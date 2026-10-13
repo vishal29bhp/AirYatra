@@ -150,7 +150,7 @@ function PaymentPage({ user }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <Loader2 className="h-8 w-8 text-orange-400 animate-spin" />
+        <Loader2 className="h-8 w-8 text-lime animate-spin" />
       </div>
     );
   }
@@ -195,16 +195,16 @@ function PaymentPage({ user }) {
         </div>
 
         {/* Booking Summary */}
-        <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 mb-6">
+        <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Plane className="h-5 w-5 text-orange-400" />
+            <Plane className="h-5 w-5 text-lime" />
             Booking Summary / बुकिंग सारांश
           </h3>
           
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-slate-400">Inquiry Number</span>
-              <span className="text-orange-400 font-mono">{inquiry.inquiry_number || inquiry.id?.slice(0, 8)}</span>
+              <span className="text-lime font-mono">{inquiry.inquiry_number || inquiry.id?.slice(0, 8)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-400">Aircraft</span>
@@ -230,7 +230,7 @@ function PaymentPage({ user }) {
         </div>
 
         {/* Payment Amount */}
-        <div className="bg-gradient-to-br from-orange-500/20 to-amber-500/10 rounded-2xl p-6 border border-orange-500/30 mb-6" data-testid="payment-amount-card">
+        <div className="bg-lime/20 rounded-sm p-6 border border-lime/30 mb-6" data-testid="payment-amount-card">
           <div className="text-center">
             <p className="text-slate-400 text-sm">{isBalance ? 'Remaining Balance Payment / शेष राशि भुगतान' : `Amount to Pay Now (${advancePercent}% Advance)`}</p>
             {voucherDiscount > 0 ? (
@@ -248,7 +248,7 @@ function PaymentPage({ user }) {
             )}
             
             {advancePercent < 100 && remainingAmount > 0 && (
-              <div className="mt-4 pt-4 border-t border-orange-500/30">
+              <div className="mt-4 pt-4 border-t border-lime/30">
                 <p className="text-slate-400 text-sm">
                   Remaining amount ₹{remainingAmount?.toLocaleString()} to be paid before flight
                 </p>
@@ -262,13 +262,13 @@ function PaymentPage({ user }) {
 
         {/* Loyalty Voucher */}
         {!isBalance && (
-        <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 mb-6" data-testid="voucher-section">
+        <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6" data-testid="voucher-section">
           <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-            <Ticket className="h-5 w-5 text-orange-400" />
+            <Ticket className="h-5 w-5 text-lime" />
             Apply Loyalty Voucher / वाउचर लगाएं
           </h3>
           {appliedVoucher ? (
-            <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-3" data-testid="applied-voucher">
+            <div className="flex items-center justify-between bg-green-500/10 border border-green-500/30 rounded-sm px-4 py-3" data-testid="applied-voucher">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{appliedVoucher.reward_icon}</span>
                 <div>
@@ -293,7 +293,7 @@ function PaymentPage({ user }) {
                 <Button
                   onClick={() => applyVoucher(voucherCode)}
                   disabled={applying || !voucherCode.trim()}
-                  className="bg-orange-500 hover:bg-orange-600"
+                  className="bg-lime text-black hover:bg-lime/90"
                   data-testid="apply-voucher-btn"
                 >
                   {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
@@ -307,7 +307,7 @@ function PaymentPage({ user }) {
                       <button
                         key={v.id}
                         onClick={() => applyVoucher(v.code)}
-                        className="px-3 py-1.5 rounded-full border border-orange-500/40 text-orange-400 text-xs hover:bg-orange-500/10 flex items-center gap-1"
+                        className="px-3 py-1.5 rounded-full border border-lime/40 text-lime text-xs hover:bg-lime/10 flex items-center gap-1"
                         data-testid={`voucher-chip-${v.code}`}
                       >
                         {v.reward_icon} ₹{v.value.toLocaleString()} off
@@ -322,7 +322,7 @@ function PaymentPage({ user }) {
         )}
 
         {/* Payment Methods */}
-        <div className="bg-slate-900/50 rounded-2xl p-6 border border-slate-800 mb-6">
+        <div className="bg-slate-900/50 rounded-sm p-6 border border-slate-800 mb-6">
           <h3 className="text-lg font-semibold text-white mb-4">
             Select Payment Method / भुगतान विधि चुनें
           </h3>
@@ -335,21 +335,21 @@ function PaymentPage({ user }) {
                 <button
                   key={method.id}
                   onClick={() => setSelectedMethod(method.id)}
-                  className={`w-full p-4 rounded-xl border flex items-center justify-between transition-all ${
+                  className={`w-full p-4 rounded-sm border flex items-center justify-between transition-all ${
                     selectedMethod === method.id
-                      ? 'bg-orange-500/20 border-orange-500/50'
+                      ? 'bg-lime/20 border-lime/50'
                       : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
-                    <Icon className={`h-6 w-6 ${selectedMethod === method.id ? 'text-orange-400' : 'text-slate-400'}`} />
+                    <Icon className={`h-6 w-6 ${selectedMethod === method.id ? 'text-lime' : 'text-slate-400'}`} />
                     <div className="text-left">
                       <p className="text-white font-medium">{method.name}</p>
                       <p className="text-sm text-slate-400">{method.description}</p>
                     </div>
                   </div>
                   {selectedMethod === method.id && (
-                    <Check className="h-5 w-5 text-orange-400" />
+                    <Check className="h-5 w-5 text-lime" />
                   )}
                 </button>
               );

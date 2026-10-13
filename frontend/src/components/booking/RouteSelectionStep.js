@@ -15,7 +15,7 @@ const RouteSelectionStep = ({
   return (
     <div className="space-y-6">
       {/* Pickup Location */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
           <MapPin className="h-5 w-5 text-green-400" />
           Pickup Location / पिकअप स्थान
@@ -32,7 +32,7 @@ const RouteSelectionStep = ({
         {formData.pickup_landing_point && (
           <div className="mt-4 p-4 bg-slate-900/50 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              {formData.pickup_landing_point.type === 'airport' && <Building2 className="h-4 w-4 text-blue-400" />}
+              {formData.pickup_landing_point.type === 'airport' && <Building2 className="h-4 w-4 text-amber" />}
               {formData.pickup_landing_point.type?.includes('helipad') && <Building2 className="h-4 w-4 text-purple-400" />}
               {formData.pickup_landing_point.type === 'village_land' && <TreePine className="h-4 w-4 text-green-400" />}
               <span className="text-white font-medium">{formData.pickup_landing_point.name}</span>
@@ -49,7 +49,7 @@ const RouteSelectionStep = ({
                 </span>
               )}
               {formData.pickup_landing_point.permission_required && (
-                <span className="text-xs px-2 py-1 bg-orange-500/20 text-orange-400 rounded flex items-center gap-1">
+                <span className="text-xs px-2 py-1 bg-lime/20 text-lime rounded flex items-center gap-1">
                   <AlertCircle className="h-3 w-3" /> Permission Required
                 </span>
               )}
@@ -59,7 +59,7 @@ const RouteSelectionStep = ({
       </div>
 
       {/* Drop Location */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <Label className="text-white text-lg mb-4 flex items-center gap-2">
           <MapPin className="h-5 w-5 text-red-400" />
           Drop Location / ड्रॉप स्थान
@@ -76,7 +76,7 @@ const RouteSelectionStep = ({
         {formData.drop_landing_point && (
           <div className="mt-4 p-4 bg-slate-900/50 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              {formData.drop_landing_point.type === 'airport' && <Building2 className="h-4 w-4 text-blue-400" />}
+              {formData.drop_landing_point.type === 'airport' && <Building2 className="h-4 w-4 text-amber" />}
               {formData.drop_landing_point.type?.includes('helipad') && <Building2 className="h-4 w-4 text-purple-400" />}
               {formData.drop_landing_point.type === 'village_land' && <TreePine className="h-4 w-4 text-green-400" />}
               <span className="text-white font-medium">{formData.drop_landing_point.name}</span>
@@ -93,7 +93,7 @@ const RouteSelectionStep = ({
                 </span>
               )}
               {formData.drop_landing_point.permission_required && (
-                <span className="text-xs px-2 py-1 bg-orange-500/20 text-orange-400 rounded flex items-center gap-1">
+                <span className="text-xs px-2 py-1 bg-lime/20 text-lime rounded flex items-center gap-1">
                   <AlertCircle className="h-3 w-3" /> Permission Required
                 </span>
               )}
@@ -104,7 +104,7 @@ const RouteSelectionStep = ({
 
       {/* Distance & Landing Rent Info */}
       {distanceKm > 0 && (
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <h3 className="text-white font-semibold mb-4">Route Summary / मार्ग सारांश</h3>
           
           <div className="grid grid-cols-2 gap-4">
@@ -125,18 +125,18 @@ const RouteSelectionStep = ({
 
       {/* Permission Warning */}
       {permissionRequired && (
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
+        <div className="bg-lime/10 border border-lime/30 rounded-sm p-6">
           <div className="flex items-start gap-3">
-            <AlertCircle className="h-6 w-6 text-orange-400 flex-shrink-0" />
+            <AlertCircle className="h-6 w-6 text-lime flex-shrink-0" />
             <div>
-              <h4 className="text-orange-400 font-semibold">Permission Required / अनुमति आवश्यक</h4>
-              <p className="text-orange-200/70 text-sm mt-1">
+              <h4 className="text-lime font-semibold">Permission Required / अनुमति आवश्यक</h4>
+              <p className="text-slate-300 text-sm mt-1">
                 Village/Private land landing requires additional permissions. You will need to submit documents after booking confirmation.
               </p>
-              <p className="text-orange-200/70 text-sm mt-1">
+              <p className="text-slate-300 text-sm mt-1">
                 गाँव/निजी भूमि पर उतरने के लिए अतिरिक्त अनुमति की आवश्यकता है। बुकिंग पुष्टि के बाद आपको दस्तावेज़ जमा करने होंगे।
               </p>
-              <ul className="text-orange-200/70 text-sm mt-2 list-disc list-inside">
+              <ul className="text-slate-300 text-sm mt-2 list-disc list-inside">
                 <li>Collector NOC / कलेक्टर एनओसी</li>
                 <li>Fire Department Acknowledgment / अग्निशमन विभाग की पावती</li>
                 <li>Police Station NOC / पुलिस स्टेशन एनओसी</li>
@@ -149,7 +149,7 @@ const RouteSelectionStep = ({
 
       {/* Date & Time Selection */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <Label className="text-white mb-4 flex items-center gap-2">
             <Calendar className="h-5 w-5 text-purple-400" />
             Preferred Date / पसंदीदा तिथि
@@ -163,7 +163,7 @@ const RouteSelectionStep = ({
           />
         </div>
 
-        <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
           <Label className="text-white mb-4 flex items-center gap-2">
             <Clock className="h-5 w-5 text-cyan-400" />
             Preferred Time / पसंदीदा समय

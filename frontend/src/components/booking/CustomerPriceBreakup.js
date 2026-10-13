@@ -55,11 +55,11 @@ export const CustomerPriceBreakup = ({
     <Card className="bg-slate-900 border-slate-700">
       <CardHeader className="pb-2">
         <CardTitle className="text-white flex items-center gap-2">
-          <Receipt className="h-5 w-5 text-orange-400" />
+          <Receipt className="h-5 w-5 text-lime" />
           Price Breakup / मूल्य विवरण
         </CardTitle>
         <CardDescription className="flex items-center gap-2">
-          <Badge variant="outline" className="text-orange-400 border-orange-400">
+          <Badge variant="outline" className="text-lime border-lime">
             {bookingTypeLabels[bookingType] || bookingType}
           </Badge>
           {route && (
@@ -73,7 +73,7 @@ export const CustomerPriceBreakup = ({
       
       <CardContent className="space-y-4">
         {/* Summary Card */}
-        <div className="bg-gradient-to-r from-orange-500/20 to-orange-600/10 rounded-lg p-4 border border-orange-500/30">
+        <div className="bg-lime/20 rounded-lg p-4 border border-lime/30">
           <div className="flex justify-between items-center">
             <div>
               <p className="text-slate-400 text-sm">Total Amount / कुल राशि</p>
@@ -105,7 +105,7 @@ export const CustomerPriceBreakup = ({
             className="w-full flex items-center justify-between p-3 bg-slate-800 hover:bg-slate-750 transition-colors"
           >
             <span className="text-white font-medium flex items-center gap-2">
-              <Info className="h-4 w-4 text-orange-400" />
+              <Info className="h-4 w-4 text-lime" />
               View Detailed Breakup / विस्तृत विवरण देखें
             </span>
             {isExpanded ? (
@@ -220,28 +220,28 @@ export const CustomerPriceBreakup = ({
               </div>
               
               {/* Grand Total */}
-              <div className="border-t-2 border-orange-500/50 pt-3 flex justify-between items-center">
+              <div className="border-t-2 border-lime/50 pt-3 flex justify-between items-center">
                 <span className="text-white font-semibold text-lg">Grand Total / कुल राशि</span>
-                <span className="text-orange-400 font-bold text-xl">₹{grandTotal.toLocaleString('en-IN')}</span>
+                <span className="text-lime font-bold text-xl">₹{grandTotal.toLocaleString('en-IN')}</span>
               </div>
             </div>
           )}
         </div>
         
         {/* Price Lock Timer */}
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 flex items-center gap-3">
-          <div className="h-10 w-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <Lock className="h-5 w-5 text-blue-400" />
+        <div className="bg-amber/10 border border-amber/30 rounded-lg p-3 flex items-center gap-3">
+          <div className="h-10 w-10 bg-amber/20 rounded-full flex items-center justify-center">
+            <Lock className="h-5 w-5 text-amber" />
           </div>
           <div className="flex-1">
-            <p className="text-blue-400 font-medium text-sm">Price Lock / मूल्य लॉक</p>
+            <p className="text-amber font-medium text-sm">Price Lock / मूल्य लॉक</p>
             <p className="text-slate-400 text-xs">
               Price locked for {priceLockMinutes} minutes. Complete payment to confirm.
             </p>
           </div>
           <div className="text-right">
-            <div className="bg-blue-500/20 rounded-lg px-3 py-1">
-              <span className="text-blue-400 font-mono font-bold">{priceLockMinutes}:00</span>
+            <div className="bg-amber/20 rounded-lg px-3 py-1">
+              <span className="text-amber font-mono font-bold">{priceLockMinutes}:00</span>
             </div>
           </div>
         </div>
@@ -298,8 +298,8 @@ export const BookingTypeSelector = ({ selected, onSelect }) => {
             onClick={() => onSelect(type.key)}
             className={`p-3 rounded-lg border text-center transition-all ${
               selected === type.key
-                ? 'bg-orange-500/20 border-orange-500 text-orange-400'
-                : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-orange-500/50'
+                ? 'bg-lime/20 border-lime text-lime'
+                : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-lime/50'
             }`}
           >
             <span className="text-2xl block mb-1">{type.icon}</span>

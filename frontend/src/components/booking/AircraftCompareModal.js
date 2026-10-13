@@ -161,12 +161,12 @@ const AircraftCompareModal = ({
         }
       }}
     >
-      <div className="bg-slate-900 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-slate-900 rounded-sm w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-700">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-orange-500/20 rounded-lg">
-              <Scale className="h-5 w-5 text-orange-400" />
+            <div className="p-2 bg-lime/20 rounded-lg">
+              <Scale className="h-5 w-5 text-lime" />
             </div>
             <div>
               <h2 className="text-white font-semibold text-lg">
@@ -190,9 +190,9 @@ const AircraftCompareModal = ({
           {!comparing ? (
             /* Selection View */
             <div className="space-y-4">
-              <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 flex items-center gap-2">
-                <Info className="h-4 w-4 text-blue-400" />
-                <span className="text-blue-300 text-sm">
+              <div className="bg-amber/10 border border-amber/30 rounded-lg p-3 flex items-center gap-2">
+                <Info className="h-4 w-4 text-amber" />
+                <span className="text-slate-300 text-sm">
                   2-3 aircraft select karein compare karne ke liye
                 </span>
               </div>
@@ -203,7 +203,7 @@ const AircraftCompareModal = ({
                     key={aircraft.id}
                     className={`bg-slate-800/50 border cursor-pointer transition-all ${
                       selectedForCompare.includes(aircraft.id)
-                        ? 'border-orange-500 bg-orange-500/10'
+                        ? 'border-lime bg-lime/10'
                         : 'border-slate-700 hover:border-slate-600'
                     }`}
                     onClick={() => toggleAircraftSelection(aircraft.id)}
@@ -220,7 +220,7 @@ const AircraftCompareModal = ({
                         </div>
                         <Checkbox 
                           checked={selectedForCompare.includes(aircraft.id)}
-                          className="data-[state=checked]:bg-orange-500"
+                          className="data-[state=checked]:bg-lime"
                         />
                       </div>
                       
@@ -294,7 +294,7 @@ const AircraftCompareModal = ({
                       {/* Score Breakdown */}
                       <div className="space-y-2">
                         <ScoreBar score={aircraft.scores.safety} label="Safety / सुरक्षा" color="text-green-400" />
-                        <ScoreBar score={aircraft.scores.amenity} label="Comfort / आराम" color="text-blue-400" />
+                        <ScoreBar score={aircraft.scores.amenity} label="Comfort / आराम" color="text-amber" />
                         <ScoreBar score={aircraft.scores.value} label="Value / मूल्य" color="text-purple-400" />
                       </div>
                       
@@ -340,7 +340,7 @@ const AircraftCompareModal = ({
                             <Badge variant="outline" className="text-xs border-green-500/50 text-green-400">Autopilot</Badge>
                           )}
                           {aircraft.amenities?.wifi_type && aircraft.amenities?.wifi_type !== 'none' && (
-                            <Badge variant="outline" className="text-xs border-blue-500/50 text-blue-400">
+                            <Badge variant="outline" className="text-xs border-amber/50 text-amber">
                               <Wifi className="h-3 w-3 mr-1" />
                               WiFi
                             </Badge>
@@ -352,8 +352,8 @@ const AircraftCompareModal = ({
                       </div>
                       
                       {/* Price */}
-                      <div className="bg-orange-500/10 rounded-lg p-3 border border-orange-500/30">
-                        <p className="text-orange-400 text-xs mb-1">Estimated Price</p>
+                      <div className="bg-lime/10 rounded-lg p-3 border border-lime/30">
+                        <p className="text-lime text-xs mb-1">Estimated Price</p>
                         <p className="text-white text-2xl font-bold">
                           ₹{aircraft.estimatedPrice.toLocaleString('en-IN')}
                         </p>
@@ -367,7 +367,7 @@ const AircraftCompareModal = ({
                         className={`w-full ${
                           selectedAircraftId === aircraft.id 
                             ? 'bg-green-600 hover:bg-green-700' 
-                            : 'bg-orange-500 hover:bg-orange-600'
+                            : 'bg-lime text-black hover:bg-lime/90'
                         }`}
                         onClick={() => {
                           onSelectAircraft(aircraft);
@@ -392,7 +392,7 @@ const AircraftCompareModal = ({
               {/* Comparison Notes */}
               <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                 <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 text-blue-400" />
+                  <AlertCircle className="h-4 w-4 text-amber" />
                   Comparison Notes / तुलना नोट्स
                 </h4>
                 <ul className="text-slate-400 text-sm space-y-1 list-disc list-inside">
@@ -426,7 +426,7 @@ const AircraftCompareModal = ({
             <Button 
               onClick={startComparison}
               disabled={selectedForCompare.length < 2}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               <Scale className="h-4 w-4 mr-2" />
               Compare ({selectedForCompare.length})

@@ -125,9 +125,9 @@ function MyTrips({ user }) {
       pending: 'bg-yellow-500/20 text-yellow-400',
       pending_acceptance: 'bg-yellow-500/20 text-yellow-400',
       pending_quotes: 'bg-yellow-500/20 text-yellow-400',
-      quote_received: 'bg-orange-500/20 text-orange-400',
-      quotes_received: 'bg-orange-500/20 text-orange-400',
-      quote_accepted: 'bg-blue-500/20 text-blue-400',
+      quote_received: 'bg-lime/20 text-lime',
+      quotes_received: 'bg-lime/20 text-lime',
+      quote_accepted: 'bg-amber/20 text-amber',
       passenger_details_filled: 'bg-purple-500/20 text-purple-400',
       confirmed: 'bg-green-500/20 text-green-400',
       completed: 'bg-green-500/20 text-green-400',
@@ -169,14 +169,14 @@ function MyTrips({ user }) {
 
       {/* Pending Quotes Alert */}
       {pendingQuotes.length > 0 && (
-        <div className="mb-6 p-4 rounded-xl bg-orange-500/10 border border-orange-500/30">
+        <div className="mb-6 p-4 rounded-sm bg-lime/10 border border-lime/30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-orange-500/20">
-                <Bell className="h-5 w-5 text-orange-400 animate-pulse" />
+              <div className="p-2 rounded-full bg-lime/20">
+                <Bell className="h-5 w-5 text-lime animate-pulse" />
               </div>
               <div>
-                <h3 className="text-orange-400 font-semibold">
+                <h3 className="text-lime font-semibold">
                   {pendingQuotes.length} New Quote{pendingQuotes.length > 1 ? 's' : ''} Received! / नया कोट मिला!
                 </h3>
                 <p className="text-slate-400 text-sm">
@@ -186,7 +186,7 @@ function MyTrips({ user }) {
             </div>
             <Button
               onClick={() => setActiveTab('upcoming')}
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-lime text-black hover:bg-lime/90"
             >
               View Quotes
             </Button>
@@ -201,7 +201,7 @@ function MyTrips({ user }) {
           <p className="text-sm text-slate-400">Total Trips</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
-          <p className="text-2xl font-bold text-blue-400">{statistics.upcoming_count || 0}</p>
+          <p className="text-2xl font-bold text-amber">{statistics.upcoming_count || 0}</p>
           <p className="text-sm text-slate-400">Upcoming</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
@@ -209,7 +209,7 @@ function MyTrips({ user }) {
           <p className="text-sm text-slate-400">Completed</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
-          <p className="text-2xl font-bold text-orange-400">₹{(statistics.total_spent || 0).toLocaleString()}</p>
+          <p className="text-2xl font-bold text-lime">₹{(statistics.total_spent || 0).toLocaleString()}</p>
           <p className="text-sm text-slate-400">Total Spent</p>
         </div>
       </div>
@@ -227,11 +227,11 @@ function MyTrips({ user }) {
             key={tab.id}
             variant={activeTab === tab.id ? 'default' : 'outline'}
             onClick={() => setActiveTab(tab.id)}
-            className={activeTab === tab.id ? 'bg-orange-500 hover:bg-orange-600' : 'border-slate-600 text-slate-300'}
+            className={activeTab === tab.id ? 'bg-lime text-black hover:bg-lime/90' : 'border-slate-600 text-slate-300'}
           >
             {tab.label}
             {tab.id === 'pending' && statistics.pending_count > 0 && (
-              <span className="ml-2 px-2 py-0.5 bg-orange-600 rounded-full text-xs">
+              <span className="ml-2 px-2 py-0.5 bg-lime text-black rounded-full text-xs">
                 {statistics.pending_count}
               </span>
             )}
@@ -250,13 +250,13 @@ function MyTrips({ user }) {
       ) : (
         <div className="space-y-4">
           {filteredTrips.map((trip) => (
-            <div key={trip.id} className="glass p-6 rounded-xl">
+            <div key={trip.id} className="glass p-6 rounded-sm">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="text-white font-semibold text-lg">
                     {trip.inquiry_number || trip.booking_number || `#${trip.id?.slice(0, 8)}`}
                     {trip.source === 'inquiry' && (
-                      <span className="ml-2 text-xs px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded">Inquiry</span>
+                      <span className="ml-2 text-xs px-2 py-0.5 bg-amber/20 text-amber rounded">Inquiry</span>
                     )}
                   </p>
                   <div className="flex items-center gap-2 mt-2 text-slate-300">
@@ -293,17 +293,17 @@ function MyTrips({ user }) {
                   <span>✈️ {trip.aircraft_type === 'helicopter' ? 'Helicopter' : 'Plane'}</span>
                   <span>👥 {trip.total_passengers} Passengers</span>
                   {trip.quote_count > 0 && (
-                    <span className="text-orange-400">📋 {trip.quote_count} Quote(s) Received</span>
+                    <span className="text-lime">📋 {trip.quote_count} Quote(s) Received</span>
                   )}
                 </div>
               )}
 
               {/* Latest Quote Alert */}
               {trip.latest_quote && trip.status !== 'quote_accepted' && (
-                <div className="mb-4 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30">
+                <div className="mb-4 p-3 rounded-lg bg-amber/10 border border-amber/30">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-blue-400 font-medium flex items-center gap-2">
+                      <p className="text-amber font-medium flex items-center gap-2">
                         <Bell className="h-4 w-4" />
                         New Quote from {trip.latest_quote.operator_name}
                       </p>
@@ -313,7 +313,7 @@ function MyTrips({ user }) {
                     </div>
                     <Button
                       size="sm"
-                      className="bg-blue-500 hover:bg-blue-600"
+                      className="bg-slate-700 hover:bg-slate-600"
                       onClick={() => handleViewQuotes(trip)}
                     >
                       View Quotes
@@ -328,7 +328,7 @@ function MyTrips({ user }) {
                 {trip.source === 'inquiry' && (
                   <Button
                     size="sm"
-                    className="bg-blue-500 hover:bg-blue-600"
+                    className="bg-slate-700 hover:bg-slate-600"
                     onClick={() => window.location.href = `/customer/inquiry/${trip.id}`}
                   >
                     <FileText className="h-4 w-4 mr-1" /> View Status / स्थिति देखें
@@ -338,7 +338,7 @@ function MyTrips({ user }) {
                 {['pending', 'pending_quotes', 'quote_sent', 'quotes_received', 'quote_received'].includes(trip.status) && trip.source !== 'inquiry' && (
                   <Button
                     size="sm"
-                    className="bg-orange-500/20 text-orange-400 hover:bg-orange-500/30"
+                    className="bg-lime/20 text-lime hover:bg-lime/30"
                     onClick={() => handleViewQuotes(trip)}
                   >
                     <Bell className="h-4 w-4 mr-1" /> View Quotes
@@ -470,7 +470,7 @@ function MyTrips({ user }) {
             <Button variant="outline" onClick={() => setShowReviewDialog(false)} className="border-slate-600 text-slate-300">
               Cancel
             </Button>
-            <Button onClick={handleSubmitReview} disabled={processing} className="bg-orange-500 hover:bg-orange-600">
+            <Button onClick={handleSubmitReview} disabled={processing} className="bg-lime text-black hover:bg-lime/90">
               {processing ? 'Submitting...' : 'Submit Review'}
             </Button>
           </DialogFooter>
@@ -482,7 +482,7 @@ function MyTrips({ user }) {
         <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Bell className="h-5 w-5 text-orange-400" />
+              <Bell className="h-5 w-5 text-lime" />
               Received Quotes / प्राप्त कोट्स
             </DialogTitle>
           </DialogHeader>
@@ -499,7 +499,7 @@ function MyTrips({ user }) {
               tripQuotes.map((quote) => (
                 <div
                   key={quote.id}
-                  className={`p-4 rounded-xl border ${
+                  className={`p-4 rounded-sm border ${
                     quote.status === 'accepted'
                       ? 'bg-green-500/10 border-green-500/30'
                       : quote.status === 'rejected_by_customer'
@@ -522,7 +522,7 @@ function MyTrips({ user }) {
                     <span className={`px-2 py-1 rounded text-xs ${
                       quote.status === 'accepted' ? 'bg-green-500/20 text-green-400' :
                       quote.status === 'rejected_by_customer' ? 'bg-red-500/20 text-red-400' :
-                      'bg-blue-500/20 text-blue-400'
+                      'bg-amber/20 text-amber'
                     }`}>
                       {quote.status === 'accepted' ? '✓ Accepted' :
                        quote.status === 'rejected_by_customer' ? '✗ Rejected' :
@@ -532,7 +532,7 @@ function MyTrips({ user }) {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-orange-400 text-2xl font-bold">
+                      <p className="text-lime text-2xl font-bold">
                         ₹{quote.amount?.toLocaleString()}
                       </p>
                       {quote.revision_count > 1 && (

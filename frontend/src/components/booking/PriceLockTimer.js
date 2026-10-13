@@ -104,7 +104,7 @@ export const PriceLockTimer = ({
   const getTimerColor = () => {
     if (isExpired || timeRemaining <= 0) return 'text-red-500';
     if (timeRemaining <= 60) return 'text-red-400 animate-pulse';
-    if (timeRemaining <= 120) return 'text-orange-400';
+    if (timeRemaining <= 120) return 'text-lime';
     return 'text-green-400';
   };
   
@@ -112,24 +112,24 @@ export const PriceLockTimer = ({
   const getBackgroundClass = () => {
     if (isExpired) return 'bg-red-500/10 border-red-500/50';
     if (timeRemaining <= 60) return 'bg-red-500/10 border-red-500/30 animate-pulse';
-    if (timeRemaining <= 120) return 'bg-orange-500/10 border-orange-500/30';
-    return 'bg-blue-500/10 border-blue-500/30';
+    if (timeRemaining <= 120) return 'bg-lime/10 border-lime/30';
+    return 'bg-amber/10 border-amber/30';
   };
 
   if (!expiresAt) return null;
 
   return (
-    <div className={`rounded-xl border p-4 ${getBackgroundClass()} ${className}`}>
+    <div className={`rounded-sm border p-4 ${getBackgroundClass()} ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
-            isExpired ? 'bg-red-500/20' : 'bg-blue-500/20'
+            isExpired ? 'bg-red-500/20' : 'bg-amber/20'
           }`}>
             {isExpired ? (
               <AlertTriangle className="h-5 w-5 text-red-400" />
             ) : (
-              <Lock className="h-5 w-5 text-blue-400" />
+              <Lock className="h-5 w-5 text-amber" />
             )}
           </div>
           <div>
@@ -161,7 +161,7 @@ export const PriceLockTimer = ({
           <div 
             className={`h-full rounded-full transition-all duration-1000 ${
               timeRemaining <= 60 ? 'bg-red-500' :
-              timeRemaining <= 120 ? 'bg-orange-500' : 'bg-blue-500'
+              timeRemaining <= 120 ? 'bg-lime text-black' : 'bg-slate-700'
             }`}
             style={{ 
               width: `${Math.min(100, (timeRemaining / 900) * 100)}%` // 900 = 15 minutes
@@ -182,13 +182,13 @@ export const PriceLockTimer = ({
       
       {/* Warning Message */}
       {showWarning && !isExpired && (
-        <div className="bg-orange-500/20 border border-orange-500/30 rounded-lg p-3 mt-3 flex items-start gap-2">
-          <AlertTriangle className="h-5 w-5 text-orange-400 flex-shrink-0 mt-0.5" />
+        <div className="bg-lime/20 border border-lime/30 rounded-lg p-3 mt-3 flex items-start gap-2">
+          <AlertTriangle className="h-5 w-5 text-lime flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-orange-300 text-sm font-medium">
+            <p className="text-slate-300 text-sm font-medium">
               Complete payment soon!
             </p>
-            <p className="text-orange-400/70 text-xs">
+            <p className="text-lime/70 text-xs">
               जल्द ही भुगतान पूरा करें! Price may change after expiry.
             </p>
           </div>
@@ -214,7 +214,7 @@ export const PriceLockTimer = ({
           onClick={handleExtend}
           disabled={isExtending}
           variant="outline"
-          className="w-full mt-3 border-orange-500/50 text-orange-400 hover:bg-orange-500/10"
+          className="w-full mt-3 border-lime/50 text-lime hover:bg-lime/10"
         >
           {isExtending ? (
             <><RefreshCw className="h-4 w-4 mr-2 animate-spin" /> Extending...</>
@@ -266,8 +266,8 @@ export const PriceLockBadge = ({ expiresAt, onClick }) => {
         timeRemaining <= 60 
           ? 'bg-red-500/20 text-red-400 animate-pulse' 
           : timeRemaining <= 120 
-            ? 'bg-orange-500/20 text-orange-400'
-            : 'bg-blue-500/20 text-blue-400'
+            ? 'bg-lime/20 text-lime'
+            : 'bg-amber/20 text-amber'
       }`}
     >
       <Lock className="h-3.5 w-3.5" />

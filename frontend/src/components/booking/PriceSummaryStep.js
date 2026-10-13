@@ -20,7 +20,7 @@ const PriceSummaryStep = ({
   return (
     <div className="space-y-6">
       {/* Price Breakdown Card */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
           <Calculator className="h-5 w-5 text-green-400" />
           Price Estimate / मूल्य अनुमान
@@ -73,13 +73,13 @@ const PriceSummaryStep = ({
       </div>
 
       {/* Booking Summary Card */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <h3 className="text-white font-semibold text-lg mb-4">Booking Summary / बुकिंग सारांश</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Aircraft */}
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
-            <Plane className="h-5 w-5 text-orange-400" />
+            <Plane className="h-5 w-5 text-lime" />
             <div>
               <p className="text-slate-400 text-xs">Aircraft</p>
               <p className="text-white">{formData.aircraft_type === 'helicopter' ? 'Helicopter' : 'Chartered Plane'}</p>
@@ -88,7 +88,7 @@ const PriceSummaryStep = ({
 
           {/* Passengers */}
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
-            <Users className="h-5 w-5 text-blue-400" />
+            <Users className="h-5 w-5 text-amber" />
             <div>
               <p className="text-slate-400 text-xs">Passengers</p>
               <p className="text-white">
@@ -142,12 +142,12 @@ const PriceSummaryStep = ({
 
       {/* Permission Required Warning */}
       {permissionRequired && (
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
+        <div className="bg-lime/10 border border-lime/30 rounded-sm p-6">
           <div className="flex items-start gap-3">
-            <AlertCircle className="h-6 w-6 text-orange-400 flex-shrink-0" />
+            <AlertCircle className="h-6 w-6 text-lime flex-shrink-0" />
             <div>
-              <h4 className="text-orange-400 font-semibold">Documents Required / दस्तावेज़ आवश्यक</h4>
-              <p className="text-orange-200/70 text-sm mt-1">
+              <h4 className="text-lime font-semibold">Documents Required / दस्तावेज़ आवश्यक</h4>
+              <p className="text-slate-300 text-sm mt-1">
                 After booking confirmation, you will need to upload permission documents for village/private landing.
               </p>
             </div>
@@ -156,7 +156,7 @@ const PriceSummaryStep = ({
       )}
 
       {/* Terms Checkbox */}
-      <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+      <div className="bg-slate-800/50 rounded-sm p-6 border border-slate-700">
         <div className="flex items-start gap-3">
           <Shield className="h-5 w-5 text-green-400 flex-shrink-0 mt-1" />
           <div>

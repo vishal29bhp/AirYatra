@@ -103,7 +103,7 @@ function PinCodeInput({
             className="pl-10 pr-10 bg-slate-900 border-slate-700 text-white"
           />
           <div className="absolute right-3 top-3">
-            {loading && <Loader2 className="h-5 w-5 text-orange-400 animate-spin" />}
+            {loading && <Loader2 className="h-5 w-5 text-lime animate-spin" />}
             {!loading && locationData && <Check className="h-5 w-5 text-green-400" />}
             {!loading && error && <X className="h-5 w-5 text-red-400" />}
           </div>
