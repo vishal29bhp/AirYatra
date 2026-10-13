@@ -1,4 +1,21 @@
 /** @type {import('tailwindcss').Config} */
+// AirYatra theme (Vaayu Prive look, master prompt C.4); contrast ratios in docs/design/THEME.md.
+// The app uses slate-* for every surface, border and secondary text, so remapping slate onto the
+// aubergine scale themes all screens through tokens instead of per-component edits.
+const aubergine = {
+  50: '#F8F6FA',
+  100: '#F2EEF6',
+  200: '#E2DCE9',
+  300: '#D0C9DA',
+  400: '#A69DB3',
+  500: '#8B819C',
+  600: '#5A5068',
+  700: '#3A3046',
+  800: '#221A2D',
+  900: '#17111F',
+  950: '#0F0B15',
+};
+
 module.exports = {
     darkMode: ["class"],
     content: [
@@ -7,12 +24,25 @@ module.exports = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+  			heading: ['"Barlow Condensed"', '"IBM Plex Sans"', 'sans-serif'],
+  			mono: ['"JetBrains Mono"', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			slate: aubergine,
+  			lime: {
+  				DEFAULT: '#C8F23C',
+  				foreground: '#000000'
+  			},
+  			amber: {
+  				DEFAULT: '#FFB000'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

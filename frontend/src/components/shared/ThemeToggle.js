@@ -18,8 +18,7 @@ export const ThemeProvider = ({ children }) => {
     // Check localStorage first
     const saved = localStorage.getItem('airyatra_theme');
     if (saved) return saved;
-    // Check system preference
-    if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    // Dark is the AirYatra default (theme rules, master prompt C.4); light is opt-in via the toggle.
     return 'dark';
   });
 
@@ -30,21 +29,21 @@ export const ThemeProvider = ({ children }) => {
     if (theme === 'light') {
       root.classList.remove('dark');
       root.classList.add('light');
-      root.style.setProperty('--bg-primary', '#f8fafc');
-      root.style.setProperty('--bg-secondary', '#ffffff');
-      root.style.setProperty('--bg-tertiary', '#f1f5f9');
-      root.style.setProperty('--text-primary', '#0f172a');
-      root.style.setProperty('--text-secondary', '#475569');
-      root.style.setProperty('--border-color', '#e2e8f0');
+      root.style.setProperty('--bg-primary', '#F2EEF6');
+      root.style.setProperty('--bg-secondary', '#FFFFFF');
+      root.style.setProperty('--bg-tertiary', '#E2DCE9');
+      root.style.setProperty('--text-primary', '#17111F');
+      root.style.setProperty('--text-secondary', '#5A5068');
+      root.style.setProperty('--border-color', '#D0C9DA');
     } else {
       root.classList.remove('light');
       root.classList.add('dark');
-      root.style.setProperty('--bg-primary', '#020617');
-      root.style.setProperty('--bg-secondary', '#0f172a');
-      root.style.setProperty('--bg-tertiary', '#1e293b');
-      root.style.setProperty('--text-primary', '#f8fafc');
-      root.style.setProperty('--text-secondary', '#94a3b8');
-      root.style.setProperty('--border-color', '#334155');
+      root.style.setProperty('--bg-primary', '#17111F');
+      root.style.setProperty('--bg-secondary', '#221A2D');
+      root.style.setProperty('--bg-tertiary', '#3A3046');
+      root.style.setProperty('--text-primary', '#F2EEF6');
+      root.style.setProperty('--text-secondary', '#D0C9DA');
+      root.style.setProperty('--border-color', '#3A3046');
     }
     
     // Save to localStorage
