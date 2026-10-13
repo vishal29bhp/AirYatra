@@ -103,49 +103,61 @@ class PaymentService:
         razorpay_order_id: str,
         razorpay_payment_id: str,
         razorpay_signature: str,
-        db=None
+        db=None,
+        allow_mock: bool = False
     ) -> Dict:
-        """Verify Razorpay payment signature"""
+        """Verify Razorpay payment signature.
+
+        SECURITY: the signature is checked with the key secret alone (constant-time). A missing
+        configuration is a failure, never a success; the mock path only runs when the caller
+        explicitly allows it (local development with PAYMENTS_MOCK_ENABLED and a mock order).
+        """
         
-        if db:
+        if db is not None:
             await self._load_api_keys_from_db(db)
         
-        if self.client and self.key_secret:
-            try:
-                # Verify signature
-                message = f"{razorpay_order_id}|{razorpay_payment_id}"
-                generated_signature = hmac.new(
-                    self.key_secret.encode(),
-                    message.encode(),
-                    hashlib.sha256
-                ).hexdigest()
-                
-                if generated_signature == razorpay_signature:
-                    # Fetch payment details
+        if self.key_secret:
+            message = f"{razorpay_order_id}|{razorpay_payment_id}"
+            generated_signature = hmac.new(
+                self.key_secret.encode(),
+                message.encode(),
+                hashlib.sha256
+            ).hexdigest()
+            
+            if not hmac.compare_digest(generated_signature, razorpay_signature or ""):
+                return {
+                    "success": False,
+                    "verified": False,
+                    "error": "Invalid signature"
+                }
+            
+            payment = {}
+            if self.client:
+                try:
                     payment = self.client.payment.fetch(razorpay_payment_id)
-                    
-                    print(f"[Razorpay] Payment verified: {razorpay_payment_id}")
-                    
-                    return {
-                        "success": True,
-                        "verified": True,
-                        "payment_id": razorpay_payment_id,
-                        "amount": payment.get("amount", 0) / 100,  # Convert paise to INR
-                        "method": payment.get("method"),
-                        "status": payment.get("status"),
-                        "mock": False
-                    }
-                else:
-                    return {
-                        "success": False,
-                        "verified": False,
-                        "error": "Invalid signature"
-                    }
-            except Exception as e:
-                print(f"[Razorpay] Verification error: {e}")
-                return {"success": False, "error": str(e)}
+                except Exception as e:
+                    print(f"[Razorpay] Payment fetch error after valid signature: {e}")
+            
+            print(f"[Razorpay] Payment verified: {razorpay_payment_id}")
+            
+            return {
+                "success": True,
+                "verified": True,
+                "payment_id": razorpay_payment_id,
+                "amount": payment.get("amount", 0) / 100,  # Convert paise to INR
+                "method": payment.get("method"),
+                "status": payment.get("status"),
+                "mock": False
+            }
         
-        # Mock verification
+        if not allow_mock:
+            return {
+                "success": False,
+                "verified": False,
+                "error": "Payment gateway is not configured"
+            }
+        
+        # Mock verification (local development only)
         print(f"[MOCK PAYMENT] Verification for payment: {razorpay_payment_id}")
         return {
             "success": True,

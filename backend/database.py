@@ -19,8 +19,10 @@ MONGO_OPTIONS = {
     "socketTimeoutMS": 30000,
     "retryWrites": True,
     "retryReads": True,
-    "w": 1,                       # Fast writes
-    "journal": False,             # Skip journal for speed
+    # SECURITY/DURABILITY: an acknowledged write must survive a primary failover (master prompt S.1).
+    # w=1 with journal=False could lose acknowledged bookings and payments.
+    "w": "majority",
+    "journal": True,
 }
 
 async def connect_to_mongo():

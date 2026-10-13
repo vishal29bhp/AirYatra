@@ -23,17 +23,24 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
+def demo_password() -> str:
+    """Seed password from SEED_DEMO_PASSWORD, never from source code (published passwords become live logins)."""
+    password = os.environ.get("SEED_DEMO_PASSWORD", "")
+    if len(password) < 12:
+        raise SystemExit("Set SEED_DEMO_PASSWORD (12+ characters) to seed demo users.")
+    return password
+
 # Demo Users
 DEMO_USERS = [
-    {"email": "admin@airyatra.com", "password": "Admin123!", "full_name": "Admin User", "phone": "+919999900001", "roles": ["admin"]},
-    {"email": "finance@airyatra.com", "password": "Finance@123456", "full_name": "Finance Manager", "phone": "+919999900002", "roles": ["finance"]},
-    {"email": "hr@airyatra.com", "password": "HR@123456", "full_name": "HR Manager", "phone": "+919999900003", "roles": ["hr"]},
-    {"email": "sales@airyatra.com", "password": "Sales@123456", "full_name": "Sales Executive", "phone": "+919999900004", "roles": ["sales"]},
-    {"email": "operator@airyatra.com", "password": "Operator@123456", "full_name": "Test Operator", "phone": "+919999900005", "roles": ["operator"]},
-    {"email": "demo.operator@airyatra.com", "password": "Demo1234", "full_name": "Demo Operator", "phone": "+919999900006", "roles": ["operator"]},
-    {"email": "pilot@airyatra.com", "password": "Pilot@123456", "full_name": "Captain Pilot", "phone": "+919999900007", "roles": ["operator"]},
-    {"email": "customer@airyatra.com", "password": "Customer@123456", "full_name": "Demo Customer", "phone": "+919999900008", "roles": ["customer"]},
-    {"email": "support@airyatra.com", "password": "Support@123456", "full_name": "Support Agent", "phone": "+919999900009", "roles": ["support"]},
+    {"email": "admin@airyatra.com", "full_name": "Admin User", "phone": "+919999900001", "roles": ["admin"]},
+    {"email": "finance@airyatra.com", "full_name": "Finance Manager", "phone": "+919999900002", "roles": ["finance"]},
+    {"email": "hr@airyatra.com", "full_name": "HR Manager", "phone": "+919999900003", "roles": ["hr"]},
+    {"email": "sales@airyatra.com", "full_name": "Sales Executive", "phone": "+919999900004", "roles": ["sales"]},
+    {"email": "operator@airyatra.com", "full_name": "Test Operator", "phone": "+919999900005", "roles": ["operator"]},
+    {"email": "demo.operator@airyatra.com", "full_name": "Demo Operator", "phone": "+919999900006", "roles": ["operator"]},
+    {"email": "pilot@airyatra.com", "full_name": "Captain Pilot", "phone": "+919999900007", "roles": ["operator"]},
+    {"email": "customer@airyatra.com", "full_name": "Demo Customer", "phone": "+919999900008", "roles": ["customer"]},
+    {"email": "support@airyatra.com", "full_name": "Support Agent", "phone": "+919999900009", "roles": ["support"]},
 ]
 
 # Demo Operators with coordinates
@@ -86,7 +93,7 @@ async def seed_users(db):
         user = {
             "id": str(uuid4()),
             "email": user_data["email"],
-            "password_hash": get_password_hash(user_data["password"]),
+            "password_hash": get_password_hash(demo_password()),
             "full_name": user_data["full_name"],
             "phone": user_data["phone"],
             "role": user_data["roles"][0],
@@ -148,6 +155,8 @@ async def seed_operators(db):
     return created
 
 async def main():
+    if os.environ.get("APP_ENV", "").strip().lower() in {"prod", "production", "staging"}:
+        raise SystemExit("Refusing to seed demo users into a production or staging database.")
     print("=" * 60)
     print("       AirYatra - Demo Data Seeding Script")
     print("=" * 60)

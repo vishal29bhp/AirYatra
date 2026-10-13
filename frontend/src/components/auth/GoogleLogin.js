@@ -64,23 +64,9 @@ function EmergentAuthCallback({ onLogin }) {
         return;
       }
       
-      const sessionId = sessionIdMatch[1];
+      const sessionId = decodeURIComponent(sessionIdMatch[1]);
       
-      // Exchange session_id for user data via Emergent API
-      const response = await fetch('https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data', {
-        method: 'GET',
-        headers: {
-          'X-Session-ID': sessionId
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to exchange session for user data');
-      }
-      
-      const emergentUserData = await response.json();
-      
-      // Now call our backend to create/login user
+      // The API looks the session up with Emergent itself; the browser never asserts who the user is.
       const deviceInfo = getDeviceInfo();
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
       
@@ -90,9 +76,8 @@ function EmergentAuthCallback({ onLogin }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          emergent_user: emergentUserData,
-          device_info: deviceInfo,
-          session_token: emergentUserData.session_token
+          session_id: sessionId,
+          device_info: deviceInfo
         })
       });
       

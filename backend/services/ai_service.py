@@ -23,7 +23,7 @@ except ImportError:
     EMERGENT_AVAILABLE = False
     logger.info("emergentintegrations not available, AI features will use mock responses")
 
-EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "sk-emergent-dBbA2Ee2c6f44E66e5")
+EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "")  # never hard-code a fallback key
 
 class AIService:
     def __init__(self):

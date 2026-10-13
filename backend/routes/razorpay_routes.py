@@ -4,12 +4,13 @@ Order creation, payment verification, webhook handling
 Receipt Prefix: AY000125 format
 Website: airyatra.co.in
 """
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime, timezone
 from bson import ObjectId
 from database import get_database
+from middleware import get_current_user, require_roles
 import razorpay
 import hmac
 import hashlib
@@ -19,6 +20,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/razorpay", tags=["razorpay"])
+
+# SECURITY: refunds, order listings and stats were callable without logging in.
+FINANCE_ROLES = ["admin", "super_admin", "finance", "finance_head", "cfo", "accounts_manager"]
+require_finance = require_roles(FINANCE_ROLES)
 
 # Initialize Razorpay client
 RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "")
@@ -66,7 +71,7 @@ async def get_next_receipt_number(db) -> str:
 
 # Create Razorpay Order
 @router.post("/create-order")
-async def create_order(request: OrderRequest):
+async def create_order(request: OrderRequest, current_user: dict = Depends(get_current_user)):
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
     
@@ -147,7 +152,7 @@ async def create_order(request: OrderRequest):
 
 # Verify Payment Signature
 @router.post("/verify-payment")
-async def verify_payment(request: PaymentVerifyRequest):
+async def verify_payment(request: PaymentVerifyRequest, current_user: dict = Depends(get_current_user)):
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
     
@@ -238,27 +243,34 @@ async def verify_payment(request: PaymentVerifyRequest):
         raise HTTPException(status_code=500, detail=f"Verification failed: {str(e)}")
 
 # Webhook Handler
+def is_valid_webhook_signature(secret: str, payload: bytes, signature: str) -> bool:
+    """HMAC-SHA256 of the raw body with the webhook secret, compared in constant time.
+
+    SECURITY: a missing secret or a missing header is a failure. The previous code skipped the
+    check in both cases, so anyone could post a forged "payment.captured" event.
+    """
+    if not secret or not signature:
+        return False
+    expected_signature = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(signature, expected_signature)
+
+
 @router.post("/webhook")
 async def handle_webhook(request: Request):
     db = get_database()
     
+    # Get raw body and signature
+    payload = await request.body()
+    signature = request.headers.get("X-Razorpay-Signature", "")
+    
+    if not RAZORPAY_WEBHOOK_SECRET:
+        logger.error("Razorpay webhook received but RAZORPAY_WEBHOOK_SECRET is not configured")
+        raise HTTPException(status_code=503, detail="Webhook not configured")
+    if not is_valid_webhook_signature(RAZORPAY_WEBHOOK_SECRET, payload, signature):
+        logger.warning("Webhook signature verification failed")
+        raise HTTPException(status_code=400, detail="Invalid webhook signature")
+    
     try:
-        # Get raw body and signature
-        payload = await request.body()
-        signature = request.headers.get("X-Razorpay-Signature", "")
-        
-        # Verify webhook signature if secret is configured
-        if RAZORPAY_WEBHOOK_SECRET and signature:
-            expected_signature = hmac.new(
-                RAZORPAY_WEBHOOK_SECRET.encode(),
-                payload,
-                hashlib.sha256
-            ).hexdigest()
-            
-            if not hmac.compare_digest(signature, expected_signature):
-                logger.warning("Webhook signature verification failed")
-                raise HTTPException(status_code=400, detail="Invalid webhook signature")
-        
         # Parse payload
         import json
         event_data = json.loads(payload.decode())
@@ -431,7 +443,7 @@ async def handle_webhook(request: Request):
 
 # Create Refund
 @router.post("/refund")
-async def create_refund(request: RefundRequest):
+async def create_refund(request: RefundRequest, current_user: dict = Depends(require_finance)):
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
     
@@ -483,7 +495,7 @@ async def create_refund(request: RefundRequest):
 
 # Get Order Status
 @router.get("/order/{order_id}")
-async def get_order_status(order_id: str):
+async def get_order_status(order_id: str, current_user: dict = Depends(require_finance)):
     db = get_database()
     
     order = await db.razorpay_orders.find_one(
@@ -498,7 +510,7 @@ async def get_order_status(order_id: str):
 
 # Get Payment Status
 @router.get("/payment/{payment_id}")
-async def get_payment_status(payment_id: str):
+async def get_payment_status(payment_id: str, current_user: dict = Depends(require_finance)):
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
     
@@ -513,7 +525,8 @@ async def get_payment_status(payment_id: str):
 async def get_all_orders(
     status: Optional[str] = None,
     limit: int = 50,
-    skip: int = 0
+    skip: int = 0,
+    current_user: dict = Depends(require_finance)
 ):
     db = get_database()
     
@@ -537,7 +550,7 @@ async def get_all_orders(
 
 # Get Payment Statistics
 @router.get("/stats")
-async def get_payment_stats():
+async def get_payment_stats(current_user: dict = Depends(require_finance)):
     db = get_database()
     
     total_orders = await db.razorpay_orders.count_documents({})

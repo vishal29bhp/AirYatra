@@ -4,6 +4,7 @@ from typing import Optional, Dict
 from datetime import datetime, timezone
 from uuid import uuid4
 from database import get_database
+from config import settings
 from middleware import get_current_user
 from services.payment_service import payment_service
 from services.notification_service import notification_service
@@ -109,18 +110,27 @@ async def verify_payment(
 ):
     """Verify Razorpay payment after completion"""
     
+    # SECURITY: the order must exist, belong to the caller and be for the booking being marked paid.
+    payment_order = await db.payment_orders.find_one(
+        {"order_id": request.razorpay_order_id},
+        {"_id": 0}
+    )
+    if not payment_order:
+        raise HTTPException(status_code=404, detail="Payment order not found")
+    if payment_order.get("customer_id") != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    if payment_order.get("booking_id") != request.booking_id:
+        raise HTTPException(status_code=400, detail="Payment order does not match booking")
+    
     result = await payment_service.verify_payment(
         razorpay_order_id=request.razorpay_order_id,
         razorpay_payment_id=request.razorpay_payment_id,
-        razorpay_signature=request.razorpay_signature
+        razorpay_signature=request.razorpay_signature,
+        db=db,
+        allow_mock=settings.payments_mock_enabled and payment_order.get("mock") is True
     )
     
     if result.get("verified"):
-        # Get payment order to check if it's an inquiry
-        payment_order = await db.payment_orders.find_one(
-            {"order_id": request.razorpay_order_id},
-            {"_id": 0}
-        )
         is_inquiry = payment_order.get("is_inquiry", False) if payment_order else False
         
         update_data = {

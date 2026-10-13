@@ -12,6 +12,11 @@ from datetime import datetime, timezone
 from uuid import uuid4
 from database import get_database
 from auth import create_access_token
+from services.emergent_auth_service import (
+    emergent_session_verifier,
+    EmergentAuthError,
+    EmergentAuthDisabledError,
+)
 import logging
 import json
 
@@ -464,14 +469,16 @@ async def exchange_code_for_user_data(code: str) -> dict:
         return user_data
 
 async def verify_emergent_token(token: str) -> dict:
-    """Verify Emergent managed Google auth token"""
-    # Emergent auth returns user data directly
-    # Token is base64 encoded user data
-    import base64
+    """Resolve an Emergent session id to the Google profile by asking Emergent directly.
+
+    The previous version base64-decoded user data supplied by the caller, which let anyone sign in
+    as any e-mail address.
+    """
     try:
-        decoded = base64.b64decode(token).decode('utf-8')
-        return json.loads(decoded)
-    except:
+        return await emergent_session_verifier.verify(token)
+    except EmergentAuthDisabledError:
+        raise HTTPException(status_code=404, detail="Not found")
+    except EmergentAuthError:
         raise HTTPException(status_code=401, detail="Invalid Emergent auth token")
 
 @router.get("/settings")
@@ -503,12 +510,10 @@ async def emergent_auth_callback(request: Request, data: dict):
     """
     db = get_database()
     
-    emergent_user = data.get("emergent_user", {})
-    device_info = data.get("device_info", {})
-    session_token = data.get("session_token")
-    
-    if not emergent_user or not emergent_user.get("email"):
-        raise HTTPException(status_code=400, detail="Invalid user data")
+    # SECURITY: identity comes from Emergent (server-to-server), never from the request body.
+    emergent_user = await verify_emergent_token(data.get("session_id"))
+    device_info = data.get("device_info") or {}
+    session_token = emergent_user.get("session_token")
     
     # Merge device info from request with frontend-provided info
     server_device_info = extract_device_info(request)
