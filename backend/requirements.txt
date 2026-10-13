@@ -114,6 +114,7 @@ pytz==2025.2
 qrcode==8.2
 razorpay==2.0.0
 redis==7.1.0
+redis-entraid==1.2.2
 referencing==0.37.0
 regex==2025.11.3
 reportlab==5.0.0

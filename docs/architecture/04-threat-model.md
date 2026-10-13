@@ -22,7 +22,7 @@ KYC, file upload or admin (S.6).
 
 | Flow | STRIDE | Threat | Today | Control (target) | Phase |
 |---|---|---|---|---|---|
-| L1 login | S | Credential stuffing, brute force | Lockout after 5 failures; in-memory rate limit per process | WAF auth rate rule (30/min/IP), Redis-backed limiter and lockout shared by all replicas, CAPTCHA after repeated failures, breached-password check | 1 (WAF), 3 |
+| L1 login | S | Credential stuffing, brute force | Lockout after 5 failures; API token bucket shared across replicas in Redis (per-process fallback) | WAF auth rate rule (30/min/IP), Redis-backed limiter and lockout shared by all replicas, CAPTCHA after repeated failures, breached-password check | 1 (WAF), 3 |
 | L1 login | S | Stolen long-lived token replayed | 7-day JWT in `localStorage` | 15-min access token, rotating refresh token with reuse detection, HttpOnly Secure SameSite cookies, revocation on logout/password change | 3 |
 | L1 OTP | S/D | OTP brute force or SMS/email bombing | OTP service with resend cooldown | Single-use, 5-min expiry, constant-time compare, per-user and per-IP OTP limits | 3 |
 | L2 Google | S/E | **Account takeover: `/api/auth/google/emergent-callback` issues a token for any e-mail the browser posts, including admin accounts, and skips OTP/TOTP** (Phase 0 S-02) | Live in code today | Remove the Emergent callback (or require a server-verified Emergent session) before anything else; direct Google OAuth with verified id_token | **Immediately**, 3 |
@@ -41,7 +41,7 @@ KYC, file upload or admin (S.6).
 | L10 SOS | D | SOS not delivered when one replica or channel fails | In-app notifications only | Redis pub/sub to every replica + SMS/WhatsApp escalation + alert if unacknowledged | 3 |
 | L11 authZ | E | Role escalation via `/auth/set-role` or admin routes | Role checks spread across modules | Central `AuthorizationPolicy`, admin router with step-up MFA, negative tests per role | 3 |
 | L12 scheduler | T/D | Jobs run N times with N replicas (duplicate payouts/reminders) | Scheduler inside every API process | Single worker + Redis lock per fire time | 1 (infra), 3 (code) |
-| L13 chat | S/I | Anyone with a booking id joins its chat and impersonates a user | Token not verified, name/type from query | Verify JWT on connect, authorise per booking, identity from token, message size and rate limits | 3 |
+| L13 chat | S/I | Anyone with a booking id joins its chat and impersonates a user | **Done:** JWT (query `token` or `access_token` cookie) verified on connect with the revocation check, only the booking's customer/operator/admin may join, identity from the token, frame/message size and per-socket rate limits, read receipts scoped to the booking | Same; fan-out to every replica via Redis pub/sub | 3 |
 | L14 AI | I | Prompt injection exfiltrates data; PII sent to the model | Emergent key hard-coded as fallback | Remove key, Azure OpenAI with managed identity, PII redaction, no tool access, output filter | 1, 3 |
 | All | I | Secrets leaked from repo or images | Hard-coded fallback LLM key, credentials file in `memory/` | Key Vault only, gitleaks pre-commit + push protection, rotate every key at cutover | 1, 3 |
 | All | R | No trustworthy record of sensitive actions | `audit_logs` collection (mutable) | Also write to WORM `audit-logs` Blob container; Key Vault and Blob audit logs to Log Analytics | 1, 3 |

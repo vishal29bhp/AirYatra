@@ -10,6 +10,7 @@ import logging
 from config import settings
 from front_door import FrontDoorClientIPMiddleware
 from services.file_storage import InvalidKeyError, file_store
+from services.redis_client import close_redis
 from database import connect_to_mongo, close_mongo_connection, get_database
 from scheduler import start_scheduler, stop_scheduler
 
@@ -508,6 +509,7 @@ async def shutdown_event():
     if settings.scheduler_enabled:
         stop_scheduler()
     await close_mongo_connection()
+    await close_redis()
     logger.info("AirYatra API shut down successfully")
 
 if __name__ == "__main__":

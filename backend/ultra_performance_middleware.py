@@ -97,6 +97,48 @@ def check_rate_limit(client_id: str) -> tuple:
     return False, 0
 
 
+# Same token bucket, kept in Redis so every API replica shares one budget per client.
+# KEYS[1] = bucket key; ARGV = rate (tokens/s), burst, now (s, float), ttl (s).
+_REDIS_TOKEN_BUCKET = """
+local rate = tonumber(ARGV[1])
+local burst = tonumber(ARGV[2])
+local now = tonumber(ARGV[3])
+local state = redis.call('HMGET', KEYS[1], 'tokens', 'last')
+local tokens = tonumber(state[1])
+local last = tonumber(state[2])
+if tokens == nil then
+  tokens = burst
+  last = now
+end
+tokens = math.min(burst, tokens + math.max(0, now - last) * rate)
+local allowed = 0
+if tokens >= 1 then
+  tokens = tokens - 1
+  allowed = 1
+end
+redis.call('HSET', KEYS[1], 'tokens', tostring(tokens), 'last', tostring(now))
+redis.call('EXPIRE', KEYS[1], tonumber(ARGV[4]))
+return {allowed, math.floor(tokens)}
+"""
+
+
+async def check_rate_limit_shared(client_id: str) -> tuple:
+    """Token bucket shared by all replicas through Redis; per-process bucket when Redis is unavailable."""
+    from services.redis_client import get_redis, mark_unhealthy
+
+    redis = await get_redis()
+    if redis is not None:
+        try:
+            allowed, remaining = await redis.eval(
+                _REDIS_TOKEN_BUCKET, 1, f"ratelimit:{client_id}",
+                RATE_LIMIT_RPS, RATE_LIMIT_BURST, time.time(), 60,
+            )
+            return bool(int(allowed)), int(remaining)
+        except Exception:
+            mark_unhealthy()
+    return check_rate_limit(client_id)
+
+
 # ==================== CACHEABLE PATHS ====================
 CACHE_PATHS = {
     "/api/landing/points": 300,
@@ -154,7 +196,7 @@ class FastRateLimitMiddleware(BaseHTTPMiddleware):
     
     async def dispatch(self, request: Request, call_next):
         # Skip health checks
-        if request.url.path in {"/health", "/api/auth/login"}:
+        if request.url.path in {"/health", "/health/ready", "/api/auth/login"}:
             return await call_next(request)
         
         # Get client ID (SHA256 for security)
@@ -164,7 +206,7 @@ class FastRateLimitMiddleware(BaseHTTPMiddleware):
         else:
             client_id = request.client.host if request.client else "unknown"
         
-        allowed, remaining = check_rate_limit(client_id)
+        allowed, remaining = await check_rate_limit_shared(client_id)
         
         if not allowed:
             return Response(

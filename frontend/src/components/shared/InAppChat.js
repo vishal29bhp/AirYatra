@@ -69,7 +69,10 @@ function InAppChat({ user, bookingId }) {
       wsRef.current.close();
     }
     
-    const wsUrl = `${process.env.REACT_APP_BACKEND_URL?.replace('https', 'wss').replace('http', 'ws')}/api/ws/chat/${convBookingId}`;
+    // The server only accepts chat sockets from the booking's own customer, operator or an admin.
+    const token = localStorage.getItem('token');
+    const tokenQuery = token ? `?token=${encodeURIComponent(token)}` : '';
+    const wsUrl = `${process.env.REACT_APP_BACKEND_URL?.replace('https', 'wss').replace('http', 'ws')}/api/ws/chat/${convBookingId}${tokenQuery}`;
     
     try {
       wsRef.current = new WebSocket(wsUrl);
