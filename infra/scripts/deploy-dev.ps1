@@ -161,7 +161,15 @@ budget_start_date = "$BudgetStartDate"
     Write-Step "6/9 Creating the dev environment"
     Push-Location $DevDir
     try {
-        Invoke-Native terraform init "-input=false" "-backend-config=backend.hcl"
+        # Your access to the state storage is granted in step 4 and Azure takes a few minutes to apply it,
+        # so a fresh setup can get "403 AuthorizationPermissionMismatch" here at first. Wait and retry.
+        for ($attempt = 1; $attempt -le 10; $attempt++) {
+            & terraform init "-input=false" "-backend-config=backend.hcl"
+            if ($LASTEXITCODE -eq 0) { break }
+            if ($attempt -eq 10) { throw "'terraform init' still failed after 10 tries. Paste the error in the project thread." }
+            Write-Host "Azure may still be applying your access to the state storage. Trying again in 60 seconds ($attempt/10)..." -ForegroundColor Yellow
+            Start-Sleep -Seconds 60
+        }
         Invoke-Native terraform plan "-input=false" -out dev.tfplan
         if (-not (Confirm-Yes "Review the plan above. The last line says how many resources will be created.")) {
             throw "Stopped before creating anything. Run the script again when ready."
