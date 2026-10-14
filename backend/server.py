@@ -484,6 +484,16 @@ async def startup_event():
     except Exception as e:
         logger.warning(f"Database optimization warning: {e}")
     
+    # Dev only: staff logins for a database that has none yet (see services/staff_bootstrap.py).
+    if os.environ.get("BOOTSTRAP_STAFF"):
+        try:
+            from database import get_database
+            from services.staff_bootstrap import bootstrap_staff
+            await bootstrap_staff(get_database(), os.environ["BOOTSTRAP_STAFF"],
+                                  os.environ.get("BOOTSTRAP_STAFF_PASSWORD", ""), settings.app_env)
+        except Exception as e:
+            logger.warning(f"Staff bootstrap skipped: {type(e).__name__}: {e}")
+
     # Initialize Security Middleware (Audit Logger, Session Manager, File Encryption)
     try:
         from database import get_database

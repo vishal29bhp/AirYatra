@@ -160,7 +160,7 @@ resource "azurerm_key_vault_secret" "generated" {
 # Placeholders so Container Apps can start; real values are set out of band and never touched again by Terraform.
 resource "azurerm_key_vault_secret" "manual" {
   #checkov:skip=CKV_AZURE_41:Rotation is a runbook step (docs/architecture), a hard expiry would take the app down.
-  for_each     = toset(var.manual_secret_env_vars)
+  for_each     = toset(local.manual_secret_env_vars)
   name         = lower(replace(each.value, "_", "-"))
   value        = "set-me"
   key_vault_id = module.keyvault.id
@@ -268,7 +268,7 @@ module "app_service" {
 }
 
 locals {
-  app_env_vars = {
+  app_env_vars = merge({
     APP_ENV                               = var.environment
     DB_NAME                               = var.database_name
     CORS_ORIGINS                          = join(",", local.cors_origins)
@@ -286,7 +286,10 @@ locals {
     REDIS_HOST                            = module.redis.hostname
     REDIS_PORT                            = "10000"
     APPLICATIONINSIGHTS_CONNECTION_STRING = module.observability.application_insights_connection_string
-  }
+  }, var.bootstrap_staff == "" ? {} : { BOOTSTRAP_STAFF = var.bootstrap_staff })
+  # Dev only: staff logins for an empty database, all sharing one password kept in Key Vault.
+  manual_secret_env_vars = concat(var.manual_secret_env_vars, var.bootstrap_staff == "" ? [] : ["BOOTSTRAP_STAFF_PASSWORD"])
+
   app_key_vault_secrets = merge(
     { for k, s in azurerm_key_vault_secret.generated : k => s.versionless_id },
     { for k, s in azurerm_key_vault_secret.manual : k => s.versionless_id },

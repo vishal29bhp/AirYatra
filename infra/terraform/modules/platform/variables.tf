@@ -235,6 +235,12 @@ variable "manual_secret_env_vars" {
   ]
 }
 
+variable "bootstrap_staff" {
+  description = "Dev only: comma-separated email:role staff logins created at API start when missing (see backend/services/staff_bootstrap.py). Empty = off."
+  type        = string
+  default     = ""
+}
+
 variable "load_test_location" {
   description = "Region for Azure Load Testing when the primary region does not offer it. Null uses location."
   type        = string
