@@ -1,3 +1,8 @@
+variable "environment_enabled" {
+  description = "False creates only the registry (dev on App Service, where the trial allows no second Container Apps environment)."
+  type        = bool
+  default     = true
+}
 variable "name_prefix" {
   type = string
 }

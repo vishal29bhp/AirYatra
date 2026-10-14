@@ -11,13 +11,13 @@ output "frontdoor_endpoint" {
   value = module.frontdoor.endpoint_host_name
 }
 output "api_internal_fqdn" {
-  value = module.container_apps.api_fqdn
+  value = local.api_fqdn
 }
 output "api_container_app_name" {
-  value = module.container_apps.api_name
+  value = local.api_name
 }
 output "worker_container_app_name" {
-  value = module.container_apps.worker_name
+  value = local.worker_name
 }
 output "registry_login_server" {
   value = module.container_apps.registry_login_server
@@ -44,16 +44,18 @@ output "atlas_project_id" {
 output "github_actions_variables" {
   description = "Variables for this GitHub environment, used by .github/workflows/azure-deploy.yml (none are secrets)."
   value = merge({
-    AZURE_CLIENT_ID       = module.github_oidc.client_id
-    AZURE_TENANT_ID       = data.azurerm_client_config.current.tenant_id
-    AZURE_SUBSCRIPTION_ID = data.azurerm_client_config.current.subscription_id
-    AZURE_RESOURCE_GROUP  = azurerm_resource_group.this.name
-    ACR_LOGIN_SERVER      = module.container_apps.registry_login_server
-    API_APP_NAME          = module.container_apps.api_name
-    WORKER_APP_NAME       = module.container_apps.worker_name
-    WEB_STORAGE_ACCOUNT   = module.frontdoor.web_storage_account_name
-    PUBLIC_URL            = local.public_url
-    API_URL               = local.api_url
+    AZURE_CLIENT_ID        = module.github_oidc.client_id
+    AZURE_TENANT_ID        = data.azurerm_client_config.current.tenant_id
+    AZURE_SUBSCRIPTION_ID  = data.azurerm_client_config.current.subscription_id
+    AZURE_RESOURCE_GROUP   = azurerm_resource_group.this.name
+    ACR_LOGIN_SERVER       = module.container_apps.registry_login_server
+    API_APP_NAME           = local.api_name
+    WORKER_APP_NAME        = local.worker_name
+    COMPUTE_PLATFORM       = var.compute_platform
+    APP_IDENTITY_CLIENT_ID = azurerm_user_assigned_identity.app.client_id
+    WEB_STORAGE_ACCOUNT    = module.frontdoor.web_storage_account_name
+    PUBLIC_URL             = local.public_url
+    API_URL                = local.api_url
     }, var.frontdoor_enabled ? {
     FRONTDOOR_PROFILE  = module.frontdoor.profile_name
     FRONTDOOR_ENDPOINT = module.frontdoor.endpoint_name

@@ -229,3 +229,28 @@ variable "manual_secret_env_vars" {
     "OPENWEATHER_API_KEY",
   ]
 }
+
+variable "load_test_location" {
+  description = "Region for Azure Load Testing when the primary region does not offer it. Null uses location."
+  type        = string
+  default     = null
+}
+variable "web_storage_replication_type" {
+  description = "Replication of the static website account. ZRS is not offered in every region (for example South India)."
+  type        = string
+  default     = "ZRS"
+}
+
+variable "compute_platform" {
+  description = "container_apps (production design) or app_service (dev on an Azure Free Trial, which allows one Container Apps environment per subscription)."
+  type        = string
+  default     = "container_apps"
+  validation {
+    condition     = contains(["container_apps", "app_service"], var.compute_platform)
+    error_message = "compute_platform must be container_apps or app_service."
+  }
+}
+variable "app_service_sku" {
+  type    = string
+  default = "B1"
+}

@@ -16,3 +16,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+variable "app_service_subnet_enabled" {
+  description = "Add a subnet delegated to App Service and let it reach the private endpoints."
+  type        = bool
+  default     = false
+}

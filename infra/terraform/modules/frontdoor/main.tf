@@ -17,7 +17,7 @@ resource "azurerm_storage_account" "web" {
   resource_group_name             = var.resource_group_name
   account_kind                    = "StorageV2"
   account_tier                    = "Standard"
-  account_replication_type        = "ZRS"
+  account_replication_type        = var.web_replication_type
   min_tls_version                 = "TLS1_2"
   https_traffic_only_enabled      = true
   allow_nested_items_to_be_public = false

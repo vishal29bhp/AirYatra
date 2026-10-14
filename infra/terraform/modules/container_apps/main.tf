@@ -10,6 +10,7 @@ locals {
   })
 }
 
+# The registry is shared: dev on App Service pulls from it too.
 resource "azurerm_container_registry" "this" {
   #checkov:skip=CKV_AZURE_139:GitHub-hosted runners push over the public endpoint with Entra (OIDC) auth; no admin user or keys.
   #checkov:skip=CKV_AZURE_163:Images are scanned by Defender for Containers (governance module) and Trivy in CI.
@@ -31,6 +32,7 @@ resource "azurerm_container_registry" "this" {
 }
 
 resource "azurerm_container_app_environment" "this" {
+  count                          = var.environment_enabled ? 1 : 0
   name                           = "cae-${var.name_prefix}"
   location                       = var.location
   resource_group_name            = var.resource_group_name
@@ -47,8 +49,9 @@ resource "azurerm_container_app_environment" "this" {
 }
 
 resource "azurerm_container_app" "api" {
+  count                        = var.environment_enabled ? 1 : 0
   name                         = "ca-${var.name_prefix}-api"
-  container_app_environment_id = azurerm_container_app_environment.this.id
+  container_app_environment_id = azurerm_container_app_environment.this[0].id
   resource_group_name          = var.resource_group_name
   revision_mode                = "Single"
   workload_profile_name        = "Consumption"
@@ -156,8 +159,9 @@ resource "azurerm_container_app" "api" {
 
 # Single-replica worker: runs APScheduler so jobs fire exactly once however far the API scales (Q.2 item 10).
 resource "azurerm_container_app" "worker" {
+  count                        = var.environment_enabled ? 1 : 0
   name                         = "ca-${var.name_prefix}-worker"
-  container_app_environment_id = azurerm_container_app_environment.this.id
+  container_app_environment_id = azurerm_container_app_environment.this[0].id
   resource_group_name          = var.resource_group_name
   revision_mode                = "Single"
   workload_profile_name        = "Consumption"

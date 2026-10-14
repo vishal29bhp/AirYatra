@@ -9,6 +9,10 @@ Dev runs without Azure Front Door by default, because Azure Free Trial subscript
 then served straight from its storage account and the browser calls the API at its own address, with no WAF or edge
 security headers. After upgrading the subscription to Pay-As-You-Go, add `frontdoor_enabled = true` to
 `infra/terraform/envs/dev/terraform.tfvars` and run the script again.
+
+Dev also runs the API on Azure App Service (one B1 web app that runs the API and the scheduler) instead of Container
+Apps, because a Free Trial subscription allows only one Container Apps environment and that may already be used by
+another project. Dev lives in South India for the same reason. Prod keeps Container Apps.
 No secret goes into a file, the repo, GitHub or chat: keys are typed straight into Key Vault in step 8.
 
 Each step has a **bash** block (macOS, Linux, Git Bash on Windows) and a **PowerShell** block (the default VS Code
