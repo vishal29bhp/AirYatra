@@ -7,15 +7,16 @@ import {
   Plane, MapPin, Calendar, Clock, TrendingUp, Star, Award, 
   RefreshCw, DollarSign, Target, Zap, Crown, Gift, ArrowUpRight
 } from 'lucide-react';
+import { tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Loyalty Tiers
 const LOYALTY_TIERS = [
-  { name: 'Bronze', minSpend: 0, maxSpend: 500000, color: 'from-amber-700 to-amber-800', icon: Award, benefits: ['5% discount on bookings', 'Priority support'] },
-  { name: 'Silver', minSpend: 500000, maxSpend: 1500000, color: 'from-slate-400 to-slate-500', icon: Star, benefits: ['10% discount on bookings', 'Free cancellation', 'Lounge access'] },
-  { name: 'Gold', minSpend: 1500000, maxSpend: 5000000, color: 'from-yellow-500 to-yellow-600', icon: Crown, benefits: ['15% discount on bookings', 'Free upgrades', 'Dedicated manager', 'Airport transfers'] },
-  { name: 'Platinum', minSpend: 5000000, maxSpend: Infinity, color: 'from-purple-500 to-purple-600', icon: Zap, benefits: ['20% discount on bookings', 'All Gold benefits', 'Private jet access', 'Exclusive events'] },
+  { name: tr('Bronze', 'ब्रॉन्ज़'), minSpend: 0, maxSpend: 500000, color: 'from-amber-700 to-amber-800', icon: Award, benefits: ['5% discount on bookings', 'Priority support'] },
+  { name: tr('Silver', 'सिल्वर'), minSpend: 500000, maxSpend: 1500000, color: 'from-slate-400 to-slate-500', icon: Star, benefits: ['10% discount on bookings', 'Free cancellation', 'Lounge access'] },
+  { name: tr('Gold', 'गोल्ड'), minSpend: 1500000, maxSpend: 5000000, color: 'from-yellow-500 to-yellow-600', icon: Crown, benefits: ['15% discount on bookings', 'Free upgrades', 'Dedicated manager', 'Airport transfers'] },
+  { name: tr('Platinum', 'प्लेटिनम'), minSpend: 5000000, maxSpend: Infinity, color: 'from-purple-500 to-purple-600', icon: Zap, benefits: ['20% discount on bookings', 'All Gold benefits', 'Private jet access', 'Exclusive events'] },
 ];
 
 export default function CustomerBookingStats({ user }) {
@@ -96,9 +97,9 @@ export default function CustomerBookingStats({ user }) {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <TrendingUp className="h-7 w-7 text-lime" />
-            My Flight Stats
+            {tr('My Flight Stats', 'मेरे उड़ान आंकड़े')}
           </h1>
-          <p className="text-slate-400 mt-1">Your journey with AirYatra</p>
+          <p className="text-slate-400 mt-1">{tr('Your journey with AirYatra', 'AirYatra के साथ आपकी यात्रा')}</p>
         </div>
         <Button 
           onClick={loadStats} 
@@ -106,7 +107,7 @@ export default function CustomerBookingStats({ user }) {
           className="border-slate-600 text-slate-300 hover:bg-slate-800"
         >
           <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
+          {tr('Refresh', 'रीफ़्रेश करें')}
         </Button>
       </div>
 
@@ -119,7 +120,7 @@ export default function CustomerBookingStats({ user }) {
               <div className="flex items-center gap-3 mb-2">
                 <TierIcon className="h-10 w-10 text-white" />
                 <div>
-                  <p className="text-white/70 text-sm">Current Tier</p>
+                  <p className="text-white/70 text-sm">{tr('Current Tier', 'वर्तमान स्तर')}</p>
                   <h2 className="text-3xl font-bold text-white">{currentTier.name}</h2>
                 </div>
               </div>
@@ -127,12 +128,12 @@ export default function CustomerBookingStats({ user }) {
               {nextTier && (
                 <div className="mt-4">
                   <div className="flex justify-between text-sm mb-2">
-                    <span className="text-white/70">Progress to {nextTier.name}</span>
+                    <span className="text-white/70">{tr('Progress to', 'अगले स्तर की प्रगति:')} {nextTier.name}</span>
                     <span className="text-white font-semibold">{progress.toFixed(0)}%</span>
                   </div>
                   <Progress value={progress} className="h-2 bg-white/20" />
                   <p className="text-white/70 text-sm mt-2">
-                    Spend {formatCurrency(remaining)} more to unlock {nextTier.name}
+                    {tr('Spend', 'खर्च करें')} {formatCurrency(remaining)} {tr('more to unlock', 'और, अनलॉक करने के लिए')} {nextTier.name}
                   </p>
                 </div>
               )}
@@ -140,13 +141,13 @@ export default function CustomerBookingStats({ user }) {
               {!nextTier && (
                 <p className="text-white/80 mt-4 flex items-center gap-2">
                   <Crown className="h-5 w-5" />
-                  You've reached the highest tier! Enjoy all benefits.
+                  {tr("You've reached the highest tier! Enjoy all benefits.", 'आप सबसे ऊंचे स्तर पर पहुंच गए हैं! सभी लाभों का आनंद लें।')}
                 </p>
               )}
             </div>
             
             <div className="text-right">
-              <p className="text-white/70 text-sm">Total Spend</p>
+              <p className="text-white/70 text-sm">{tr('Total Spend', 'कुल खर्च')}</p>
               <p className="text-3xl font-bold text-white">{formatCurrency(totalSpend)}</p>
             </div>
           </div>
@@ -159,7 +160,7 @@ export default function CustomerBookingStats({ user }) {
           <CardContent className="p-5 text-center">
             <Plane className="h-8 w-8 text-lime mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.total_flights || 0}</p>
-            <p className="text-slate-400 text-sm">Total Flights</p>
+            <p className="text-slate-400 text-sm">{tr('Total Flights', 'कुल उड़ानें')}</p>
           </CardContent>
         </Card>
 
@@ -167,7 +168,7 @@ export default function CustomerBookingStats({ user }) {
           <CardContent className="p-5 text-center">
             <MapPin className="h-8 w-8 text-amber mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.unique_routes || 0}</p>
-            <p className="text-slate-400 text-sm">Unique Routes</p>
+            <p className="text-slate-400 text-sm">{tr('Unique Routes', 'अलग-अलग मार्ग')}</p>
           </CardContent>
         </Card>
 
@@ -175,7 +176,7 @@ export default function CustomerBookingStats({ user }) {
           <CardContent className="p-5 text-center">
             <Clock className="h-8 w-8 text-green-500 mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.total_hours || 0}</p>
-            <p className="text-slate-400 text-sm">Flight Hours</p>
+            <p className="text-slate-400 text-sm">{tr('Flight Hours', 'उड़ान घंटे')}</p>
           </CardContent>
         </Card>
 
@@ -183,7 +184,7 @@ export default function CustomerBookingStats({ user }) {
           <CardContent className="p-5 text-center">
             <Gift className="h-8 w-8 text-purple-500 mx-auto mb-2" />
             <p className="text-3xl font-bold text-white">{stats?.rewards_earned || 0}</p>
-            <p className="text-slate-400 text-sm">Points Earned</p>
+            <p className="text-slate-400 text-sm">{tr('Points Earned', 'अर्जित पॉइंट')}</p>
           </CardContent>
         </Card>
       </div>
@@ -195,7 +196,7 @@ export default function CustomerBookingStats({ user }) {
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Star className="h-5 w-5 text-yellow-500" />
-              Your {currentTier.name} Benefits
+              {tr('Your', 'आपके')} {currentTier.name} {tr('Benefits', 'लाभ')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -212,7 +213,7 @@ export default function CustomerBookingStats({ user }) {
             
             {nextTier && (
               <div className="mt-6 pt-4 border-t border-slate-700">
-                <p className="text-slate-400 text-sm mb-2">Unlock with {nextTier.name}:</p>
+                <p className="text-slate-400 text-sm mb-2">{tr('Unlock with', 'इससे अनलॉक करें:')} {nextTier.name}:</p>
                 <ul className="space-y-2">
                   {nextTier.benefits.slice(0, 2).map((benefit, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-slate-500 text-sm">
@@ -233,19 +234,19 @@ export default function CustomerBookingStats({ user }) {
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Calendar className="h-5 w-5 text-lime" />
-              Recent Flights
+              {tr('Recent Flights', 'हाल की उड़ानें')}
             </CardTitle>
           </CardHeader>
           <CardContent>
             {(!stats?.recent_flights || stats.recent_flights.length === 0) ? (
               <div className="text-center py-8 text-slate-500">
                 <Plane className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                <p>No flights yet</p>
+                <p>{tr('No flights yet', 'अभी कोई उड़ान नहीं')}</p>
                 <Button 
                   className="mt-4 bg-lime text-black hover:bg-lime/90"
                   onClick={() => window.location.href = '/booking'}
                 >
-                  Book Your First Flight
+                  {tr('Book Your First Flight', 'अपनी पहली उड़ान बुक करें')}
                 </Button>
               </div>
             ) : (
@@ -291,9 +292,9 @@ export default function CustomerBookingStats({ user }) {
       {/* All Tiers Overview */}
       <Card className="bg-slate-800/50 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">Loyalty Tier Roadmap</CardTitle>
+          <CardTitle className="text-white">{tr('Loyalty Tier Roadmap', 'लॉयल्टी स्तर रोडमैप')}</CardTitle>
           <CardDescription className="text-slate-400">
-            Spend more to unlock better benefits
+            {tr('Spend more to unlock better benefits', 'बेहतर लाभ पाने के लिए और खर्च करें')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -323,12 +324,12 @@ export default function CustomerBookingStats({ user }) {
                   </p>
                   {isCurrentOrPast && idx < tierIndex && (
                     <Badge className="mt-2 bg-green-500/20 text-green-400 border-0 text-xs">
-                      ✓ Unlocked
+                      {tr('✓ Unlocked', '✓ अनलॉक')}
                     </Badge>
                   )}
                   {idx === tierIndex && (
                     <Badge className="mt-2 bg-white/20 text-white border-0 text-xs">
-                      Current
+                      {tr('Current', 'वर्तमान')}
                     </Badge>
                   )}
                 </div>

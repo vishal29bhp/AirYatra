@@ -149,3 +149,12 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Devanagari and other Indic scripts join letters into clusters; the wide tracking used on English labels splits them. */
+html[lang]:not([lang^="en"]) [class*="tracking-"],
+html[lang]:not([lang^="en"]) .ay-overline {
+    letter-spacing: normal;
+}
+html[lang]:not([lang^="en"]) .ay-overline {
+    font-family: "IBM Plex Sans", sans-serif;
+}

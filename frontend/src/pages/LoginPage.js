@@ -77,7 +77,7 @@ function LoginPage({ setUser }) {
         if (response.data.totp_required) {
           setTotpRequired(true);
           setTempToken(response.data.temp_token);
-          toast.info('🔐 Google Authenticator code required');
+          toast.info(tr('🔐 Google Authenticator code required', '🔐 Google Authenticator कोड आवश्यक है'));
         }
         // Check if Email OTP is required
         else if (response.data.otp_required) {
@@ -96,7 +96,7 @@ function LoginPage({ setUser }) {
         // Registration
         const response = await authAPI.register(submitData);
         completeLogin(response.data);
-        toast.success('Registration successful!');
+        toast.success(tr('Registration successful!', 'पंजीकरण सफल!'));
       }
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Authentication failed');
@@ -110,7 +110,7 @@ function LoginPage({ setUser }) {
     const otp = otpCode.join('');
     
     if (otp.length !== 6) {
-      toast.error('Please enter complete 6-digit OTP');
+      toast.error(tr('Please enter complete 6-digit OTP', 'कृपया पूरा 6 अंकों का OTP दर्ज करें'));
       return;
     }
 
@@ -125,9 +125,9 @@ function LoginPage({ setUser }) {
       completeLogin(response.data);
       
       if (trustDevice) {
-        toast.success('✅ Login successful! Device trusted for 30 days');
+        toast.success(tr('✅ Login successful! Device trusted for 30 days', '✅ लॉगिन सफल! यह डिवाइस 30 दिनों के लिए भरोसेमंद है'));
       } else {
-        toast.success('✅ Login successful!');
+        toast.success(tr('✅ Login successful!', '✅ लॉगिन सफल!'));
       }
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Invalid OTP');
@@ -144,7 +144,7 @@ function LoginPage({ setUser }) {
     e.preventDefault();
     
     if (totpCode.length !== 6) {
-      toast.error('Please enter complete 6-digit code');
+      toast.error(tr('Please enter complete 6-digit code', 'कृपया पूरा 6 अंकों का कोड दर्ज करें'));
       return;
     }
 
@@ -166,7 +166,7 @@ function LoginPage({ setUser }) {
       }
       
       completeLogin(data);
-      toast.success('✅ Login successful with 2FA!');
+      toast.success(tr('✅ Login successful with 2FA!', '✅ 2FA के साथ लॉगिन सफल!'));
     } catch (error) {
       toast.error(error.message || 'Invalid authenticator code');
       setTotpCode('');
@@ -189,7 +189,7 @@ function LoginPage({ setUser }) {
         setOtpCooldown(response.data.remaining_seconds || 60);
         toast.warning(response.data.message);
       } else {
-        toast.success('🔐 New OTP sent to your email');
+        toast.success(tr('🔐 New OTP sent to your email', '🔐 नया OTP आपके ईमेल पर भेजा गया'));
         setOtpCode(['', '', '', '', '', '']);
       }
     } catch (error) {
@@ -256,14 +256,14 @@ function LoginPage({ setUser }) {
             <span className="text-3xl font-bold text-white">AirYatra</span>
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2" data-testid="auth-title">
-            {totpRequired ? 'Authenticator Code' : (otpRequired ? 'Verify OTP' : (isLogin ? 'Welcome Back' : 'Create Account'))}
+            {totpRequired ? tr('Authenticator Code', 'ऑथेंटिकेटर कोड') : (otpRequired ? tr('Verify OTP', 'OTP सत्यापित करें') : (isLogin ? tr('Welcome Back', 'फिर से स्वागत है') : tr('Create Account', 'खाता बनाएं')))}
           </h1>
           <p className="text-slate-400">
             {totpRequired
-              ? 'Enter code from Google Authenticator'
+              ? tr('Enter code from Google Authenticator', 'Google Authenticator से कोड दर्ज करें')
               : (otpRequired 
                 ? otpMessage 
-                : (isLogin ? 'Login to access your account' : 'Sign up to start booking flights'))}
+                : (isLogin ? tr('Login to access your account', 'अपने खाते में जाने के लिए लॉगिन करें') : tr('Sign up to start booking flights', 'उड़ानें बुक करने के लिए साइन अप करें')))}
           </p>
         </div>
 
@@ -309,7 +309,7 @@ function LoginPage({ setUser }) {
               ) : (
                 <>
                   <CheckCircle className="mr-2 h-5 w-5" />
-                  Verify Code
+                  {tr('Verify Code', 'कोड सत्यापित करें')}
                 </>
               )}
             </Button>
@@ -325,7 +325,7 @@ function LoginPage({ setUser }) {
               }}
               className="w-full text-slate-400 hover:text-white"
             >
-              Back to Login
+              {tr('Back to Login', 'लॉगिन पर वापस जाएं')}
             </Button>
           </form>
         ) : otpRequired ? (
@@ -370,7 +370,7 @@ function LoginPage({ setUser }) {
               />
               <label htmlFor="trustDevice" className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
                 <Smartphone className="h-4 w-4 text-lime" />
-                Trust this device for 30 days
+                {tr('Trust this device for 30 days', 'इस डिवाइस पर 30 दिनों तक भरोसा करें')}
               </label>
             </div>
 
@@ -386,7 +386,7 @@ function LoginPage({ setUser }) {
               ) : (
                 <>
                   <CheckCircle className="h-5 w-5 mr-2" />
-                  Verify & Login
+                  {tr('Verify & Login', 'सत्यापित करें और लॉगिन करें')}
                 </>
               )}
             </Button>
@@ -401,7 +401,7 @@ function LoginPage({ setUser }) {
               >
                 {otpCooldown > 0 
                   ? `Resend OTP in ${otpCooldown}s` 
-                  : "Didn't receive code? Resend OTP"}
+                  : tr("Didn't receive code? Resend OTP", 'कोड नहीं मिला? OTP फिर से भेजें')}
               </button>
             </div>
 
@@ -415,7 +415,7 @@ function LoginPage({ setUser }) {
                 }}
                 className="text-slate-400 hover:text-white text-sm"
               >
-                ← Back to Login
+                {tr('← Back to Login', '← लॉगिन पर वापस जाएं')}
               </button>
             </div>
           </form>
@@ -425,7 +425,7 @@ function LoginPage({ setUser }) {
             {!isLogin && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="user_type" className="text-white">I am a *</Label>
+                  <Label htmlFor="user_type" className="text-white">{tr('I am a *', 'मैं हूं *')}</Label>
                   <select
                     id="user_type"
                     name="user_type"
@@ -437,13 +437,13 @@ function LoginPage({ setUser }) {
                     className="w-full h-10 px-3 rounded-md bg-slate-900 border-slate-700 text-white"
                     data-testid="user-type-select"
                   >
-                    <option value="customer">Customer (Book Flights)</option>
-                    <option value="operator">Operator (Provide Services)</option>
+                    <option value="customer">{tr('Customer (Book Flights)', 'ग्राहक (उड़ानें बुक करें)')}</option>
+                    <option value="operator">{tr('Operator (Provide Services)', 'ऑपरेटर (सेवाएं दें)')}</option>
                   </select>
                 </div>
 
               <div className="space-y-2">
-                <Label htmlFor="full_name" className="text-white">Full Name</Label>
+                <Label htmlFor="full_name" className="text-white">{tr('Full Name', 'पूरा नाम')}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <Input
@@ -459,7 +459,7 @@ function LoginPage({ setUser }) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-white">Phone</Label>
+                <Label htmlFor="phone" className="text-white">{tr('Phone', 'फ़ोन')}</Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <Input
@@ -478,7 +478,7 @@ function LoginPage({ setUser }) {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-white">Email</Label>
+            <Label htmlFor="email" className="text-white">{tr('Email', 'ईमेल')}</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
               <Input
@@ -496,7 +496,7 @@ function LoginPage({ setUser }) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-white">Password</Label>
+            <Label htmlFor="password" className="text-white">{tr('Password', 'पासवर्ड')}</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
               <Input
@@ -535,7 +535,7 @@ function LoginPage({ setUser }) {
             disabled={loading}
             data-testid="submit-btn"
           >
-            {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Create Account')}
+            {loading ? tr('Please wait...', 'कृपया प्रतीक्षा करें...') : (isLogin ? tr('Login', 'लॉगिन') : tr('Create Account', 'खाता बनाएं'))}
           </Button>
 
           {/* Divider */}
@@ -562,7 +562,7 @@ function LoginPage({ setUser }) {
               className="text-lime hover:text-lime/80 text-sm"
               data-testid="toggle-auth-btn"
             >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Login"}
+              {isLogin ? tr("Don't have an account? Sign up", 'खाता नहीं है? साइन अप करें') : tr('Already have an account? Login', 'पहले से खाता है? लॉगिन करें')}
             </button>
           </div>
         </form>

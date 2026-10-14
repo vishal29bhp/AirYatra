@@ -148,7 +148,7 @@ export default function PaymentSuccessPage() {
             {/* Amount display with animation */}
             {txn?.amount && (
               <div className="mt-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-sm p-4 border border-green-500/30">
-                <p className="text-slate-400 text-sm">Amount Paid</p>
+                <p className="text-slate-400 text-sm">{tr('Amount Paid', 'भुगतान की गई राशि')}</p>
                 <p className="text-3xl font-bold text-green-400 mt-1">
                   ₹{Number(txn.amount).toLocaleString()}
                 </p>
@@ -157,7 +157,7 @@ export default function PaymentSuccessPage() {
             
             <p className="text-slate-500 text-sm mt-4 flex items-center justify-center gap-2">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              Confirmation email aapko bhej diya gaya hai
+              {tr('A confirmation email has been sent to you', 'पुष्टि ईमेल आपको भेज दिया गया है')}
             </p>
             
             <div className="mt-6 space-y-3">
@@ -203,7 +203,7 @@ export default function PaymentSuccessPage() {
                 onClick={() => navigate('/customer')} 
                 className="w-full text-slate-400 hover:text-white hover:bg-slate-800"
               >
-                Go to Dashboard
+                {tr('Go to Dashboard', 'डैशबोर्ड पर जाएं')}
               </Button>
             </div>
           </>
@@ -215,14 +215,14 @@ export default function PaymentSuccessPage() {
               <AlertCircle className="h-16 w-16 text-red-400 mx-auto animate-pulse" />
             </div>
             <h1 className="text-xl font-bold text-white">
-              Payment {state === 'error' ? 'session not found' : 'failed / expired'}
+              {tr('Payment', 'भुगतान')} {state === 'error' ? tr('session not found', 'सत्र नहीं मिला') : tr('failed / expired', 'विफल / समाप्त')}
             </h1>
-            <p className="text-slate-400 text-sm mt-2">Koi charge nahi hua hai. Dobara try karein.</p>
+            <p className="text-slate-400 text-sm mt-2">{tr('You have not been charged. Please try again.', 'कोई शुल्क नहीं लिया गया है। कृपया दोबारा प्रयास करें।')}</p>
             <Button 
               onClick={() => navigate(txn?.booking_id ? `/customer/payment/${txn.booking_id}` : '/customer')} 
               className="w-full mt-6 bg-lime text-black hover:bg-lime/90"
             >
-              Try Again
+              {tr('Try Again', 'फिर से प्रयास करें')}
             </Button>
           </>
         )}
@@ -230,15 +230,15 @@ export default function PaymentSuccessPage() {
         {state === 'timeout' && (
           <>
             <AlertCircle className="h-16 w-16 text-yellow-400 mx-auto mb-4 animate-pulse" />
-            <h1 className="text-xl font-bold text-white">Still processing...</h1>
+            <h1 className="text-xl font-bold text-white">{tr('Still processing...', 'अभी भी प्रोसेस हो रहा है...')}</h1>
             <p className="text-slate-400 text-sm mt-2">
-              Payment status confirm hone mein time lag raha hai. Aapki booking par status apne aap update ho jayega.
+              {tr('Confirming the payment status is taking a while. The status on your booking will update automatically.', 'भुगतान की स्थिति की पुष्टि में समय लग रहा है। आपकी बुकिंग पर स्थिति अपने आप अपडेट हो जाएगी।')}
             </p>
             <Button 
               onClick={() => navigate('/customer')} 
               className="w-full mt-6 bg-lime text-black hover:bg-lime/90"
             >
-              Go to Dashboard
+              {tr('Go to Dashboard', 'डैशबोर्ड पर जाएं')}
             </Button>
           </>
         )}

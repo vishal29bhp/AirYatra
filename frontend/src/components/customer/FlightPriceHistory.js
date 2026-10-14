@@ -8,16 +8,17 @@ import {
   DollarSign, ArrowRight, Sparkles, Clock, Info
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from 'recharts';
+import { tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Popular routes (can be expanded)
 const POPULAR_ROUTES = [
-  { from: 'Mumbai', to: 'Shirdi', label: 'Mumbai → Shirdi' },
-  { from: 'Mumbai', to: 'Pune', label: 'Mumbai → Pune' },
-  { from: 'Delhi', to: 'Agra', label: 'Delhi → Agra' },
-  { from: 'Bangalore', to: 'Coorg', label: 'Bangalore → Coorg' },
-  { from: 'Chennai', to: 'Tirupati', label: 'Chennai → Tirupati' },
+  { from: 'Mumbai', to: 'Shirdi', label: tr('Mumbai → Shirdi', 'मुंबई → शिर्डी') },
+  { from: 'Mumbai', to: 'Pune', label: tr('Mumbai → Pune', 'मुंबई → पुणे') },
+  { from: 'Delhi', to: 'Agra', label: tr('Delhi → Agra', 'दिल्ली → आगरा') },
+  { from: 'Bangalore', to: 'Coorg', label: tr('Bangalore → Coorg', 'बेंगलुरु → कूर्ग') },
+  { from: 'Chennai', to: 'Tirupati', label: tr('Chennai → Tirupati', 'चेन्नई → तिरुपति') },
 ];
 
 export default function FlightPriceHistory({ user }) {
@@ -83,9 +84,9 @@ export default function FlightPriceHistory({ user }) {
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
             <TrendingUp className="h-7 w-7 text-green-500" />
-            Price Trends
+            {tr('Price Trends', 'कीमत रुझान')}
           </h1>
-          <p className="text-slate-400 mt-1">Track price history to find the best time to book</p>
+          <p className="text-slate-400 mt-1">{tr('Track price history to find the best time to book', 'बुकिंग का सबसे अच्छा समय जानने के लिए कीमत इतिहास देखें')}</p>
         </div>
         <Button 
           onClick={loadPriceHistory} 
@@ -93,7 +94,7 @@ export default function FlightPriceHistory({ user }) {
           className="border-slate-600 text-slate-300 hover:bg-slate-800"
         >
           <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
+          {tr('Refresh', 'रीफ़्रेश करें')}
         </Button>
       </div>
 
@@ -103,7 +104,7 @@ export default function FlightPriceHistory({ user }) {
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2">
               <MapPin className="h-5 w-5 text-lime" />
-              <span className="text-slate-400">Select Route:</span>
+              <span className="text-slate-400">{tr('Select Route:', 'मार्ग चुनें:')}</span>
             </div>
             <Select
               value={selectedRoute.label}
@@ -139,13 +140,13 @@ export default function FlightPriceHistory({ user }) {
               <CardContent className="p-5">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-slate-300 text-sm font-medium">Current Price</p>
+                    <p className="text-slate-300 text-sm font-medium">{tr('Current Price', 'वर्तमान कीमत')}</p>
                     <p className="text-3xl font-bold text-white mt-1">
                       {formatCurrency(priceData?.current_price)}
                     </p>
                     <div className={`flex items-center gap-1 mt-1 ${getTrendColor(priceData?.trend_percent)}`}>
                       {getTrendIcon(priceData?.trend_percent)}
-                      <span className="text-sm">{Math.abs(priceData?.trend_percent || 0)}% vs last month</span>
+                      <span className="text-sm">{Math.abs(priceData?.trend_percent || 0)}{tr('% vs last month', '% पिछले महीने की तुलना में')}</span>
                     </div>
                   </div>
                   <div className="p-3 bg-white/20 rounded-sm">
@@ -159,7 +160,7 @@ export default function FlightPriceHistory({ user }) {
               <CardContent className="p-5">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-green-100 text-sm font-medium">Lowest Price</p>
+                    <p className="text-green-100 text-sm font-medium">{tr('Lowest Price', 'सबसे कम कीमत')}</p>
                     <p className="text-3xl font-bold text-white mt-1">
                       {formatCurrency(priceData?.lowest_price)}
                     </p>
@@ -176,7 +177,7 @@ export default function FlightPriceHistory({ user }) {
               <CardContent className="p-5">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-red-100 text-sm font-medium">Highest Price</p>
+                    <p className="text-red-100 text-sm font-medium">{tr('Highest Price', 'सबसे ज़्यादा कीमत')}</p>
                     <p className="text-3xl font-bold text-white mt-1">
                       {formatCurrency(priceData?.highest_price)}
                     </p>
@@ -193,11 +194,11 @@ export default function FlightPriceHistory({ user }) {
               <CardContent className="p-5">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-purple-100 text-sm font-medium">Average Price</p>
+                    <p className="text-purple-100 text-sm font-medium">{tr('Average Price', 'औसत कीमत')}</p>
                     <p className="text-3xl font-bold text-white mt-1">
                       {formatCurrency(priceData?.avg_price)}
                     </p>
-                    <p className="text-purple-200 text-sm mt-1">Last 6 months</p>
+                    <p className="text-purple-200 text-sm mt-1">{tr('Last 6 months', 'पिछले 6 महीने')}</p>
                   </div>
                   <div className="p-3 bg-white/20 rounded-sm">
                     <Minus className="h-6 w-6 text-white" />
@@ -217,8 +218,8 @@ export default function FlightPriceHistory({ user }) {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-white font-semibold flex items-center gap-2">
-                      <span>💡 Best Time to Book</span>
-                      <Badge className="bg-green-500/20 text-green-400 border-0">Tip</Badge>
+                      <span>{tr('💡 Best Time to Book', '💡 बुकिंग का सबसे अच्छा समय')}</span>
+                      <Badge className="bg-green-500/20 text-green-400 border-0">{tr('Tip', 'सुझाव')}</Badge>
                     </h3>
                     <p className="text-slate-300 mt-1">
                       Prices are typically lowest in <strong className="text-green-400">{bestTime.month}</strong> at around {formatCurrency(bestTime.avg_price)}. 
@@ -235,7 +236,7 @@ export default function FlightPriceHistory({ user }) {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-lime" />
-                Price History (Last 6 Months)
+                {tr('Price History (Last 6 Months)', 'कीमत इतिहास (पिछले 6 महीने)')}
               </CardTitle>
               <CardDescription className="text-slate-400">
                 {selectedRoute.from} → {selectedRoute.to}
@@ -267,8 +268,8 @@ export default function FlightPriceHistory({ user }) {
                 <div className="h-72 flex items-center justify-center text-slate-500">
                   <div className="text-center">
                     <Info className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                    <p>No historical data available for this route</p>
-                    <p className="text-sm mt-1">Check back after some bookings are made</p>
+                    <p>{tr('No historical data available for this route', 'इस मार्ग का कोई पुराना डेटा उपलब्ध नहीं')}</p>
+                    <p className="text-sm mt-1">{tr('Check back after some bookings are made', 'कुछ बुकिंग होने के बाद फिर देखें')}</p>
                   </div>
                 </div>
               )}
@@ -280,7 +281,7 @@ export default function FlightPriceHistory({ user }) {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Clock className="h-5 w-5 text-amber" />
-                Booking Tips
+                {tr('Booking Tips', 'बुकिंग सुझाव')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -289,22 +290,22 @@ export default function FlightPriceHistory({ user }) {
                   <div className="w-10 h-10 bg-amber/20 rounded-lg flex items-center justify-center mb-3">
                     <Calendar className="h-5 w-5 text-amber" />
                   </div>
-                  <h4 className="text-white font-semibold mb-1">Book Early</h4>
-                  <p className="text-slate-400 text-sm">Book 2-4 weeks in advance for better rates and availability</p>
+                  <h4 className="text-white font-semibold mb-1">{tr('Book Early', 'जल्दी बुक करें')}</h4>
+                  <p className="text-slate-400 text-sm">{tr('Book 2-4 weeks in advance for better rates and availability', 'बेहतर दरों और उपलब्धता के लिए 2-4 सप्ताह पहले बुक करें')}</p>
                 </div>
                 <div className="bg-slate-900/50 rounded-sm p-4">
                   <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
                     <TrendingDown className="h-5 w-5 text-green-400" />
                   </div>
-                  <h4 className="text-white font-semibold mb-1">Avoid Peak Season</h4>
-                  <p className="text-slate-400 text-sm">Prices are higher during festivals and long weekends</p>
+                  <h4 className="text-white font-semibold mb-1">{tr('Avoid Peak Season', 'व्यस्त मौसम से बचें')}</h4>
+                  <p className="text-slate-400 text-sm">{tr('Prices are higher during festivals and long weekends', 'त्योहारों और लंबे सप्ताहांत में कीमतें ज़्यादा होती हैं')}</p>
                 </div>
                 <div className="bg-slate-900/50 rounded-sm p-4">
                   <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-3">
                     <Sparkles className="h-5 w-5 text-purple-400" />
                   </div>
-                  <h4 className="text-white font-semibold mb-1">Use Loyalty Points</h4>
-                  <p className="text-slate-400 text-sm">Earn and redeem points for discounts on future bookings</p>
+                  <h4 className="text-white font-semibold mb-1">{tr('Use Loyalty Points', 'लॉयल्टी पॉइंट का उपयोग करें')}</h4>
+                  <p className="text-slate-400 text-sm">{tr('Earn and redeem points for discounts on future bookings', 'पॉइंट कमाएं और आगे की बुकिंग पर छूट के लिए भुनाएं')}</p>
                 </div>
               </div>
             </CardContent>

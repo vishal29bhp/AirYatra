@@ -167,15 +167,15 @@ function VillageLandingDocuments({
     const rejectedCount = Object.values(documents).filter(d => d.status === 'rejected').length;
     
     if (approvedCount === REQUIRED_DOCUMENTS.length) {
-      return { status: 'approved', message: 'All documents approved! Pilot can proceed with flight.' };
+      return { status: 'approved', message: tr('All documents approved! Pilot can proceed with flight.', 'सभी दस्तावेज़ स्वीकृत! पायलट उड़ान भर सकता है।') };
     }
     if (rejectedCount > 0) {
-      return { status: 'rejected', message: 'Some documents rejected. Please re-upload.' };
+      return { status: 'rejected', message: tr('Some documents rejected. Please re-upload.', 'कुछ दस्तावेज़ अस्वीकृत हुए। कृपया फिर से अपलोड करें।') };
     }
     if (uploadedCount < REQUIRED_DOCUMENTS.length) {
       return { status: 'pending', message: `${uploadedCount}/${REQUIRED_DOCUMENTS.length} documents uploaded` };
     }
-    return { status: 'under_review', message: 'All documents submitted. Under review.' };
+    return { status: 'under_review', message: tr('All documents submitted. Under review.', 'सभी दस्तावेज़ जमा हो गए। समीक्षा जारी है।') };
   };
 
   const overall = getOverallStatus();
@@ -217,7 +217,7 @@ function VillageLandingDocuments({
         {REQUIRED_DOCUMENTS.map((doc) => {
           const uploadedDoc = documents[doc.id];
           const isUploading = uploading[doc.id];
-          const docStatus = uploadedDoc?.status || 'pending';
+          const docStatus = uploadedDoc?.status || tr('pending', 'लंबित');
           const Icon = doc.icon;
 
           return (
@@ -249,10 +249,10 @@ function VillageLandingDocuments({
                   <div className="flex items-center gap-2">
                     <h4 className="text-white font-medium">{tr(doc.name, doc.name_hi)}</h4>
                     {doc.required && (
-                      <span className="text-red-400 text-xs">*Required</span>
+                      <span className="text-red-400 text-xs">{tr('*Required', '*आवश्यक')}</span>
                     )}
                   </div>
-                  <p className="text-slate-500 text-xs mt-1">{doc.description}</p>
+                  <p className="text-slate-500 text-xs mt-1">{tr(doc.description, doc.description_hi)}</p>
 
                   {/* Status Badge */}
                   <div className={`inline-flex items-center gap-1 mt-2 px-2 py-1 rounded text-xs ${statusConfig[docStatus]?.bg} ${statusConfig[docStatus]?.color}`}>
@@ -310,7 +310,7 @@ function VillageLandingDocuments({
                           <Upload className="h-4 w-4" />
                         )}
                         <span className="text-sm">
-                          {isUploading ? 'Uploading...' : docStatus === 'rejected' ? 'Re-upload' : 'Upload'}
+                          {isUploading ? tr('Uploading...', 'अपलोड हो रहा है...') : docStatus === 'rejected' ? 'Re-upload' : tr('Upload', 'अपलोड करें')}
                         </span>
                       </div>
                     </label>
@@ -338,8 +338,7 @@ function VillageLandingDocuments({
       {/* Help Note */}
       <div className="p-4 bg-slate-900/50 border-t border-slate-700">
         {!isHindi() && (<p className="text-slate-400 text-xs">
-          📝 <strong>Note:</strong> Upload clear scanned copies or photos of documents. 
-          Accepted formats: PDF, JPG, PNG (Max 5MB each).
+          📝 <strong>Note:</strong> {tr('Upload clear scanned copies or photos of documents. Accepted formats: PDF, JPG, PNG (Max 5MB each).', 'दस्तावेज़ों की साफ़ स्कैन कॉपी या फ़ोटो अपलोड करें। मान्य फ़ॉर्मेट: PDF, JPG, PNG (हर फ़ाइल अधिकतम 5MB)।')}
         </p>)}
         {isHindi() && (<p className="text-slate-500 text-xs mt-1">
           नोट: दस्तावेज़ों की स्पष्ट स्कैन कॉपी या फोटो अपलोड करें। 

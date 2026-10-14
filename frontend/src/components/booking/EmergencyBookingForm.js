@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import LandingPointSelector from '../shared/LandingPointSelector';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -102,17 +102,17 @@ const EmergencyBookingForm = ({
     e.preventDefault();
     
     if (!user) {
-      toast.error('Please login to create emergency booking');
+      toast.error(tr('Please login to create emergency booking', 'आपातकालीन बुकिंग के लिए कृपया लॉगिन करें'));
       return;
     }
     
     if (!formData.from_location || !formData.to_location) {
-      toast.error('Please select pickup and drop locations');
+      toast.error(tr('Please select pickup and drop locations', 'कृपया पिकअप और ड्रॉप स्थान चुनें'));
       return;
     }
     
     if (!formData.emergency_contact_name || !formData.emergency_contact_phone) {
-      toast.error('Emergency contact details required');
+      toast.error(tr('Emergency contact details required', 'आपातकालीन संपर्क विवरण आवश्यक है'));
       return;
     }
     
@@ -137,9 +137,9 @@ const EmergencyBookingForm = ({
       
       toast.success(
         <div>
-          <p className="font-semibold">🚨 Emergency Request Sent!</p>
+          <p className="font-semibold">{tr('🚨 Emergency Request Sent!', '🚨 आपातकालीन अनुरोध भेजा गया!')}</p>
           <p className="text-sm">{data.message}</p>
-          <p className="text-xs mt-1">Request #: {data.emergency_number}</p>
+          <p className="text-xs mt-1">{tr('Request #:', 'अनुरोध #:')} {data.emergency_number}</p>
         </div>
       );
       
@@ -181,7 +181,7 @@ const EmergencyBookingForm = ({
               {bi("Emergency Booking / आपातकालीन बुकिंग")}
             </h2>
             <p className="text-red-400/70 text-sm">
-              Priority queue + Instant operator notification
+              {tr('Priority queue + Instant operator notification', 'प्राथमिकता कतार + ऑपरेटर को तुरंत सूचना')}
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ const EmergencyBookingForm = ({
                     {value.label}
                   </div>
                   <div className="text-slate-400 text-sm mt-1">
-                    +{value.surcharge_percent}% surcharge
+                    +{value.surcharge_percent}{tr('% surcharge', '% अधिभार')}
                   </div>
                 </button>
               ))}
@@ -266,7 +266,7 @@ const EmergencyBookingForm = ({
             </CardHeader>
             <CardContent>
               <LandingPointSelector
-                label="Select pickup point"
+                label={tr('Select pickup point', 'पिकअप स्थान चुनें')}
                 type="pickup"
                 onSelect={handlePickupSelect}
                 selectedPoint={pickupPoint}
@@ -284,7 +284,7 @@ const EmergencyBookingForm = ({
             </CardHeader>
             <CardContent>
               <LandingPointSelector
-                label="Select drop point"
+                label={tr('Select drop point', 'ड्रॉप स्थान चुनें')}
                 type="drop"
                 onSelect={handleDropSelect}
                 selectedPoint={dropPoint}
@@ -317,20 +317,20 @@ const EmergencyBookingForm = ({
               </div>
               
               <div>
-                <Label className="text-slate-300 mb-2 block">Aircraft Type</Label>
+                <Label className="text-slate-300 mb-2 block">{tr('Aircraft Type', 'विमान का प्रकार')}</Label>
                 <select
                   value={formData.aircraft_type}
                   onChange={(e) => handleInputChange('aircraft_type', e.target.value)}
                   className="w-full p-2 bg-slate-900 border border-slate-600 rounded-md text-white"
                 >
-                  <option value="any">Any Available</option>
-                  <option value="helicopter">Helicopter</option>
-                  <option value="light_jet">Light Jet</option>
+                  <option value="any">{tr('Any Available', 'जो भी उपलब्ध हो')}</option>
+                  <option value="helicopter">{tr('Helicopter', 'हेलीकॉप्टर')}</option>
+                  <option value="light_jet">{tr('Light Jet', 'लाइट जेट')}</option>
                 </select>
               </div>
               
               <div>
-                <Label className="text-slate-300 mb-2 block">Required By (Optional)</Label>
+                <Label className="text-slate-300 mb-2 block">{tr('Required By (Optional)', 'कब तक चाहिए (वैकल्पिक)')}</Label>
                 <Input
                   type="datetime-local"
                   value={formData.required_by}
@@ -341,11 +341,11 @@ const EmergencyBookingForm = ({
             </div>
             
             <div className="mt-4">
-              <Label className="text-slate-300 mb-2 block">Special Requirements</Label>
+              <Label className="text-slate-300 mb-2 block">{tr('Special Requirements', 'विशेष आवश्यकताएं')}</Label>
               <Textarea
                 value={formData.special_requirements}
                 onChange={(e) => handleInputChange('special_requirements', e.target.value)}
-                placeholder="Medical equipment needed, stretcher required, oxygen support..."
+                placeholder={tr('Medical equipment needed, stretcher required, oxygen support...', 'चिकित्सा उपकरण, स्ट्रेचर, ऑक्सीजन सहायता...')}
                 className="bg-slate-900 border-slate-600 text-white"
                 rows={2}
               />
@@ -364,18 +364,18 @@ const EmergencyBookingForm = ({
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label className="text-slate-300 mb-2 block">Contact Name *</Label>
+                <Label className="text-slate-300 mb-2 block">{tr('Contact Name *', 'संपर्क नाम *')}</Label>
                 <Input
                   value={formData.emergency_contact_name}
                   onChange={(e) => handleInputChange('emergency_contact_name', e.target.value)}
-                  placeholder="Full name"
+                  placeholder={tr('Full name', 'पूरा नाम')}
                   className="bg-slate-900 border-slate-600 text-white"
                   required
                 />
               </div>
               
               <div>
-                <Label className="text-slate-300 mb-2 block">Phone Number *</Label>
+                <Label className="text-slate-300 mb-2 block">{tr('Phone Number *', 'फ़ोन नंबर *')}</Label>
                 <Input
                   type="tel"
                   value={formData.emergency_contact_phone}
@@ -396,8 +396,7 @@ const EmergencyBookingForm = ({
             <div className="text-yellow-400 text-sm">
               <p className="font-medium">{bi("Emergency Surcharge Notice / आपातकालीन अधिभार")}</p>
               <p className="mt-1 text-yellow-400/70">
-                Emergency bookings include a {urgencyLevels[formData.urgency_level]?.surcharge_percent}% priority surcharge 
-                for immediate processing and dedicated operator response.
+                {tr('Emergency bookings include a', 'आपातकालीन बुकिंग में')} {urgencyLevels[formData.urgency_level]?.surcharge_percent}{tr('% priority surcharge for immediate processing and dedicated operator response.', '% प्राथमिकता अधिभार शामिल है, ताकि तुरंत प्रोसेसिंग और समर्पित ऑपरेटर प्रतिक्रिया मिले।')}
               </p>
             </div>
           </div>
@@ -412,7 +411,7 @@ const EmergencyBookingForm = ({
               onClick={onCancel}
               className="flex-1 border-slate-600"
             >
-              Cancel
+              {tr('Cancel', 'रद्द करें')}
             </Button>
           )}
           <Button 
@@ -423,12 +422,12 @@ const EmergencyBookingForm = ({
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Sending...
+                {tr('Sending...', 'भेजा जा रहा है...')}
               </>
             ) : (
               <>
                 <Siren className="h-4 w-4 mr-2" />
-                Send Emergency Request
+                {tr('Send Emergency Request', 'आपातकालीन अनुरोध भेजें')}
               </>
             )}
           </Button>

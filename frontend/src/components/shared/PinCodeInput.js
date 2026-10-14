@@ -3,6 +3,7 @@ import { MapPin, Loader2, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { pincodeAPI } from '../../services/api';
+import { tr } from '../../lib/bilingual';
 
 function PinCodeInput({ 
   label, 
@@ -115,7 +116,7 @@ function PinCodeInput({
       {locationData && (
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-2">
-            <Label className="text-slate-400 text-sm">State</Label>
+            <Label className="text-slate-400 text-sm">{tr('State', 'राज्य')}</Label>
             <Input
               value={locationData.state}
               readOnly
@@ -123,7 +124,7 @@ function PinCodeInput({
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-slate-400 text-sm">District</Label>
+            <Label className="text-slate-400 text-sm">{tr('District', 'ज़िला')}</Label>
             <Input
               value={locationData.district}
               readOnly
@@ -136,7 +137,7 @@ function PinCodeInput({
       {/* Area Selection */}
       {areas.length > 0 && (
         <div className="space-y-2">
-          <Label className="text-slate-400 text-sm">Area / Village</Label>
+          <Label className="text-slate-400 text-sm">{tr('Area / Village', 'क्षेत्र / गांव')}</Label>
           <select
             value={selectedArea}
             onChange={handleAreaChange}
@@ -154,7 +155,7 @@ function PinCodeInput({
       {/* Coordinates Display */}
       {locationData?.latitude && (
         <div className="text-xs text-slate-500">
-          📍 Coordinates: {locationData.latitude?.toFixed(4)}, {locationData.longitude?.toFixed(4)}
+          {tr('📍 Coordinates:', '📍 निर्देशांक:')} {locationData.latitude?.toFixed(4)}, {locationData.longitude?.toFixed(4)}
         </div>
       )}
     </div>

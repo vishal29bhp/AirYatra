@@ -15,12 +15,12 @@ import VillageLandingDocuments from './VillageLandingDocuments';
 import { bi, tr } from '../../lib/bilingual';
 
 const STATUS_STEPS = [
-  { id: 'pending_acceptance', label: 'Inquiry Sent', labelHi: 'इंक्वायरी भेजी गई', icon: Clock },
-  { id: 'quote_received', label: 'Quotes Received', labelHi: 'कोट प्राप्त', icon: Bell },
-  { id: 'quote_accepted', label: 'Quote Accepted', labelHi: 'कोट स्वीकृत', icon: Check },
-  { id: 'passenger_details_filled', label: 'Details Filled', labelHi: 'विवरण भरा', icon: Users },
-  { id: 'payment_pending', label: 'Payment', labelHi: 'भुगतान', icon: CreditCard },
-  { id: 'confirmed', label: 'Confirmed', labelHi: 'पुष्टि', icon: Check },
+  { id: 'pending_acceptance', label: tr('Inquiry Sent', 'पूछताछ भेजी गई'), labelHi: 'इंक्वायरी भेजी गई', icon: Clock },
+  { id: 'quote_received', label: tr('Quotes Received', 'कोटेशन मिले'), labelHi: 'कोट प्राप्त', icon: Bell },
+  { id: 'quote_accepted', label: tr('Quote Accepted', 'कोटेशन स्वीकृत'), labelHi: 'कोट स्वीकृत', icon: Check },
+  { id: 'passenger_details_filled', label: tr('Details Filled', 'विवरण भरा गया'), labelHi: 'विवरण भरा', icon: Users },
+  { id: 'payment_pending', label: tr('Payment', 'भुगतान'), labelHi: 'भुगतान', icon: CreditCard },
+  { id: 'confirmed', label: tr('Confirmed', 'पुष्टि हुई'), labelHi: 'पुष्टि', icon: Check },
 ];
 
 function InquiryStatus({ user }) {
@@ -46,7 +46,7 @@ function InquiryStatus({ user }) {
       a.click();
       URL.revokeObjectURL(url);
       toast.success(bi('Receipt downloaded / रसीद डाउनलोड हो गई'));
-    } catch (e) { toast.error('Failed to download receipt'); }
+    } catch (e) { toast.error(tr('Failed to download receipt', 'रसीद डाउनलोड नहीं हो सकी')); }
   };
   const [loading, setLoading] = useState(true);
   const [showQuotesDialog, setShowQuotesDialog] = useState(false);
@@ -82,7 +82,7 @@ function InquiryStatus({ user }) {
         }
       }
     } catch (error) {
-      toast.error('Failed to load inquiry status');
+      toast.error(tr('Failed to load inquiry status', 'पूछताछ की स्थिति लोड नहीं हो सकी'));
       console.error(error);
     } finally {
       setLoading(false);
@@ -139,9 +139,9 @@ function InquiryStatus({ user }) {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <p className="text-white text-xl">Inquiry not found</p>
+          <p className="text-white text-xl">{tr('Inquiry not found', 'पूछताछ नहीं मिली')}</p>
           <Button onClick={() => navigate('/customer')} className="mt-4">
-            Go to Dashboard
+            {tr('Go to Dashboard', 'डैशबोर्ड पर जाएं')}
           </Button>
         </div>
       </div>
@@ -207,7 +207,7 @@ function InquiryStatus({ user }) {
             <div className="bg-slate-800/50 rounded-lg p-3">
               <p className="text-slate-400 text-xs mb-1">{bi("Aircraft / विमान")}</p>
               <p className="text-white font-bold text-sm flex items-center gap-1">
-                <Plane className="h-4 w-4 text-lime" /> {inquiry.aircraft_type === 'helicopter' ? 'Helicopter' : 'Plane'}
+                <Plane className="h-4 w-4 text-lime" /> {inquiry.aircraft_type === 'helicopter' ? tr('Helicopter', 'हेलीकॉप्टर') : tr('Plane', 'विमान')}
               </p>
             </div>
             <div className="bg-slate-800/50 rounded-lg p-3">
@@ -277,14 +277,14 @@ function InquiryStatus({ user }) {
           <div className="mt-4 pt-4 border-t border-slate-700">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-slate-400 text-sm">Operator Status:</span>
+                <span className="text-slate-400 text-sm">{tr('Operator Status:', 'ऑपरेटर स्थिति:')}</span>
                 {quotes.length > 0 ? (
                   <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
-                    ✅ {quotes.length} Operator(s) Accepted
+                    ✅ {quotes.length} {tr('Operator(s) Accepted', 'ऑपरेटर ने स्वीकार किया')}
                   </span>
                 ) : (
                   <span className="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium animate-pulse">
-                    ⏳ Waiting for Operators...
+                    {tr('⏳ Waiting for Operators...', '⏳ ऑपरेटरों की प्रतीक्षा...')}
                   </span>
                 )}
               </div>
@@ -294,7 +294,7 @@ function InquiryStatus({ user }) {
                 size="sm"
                 className="border-slate-600 text-slate-300 hover:bg-slate-700"
               >
-                <RefreshCw className="h-4 w-4 mr-1" /> Refresh
+                <RefreshCw className="h-4 w-4 mr-1" /> {tr('Refresh', 'रीफ़्रेश करें')}
               </Button>
             </div>
           </div>
@@ -363,13 +363,13 @@ function InquiryStatus({ user }) {
                 {bi("Quotes Received! / कोट प्राप्त!")}
               </h3>
               <p className="text-slate-300 mt-2">
-                {quotes.length} operator(s) have sent you quotes. Please review and accept one.
+                {quotes.length} {tr('operator(s) have sent you quotes. Please review and accept one.', 'ऑपरेटरों ने आपको कोटेशन भेजे हैं। कृपया देखें और एक स्वीकार करें।')}
               </p>
               <Button 
                 onClick={() => setShowQuotesDialog(true)} 
                 className="mt-4 bg-slate-700 hover:bg-slate-600"
               >
-                <DollarSign className="h-4 w-4 mr-2" /> View Quotes ({quotes.length})
+                <DollarSign className="h-4 w-4 mr-2" /> {tr('View Quotes (', 'कोटेशन देखें (')}{quotes.length})
               </Button>
             </div>
           )}
@@ -381,13 +381,13 @@ function InquiryStatus({ user }) {
                 {bi("Booking Accepted! / बुकिंग स्वीकृत!")}
               </h3>
               <p className="text-slate-300 mt-2">
-                Please fill passenger details to proceed with payment.
+                {tr('Please fill passenger details to proceed with payment.', 'भुगतान के लिए कृपया यात्री विवरण भरें।')}
               </p>
               <Button 
                 onClick={() => setShowPassengerForm(true)} 
                 className="mt-4 bg-lime text-black hover:bg-lime/90"
               >
-                <Users className="h-4 w-4 mr-2" /> Fill Passenger Details
+                <Users className="h-4 w-4 mr-2" /> {tr('Fill Passenger Details', 'यात्री विवरण भरें')}
               </Button>
             </div>
           )}
@@ -402,13 +402,13 @@ function InquiryStatus({ user }) {
                 Passenger details saved. Complete {paymentInfo?.advance_percent || 50}% advance payment to confirm booking.
               </p>
               <div className="mt-4 p-4 bg-slate-800/50 rounded-lg inline-block">
-                <p className="text-slate-400 text-sm">Amount to Pay:</p>
+                <p className="text-slate-400 text-sm">{tr('Amount to Pay:', 'देय राशि:')}</p>
                 <p className="text-lime text-3xl font-bold">
                   ₹{(paymentInfo?.advance_amount || inquiry.estimated_price)?.toLocaleString()}
                 </p>
                 {paymentInfo?.advance_percent < 100 && (
                   <p className="text-slate-500 text-xs mt-1">
-                    Remaining ₹{paymentInfo?.remaining_amount?.toLocaleString()} before flight
+                    {tr('Remaining ₹', 'शेष ₹')}{paymentInfo?.remaining_amount?.toLocaleString()} {tr('before flight', 'उड़ान से पहले')}
                   </p>
                 )}
               </div>
@@ -416,7 +416,7 @@ function InquiryStatus({ user }) {
                 onClick={handleProceedToPayment} 
                 className="mt-4 bg-green-600 hover:bg-green-700"
               >
-                <CreditCard className="h-4 w-4 mr-2" /> Pay Now
+                <CreditCard className="h-4 w-4 mr-2" /> {tr('Pay Now', 'अभी भुगतान करें')}
               </Button>
             </div>
           )}
@@ -431,8 +431,8 @@ function InquiryStatus({ user }) {
               </h3>
               <p className="text-slate-300 mt-2">
                 {inquiry.permission_required 
-                  ? 'Please upload required documents for village landing approval.'
-                  : 'Your booking has been confirmed. Have a safe flight!'}
+                  ? tr('Please upload required documents for village landing approval.', 'गांव में लैंडिंग की स्वीकृति के लिए कृपया आवश्यक दस्तावेज़ अपलोड करें।')
+                  : tr('Your booking has been confirmed. Have a safe flight!', 'आपकी बुकिंग की पुष्टि हो गई है। आपकी उड़ान सुरक्षित हो!')}
               </p>
             </div>
           )}
@@ -460,7 +460,7 @@ function InquiryStatus({ user }) {
                   {bi("Village Landing - Documents Required / गांव लैंडिंग - दस्तावेज़ आवश्यक")}
                 </h4>
                 <p className="text-yellow-400/70 text-sm mt-1">
-                  After booking is confirmed, you will need to upload documents from authorities:
+                  {tr('After booking is confirmed, you will need to upload documents from authorities:', 'बुकिंग की पुष्टि के बाद आपको अधिकारियों से मिले दस्तावेज़ अपलोड करने होंगे:')}
                 </p>
                 <ul className="text-yellow-400/70 text-sm mt-2 list-disc list-inside">
                   <li>{bi("Collector NOC / कलेक्टर NOC")}</li>
@@ -485,13 +485,13 @@ function InquiryStatus({ user }) {
                 <div key={t.id} className="flex items-center justify-between bg-slate-800/60 rounded-lg p-3 border border-slate-700/60" data-testid={`payment-txn-${t.id}`}>
                   <div>
                     <p className="text-white text-sm font-medium">
-                      {t.payment_type === 'balance' ? 'Remaining Balance' : 'Advance Payment'} — ₹{Number(t.amount).toLocaleString()}
-                      {t.voucher_discount > 0 && <span className="text-green-400 text-xs ml-2">(voucher -₹{t.voucher_discount.toLocaleString()})</span>}
+                      {t.payment_type === 'balance' ? tr('Remaining Balance', 'शेष राशि') : tr('Advance Payment', 'अग्रिम भुगतान')} — ₹{Number(t.amount).toLocaleString()}
+                      {t.voucher_discount > 0 && <span className="text-green-400 text-xs ml-2">{tr('(voucher -₹', '(वाउचर -₹')}{t.voucher_discount.toLocaleString()})</span>}
                     </p>
                     <p className="text-slate-500 text-xs">{(t.paid_at || '').slice(0, 16).replace('T', ' ')} • Stripe (Test)</p>
                   </div>
                   <Button size="sm" variant="outline" onClick={() => downloadReceipt(t)} className="border-slate-600 text-slate-300 hover:text-white h-8" data-testid={`download-receipt-${t.id}`}>
-                    <FileText className="h-3.5 w-3.5 mr-1.5" />Receipt PDF
+                    <FileText className="h-3.5 w-3.5 mr-1.5" />{tr('Receipt PDF', 'रसीद PDF')}
                   </Button>
                 </div>
               ))}
@@ -504,7 +504,7 @@ function InquiryStatus({ user }) {
               </p>
               {ledger.remaining_due > 0 && ledger.payment_status === 'paid' && (
                 <Button onClick={() => navigate(`/customer/payment/${inquiryId}?type=balance`)} className="bg-lime text-black hover:bg-lime/90" data-testid="pay-remaining-btn">
-                  <CreditCard className="h-4 w-4 mr-2" />Pay Remaining ₹{Number(ledger.remaining_due).toLocaleString()}
+                  <CreditCard className="h-4 w-4 mr-2" />{tr('Pay Remaining ₹', 'शेष भुगतान करें ₹')}{Number(ledger.remaining_due).toLocaleString()}
                 </Button>
               )}
               {ledger.payment_status === 'fully_paid' && (
@@ -523,27 +523,27 @@ function InquiryStatus({ user }) {
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <p className="text-slate-500">Aircraft</p>
-              <p className="text-white">{inquiry.aircraft_type === 'helicopter' ? '🚁 Helicopter' : '✈️ Plane'}</p>
+              <p className="text-slate-500">{tr('Aircraft', 'विमान')}</p>
+              <p className="text-white">{inquiry.aircraft_type === 'helicopter' ? tr('🚁 Helicopter', '🚁 हेलीकॉप्टर') : tr('✈️ Plane', '✈️ विमान')}</p>
             </div>
             <div>
-              <p className="text-slate-500">Passengers</p>
-              <p className="text-white">{inquiry.total_passengers} Adults + {inquiry.children_count || 0} Children</p>
+              <p className="text-slate-500">{tr('Passengers', 'यात्री')}</p>
+              <p className="text-white">{inquiry.total_passengers} Adults + {inquiry.children_count || 0} {tr('Children', 'बच्चे')}</p>
             </div>
             <div>
-              <p className="text-slate-500">Flight Type</p>
+              <p className="text-slate-500">{tr('Flight Type', 'उड़ान का प्रकार')}</p>
               <p className="text-white">{inquiry.udan_prakar}</p>
             </div>
             <div>
-              <p className="text-slate-500">Date & Time</p>
+              <p className="text-slate-500">{tr('Date & Time', 'तारीख और समय')}</p>
               <p className="text-white">{inquiry.departure_date} {inquiry.pickup_time}</p>
             </div>
             <div>
-              <p className="text-slate-500">Purpose</p>
+              <p className="text-slate-500">{tr('Purpose', 'उद्देश्य')}</p>
               <p className="text-white">{inquiry.booking_purpose}</p>
             </div>
             <div>
-              <p className="text-slate-500">Distance</p>
+              <p className="text-slate-500">{tr('Distance', 'दूरी')}</p>
               <p className="text-lime font-bold">{inquiry.distance_km} KM</p>
             </div>
           </div>
@@ -553,7 +553,7 @@ function InquiryStatus({ user }) {
             <div className="flex items-center gap-4">
               <div className="flex-1">
                 <p className="text-green-400 flex items-center gap-1 text-sm">
-                  <MapPin className="h-4 w-4" /> Pickup
+                  <MapPin className="h-4 w-4" /> {tr('Pickup', 'पिकअप')}
                 </p>
                 <p className="text-white font-medium">{inquiry.pickup_location}</p>
                 <p className="text-slate-500 text-xs">{inquiry.pickup_district}, {inquiry.pickup_state}</p>
@@ -561,7 +561,7 @@ function InquiryStatus({ user }) {
               <ChevronRight className="h-6 w-6 text-slate-500" />
               <div className="flex-1">
                 <p className="text-red-400 flex items-center gap-1 text-sm">
-                  <MapPin className="h-4 w-4" /> Drop
+                  <MapPin className="h-4 w-4" /> {tr('Drop', 'ड्रॉप')}
                 </p>
                 <p className="text-white font-medium">{inquiry.drop_location}</p>
                 <p className="text-slate-500 text-xs">{inquiry.drop_district}, {inquiry.drop_state}</p>
@@ -571,7 +571,7 @@ function InquiryStatus({ user }) {
 
           {/* Estimated Price */}
           <div className="mt-4 pt-4 border-t border-slate-700 flex justify-between items-center">
-            <span className="text-slate-400">Estimated Amount:</span>
+            <span className="text-slate-400">{tr('Estimated Amount:', 'अनुमानित राशि:')}</span>
             <span className="text-lime text-2xl font-bold">
               ₹{(inquiry.accepted_quote?.amount || inquiry.estimated_price || 0).toLocaleString()}
             </span>
@@ -581,7 +581,7 @@ function InquiryStatus({ user }) {
         {/* Back to Dashboard */}
         <div className="mt-6 text-center">
           <Button variant="outline" onClick={() => navigate('/customer')} className="border-slate-600">
-            ← Back to Dashboard
+            {tr('← Back to Dashboard', '← डैशबोर्ड पर वापस जाएं')}
           </Button>
         </div>
       </div>
@@ -597,13 +597,13 @@ function InquiryStatus({ user }) {
           </DialogHeader>
           <div className="space-y-4 max-h-[60vh] overflow-y-auto">
             {quotes.length === 0 ? (
-              <p className="text-slate-400 text-center py-8">No quotes received yet</p>
+              <p className="text-slate-400 text-center py-8">{tr('No quotes received yet', 'अभी कोई कोटेशन नहीं मिला')}</p>
             ) : (
               quotes.map((quote, idx) => (
                 <div key={idx} className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
                   <div className="flex justify-between items-start">
                     <div>
-                      <p className="text-white font-semibold">{quote.operator_name || 'Operator'}</p>
+                      <p className="text-white font-semibold">{quote.operator_name || tr('Operator', 'ऑपरेटर')}</p>
                       {quote.notes && (
                         <p className="text-slate-400 text-sm mt-1">&ldquo;{quote.notes}&rdquo;</p>
                       )}
@@ -620,7 +620,7 @@ function InquiryStatus({ user }) {
                     className="w-full mt-4 bg-green-600 hover:bg-green-700"
                   >
                     {processing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4 mr-2" />}
-                    Accept This Quote
+                    {tr('Accept This Quote', 'यह कोटेशन स्वीकार करें')}
                   </Button>
                 </div>
               ))
@@ -628,7 +628,7 @@ function InquiryStatus({ user }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowQuotesDialog(false)} className="border-slate-600">
-              Close
+              {tr('Close', 'बंद करें')}
             </Button>
           </DialogFooter>
         </DialogContent>

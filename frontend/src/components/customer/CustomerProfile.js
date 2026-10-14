@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { authAPI } from '../../services/api';
 import { toast } from 'sonner';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 function CustomerProfile({ user, onUserUpdate }) {
   const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ function CustomerProfile({ user, onUserUpdate }) {
     <div className="max-w-2xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">{bi("My Profile / मेरी प्रोफाइल")}</h1>
-        <p className="text-slate-400 mt-1">Manage your account details</p>
+        <p className="text-slate-400 mt-1">{tr('Manage your account details', 'अपने खाते का विवरण प्रबंधित करें')}</p>
       </div>
 
       {/* Profile Picture */}
@@ -74,11 +74,11 @@ function CustomerProfile({ user, onUserUpdate }) {
             </button>
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-white">{formData.full_name || 'User'}</h2>
+            <h2 className="text-xl font-semibold text-white">{formData.full_name || tr('User', 'उपयोगकर्ता')}</h2>
             <p className="text-slate-400">{formData.email}</p>
             <div className="flex items-center gap-2 mt-2">
               <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">
-                <Check className="h-3 w-3 inline mr-1" /> Verified Customer
+                <Check className="h-3 w-3 inline mr-1" /> {tr('Verified Customer', 'सत्यापित ग्राहक')}
               </span>
             </div>
           </div>
@@ -99,7 +99,7 @@ function CustomerProfile({ user, onUserUpdate }) {
             <Input
               value={formData.full_name}
               onChange={(e) => handleChange('full_name', e.target.value)}
-              placeholder="Enter your name"
+              placeholder={tr('Enter your name', 'अपना नाम दर्ज करें')}
               className="bg-slate-800 border-slate-600 text-white"
             />
           </div>
@@ -108,7 +108,7 @@ function CustomerProfile({ user, onUserUpdate }) {
           <div className="space-y-2">
             <Label className="text-slate-300">
               <Mail className="h-4 w-4 inline mr-2" />
-              Email
+              {tr('Email', 'ईमेल')}
             </Label>
             <Input
               type="email"
@@ -116,7 +116,7 @@ function CustomerProfile({ user, onUserUpdate }) {
               disabled
               className="bg-slate-900 border-slate-700 text-slate-400 cursor-not-allowed"
             />
-            <p className="text-xs text-slate-500">Email cannot be changed</p>
+            <p className="text-xs text-slate-500">{tr('Email cannot be changed', 'ईमेल बदला नहीं जा सकता')}</p>
           </div>
 
           {/* Phone */}
@@ -158,7 +158,7 @@ function CustomerProfile({ user, onUserUpdate }) {
           <Input
             value={formData.address}
             onChange={(e) => handleChange('address', e.target.value)}
-            placeholder="Enter your address"
+            placeholder={tr('Enter your address', 'अपना पता दर्ज करें')}
             className="bg-slate-800 border-slate-600 text-white"
           />
         </div>
@@ -170,7 +170,7 @@ function CustomerProfile({ user, onUserUpdate }) {
             <Input
               value={formData.city}
               onChange={(e) => handleChange('city', e.target.value)}
-              placeholder="Enter city"
+              placeholder={tr('Enter city', 'शहर दर्ज करें')}
               className="bg-slate-800 border-slate-600 text-white"
             />
           </div>
@@ -181,7 +181,7 @@ function CustomerProfile({ user, onUserUpdate }) {
             <Input
               value={formData.state}
               onChange={(e) => handleChange('state', e.target.value)}
-              placeholder="Enter state"
+              placeholder={tr('Enter state', 'राज्य दर्ज करें')}
               className="bg-slate-800 border-slate-600 text-white"
             />
           </div>
@@ -197,7 +197,7 @@ function CustomerProfile({ user, onUserUpdate }) {
             {saving ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Saving...
+                {tr('Saving...', 'सेव हो रहा है...')}
               </>
             ) : (
               <>

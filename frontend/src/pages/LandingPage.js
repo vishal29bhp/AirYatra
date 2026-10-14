@@ -10,43 +10,43 @@ import { Button } from '@/components/ui/button';
 import LanguageSwitcher from '../components/shared/LanguageSwitcher';
 import TestimonialsSlider from '../components/landing/TestimonialsSlider';
 import InvestorInterestSection from '../components/landing/InvestorInterestSection';
-import { bi } from '../lib/bilingual';
+import { bi, tr } from '../lib/bilingual';
 
 // Hero Slider Images
 const HERO_SLIDES = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1619659085985-f51a00f0160a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBwcml2YXRlJTIwamV0JTIwY2hhcnRlciUyMGF2aWF0aW9ufGVufDB8fHx8MTc4NTY3MjI4NHww&ixlib=rb-4.1.0&q=85",
-    title: "Premium Charter Flights",
-    subtitle: "Experience luxury in the skies with our world-class fleet",
+    title: tr('Premium Charter Flights', 'प्रीमियम चार्टर उड़ानें'),
+    subtitle: tr('Experience luxury in the skies with our world-class fleet', 'हमारे विश्व-स्तरीय बेड़े के साथ आसमान में विलासिता का अनुभव करें'),
     titleHi: "प्रीमियम चार्टर फ्लाइट्स"
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBwcml2YXRlJTIwamV0JTIwY2hhcnRlciUyMGF2aWF0aW9ufGVufDB8fHx8MTc4NTY3MjI4NHww&ixlib=rb-4.1.0&q=85",
-    title: "Private Jet Excellence",
-    subtitle: "Your personal aircraft awaits for seamless journeys",
+    title: tr('Private Jet Excellence', 'प्राइवेट जेट की उत्कृष्टता'),
+    subtitle: tr('Your personal aircraft awaits for seamless journeys', 'सहज यात्रा के लिए आपका निजी विमान तैयार है'),
     titleHi: "प्राइवेट जेट एक्सीलेंस"
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1782865423531-27f6fab92fe8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwyfHxoZWxpY29wdGVyJTIwYWVyaWFsJTIwdG91ciUyMGNpdHlzY2FwZXxlbnwwfHx8fDE3ODU2NzIyODl8MA&ixlib=rb-4.1.0&q=85",
-    title: "Helicopter Services",
-    subtitle: "City tours, transfers & emergency medical services",
+    title: tr('Helicopter Services', 'हेलीकॉप्टर सेवाएं'),
+    subtitle: tr('City tours, transfers & emergency medical services', 'शहर भ्रमण, ट्रांसफर और आपातकालीन चिकित्सा सेवाएं'),
     titleHi: "हेलीकॉप्टर सेवाएं"
   },
   {
     id: 4,
     image: "https://images.unsplash.com/photo-1625513123245-fcb02d69ad12?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwcml2YXRlJTIwamV0JTIwY2hhcnRlciUyMGF2aWF0aW9ufGVufDB8fHx8MTc4NTY3MjI4NHww&ixlib=rb-4.1.0&q=85",
-    title: "Luxury Interiors",
-    subtitle: "Travel in comfort with premium cabin amenities",
+    title: tr('Luxury Interiors', 'शानदार इंटीरियर'),
+    subtitle: tr('Travel in comfort with premium cabin amenities', 'प्रीमियम केबिन सुविधाओं के साथ आराम से यात्रा करें'),
     titleHi: "लग्जरी इंटीरियर्स"
   },
   {
     id: 5,
     image: "https://images.unsplash.com/photo-1661954864180-e61dea14208a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBwcml2YXRlJTIwamV0JTIwY2hhcnRlciUyMGF2aWF0aW9ufGVufDB8fHx8MTc4NTY3MjI4NHww&ixlib=rb-4.1.0&q=85",
-    title: "In-Flight Dining",
-    subtitle: "Gourmet cuisine served at 40,000 feet",
+    title: tr('In-Flight Dining', 'उड़ान में भोजन'),
+    subtitle: tr('Gourmet cuisine served at 40,000 feet', '40,000 फीट पर परोसा गया उम्दा भोजन'),
     titleHi: "इन-फ्लाइट डाइनिंग"
   }
 ];
@@ -102,11 +102,11 @@ function LandingPage({ user }) {
           
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="#services" className="text-slate-300 hover:text-lime transition-colors">Services</a>
-            <Link to="/fleet" className="text-slate-300 hover:text-lime transition-colors">Fleet</Link>
-            <Link to="/blog" className="text-slate-300 hover:text-lime transition-colors">Blog</Link>
-            <a href="#about" className="text-slate-300 hover:text-lime transition-colors">About</a>
-            <a href="#contact" className="text-slate-300 hover:text-lime transition-colors">Contact</a>
+            <a href="#services" className="text-slate-300 hover:text-lime transition-colors">{tr('Services', 'सेवाएं')}</a>
+            <Link to="/fleet" className="text-slate-300 hover:text-lime transition-colors">{tr('Fleet', 'बेड़ा')}</Link>
+            <Link to="/blog" className="text-slate-300 hover:text-lime transition-colors">{tr('Blog', 'ब्लॉग')}</Link>
+            <a href="#about" className="text-slate-300 hover:text-lime transition-colors">{tr('About', 'हमारे बारे में')}</a>
+            <a href="#contact" className="text-slate-300 hover:text-lime transition-colors">{tr('Contact', 'संपर्क')}</a>
           </div>
           
           <div className="flex items-center space-x-3">
@@ -160,7 +160,7 @@ function LandingPage({ user }) {
         <div className="relative h-full flex items-center justify-center px-6">
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <div className="mb-4">
-              <span className="ay-overline">India&#39;s Premier Aviation Platform</span>
+              <span className="ay-overline">{tr("India's Premier Aviation Platform", 'भारत का प्रमुख विमानन प्लेटफ़ॉर्म')}</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight animate-fade-in" data-testid="hero-title">
@@ -174,12 +174,12 @@ function LandingPage({ user }) {
               <Link to="/booking">
                 <Button size="lg" className="bg-lime text-black hover:bg-lime/90 font-semibold text-lg px-10 py-6 rounded-sm" data-testid="hero-book-btn">
                   <Plane className="mr-2 h-5 w-5" />
-                  Book Your Flight
+                  {tr('Book Your Flight', 'अपनी उड़ान बुक करें')}
                 </Button>
               </Link>
               <Link to="/login">
                 <Button size="lg" variant="outline" className="border-slate-600 bg-transparent text-white hover:bg-slate-800 text-lg px-10 py-6 rounded-sm" data-testid="become-operator-btn">
-                  Become an Operator
+                  {tr('Become an Operator', 'ऑपरेटर बनें')}
                 </Button>
               </Link>
             </div>
@@ -190,14 +190,14 @@ function LandingPage({ user }) {
         <button
           onClick={prevSlide}
           className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 rounded-full text-white transition-all z-10"
-          aria-label="Previous slide"
+          aria-label={tr('Previous slide', 'पिछली स्लाइड')}
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
         <button
           onClick={nextSlide}
           className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 rounded-full text-white transition-all z-10"
-          aria-label="Next slide"
+          aria-label={tr('Next slide', 'अगली स्लाइड')}
         >
           <ChevronRight className="h-6 w-6" />
         </button>
@@ -223,12 +223,12 @@ function LandingPage({ user }) {
       <section id="services" className="py-24 px-6 bg-slate-900" data-testid="services-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="ay-overline">Our Services</span>
+            <span className="ay-overline">{tr('Our Services', 'हमारी सेवाएं')}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
-              Premium Aviation Solutions
+              {tr('Premium Aviation Solutions', 'प्रीमियम विमानन समाधान')}
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              From private jets to helicopters, we provide end-to-end aviation services tailored to your needs
+              {tr('From private jets to helicopters, we provide end-to-end aviation services tailored to your needs', 'प्राइवेट जेट से हेलीकॉप्टर तक, हम आपकी ज़रूरतों के अनुसार संपूर्ण विमानन सेवाएं देते हैं')}
             </p>
           </div>
           
@@ -238,19 +238,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Plane className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Private Jet Charter</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Private Jet Charter', 'प्राइवेट जेट चार्टर')}</h3>
               <p className="text-slate-400 mb-4">
-                Luxury private jets for business and leisure travel. Fly on your schedule with maximum comfort and privacy.
+                {tr('Luxury private jets for business and leisure travel. Fly on your schedule with maximum comfort and privacy.', 'व्यवसाय और अवकाश यात्रा के लिए शानदार प्राइवेट जेट। पूरे आराम और गोपनीयता के साथ अपने समय पर उड़ान भरें।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Flexible scheduling
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Flexible scheduling', 'लचीला शेड्यूल')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> VIP ground handling
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('VIP ground handling', 'VIP ग्राउंड हैंडलिंग')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> In-flight catering
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('In-flight catering', 'उड़ान में खानपान')}
                 </li>
               </ul>
             </div>
@@ -260,19 +260,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Globe className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Helicopter Services</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Helicopter Services', 'हेलीकॉप्टर सेवाएं')}</h3>
               <p className="text-slate-400 mb-4">
-                Quick city transfers, aerial tours, and emergency medical evacuations with our helicopter fleet.
+                {tr('Quick city transfers, aerial tours, and emergency medical evacuations with our helicopter fleet.', 'हमारे हेलीकॉप्टर बेड़े से तेज़ शहर ट्रांसफर, हवाई भ्रमण और आपातकालीन चिकित्सा निकासी।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> City-to-city transfers
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('City-to-city transfers', 'शहर से शहर ट्रांसफर')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Scenic aerial tours
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Scenic aerial tours', 'मनोरम हवाई भ्रमण')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Medical evacuation
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Medical evacuation', 'चिकित्सा निकासी')}
                 </li>
               </ul>
             </div>
@@ -282,19 +282,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Building2 className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Corporate Solutions</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Corporate Solutions', 'कॉर्पोरेट समाधान')}</h3>
               <p className="text-slate-400 mb-4">
-                Dedicated aviation solutions for enterprises with volume discounts and priority booking.
+                {tr('Dedicated aviation solutions for enterprises with volume discounts and priority booking.', 'कंपनियों के लिए वॉल्यूम छूट और प्राथमिकता बुकिंग के साथ समर्पित विमानन समाधान।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Corporate accounts
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Corporate accounts', 'कॉर्पोरेट खाते')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Travel analytics
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Travel analytics', 'यात्रा विश्लेषण')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Dedicated manager
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Dedicated manager', 'समर्पित मैनेजर')}
                 </li>
               </ul>
             </div>
@@ -304,19 +304,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <FileCheck className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Aircraft Management</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Aircraft Management', 'विमान प्रबंधन')}</h3>
               <p className="text-slate-400 mb-4">
-                Complete aircraft management including maintenance, crew, and charter revenue optimization.
+                {tr('Complete aircraft management including maintenance, crew, and charter revenue optimization.', 'रखरखाव, क्रू और चार्टर आय बढ़ाने सहित संपूर्ण विमान प्रबंधन।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Maintenance scheduling
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Maintenance scheduling', 'रखरखाव शेड्यूलिंग')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Crew management
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Crew management', 'क्रू प्रबंधन')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Revenue optimization
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Revenue optimization', 'आय अनुकूलन')}
                 </li>
               </ul>
             </div>
@@ -326,19 +326,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <Zap className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Emergency Services</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Emergency Services', 'आपातकालीन सेवाएं')}</h3>
               <p className="text-slate-400 mb-4">
-                24/7 emergency aviation support for medical, rescue, and urgent travel requirements.
+                {tr('24/7 emergency aviation support for medical, rescue, and urgent travel requirements.', 'चिकित्सा, बचाव और अत्यावश्यक यात्रा के लिए 24/7 आपातकालीन विमानन सहायता।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Air ambulance
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Air ambulance', 'एयर एम्बुलेंस')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Organ transport
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Organ transport', 'अंग परिवहन')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Disaster relief
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Disaster relief', 'आपदा राहत')}
                 </li>
               </ul>
             </div>
@@ -348,19 +348,19 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-4 rounded-sm w-fit mb-6">
                 <HeartHandshake className="h-8 w-8 text-lime" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Concierge Services</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">{tr('Concierge Services', 'कंसीयर्ज सेवाएं')}</h3>
               <p className="text-slate-400 mb-4">
-                End-to-end travel assistance including hotel bookings, ground transport, and event planning.
+                {tr('End-to-end travel assistance including hotel bookings, ground transport, and event planning.', 'होटल बुकिंग, ज़मीनी परिवहन और कार्यक्रम योजना सहित संपूर्ण यात्रा सहायता।')}
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Luxury hotel booking
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Luxury hotel booking', 'लक्ज़री होटल बुकिंग')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Limousine service
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Limousine service', 'लिमोज़ीन सेवा')}
                 </li>
                 <li className="flex items-center gap-2 text-slate-300 text-sm">
-                  <CheckCircle className="h-4 w-4 text-lime" /> Event coordination
+                  <CheckCircle className="h-4 w-4 text-lime" /> {tr('Event coordination', 'कार्यक्रम समन्वय')}
                 </li>
               </ul>
             </div>
@@ -374,33 +374,30 @@ function LandingPage({ user }) {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* About Content */}
             <div>
-              <span className="ay-overline">About Us</span>
+              <span className="ay-overline">{tr('About Us', 'हमारे बारे में')}</span>
               <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
-                India&#39;s Trusted Aviation Partner Since 2020
+                {tr("India's Trusted Aviation Partner Since 2020", '2020 से भारत का भरोसेमंद विमानन साथी')}
               </h2>
               <p className="text-slate-400 text-lg mb-6">
-                AirYatra is India&#39;s premier aviation operating system, connecting travelers with verified charter operators, 
-                helicopter services, and luxury aviation experiences. We have revolutionized how India flies private.
+                {tr("AirYatra is India's premier aviation operating system, connecting travelers with verified charter operators, helicopter services, and luxury aviation experiences. We have revolutionized how India flies private.", 'AirYatra भारत का प्रमुख विमानन ऑपरेटिंग सिस्टम है, जो यात्रियों को सत्यापित चार्टर ऑपरेटरों, हेलीकॉप्टर सेवाओं और लक्ज़री विमानन अनुभवों से जोड़ता है। हमने भारत में निजी उड़ान का तरीका बदल दिया है।')}
               </p>
               <p className="text-slate-400 mb-8">
-                Our platform combines cutting-edge technology with personalized service to deliver seamless 
-                aviation experiences. From corporate executives to leisure travelers, we serve clients who 
-                value time, comfort, and reliability.
+                {tr('Our platform combines cutting-edge technology with personalized service to deliver seamless aviation experiences. From corporate executives to leisure travelers, we serve clients who value time, comfort, and reliability.', 'हमारा प्लेटफ़ॉर्म आधुनिक तकनीक और व्यक्तिगत सेवा को जोड़कर सहज विमानन अनुभव देता है। कॉर्पोरेट अधिकारियों से लेकर पर्यटकों तक, हम उन सभी की सेवा करते हैं जो समय, आराम और भरोसे को महत्व देते हैं।')}
               </p>
               
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-lime">500+</div>
-                  <div className="text-slate-400 text-sm">Flights Completed</div>
+                  <div className="text-slate-400 text-sm">{tr('Flights Completed', 'पूरी हुई उड़ानें')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold text-lime">50+</div>
-                  <div className="text-slate-400 text-sm">Aircraft Fleet</div>
+                  <div className="text-slate-400 text-sm">{tr('Aircraft Fleet', 'विमान बेड़ा')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold text-lime">100%</div>
-                  <div className="text-slate-400 text-sm">Safety Record</div>
+                  <div className="text-slate-400 text-sm">{tr('Safety Record', 'सुरक्षा रिकॉर्ड')}</div>
                 </div>
               </div>
 
@@ -408,15 +405,15 @@ function LandingPage({ user }) {
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
                   <Award className="h-5 w-5 text-yellow-500" />
-                  <span className="text-slate-300 text-sm">DGCA Approved</span>
+                  <span className="text-slate-300 text-sm">{tr('DGCA Approved', 'DGCA स्वीकृत')}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
                   <Shield className="h-5 w-5 text-green-500" />
-                  <span className="text-slate-300 text-sm">ISO Certified</span>
+                  <span className="text-slate-300 text-sm">{tr('ISO Certified', 'ISO प्रमाणित')}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm">
                   <Star className="h-5 w-5 text-lime" />
-                  <span className="text-slate-300 text-sm">5-Star Rated</span>
+                  <span className="text-slate-300 text-sm">{tr('5-Star Rated', '5-स्टार रेटिंग')}</span>
                 </div>
               </div>
             </div>
@@ -426,24 +423,24 @@ function LandingPage({ user }) {
               <div className="space-y-4">
                 <img 
                   src="https://images.unsplash.com/photo-1619659085985-f51a00f0160a?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
-                  alt="Private Jet" 
+                  alt={tr('Private Jet', 'प्राइवेट जेट')} 
                   className="rounded-sm w-full h-48 object-cover"
                 />
                 <img 
                   src="https://images.unsplash.com/photo-1625513123245-fcb02d69ad12?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
-                  alt="Luxury Interior" 
+                  alt={tr('Luxury Interior', 'शानदार इंटीरियर')} 
                   className="rounded-sm w-full h-64 object-cover"
                 />
               </div>
               <div className="space-y-4 pt-8">
                 <img 
                   src="https://images.unsplash.com/photo-1782865423531-27f6fab92fe8?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
-                  alt="Helicopter" 
+                  alt={tr('Helicopter', 'हेलीकॉप्टर')} 
                   className="rounded-sm w-full h-64 object-cover"
                 />
                 <img 
                   src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" 
-                  alt="Aircraft" 
+                  alt={tr('Aircraft', 'विमान')} 
                   className="rounded-sm w-full h-48 object-cover"
                 />
               </div>
@@ -489,7 +486,7 @@ function LandingPage({ user }) {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">{t('landing.products')}</h2>
-            <p className="text-slate-400 text-lg">Complete aviation solutions for every stakeholder</p>
+            <p className="text-slate-400 text-lg">{tr('Complete aviation solutions for every stakeholder', 'हर हितधारक के लिए संपूर्ण विमानन समाधान')}</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -550,9 +547,9 @@ function LandingPage({ user }) {
       <section id="contact" className="py-20 px-6 bg-slate-900" data-testid="contact-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <span className="ay-overline">Contact Us</span>
-            <h2 className="text-4xl font-bold text-white mt-3 mb-4">Get In Touch</h2>
-            <p className="text-slate-400">We are here to help with all your aviation needs</p>
+            <span className="ay-overline">{tr('Contact Us', 'संपर्क करें')}</span>
+            <h2 className="text-4xl font-bold text-white mt-3 mb-4">{tr('Get In Touch', 'हमसे जुड़ें')}</h2>
+            <p className="text-slate-400">{tr('We are here to help with all your aviation needs', 'आपकी सभी विमानन ज़रूरतों में मदद के लिए हम यहां हैं')}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -561,7 +558,7 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
                 <MapPin className="h-6 w-6 text-lime" />
               </div>
-              <h3 className="text-white font-semibold mb-2">Head Office</h3>
+              <h3 className="text-white font-semibold mb-2">{tr('Head Office', 'मुख्य कार्यालय')}</h3>
               <p className="text-slate-400 text-sm leading-relaxed">
                 {COMPANY_INFO.address}
               </p>
@@ -572,7 +569,7 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
                 <Mail className="h-6 w-6 text-lime" />
               </div>
-              <h3 className="text-white font-semibold mb-2">Email Us</h3>
+              <h3 className="text-white font-semibold mb-2">{tr('Email Us', 'ईमेल करें')}</h3>
               <a href={`mailto:${COMPANY_INFO.email}`} className="text-amber hover:text-amber/80 text-sm">
                 {COMPANY_INFO.email}
               </a>
@@ -583,7 +580,7 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
                 <Phone className="h-6 w-6 text-lime" />
               </div>
-              <h3 className="text-white font-semibold mb-2">Call Us</h3>
+              <h3 className="text-white font-semibold mb-2">{tr('Call Us', 'कॉल करें')}</h3>
               <a href={`tel:${COMPANY_INFO.phone}`} className="text-amber hover:text-amber/80 text-sm">
                 {COMPANY_INFO.phone}
               </a>
@@ -594,7 +591,7 @@ function LandingPage({ user }) {
               <div className="bg-slate-900 border border-slate-700 p-3 rounded-sm w-fit mx-auto mb-4">
                 <Clock className="h-6 w-6 text-lime" />
               </div>
-              <h3 className="text-white font-semibold mb-2">Working Hours</h3>
+              <h3 className="text-white font-semibold mb-2">{tr('Working Hours', 'कार्य समय')}</h3>
               <p className="text-slate-400 text-sm">
                 {COMPANY_INFO.hours}
               </p>
@@ -614,7 +611,7 @@ function LandingPage({ user }) {
                 <span className="text-2xl font-bold text-white">AirYatra</span>
               </div>
               <p className="text-slate-400 text-sm mb-4">
-                India&#39;s Premier Aviation Operating System. Connecting travelers with verified charter operators.
+                {tr("India's Premier Aviation Operating System. Connecting travelers with verified charter operators.", 'भारत का प्रमुख विमानन ऑपरेटिंग सिस्टम। यात्रियों को सत्यापित चार्टर ऑपरेटरों से जोड़ता है।')}
               </p>
               <div className="flex gap-3">
                 <a href="https://www.facebook.com/profile.php?id=61592460343465" target="_blank" rel="noopener noreferrer" className="bg-slate-800 p-2 rounded-lg hover:bg-slate-700 transition-colors" aria-label="Facebook">
@@ -634,21 +631,21 @@ function LandingPage({ user }) {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-white font-semibold mb-4">{tr('Quick Links', 'त्वरित लिंक')}</h4>
               <ul className="space-y-2">
-                <li><Link to="/booking" className="text-slate-400 hover:text-lime text-sm transition-colors">Book a Flight</Link></li>
-                <li><Link to="/corporate" className="text-slate-400 hover:text-lime text-sm transition-colors">Corporate Solutions</Link></li>
-                <li><a href="#services" className="text-slate-400 hover:text-lime text-sm transition-colors">Our Services</a></li>
+                <li><Link to="/booking" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Book a Flight', 'उड़ान बुक करें')}</Link></li>
+                <li><Link to="/corporate" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Corporate Solutions', 'कॉर्पोरेट समाधान')}</Link></li>
+                <li><a href="#services" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Our Services', 'हमारी सेवाएं')}</a></li>
               </ul>
             </div>
 
             {/* Support */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Support</h4>
+              <h4 className="text-white font-semibold mb-4">{tr('Support', 'सहायता')}</h4>
               <ul className="space-y-2">
-                <li><a href="#contact" className="text-slate-400 hover:text-lime text-sm transition-colors">Help Center</a></li>
-                <li><Link to="/about" className="text-slate-400 hover:text-lime text-sm transition-colors">Safety Guidelines</Link></li>
-                <li><a href="mailto:care@airyatra.co.in" className="text-slate-400 hover:text-lime text-sm transition-colors">Contact Support</a></li>
+                <li><a href="#contact" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Help Center', 'सहायता केंद्र')}</a></li>
+                <li><Link to="/about" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Safety Guidelines', 'सुरक्षा दिशानिर्देश')}</Link></li>
+                <li><a href="mailto:care@airyatra.co.in" className="text-slate-400 hover:text-lime text-sm transition-colors">{tr('Contact Support', 'सहायता से संपर्क करें')}</a></li>
               </ul>
             </div>
 
@@ -664,7 +661,7 @@ function LandingPage({ user }) {
 
             {/* Contact */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Contact</h4>
+              <h4 className="text-white font-semibold mb-4">{tr('Contact', 'संपर्क')}</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <MapPin className="h-4 w-4 text-lime mt-1 flex-shrink-0" />
@@ -690,22 +687,22 @@ function LandingPage({ user }) {
           <div className="border-t border-slate-800 pt-8">
             {/* Legal Links Row */}
             <div className="flex flex-wrap justify-center gap-4 mb-4 text-xs">
-              <Link to="/legal/terms" className="text-slate-500 hover:text-lime transition-colors">Terms & Conditions</Link>
+              <Link to="/legal/terms" className="text-slate-500 hover:text-lime transition-colors">{tr('Terms & Conditions', 'नियम और शर्तें')}</Link>
               <span className="text-slate-700">|</span>
-              <Link to="/legal/privacy" className="text-slate-500 hover:text-lime transition-colors">Privacy Policy</Link>
+              <Link to="/legal/privacy" className="text-slate-500 hover:text-lime transition-colors">{tr('Privacy Policy', 'गोपनीयता नीति')}</Link>
               <span className="text-slate-700">|</span>
-              <Link to="/legal/cancellation" className="text-slate-500 hover:text-lime transition-colors">Refund & Cancellation Policy</Link>
+              <Link to="/legal/cancellation" className="text-slate-500 hover:text-lime transition-colors">{tr('Refund & Cancellation Policy', 'रिफंड और रद्दीकरण नीति')}</Link>
             </div>
             
             {/* Copyright Row */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-slate-500 text-sm">
-                © 2026 Lucuma Corporation Pvt. Ltd. (AirYatra). All rights reserved. India&#39;s Premier Aviation Platform.
+                {tr("© 2026 Lucuma Corporation Pvt. Ltd. (AirYatra). All rights reserved. India's Premier Aviation Platform.", '© 2026 Lucuma Corporation Pvt. Ltd. (AirYatra). सर्वाधिकार सुरक्षित। भारत का प्रमुख विमानन प्लेटफ़ॉर्म।')}
               </p>
               <div className="flex items-center gap-4">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/100px-Visa_Inc._logo.svg.png" alt="Visa" className="h-6 opacity-60" />
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/100px-Mastercard-logo.svg.png" alt="Mastercard" className="h-6 opacity-60" />
-                <span className="text-slate-600 text-xs">Secure Payments</span>
+                <span className="text-slate-600 text-xs">{tr('Secure Payments', 'सुरक्षित भुगतान')}</span>
               </div>
             </div>
           </div>

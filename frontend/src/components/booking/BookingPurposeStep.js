@@ -2,7 +2,7 @@ import React from 'react';
 import { Briefcase, Target, Plane } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 // Dropdown options
 export const udanPrakarOptions = [
@@ -115,7 +115,7 @@ const BookingPurposeStep = ({ formData, onInputChange }) => {
             <Input
               value={formData.booking_purpose_other || ''}
               onChange={(e) => onInputChange('booking_purpose_other', e.target.value)}
-              placeholder="Enter purpose..."
+              placeholder={tr('Enter purpose...', 'उद्देश्य दर्ज करें...')}
               className="bg-slate-800 border-slate-600 text-white mt-1"
             />
           </div>

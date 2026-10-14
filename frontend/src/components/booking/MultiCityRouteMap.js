@@ -167,7 +167,7 @@ const MultiCityRouteMap = ({
             <Navigation className="h-5 w-5 text-lime" />
             <span className="text-white font-medium">{bi("Route Map / रूट मैप")}</span>
             <Badge className="bg-slate-600 text-slate-300 ml-2">
-              Select destinations
+              {tr('Select destinations', 'गंतव्य चुनें')}
             </Badge>
           </div>
         </div>
@@ -208,7 +208,7 @@ const MultiCityRouteMap = ({
           <Navigation className="h-5 w-5 text-lime" />
           <span className="text-white font-medium">{bi("Route Map / रूट मैप")}</span>
           <Badge className="bg-amber/20 text-amber ml-2">
-            {legs.length} Legs
+            {legs.length} {tr('Legs', 'चरण')}
           </Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -271,8 +271,8 @@ const MultiCityRouteMap = ({
                 <div className="text-sm">
                   <p className="font-semibold">{coord.name}</p>
                   <p className="text-gray-500">
-                    {coord.type === 'start' ? 'Starting Point' : 
-                     coord.type === 'end' ? 'Final Destination' : 
+                    {coord.type === 'start' ? tr('Starting Point', 'प्रारंभ बिंदु') : 
+                     coord.type === 'end' ? tr('Final Destination', 'अंतिम गंतव्य') : 
                      `Waypoint ${index}`}
                   </p>
                 </div>
@@ -286,15 +286,15 @@ const MultiCityRouteMap = ({
           <div className="flex items-center gap-3 text-xs">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-green-500" />
-              <span className="text-slate-300">Start</span>
+              <span className="text-slate-300">{tr('Start', 'शुरुआत')}</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-lime text-black" />
-              <span className="text-slate-300">Stop</span>
+              <span className="text-slate-300">{tr('Stop', 'पड़ाव')}</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-red-500" />
-              <span className="text-slate-300">End</span>
+              <span className="text-slate-300">{tr('End', 'अंत')}</span>
             </div>
           </div>
         </div>
@@ -308,7 +308,7 @@ const MultiCityRouteMap = ({
               {/* From point */}
               {index === 0 && (
                 <Badge className="bg-green-500/20 text-green-400 flex-shrink-0">
-                  {leg.from?.landing_point_name?.split(',')[0] || 'Start'}
+                  {leg.from?.landing_point_name?.split(',')[0] || tr('Start', 'शुरुआत')}
                 </Badge>
               )}
               
@@ -343,7 +343,7 @@ const MultiCityRouteMap = ({
             </span>
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              ~{Math.round(totalDistance / 200 * 60)} min
+              ~{Math.round(totalDistance / 200 * 60)} {tr('min', 'मिनट')}
             </span>
           </div>
           <span className="text-lime font-semibold">

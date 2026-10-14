@@ -90,15 +90,15 @@ const SortableLegCard = ({
             </div>
             <span className="text-white font-medium">
               {tr(`Leg ${index + 1}`, `पड़ाव ${index + 1}`)}
-              {index === 0 && <span className="text-green-400 text-xs ml-2">(Start)</span>}
-              {index === legs.length - 1 && <span className="text-red-400 text-xs ml-2">(End)</span>}
+              {index === 0 && <span className="text-green-400 text-xs ml-2">{tr('(Start)', '(शुरुआत)')}</span>}
+              {index === legs.length - 1 && <span className="text-red-400 text-xs ml-2">{tr('(End)', '(अंत)')}</span>}
             </span>
           </div>
           <div className="flex items-center gap-2">
             {/* Per-leg discount badge */}
             {index > 0 && perLegDiscount > 0 && (
               <Badge className="bg-green-500/20 text-green-400 text-xs">
-                {Math.min(index * perLegDiscount, 25)}% off
+                {Math.min(index * perLegDiscount, 25)}{tr('% off', '% छूट')}
               </Badge>
             )}
             {/* Remove button */}
@@ -127,11 +127,11 @@ const SortableLegCard = ({
               // Auto-filled from previous leg's destination
               <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600">
                 <p className="text-white text-sm">{legs[index - 1].to?.landing_point_name}</p>
-                <p className="text-slate-400 text-xs">Auto-linked from Leg {index}</p>
+                <p className="text-slate-400 text-xs">{tr('Auto-linked from Leg', 'इस चरण से अपने आप जुड़ा:')} {index}</p>
               </div>
             ) : (
               <LandingPointSelector
-                label="Select pickup"
+                label={tr('Select pickup', 'पिकअप चुनें')}
                 type="pickup"
                 selectedDate={selectedDate}
                 aircraftType={aircraftType}
@@ -149,7 +149,7 @@ const SortableLegCard = ({
               {bi("To / तक")} <span className="text-red-400">*</span>
             </Label>
             <LandingPointSelector
-              label="Select destination"
+              label={tr('Select destination', 'गंतव्य चुनें')}
               type="drop"
               selectedDate={selectedDate}
               aircraftType={aircraftType}
@@ -170,7 +170,7 @@ const SortableLegCard = ({
               </span>
               <span className="flex items-center gap-1">
                 <ArrowRight className="h-3 w-3" />
-                ~{Math.round(leg.distance / 200 * 60)} min
+                ~{Math.round(leg.distance / 200 * 60)} {tr('min', 'मिनट')}
               </span>
             </div>
             <span className="text-lime font-medium">
@@ -386,7 +386,7 @@ export const MultiCityRouteBuilder = ({
             {bi("Multi-City Route Builder / बहु-शहर रूट बिल्डर")}
           </h3>
           <p className="text-slate-400 text-sm mt-1">
-            Add {minLegs}-{maxLegs} destinations. Each additional leg gets {perLegDiscount}% off!
+            {tr('Add', 'जोड़ें')} {minLegs}-{maxLegs} {tr('destinations. Each additional leg gets', 'गंतव्य। हर अतिरिक्त चरण पर')} {perLegDiscount}{tr('% off!', '% छूट!')}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -397,7 +397,7 @@ export const MultiCityRouteBuilder = ({
             className={`border-slate-600 ${showMap ? 'bg-amber/20 text-amber' : ''}`}
           >
             <Map className="h-4 w-4 mr-1" />
-            {showMap ? 'Hide Map' : 'Show Map'}
+            {showMap ? tr('Hide Map', 'मानचित्र छिपाएं') : tr('Show Map', 'मानचित्र दिखाएं')}
           </Button>
           <Badge className="bg-amber/20 text-amber">
             {tr(`${legs.length} Legs`, `${legs.length} पड़ाव`)}
@@ -481,7 +481,7 @@ export const MultiCityRouteBuilder = ({
                       index === 0 ? 'bg-green-500/20 text-green-400' :
                       'bg-slate-700 text-slate-300'
                     }`}>
-                      {leg.from?.landing_point_name?.split(',')[0] || 'Start'}
+                      {leg.from?.landing_point_name?.split(',')[0] || tr('Start', 'शुरुआत')}
                     </div>
                     {leg.to && (
                       <>
@@ -490,7 +490,7 @@ export const MultiCityRouteBuilder = ({
                           index === legs.length - 1 ? 'bg-red-500/20 text-red-400' :
                           'bg-slate-700 text-slate-300'
                         }`}>
-                          {leg.to?.landing_point_name?.split(',')[0] || 'End'}
+                          {leg.to?.landing_point_name?.split(',')[0] || tr('End', 'अंत')}
                         </div>
                       </>
                     )}
@@ -502,15 +502,15 @@ export const MultiCityRouteBuilder = ({
             {/* Stats Grid */}
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
-                <p className="text-slate-400 text-xs">Total Distance</p>
+                <p className="text-slate-400 text-xs">{tr('Total Distance', 'कुल दूरी')}</p>
                 <p className="text-white text-xl font-bold">{totalDistance} km</p>
               </div>
               <div className="text-center">
-                <p className="text-slate-400 text-xs">You Save</p>
+                <p className="text-slate-400 text-xs">{tr('You Save', 'आपकी बचत')}</p>
                 <p className="text-green-400 text-xl font-bold">₹{totalDiscount.toLocaleString('en-IN')}</p>
               </div>
               <div className="text-center">
-                <p className="text-slate-400 text-xs">Total Price</p>
+                <p className="text-slate-400 text-xs">{tr('Total Price', 'कुल कीमत')}</p>
                 <p className="text-lime text-xl font-bold">₹{totalPrice.toLocaleString('en-IN')}</p>
               </div>
             </div>

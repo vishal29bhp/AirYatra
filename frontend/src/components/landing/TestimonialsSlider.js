@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -53,11 +54,11 @@ function TestimonialsSlider() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="ay-overline">Testimonials</span>
+          <span className="ay-overline">{tr('Testimonials', 'प्रशंसापत्र')}</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
-            What Our Clients Say
+            {tr('What Our Clients Say', 'हमारे ग्राहक क्या कहते हैं')}
           </h2>
-          <p className="text-slate-400">Trusted by business leaders, celebrities, and discerning travelers</p>
+          <p className="text-slate-400">{tr('Trusted by business leaders, celebrities, and discerning travelers', 'व्यापारिक नेताओं, हस्तियों और समझदार यात्रियों का भरोसा')}</p>
         </div>
 
         {/* Testimonial Card */}
@@ -109,14 +110,14 @@ function TestimonialsSlider() {
           <button
             onClick={prevSlide}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 p-3 bg-slate-900 border border-slate-700 hover:border-lime rounded-sm text-lime transition-colors"
-            aria-label="Previous testimonial"
+            aria-label={tr('Previous testimonial', 'पिछला प्रशंसापत्र')}
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={nextSlide}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 p-3 bg-slate-900 border border-slate-700 hover:border-lime rounded-sm text-lime transition-colors"
-            aria-label="Next testimonial"
+            aria-label={tr('Next testimonial', 'अगला प्रशंसापत्र')}
           >
             <ChevronRight className="h-5 w-5" />
           </button>

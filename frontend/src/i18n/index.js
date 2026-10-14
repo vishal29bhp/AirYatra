@@ -47,4 +47,11 @@ i18n
     interpolation: { escapeValue: false },
   });
 
+// Lets CSS adapt to the script in use (see index.css: Indic scripts break apart with letter-spacing).
+const setDocumentLanguage = (lng) => {
+  if (typeof document !== 'undefined' && lng) document.documentElement.lang = lng;
+};
+setDocumentLanguage(i18n.resolvedLanguage || i18n.language);
+i18n.on('languageChanged', setDocumentLanguage);
+
 export default i18n;

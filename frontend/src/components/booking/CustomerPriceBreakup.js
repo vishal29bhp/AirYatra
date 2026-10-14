@@ -83,17 +83,17 @@ export const CustomerPriceBreakup = ({
               </p>
               {totalDiscount > 0 && (
                 <p className="text-green-400 text-sm">
-                  You save ₹{totalDiscount.toLocaleString('en-IN')}! 🎉
+                  {tr('You save ₹', 'आपकी बचत ₹')}{totalDiscount.toLocaleString('en-IN')}! 🎉
                 </p>
               )}
             </div>
             <div className="text-right">
               <Badge className="bg-green-500/20 text-green-400 mb-2">
-                <Shield className="h-3 w-3 mr-1" /> Verified Pricing
+                <Shield className="h-3 w-3 mr-1" /> {tr('Verified Pricing', 'सत्यापित मूल्य')}
               </Badge>
               <p className="text-slate-400 text-xs">
                 <Users className="h-3 w-3 inline mr-1" />
-                {passengers} passenger{passengers > 1 ? 's' : ''}
+                {passengers} {tr('passenger', 'यात्री')}{passengers > 1 ? 's' : ''}
               </p>
             </div>
           </div>
@@ -208,7 +208,7 @@ export const CustomerPriceBreakup = ({
                 <div className="flex justify-between items-center text-sm">
                   <div className="flex items-center gap-2">
                     <span className="text-slate-300">{bi("Service Fee / सेवा शुल्क")}</span>
-                    <span className="text-xs text-slate-500">(includes booking & support)</span>
+                    <span className="text-xs text-slate-500">{tr('(includes booking & support)', '(बुकिंग और सहायता सहित)')}</span>
                   </div>
                   <span className="text-slate-300">₹{platformFee.toLocaleString('en-IN')}</span>
                 </div>
@@ -237,7 +237,7 @@ export const CustomerPriceBreakup = ({
           <div className="flex-1">
             <p className="text-amber font-medium text-sm">{bi("Price Lock / मूल्य लॉक")}</p>
             <p className="text-slate-400 text-xs">
-              Price locked for {priceLockMinutes} minutes. Complete payment to confirm.
+              {tr('Price locked for', 'कीमत लॉक है')} {priceLockMinutes} {tr('minutes. Complete payment to confirm.', 'मिनट के लिए। पुष्टि के लिए भुगतान पूरा करें।')}
             </p>
           </div>
           <div className="text-right">
@@ -250,21 +250,20 @@ export const CustomerPriceBreakup = ({
         {/* Trust Indicators */}
         <div className="flex flex-wrap gap-2 pt-2">
           <Badge variant="outline" className="text-green-400 border-green-400/50">
-            <CheckCircle className="h-3 w-3 mr-1" /> No Hidden Charges
+            <CheckCircle className="h-3 w-3 mr-1" /> {tr('No Hidden Charges', 'कोई छिपा शुल्क नहीं')}
           </Badge>
           <Badge variant="outline" className="text-green-400 border-green-400/50">
-            <Shield className="h-3 w-3 mr-1" /> Secure Payment
+            <Shield className="h-3 w-3 mr-1" /> {tr('Secure Payment', 'सुरक्षित भुगतान')}
           </Badge>
           <Badge variant="outline" className="text-green-400 border-green-400/50">
-            <Clock className="h-3 w-3 mr-1" /> Instant Confirmation
+            <Clock className="h-3 w-3 mr-1" /> {tr('Instant Confirmation', 'तुरंत पुष्टि')}
           </Badge>
         </div>
         
         {/* Note */}
         <p className="text-slate-500 text-xs flex items-start gap-1">
           <Info className="h-3 w-3 mt-0.5 flex-shrink-0" />
-          All prices are in Indian Rupees (₹). GST as applicable. Final amount may vary based on 
-          actual flight duration and additional services requested.
+          {tr('All prices are in Indian Rupees (₹). GST as applicable. Final amount may vary based on actual flight duration and additional services requested.', 'सभी कीमतें भारतीय रुपये (₹) में हैं। GST लागू अनुसार। अंतिम राशि वास्तविक उड़ान अवधि और अतिरिक्त सेवाओं के अनुसार बदल सकती है।')}
         </p>
       </CardContent>
     </Card>
@@ -275,15 +274,15 @@ export const CustomerPriceBreakup = ({
 
 export const BookingTypeSelector = ({ selected, onSelect }) => {
   const bookingTypes = [
-    { key: 'one_way', label: 'One Way', labelHi: 'एकतरफा', icon: '→', desc: 'A to B' },
-    { key: 'round_trip', label: 'Round Trip', labelHi: 'वापसी', icon: '↔', desc: 'A to B to A', discount: '5-10%' },
-    { key: 'multi_city', label: 'Multi-City', labelHi: 'बहु-शहर', icon: '◇', desc: 'Multiple stops' },
-    { key: 'hourly_charter', label: 'Hourly', labelHi: 'प्रति घंटा', icon: '⏱', desc: 'By the hour' },
-    { key: 'daily_charter', label: 'Daily', labelHi: 'दैनिक', icon: '📅', desc: 'Full day' },
-    { key: 'multi_day', label: 'Multi-Day', labelHi: 'बहु-दिवसीय', icon: '📆', desc: '3+ days', discount: '10-15%' },
-    { key: 'group_booking', label: 'Group', labelHi: 'समूह', icon: '👥', desc: '5+ passengers', discount: 'Special' },
-    { key: 'emergency', label: 'Emergency', labelHi: 'आपात', icon: '🚨', desc: 'Urgent booking', priority: true },
-    { key: 'event_based', label: 'Event', labelHi: 'इवेंट', icon: '🎉', desc: 'Wedding/Corporate' }
+    { key: 'one_way', label: tr('One Way', 'एक तरफ़ा'), labelHi: 'एकतरफा', icon: '→', desc: tr('A to B', 'A से B') },
+    { key: 'round_trip', label: tr('Round Trip', 'आना-जाना'), labelHi: 'वापसी', icon: '↔', desc: tr('A to B to A', 'A से B और वापस A'), discount: '5-10%' },
+    { key: 'multi_city', label: 'Multi-City', labelHi: 'बहु-शहर', icon: '◇', desc: tr('Multiple stops', 'कई पड़ाव') },
+    { key: 'hourly_charter', label: tr('Hourly', 'प्रति घंटा'), labelHi: 'प्रति घंटा', icon: '⏱', desc: tr('By the hour', 'घंटे के हिसाब से') },
+    { key: 'daily_charter', label: tr('Daily', 'दैनिक'), labelHi: 'दैनिक', icon: '📅', desc: tr('Full day', 'पूरा दिन') },
+    { key: 'multi_day', label: 'Multi-Day', labelHi: 'बहु-दिवसीय', icon: '📆', desc: tr('3+ days', '3+ दिन'), discount: '10-15%' },
+    { key: 'group_booking', label: tr('Group', 'समूह'), labelHi: 'समूह', icon: '👥', desc: tr('5+ passengers', '5+ यात्री'), discount: 'Special' },
+    { key: 'emergency', label: tr('Emergency', 'आपातकाल'), labelHi: 'आपात', icon: '🚨', desc: tr('Urgent booking', 'तत्काल बुकिंग'), priority: true },
+    { key: 'event_based', label: tr('Event', 'कार्यक्रम'), labelHi: 'इवेंट', icon: '🎉', desc: 'Wedding/Corporate' }
   ];
   
   return (
@@ -312,7 +311,7 @@ export const BookingTypeSelector = ({ selected, onSelect }) => {
             )}
             {type.priority && (
               <Badge className="mt-1 bg-red-500/20 text-red-400 text-xs">
-                Priority
+                {tr('Priority', 'प्राथमिकता')}
               </Badge>
             )}
           </button>

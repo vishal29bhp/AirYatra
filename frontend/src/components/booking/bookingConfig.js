@@ -14,10 +14,10 @@ export const aircraftTypes = [
 export const bookingTypes = [
   { 
     value: 'one_way', 
-    label: 'One Way', 
+    label: tr('One Way', 'एक तरफ़ा'), 
     labelHi: 'एकतरफा',
     icon: '→',
-    description: 'Single journey from A to B',
+    description: tr('Single journey from A to B', 'A से B तक एक यात्रा'),
     descriptionHi: 'A से B तक एक तरफ़ा यात्रा',
     multiplier: 1.0,
     minHours: null,
@@ -26,10 +26,10 @@ export const bookingTypes = [
   },
   { 
     value: 'round_trip', 
-    label: 'Round Trip', 
+    label: tr('Round Trip', 'आना-जाना'), 
     labelHi: 'वापसी यात्रा',
     icon: '↔',
-    description: 'Return journey A to B to A',
+    description: tr('Return journey A to B to A', 'A से B और वापस A की यात्रा'),
     descriptionHi: 'A से B और वापस A तक',
     multiplier: 1.85, // 7.5% discount on 2x
     minHours: null,
@@ -41,7 +41,7 @@ export const bookingTypes = [
     label: 'Multi-City', 
     labelHi: 'बहु-शहर',
     icon: '◇',
-    description: 'Multiple destinations in one trip',
+    description: tr('Multiple destinations in one trip', 'एक यात्रा में कई गंतव्य'),
     descriptionHi: 'एक यात्रा में कई गंतव्य',
     multiplier: 1.0, // Per leg pricing
     minHours: null,
@@ -50,10 +50,10 @@ export const bookingTypes = [
   },
   { 
     value: 'hourly_charter', 
-    label: 'Hourly Charter', 
+    label: tr('Hourly Charter', 'प्रति घंटा चार्टर'), 
     labelHi: 'प्रति घंटा चार्टर',
     icon: '⏱',
-    description: 'Book by the hour',
+    description: tr('Book by the hour', 'घंटे के हिसाब से बुक करें'),
     descriptionHi: 'घंटे के हिसाब से बुक करें',
     multiplier: 1.0,
     minHours: 1,
@@ -62,10 +62,10 @@ export const bookingTypes = [
   },
   { 
     value: 'daily_charter', 
-    label: 'Daily Charter', 
+    label: tr('Daily Charter', 'दैनिक चार्टर'), 
     labelHi: 'दैनिक चार्टर',
     icon: '📅',
-    description: 'Full day aircraft at your disposal',
+    description: tr('Full day aircraft at your disposal', 'पूरे दिन विमान आपकी सेवा में'),
     descriptionHi: 'पूरे दिन के लिए विमान',
     multiplier: 0.9, // 10% discount for full day
     minHours: 8,
@@ -77,7 +77,7 @@ export const bookingTypes = [
     label: 'Multi-Day', 
     labelHi: 'बहु-दिवसीय',
     icon: '📆',
-    description: '3+ days charter with discounts',
+    description: tr('3+ days charter with discounts', 'छूट के साथ 3+ दिन का चार्टर'),
     descriptionHi: '3+ दिन की चार्टर छूट के साथ',
     multiplier: 0.85, // 15% discount for 3+ days
     minHours: null,
@@ -86,10 +86,10 @@ export const bookingTypes = [
   },
   { 
     value: 'group_booking', 
-    label: 'Group Booking', 
+    label: tr('Group Booking', 'समूह बुकिंग'), 
     labelHi: 'समूह बुकिंग',
     icon: '👥',
-    description: '5+ passengers, special rates',
+    description: tr('5+ passengers, special rates', '5+ यात्री, विशेष दरें'),
     descriptionHi: '5+ यात्री, विशेष दरें',
     multiplier: 0.92, // 8% group discount
     minHours: null,
@@ -99,10 +99,10 @@ export const bookingTypes = [
   },
   { 
     value: 'emergency', 
-    label: 'Emergency', 
+    label: tr('Emergency', 'आपातकाल'), 
     labelHi: 'आपातकालीन',
     icon: '🚨',
-    description: 'Urgent medical or time-critical',
+    description: tr('Urgent medical or time-critical', 'अत्यावश्यक चिकित्सा या समय-संवेदनशील'),
     descriptionHi: 'तत्काल चिकित्सा या समय-महत्वपूर्ण',
     multiplier: 1.25, // 25% priority surcharge
     minHours: null,
@@ -112,10 +112,10 @@ export const bookingTypes = [
   },
   { 
     value: 'event_based', 
-    label: 'Event Package', 
+    label: tr('Event Package', 'इवेंट पैकेज'), 
     labelHi: 'इवेंट पैकेज',
     icon: '🎉',
-    description: 'Weddings, Corporate events, Film shoots',
+    description: tr('Weddings, Corporate events, Film shoots', 'शादियां, कॉर्पोरेट कार्यक्रम, फ़िल्म शूटिंग'),
     descriptionHi: 'शादी, कॉर्पोरेट इवेंट, फिल्म शूटिंग',
     multiplier: 1.0, // Custom quote
     minHours: null,

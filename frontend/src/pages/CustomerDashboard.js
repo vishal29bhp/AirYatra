@@ -22,7 +22,7 @@ import TwoFactorSetup from '../components/auth/TwoFactorSetup';
 import { CustomerAuctions } from '../components/auction/AuctionDashboard';
 import { useResponsiveSidebar, MobileMenuButton, ResponsiveSidebar, CollapsibleNavGroup } from '../components/shared/Sidebar';
 import { AircraftComparison } from '../components/aircraft/AircraftComparison';
-import { bi } from '../lib/bilingual';
+import { bi, tr } from '../lib/bilingual';
 
 // Organized Navigation Structure - 4 Main Categories
 const navGroups = [
@@ -31,7 +31,7 @@ const navGroups = [
     label: bi('Main / मुख्य'),
     icon: Home,
     items: [
-      { id: 'overview', label: 'Dashboard', icon: Home, path: '/customer' },
+      { id: 'overview', label: tr('Dashboard', 'डैशबोर्ड'), icon: Home, path: '/customer' },
       { id: 'trips', label: bi('My Trips / मेरी यात्राएं'), icon: MapPin, path: '/customer/trips', highlight: true },
       { id: 'compare', label: bi('Compare Aircraft / तुलना करें'), icon: Scale, path: '/customer/compare', highlight: true },
       { id: 'stats', label: bi('My Stats / मेरे आंकड़े'), icon: PieChart, path: '/customer/stats', highlight: true },
@@ -211,12 +211,12 @@ function CustomerDashboard({ user, onLogout }) {
               <Link to="/booking" className="bg-lime text-black p-6 rounded-sm transition-all">
                 <Calendar className="h-8 w-8 text-black mb-3" />
                 <h3 className="text-xl font-bold text-black mb-1">{bi("Book a Flight / फ्लाइट बुक करें")}</h3>
-                <p className="text-black/70">Charter your private jet or helicopter</p>
+                <p className="text-black/70">{tr('Charter your private jet or helicopter', 'अपना प्राइवेट जेट या हेलीकॉप्टर चार्टर करें')}</p>
               </Link>
               <button onClick={() => { setActiveTab('trips'); navigate('/customer/trips'); }} className="bg-slate-800/50 p-6 rounded-sm border border-slate-700 hover:bg-slate-700/50 transition-all text-left">
                 <MapPin className="h-8 w-8 text-amber mb-3" />
                 <h3 className="text-xl font-bold text-white mb-1">{bi("View My Trips / यात्राएं देखें")}</h3>
-                <p className="text-slate-400">Track and manage your bookings</p>
+                <p className="text-slate-400">{tr('Track and manage your bookings', 'अपनी बुकिंग ट्रैक और प्रबंधित करें')}</p>
               </button>
             </div>
 
@@ -229,18 +229,18 @@ function CustomerDashboard({ user, onLogout }) {
                   className="border-lime text-lime hover:bg-lime/10"
                   onClick={() => { setActiveTab('trips'); navigate('/customer/trips'); }}
                 >
-                  View All
+                  {tr('View All', 'सभी देखें')}
                 </Button>
               </div>
               {loading ? (
-                <div className="text-slate-400">Loading...</div>
+                <div className="text-slate-400">{tr('Loading...', 'लोड हो रहा है...')}</div>
               ) : bookings.length === 0 ? (
                 <div className="text-center py-12">
                   <Plane className="h-16 w-16 mx-auto text-slate-600 mb-4" />
                   <p className="text-slate-400 mb-4">{bi("No bookings yet / अभी कोई बुकिंग नहीं")}</p>
                   <Link to="/booking">
                     <Button className="bg-lime text-black hover:bg-lime/90" data-testid="create-first-booking-btn">
-                      Create Your First Booking
+                      {tr('Create Your First Booking', 'अपनी पहली बुकिंग बनाएं')}
                     </Button>
                   </Link>
                 </div>
@@ -261,7 +261,7 @@ function CustomerDashboard({ user, onLogout }) {
                           id: 'cancel',
                           icon: XCircle,
                           color: 'bg-red-500',
-                          onClick: () => toast.info('Cancel from My Trips page')
+                          onClick: () => toast.info(tr('Cancel from My Trips page', 'मेरी यात्राएं पेज से रद्द करें'))
                         }] : [])
                       ]}
                     >
@@ -282,7 +282,7 @@ function CustomerDashboard({ user, onLogout }) {
                           </span>
                         </div>
                         {/* Mobile swipe hint */}
-                        <p className="text-xs text-slate-500 mt-2 sm:hidden">← Swipe for actions</p>
+                        <p className="text-xs text-slate-500 mt-2 sm:hidden">{tr('← Swipe for actions', '← विकल्पों के लिए स्वाइप करें')}</p>
                       </div>
                     </SwipeableCard>
                   ))}

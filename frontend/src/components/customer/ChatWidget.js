@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { chatAPI } from '../../services/api';
 import { toast } from 'sonner';
+import { tr } from '../../lib/bilingual';
 
 function ChatWidget({ user }) {
   const [conversations, setConversations] = useState([]);
@@ -42,7 +43,7 @@ function ChatWidget({ user }) {
       const response = await chatAPI.getMessages(bookingId);
       setMessages(response.data.messages || []);
     } catch (error) {
-      toast.error('Failed to load messages');
+      toast.error(tr('Failed to load messages', 'संदेश लोड नहीं हो सके'));
     }
   };
 
@@ -68,7 +69,7 @@ function ChatWidget({ user }) {
       // Update conversation list
       loadConversations();
     } catch (error) {
-      toast.error('Failed to send message');
+      toast.error(tr('Failed to send message', 'संदेश नहीं भेजा जा सका'));
     } finally {
       setSending(false);
     }
@@ -89,15 +90,15 @@ function ChatWidget({ user }) {
         <div className="p-4 border-b border-slate-700">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-lime" />
-            Messages
+            {tr('Messages', 'संदेश')}
           </h3>
         </div>
         
         <div className="overflow-y-auto h-[calc(100%-60px)]">
           {loading ? (
-            <p className="text-center py-8 text-slate-400">Loading...</p>
+            <p className="text-center py-8 text-slate-400">{tr('Loading...', 'लोड हो रहा है...')}</p>
           ) : conversations.length === 0 ? (
-            <p className="text-center py-8 text-slate-400">No conversations</p>
+            <p className="text-center py-8 text-slate-400">{tr('No conversations', 'कोई बातचीत नहीं')}</p>
           ) : (
             conversations.map((conv) => (
               <button
@@ -160,7 +161,7 @@ function ChatWidget({ user }) {
                           </div>
                         )}
                         <span className="text-xs text-slate-500">
-                          {msg.sender_name || (isMe ? 'You' : 'Operator')}
+                          {msg.sender_name || (isMe ? tr('You', 'आप') : tr('Operator', 'ऑपरेटर'))}
                         </span>
                       </div>
                       <div
@@ -190,7 +191,7 @@ function ChatWidget({ user }) {
                 <Input
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Type a message..."
+                  placeholder={tr('Type a message...', 'संदेश लिखें...')}
                   className="flex-1 bg-slate-800 border-slate-700 text-white"
                 />
                 <Button type="submit" disabled={sending || !newMessage.trim()} className="bg-lime text-black hover:bg-lime/90">
@@ -203,7 +204,7 @@ function ChatWidget({ user }) {
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
               <MessageSquare className="h-16 w-16 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400">Select a conversation to start messaging</p>
+              <p className="text-slate-400">{tr('Select a conversation to start messaging', 'संदेश भेजने के लिए कोई बातचीत चुनें')}</p>
             </div>
           </div>
         )}
