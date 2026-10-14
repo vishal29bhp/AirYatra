@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { landingAPI, pincodeAPI } from '@/services/api';
 import { toast } from 'sonner';
-import { bi, isHindi } from '../../lib/bilingual';
+import { bi, isHindi, tr } from '../../lib/bilingual';
 
 // Landing Point Type Icons & Colors
 const typeConfig = {
@@ -334,21 +334,21 @@ function LandingPointSelector({
                   {point.permission_required && (
                     <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 rounded text-xs flex items-center gap-1">
                       <AlertTriangle className="h-3 w-3" />
-                      Permission
+                      {tr('Permission', 'अनुमति')}
                     </span>
                   )}
                   
                   {point.rent_applicable && (
                     <span className="px-2 py-0.5 bg-green-500/20 text-green-400 rounded text-xs flex items-center gap-1">
                       <DollarSign className="h-3 w-3" />
-                      Rent
+                      {tr('Rent', 'किराया')}
                     </span>
                   )}
                   
                   {point.availability_calendar_required && (
                     <span className="px-2 py-0.5 bg-amber/20 text-amber rounded text-xs flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      Calendar
+                      {tr('Calendar', 'कैलेंडर')}
                     </span>
                   )}
                 </div>
@@ -446,7 +446,7 @@ function LandingPointSelector({
             <div>
               <h4 className="text-lime font-medium">{bi("Select Village Area / गांव क्षेत्र चुनें")}</h4>
               <p className="text-lime/70 text-xs">
-                Enter your village PIN code to get location details
+                {tr('Enter your village PIN code to get location details', 'स्थान का विवरण पाने के लिए अपने गांव का PIN कोड दर्ज करें')}
               </p>
             </div>
           </div>
@@ -459,7 +459,7 @@ function LandingPointSelector({
                 <Input
                   type="text"
                   maxLength={6}
-                  placeholder="Enter 6-digit PIN code"
+                  placeholder={tr('Enter 6-digit PIN code', '6 अंकों का PIN कोड दर्ज करें')}
                   value={villageData.pincode}
                   onChange={(e) => handlePincodeChange(e.target.value.replace(/\D/g, ''))}
                   className="bg-slate-800 border-slate-600 text-white"
@@ -488,9 +488,9 @@ function LandingPointSelector({
               <div className="flex items-start gap-2">
                 <AlertTriangle className="h-4 w-4 text-yellow-400 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-yellow-400 text-sm font-medium">Landing Permission Required</p>
+                  <p className="text-yellow-400 text-sm font-medium">{tr('Landing Permission Required', 'लैंडिंग अनुमति आवश्यक')}</p>
                   {!isHindi() && (<p className="text-yellow-400/70 text-xs">
-                    Village landing requires documents: Collector NOC, Fire Dept, Police & SP/DCP Acknowledgments
+                    {tr('Village landing requires documents: Collector NOC, Fire Dept, Police & SP/DCP Acknowledgments', 'गांव में लैंडिंग के लिए दस्तावेज़ चाहिए: कलेक्टर NOC, अग्निशमन विभाग, पुलिस और SP/DCP की पावती')}
                   </p>)}
                   {isHindi() && (<p className="text-yellow-400/70 text-xs">
                     गांव लैंडिंग के लिए दस्तावेज़ आवश्यक: कलेक्टर NOC, फायर विभाग, पुलिस और SP/DCP पावती
@@ -508,7 +508,7 @@ function LandingPointSelector({
                 className="flex-1 bg-lime text-black hover:bg-lime/90"
               >
                 <Check className="h-4 w-4 mr-2" />
-                Select This Location
+                {tr('Select This Location', 'यह स्थान चुनें')}
               </Button>
               <Button
                 type="button"

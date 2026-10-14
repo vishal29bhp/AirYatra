@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { customerAPI } from '@/services/api';
 import { toast } from 'sonner';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
   const [passengers, setPassengers] = useState([]);
@@ -131,18 +131,18 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
           {bi("Passenger Details / यात्री विवरण")}
         </h2>
         <p className="text-slate-400 text-sm mt-1">
-          Please fill details for all {passengers.length} passengers
+          Please fill details for all {passengers.length} {tr('passengers', 'यात्री')}
         </p>
       </div>
 
       {/* Weight Summary */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
-          <p className="text-slate-400 text-sm">Total Passenger Weight</p>
+          <p className="text-slate-400 text-sm">{tr('Total Passenger Weight', 'यात्रियों का कुल वज़न')}</p>
           <p className="text-white text-2xl font-bold">{totalWeight} kg</p>
         </div>
         <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
-          <p className="text-slate-400 text-sm">Total Luggage Weight</p>
+          <p className="text-slate-400 text-sm">{tr('Total Luggage Weight', 'सामान का कुल वज़न')}</p>
           <p className="text-white text-2xl font-bold">{totalLuggageWeight} kg</p>
         </div>
       </div>
@@ -179,7 +179,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                   </p>
                   {passenger.name && (
                     <p className="text-slate-400 text-sm">
-                      {passenger.weight_kg}kg • {passenger.luggage_count} bag(s) • {passenger.luggage_weight_kg}kg luggage
+                      {passenger.weight_kg}kg • {passenger.luggage_count} {tr('bag(s) •', 'बैग •')} {passenger.luggage_weight_kg}{tr('kg luggage', 'किलो सामान')}
                     </p>
                   )}
                 </div>
@@ -206,7 +206,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                     <Input
                       value={passenger.name}
                       onChange={(e) => handlePassengerChange(index, 'name', e.target.value)}
-                      placeholder="Enter full name"
+                      placeholder={tr('Enter full name', 'पूरा नाम दर्ज करें')}
                       className="bg-slate-900 border-slate-600 text-white mt-1"
                     />
                   </div>
@@ -218,7 +218,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                       type="number"
                       value={passenger.age}
                       onChange={(e) => handlePassengerChange(index, 'age', e.target.value)}
-                      placeholder="Years"
+                      placeholder={tr('Years', 'वर्ष')}
                       min="0"
                       max="120"
                       className="bg-slate-900 border-slate-600 text-white mt-1"
@@ -234,7 +234,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                         onChange={(e) => handlePassengerChange(index, 'gender', e.target.value)}
                         className="w-full p-2 bg-slate-900 border border-slate-600 rounded-lg text-white mt-1"
                       >
-                        <option value="">Select Gender</option>
+                        <option value="">{tr('Select Gender', 'लिंग चुनें')}</option>
                         <option value="male">{bi("Male / पुरुष")}</option>
                         <option value="female">{bi("Female / महिला")}</option>
                       </select>
@@ -251,7 +251,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                       type="number"
                       value={passenger.weight_kg}
                       onChange={(e) => handlePassengerChange(index, 'weight_kg', e.target.value)}
-                      placeholder="Weight in kg"
+                      placeholder={tr('Weight in kg', 'वज़न (किलो में)')}
                       min="5"
                       max="200"
                       className="bg-slate-900 border-slate-600 text-white mt-1"
@@ -287,7 +287,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                       type="number"
                       value={passenger.luggage_weight_kg}
                       onChange={(e) => handlePassengerChange(index, 'luggage_weight_kg', e.target.value)}
-                      placeholder="Total luggage weight"
+                      placeholder={tr('Total luggage weight', 'सामान का कुल वज़न')}
                       min="0"
                       max="100"
                       className="bg-slate-900 border-slate-600 text-white mt-1"
@@ -309,7 +309,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                         onChange={(e) => handlePassengerChange(index, 'id_proof_type', e.target.value)}
                         className="w-full p-2 bg-slate-900 border border-slate-600 rounded-lg text-white mt-1"
                       >
-                        <option value="">Select ID Type (Optional)</option>
+                        <option value="">{tr('Select ID Type (Optional)', 'ID का प्रकार चुनें (वैकल्पिक)')}</option>
                         <option value="aadhar">{bi("Aadhar Card / आधार कार्ड")}</option>
                         <option value="passport">{bi("Passport / पासपोर्ट")}</option>
                         <option value="driving_license">{bi("Driving License / ड्राइविंग लाइसेंस")}</option>
@@ -323,7 +323,7 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
                         <Input
                           value={passenger.id_proof_number}
                           onChange={(e) => handlePassengerChange(index, 'id_proof_number', e.target.value)}
-                          placeholder="Enter ID number"
+                          placeholder={tr('Enter ID number', 'ID नंबर दर्ज करें')}
                           className="bg-slate-900 border-slate-600 text-white mt-1"
                         />
                       </div>
@@ -351,9 +351,9 @@ function PassengerDetailsForm({ inquiry, onComplete, onCancel }) {
           className="flex-1 bg-lime text-black hover:bg-lime/90"
         >
           {loading ? (
-            <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Saving...</>
+            <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> {tr('Saving...', 'सेव हो रहा है...')}</>
           ) : (
-            <><Check className="h-4 w-4 mr-2" /> Save & Continue to Payment</>
+            <><Check className="h-4 w-4 mr-2" /> {tr('Save & Continue to Payment', 'सेव करें और भुगतान पर जाएं')}</>
           )}
         </Button>
       </div>

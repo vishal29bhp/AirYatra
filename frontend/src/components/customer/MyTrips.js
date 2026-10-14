@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { customerAPI, feedbackAPI } from '../../services/api';
 import { toast } from 'sonner';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 function MyTrips({ user }) {
   const [trips, setTrips] = useState([]);
@@ -34,7 +34,7 @@ function MyTrips({ user }) {
       setTrips(response.data.trips || []);
       setStatistics(response.data.statistics || {});
     } catch (error) {
-      toast.error('Failed to load trips');
+      toast.error(tr('Failed to load trips', 'यात्राएं लोड नहीं हो सकीं'));
     } finally {
       setLoading(false);
     }
@@ -54,7 +54,7 @@ function MyTrips({ user }) {
       const response = await customerAPI.getBookingQuotes(bookingId);
       setTripQuotes(response.data.quotes || []);
     } catch (error) {
-      toast.error('Failed to load quotes');
+      toast.error(tr('Failed to load quotes', 'कोटेशन लोड नहीं हो सके'));
     }
   };
 
@@ -110,7 +110,7 @@ function MyTrips({ user }) {
         booking_id: selectedTrip.id,
         ...reviewData
       });
-      toast.success('Review submitted!');
+      toast.success(tr('Review submitted!', 'समीक्षा भेजी गई!'));
       setShowReviewDialog(false);
       setSelectedTrip(null);
       loadTrips();
@@ -164,8 +164,8 @@ function MyTrips({ user }) {
   return (
     <div className="max-w-4xl mx-auto" data-testid="my-trips">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white">My Trips</h1>
-        <p className="text-slate-400 mt-1">View and manage your helicopter bookings</p>
+        <h1 className="text-4xl font-bold text-white">{tr('My Trips', 'मेरी यात्राएं')}</h1>
+        <p className="text-slate-400 mt-1">{tr('View and manage your helicopter bookings', 'अपनी हेलीकॉप्टर बुकिंग देखें और प्रबंधित करें')}</p>
       </div>
 
       {/* Pending Quotes Alert */}
@@ -178,10 +178,10 @@ function MyTrips({ user }) {
               </div>
               <div>
                 <h3 className="text-lime font-semibold">
-                  {pendingQuotes.length} New Quote{pendingQuotes.length > 1 ? 's' : ''} {bi("Received! / नया कोट मिला!")}
+                  {pendingQuotes.length} {tr('New Quote', 'नया कोटेशन')}{pendingQuotes.length > 1 ? 's' : ''} {bi("Received! / नया कोट मिला!")}
                 </h3>
                 <p className="text-slate-400 text-sm">
-                  Operators have sent revised quotes for your bookings. Please review and respond.
+                  {tr('Operators have sent revised quotes for your bookings. Please review and respond.', 'ऑपरेटरों ने आपकी बुकिंग के लिए संशोधित कोटेशन भेजे हैं। कृपया देखें और जवाब दें।')}
                 </p>
               </div>
             </div>
@@ -189,7 +189,7 @@ function MyTrips({ user }) {
               onClick={() => setActiveTab('upcoming')}
               className="bg-lime text-black hover:bg-lime/90"
             >
-              View Quotes
+              {tr('View Quotes', 'कोटेशन देखें')}
             </Button>
           </div>
         </div>
@@ -199,19 +199,19 @@ function MyTrips({ user }) {
       <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="glass p-4 rounded-lg text-center">
           <p className="text-2xl font-bold text-white">{statistics.total_trips || 0}</p>
-          <p className="text-sm text-slate-400">Total Trips</p>
+          <p className="text-sm text-slate-400">{tr('Total Trips', 'कुल यात्राएं')}</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
           <p className="text-2xl font-bold text-amber">{statistics.upcoming_count || 0}</p>
-          <p className="text-sm text-slate-400">Upcoming</p>
+          <p className="text-sm text-slate-400">{tr('Upcoming', 'आगामी')}</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
           <p className="text-2xl font-bold text-green-400">{statistics.completed_count || 0}</p>
-          <p className="text-sm text-slate-400">Completed</p>
+          <p className="text-sm text-slate-400">{tr('Completed', 'पूर्ण')}</p>
         </div>
         <div className="glass p-4 rounded-lg text-center">
           <p className="text-2xl font-bold text-lime">₹{(statistics.total_spent || 0).toLocaleString()}</p>
-          <p className="text-sm text-slate-400">Total Spent</p>
+          <p className="text-sm text-slate-400">{tr('Total Spent', 'कुल खर्च')}</p>
         </div>
       </div>
 
@@ -219,10 +219,10 @@ function MyTrips({ user }) {
       <div className="flex gap-2 mb-6 flex-wrap">
         {[
           { id: 'pending', label: bi('Pending Inquiries / इंक्वायरी') },
-          { id: 'upcoming', label: 'Upcoming' },
-          { id: 'completed', label: 'Completed' },
-          { id: 'cancelled', label: 'Cancelled' },
-          { id: 'all', label: 'All' }
+          { id: 'upcoming', label: tr('Upcoming', 'आगामी') },
+          { id: 'completed', label: tr('Completed', 'पूर्ण') },
+          { id: 'cancelled', label: tr('Cancelled', 'रद्द') },
+          { id: 'all', label: tr('All', 'सभी') }
         ].map(tab => (
           <Button
             key={tab.id}
@@ -242,11 +242,11 @@ function MyTrips({ user }) {
 
       {/* Trips List */}
       {loading ? (
-        <div className="text-center py-12 text-slate-400">Loading trips...</div>
+        <div className="text-center py-12 text-slate-400">{tr('Loading trips...', 'यात्राएं लोड हो रही हैं...')}</div>
       ) : filteredTrips.length === 0 ? (
         <div className="text-center py-12">
           <Plane className="h-16 w-16 text-slate-600 mx-auto mb-4" />
-          <p className="text-slate-400">No trips found</p>
+          <p className="text-slate-400">{tr('No trips found', 'कोई यात्रा नहीं मिली')}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -257,7 +257,7 @@ function MyTrips({ user }) {
                   <p className="text-white font-semibold text-lg">
                     {trip.inquiry_number || trip.booking_number || `#${trip.id?.slice(0, 8)}`}
                     {trip.source === 'inquiry' && (
-                      <span className="ml-2 text-xs px-2 py-0.5 bg-amber/20 text-amber rounded">Inquiry</span>
+                      <span className="ml-2 text-xs px-2 py-0.5 bg-amber/20 text-amber rounded">{tr('Inquiry', 'पूछताछ')}</span>
                     )}
                   </p>
                   <div className="flex items-center gap-2 mt-2 text-slate-300">
@@ -280,7 +280,7 @@ function MyTrips({ user }) {
                 </div>
                 <div className="flex items-center gap-2 text-slate-400">
                   <Plane className="h-4 w-4" />
-                  <span>{trip.operator?.company_name || 'Operator TBD'}</span>
+                  <span>{trip.operator?.company_name || tr('Operator TBD', 'ऑपरेटर तय होना बाकी')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-white font-semibold">
                   <IndianRupee className="h-4 w-4" />
@@ -291,10 +291,10 @@ function MyTrips({ user }) {
               {/* Additional info for inquiries */}
               {trip.source === 'inquiry' && (
                 <div className="flex items-center gap-4 text-sm text-slate-400 mb-4">
-                  <span>✈️ {trip.aircraft_type === 'helicopter' ? 'Helicopter' : 'Plane'}</span>
-                  <span>👥 {trip.total_passengers} Passengers</span>
+                  <span>✈️ {trip.aircraft_type === 'helicopter' ? tr('Helicopter', 'हेलीकॉप्टर') : tr('Plane', 'विमान')}</span>
+                  <span>👥 {trip.total_passengers} {tr('Passengers', 'यात्री')}</span>
                   {trip.quote_count > 0 && (
-                    <span className="text-lime">📋 {trip.quote_count} Quote(s) Received</span>
+                    <span className="text-lime">📋 {trip.quote_count} {tr('Quote(s) Received', 'कोटेशन मिले')}</span>
                   )}
                 </div>
               )}
@@ -306,7 +306,7 @@ function MyTrips({ user }) {
                     <div>
                       <p className="text-amber font-medium flex items-center gap-2">
                         <Bell className="h-4 w-4" />
-                        New Quote from {trip.latest_quote.operator_name}
+                        {tr('New Quote from', 'नया कोटेशन, भेजने वाले:')} {trip.latest_quote.operator_name}
                       </p>
                       <p className="text-white text-lg font-bold mt-1">
                         ₹{trip.latest_quote.amount?.toLocaleString()}
@@ -317,7 +317,7 @@ function MyTrips({ user }) {
                       className="bg-slate-700 hover:bg-slate-600"
                       onClick={() => handleViewQuotes(trip)}
                     >
-                      View Quotes
+                      {tr('View Quotes', 'कोटेशन देखें')}
                     </Button>
                   </div>
                 </div>
@@ -342,7 +342,7 @@ function MyTrips({ user }) {
                     className="bg-lime/20 text-lime hover:bg-lime/30"
                     onClick={() => handleViewQuotes(trip)}
                   >
-                    <Bell className="h-4 w-4 mr-1" /> View Quotes
+                    <Bell className="h-4 w-4 mr-1" /> {tr('View Quotes', 'कोटेशन देखें')}
                   </Button>
                 )}
                 {trip.status === 'completed' && !trip.feedback && (
@@ -351,7 +351,7 @@ function MyTrips({ user }) {
                     className="bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30"
                     onClick={() => { setSelectedTrip(trip); setShowReviewDialog(true); }}
                   >
-                    <Star className="h-4 w-4 mr-1" /> Rate Trip
+                    <Star className="h-4 w-4 mr-1" /> {tr('Rate Trip', 'यात्रा को रेट करें')}
                   </Button>
                 )}
                 {['pending', 'confirmed'].includes(trip.status) && (
@@ -360,7 +360,7 @@ function MyTrips({ user }) {
                     variant="destructive"
                     onClick={() => { setSelectedTrip(trip); setShowCancelDialog(true); }}
                   >
-                    <X className="h-4 w-4 mr-1" /> Cancel
+                    <X className="h-4 w-4 mr-1" /> {tr('Cancel', 'रद्द करें')}
                   </Button>
                 )}
                 <Button
@@ -369,14 +369,14 @@ function MyTrips({ user }) {
                   className="border-slate-600 text-slate-300"
                   onClick={() => setSelectedTrip(trip)}
                 >
-                  <FileText className="h-4 w-4 mr-1" /> Details
+                  <FileText className="h-4 w-4 mr-1" /> {tr('Details', 'विवरण')}
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
                   className="border-slate-600 text-slate-300"
                 >
-                  <MessageSquare className="h-4 w-4 mr-1" /> Chat
+                  <MessageSquare className="h-4 w-4 mr-1" /> {tr('Chat', 'चैट')}
                 </Button>
               </div>
             </div>
@@ -390,19 +390,19 @@ function MyTrips({ user }) {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-red-400" />
-              Cancel Booking
+              {tr('Cancel Booking', 'बुकिंग रद्द करें')}
             </DialogTitle>
           </DialogHeader>
           <div className="py-4 space-y-4">
-            <p className="text-slate-400">Are you sure you want to cancel this booking?</p>
+            <p className="text-slate-400">{tr('Are you sure you want to cancel this booking?', 'क्या आप वाकई यह बुकिंग रद्द करना चाहते हैं?')}</p>
             <div>
-              <label className="block text-sm text-slate-400 mb-2">Reason for cancellation *</label>
+              <label className="block text-sm text-slate-400 mb-2">{tr('Reason for cancellation *', 'रद्द करने का कारण *')}</label>
               <textarea
                 value={cancelReason}
                 onChange={(e) => setCancelReason(e.target.value)}
                 className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white"
                 rows={3}
-                placeholder="Please provide a reason..."
+                placeholder={tr('Please provide a reason...', 'कृपया कारण बताएं...')}
               />
             </div>
             <label className="flex items-center gap-2 text-slate-300">
@@ -412,15 +412,15 @@ function MyTrips({ user }) {
                 onChange={(e) => setIsEmergency(e.target.checked)}
                 className="rounded"
               />
-              <span>This is an emergency cancellation (full refund)</span>
+              <span>{tr('This is an emergency cancellation (full refund)', 'यह आपातकालीन रद्दीकरण है (पूरा रिफंड)')}</span>
             </label>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCancelDialog(false)} className="border-slate-600 text-slate-300">
-              Keep Booking
+              {tr('Keep Booking', 'बुकिंग रखें')}
             </Button>
             <Button variant="destructive" onClick={handleCancelTrip} disabled={processing || !cancelReason}>
-              {processing ? 'Processing...' : 'Cancel Booking'}
+              {processing ? tr('Processing...', 'प्रोसेस हो रहा है...') : tr('Cancel Booking', 'बुकिंग रद्द करें')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -430,11 +430,11 @@ function MyTrips({ user }) {
       <Dialog open={showReviewDialog} onOpenChange={setShowReviewDialog}>
         <DialogContent className="bg-slate-900 border-slate-700 text-white">
           <DialogHeader>
-            <DialogTitle>Rate Your Trip</DialogTitle>
+            <DialogTitle>{tr('Rate Your Trip', 'अपनी यात्रा को रेट करें')}</DialogTitle>
           </DialogHeader>
           <div className="py-4 space-y-4">
             <div>
-              <label className="block text-sm text-slate-400 mb-2">Overall Rating</label>
+              <label className="block text-sm text-slate-400 mb-2">{tr('Overall Rating', 'कुल रेटिंग')}</label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -448,13 +448,13 @@ function MyTrips({ user }) {
               </div>
             </div>
             <div>
-              <label className="block text-sm text-slate-400 mb-2">Your Review</label>
+              <label className="block text-sm text-slate-400 mb-2">{tr('Your Review', 'आपकी समीक्षा')}</label>
               <textarea
                 value={reviewData.comment}
                 onChange={(e) => setReviewData({ ...reviewData, comment: e.target.value })}
                 className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 text-white"
                 rows={3}
-                placeholder="Share your experience..."
+                placeholder={tr('Share your experience...', 'अपना अनुभव साझा करें...')}
               />
             </div>
             <label className="flex items-center gap-2 text-slate-300">
@@ -464,15 +464,15 @@ function MyTrips({ user }) {
                 onChange={(e) => setReviewData({ ...reviewData, recommend: e.target.checked })}
                 className="rounded"
               />
-              <span>I would recommend this operator</span>
+              <span>{tr('I would recommend this operator', 'मैं इस ऑपरेटर की सिफ़ारिश करूंगा/करूंगी')}</span>
             </label>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowReviewDialog(false)} className="border-slate-600 text-slate-300">
-              Cancel
+              {tr('Cancel', 'रद्द करें')}
             </Button>
             <Button onClick={handleSubmitReview} disabled={processing} className="bg-lime text-black hover:bg-lime/90">
-              {processing ? 'Submitting...' : 'Submit Review'}
+              {processing ? tr('Submitting...', 'भेजा जा रहा है...') : tr('Submit Review', 'समीक्षा भेजें')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -491,9 +491,9 @@ function MyTrips({ user }) {
             {tripQuotes.length === 0 ? (
               <div className="text-center py-8">
                 <Bell className="h-12 w-12 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-400">No quotes received yet</p>
+                <p className="text-slate-400">{tr('No quotes received yet', 'अभी कोई कोटेशन नहीं मिला')}</p>
                 <p className="text-slate-500 text-sm mt-1">
-                  Operators will send you revised quotes soon
+                  {tr('Operators will send you revised quotes soon', 'ऑपरेटर जल्द ही आपको संशोधित कोटेशन भेजेंगे')}
                 </p>
               </div>
             ) : (
@@ -525,9 +525,9 @@ function MyTrips({ user }) {
                       quote.status === 'rejected_by_customer' ? 'bg-red-500/20 text-red-400' :
                       'bg-amber/20 text-amber'
                     }`}>
-                      {quote.status === 'accepted' ? '✓ Accepted' :
-                       quote.status === 'rejected_by_customer' ? '✗ Rejected' :
-                       'Pending Response'}
+                      {quote.status === 'accepted' ? tr('✓ Accepted', '✓ स्वीकृत') :
+                       quote.status === 'rejected_by_customer' ? tr('✗ Rejected', '✗ अस्वीकृत') :
+                       tr('Pending Response', 'जवाब लंबित')}
                     </span>
                   </div>
 
@@ -538,7 +538,7 @@ function MyTrips({ user }) {
                       </p>
                       {quote.revision_count > 1 && (
                         <p className="text-slate-500 text-xs">
-                          Revision #{quote.revision_count}
+                          {tr('Revision #', 'संशोधन #')}{quote.revision_count}
                         </p>
                       )}
                       {quote.notes && (
@@ -556,7 +556,7 @@ function MyTrips({ user }) {
                           onClick={() => handleQuoteResponse(quote.id, 'accept')}
                           disabled={processing}
                         >
-                          <Check className="h-4 w-4 mr-1" /> Accept
+                          <Check className="h-4 w-4 mr-1" /> {tr('Accept', 'स्वीकार करें')}
                         </Button>
                         <Button
                           size="sm"
@@ -564,7 +564,7 @@ function MyTrips({ user }) {
                           onClick={() => handleQuoteResponse(quote.id, 'reject')}
                           disabled={processing}
                         >
-                          <X className="h-4 w-4 mr-1" /> Reject
+                          <X className="h-4 w-4 mr-1" /> {tr('Reject', 'अस्वीकार करें')}
                         </Button>
                       </div>
                     ) : null}
@@ -573,7 +573,7 @@ function MyTrips({ user }) {
                   {/* Quote Breakdown if available */}
                   {quote.breakdown && Object.keys(quote.breakdown).length > 0 && (
                     <div className="mt-3 pt-3 border-t border-slate-700">
-                      <p className="text-slate-400 text-xs mb-2">Price Breakdown:</p>
+                      <p className="text-slate-400 text-xs mb-2">{tr('Price Breakdown:', 'कीमत का विवरण:')}</p>
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         {Object.entries(quote.breakdown).map(([key, value]) => (
                           <div key={key} className="flex justify-between">
@@ -590,10 +590,10 @@ function MyTrips({ user }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowQuotesDialog(false)} className="border-slate-600 text-slate-300">
-              Close
+              {tr('Close', 'बंद करें')}
             </Button>
             <Button onClick={() => loadTripQuotes(selectedTrip?.id)} className="bg-slate-700 hover:bg-slate-600">
-              <RefreshCw className="h-4 w-4 mr-1" /> Refresh
+              <RefreshCw className="h-4 w-4 mr-1" /> {tr('Refresh', 'रीफ़्रेश करें')}
             </Button>
           </DialogFooter>
         </DialogContent>

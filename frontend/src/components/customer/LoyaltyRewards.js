@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import api from '../../services/api';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 const TIER_COLORS = {
   bronze: 'from-amber-700 to-amber-900',
@@ -27,7 +27,7 @@ const StatusHeader = ({ status }) => {
           <p className="text-4xl font-black text-lime" data-testid="available-points">
             {(profile?.available_points || 0).toLocaleString()}
           </p>
-          <p className="text-slate-500 text-xs mt-1">Lifetime: {(profile?.lifetime_points || 0).toLocaleString()} pts</p>
+          <p className="text-slate-500 text-xs mt-1">Lifetime: {(profile?.lifetime_points || 0).toLocaleString()} {tr('pts', 'पॉइंट')}</p>
         </div>
         <div className="text-right">
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${TIER_COLORS[current_tier?.id] || TIER_COLORS.bronze}`} data-testid="tier-badge">
@@ -61,7 +61,7 @@ const StatusHeader = ({ status }) => {
             {tier.charAt(0).toUpperCase() + tier.slice(1)} {mult}x
           </span>
         ))}
-        <span className="text-amber-400">BLACK Members up to 3x 👑</span>
+        <span className="text-amber-400">{tr('BLACK Members up to 3x 👑', 'BLACK सदस्यों को 3x तक 👑')}</span>
       </div>
     </div>
   );
@@ -88,7 +88,7 @@ const RewardCard = ({ reward, onRedeem }) => (
         className={reward.can_redeem ? 'bg-lime text-black hover:bg-lime/90' : 'bg-slate-700 text-slate-500'}
         data-testid={`redeem-btn-${reward.id}`}
       >
-        Redeem
+        {tr('Redeem', 'भुनाएं')}
       </Button>
     </div>
   </div>
@@ -99,7 +99,7 @@ const VoucherRow = ({ voucher }) => {
   const copyCode = () => {
     navigator.clipboard.writeText(voucher.code);
     setCopied(true);
-    toast.success('Voucher code copied!');
+    toast.success(tr('Voucher code copied!', 'वाउचर कोड कॉपी हो गया!'));
     setTimeout(() => setCopied(false), 2000);
   };
   const statusColors = { active: 'bg-green-500/20 text-green-400', used: 'bg-slate-600/40 text-slate-400', expired: 'bg-red-500/20 text-red-400' };
@@ -110,7 +110,7 @@ const VoucherRow = ({ voucher }) => {
         <div>
           <p className="text-white text-sm font-medium">{voucher.reward_name}</p>
           <p className="text-slate-500 text-xs flex items-center gap-1">
-            <Clock className="h-3 w-3" /> Expires {new Date(voucher.expires_at).toLocaleDateString()}
+            <Clock className="h-3 w-3" /> {tr('Expires', 'समाप्ति')} {new Date(voucher.expires_at).toLocaleDateString()}
           </p>
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function LoyaltyRewards({ user }) {
       setVouchers(v.data.redemptions || []);
       setHistory(h.data.history || []);
     } catch (e) {
-      toast.error('Failed to load rewards data');
+      toast.error(tr('Failed to load rewards data', 'रिवॉर्ड डेटा लोड नहीं हो सका'));
     } finally {
       setLoading(false);
     }
@@ -170,7 +170,7 @@ export default function LoyaltyRewards({ user }) {
   };
 
   if (loading) {
-    return <div className="text-center text-slate-400 py-20">Loading rewards...</div>;
+    return <div className="text-center text-slate-400 py-20">{tr('Loading rewards...', 'रिवॉर्ड लोड हो रहे हैं...')}</div>;
   }
 
   return (
@@ -178,7 +178,7 @@ export default function LoyaltyRewards({ user }) {
       <h1 className="text-3xl font-bold text-white mb-1 flex items-center gap-2">
         <Star className="h-7 w-7 text-lime" /> {bi("VIP Points & Rewards / पॉइंट्स और रिवॉर्ड्स")}
       </h1>
-      <p className="text-slate-400 mb-6">Earn points on every flight. Redeem for vouchers & experiences.</p>
+      <p className="text-slate-400 mb-6">{tr('Earn points on every flight. Redeem for vouchers & experiences.', 'हर उड़ान पर पॉइंट कमाएं। वाउचर और अनुभवों के लिए भुनाएं।')}</p>
 
       <StatusHeader status={status} />
 
@@ -198,7 +198,7 @@ export default function LoyaltyRewards({ user }) {
           <Ticket className="h-5 w-5 text-green-400" /> {bi("My Vouchers / मेरे वाउचर")}
         </h2>
         {vouchers.length === 0 ? (
-          <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-vouchers">No vouchers yet. Redeem a reward above!</p>
+          <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-vouchers">{tr('No vouchers yet. Redeem a reward above!', 'अभी कोई वाउचर नहीं। ऊपर से कोई रिवॉर्ड भुनाएं!')}</p>
         ) : (
           <div className="space-y-3" data-testid="vouchers-list">
             {vouchers.map(v => <VoucherRow key={v.id} voucher={v} />)}
@@ -213,7 +213,7 @@ export default function LoyaltyRewards({ user }) {
         </h2>
         {history.length === 0 ? (
           <p className="text-slate-500 text-sm bg-slate-800/30 rounded-lg p-4 border border-slate-700" data-testid="no-history">
-            No transactions yet. Complete a flight to earn points! ✈️
+            {tr('No transactions yet. Complete a flight to earn points! ✈️', 'अभी कोई लेन-देन नहीं। पॉइंट कमाने के लिए एक उड़ान पूरी करें! ✈️')}
           </p>
         ) : (
           <div className="space-y-2" data-testid="points-history">
@@ -240,7 +240,7 @@ export default function LoyaltyRewards({ user }) {
         <DialogContent className="bg-slate-900 border-slate-700 text-white" data-testid="redeem-confirm-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <span className="text-2xl">{confirmReward?.icon}</span> Redeem {confirmReward?.name}?
+              <span className="text-2xl">{confirmReward?.icon}</span> {tr('Redeem', 'भुनाएं')} {confirmReward?.name}?
             </DialogTitle>
             <DialogDescription className="text-slate-400">
               This will deduct <span className="text-lime font-bold">{confirmReward?.points_cost?.toLocaleString()} points</span> from your balance.
@@ -249,10 +249,10 @@ export default function LoyaltyRewards({ user }) {
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setConfirmReward(null)} className="border-slate-600 text-slate-300" data-testid="cancel-redeem-btn">
-              Cancel
+              {tr('Cancel', 'रद्द करें')}
             </Button>
             <Button onClick={handleRedeem} disabled={redeeming} className="bg-lime text-black hover:bg-lime/90" data-testid="confirm-redeem-btn">
-              {redeeming ? 'Redeeming...' : 'Confirm Redeem'}
+              {redeeming ? tr('Redeeming...', 'भुनाया जा रहा है...') : tr('Confirm Redeem', 'भुनाने की पुष्टि करें')}
             </Button>
           </DialogFooter>
         </DialogContent>

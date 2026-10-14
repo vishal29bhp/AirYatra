@@ -105,16 +105,16 @@ function PaymentPage({ user }) {
     try {
       const response = await paymentsAPI.getMethods();
       setPaymentMethods(response.data.methods || [
-        { id: 'upi', name: 'UPI', description: 'Pay via GPay, PhonePe, Paytm', icon: 'upi' },
-        { id: 'card', name: 'Credit/Debit Card', description: 'Visa, Mastercard, Rupay', icon: 'card' },
-        { id: 'netbanking', name: 'Net Banking', description: 'All major banks', icon: 'netbanking' },
+        { id: 'upi', name: 'UPI', description: tr('Pay via GPay, PhonePe, Paytm', 'GPay, PhonePe, Paytm से भुगतान करें'), icon: 'upi' },
+        { id: 'card', name: tr('Credit/Debit Card', 'क्रेडिट/डेबिट कार्ड'), description: tr('Visa, Mastercard, Rupay', 'Visa, Mastercard, Rupay'), icon: 'card' },
+        { id: 'netbanking', name: tr('Net Banking', 'नेट बैंकिंग'), description: tr('All major banks', 'सभी प्रमुख बैंक'), icon: 'netbanking' },
       ]);
     } catch (error) {
       // Use default methods
       setPaymentMethods([
-        { id: 'upi', name: 'UPI', description: 'Pay via GPay, PhonePe, Paytm' },
-        { id: 'card', name: 'Credit/Debit Card', description: 'Visa, Mastercard, Rupay' },
-        { id: 'netbanking', name: 'Net Banking', description: 'All major banks' },
+        { id: 'upi', name: 'UPI', description: tr('Pay via GPay, PhonePe, Paytm', 'GPay, PhonePe, Paytm से भुगतान करें') },
+        { id: 'card', name: tr('Credit/Debit Card', 'क्रेडिट/डेबिट कार्ड'), description: tr('Visa, Mastercard, Rupay', 'Visa, Mastercard, Rupay') },
+        { id: 'netbanking', name: tr('Net Banking', 'नेट बैंकिंग'), description: tr('All major banks', 'सभी प्रमुख बैंक') },
       ]);
     }
   };
@@ -161,9 +161,9 @@ function PaymentPage({ user }) {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <p className="text-white text-xl">Payment details not found</p>
+          <p className="text-white text-xl">{tr('Payment details not found', 'भुगतान विवरण नहीं मिला')}</p>
           <Button onClick={() => navigate('/customer')} className="mt-4">
-            Go to Dashboard
+            {tr('Go to Dashboard', 'डैशबोर्ड पर जाएं')}
           </Button>
         </div>
       </div>
@@ -203,27 +203,27 @@ function PaymentPage({ user }) {
           
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">Inquiry Number</span>
+              <span className="text-slate-400">{tr('Inquiry Number', 'पूछताछ संख्या')}</span>
               <span className="text-lime font-mono">{inquiry.inquiry_number || inquiry.id?.slice(0, 8)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Aircraft</span>
-              <span className="text-white">{inquiry.aircraft_type === 'helicopter' ? '🚁 Helicopter' : '✈️ Plane'}</span>
+              <span className="text-slate-400">{tr('Aircraft', 'विमान')}</span>
+              <span className="text-white">{inquiry.aircraft_type === 'helicopter' ? tr('🚁 Helicopter', '🚁 हेलीकॉप्टर') : tr('✈️ Plane', '✈️ विमान')}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Route</span>
+              <span className="text-slate-400">{tr('Route', 'मार्ग')}</span>
               <span className="text-white">{inquiry.pickup_location} → {inquiry.drop_location}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Date</span>
+              <span className="text-slate-400">{tr('Date', 'तारीख')}</span>
               <span className="text-white">{inquiry.departure_date} at {inquiry.pickup_time}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Passengers</span>
-              <span className="text-white">{inquiry.total_passengers} Adults + {inquiry.children_count || 0} Children</span>
+              <span className="text-slate-400">{tr('Passengers', 'यात्री')}</span>
+              <span className="text-white">{inquiry.total_passengers} Adults + {inquiry.children_count || 0} {tr('Children', 'बच्चे')}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Purpose</span>
+              <span className="text-slate-400">{tr('Purpose', 'उद्देश्य')}</span>
               <span className="text-white">{inquiry.booking_purpose}</span>
             </div>
           </div>
@@ -296,7 +296,7 @@ function PaymentPage({ user }) {
                   className="bg-lime text-black hover:bg-lime/90"
                   data-testid="apply-voucher-btn"
                 >
-                  {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
+                  {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : tr('Apply', 'लागू करें')}
                 </Button>
               </div>
               {myVouchers.length > 0 && (
@@ -365,7 +365,7 @@ function PaymentPage({ user }) {
           data-testid="pay-now-btn"
         >
           {processing ? (
-            <><Loader2 className="h-5 w-5 mr-2 animate-spin" /> Processing...</>
+            <><Loader2 className="h-5 w-5 mr-2 animate-spin" /> {tr('Processing...', 'प्रोसेस हो रहा है...')}</>
           ) : (
             <>
               <CreditCard className="h-5 w-5 mr-2" />
@@ -378,7 +378,7 @@ function PaymentPage({ user }) {
         <div className="mt-6 text-center">
           <p className="text-slate-500 text-sm flex items-center justify-center gap-2">
             <Shield className="h-4 w-4" />
-            Secured by Stripe (Test Mode) • 256-bit SSL encryption
+            {tr('Secured by Stripe (Test Mode) • 256-bit SSL encryption', 'Stripe द्वारा सुरक्षित (टेस्ट मोड) • 256-बिट SSL एन्क्रिप्शन')}
           </p>
         </div>
 
@@ -389,7 +389,7 @@ function PaymentPage({ user }) {
             onClick={() => navigate(`/customer/inquiry/${inquiryId}`)}
             className="border-slate-600 text-slate-300"
           >
-            ← Back to Inquiry Status
+            {tr('← Back to Inquiry Status', '← पूछताछ स्थिति पर वापस जाएं')}
           </Button>
         </div>
       </div>

@@ -130,7 +130,7 @@ export const BookingTypeSelector = ({
               {!isAvailable && type.minPassengers && (
                 <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded-sm">
                   <span className="text-xs text-slate-400">
-                    {type.minPassengers}+ pax
+                    {type.minPassengers}{tr('+ pax', '+ यात्री')}
                   </span>
                 </div>
               )}
@@ -167,22 +167,22 @@ export const BookingTypeSelector = ({
                   <div className="flex flex-wrap gap-2 mt-2">
                     {type.minHours && (
                       <Badge variant="outline" className="text-xs">
-                        <Clock className="h-3 w-3 mr-1" /> Min {type.minHours} hours
+                        <Clock className="h-3 w-3 mr-1" /> {tr('Min', 'न्यूनतम')} {type.minHours} {tr('hours', 'घंटे')}
                       </Badge>
                     )}
                     {type.minDays && (
                       <Badge variant="outline" className="text-xs">
-                        <Calendar className="h-3 w-3 mr-1" /> Min {type.minDays} days
+                        <Calendar className="h-3 w-3 mr-1" /> {tr('Min', 'न्यूनतम')} {type.minDays} {tr('days', 'दिन')}
                       </Badge>
                     )}
                     {type.minPassengers && (
                       <Badge variant="outline" className="text-xs">
-                        <Users className="h-3 w-3 mr-1" /> Min {type.minPassengers} passengers
+                        <Users className="h-3 w-3 mr-1" /> {tr('Min', 'न्यूनतम')} {type.minPassengers} {tr('passengers', 'यात्री')}
                       </Badge>
                     )}
                     {type.customQuote && (
                       <Badge variant="outline" className="text-amber border-amber/50 text-xs">
-                        <Info className="h-3 w-3 mr-1" /> Custom Quote
+                        <Info className="h-3 w-3 mr-1" /> {tr('Custom Quote', 'कस्टम कोटेशन')}
                       </Badge>
                     )}
                   </div>
@@ -191,7 +191,7 @@ export const BookingTypeSelector = ({
                 {/* Price Impact */}
                 {showPriceImpact && basePrice > 0 && !type.customQuote && (
                   <div className="text-right">
-                    <p className="text-slate-400 text-xs">Estimated Price</p>
+                    <p className="text-slate-400 text-xs">{tr('Estimated Price', 'अनुमानित कीमत')}</p>
                     <p className="text-xl font-bold text-white">
                       ₹{adjustedPrice?.toLocaleString('en-IN')}
                     </p>

@@ -66,7 +66,7 @@ const CustomerProfileCard = ({ user }) => {
         </div>
         <div className="text-right">
           <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">
-            {user.roles?.[0] || 'Customer'}
+            {user.roles?.[0] || tr('Customer', 'ग्राहक')}
           </span>
         </div>
       </div>
@@ -783,7 +783,7 @@ function BookingPage({ user }) {
         currentStep,
         savedAt: new Date().toISOString()
       }));
-      toast.info('🔐 Login karein, form data save ho gaya hai! / Please login, form data is saved!');
+      toast.info(tr('🔐 Please log in. Your form data is saved.', '🔐 कृपया लॉगिन करें, आपका फ़ॉर्म डेटा सेव हो गया है!'));
       navigate('/login', { state: { returnTo: '/booking' } });
       return;
     }
@@ -891,7 +891,7 @@ function BookingPage({ user }) {
             customer_phone: user.phone,
           });
           
-          toast.success('🎉 Inquiry submitted! Admin approval required for village landing.');
+          toast.success(tr('🎉 Inquiry submitted! Admin approval required for village landing.', '🎉 पूछताछ भेजी गई! गांव में लैंडिंग के लिए एडमिन की स्वीकृति आवश्यक है।'));
         } catch (permError) {
           console.error('Permission request failed:', permError);
         }
@@ -1053,7 +1053,7 @@ function BookingPage({ user }) {
           data-testid="emergency-booking-btn"
         >
           <Siren className="h-4 w-4 mr-2" />
-          Emergency Booking
+          {tr('Emergency Booking', 'आपातकालीन बुकिंग')}
         </Button>
         <Button
           variant="outline"
@@ -1062,7 +1062,7 @@ function BookingPage({ user }) {
           data-testid="compare-aircraft-btn"
         >
           <Scale className="h-4 w-4 mr-2" />
-          Compare Aircraft
+          {tr('Compare Aircraft', 'विमानों की तुलना करें')}
         </Button>
       </div>
       
@@ -1073,7 +1073,7 @@ function BookingPage({ user }) {
             <Check className="h-5 w-5 text-green-400" />
             <div>
               <p className="text-white font-medium">
-                {selectedAircraft.basic_info?.model || selectedAircraft.model} Selected
+                {selectedAircraft.basic_info?.model || selectedAircraft.model} {tr('Selected', 'चयनित')}
               </p>
               <p className="text-slate-400 text-sm">
                 {selectedAircraft.basic_info?.manufacturer || selectedAircraft.manufacturer}
@@ -1086,7 +1086,7 @@ function BookingPage({ user }) {
             onClick={() => setSelectedAircraft(null)}
             className="text-slate-400"
           >
-            Change
+            {tr('Change', 'बदलें')}
           </Button>
         </div>
       )}
@@ -1364,7 +1364,7 @@ function BookingPage({ user }) {
           totalAmount={priceLock.lockedAmount}
           onExpire={() => {
             setPriceLock({ isLocked: false, lockId: null, expiresAt: null, lockedAmount: null });
-            toast.warning('Price lock expired. Please recalculate for latest pricing.');
+            toast.warning(tr('Price lock expired. Please recalculate for latest pricing.', 'मूल्य लॉक समाप्त हो गया। नवीनतम कीमत के लिए फिर से गणना करें।'));
           }}
           onExtend={async () => {
             // Extend price lock by 5 minutes via API
@@ -1476,7 +1476,7 @@ function BookingPage({ user }) {
                 )}
                 {priceEstimate.mdg_adjustment > 0 && (
                   <div className="flex justify-between text-slate-300">
-                    <span>Min Guarantee (MDG) Adjustment:</span>
+                    <span>{tr('Min Guarantee (MDG) Adjustment:', 'न्यूनतम गारंटी (MDG) समायोजन:')}</span>
                     <span>₹{priceEstimate.mdg_adjustment?.toLocaleString()}</span>
                   </div>
                 )}
@@ -1552,7 +1552,7 @@ function BookingPage({ user }) {
                 )}
                 <div className="flex justify-between text-slate-400 text-xs">
                   <span>Platform Commission ({priceEstimate.platform_commission_percent || priceEstimate.commission_percent || 10}%):</span>
-                  <span className="text-slate-500">Included</span>
+                  <span className="text-slate-500">{tr('Included', 'शामिल')}</span>
                 </div>
               </div>
             </div>
@@ -1567,13 +1567,13 @@ function BookingPage({ user }) {
                 <div className="space-y-1">
                   {priceEstimate.pickup_landing_charge > 0 && (
                     <div className="flex justify-between text-slate-300">
-                      <span>Pickup {priceEstimate.pickup_landing_name ? `- ${priceEstimate.pickup_landing_name}` : ''}:</span>
+                      <span>{tr('Pickup', 'पिकअप')} {priceEstimate.pickup_landing_name ? `- ${priceEstimate.pickup_landing_name}` : ''}:</span>
                       <span>₹{priceEstimate.pickup_landing_charge?.toLocaleString()}</span>
                     </div>
                   )}
                   {priceEstimate.drop_landing_charge > 0 && (
                     <div className="flex justify-between text-slate-300">
-                      <span>Drop {priceEstimate.drop_landing_name ? `- ${priceEstimate.drop_landing_name}` : ''}:</span>
+                      <span>{tr('Drop', 'ड्रॉप')} {priceEstimate.drop_landing_name ? `- ${priceEstimate.drop_landing_name}` : ''}:</span>
                       <span>₹{priceEstimate.drop_landing_charge?.toLocaleString()}</span>
                     </div>
                   )}
@@ -1660,7 +1660,7 @@ function BookingPage({ user }) {
                       disabled={applyingCode || !referralCode.trim()}
                       className="bg-green-600 hover:bg-green-700"
                     >
-                      {applyingCode ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
+                      {applyingCode ? <Loader2 className="h-4 w-4 animate-spin" /> : tr('Apply', 'लागू करें')}
                     </Button>
                   </div>
                   <p className="text-slate-500 text-xs mt-1">{bi("Get 10% off on your first booking! / पहली बुकिंग पर 10% छूट!")}</p>
@@ -1677,7 +1677,7 @@ function BookingPage({ user }) {
                     </div>
                     <span className="text-green-400 font-bold">-{referralApplied.discount_percent}%</span>
                   </div>
-                  <p className="text-slate-400 text-xs mt-1">Referred by: {referralApplied.referrer_name}</p>
+                  <p className="text-slate-400 text-xs mt-1">{tr('Referred by:', 'रेफर करने वाले:')} {referralApplied.referrer_name}</p>
                 </div>
               )}
               
@@ -1711,7 +1711,7 @@ function BookingPage({ user }) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Tag className="h-4 w-4 text-purple-400" />
-                      <span className="text-purple-400">{discountApplied.code} Applied!</span>
+                      <span className="text-purple-400">{discountApplied.code} {tr('Applied!', 'लागू हो गया!')}</span>
                     </div>
                     <span className="text-purple-400 font-bold">-₹{discountApplied.discount_amount?.toLocaleString()}</span>
                   </div>
@@ -1743,7 +1743,7 @@ function BookingPage({ user }) {
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg p-4 border border-green-500/40 mt-2">
                 <div className="space-y-2">
                   <div className="flex justify-between text-slate-400">
-                    <span>Original Price:</span>
+                    <span>{tr('Original Price:', 'मूल कीमत:')}</span>
                     <span className="line-through">₹{(priceEstimate.total || 0).toLocaleString()}</span>
                   </div>
                   {getFinalPrice().discounts.map((d, i) => (
@@ -1825,13 +1825,13 @@ function BookingPage({ user }) {
                 {!isHindi() && (<p className="text-slate-400 text-xs mt-1">
                   I confirm that I have carefully read and understood the AirYatra{' '}
                   <a href="/legal/terms" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
-                    Terms & Conditions <ExternalLink className="h-3 w-3 inline" />
+                    {tr('Terms & Conditions', 'नियम और शर्तें')} <ExternalLink className="h-3 w-3 inline" />
                   </a>, {' '}
                   <a href="/legal/privacy" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
-                    Privacy Policy <ExternalLink className="h-3 w-3 inline" />
+                    {tr('Privacy Policy', 'गोपनीयता नीति')} <ExternalLink className="h-3 w-3 inline" />
                   </a>, and {' '}
                   <a href="/legal/cancellation" target="_blank" rel="noopener noreferrer" className="text-lime underline hover:text-lime/80" onClick={(e) => e.stopPropagation()}>
-                    Cancellation Policy <ExternalLink className="h-3 w-3 inline" />
+                    {tr('Cancellation Policy', 'रद्दीकरण नीति')} <ExternalLink className="h-3 w-3 inline" />
                   </a>.
                 </p>)}
                 {isHindi() && (<p className="text-slate-500 text-xs mt-1">
@@ -1947,7 +1947,7 @@ function BookingPage({ user }) {
                   {bi("Electronic Consent / इलेक्ट्रॉनिक सहमति")}
                 </label>
                 <p className="text-slate-400 text-xs mt-1">
-                  I consent to electronic records, digital signatures, OTP authentication and online agreements in accordance with applicable Indian laws (IT Act 2000).
+                  {tr('I consent to electronic records, digital signatures, OTP authentication and online agreements in accordance with applicable Indian laws (IT Act 2000).', 'मैं लागू भारतीय कानूनों (IT अधिनियम 2000) के अनुसार इलेक्ट्रॉनिक रिकॉर्ड, डिजिटल हस्ताक्षर, OTP प्रमाणीकरण और ऑनलाइन समझौतों के लिए सहमति देता/देती हूं।')}
                 </p>
                 <p className="text-slate-500 text-xs mt-1">
                   {bi("मैं इलेक्ट्रॉनिक रिकॉर्ड, डिजिटल हस्ताक्षर, OTP प्रमाणीकरण और ऑनलाइन समझौतों के लिए भारतीय कानूनों (IT Act 2000) के अनुसार सहमति देता/देती हूं।")}

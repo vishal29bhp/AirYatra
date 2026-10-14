@@ -78,11 +78,11 @@ function CustomerKYCUpload({ user }) {
     if (selectedFile) {
       const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
       if (!allowedTypes.includes(selectedFile.type)) {
-        toast.error('Only PDF and image files allowed');
+        toast.error(tr('Only PDF and image files allowed', 'केवल PDF और इमेज फ़ाइलें मान्य हैं'));
         return;
       }
       if (selectedFile.size > 5 * 1024 * 1024) {
-        toast.error('File too large (max 5MB)');
+        toast.error(tr('File too large (max 5MB)', 'फ़ाइल बहुत बड़ी है (अधिकतम 5MB)'));
         return;
       }
       setFile(selectedFile);
@@ -91,13 +91,13 @@ function CustomerKYCUpload({ user }) {
 
   const handleUpload = async () => {
     if (!file || !selectedType || !documentNumber) {
-      toast.error('Please fill all required fields');
+      toast.error(tr('Please fill all required fields', 'कृपया सभी आवश्यक फ़ील्ड भरें'));
       return;
     }
 
     const docType = documentTypes.find(t => t.code === selectedType);
     if (docType?.has_expiry && !expiryDate) {
-      toast.error('Expiry date is required for this document');
+      toast.error(tr('Expiry date is required for this document', 'इस दस्तावेज़ के लिए समाप्ति तिथि आवश्यक है'));
       return;
     }
 
@@ -122,7 +122,7 @@ function CustomerKYCUpload({ user }) {
       }
 
       const result = await res.json();
-      toast.success('Document uploaded! Verification in progress...');
+      toast.success(tr('Document uploaded! Verification in progress...', 'दस्तावेज़ अपलोड हुआ! सत्यापन जारी है...'));
 
       // Reset form
       setShowUpload(false);
@@ -134,9 +134,9 @@ function CustomerKYCUpload({ user }) {
       // If auto-verification available, show status
       if (result.verification_status) {
         if (result.verification_status === 'verified') {
-          toast.success('Document verified successfully!');
+          toast.success(tr('Document verified successfully!', 'दस्तावेज़ सफलतापूर्वक सत्यापित!'));
         } else if (result.verification_status === 'pending') {
-          toast.info('Document uploaded. Verification pending.');
+          toast.info(tr('Document uploaded. Verification pending.', 'दस्तावेज़ अपलोड हुआ। सत्यापन लंबित है।'));
         }
       }
     } catch (error) {
@@ -167,20 +167,20 @@ function CustomerKYCUpload({ user }) {
       const result = await res.json();
       
       if (result.verified) {
-        toast.success('Document verified successfully!');
+        toast.success(tr('Document verified successfully!', 'दस्तावेज़ सफलतापूर्वक सत्यापित!'));
         loadDocuments();
       } else {
         toast.info(result.message || 'Verification pending');
       }
     } catch (error) {
-      toast.error('Verification failed');
+      toast.error(tr('Verification failed', 'सत्यापन विफल'));
     } finally {
       setVerifying(null);
     }
   };
 
   const deleteDocument = async (docId) => {
-    if (!window.confirm('Delete this document?')) return;
+    if (!window.confirm(tr('Delete this document?', 'यह दस्तावेज़ हटाएं?'))) return;
     
     try {
       const token = localStorage.getItem('token');
@@ -188,10 +188,10 @@ function CustomerKYCUpload({ user }) {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      toast.success('Document deleted');
+      toast.success(tr('Document deleted', 'दस्तावेज़ हटाया गया'));
       loadDocuments();
     } catch (error) {
-      toast.error('Failed to delete document');
+      toast.error(tr('Failed to delete document', 'दस्तावेज़ हटाया नहीं जा सका'));
     }
   };
 
@@ -200,25 +200,25 @@ function CustomerKYCUpload({ user }) {
       case 'verified':
         return (
           <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs flex items-center gap-1">
-            <CheckCircle className="h-3 w-3" /> Verified
+            <CheckCircle className="h-3 w-3" /> {tr('Verified', 'सत्यापित')}
           </span>
         );
       case 'pending':
         return (
           <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs flex items-center gap-1">
-            <Clock className="h-3 w-3" /> Pending
+            <Clock className="h-3 w-3" /> {tr('Pending', 'लंबित')}
           </span>
         );
       case 'rejected':
         return (
           <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded-full text-xs flex items-center gap-1">
-            <AlertTriangle className="h-3 w-3" /> Rejected
+            <AlertTriangle className="h-3 w-3" /> {tr('Rejected', 'अस्वीकृत')}
           </span>
         );
       default:
         return (
           <span className="px-2 py-1 bg-slate-500/20 text-slate-400 rounded-full text-xs flex items-center gap-1">
-            <AlertCircle className="h-3 w-3" /> Uploaded
+            <AlertCircle className="h-3 w-3" /> {tr('Uploaded', 'अपलोड किया गया')}
           </span>
         );
     }
@@ -242,10 +242,10 @@ function CustomerKYCUpload({ user }) {
             <Shield className="h-6 w-6 text-green-400" />
             {bi("KYC Documents / केवाईसी दस्तावेज़")}
           </h2>
-          <p className="text-slate-400 mt-1">Upload identity documents for verification</p>
+          <p className="text-slate-400 mt-1">{tr('Upload identity documents for verification', 'सत्यापन के लिए पहचान दस्तावेज़ अपलोड करें')}</p>
         </div>
         <Button onClick={() => setShowUpload(true)} className="bg-green-600 hover:bg-green-700">
-          <Upload className="h-4 w-4 mr-2" /> Upload Document
+          <Upload className="h-4 w-4 mr-2" /> {tr('Upload Document', 'दस्तावेज़ अपलोड करें')}
         </Button>
       </div>
 
@@ -267,7 +267,7 @@ function CustomerKYCUpload({ user }) {
             </h3>
             <p className="text-slate-400">
               {kycComplete 
-                ? 'All required documents verified. You can book flights without restrictions.'
+                ? tr('All required documents verified. You can book flights without restrictions.', 'सभी आवश्यक दस्तावेज़ सत्यापित। आप बिना किसी रोक के उड़ानें बुक कर सकते हैं।')
                 : `Upload required documents: ${requiredDocs.map(d => d.name).join(', ')}`
               }
             </p>
@@ -286,10 +286,10 @@ function CustomerKYCUpload({ user }) {
         ) : documents.length === 0 ? (
           <div className="bg-slate-800/50 rounded-sm p-12 border border-slate-700 text-center">
             <FileText className="h-16 w-16 text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-400 text-lg">No documents uploaded yet</p>
-            <p className="text-slate-500 text-sm mt-2">Upload Aadhar, PAN, or Passport for verification</p>
+            <p className="text-slate-400 text-lg">{tr('No documents uploaded yet', 'अभी कोई दस्तावेज़ अपलोड नहीं हुआ')}</p>
+            <p className="text-slate-500 text-sm mt-2">{tr('Upload Aadhar, PAN, or Passport for verification', 'सत्यापन के लिए आधार, पैन या पासपोर्ट अपलोड करें')}</p>
             <Button onClick={() => setShowUpload(true)} className="mt-4 bg-green-600 hover:bg-green-700">
-              <Upload className="h-4 w-4 mr-2" /> Upload First Document
+              <Upload className="h-4 w-4 mr-2" /> {tr('Upload First Document', 'पहला दस्तावेज़ अपलोड करें')}
             </Button>
           </div>
         ) : (
@@ -344,7 +344,7 @@ function CustomerKYCUpload({ user }) {
                             <Loader2 className="h-4 w-4 animate-spin" />
                           ) : (
                             <>
-                              <Shield className="h-4 w-4 mr-1" /> Verify
+                              <Shield className="h-4 w-4 mr-1" /> {tr('Verify', 'सत्यापित करें')}
                             </>
                           )}
                         </Button>
@@ -392,7 +392,7 @@ function CustomerKYCUpload({ user }) {
                   ) : null}
                 </div>
                 {type.is_mandatory && (
-                  <span className="text-xs text-red-400">Required</span>
+                  <span className="text-xs text-red-400">{tr('Required', 'आवश्यक')}</span>
                 )}
                 {type.verification_api && (
                   <span className="text-xs text-green-400 ml-2">Auto-Verify</span>
@@ -410,7 +410,7 @@ function CustomerKYCUpload({ user }) {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <Upload className="h-5 w-5 text-green-400" />
-                Upload KYC Document
+                {tr('Upload KYC Document', 'KYC दस्तावेज़ अपलोड करें')}
               </h3>
               <button onClick={() => setShowUpload(false)} className="text-slate-400 hover:text-white">
                 <X className="h-5 w-5" />
@@ -443,7 +443,7 @@ function CustomerKYCUpload({ user }) {
                   onChange={(e) => setDocumentNumber(e.target.value)}
                   placeholder={selectedType === 'AADHAR' ? '1234 5678 9012' : 
                                selectedType === 'PAN' ? 'ABCDE1234F' : 
-                               'Enter document number'}
+                               tr('Enter document number', 'दस्तावेज़ संख्या दर्ज करें')}
                   className="mt-1 bg-slate-800 border-slate-600 text-white"
                 />
               </div>
@@ -479,8 +479,8 @@ function CustomerKYCUpload({ user }) {
                   ) : (
                     <>
                       <Upload className="h-8 w-8 text-slate-500 mx-auto mb-2" />
-                      <p className="text-slate-400">Click to select or drag & drop</p>
-                      <p className="text-slate-500 text-xs mt-1">PDF, JPG, PNG (max 5MB)</p>
+                      <p className="text-slate-400">{tr('Click to select or drag & drop', 'चुनने के लिए क्लिक करें या खींचकर छोड़ें')}</p>
+                      <p className="text-slate-500 text-xs mt-1">{tr('PDF, JPG, PNG (max 5MB)', 'PDF, JPG, PNG (अधिकतम 5MB)')}</p>
                     </>
                   )}
                   <input
@@ -497,10 +497,10 @@ function CustomerKYCUpload({ user }) {
                 <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/30">
                   <p className="text-green-400 text-sm flex items-center gap-2">
                     <Shield className="h-4 w-4" />
-                    Auto-verification available for {selectedDocType.name}
+                    {tr('Auto-verification available for', 'इनके लिए स्वतः सत्यापन उपलब्ध:')} {selectedDocType.name}
                   </p>
                   <p className="text-slate-400 text-xs mt-1">
-                    Document will be verified with government database after upload
+                    {tr('Document will be verified with government database after upload', 'अपलोड के बाद दस्तावेज़ सरकारी डेटाबेस से सत्यापित होगा')}
                   </p>
                 </div>
               )}
@@ -508,7 +508,7 @@ function CustomerKYCUpload({ user }) {
 
             <div className="flex gap-3 mt-6">
               <Button onClick={() => setShowUpload(false)} variant="outline" className="flex-1 border-slate-600">
-                Cancel
+                {tr('Cancel', 'रद्द करें')}
               </Button>
               <Button 
                 onClick={handleUpload}
@@ -516,9 +516,9 @@ function CustomerKYCUpload({ user }) {
                 className="flex-1 bg-green-600 hover:bg-green-700"
               >
                 {uploading ? (
-                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Uploading...</>
+                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> {tr('Uploading...', 'अपलोड हो रहा है...')}</>
                 ) : (
-                  <><Upload className="h-4 w-4 mr-2" /> Upload & Verify</>
+                  <><Upload className="h-4 w-4 mr-2" /> {tr('Upload & Verify', 'अपलोड और सत्यापित करें')}</>
                 )}
               </Button>
             </div>

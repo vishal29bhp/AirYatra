@@ -7,6 +7,11 @@ const en = {
     home: 'Home',
   },
   landing: {
+    multipleOptions: 'Multiple Options',
+    multipleOptionsDesc: 'Compare quotes from several operators and pick the aircraft, time and price that suit you.',
+    transparentPricing: 'Transparent Pricing',
+    transparentPricingDesc: 'See the full price breakdown before you pay. No hidden charges.',
+    products: 'Our Products',
     heroTitle1: 'Sky-High Journeys,',
     heroTitle2: 'Simplified',
     heroSubtitle: "India's Premier Helicopter Charter Aggregator. Connect with verified operators, book flights instantly, and soar above the ordinary.",

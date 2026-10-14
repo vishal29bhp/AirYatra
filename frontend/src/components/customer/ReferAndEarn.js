@@ -68,7 +68,7 @@ function ReferAndEarn({ user }) {
       toast.success(bi('Copied to clipboard! / क्लिपबोर्ड पर कॉपी हो गया!'));
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      toast.error('Failed to copy');
+      toast.error(tr('Failed to copy', 'कॉपी नहीं हो सका'));
     }
   };
 
@@ -102,7 +102,7 @@ function ReferAndEarn({ user }) {
           <Gift className="h-8 w-8 text-white" />
         </div>
         <h2 className="text-2xl font-bold text-white">{bi("Refer & Earn / रेफर करें और कमाएं")}</h2>
-        <p className="text-slate-400 mt-1">Share with friends and earn rewards on their bookings</p>
+        <p className="text-slate-400 mt-1">{tr('Share with friends and earn rewards on their bookings', 'दोस्तों के साथ साझा करें और उनकी बुकिंग पर रिवॉर्ड पाएं')}</p>
       </div>
 
       {/* Tabs */}
@@ -149,17 +149,17 @@ function ReferAndEarn({ user }) {
             <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
               <Users className="h-6 w-6 text-amber mx-auto mb-2" />
               <p className="text-2xl font-bold text-white">{stats?.total_referrals || 0}</p>
-              <p className="text-slate-400 text-xs">Total Referrals</p>
+              <p className="text-slate-400 text-xs">{tr('Total Referrals', 'कुल रेफ़रल')}</p>
             </div>
             <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
               <Check className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <p className="text-2xl font-bold text-green-400">{stats?.successful_referrals || 0}</p>
-              <p className="text-slate-400 text-xs">Successful</p>
+              <p className="text-slate-400 text-xs">{tr('Successful', 'सफल')}</p>
             </div>
             <div className="bg-slate-800/50 rounded-sm p-4 text-center border border-slate-700">
               <IndianRupee className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
               <p className="text-2xl font-bold text-yellow-400">₹{stats?.total_earnings || 0}</p>
-              <p className="text-slate-400 text-xs">Total Earned</p>
+              <p className="text-slate-400 text-xs">{tr('Total Earned', 'कुल कमाई')}</p>
             </div>
           </div>
 
@@ -168,7 +168,7 @@ function ReferAndEarn({ user }) {
             <p className="text-slate-300 text-sm mb-2">{bi("Your Referral Code / आपका रेफरल कोड")}</p>
             <div className="flex items-center gap-3">
               <div className="flex-1 bg-slate-900/50 rounded-lg px-4 py-3 font-mono text-2xl text-white tracking-wider">
-                {referralCode?.code || 'Loading...'}
+                {referralCode?.code || tr('Loading...', 'लोड हो रहा है...')}
               </div>
               <Button
                 onClick={() => copyToClipboard(referralCode?.code)}
@@ -212,7 +212,7 @@ function ReferAndEarn({ user }) {
                 className="flex-1 border-slate-600"
               >
                 <Mail className="h-4 w-4 mr-2" />
-                Email
+                {tr('Email', 'ईमेल')}
               </Button>
             </div>
           </div>
@@ -225,21 +225,21 @@ function ReferAndEarn({ user }) {
                 <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">1</div>
                 <div>
                   <p className="text-white">{bi("Share your code / अपना कोड शेयर करें")}</p>
-                  <p className="text-slate-400 text-sm">Share your referral link with friends and family</p>
+                  <p className="text-slate-400 text-sm">{tr('Share your referral link with friends and family', 'अपना रेफ़रल लिंक दोस्तों और परिवार के साथ साझा करें')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">2</div>
                 <div>
                   <p className="text-white">{bi("They book a flight / वो उड़ान बुक करें")}</p>
-                  <p className="text-slate-400 text-sm">They get 10% off on their first booking</p>
+                  <p className="text-slate-400 text-sm">{tr('They get 10% off on their first booking', 'उन्हें पहली बुकिंग पर 10% छूट मिलती है')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold">3</div>
                 <div>
                   <p className="text-white">{bi("You earn rewards / आप कमाएं")}</p>
-                  <p className="text-slate-400 text-sm">₹500 added to your wallet for each successful booking</p>
+                  <p className="text-slate-400 text-sm">{tr('₹500 added to your wallet for each successful booking', 'हर सफल बुकिंग पर आपके वॉलेट में ₹500 जुड़ते हैं')}</p>
                 </div>
               </div>
             </div>
@@ -262,12 +262,12 @@ function ReferAndEarn({ user }) {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <TrendingUp className="h-5 w-5 text-green-400 mb-2" />
-              <p className="text-slate-400 text-sm">Total Earned</p>
+              <p className="text-slate-400 text-sm">{tr('Total Earned', 'कुल कमाई')}</p>
               <p className="text-xl font-bold text-green-400">₹{wallet?.total_earned?.toLocaleString() || 0}</p>
             </div>
             <div className="bg-slate-800/50 rounded-sm p-4 border border-slate-700">
               <IndianRupee className="h-5 w-5 text-lime mb-2" />
-              <p className="text-slate-400 text-sm">Total Used</p>
+              <p className="text-slate-400 text-sm">{tr('Total Used', 'कुल उपयोग')}</p>
               <p className="text-xl font-bold text-lime">₹{wallet?.total_used?.toLocaleString() || 0}</p>
             </div>
           </div>
@@ -326,7 +326,7 @@ function ReferAndEarn({ user }) {
                       }`} />
                     </div>
                     <div>
-                      <p className="text-white">Booking ₹{ref.booking_amount?.toLocaleString()}</p>
+                      <p className="text-white">{tr('Booking ₹', 'बुकिंग ₹')}{ref.booking_amount?.toLocaleString()}</p>
                       <p className="text-slate-500 text-xs">{new Date(ref.created_at).toLocaleDateString()}</p>
                     </div>
                   </div>
@@ -335,7 +335,7 @@ function ReferAndEarn({ user }) {
                     <span className={`text-xs px-2 py-0.5 rounded ${
                       ref.status === 'completed' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'
                     }`}>
-                      {ref.status === 'completed' ? 'Completed' : 'Pending'}
+                      {ref.status === 'completed' ? tr('Completed', 'पूर्ण') : tr('Pending', 'लंबित')}
                     </span>
                   </div>
                 </div>
@@ -345,7 +345,7 @@ function ReferAndEarn({ user }) {
             <div className="text-center py-8">
               <Clock className="h-12 w-12 text-slate-600 mx-auto mb-3" />
               <p className="text-slate-400">{bi("No referrals yet / अभी कोई रेफरल नहीं")}</p>
-              <p className="text-slate-500 text-sm">Share your code to start earning!</p>
+              <p className="text-slate-500 text-sm">{tr('Share your code to start earning!', 'कमाई शुरू करने के लिए अपना कोड साझा करें!')}</p>
             </div>
           )}
         </div>
@@ -426,7 +426,7 @@ function ReferAndEarn({ user }) {
               <h3 className="text-white font-semibold flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-yellow-400" />
                 {bi("Top Referrers / शीर्ष रेफरर्स")}
-                <span className="text-slate-500 text-sm ml-auto">{leaderboard?.total_participants || 0} participants</span>
+                <span className="text-slate-500 text-sm ml-auto">{leaderboard?.total_participants || 0} {tr('participants', 'प्रतिभागी')}</span>
               </h3>
             </div>
             
@@ -459,19 +459,19 @@ function ReferAndEarn({ user }) {
                     {/* User Info */}
                     <div className="flex-1">
                       <p className="text-white font-medium">
-                        {entry.user_name || 'Anonymous'}
+                        {entry.user_name || tr('Anonymous', 'अनाम')}
                         {entry.user_id === user?.id && (
-                          <span className="ml-2 px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded text-xs">You</span>
+                          <span className="ml-2 px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded text-xs">{tr('You', 'आप')}</span>
                         )}
                       </p>
-                      <p className="text-slate-500 text-sm">{entry.referrals} successful referrals</p>
+                      <p className="text-slate-500 text-sm">{entry.referrals} {tr('successful referrals', 'सफल रेफ़रल')}</p>
                     </div>
                     
                     {/* Earnings */}
                     <div className="text-right">
                       <p className="text-green-400 font-bold">₹{entry.earnings?.toLocaleString()}</p>
                       {entry.bonus_reward > 0 && (
-                        <p className="text-yellow-400 text-xs">+₹{entry.bonus_reward} bonus</p>
+                        <p className="text-yellow-400 text-xs">+₹{entry.bonus_reward} {tr('bonus', 'बोनस')}</p>
                       )}
                     </div>
                   </div>
@@ -481,7 +481,7 @@ function ReferAndEarn({ user }) {
               <div className="p-8 text-center">
                 <Trophy className="h-12 w-12 text-slate-600 mx-auto mb-3" />
                 <p className="text-slate-400">No referrals yet this {leaderboardPeriod === 'month' ? 'month' : 'period'}</p>
-                <p className="text-slate-500 text-sm">Be the first to top the leaderboard!</p>
+                <p className="text-slate-500 text-sm">{tr('Be the first to top the leaderboard!', 'लीडरबोर्ड में सबसे ऊपर आने वाले पहले व्यक्ति बनें!')}</p>
               </div>
             )}
           </div>

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import api, { paymentsAPI, bookingAPI } from '../../services/api';
 import { toast } from 'sonner';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -101,10 +101,10 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
             });
 
             if (verifyResponse.data.verified) {
-              toast.success('Payment successful!');
+              toast.success(tr('Payment successful!', 'भुगतान सफल!'));
               onSuccess(verifyResponse.data);
             } else {
-              toast.error('Payment verification failed');
+              toast.error(tr('Payment verification failed', 'भुगतान सत्यापन विफल'));
             }
           },
           prefill: {
@@ -130,7 +130,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
           booking_id: bookingId
         });
 
-        toast.success('Payment successful! (Demo Mode)');
+        toast.success(tr('Payment successful! (Demo Mode)', 'भुगतान सफल! (डेमो मोड)'));
         onSuccess(verifyResponse.data);
       }
     } catch (error) {
@@ -149,31 +149,31 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
   };
 
   if (loading) {
-    return <div className="text-center py-8 text-slate-400">Loading payment options...</div>;
+    return <div className="text-center py-8 text-slate-400">{tr('Loading payment options...', 'भुगतान विकल्प लोड हो रहे हैं...')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-white">Complete Payment</h2>
-        <p className="text-slate-400 mt-1">Secure payment powered by Razorpay</p>
+        <h2 className="text-2xl font-bold text-white">{tr('Complete Payment', 'भुगतान पूरा करें')}</h2>
+        <p className="text-slate-400 mt-1">{tr('Secure payment powered by Razorpay', 'Razorpay द्वारा सुरक्षित भुगतान')}</p>
       </div>
 
       {/* Amount Display */}
       <div className="p-6 rounded-sm bg-lime/20 border border-lime/30 text-center" data-testid="payment-amount-card">
-        <p className="text-slate-400">Total Amount</p>
+        <p className="text-slate-400">{tr('Total Amount', 'कुल राशि')}</p>
         {discount > 0 ? (
           <>
             <p className="text-slate-500 line-through text-lg mt-2" data-testid="original-amount">₹{amount.toLocaleString()}</p>
             <p className="text-4xl font-bold text-white" data-testid="final-amount">₹{finalAmount.toLocaleString()}</p>
             <p className="text-green-400 text-sm mt-1" data-testid="discount-line">
-              🎫 Voucher discount: −₹{discount.toLocaleString()}
+              {tr('🎫 Voucher discount: −₹', '🎫 वाउचर छूट: −₹')}{discount.toLocaleString()}
             </p>
           </>
         ) : (
           <p className="text-4xl font-bold text-white mt-2" data-testid="final-amount">₹{amount.toLocaleString()}</p>
         )}
-        <p className="text-sm text-slate-400 mt-1">Including all taxes</p>
+        <p className="text-sm text-slate-400 mt-1">{tr('Including all taxes', 'सभी करों सहित')}</p>
       </div>
 
       {/* Loyalty Voucher */}
@@ -210,12 +210,12 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
                 className="bg-lime text-black hover:bg-lime/90"
                 data-testid="apply-voucher-btn"
               >
-                {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
+                {applying ? <Loader2 className="h-4 w-4 animate-spin" /> : tr('Apply', 'लागू करें')}
               </Button>
             </div>
             {myVouchers.length > 0 && (
               <div className="mt-3">
-                <p className="text-slate-500 text-xs mb-2">Your vouchers:</p>
+                <p className="text-slate-500 text-xs mb-2">{tr('Your vouchers:', 'आपके वाउचर:')}</p>
                 <div className="flex flex-wrap gap-2">
                   {myVouchers.map(v => (
                     <button
@@ -236,7 +236,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
 
       {/* Payment Methods */}
       <div>
-        <p className="text-white font-medium mb-3">Select Payment Method</p>
+        <p className="text-white font-medium mb-3">{tr('Select Payment Method', 'भुगतान का तरीका चुनें')}</p>
         <div className="space-y-2">
           {paymentMethods.map((method) => {
             const Icon = methodIcons[method.id] || CreditCard;
@@ -279,7 +279,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
           onClick={onCancel}
           disabled={processing}
         >
-          Cancel
+          {tr('Cancel', 'रद्द करें')}
         </Button>
         <Button
           className="flex-1 bg-lime text-black hover:bg-lime/90"
@@ -288,7 +288,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
           data-testid="pay-now-btn"
         >
           {processing ? (
-            <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Processing...</>
+            <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> {tr('Processing...', 'प्रोसेस हो रहा है...')}</>
           ) : (
             `Pay ₹${finalAmount.toLocaleString()}`
           )}
@@ -297,7 +297,7 @@ function PaymentCheckout({ bookingId, amount, onSuccess, onCancel }) {
 
       {/* Security Note */}
       <p className="text-center text-xs text-slate-500">
-        🔒 Your payment is secured with 256-bit SSL encryption
+        {tr('🔒 Your payment is secured with 256-bit SSL encryption', '🔒 आपका भुगतान 256-बिट SSL एन्क्रिप्शन से सुरक्षित है')}
       </p>
     </div>
   );

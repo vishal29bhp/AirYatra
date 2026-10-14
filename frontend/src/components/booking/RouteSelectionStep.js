@@ -46,12 +46,12 @@ const RouteSelectionStep = ({
             <div className="flex gap-2 mt-2 flex-wrap">
               {formData.pickup_landing_point.rent_applicable && (
                 <span className="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded flex items-center gap-1">
-                  <DollarSign className="h-3 w-3" /> Landing Rent
+                  <DollarSign className="h-3 w-3" /> {tr('Landing Rent', 'लैंडिंग किराया')}
                 </span>
               )}
               {formData.pickup_landing_point.permission_required && (
                 <span className="text-xs px-2 py-1 bg-lime/20 text-lime rounded flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" /> Permission Required
+                  <AlertCircle className="h-3 w-3" /> {tr('Permission Required', 'अनुमति आवश्यक')}
                 </span>
               )}
             </div>
@@ -90,12 +90,12 @@ const RouteSelectionStep = ({
             <div className="flex gap-2 mt-2 flex-wrap">
               {formData.drop_landing_point.rent_applicable && (
                 <span className="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded flex items-center gap-1">
-                  <DollarSign className="h-3 w-3" /> Landing Rent
+                  <DollarSign className="h-3 w-3" /> {tr('Landing Rent', 'लैंडिंग किराया')}
                 </span>
               )}
               {formData.drop_landing_point.permission_required && (
                 <span className="text-xs px-2 py-1 bg-lime/20 text-lime rounded flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" /> Permission Required
+                  <AlertCircle className="h-3 w-3" /> {tr('Permission Required', 'अनुमति आवश्यक')}
                 </span>
               )}
             </div>

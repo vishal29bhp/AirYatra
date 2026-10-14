@@ -156,7 +156,7 @@ How can I assist you today?`,
       <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-20 right-4 bg-lime text-black p-3 rounded-full hover:bg-lime/90 transition-colors z-40"
-        title="Chat with AI Assistant"
+        title={tr('Chat with AI Assistant', 'AI सहायक से चैट करें')}
       >
         <div className="relative">
           <MessageCircle className="h-5 w-5" />
@@ -178,7 +178,7 @@ How can I assist you today?`,
             <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-slate-800" />
           </div>
           <div>
-            <h3 className="text-white font-semibold">AirYatra AI</h3>
+            <h3 className="text-white font-semibold">{tr('AirYatra AI', 'AirYatra AI')}</h3>
             <p className="text-slate-400 text-xs">{bi("Always here to help / हमेशा मदद के लिए")}</p>
           </div>
         </div>
@@ -266,10 +266,10 @@ How can I assist you today?`,
               <button
                 key={action}
                 onClick={() => {
-                  setInput(action === 'Pricing?' ? 'What are your prices?' : 
-                          action === 'Routes' ? 'What routes do you offer?' :
-                          action === 'Booking Help' ? 'How do I book a helicopter?' :
-                          'How can I contact support?');
+                  setInput(action === 'Pricing?' ? tr('What are your prices?', 'आपकी कीमतें क्या हैं?') : 
+                          action === 'Routes' ? tr('What routes do you offer?', 'आप कौन से मार्ग देते हैं?') :
+                          action === 'Booking Help' ? tr('How do I book a helicopter?', 'हेलीकॉप्टर कैसे बुक करूं?') :
+                          tr('How can I contact support?', 'सहायता से कैसे संपर्क करूं?'));
                 }}
                 className="px-3 py-1 text-xs bg-slate-800 text-slate-300 rounded-full hover:bg-slate-700 whitespace-nowrap"
               >
@@ -302,10 +302,10 @@ How can I assist you today?`,
                 onClick={startNewConversation}
                 className="text-xs text-slate-500 hover:text-slate-300"
               >
-                New conversation
+                {tr('New conversation', 'नई बातचीत')}
               </button>
               <span className="text-xs text-slate-600">
-                Powered by AI ✨
+                {tr('Powered by AI ✨', 'AI द्वारा संचालित ✨')}
               </span>
             </div>
           </div>

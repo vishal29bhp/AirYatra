@@ -2,7 +2,7 @@ import React from 'react';
 import { Plane, Users, User, Baby, Minus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 // Aircraft types configuration
 export const aircraftTypes = [
@@ -53,7 +53,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
             >
               <div className="text-4xl mb-3">{type.icon}</div>
               <h3 className="text-white font-semibold text-lg">{type.name}</h3>
-              <p className="text-slate-400 text-sm mt-1">Max {type.maxPassengers} passengers</p>
+              <p className="text-slate-400 text-sm mt-1">{tr('Max', 'अधिकतम')} {type.maxPassengers} {tr('passengers', 'यात्री')}</p>
             </button>
           ))}
         </div>
@@ -74,7 +74,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
                 <User className="h-5 w-5 text-amber" />
                 <div>
                   <p className="text-white">{bi("Adult Male / पुरुष")}</p>
-                  <p className="text-slate-500 text-xs">18+ years</p>
+                  <p className="text-slate-500 text-xs">{tr('18+ years', '18+ वर्ष')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
                 <User className="h-5 w-5 text-pink-400" />
                 <div>
                   <p className="text-white">{bi("Adult Female / महिला")}</p>
-                  <p className="text-slate-500 text-xs">18+ years</p>
+                  <p className="text-slate-500 text-xs">{tr('18+ years', '18+ वर्ष')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -142,7 +142,7 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
                 <Baby className="h-5 w-5 text-green-400" />
                 <div>
                   <p className="text-white">{bi("Children / बच्चे")}</p>
-                  <p className="text-slate-500 text-xs">Up to 4 years (Free, max 2)</p>
+                  <p className="text-slate-500 text-xs">{tr('Up to 4 years (Free, max 2)', '4 वर्ष तक (मुफ़्त, अधिकतम 2)')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -174,8 +174,8 @@ const AircraftPassengerStep = ({ formData, onInputChange }) => {
           {/* Summary */}
           <div className="mt-4 p-3 bg-lime/10 rounded-lg border border-lime/30">
             <p className="text-lime text-sm">
-              <strong>Total:</strong> {totalAdults} Adult(s) + {formData.children_count || 0} Child(ren)
-              <span className="text-slate-400 ml-2">({maxPassengers - totalAdults} seats available)</span>
+              <strong>Total:</strong> {totalAdults} {tr('Adult(s) +', 'वयस्क +')} {formData.children_count || 0} {tr('Child(ren)', 'बच्चे')}
+              <span className="text-slate-400 ml-2">({maxPassengers - totalAdults} {tr('seats available)', 'सीटें उपलब्ध)')}</span>
             </p>
           </div>
         </div>

@@ -7,6 +7,13 @@ const hi = {
     home: 'होम',
   },
   landing: {
+    multipleOptions: 'कई विकल्प',
+    multipleOptionsDesc: 'कई ऑपरेटरों के कोटेशन की तुलना करें और अपने अनुकूल विमान, समय और कीमत चुनें।',
+    transparentPricing: 'पारदर्शी कीमतें',
+    transparentPricingDesc: 'भुगतान से पहले कीमत का पूरा विवरण देखें। कोई छिपा शुल्क नहीं।',
+    products: 'हमारे उत्पाद',
+    corporateSolutions: 'कॉर्पोरेट समाधान',
+    volumeDiscounts: 'वॉल्यूम छूट',
     heroTitle1: 'आसमान की ऊँचाइयों का सफर,',
     heroTitle2: 'अब आसान',
     heroSubtitle: 'भारत का प्रमुख हेलीकॉप्टर चार्टर एग्रीगेटर। सत्यापित ऑपरेटरों से जुड़ें, तुरंत उड़ानें बुक करें, और आसमान की ऊँचाइयों को छुएं।',

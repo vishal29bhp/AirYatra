@@ -7,7 +7,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -80,7 +80,7 @@ function RouteSuggestions({ user }) {
           <Sparkles className="h-6 w-6 text-yellow-400" />
           {bi("Route Suggestions / मार्ग सुझाव")}
         </h2>
-        <p className="text-slate-400 mt-1">AI-powered recommendations based on your preferences</p>
+        <p className="text-slate-400 mt-1">{tr('AI-powered recommendations based on your preferences', 'आपकी पसंद पर आधारित AI सुझाव')}</p>
       </div>
 
       {/* Seasonal Suggestion Banner */}
@@ -104,7 +104,7 @@ function RouteSuggestions({ user }) {
                 onClick={() => handleBookRoute(data.seasonal_suggestion.route)}
                 className="bg-lime text-black hover:bg-lime/90"
               >
-                Book Now <ChevronRight className="h-4 w-4 ml-1" />
+                {tr('Book Now', 'अभी बुक करें')} <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             )}
           </div>
@@ -117,7 +117,7 @@ function RouteSuggestions({ user }) {
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
             <Star className="h-5 w-5 text-yellow-400" />
             {bi("For You / आपके लिए")}
-            <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">Personalized</span>
+            <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">{tr('Personalized', 'आपके लिए')}</span>
           </h3>
           <div className="grid grid-cols-2 gap-4">
             {data.personalized_routes.map((route, idx) => (
@@ -132,7 +132,7 @@ function RouteSuggestions({ user }) {
                     <span className="text-slate-400 text-sm">{getPurposeLabel(route.purpose)}</span>
                   </div>
                   <span className="text-yellow-400 text-xs bg-yellow-500/20 px-2 py-0.5 rounded-full">
-                    {route.popularity}% popular
+                    {route.popularity}{tr('% popular', '% लोकप्रिय')}
                   </span>
                 </div>
                 
@@ -154,7 +154,7 @@ function RouteSuggestions({ user }) {
                     <span className="text-green-400 font-semibold">{route.price_range}</span>
                   </div>
                   <Button size="sm" className="bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Book <ChevronRight className="h-3 w-3 ml-1" />
+                    {tr('Book', 'बुक करें')} <ChevronRight className="h-3 w-3 ml-1" />
                   </Button>
                 </div>
               </div>
@@ -205,7 +205,7 @@ function RouteSuggestions({ user }) {
               <div className="mt-3 pt-3 border-t border-slate-700 flex items-center justify-between">
                 <span className="text-slate-500 text-xs">Best: {route.best_time}</span>
                 <Button size="sm" variant="ghost" className="text-lime opacity-0 group-hover:opacity-100 transition-opacity h-7 px-2">
-                  Book <ChevronRight className="h-3 w-3" />
+                  {tr('Book', 'बुक करें')} <ChevronRight className="h-3 w-3" />
                 </Button>
               </div>
             </div>
@@ -224,11 +224,11 @@ function RouteSuggestions({ user }) {
             <thead className="bg-slate-800">
               <tr>
                 <th className="text-left p-3 text-slate-400 font-medium">{bi("Route / मार्ग")}</th>
-                <th className="text-left p-3 text-slate-400 font-medium">Type</th>
-                <th className="text-left p-3 text-slate-400 font-medium">Duration</th>
-                <th className="text-left p-3 text-slate-400 font-medium">Price Range</th>
-                <th className="text-left p-3 text-slate-400 font-medium">Best Time</th>
-                <th className="text-right p-3 text-slate-400 font-medium">Action</th>
+                <th className="text-left p-3 text-slate-400 font-medium">{tr('Type', 'प्रकार')}</th>
+                <th className="text-left p-3 text-slate-400 font-medium">{tr('Duration', 'अवधि')}</th>
+                <th className="text-left p-3 text-slate-400 font-medium">{tr('Price Range', 'कीमत सीमा')}</th>
+                <th className="text-left p-3 text-slate-400 font-medium">{tr('Best Time', 'सबसे अच्छा समय')}</th>
+                <th className="text-right p-3 text-slate-400 font-medium">{tr('Action', 'कार्रवाई')}</th>
               </tr>
             </thead>
             <tbody>
@@ -256,7 +256,7 @@ function RouteSuggestions({ user }) {
                       onClick={() => handleBookRoute(route)}
                       className="bg-lime text-black hover:bg-lime/90"
                     >
-                      Book
+                      {tr('Book', 'बुक करें')}
                     </Button>
                   </td>
                 </tr>
@@ -280,7 +280,7 @@ function RouteSuggestions({ user }) {
           <div className="flex items-center gap-4">
             <span className="text-white">
               <Users className="h-4 w-4 inline mr-1 text-amber" />
-              {data.user_preference.total_bookings} bookings
+              {data.user_preference.total_bookings} {tr('bookings', 'बुकिंग')}
             </span>
             <span className="text-white">
               {getPurposeIcon(data.user_preference.top_purpose)}

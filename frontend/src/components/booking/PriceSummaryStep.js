@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calculator, Plane, MapPin, Users, DollarSign, Shield, Check, AlertCircle } from 'lucide-react';
-import { bi } from '../../lib/bilingual';
+import { bi, tr } from '../../lib/bilingual';
 
 const PriceSummaryStep = ({ 
   formData, 
@@ -36,7 +36,7 @@ const PriceSummaryStep = ({
 
           {/* Distance Charge */}
           <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-            <span className="text-slate-300">Distance ({distanceKm} {bi("km) / दूरी")}</span>
+            <span className="text-slate-300">{tr('Distance (', 'दूरी (')}{distanceKm} {bi("km) / दूरी")}</span>
             <span className="text-white font-medium">₹{priceEstimate.kmPrice?.toLocaleString()}</span>
           </div>
 
@@ -53,7 +53,7 @@ const PriceSummaryStep = ({
 
           {/* GST */}
           <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-            <span className="text-slate-300">GST (18%)</span>
+            <span className="text-slate-300">{tr('GST (18%)', 'GST (18%)')}</span>
             <span className="text-white font-medium">₹{priceEstimate.gst?.toLocaleString()}</span>
           </div>
 
@@ -81,8 +81,8 @@ const PriceSummaryStep = ({
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
             <Plane className="h-5 w-5 text-lime" />
             <div>
-              <p className="text-slate-400 text-xs">Aircraft</p>
-              <p className="text-white">{formData.aircraft_type === 'helicopter' ? 'Helicopter' : 'Chartered Plane'}</p>
+              <p className="text-slate-400 text-xs">{tr('Aircraft', 'विमान')}</p>
+              <p className="text-white">{formData.aircraft_type === 'helicopter' ? tr('Helicopter', 'हेलीकॉप्टर') : tr('Chartered Plane', 'चार्टर्ड विमान')}</p>
             </div>
           </div>
 
@@ -90,9 +90,9 @@ const PriceSummaryStep = ({
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
             <Users className="h-5 w-5 text-amber" />
             <div>
-              <p className="text-slate-400 text-xs">Passengers</p>
+              <p className="text-slate-400 text-xs">{tr('Passengers', 'यात्री')}</p>
               <p className="text-white">
-                {(parseInt(formData.adults_male || 0) + parseInt(formData.adults_female || 0))} Adults
+                {(parseInt(formData.adults_male || 0) + parseInt(formData.adults_female || 0))} {tr('Adults', 'वयस्क')}
                 {formData.children_count > 0 && ` + ${formData.children_count} Children`}
               </p>
             </div>
@@ -102,7 +102,7 @@ const PriceSummaryStep = ({
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
             <MapPin className="h-5 w-5 text-green-400" />
             <div>
-              <p className="text-slate-400 text-xs">Pickup</p>
+              <p className="text-slate-400 text-xs">{tr('Pickup', 'पिकअप')}</p>
               <p className="text-white truncate">{formData.pickup_landing_point?.name || formData.pickup_location}</p>
             </div>
           </div>
@@ -111,7 +111,7 @@ const PriceSummaryStep = ({
           <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
             <MapPin className="h-5 w-5 text-red-400" />
             <div>
-              <p className="text-slate-400 text-xs">Drop</p>
+              <p className="text-slate-400 text-xs">{tr('Drop', 'ड्रॉप')}</p>
               <p className="text-white truncate">{formData.drop_landing_point?.name || formData.drop_location}</p>
             </div>
           </div>
@@ -121,7 +121,7 @@ const PriceSummaryStep = ({
             <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
               <div className="h-5 w-5 text-purple-400">📅</div>
               <div>
-                <p className="text-slate-400 text-xs">Date</p>
+                <p className="text-slate-400 text-xs">{tr('Date', 'तारीख')}</p>
                 <p className="text-white">{new Date(formData.preferred_date).toLocaleDateString('en-IN')}</p>
               </div>
             </div>
@@ -132,7 +132,7 @@ const PriceSummaryStep = ({
             <div className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg">
               <div className="h-5 w-5 text-cyan-400">⏰</div>
               <div>
-                <p className="text-slate-400 text-xs">Time</p>
+                <p className="text-slate-400 text-xs">{tr('Time', 'समय')}</p>
                 <p className="text-white">{formData.preferred_time}</p>
               </div>
             </div>
@@ -148,7 +148,7 @@ const PriceSummaryStep = ({
             <div>
               <h4 className="text-lime font-semibold">{bi("Documents Required / दस्तावेज़ आवश्यक")}</h4>
               <p className="text-slate-300 text-sm mt-1">
-                After booking confirmation, you will need to upload permission documents for village/private landing.
+                {tr('After booking confirmation, you will need to upload permission documents for village/private landing.', 'बुकिंग की पुष्टि के बाद आपको गांव/निजी लैंडिंग के अनुमति दस्तावेज़ अपलोड करने होंगे।')}
               </p>
             </div>
           </div>
@@ -160,10 +160,9 @@ const PriceSummaryStep = ({
         <div className="flex items-start gap-3">
           <Shield className="h-5 w-5 text-green-400 flex-shrink-0 mt-1" />
           <div>
-            <p className="text-white font-medium">Safety & Terms</p>
+            <p className="text-white font-medium">{tr('Safety & Terms', 'सुरक्षा और शर्तें')}</p>
             <p className="text-slate-400 text-sm mt-1">
-              By submitting this inquiry, you agree to our terms of service and safety guidelines.
-              Your inquiry will be sent to multiple operators for competitive quotes.
+              {tr('By submitting this inquiry, you agree to our terms of service and safety guidelines. Your inquiry will be sent to multiple operators for competitive quotes.', 'यह पूछताछ भेजकर आप हमारी सेवा शर्तों और सुरक्षा दिशानिर्देशों से सहमत होते हैं। प्रतिस्पर्धी कोटेशन के लिए आपकी पूछताछ कई ऑपरेटरों को भेजी जाएगी।')}
             </p>
           </div>
         </div>

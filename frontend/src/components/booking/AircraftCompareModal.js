@@ -71,7 +71,7 @@ const AircraftCompareModal = ({
   // Start comparison
   const startComparison = () => {
     if (selectedForCompare.length < 2) {
-      toast.error('Kam se kam 2 aircraft select karein');
+      toast.error(tr('Select at least 2 aircraft', 'कम से कम 2 विमान चुनें'));
       return;
     }
     
@@ -194,7 +194,7 @@ const AircraftCompareModal = ({
               <div className="bg-amber/10 border border-amber/30 rounded-lg p-3 flex items-center gap-2">
                 <Info className="h-4 w-4 text-amber" />
                 <span className="text-slate-300 text-sm">
-                  2-3 aircraft select karein compare karne ke liye
+                  {tr('Select 2-3 aircraft to compare', 'तुलना के लिए 2-3 विमान चुनें')}
                 </span>
               </div>
               
@@ -213,7 +213,7 @@ const AircraftCompareModal = ({
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h3 className="text-white font-medium">
-                            {aircraft.basic_info?.model || aircraft.model || 'Unknown'}
+                            {aircraft.basic_info?.model || aircraft.model || tr('Unknown', 'अज्ञात')}
                           </h3>
                           <p className="text-slate-400 text-sm">
                             {aircraft.basic_info?.manufacturer || aircraft.manufacturer}
@@ -228,7 +228,7 @@ const AircraftCompareModal = ({
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         <div className="flex items-center gap-1 text-slate-400">
                           <Users className="h-3 w-3" />
-                          <span>{aircraft.passenger_capacity || aircraft.basic_info?.passenger_capacity || 4} seats</span>
+                          <span>{aircraft.passenger_capacity || aircraft.basic_info?.passenger_capacity || 4} {tr('seats', 'सीटें')}</span>
                         </div>
                         <div className="flex items-center gap-1 text-slate-400">
                           <Gauge className="h-3 w-3" />
@@ -239,7 +239,7 @@ const AircraftCompareModal = ({
                       {aircraft.verification?.verified && (
                         <Badge className="mt-2 bg-green-500/20 text-green-400">
                           <Shield className="h-3 w-3 mr-1" />
-                          Verified
+                          {tr('Verified', 'सत्यापित')}
                         </Badge>
                       )}
                     </CardContent>
@@ -250,7 +250,7 @@ const AircraftCompareModal = ({
               {availableAircraft.length === 0 && (
                 <div className="text-center py-8 text-slate-400">
                   <Plane className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                  <p>No aircraft available for comparison</p>
+                  <p>{tr('No aircraft available for comparison', 'तुलना के लिए कोई विमान उपलब्ध नहीं')}</p>
                 </div>
               )}
             </div>
@@ -272,7 +272,7 @@ const AircraftCompareModal = ({
                         {index === 0 && aircraft.scores.overall >= Math.max(...comparisonData.map(a => a.scores.overall)) && (
                           <Badge className="bg-yellow-500/20 text-yellow-400">
                             <Star className="h-3 w-3 mr-1" />
-                            Best Match
+                            {tr('Best Match', 'सबसे उपयुक्त')}
                           </Badge>
                         )}
                       </div>
@@ -283,7 +283,7 @@ const AircraftCompareModal = ({
                     <CardContent className="space-y-4">
                       {/* Overall Score */}
                       <div className="bg-slate-700/50 rounded-lg p-3 text-center">
-                        <p className="text-slate-400 text-xs mb-1">Overall Score</p>
+                        <p className="text-slate-400 text-xs mb-1">{tr('Overall Score', 'कुल स्कोर')}</p>
                         <p className={`text-3xl font-bold ${
                           aircraft.scores.overall >= 80 ? 'text-green-400' :
                           aircraft.scores.overall >= 60 ? 'text-yellow-400' : 'text-red-400'
@@ -302,28 +302,28 @@ const AircraftCompareModal = ({
                       {/* Specs */}
                       <div className="grid grid-cols-2 gap-3 text-sm">
                         <div className="bg-slate-700/30 rounded p-2">
-                          <p className="text-slate-400 text-xs">Capacity</p>
+                          <p className="text-slate-400 text-xs">{tr('Capacity', 'क्षमता')}</p>
                           <p className="text-white font-medium flex items-center gap-1">
                             <Users className="h-3 w-3" />
-                            {aircraft.passenger_capacity || aircraft.basic_info?.passenger_capacity || 4} seats
+                            {aircraft.passenger_capacity || aircraft.basic_info?.passenger_capacity || 4} {tr('seats', 'सीटें')}
                           </p>
                         </div>
                         <div className="bg-slate-700/30 rounded p-2">
-                          <p className="text-slate-400 text-xs">Speed</p>
+                          <p className="text-slate-400 text-xs">{tr('Speed', 'गति')}</p>
                           <p className="text-white font-medium flex items-center gap-1">
                             <Gauge className="h-3 w-3" />
                             {aircraft.cruise_speed_kmh || aircraft.basic_info?.cruise_speed_kmh || 200} km/h
                           </p>
                         </div>
                         <div className="bg-slate-700/30 rounded p-2">
-                          <p className="text-slate-400 text-xs">Flight Time</p>
+                          <p className="text-slate-400 text-xs">{tr('Flight Time', 'उड़ान समय')}</p>
                           <p className="text-white font-medium flex items-center gap-1">
                             <Clock className="h-3 w-3" />
-                            {aircraft.flightTime} min
+                            {aircraft.flightTime} {tr('min', 'मिनट')}
                           </p>
                         </div>
                         <div className="bg-slate-700/30 rounded p-2">
-                          <p className="text-slate-400 text-xs">Range</p>
+                          <p className="text-slate-400 text-xs">{tr('Range', 'रेंज')}</p>
                           <p className="text-white font-medium">
                             {aircraft.max_range_km || aircraft.basic_info?.max_range_km || 500} km
                           </p>
@@ -332,7 +332,7 @@ const AircraftCompareModal = ({
                       
                       {/* Features */}
                       <div className="space-y-2">
-                        <p className="text-slate-400 text-xs font-medium">Key Features</p>
+                        <p className="text-slate-400 text-xs font-medium">{tr('Key Features', 'मुख्य विशेषताएं')}</p>
                         <div className="flex flex-wrap gap-1">
                           {aircraft.safety_features?.tcas && (
                             <Badge variant="outline" className="text-xs border-green-500/50 text-green-400">TCAS</Badge>
@@ -347,19 +347,19 @@ const AircraftCompareModal = ({
                             </Badge>
                           )}
                           {aircraft.amenities?.leather_seats && (
-                            <Badge variant="outline" className="text-xs border-purple-500/50 text-purple-400">Leather</Badge>
+                            <Badge variant="outline" className="text-xs border-purple-500/50 text-purple-400">{tr('Leather', 'लेदर')}</Badge>
                           )}
                         </div>
                       </div>
                       
                       {/* Price */}
                       <div className="bg-lime/10 rounded-lg p-3 border border-lime/30">
-                        <p className="text-lime text-xs mb-1">Estimated Price</p>
+                        <p className="text-lime text-xs mb-1">{tr('Estimated Price', 'अनुमानित कीमत')}</p>
                         <p className="text-white text-2xl font-bold">
                           ₹{aircraft.estimatedPrice.toLocaleString('en-IN')}
                         </p>
                         <p className="text-slate-400 text-xs">
-                          For {distanceKm} km journey
+                          {tr('For', 'के लिए')} {distanceKm} {tr('km journey', 'किमी यात्रा')}
                         </p>
                       </div>
                       
@@ -379,10 +379,10 @@ const AircraftCompareModal = ({
                         {selectedAircraftId === aircraft.id ? (
                           <>
                             <Check className="h-4 w-4 mr-2" />
-                            Selected
+                            {tr('Selected', 'चयनित')}
                           </>
                         ) : (
-                          'Select This Aircraft'
+                          tr('Select This Aircraft', 'यह विमान चुनें')
                         )}
                       </Button>
                     </CardContent>
@@ -397,9 +397,9 @@ const AircraftCompareModal = ({
                   {bi("Comparison Notes / तुलना नोट्स")}
                 </h4>
                 <ul className="text-slate-400 text-sm space-y-1 list-disc list-inside">
-                  <li>Prices are estimates based on distance and hourly rates</li>
-                  <li>Safety score includes TCAS, autopilot, and emergency equipment</li>
-                  <li>Actual availability may vary based on operator schedule</li>
+                  <li>{tr('Prices are estimates based on distance and hourly rates', 'कीमतें दूरी और प्रति घंटा दरों पर आधारित अनुमान हैं')}</li>
+                  <li>{tr('Safety score includes TCAS, autopilot, and emergency equipment', 'सुरक्षा स्कोर में TCAS, ऑटोपायलट और आपातकालीन उपकरण शामिल हैं')}</li>
+                  <li>{tr('Actual availability may vary based on operator schedule', 'वास्तविक उपलब्धता ऑपरेटर के शेड्यूल पर निर्भर कर सकती है')}</li>
                   <li>{tr("Prices are estimates. The final price is confirmed at booking.", "कीमतें अनुमानित हैं, अंतिम कीमत बुकिंग पर मिलेगी")}</li>
                 </ul>
               </div>
@@ -415,11 +415,11 @@ const AircraftCompareModal = ({
               onClick={() => setComparing(false)}
               className="border-slate-600"
             >
-              Back to Selection
+              {tr('Back to Selection', 'चयन पर वापस जाएं')}
             </Button>
           ) : (
             <span className="text-slate-400 text-sm">
-              {selectedForCompare.length}/{MAX_COMPARE} selected
+              {selectedForCompare.length}/{MAX_COMPARE} {tr('selected', 'चयनित')}
             </span>
           )}
           
@@ -430,7 +430,7 @@ const AircraftCompareModal = ({
               className="bg-lime text-black hover:bg-lime/90"
             >
               <Scale className="h-4 w-4 mr-2" />
-              Compare ({selectedForCompare.length})
+              {tr('Compare (', 'तुलना करें (')}{selectedForCompare.length})
             </Button>
           )}
         </div>

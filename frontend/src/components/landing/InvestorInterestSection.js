@@ -4,14 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { tr } from '../../lib/bilingual';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const INVESTMENT_RANGES = [
-  { value: '1-5L', label: '₹1 - 5 Lakhs' },
-  { value: '5-25L', label: '₹5 - 25 Lakhs' },
-  { value: '25L-1Cr', label: '₹25 Lakhs - 1 Crore' },
-  { value: '1Cr+', label: '₹1 Crore+' }
+  { value: '1-5L', label: tr('₹1 - 5 Lakhs', '₹1 - 5 लाख') },
+  { value: '5-25L', label: tr('₹5 - 25 Lakhs', '₹5 - 25 लाख') },
+  { value: '25L-1Cr', label: tr('₹25 Lakhs - 1 Crore', '₹25 लाख - 1 करोड़') },
+  { value: '1Cr+', label: tr('₹1 Crore+', '₹1 करोड़+') }
 ];
 
 function InvestorInterestSection() {
@@ -36,7 +37,7 @@ function InvestorInterestSection() {
     e.preventDefault();
     
     if (!formData.full_name || !formData.email || !formData.phone || !formData.investment_range) {
-      toast.error('Please fill all required fields');
+      toast.error(tr('Please fill all required fields', 'कृपया सभी आवश्यक फ़ील्ड भरें'));
       return;
     }
 
@@ -56,7 +57,7 @@ function InvestorInterestSection() {
 
       setSubmitted(true);
       setReferenceId(data.reference_id);
-      toast.success('Thank you! We will contact you shortly.');
+      toast.success(tr('Thank you! We will contact you shortly.', 'धन्यवाद! हम जल्द ही आपसे संपर्क करेंगे।'));
     } catch (err) {
       toast.error(err.message || 'Something went wrong');
     } finally {
@@ -71,12 +72,12 @@ function InvestorInterestSection() {
           <div className="bg-green-500/20 p-4 rounded-full w-fit mx-auto mb-6">
             <CheckCircle className="h-16 w-16 text-green-500" />
           </div>
-          <h2 className="text-3xl font-bold text-white mb-4">Thank You for Your Interest!</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">{tr('Thank You for Your Interest!', 'आपकी रुचि के लिए धन्यवाद!')}</h2>
           <p className="text-slate-400 mb-4">
-            Your inquiry has been received. Our investment relations team will contact you within 24-48 hours.
+            {tr('Your inquiry has been received. Our investment relations team will contact you within 24-48 hours.', 'आपकी पूछताछ मिल गई है। हमारी निवेशक संबंध टीम 24-48 घंटों में आपसे संपर्क करेगी।')}
           </p>
           <p className="text-amber text-sm">
-            Reference ID: <span className="font-mono">{referenceId}</span>
+            {tr('Reference ID:', 'संदर्भ ID:')} <span className="font-mono">{referenceId}</span>
           </p>
         </div>
       </section>
@@ -89,55 +90,54 @@ function InvestorInterestSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Info */}
           <div>
-            <span className="ay-overline">Investor Relations</span>
+            <span className="ay-overline">{tr('Investor Relations', 'निवेशक संबंध')}</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
-              Invest in the Future of Indian Aviation
+              {tr('Invest in the Future of Indian Aviation', 'भारतीय विमानन के भविष्य में निवेश करें')}
             </h2>
             <p className="text-slate-400 text-lg mb-8">
-              Join us in revolutionizing private aviation in India. AirYatra is growing rapidly with 
-              a proven business model and ambitious expansion plans.
+              {tr('Join us in revolutionizing private aviation in India. AirYatra is growing rapidly with a proven business model and ambitious expansion plans.', 'भारत में निजी विमानन को बदलने में हमारे साथ जुड़ें। AirYatra एक सिद्ध बिज़नेस मॉडल और महत्वाकांक्षी विस्तार योजनाओं के साथ तेज़ी से बढ़ रहा है।')}
             </p>
 
             {/* Key Metrics */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="text-3xl font-bold text-lime">500+</div>
-                <div className="text-slate-400 text-sm">Flights Completed</div>
+                <div className="text-slate-400 text-sm">{tr('Flights Completed', 'पूरी हुई उड़ानें')}</div>
               </div>
               <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="text-3xl font-bold text-lime">40%</div>
-                <div className="text-slate-400 text-sm">YoY Growth</div>
+                <div className="text-slate-400 text-sm">{tr('YoY Growth', 'सालाना वृद्धि')}</div>
               </div>
               <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="text-3xl font-bold text-lime">15+</div>
-                <div className="text-slate-400 text-sm">Cities Served</div>
+                <div className="text-slate-400 text-sm">{tr('Cities Served', 'सेवा वाले शहर')}</div>
               </div>
               <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-4">
                 <div className="text-3xl font-bold text-lime">₹50Cr+</div>
-                <div className="text-slate-400 text-sm">Revenue Target</div>
+                <div className="text-slate-400 text-sm">{tr('Revenue Target', 'राजस्व लक्ष्य')}</div>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-slate-400 text-sm">
               <TrendingUp className="h-4 w-4 text-green-500" />
-              <span>Profitable unit economics with clear path to profitability</span>
+              <span>{tr('Profitable unit economics with clear path to profitability', 'लाभदायक यूनिट इकोनॉमिक्स और मुनाफ़े की स्पष्ट राह')}</span>
             </div>
           </div>
 
           {/* Right: Form */}
           <div className="bg-slate-800/50 border border-slate-700 rounded-sm p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">Express Your Interest</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">{tr('Express Your Interest', 'अपनी रुचि बताएं')}</h3>
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
-                <Label className="text-slate-300">Full Name *</Label>
+                <Label className="text-slate-300">{tr('Full Name *', 'पूरा नाम *')}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <Input
                     name="full_name"
                     value={formData.full_name}
                     onChange={handleChange}
-                    placeholder="Your full name"
+                    placeholder={tr('Your full name', 'आपका पूरा नाम')}
                     className="pl-10 bg-slate-900 border-slate-600 text-white"
                     required
                   />
@@ -146,7 +146,7 @@ function InvestorInterestSection() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-slate-300">Email *</Label>
+                  <Label className="text-slate-300">{tr('Email *', 'ईमेल *')}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                     <Input
@@ -162,7 +162,7 @@ function InvestorInterestSection() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-slate-300">Phone *</Label>
+                  <Label className="text-slate-300">{tr('Phone *', 'फ़ोन *')}</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                     <Input
@@ -178,21 +178,21 @@ function InvestorInterestSection() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-slate-300">Company (Optional)</Label>
+                <Label className="text-slate-300">{tr('Company (Optional)', 'कंपनी (वैकल्पिक)')}</Label>
                 <div className="relative">
                   <Building2 className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
                   <Input
                     name="company_name"
                     value={formData.company_name}
                     onChange={handleChange}
-                    placeholder="Your company name"
+                    placeholder={tr('Your company name', 'आपकी कंपनी का नाम')}
                     className="pl-10 bg-slate-900 border-slate-600 text-white"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-slate-300">Investment Range *</Label>
+                <Label className="text-slate-300">{tr('Investment Range *', 'निवेश सीमा *')}</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {INVESTMENT_RANGES.map((range) => (
                     <button
@@ -212,12 +212,12 @@ function InvestorInterestSection() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-slate-300">Message (Optional)</Label>
+                <Label className="text-slate-300">{tr('Message (Optional)', 'संदेश (वैकल्पिक)')}</Label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your investment goals..."
+                  placeholder={tr('Tell us about your investment goals...', 'अपने निवेश लक्ष्यों के बारे में बताएं...')}
                   rows={3}
                   className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-lime"
                 />
@@ -229,17 +229,17 @@ function InvestorInterestSection() {
                 className="w-full bg-lime text-black hover:bg-lime/90 font-semibold rounded-sm h-12"
               >
                 {loading ? (
-                  'Submitting...'
+                  tr('Submitting...', 'भेजा जा रहा है...')
                 ) : (
                   <>
                     <Send className="mr-2 h-5 w-5" />
-                    Submit Interest
+                    {tr('Submit Interest', 'रुचि भेजें')}
                   </>
                 )}
               </Button>
 
               <p className="text-xs text-slate-500 text-center">
-                By submitting, you agree to be contacted by our investment team
+                {tr('By submitting, you agree to be contacted by our investment team', 'सबमिट करके आप हमारी निवेश टीम द्वारा संपर्क किए जाने के लिए सहमति देते हैं')}
               </p>
             </form>
           </div>

@@ -95,7 +95,7 @@ export const PriceLockTimer = ({
       setIsExpired(false);
       toast.success(bi('✅ Price lock extended by 5 minutes! / मूल्य लॉक 5 मिनट बढ़ाया गया!'));
     } catch (error) {
-      toast.error('Failed to extend price lock');
+      toast.error(tr('Failed to extend price lock', 'मूल्य लॉक बढ़ाया नहीं जा सका'));
     } finally {
       setIsExtending(false);
     }
@@ -146,7 +146,7 @@ export const PriceLockTimer = ({
             {formatTime(timeRemaining)}
           </div>
           <p className="text-xs text-slate-400">
-            {isExpired ? 'Expired' : bi('Remaining / शेष समय')}
+            {isExpired ? tr('Expired', 'समाप्त') : bi('Remaining / शेष समय')}
           </p>
         </div>
       </div>
@@ -193,7 +193,7 @@ export const PriceLockTimer = ({
         <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 mt-3">
           {!isHindi() && (<p className="text-red-300 text-sm font-medium flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
-            Price lock has expired. Redirecting to booking page...
+            {tr('Price lock has expired. Redirecting to booking page...', 'मूल्य लॉक समाप्त हो गया। बुकिंग पेज पर ले जा रहे हैं...')}
           </p>)}
           {isHindi() && (<p className="text-red-400/70 text-xs mt-1">
             मूल्य लॉक समाप्त हो गया। बुकिंग पेज पर रीडायरेक्ट हो रहा है...
@@ -210,7 +210,7 @@ export const PriceLockTimer = ({
           className="w-full mt-3 border-lime/50 text-lime hover:bg-lime/10"
         >
           {isExtending ? (
-            <><RefreshCw className="h-4 w-4 mr-2 animate-spin" /> Extending...</>
+            <><RefreshCw className="h-4 w-4 mr-2 animate-spin" /> {tr('Extending...', 'बढ़ाया जा रहा है...')}</>
           ) : (
             <><Clock className="h-4 w-4 mr-2" /> {bi("Extend by 5 min / 5 मिनट बढ़ाएं")}</>
           )}
@@ -220,7 +220,7 @@ export const PriceLockTimer = ({
       {/* Lock ID for reference */}
       {lockId && (
         <p className="text-xs text-slate-500 mt-2 text-center">
-          Lock ID: {lockId.slice(0, 8)}...
+          {tr('Lock ID:', 'लॉक ID:')} {lockId.slice(0, 8)}...
         </p>
       )}
     </div>

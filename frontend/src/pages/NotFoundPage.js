@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, Home, ArrowLeft, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { bi } from '../lib/bilingual';
+import { bi, tr } from '../lib/bilingual';
 
 function NotFoundPage() {
   return (
@@ -26,8 +26,7 @@ function NotFoundPage() {
         {bi("Page Not Found / पेज नहीं मिला")}
       </h2>
       <p className="text-slate-400 text-center max-w-md mb-8">
-        The page you&#39;re looking for doesn&#39;t exist or has been moved. 
-        Let&#39;s get you back on track!
+        {tr("The page you're looking for doesn't exist or has been moved. Let's get you back on track!", 'आप जो पेज ढूंढ रहे हैं वह मौजूद नहीं है या हटा दिया गया है। चलिए आपको सही राह पर लाते हैं!')}
       </p>
 
       {/* Action Buttons */}
@@ -35,13 +34,13 @@ function NotFoundPage() {
         <Link to="/">
           <Button className="bg-lime text-black hover:bg-lime/90 min-w-[180px]" data-testid="home-btn">
             <Home className="mr-2 h-5 w-5" />
-            Go Home
+            {tr('Go Home', 'होम पर जाएं')}
           </Button>
         </Link>
         <Link to="/booking">
           <Button variant="outline" className="border-slate-600 text-white hover:bg-slate-800 min-w-[180px]" data-testid="book-flight-btn">
             <Plane className="mr-2 h-5 w-5" />
-            Book a Flight
+            {tr('Book a Flight', 'उड़ान बुक करें')}
           </Button>
         </Link>
       </div>
@@ -51,16 +50,16 @@ function NotFoundPage() {
         <p className="text-slate-500 text-sm mb-4">{bi("Quick Links / त्वरित लिंक")}</p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/services" className="text-lime hover:text-lime/80 text-sm">
-            Services
+            {tr('Services', 'सेवाएं')}
           </Link>
           <Link to="/fleet" className="text-lime hover:text-lime/80 text-sm">
-            Fleet
+            {tr('Fleet', 'बेड़ा')}
           </Link>
           <Link to="/blog" className="text-lime hover:text-lime/80 text-sm">
-            Blog
+            {tr('Blog', 'ब्लॉग')}
           </Link>
           <Link to="/about" className="text-lime hover:text-lime/80 text-sm">
-            About Us
+            {tr('About Us', 'हमारे बारे में')}
           </Link>
         </div>
       </div>
