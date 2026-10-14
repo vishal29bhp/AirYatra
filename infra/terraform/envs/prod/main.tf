@@ -20,9 +20,11 @@ module "platform" {
   registry_sku            = "Premium"
 
   # Data: geo-redundant blobs, HA Redis, Atlas M10 with continuous backup (PITR) and autoscale to M30.
-  storage_replication_type          = "RAGZRS"
-  redis_sku_name                    = "Balanced_B1"
-  redis_high_availability           = true
+  storage_replication_type = "RAGZRS"
+  redis_sku_name           = "Balanced_B1"
+  redis_high_availability  = true
+  # Switch to "cosmos_vcore" (with cosmos_compute_tier = "M30", cosmos_high_availability = true) to avoid Atlas.
+  database_engine                   = "atlas"
   atlas_org_id                      = var.atlas_org_id
   atlas_instance_size               = "M10"
   atlas_autoscale_max_instance_size = "M30"

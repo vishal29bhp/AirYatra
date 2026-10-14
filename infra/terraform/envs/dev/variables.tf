@@ -2,8 +2,15 @@ variable "subscription_id" {
   description = "Azure subscription that hosts this environment."
   type        = string
 }
+variable "database_engine" {
+  description = "cosmos_vcore (Terraform creates everything) or atlas (needs an Atlas org and keys)."
+  type        = string
+  default     = "cosmos_vcore"
+}
 variable "atlas_org_id" {
-  type = string
+  description = "Only needed if database_engine is switched to atlas."
+  type        = string
+  default     = ""
 }
 variable "alert_email" {
   type = string

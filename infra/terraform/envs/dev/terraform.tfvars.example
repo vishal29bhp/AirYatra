@@ -1,7 +1,6 @@
-# Copy to terraform.tfvars (git-ignored). No secrets here: Atlas keys come from environment variables,
-# third-party API keys are set directly in Key Vault after the first apply.
+# Copy to terraform.tfvars (git-ignored). No secrets here: third-party API keys are set directly in Key Vault after
+# the first apply. Dev uses Cosmos DB for MongoDB vCore, so no Atlas org or Atlas keys are needed.
 subscription_id   = "00000000-0000-0000-0000-000000000000"
-atlas_org_id      = "000000000000000000000000"
 alert_email       = "ops@airyatra.com"
 deployer_ip_cidrs = ["203.0.113.10/32"]
 budget_start_date = "2026-11-01T00:00:00Z"

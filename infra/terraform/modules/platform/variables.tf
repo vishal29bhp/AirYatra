@@ -81,9 +81,31 @@ variable "redis_sku_name" {
 variable "redis_high_availability" {
   type = bool
 }
-variable "atlas_org_id" {
-  description = "MongoDB Atlas organisation id (MONGODB_ATLAS_PUBLIC_KEY / PRIVATE_KEY come from the environment)."
+variable "database_engine" {
+  description = "atlas (MongoDB Atlas, needs an Atlas org and API key) or cosmos_vcore (Azure Cosmos DB for MongoDB vCore, needs only the subscription)."
   type        = string
+  default     = "atlas"
+  validation {
+    condition     = contains(["atlas", "cosmos_vcore"], var.database_engine)
+    error_message = "database_engine must be atlas or cosmos_vcore."
+  }
+}
+variable "cosmos_compute_tier" {
+  type    = string
+  default = "M10"
+}
+variable "cosmos_storage_size_in_gb" {
+  type    = number
+  default = 32
+}
+variable "cosmos_high_availability" {
+  type    = bool
+  default = false
+}
+variable "atlas_org_id" {
+  description = "MongoDB Atlas organisation id (MONGODB_ATLAS_PUBLIC_KEY / PRIVATE_KEY come from the environment). Only used when database_engine is atlas."
+  type        = string
+  default     = ""
 }
 variable "atlas_instance_size" {
   type = string

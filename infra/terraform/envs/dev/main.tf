@@ -19,9 +19,14 @@ module "platform" {
   registry_sku            = "Basic"
 
   # Data
-  storage_replication_type          = "LRS"
-  redis_sku_name                    = "Balanced_B0"
-  redis_high_availability           = false
+  storage_replication_type = "LRS"
+  redis_sku_name           = "Balanced_B0"
+  redis_high_availability  = false
+  # Cosmos DB for MongoDB vCore: created by Terraform with only the Azure subscription, no Atlas account.
+  database_engine                   = var.database_engine
+  cosmos_compute_tier               = "M10"
+  cosmos_storage_size_in_gb         = 32
+  cosmos_high_availability          = false
   atlas_org_id                      = var.atlas_org_id
   atlas_instance_size               = "M10"
   atlas_autoscale_max_instance_size = "M20"

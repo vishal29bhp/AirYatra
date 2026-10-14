@@ -12,11 +12,12 @@ Everything is in Central India (`centralindia`), with South India (`southindia`)
 | Path | What it is |
 |---|---|
 | `bootstrap/` | One-time state storage account (`rg-airyatra-tfstate-cin`). Local state. |
-| `envs/dev/` | Dev: 1 API replica, Standard Front Door (WAF in Detection), Atlas M10, Managed Redis B0. |
+| `envs/dev/` | Dev: 1 API replica, Standard Front Door (WAF in Detection), Cosmos DB for MongoDB vCore M10, Managed Redis B0. |
 | `envs/prod/` | Prod at stage 1 (~1K users): 2+ zone-redundant API replicas, Premium Front Door + WAF (Prevention) over Private Link, Atlas M10 with PITR and autoscale to M30, Managed Redis B1 HA, RA-GZRS blobs. |
 | `modules/platform` | Composition used by every environment. |
 | `modules/network` | VNet, `/23` Container Apps subnet, private endpoint subnet, NSGs, private DNS zones. |
 | `modules/container_apps` | ACR, Container Apps environment, `api` app (HTTP + CPU autoscale) and single-replica `worker` app (APScheduler). |
+| `modules/cosmos_mongo` | Azure Cosmos DB for MongoDB (vCore), private endpoint only. Needs no account outside Azure. |
 | `modules/mongodb_atlas` | Atlas project and replica set on Azure Central India, continuous backup, Private Link, least-privilege app user. |
 | `modules/storage` | Private Blob storage (uploads, documents, kyc, invoices, exports, WORM audit-logs), Defender malware scanning. |
 | `modules/redis` | Azure Managed Redis, Entra auth only, private endpoint. |
@@ -30,7 +31,9 @@ Everything is in Central India (`centralindia`), with South India (`southindia`)
 ## Prerequisites
 
 - Terraform >= 1.9, Azure CLI, an Azure subscription where you are Owner (role assignments are created).
-- A MongoDB Atlas organisation and an Atlas **service account** (or API key) with Organization Project Creator.
+- Database: `database_engine` picks it. `cosmos_vcore` (dev default) needs nothing beyond the subscription. `atlas`
+  (prod default) needs a MongoDB Atlas organisation and an Atlas **service account** (or API key) with Organization
+  Project Creator.
 - Your public IP, so Terraform can write Key Vault secrets through the vault firewall.
 
 ## Apply, step by step
@@ -48,9 +51,8 @@ terraform output -raw backend_config      # paste into envs/<env>/backend.hcl, p
 # 2. Environment (dev first, then prod)
 cd ../envs/dev
 cp backend.hcl.example backend.hcl            # fill from step 1
-cp terraform.tfvars.example terraform.tfvars  # subscription, Atlas org id, alert email, your IP/32
-export MONGODB_ATLAS_CLIENT_ID=...            # Atlas service account (never in tfvars)
-export MONGODB_ATLAS_CLIENT_SECRET=...
+cp terraform.tfvars.example terraform.tfvars  # subscription, alert email, your IP/32 (+ Atlas org id on atlas)
+# Atlas only: export MONGODB_ATLAS_CLIENT_ID=... MONGODB_ATLAS_CLIENT_SECRET=...  (never in tfvars)
 terraform init -backend-config=backend.hcl
 git add .terraform.lock.hcl                   # commit the lock file this creates
 terraform plan -out tfplan

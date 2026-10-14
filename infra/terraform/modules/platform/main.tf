@@ -90,6 +90,7 @@ module "redis" {
 
 module "mongodb" {
   source                         = "../mongodb_atlas"
+  count                          = var.database_engine == "atlas" ? 1 : 0
   name_prefix                    = local.name_prefix
   atlas_org_id                   = var.atlas_org_id
   instance_size                  = var.atlas_instance_size
@@ -103,6 +104,20 @@ module "mongodb" {
   resource_group_name            = azurerm_resource_group.this.name
   private_endpoint_subnet_id     = module.network.private_endpoint_subnet_id
   tags                           = local.tags
+}
+
+module "cosmos_mongo" {
+  source                     = "../cosmos_mongo"
+  count                      = var.database_engine == "cosmos_vcore" ? 1 : 0
+  name                       = "mongo-airyatra-${var.environment}-${local.suffix}"
+  location                   = var.location
+  resource_group_name        = azurerm_resource_group.this.name
+  compute_tier               = var.cosmos_compute_tier
+  storage_size_in_gb         = var.cosmos_storage_size_in_gb
+  high_availability_enabled  = var.cosmos_high_availability
+  private_endpoint_subnet_id = module.network.private_endpoint_subnet_id
+  private_dns_zone_id        = module.network.private_dns_zone_ids["mongo"]
+  tags                       = local.tags
 }
 
 module "openai" {
@@ -126,7 +141,7 @@ resource "random_password" "jwt" {
 resource "azurerm_key_vault_secret" "generated" {
   #checkov:skip=CKV_AZURE_41:Rotation is a runbook step (docs/architecture), a hard expiry would take the app down.
   for_each = {
-    MONGO_URL      = module.mongodb.connection_uri
+    MONGO_URL      = var.database_engine == "atlas" ? module.mongodb[0].connection_uri : module.cosmos_mongo[0].connection_uri
     JWT_SECRET_KEY = random_password.jwt.result
   }
   name         = lower(replace(each.key, "_", "-"))
