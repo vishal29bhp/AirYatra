@@ -44,6 +44,7 @@ jobs:
       API_APP: ${{ vars.API_APP_NAME }}
       WORKER_APP: ${{ vars.WORKER_APP_NAME }}
       PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+      COMPUTE_PLATFORM: ${{ vars.COMPUTE_PLATFORM || 'container_apps' }}
       # Same as PUBLIC_URL behind Front Door; the API's own address when Front Door is off (Free Trial dev).
       API_URL: ${{ vars.API_URL || vars.PUBLIC_URL }}
       TAG: ${{ inputs.image_tag != '' && inputs.image_tag || github.sha }}
@@ -66,6 +67,10 @@ jobs:
       - name: Record the images running now (for rollback)
         if: inputs.deploy_api
         run: |
+          if [ "$COMPUTE_PLATFORM" = "app_service" ]; then
+            echo "$API_APP: $(az webapp config show -n "$API_APP" -g "$RG" --query linuxFxVersion -o tsv)" | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           for app in "$API_APP" "$WORKER_APP"; do
             echo "$app: $(az containerapp show -n "$app" -g "$RG" --query 'properties.template.containers[0].image' -o tsv)" | tee -a "$GITHUB_STEP_SUMMARY"
           done
@@ -86,15 +91,37 @@ jobs:
 
       - name: Roll the API and the worker to the new image
         if: inputs.deploy_api
+        env:
+          APP_IDENTITY_CLIENT_ID: ${{ vars.APP_IDENTITY_CLIENT_ID }}
         run: |
           IMAGE="$ACR/airyatra-api:$TAG"
+          if [ "$COMPUTE_PLATFORM" = "app_service" ]; then
+            # Dev on App Service: one web app runs the API and the scheduler, so there is no worker.
+            az webapp config set -n "$API_APP" -g "$RG" -o none --generic-configurations \
+              "{\"acrUseManagedIdentityCreds\": true, \"acrUserManagedIdentityID\": \"$APP_IDENTITY_CLIENT_ID\"}"
+            az webapp config appsettings set -n "$API_APP" -g "$RG" --settings WEBSITES_PORT=8001 -o none
+            az webapp config container set -n "$API_APP" -g "$RG" -o none \
+              --container-image-name "$IMAGE" --container-registry-url "https://$ACR"
+            exit 0
+          fi
           az containerapp update -n "$API_APP" -g "$RG" --image "$IMAGE" -o none
-          az containerapp update -n "$WORKER_APP" -g "$RG" --image "$IMAGE" -o none
+          if [ -n "$WORKER_APP" ]; then
+            az containerapp update -n "$WORKER_APP" -g "$RG" --image "$IMAGE" -o none
+          fi
 
       - name: Wait until the new API revision is healthy
         if: inputs.deploy_api
         run: |
           for i in $(seq 1 40); do
+            if [ "$COMPUTE_PLATFORM" = "app_service" ]; then
+              image=$(az webapp config show -n "$API_APP" -g "$RG" --query linuxFxVersion -o tsv)
+              echo "attempt $i: configured image=$image"
+              case "$image" in
+                *":$TAG") curl -fsS --max-time 10 "$API_URL/health" && exit 0 ;;
+              esac
+              sleep 15
+              continue
+            fi
             state=$(az containerapp revision list -n "$API_APP" -g "$RG" \
               --query "[?properties.active && contains(properties.template.containers[0].image, ':$TAG')].properties.runningState | [0]" -o tsv)
             echo "attempt $i: revision state=${state:-pending}"
@@ -106,7 +133,7 @@ jobs:
             fi
             sleep 15
           done
-          echo "::error::New revision did not become healthy in 10 minutes. Roll back: docs/operations/ROLLBACK.md"
+          echo "::error::New API did not become healthy in 10 minutes. Roll back: docs/operations/ROLLBACK.md"
           exit 1
 
       - uses: actions/setup-node@v4

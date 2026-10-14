@@ -62,3 +62,7 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+variable "web_replication_type" {
+  type    = string
+  default = "ZRS"
+}

@@ -41,7 +41,9 @@ module "network" {
   location            = var.location
   resource_group_name = azurerm_resource_group.this.name
   address_space       = var.vnet_address_space
-  tags                = local.tags
+  # Dev on the Free Trial runs the API on App Service, which needs its own delegated subnet.
+  app_service_subnet_enabled = var.compute_platform == "app_service"
+  tags                       = local.tags
 }
 
 module "observability" {
@@ -216,6 +218,7 @@ resource "azurerm_role_assignment" "app_acr_pull" {
 # ---------------- Compute ----------------
 module "container_apps" {
   source                     = "../container_apps"
+  environment_enabled        = var.compute_platform == "container_apps"
   name_prefix                = local.name_prefix
   location                   = var.location
   resource_group_name        = azurerm_resource_group.this.name
@@ -237,7 +240,35 @@ module "container_apps" {
   worker_memory              = var.worker_memory
   tags                       = local.tags
 
-  env_vars = {
+  env_vars = local.app_env_vars
+
+  key_vault_secrets = local.app_key_vault_secrets
+
+  depends_on = [azurerm_role_assignment.app_kv_secrets_user]
+}
+
+
+module "app_service" {
+  source                = "../app_service"
+  count                 = var.compute_platform == "app_service" ? 1 : 0
+  name_prefix           = local.name_prefix
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.this.name
+  sku_name              = var.app_service_sku
+  subnet_id             = module.network.app_service_subnet_id
+  identity_id           = azurerm_user_assigned_identity.app.id
+  identity_client_id    = azurerm_user_assigned_identity.app.client_id
+  registry_login_server = module.container_apps.registry_login_server
+  image                 = var.api_image
+  env_vars              = local.app_env_vars
+  key_vault_secrets     = local.app_key_vault_secrets
+  tags                  = local.tags
+
+  depends_on = [azurerm_role_assignment.app_kv_secrets_user, azurerm_role_assignment.app_acr_pull]
+}
+
+locals {
+  app_env_vars = {
     APP_ENV                               = var.environment
     DB_NAME                               = var.database_name
     CORS_ORIGINS                          = join(",", local.cors_origins)
@@ -256,13 +287,14 @@ module "container_apps" {
     REDIS_PORT                            = "10000"
     APPLICATIONINSIGHTS_CONNECTION_STRING = module.observability.application_insights_connection_string
   }
-
-  key_vault_secrets = merge(
+  app_key_vault_secrets = merge(
     { for k, s in azurerm_key_vault_secret.generated : k => s.versionless_id },
     { for k, s in azurerm_key_vault_secret.manual : k => s.versionless_id },
   )
 
-  depends_on = [azurerm_role_assignment.app_kv_secrets_user]
+  api_fqdn    = var.compute_platform == "app_service" ? one(module.app_service[*].api_fqdn) : module.container_apps.api_fqdn
+  api_name    = var.compute_platform == "app_service" ? one(module.app_service[*].api_name) : module.container_apps.api_name
+  worker_name = var.compute_platform == "app_service" ? "" : module.container_apps.worker_name
 }
 
 # ---------------- Edge ----------------
@@ -275,7 +307,8 @@ module "frontdoor" {
   sku_name                 = var.frontdoor_sku
   waf_mode                 = var.waf_mode
   web_storage_account_name = "stairyatraweb${var.environment}${local.suffix}"
-  api_fqdn                 = module.container_apps.api_fqdn
+  web_replication_type     = var.web_storage_replication_type
+  api_fqdn                 = local.api_fqdn
   api_private_link = var.frontdoor_sku == "Premium_AzureFrontDoor" ? {
     environment_id = module.container_apps.environment_id
     location       = module.container_apps.environment_location
@@ -287,12 +320,14 @@ module "frontdoor" {
 }
 
 locals {
+  # Azure Load Testing is not offered in every region (for example South India).
+  load_test_location = coalesce(var.load_test_location, var.location)
   public_url = (
     !var.frontdoor_enabled ? module.frontdoor.web_endpoint :
     length(var.custom_domains) > 0 ? "https://${var.custom_domains[0]}" : "https://${module.frontdoor.endpoint_host_name}"
   )
   # With Front Door the site and API share one address; without it the browser calls the API's own address.
-  api_url      = var.frontdoor_enabled ? local.public_url : "https://${module.container_apps.api_fqdn}"
+  api_url      = var.frontdoor_enabled ? local.public_url : "https://${local.api_fqdn}"
   cors_origins = distinct(concat([local.public_url], var.cors_allowed_origins))
 }
 
@@ -314,7 +349,7 @@ module "governance" {
   source                = "../governance"
   name_prefix           = local.name_prefix
   resource_group_id     = azurerm_resource_group.this.id
-  allowed_locations     = distinct([var.location, var.dr_location, var.openai_location])
+  allowed_locations     = distinct(compact([var.location, var.dr_location, var.openai_location, var.enable_load_testing ? local.load_test_location : ""]))
   monthly_budget_amount = var.monthly_budget_amount
   budget_start_date     = var.budget_start_date
   alert_email           = var.alert_email
@@ -324,7 +359,7 @@ module "governance" {
 resource "azurerm_load_test" "this" {
   count               = var.enable_load_testing ? 1 : 0
   name                = "lt-${local.name_prefix}"
-  location            = var.location
+  location            = local.load_test_location
   resource_group_name = azurerm_resource_group.this.name
   description         = "k6/JMeter runs for the Q.3 1K and 20K user profiles."
   tags                = local.tags

@@ -10,7 +10,11 @@ module "platform" {
   vnet_address_space = "10.20.0.0/16"
   deployer_ip_cidrs  = var.deployer_ip_cidrs
 
-  # Compute: 1 API replica is enough for dev; no zone redundancy.
+  # Compute: the Free Trial allows one Container Apps environment per subscription (already used by another
+  # project), so dev runs the API, with its scheduler, on a single App Service B1 instance.
+  compute_platform = "app_service"
+  app_service_sku  = "B1"
+  # These apply when compute_platform is container_apps. 1 API replica is enough for dev; no zone redundancy.
   api_image               = var.api_image
   worker_image            = var.worker_image
   api_cpu                 = 0.5
@@ -23,9 +27,10 @@ module "platform" {
   registry_sku            = "Basic"
 
   # Data
-  storage_replication_type = "LRS"
-  redis_sku_name           = "Balanced_B0"
-  redis_high_availability  = false
+  storage_replication_type     = "LRS"
+  web_storage_replication_type = "LRS"
+  redis_sku_name               = "Balanced_B0"
+  redis_high_availability      = false
   # Cosmos DB for MongoDB vCore: created by Terraform with only the Azure subscription, no Atlas account.
   database_engine                   = var.database_engine
   cosmos_compute_tier               = "M10"
@@ -63,4 +68,5 @@ module "platform" {
   budget_start_date     = var.budget_start_date
   enable_defender_plans = false
   enable_load_testing   = true
+  load_test_location    = "centralindia"
 }

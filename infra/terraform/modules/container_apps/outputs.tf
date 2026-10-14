@@ -1,17 +1,17 @@
 output "environment_id" {
-  value = azurerm_container_app_environment.this.id
+  value = var.environment_enabled ? azurerm_container_app_environment.this[0].id : null
 }
 output "environment_location" {
-  value = azurerm_container_app_environment.this.location
+  value = var.environment_enabled ? azurerm_container_app_environment.this[0].location : null
 }
 output "api_fqdn" {
-  value = azurerm_container_app.api.ingress[0].fqdn
+  value = var.environment_enabled ? azurerm_container_app.api[0].ingress[0].fqdn : null
 }
 output "api_name" {
-  value = azurerm_container_app.api.name
+  value = var.environment_enabled ? azurerm_container_app.api[0].name : null
 }
 output "worker_name" {
-  value = azurerm_container_app.worker.name
+  value = var.environment_enabled ? azurerm_container_app.worker[0].name : null
 }
 output "registry_id" {
   value = azurerm_container_registry.this.id

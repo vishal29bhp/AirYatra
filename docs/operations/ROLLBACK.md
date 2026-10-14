@@ -17,6 +17,10 @@ Every deployed image stays in ACR under its git SHA. To go back:
    az containerapp update -n $API -g $RG --image $IMAGE
    az containerapp update -n $WORKER -g $RG --image $IMAGE
    ```
+   Dev runs the API on App Service (one web app, no worker), so there it is:
+   ```bash
+   az webapp config container set -n $API -g $RG --container-image-name $IMAGE --container-registry-url https://<acr>.azurecr.io
+   ```
 
 ## Web app only
 

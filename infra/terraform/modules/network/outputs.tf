@@ -11,3 +11,6 @@ output "private_dns_zone_ids" {
   description = "Map of zone key (blob, keyvault, redis, openai) to private DNS zone id."
   value       = { for k, z in azurerm_private_dns_zone.this : k => z.id }
 }
+output "app_service_subnet_id" {
+  value = var.app_service_subnet_enabled ? azurerm_subnet.app_service[0].id : null
+}
