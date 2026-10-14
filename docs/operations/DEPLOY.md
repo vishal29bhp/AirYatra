@@ -4,7 +4,8 @@ Releases go through the **Deploy to Azure** workflow (`.github/workflows/azure-d
 
 ## One-time setup per environment
 
-1. Apply Terraform for the environment ([infra/terraform/README.md](../../infra/terraform/README.md)).
+1. Apply Terraform for the environment ([infra/terraform/README.md](../../infra/terraform/README.md)). For dev, the
+   copy-paste walkthrough is [FIRST_DEPLOY_DEV.md](FIRST_DEPLOY_DEV.md).
 2. In GitHub (Settings, Environments), create the `dev` and `prod` environments. Add Vishal as a **required reviewer on
    `prod`** and limit `prod` to the `main` branch.
 3. Add every value from `terraform output github_actions_variables` as an environment **variable** (not a secret).
