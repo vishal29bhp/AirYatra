@@ -2,7 +2,11 @@
 module "platform" {
   source = "../../modules/platform"
 
-  environment        = "dev"
+  environment = "dev"
+  # The Azure Free Trial allows one Container Apps environment per region, and Central India's is
+  # taken by another project on this subscription, so dev runs in South India.
+  location           = "southindia"
+  location_short     = "sin"
   vnet_address_space = "10.20.0.0/16"
   deployer_ip_cidrs  = var.deployer_ip_cidrs
 

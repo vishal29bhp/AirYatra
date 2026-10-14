@@ -32,7 +32,9 @@ provider "azurerm" {
       purge_soft_delete_on_destroy = false
     }
     resource_group {
-      prevent_deletion_if_contains_resources = true
+      # Dev only: Azure adds resources Terraform does not track (such as Application Insights smart detection
+      # rules), which would otherwise block removing a dev resource group. Prod keeps this true.
+      prevent_deletion_if_contains_resources = false
     }
   }
 }

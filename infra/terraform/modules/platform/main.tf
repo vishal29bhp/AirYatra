@@ -15,6 +15,10 @@ resource "random_string" "suffix" {
   length  = 4
   upper   = false
   special = false
+  # A new region gets new names, so they never clash with soft-deleted Key Vaults or AI accounts of the old one.
+  keepers = {
+    location = var.location
+  }
 }
 
 resource "azurerm_resource_group" "this" {
