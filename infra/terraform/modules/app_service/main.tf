@@ -10,6 +10,8 @@ locals {
 }
 
 resource "azurerm_service_plan" "this" {
+  #checkov:skip=CKV_AZURE_212:Dev runs a single B1 instance; production uses Container Apps with several replicas.
+  #checkov:skip=CKV_AZURE_225:Zone redundancy needs Premium plans; dev only.
   name                = "asp-${var.name_prefix}"
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -21,9 +23,8 @@ resource "azurerm_service_plan" "this" {
 resource "azurerm_linux_web_app" "api" {
   #checkov:skip=CKV_AZURE_17:Users sign in with JWTs; client certificates do not apply to a public web app.
   #checkov:skip=CKV_AZURE_88:No Azure Files mounts; state lives in Cosmos DB, Blob and Redis.
-  #checkov:skip=CKV_AZURE_212:Dev runs a single B1 instance; production uses Container Apps with several replicas.
+  #checkov:skip=CKV_AZURE_13:The API authenticates users itself with JWTs; Easy Auth would block the public routes.
   #checkov:skip=CKV_AZURE_222:The API is public by design (the browser calls it directly in dev).
-  #checkov:skip=CKV_AZURE_225:Zone redundancy needs Premium plans; dev only.
   name                            = "app-${var.name_prefix}-api"
   location                        = var.location
   resource_group_name             = var.resource_group_name
@@ -58,6 +59,9 @@ resource "azurerm_linux_web_app" "api" {
   }
 
   logs {
+    detailed_error_messages = true
+    failed_request_tracing  = true
+
     http_logs {
       file_system {
         retention_in_days = 7

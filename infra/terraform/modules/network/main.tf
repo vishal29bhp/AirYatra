@@ -69,6 +69,20 @@ resource "azurerm_subnet" "app_service" {
   }
 }
 
+resource "azurerm_network_security_group" "app_service" {
+  count               = var.app_service_subnet_enabled ? 1 : 0
+  name                = "nsg-${var.name_prefix}-appservice"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  tags                = var.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "app_service" {
+  count                     = var.app_service_subnet_enabled ? 1 : 0
+  subnet_id                 = azurerm_subnet.app_service[0].id
+  network_security_group_id = azurerm_network_security_group.app_service[0].id
+}
+
 resource "azurerm_subnet" "private_endpoints" {
   name                              = "snet-private-endpoints"
   resource_group_name               = var.resource_group_name
