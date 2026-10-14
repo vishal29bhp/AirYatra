@@ -12,6 +12,20 @@ open a new terminal, run step 1 again first.
 
 If any command fails, paste the error (never a key) in the project thread and stop there.
 
+## Quickest way: one PowerShell script
+
+[`infra/scripts/deploy-dev.ps1`](../../infra/scripts/deploy-dev.ps1) does steps 1 to 9 below for you. It asks you to
+confirm before creating anything in Azure, and asks for each key with hidden typing (Enter skips a key). From the
+repository root, in the VS Code PowerShell terminal:
+
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\infra\scripts\deploy-dev.ps1 -SubscriptionId <your-subscription-id> -AlertEmail <your-email>
+```
+
+It is safe to run again. `-KeysOnly` goes straight to entering keys, `-SkipKeys` and `-SkipDeploy` leave those steps
+out. The steps below are the same thing done by hand.
+
 ## 0. Tools
 
 You need the Azure CLI (you have it), Terraform 1.9 or newer, and the GitHub CLI.
