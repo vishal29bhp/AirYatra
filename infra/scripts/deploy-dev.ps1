@@ -231,6 +231,23 @@ if (-not $SkipKeys) {
         Write-Host "file-encryption-key is already set; keeping it."
     }
 
+    # Dev staff logins (bootstrap_staff in envs/dev/main.tf) share one generated password.
+    if (Test-VaultSecretIsPlaceholder "bootstrap-staff-password") {
+        $alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
+        $bytes = New-Object byte[] 20
+        [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+        $staffPassword = -join ($bytes | ForEach-Object { $alphabet[$_ % $alphabet.Length] })
+        Set-VaultSecret "bootstrap-staff-password" $staffPassword
+        Write-Host ""
+        Write-Host "Dev staff password (ceo@, admin@, finance@, hr@, sales@, booking@, noreply@airyatra.co.in):" -ForegroundColor Yellow
+        Write-Host "  $staffPassword" -ForegroundColor Yellow
+        Write-Host "Save it in your password manager. It is not shown again; read it back with:"
+        Write-Host "  az keyvault secret show --vault-name $KeyVault --name bootstrap-staff-password --query value -o tsv"
+        Remove-Variable staffPassword
+    } else {
+        Write-Host "bootstrap-staff-password is already set; keeping it."
+    }
+
     Write-Host ""
     Write-Host "Use TEST-MODE keys only (Razorpay rzp_test_..., Stripe sk_test_..., Cashfree sandbox)."
     Write-Host "Typing is hidden. Press Enter to skip a key: that feature stays off until it is set."

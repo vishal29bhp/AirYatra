@@ -13,7 +13,19 @@ module "platform" {
   # Compute: the Free Trial allows one Container Apps environment per subscription (already used by another
   # project), so dev runs the API, with its scheduler, on a single App Service B1 instance.
   compute_platform = "app_service"
-  app_service_sku  = "B1"
+
+  # The dev database starts empty: these staff logins are created at API start, all with the
+  # password in Key Vault secret bootstrap-staff-password (deploy-dev.ps1 generates it).
+  bootstrap_staff = join(",", [
+    "ceo@airyatra.co.in:super_admin",
+    "admin@airyatra.co.in:admin",
+    "finance@airyatra.co.in:finance",
+    "hr@airyatra.co.in:hr",
+    "sales@airyatra.co.in:sales",
+    "booking@airyatra.co.in:operations",
+    "noreply@airyatra.co.in:support",
+  ])
+  app_service_sku = "B1"
   # These apply when compute_platform is container_apps. 1 API replica is enough for dev; no zone redundancy.
   api_image               = var.api_image
   worker_image            = var.worker_image

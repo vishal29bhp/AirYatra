@@ -15,6 +15,10 @@ Apps, because a Free Trial subscription allows only one Container Apps environme
 another project. Dev lives in South India for the same reason. Prod keeps Container Apps.
 No secret goes into a file, the repo, GitHub or chat: keys are typed straight into Key Vault in step 8.
 
+The dev database starts empty, so step 8 also generates one password for the staff logins listed in
+`bootstrap_staff` (`infra/terraform/envs/dev/main.tf`) and shows it once on your screen. The API creates those
+accounts when it starts and never changes an existing user. Prod never does this.
+
 Each step has a **bash** block (macOS, Linux, Git Bash on Windows) and a **PowerShell** block (the default VS Code
 terminal on Windows). Use the same shell for every step, because later steps reuse variables from earlier ones. If you
 open a new terminal, run step 1 again first.
