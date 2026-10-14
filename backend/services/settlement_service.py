@@ -82,7 +82,7 @@ class SettlementAutomationService:
         # Get operator details
         operator = await db.operators.find_one(
             {"id": settlement_data["operator_id"]},
-            {"_id": 0, "company_name": 1, "bank_account": 1, "contact_email": 1}
+            {"_id": 0, "user_id": 1, "company_name": 1, "bank_account": 1, "contact_email": 1}
         )
         
         settlement = {

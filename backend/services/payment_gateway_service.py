@@ -140,7 +140,7 @@ class RazorpayXGateway(BasePaymentGateway):
                 json={
                     "account_number": self.account_number,
                     "fund_account_id": fund_account_id,
-                    "amount": int(amount * 100),  # Convert to paise
+                    "amount": int(round(amount * 100)),  # Convert to paise; round, as float error can land just below
                     "currency": "INR",
                     "mode": mode,
                     "purpose": purpose,
@@ -574,7 +574,10 @@ class PaymentGatewayManager:
                 name=employee_data["name"],
                 email=employee_data.get("email", ""),
                 phone=employee_data.get("phone", ""),
-                reference_id=employee_data.get("employee_id", "")
+                reference_id=employee_data.get("employee_id", ""),
+                # Cashfree keeps the bank account on the beneficiary itself.
+                account_number=employee_data["account_number"],
+                ifsc=employee_data["ifsc_code"]
             )
             
             # Create fund account
@@ -632,7 +635,9 @@ class PaymentGatewayManager:
                     name=emp["name"],
                     email=emp.get("email", ""),
                     phone=emp.get("phone", ""),
-                    reference_id=emp.get("employee_id", "")
+                    reference_id=emp.get("employee_id", ""),
+                    account_number=emp["account_number"],
+                    ifsc=emp["ifsc_code"]
                 )
                 
                 fund_account = await gateway.create_fund_account(
@@ -692,7 +697,9 @@ class PaymentGatewayManager:
                 name=vendor_data["name"],
                 email=vendor_data.get("email", ""),
                 phone=vendor_data.get("phone", ""),
-                reference_id=vendor_data.get("vendor_id", "")
+                reference_id=vendor_data.get("vendor_id", ""),
+                account_number=vendor_data["account_number"],
+                ifsc=vendor_data["ifsc_code"]
             )
             
             fund_account = await gateway.create_fund_account(

@@ -116,10 +116,6 @@ async def test_razorpayx_payout_converts_rupees_to_paise(razorpayx, http):
                       "amount": 45250.50, "mode": "NEFT", "reference_id": "SAL_1"}
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "Bug: RazorpayX payout converts rupees to paise with int(amount * 100) "
-    "(services/payment_gateway_service.py:143), which truncates float error: ₹1.15 is sent as 114 paise "
-    "and ₹0.29 as 28 paise, underpaying the beneficiary."))
 async def test_razorpayx_payout_paise_conversion_does_not_lose_a_paisa(razorpayx, http):
     http.post.return_value = response(json_body={"id": "pout_2", "status": "processing"})
     await razorpayx.create_payout("fa_1", 1.15, "IMPS", "salary", "SAL_2")
@@ -357,10 +353,6 @@ async def test_salary_payout_via_configured_razorpayx(manager, http):
     assert result["success"] is True and result["payout_id"] == "pout_1" and result["status"] == "queued"
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "Bug: for Cashfree the bank account lives on the beneficiary, but process_salary_payout only passes "
-    "reference_id to create_contact (services/payment_gateway_service.py:573-578), so addBeneficiary is "
-    "sent with empty bankAccount/ifsc (lines 293-294) and the transfer cannot reach the employee's bank."))
 async def test_cashfree_salary_payout_registers_beneficiary_bank_account(manager, http):
     gw = manager.gateways["cashfree"]
     gw.client_id, gw.client_secret, gw.is_configured = "CF_FAKE_ID", "cf_fake_secret", True

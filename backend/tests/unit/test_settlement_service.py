@@ -110,10 +110,6 @@ async def test_settlement_record_is_created_pending_with_operator_details(servic
     assert note["data"] == {"settlement_id": stored["id"]}
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "Bug: create_settlement_record projects the operator without user_id "
-    "(services/settlement_service.py:83-86), so the 'settlement_created' notification "
-    "is stored with user_id=None and never reaches the operator."))
 async def test_settlement_created_notification_is_addressed_to_operator_user(service, mock_db):
     await seed_operator(mock_db)
     data = await _calculated(service, mock_db)
