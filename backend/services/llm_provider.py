@@ -17,7 +17,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional
 
 PROVIDERS = ("emergent", "azure_openai")
 AZURE_OPENAI_SCOPE = "https://cognitiveservices.azure.com/.default"
-DEFAULT_AZURE_OPENAI_API_VERSION = "2024-10-21"
+DEFAULT_AZURE_OPENAI_API_VERSION = "2025-04-01-preview"
 
 
 @dataclass

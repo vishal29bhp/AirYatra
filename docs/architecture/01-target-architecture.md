@@ -21,7 +21,7 @@ Threat model: [04-threat-model.md](04-threat-model.md).
   - `ASSUMPTION` The current MongoDB server is 6.x or 7.x; Atlas is pinned to `7.0` (`atlas_mongo_major_version`), and must be set to the source's major version before migration so query semantics match.
   - `ASSUMPTION` Exchange rate ₹88 = USD 1; prices are Azure/Atlas list prices for Central India as of 2026 and are estimates, not quotes.
   - `ASSUMPTION` 1K-user stage: ~100 concurrent users, ~20 req/s peak at the API. 20K stage: 500 concurrent, 1,500 spike, ~150 req/s peak.
-  - `ASSUMPTION` `gpt-4o-mini` is available as a Standard deployment in South India; if not, `openai_location` moves to the nearest region that has it, and only prompts without KYC/payment data go there (S.3).
+  - `ASSUMPTION` `gpt-5-mini` is available as a GlobalStandard deployment in South India; if not, `openai_location` moves to the nearest region that has it, and only prompts without KYC/payment data go there (S.3).
 - **Options considered** for each decision are in the decision log (section 5); choices favour boring, managed Azure services and reversibility.
 
 ### ACTION
@@ -80,7 +80,7 @@ flowchart LR
   end
 
   subgraph SIN["Azure South India"]
-    AOAI[(Azure OpenAI\ngpt-4o-mini)]
+    AOAI[(Azure OpenAI\ngpt-5-mini)]
     GEO[(Blob geo copy)]
   end
 
@@ -191,7 +191,7 @@ Monthly, Central India list prices, USD (₹ at 88). `ASSUMPTION`: estimates; co
 | Azure Managed Redis | Balanced B0 | Balanced B1 HA | 170 | Balanced B5 HA | 450 |
 | Blob Storage + Defender scan | LRS | RA-GZRS, ~100 GB | 15 | RA-GZRS, ~1 TB | 60 |
 | Log Analytics / App Insights | ~0.2 GB/day | ~1 GB/day, 90 days | 85 | ~5 GB/day | 415 |
-| Azure OpenAI | low | gpt-4o-mini | 20 | gpt-4o-mini | 150 |
+| Azure OpenAI | low | gpt-5-mini | 20 | gpt-5-mini | 150 |
 | Container Registry | Basic | Premium | 50 | Premium | 50 |
 | Private endpoints (6) | 6 | 6 | 45 | 6 | 50 |
 | Key Vault, Load Testing, misc | small | | 15 | | 40 |
