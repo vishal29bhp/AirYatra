@@ -183,10 +183,15 @@ budget_start_date = "$BudgetStartDate"
     Invoke-Native gh api -X PUT "repos/$Repo/environments/dev" --silent
     Push-Location $DevDir
     try { $vars = Get-NativeOutput terraform output -json github_actions_variables | ConvertFrom-Json } finally { Pop-Location }
+    $added = 0
     foreach ($prop in $vars.PSObject.Properties) {
+        # PowerShell drops empty arguments to native commands, so an empty --body breaks gh.
+        # The workflow reads a missing variable as empty, so skip those (e.g. WORKER_APP_NAME on App Service).
+        if ([string]::IsNullOrEmpty([string]$prop.Value)) { continue }
         Invoke-Native gh variable set $prop.Name --env dev --body ([string]$prop.Value) --repo $Repo
+        $added++
     }
-    Write-Host "Added $(@($vars.PSObject.Properties).Count) variables to the GitHub environment 'dev'."
+    Write-Host "Added $added variables to the GitHub environment 'dev'."
 }
 
 # ---------------------------------------------------------------- 8. Keys
