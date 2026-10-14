@@ -4,6 +4,11 @@ Run these steps once from your own machine, in the VS Code terminal, from the ro
 every release goes through the **Deploy to Azure** workflow ([DEPLOY.md](DEPLOY.md)).
 
 The database is Azure Cosmos DB for MongoDB (vCore), which Terraform creates, so you need no MongoDB Atlas account.
+
+Dev runs without Azure Front Door by default, because Azure Free Trial subscriptions cannot create it. The site is
+then served straight from its storage account and the browser calls the API at its own address, with no WAF or edge
+security headers. After upgrading the subscription to Pay-As-You-Go, add `frontdoor_enabled = true` to
+`infra/terraform/envs/dev/terraform.tfvars` and run the script again.
 No secret goes into a file, the repo, GitHub or chat: keys are typed straight into Key Vault in step 8.
 
 Each step has a **bash** block (macOS, Linux, Git Bash on Windows) and a **PowerShell** block (the default VS Code
@@ -172,7 +177,7 @@ terraform apply dev.tfplan       # takes a while: Front Door, Redis and the data
 
 ## 7. Connect GitHub to the environment (no secrets involved)
 
-This creates the GitHub environment `dev` and adds the 11 values the deploy workflow needs. None of them is secret;
+This creates the GitHub environment `dev` and adds the values the deploy workflow needs. None of them is secret;
 GitHub signs in to Azure with OIDC.
 
 ```bash
@@ -189,7 +194,7 @@ $vars.PSObject.Properties | ForEach-Object { gh variable set $_.Name --env dev -
 gh variable list --env dev --repo vishal29bhp/AirYatra
 ```
 
-The list should show 11 variables (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, ... `PUBLIC_URL`).
+The list should show `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, ... `PUBLIC_URL` and `API_URL`.
 
 ## 8. Put the keys into Key Vault
 
@@ -238,10 +243,10 @@ is set.
 | `set_secret google-client-id`, `google-client-secret` | OAuth client | Google Cloud Console, APIs & Services, Credentials |
 | `set_secret openweather-api-key` | API key | openweathermap.org, API keys |
 
-Addresses to register with the providers (`terraform output -raw public_url` prints the base URL):
+Addresses to register with the providers (`terraform output -raw api_url` prints the base URL):
 
-- Razorpay webhook: `<public_url>/api/razorpay/webhook`
-- Google OAuth redirect URI: `<public_url>/api/auth/google/callback`
+- Razorpay webhook: `<api_url>/api/razorpay/webhook`
+- Google OAuth redirect URI: `<api_url>/api/auth/google/callback`
 
 Azure OpenAI, Blob storage, Redis and the database need no keys: Terraform created them, and the app signs in to them
 with its managed identity.

@@ -1,3 +1,8 @@
+variable "enabled" {
+  description = "Create Front Door and its WAF association. False serves the site straight from the static website."
+  type        = bool
+  default     = true
+}
 variable "name_prefix" {
   type = string
 }

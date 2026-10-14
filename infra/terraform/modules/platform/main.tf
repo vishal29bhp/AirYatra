@@ -264,6 +264,7 @@ module "container_apps" {
 # ---------------- Edge ----------------
 module "frontdoor" {
   source                   = "../frontdoor"
+  enabled                  = var.frontdoor_enabled
   name_prefix              = local.name_prefix
   resource_group_name      = azurerm_resource_group.this.name
   location                 = var.location
@@ -282,7 +283,12 @@ module "frontdoor" {
 }
 
 locals {
-  public_url   = length(var.custom_domains) > 0 ? "https://${var.custom_domains[0]}" : "https://${module.frontdoor.endpoint_host_name}"
+  public_url = (
+    !var.frontdoor_enabled ? module.frontdoor.web_endpoint :
+    length(var.custom_domains) > 0 ? "https://${var.custom_domains[0]}" : "https://${module.frontdoor.endpoint_host_name}"
+  )
+  # With Front Door the site and API share one address; without it the browser calls the API's own address.
+  api_url      = var.frontdoor_enabled ? local.public_url : "https://${module.container_apps.api_fqdn}"
   cors_origins = distinct(concat([local.public_url], var.cors_allowed_origins))
 }
 
