@@ -363,4 +363,7 @@ resource "azurerm_load_test" "this" {
   resource_group_name = azurerm_resource_group.this.name
   description         = "k6/JMeter runs for the Q.3 1K and 20K user profiles."
   tags                = local.tags
+
+  # The allowed-locations policy must list the load test region before it is created.
+  depends_on = [module.governance]
 }
