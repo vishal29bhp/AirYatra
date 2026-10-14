@@ -98,6 +98,17 @@ async def get_current_user(token: str = Depends(get_token_from_request)):
     
     return user
 
+async def get_optional_user(
+    request: Request,
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
+) -> Optional[dict]:
+    """The signed-in user, or None for a visitor (a missing, invalid or expired token is not an error)."""
+    try:
+        token = await get_token_from_request(request, credentials)
+        return await get_current_user(token)
+    except HTTPException:
+        return None
+
 def require_roles(allowed_roles: List[UserRole]):
     """Dependency to check if user has required roles"""
     async def role_checker(user: dict = Depends(get_current_user)):

@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from typing import Optional, Dict, List
 from datetime import datetime, timezone
 from uuid import uuid4
 from database import get_database
-from middleware import get_current_user
+from middleware import get_current_user, get_optional_user
+from security_middleware import limiter
 from services.ai_service import ai_service
 
 router = APIRouter(prefix="/ai", tags=["AI Services"])
@@ -191,60 +192,50 @@ async def chat_with_ai(
     }
 
 @router.post("/chat/stream")
+@limiter.limit("20/minute")
 async def chat_with_ai_stream(
-    request: ChatbotRequest,
-    current_user: dict = Depends(get_current_user),
+    request: Request,
+    body: ChatbotRequest,
+    current_user: Optional[dict] = Depends(get_optional_user),
     db=Depends(get_database)
 ):
-    """Streaming AI chatbot (OpenAI GPT-5.4 via Emergent, SSE)"""
+    """Website chat assistant (SSE). Open to visitors too, so it is rate limited per IP."""
     import json as _json
     import os as _os
     from fastapi.responses import StreamingResponse
     from services.llm_provider import LlmChat, UserMessage, TextDelta, StreamDone
-    
-    user_id = current_user["id"]
-    conversation_id = request.conversation_id or str(uuid4())
+    from services.chat_assistant import MAX_MESSAGE_CHARS, chat_owner, history_text, system_prompt
+
+    user_id = chat_owner(current_user)
+    message_text = body.message.strip()[:MAX_MESSAGE_CHARS]
+    conversation_id = body.conversation_id or str(uuid4())
     timestamp = datetime.now(timezone.utc).isoformat()
-    
-    # Save user message
+
+    # Earlier turns of this conversation, only ever the caller's own.
+    previous = await db.ai_chat_history.find(
+        {"conversation_id": conversation_id, "user_id": user_id}, {"_id": 0}
+    ).sort("created_at", 1).to_list(50)
+
     await db.ai_chat_history.insert_one({
         "id": str(uuid4()),
         "conversation_id": conversation_id,
         "user_id": user_id,
         "role": "user",
-        "content": request.message,
+        "content": message_text,
         "created_at": timestamp
     })
-    
-    # Build history context (last 10 messages before this one)
-    messages = await db.ai_chat_history.find(
-        {"conversation_id": conversation_id}, {"_id": 0}
-    ).sort("created_at", 1).to_list(50)
-    history_text = ""
-    for m in messages[-11:-1]:
-        role = "Customer" if m.get("role") == "user" else "Assistant"
-        history_text += f"{role}: {m.get('content', '')}\n"
-    
-    system_message = f"""You are AirYatra AI Assistant - a friendly, helpful assistant for AirYatra, India's premier helicopter charter booking platform.
 
-You help customers with: helicopter/chartered plane bookings, pricing (₹ per km based), routes across India, BLACK membership (Silver/Gold/Platinum tiers with discounts up to 20%), loyalty points (1 pt per ₹100, tier multipliers), document vault, corporate travel, and general aviation questions.
-
-Customer name: {current_user.get('full_name', 'Guest')}
-Respond in the language the customer uses (English, Hindi, or Hinglish). Keep responses concise (under 150 words), warm and professional.
-
-Previous conversation:
-{history_text}"""
-    
+    customer_name = (current_user or {}).get("full_name") or "Guest"
     chat = LlmChat(
         api_key=_os.environ.get("EMERGENT_LLM_KEY"),
         session_id=conversation_id,
-        system_message=system_message
+        system_message=system_prompt(customer_name, history_text(previous))
     ).with_model("openai", "gpt-5.4")
-    
+
     async def event_stream():
         full_response = ""
         try:
-            async for chunk in chat.stream_message(UserMessage(text=request.message)):
+            async for chunk in chat.stream_message(UserMessage(text=message_text)):
                 if isinstance(chunk, TextDelta):
                     full_response += chunk.content
                     yield f"data: {_json.dumps({'delta': chunk.content})}\n\n"
