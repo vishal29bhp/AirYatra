@@ -305,6 +305,10 @@ class HelicopterPricingEngine:
         
         dead_leg_config = await self.get_dead_leg_config(operator_id, request.helicopter_id)
         additional_charges = await self.get_additional_charges(operator_id, request.helicopter_id)
+
+        # Needed before the base cost: a contract's negotiated hourly rate replaces the operator's rate.
+        contract = await self.get_contract_pricing(request.customer_id, request.customer_email, request.contract_id)
+        contract_rate_per_hour = contract.get("fixed_rate_per_hour") if contract else None
         
         # ==================== STEP 2: Calculate Base Flight Cost ====================
         
@@ -327,7 +331,11 @@ class HelicopterPricingEngine:
                 audit_log.append(f"Estimated flight hours: {flight_hours}h for {request.distance_km}km")
             
             breakdown.flight_hours = flight_hours
-            breakdown.rate_per_hour = operator_pricing.get("price_per_hour", 180000)
+            if contract_rate_per_hour:
+                breakdown.rate_per_hour = contract_rate_per_hour
+                audit_log.append(f"Contract fixed rate applied: ₹{contract_rate_per_hour}/hr")
+            else:
+                breakdown.rate_per_hour = operator_pricing.get("price_per_hour", 180000)
             breakdown.base_flight_cost = breakdown.flight_hours * breakdown.rate_per_hour
             
             audit_log.append(f"Hourly pricing: {breakdown.flight_hours}h × ₹{breakdown.rate_per_hour} = ₹{breakdown.base_flight_cost}")
@@ -526,17 +534,12 @@ class HelicopterPricingEngine:
         
         # ==================== STEP 15: Contract Discount ====================
         
-        contract = await self.get_contract_pricing(request.customer_id, request.customer_email, request.contract_id)
-        
         if contract:
             breakdown.contract_applied = True
             breakdown.contract_discount_percent = contract.get("discount_percent", 0)
             
-            if contract.get("fixed_rate_per_hour"):
-                # Override with fixed rate
-                breakdown.base_flight_cost = breakdown.flight_hours * contract.get("fixed_rate_per_hour")
-                audit_log.append(f"Contract fixed rate applied: ₹{contract.get('fixed_rate_per_hour')}/hr")
-            else:
+            # A fixed hourly rate was already applied in step 2; otherwise the contract gives a percentage discount.
+            if not contract_rate_per_hour:
                 subtotal = breakdown.operator_gross_cost + breakdown.platform_commission
                 breakdown.contract_discount = round(subtotal * (breakdown.contract_discount_percent / 100))
                 audit_log.append(f"Contract discount: {breakdown.contract_discount_percent}% = -₹{breakdown.contract_discount}")

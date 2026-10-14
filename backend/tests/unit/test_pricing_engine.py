@@ -465,18 +465,14 @@ async def test_contract_discount_reduces_taxable_amount(engine, mock_db):
     assert result.customer_view["discount"] == 19800
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "Bug: contract fixed_rate_per_hour only rewrites base_flight_cost after operator_gross_cost, "
-    "commission and taxable amount are already computed (services/pricing_engine.py:535-538), "
-    "so the negotiated rate never changes what the customer pays."))
 async def test_contract_fixed_hourly_rate_lowers_final_price(engine, mock_db):
-    # 2.5 h × 1,50,000 = 3,75,000; +37,500 +18,750 +7,500 = 4,38,750; GST 2 × 39,487.5 → 78,975; final 5,17,725
+    # 2.5 h × 1,50,000 = 3,75,000; +37,500 +18,750 +7,500 = 4,38,750; GST 2 × round(39,487.5) = 2 × 39,488 = 78,976; final 5,17,726
     await mock_db.corporate_contracts.insert_one(
         {"contract_id": "c-9", "is_active": True, "discount_percent": 0, "fixed_rate_per_hour": 150000})
     b = (await engine.calculate_price(make_request(contract_id="c-9"))).price_breakdown
     assert b.base_flight_cost == 375000
     assert b.operator_gross_cost == 375000
-    assert b.final_customer_price == 517725
+    assert b.final_customer_price == 517726
 
 
 async def test_views_are_consistent_with_breakdown(engine):
