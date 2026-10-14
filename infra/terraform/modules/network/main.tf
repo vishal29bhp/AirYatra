@@ -9,6 +9,7 @@ locals {
     keyvault = "privatelink.vaultcore.azure.net"
     redis    = "privatelink.redis.azure.net"
     openai   = "privatelink.openai.azure.com"
+    mongo    = "privatelink.mongocluster.cosmos.azure.com"
   }
 }
 

@@ -39,4 +39,9 @@ provider "azurerm" {
 
 # Credentials from MONGODB_ATLAS_CLIENT_ID / MONGODB_ATLAS_CLIENT_SECRET (service account)
 # or MONGODB_ATLAS_PUBLIC_KEY / MONGODB_ATLAS_PRIVATE_KEY. Never put them in tfvars.
-provider "mongodbatlas" {}
+# On Cosmos DB the provider manages nothing, but it still refuses to start without credentials, so it gets inert
+# placeholders that are never sent anywhere.
+provider "mongodbatlas" {
+  public_key  = var.database_engine == "atlas" ? null : "unused"
+  private_key = var.database_engine == "atlas" ? null : "unused"
+}

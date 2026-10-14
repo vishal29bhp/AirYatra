@@ -1,3 +1,5 @@
+from urllib.parse import parse_qsl, urlsplit
+
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import settings
 import logging
@@ -25,10 +27,20 @@ MONGO_OPTIONS = {
     "journal": True,
 }
 
+def client_options(mongo_url: str) -> dict:
+    """MONGO_OPTIONS minus anything the connection string already sets.
+
+    Keyword arguments override the URI in pymongo, so without this a Cosmos DB for MongoDB (vCore) URI's
+    retrywrites=false, which that service requires, would be silently replaced by retryWrites=True.
+    """
+    in_uri = {key.lower() for key, _ in parse_qsl(urlsplit(mongo_url).query)}
+    return {key: value for key, value in MONGO_OPTIONS.items() if key.lower() not in in_uri}
+
+
 async def connect_to_mongo():
     """Connect to MongoDB with optimized pool"""
     logger.info("Connecting to MongoDB with optimized pool...")
-    db.client = AsyncIOMotorClient(settings.mongo_url, **MONGO_OPTIONS)
+    db.client = AsyncIOMotorClient(settings.mongo_url, **client_options(settings.mongo_url))
     
     # Verify connection
     await db.client.admin.command('ping')

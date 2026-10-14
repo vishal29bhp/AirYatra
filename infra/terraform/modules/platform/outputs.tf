@@ -36,7 +36,7 @@ output "custom_domain_validation_tokens" {
   value = module.frontdoor.custom_domain_validation_tokens
 }
 output "atlas_project_id" {
-  value = module.mongodb.project_id
+  value = var.database_engine == "atlas" ? module.mongodb[0].project_id : null
 }
 output "github_actions_variables" {
   description = "Variables for this GitHub environment, used by .github/workflows/azure-deploy.yml (none are secrets)."
