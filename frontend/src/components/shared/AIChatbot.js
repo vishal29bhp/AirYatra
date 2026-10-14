@@ -129,8 +129,8 @@ How can I assist you today?`,
         ...m,
         streaming: false,
         content: tr(
-          "I'm having trouble connecting right now. Please try again or contact support@airyatra.com",
-          'मुझे अभी कनेक्ट करने में समस्या हो रही है। कृपया पुनः प्रयास करें या support@airyatra.com पर संपर्क करें।',
+          "I'm having trouble connecting right now. Please try again or contact support@airyatra.co.in",
+          'मुझे अभी कनेक्ट करने में समस्या हो रही है। कृपया पुनः प्रयास करें या support@airyatra.co.in पर संपर्क करें।',
         ),
         ai_generated: false
       } : m));
