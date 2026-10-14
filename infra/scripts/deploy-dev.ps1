@@ -260,11 +260,11 @@ if (-not $SkipKeys) {
         $plain = $null
     }
 
-    $publicUrl = Get-TerraformOutput "public_url"
+    $apiUrl = Get-TerraformOutput "api_url"
     Write-Host ""
     Write-Host "Register these with the providers:"
-    Write-Host "  Razorpay webhook:          $publicUrl/api/razorpay/webhook"
-    Write-Host "  Google OAuth redirect URI: $publicUrl/api/auth/google/callback"
+    Write-Host "  Razorpay webhook:          $apiUrl/api/razorpay/webhook"
+    Write-Host "  Google OAuth redirect URI: $apiUrl/api/auth/google/callback"
 }
 
 # ---------------------------------------------------------------- 9. Deploy

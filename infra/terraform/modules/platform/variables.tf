@@ -147,6 +147,11 @@ variable "openai_deployments" {
 }
 
 # ---------------- Edge ----------------
+variable "frontdoor_enabled" {
+  description = "False skips Front Door (Azure Free Trial subscriptions cannot create it): no WAF or edge headers."
+  type        = bool
+  default     = true
+}
 variable "frontdoor_sku" {
   type = string
 }

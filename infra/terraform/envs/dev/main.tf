@@ -46,6 +46,7 @@ module "platform" {
   }
 
   # Edge: Standard Front Door (no managed WAF rules, API reached over its public ingress), WAF in detection.
+  frontdoor_enabled    = var.frontdoor_enabled
   frontdoor_sku        = "Standard_AzureFrontDoor"
   waf_mode             = "Detection"
   custom_domains       = var.custom_domains

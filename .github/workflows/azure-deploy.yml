@@ -44,6 +44,8 @@ jobs:
       API_APP: ${{ vars.API_APP_NAME }}
       WORKER_APP: ${{ vars.WORKER_APP_NAME }}
       PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+      # Same as PUBLIC_URL behind Front Door; the API's own address when Front Door is off (Free Trial dev).
+      API_URL: ${{ vars.API_URL || vars.PUBLIC_URL }}
       TAG: ${{ inputs.image_tag != '' && inputs.image_tag || github.sha }}
     steps:
       - name: Check the image tag is a commit SHA
@@ -97,7 +99,7 @@ jobs:
               --query "[?properties.active && contains(properties.template.containers[0].image, ':$TAG')].properties.runningState | [0]" -o tsv)
             echo "attempt $i: revision state=${state:-pending}"
             if [ "$state" = "Running" ] || [ "$state" = "RunningAtMaxScale" ]; then
-              curl -fsS --max-time 10 "$PUBLIC_URL/health" && exit 0
+              curl -fsS --max-time 10 "$API_URL/health" && exit 0
             fi
             if [ "$state" = "Failed" ] || [ "$state" = "Degraded" ]; then
               echo "::error::New revision is $state. Roll back: docs/operations/ROLLBACK.md"; exit 1
@@ -116,7 +118,7 @@ jobs:
         if: inputs.deploy_frontend
         working-directory: frontend
         env:
-          REACT_APP_BACKEND_URL: ${{ vars.PUBLIC_URL }}
+          REACT_APP_BACKEND_URL: ${{ vars.API_URL || vars.PUBLIC_URL }}
           CI: "false"
           GENERATE_SOURCEMAP: "false"
         run: |
@@ -130,5 +132,7 @@ jobs:
         run: |
           az storage blob upload-batch --auth-mode login --account-name "${{ vars.WEB_STORAGE_ACCOUNT }}" \
             --destination '$web' --source frontend/build --overwrite -o none
-          az afd endpoint purge -g "$RG" --profile-name "${{ vars.FRONTDOOR_PROFILE }}" \
-            --endpoint-name "${{ vars.FRONTDOOR_ENDPOINT }}" --content-paths '/*' --no-wait
+          if [ -n "${{ vars.FRONTDOOR_PROFILE }}" ]; then
+            az afd endpoint purge -g "$RG" --profile-name "${{ vars.FRONTDOOR_PROFILE }}" \
+              --endpoint-name "${{ vars.FRONTDOOR_ENDPOINT }}" --content-paths '/*' --no-wait
+          fi

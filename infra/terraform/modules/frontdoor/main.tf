@@ -1,5 +1,7 @@
 locals {
   premium = var.sku_name == "Premium_AzureFrontDoor"
+  # Free Trial subscriptions cannot create Front Door; then only the static website below is created.
+  count = var.enabled ? 1 : 0
 }
 
 # ---------------- Static front end (React build) ----------------
@@ -41,6 +43,7 @@ resource "azurerm_storage_account_static_website" "web" {
 
 # ---------------- Front Door profile and endpoint ----------------
 resource "azurerm_cdn_frontdoor_profile" "this" {
+  count                    = local.count
   name                     = "afd-${var.name_prefix}"
   resource_group_name      = var.resource_group_name
   sku_name                 = var.sku_name
@@ -49,15 +52,16 @@ resource "azurerm_cdn_frontdoor_profile" "this" {
 }
 
 resource "azurerm_cdn_frontdoor_endpoint" "this" {
+  count                    = local.count
   name                     = "fde-${var.name_prefix}"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
   tags                     = var.tags
 }
 
 resource "azurerm_cdn_frontdoor_custom_domain" "this" {
-  for_each                 = toset(var.custom_domains)
+  for_each                 = var.enabled ? toset(var.custom_domains) : toset([])
   name                     = replace(each.value, ".", "-")
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
   host_name                = each.value
 
   tls {
@@ -67,8 +71,9 @@ resource "azurerm_cdn_frontdoor_custom_domain" "this" {
 
 # ---------------- Origins ----------------
 resource "azurerm_cdn_frontdoor_origin_group" "api" {
+  count                    = local.count
   name                     = "og-api"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
   session_affinity_enabled = false
 
   load_balancing {
@@ -85,8 +90,9 @@ resource "azurerm_cdn_frontdoor_origin_group" "api" {
 }
 
 resource "azurerm_cdn_frontdoor_origin" "api" {
+  count                          = local.count
   name                           = "origin-api"
-  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.api.id
+  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.api[0].id
   enabled                        = true
   host_name                      = var.api_fqdn
   origin_host_header             = var.api_fqdn
@@ -108,8 +114,9 @@ resource "azurerm_cdn_frontdoor_origin" "api" {
 }
 
 resource "azurerm_cdn_frontdoor_origin_group" "web" {
+  count                    = local.count
   name                     = "og-web"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
 
   load_balancing {
     sample_size                 = 4
@@ -125,8 +132,9 @@ resource "azurerm_cdn_frontdoor_origin_group" "web" {
 }
 
 resource "azurerm_cdn_frontdoor_origin" "web" {
+  count                          = local.count
   name                           = "origin-web"
-  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.web.id
+  cdn_frontdoor_origin_group_id  = azurerm_cdn_frontdoor_origin_group.web[0].id
   enabled                        = true
   host_name                      = azurerm_storage_account.web.primary_web_host
   origin_host_header             = azurerm_storage_account.web.primary_web_host
@@ -137,13 +145,15 @@ resource "azurerm_cdn_frontdoor_origin" "web" {
 
 # ---------------- Edge rules: security headers and SPA fallback ----------------
 resource "azurerm_cdn_frontdoor_rule_set" "security" {
+  count                    = local.count
   name                     = "securityheaders"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
 }
 
 resource "azurerm_cdn_frontdoor_rule" "security_headers" {
+  count                     = local.count
   name                      = "addsecurityheaders"
-  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.security.id
+  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.security[0].id
   order                     = 1
   behavior_on_match         = "Continue"
 
@@ -177,14 +187,16 @@ resource "azurerm_cdn_frontdoor_rule" "security_headers" {
 }
 
 resource "azurerm_cdn_frontdoor_rule_set" "spa" {
+  count                    = local.count
   name                     = "spafallback"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
 }
 
 # Client-side routes (/booking, /admin/...) have no file extension: serve index.html with a 200.
 resource "azurerm_cdn_frontdoor_rule" "spa_fallback" {
+  count                     = local.count
   name                      = "rewritetoindex"
-  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.spa.id
+  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.spa[0].id
   order                     = 1
   behavior_on_match         = "Stop"
 
@@ -206,11 +218,12 @@ resource "azurerm_cdn_frontdoor_rule" "spa_fallback" {
 
 # ---------------- Routes ----------------
 resource "azurerm_cdn_frontdoor_route" "api" {
+  count                           = local.count
   name                            = "route-api"
-  cdn_frontdoor_endpoint_id       = azurerm_cdn_frontdoor_endpoint.this.id
-  cdn_frontdoor_origin_group_id   = azurerm_cdn_frontdoor_origin_group.api.id
-  cdn_frontdoor_origin_ids        = [azurerm_cdn_frontdoor_origin.api.id]
-  cdn_frontdoor_rule_set_ids      = [azurerm_cdn_frontdoor_rule_set.security.id]
+  cdn_frontdoor_endpoint_id       = azurerm_cdn_frontdoor_endpoint.this[0].id
+  cdn_frontdoor_origin_group_id   = azurerm_cdn_frontdoor_origin_group.api[0].id
+  cdn_frontdoor_origin_ids        = [azurerm_cdn_frontdoor_origin.api[0].id]
+  cdn_frontdoor_rule_set_ids      = [azurerm_cdn_frontdoor_rule_set.security[0].id]
   cdn_frontdoor_custom_domain_ids = [for d in azurerm_cdn_frontdoor_custom_domain.this : d.id]
   patterns_to_match               = ["/api/*", "/health"]
   supported_protocols             = ["Http", "Https"]
@@ -221,11 +234,12 @@ resource "azurerm_cdn_frontdoor_route" "api" {
 }
 
 resource "azurerm_cdn_frontdoor_route" "web" {
+  count                           = local.count
   name                            = "route-web"
-  cdn_frontdoor_endpoint_id       = azurerm_cdn_frontdoor_endpoint.this.id
-  cdn_frontdoor_origin_group_id   = azurerm_cdn_frontdoor_origin_group.web.id
-  cdn_frontdoor_origin_ids        = [azurerm_cdn_frontdoor_origin.web.id]
-  cdn_frontdoor_rule_set_ids      = [azurerm_cdn_frontdoor_rule_set.security.id, azurerm_cdn_frontdoor_rule_set.spa.id]
+  cdn_frontdoor_endpoint_id       = azurerm_cdn_frontdoor_endpoint.this[0].id
+  cdn_frontdoor_origin_group_id   = azurerm_cdn_frontdoor_origin_group.web[0].id
+  cdn_frontdoor_origin_ids        = [azurerm_cdn_frontdoor_origin.web[0].id]
+  cdn_frontdoor_rule_set_ids      = [azurerm_cdn_frontdoor_rule_set.security[0].id, azurerm_cdn_frontdoor_rule_set.spa[0].id]
   cdn_frontdoor_custom_domain_ids = [for d in azurerm_cdn_frontdoor_custom_domain.this : d.id]
   patterns_to_match               = ["/*"]
   supported_protocols             = ["Http", "Https"]
@@ -340,8 +354,9 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "this" {
 }
 
 resource "azurerm_cdn_frontdoor_security_policy" "this" {
+  count                    = local.count
   name                     = "secpol-${var.name_prefix}"
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.this[0].id
 
   security_policies {
     firewall {
@@ -351,7 +366,7 @@ resource "azurerm_cdn_frontdoor_security_policy" "this" {
         patterns_to_match = ["/*"]
 
         domain {
-          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_endpoint.this.id
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_endpoint.this[0].id
         }
 
         dynamic "domain" {
@@ -366,8 +381,9 @@ resource "azurerm_cdn_frontdoor_security_policy" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "frontdoor" {
+  count                      = local.count
   name                       = "diag-to-log-analytics"
-  target_resource_id         = azurerm_cdn_frontdoor_profile.this.id
+  target_resource_id         = azurerm_cdn_frontdoor_profile.this[0].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
   enabled_log {

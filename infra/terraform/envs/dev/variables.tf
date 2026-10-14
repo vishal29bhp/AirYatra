@@ -36,3 +36,9 @@ variable "budget_start_date" {
   description = "First day of the month the budget starts, e.g. 2026-11-01T00:00:00Z."
   type        = string
 }
+
+variable "frontdoor_enabled" {
+  description = "Azure Free Trial subscriptions cannot create Front Door. Set true in terraform.tfvars after upgrading to Pay-As-You-Go."
+  type        = bool
+  default     = false
+}

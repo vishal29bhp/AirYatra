@@ -4,6 +4,9 @@ output "resource_group_name" {
 output "public_url" {
   value = module.platform.public_url
 }
+output "api_url" {
+  value = module.platform.api_url
+}
 output "frontdoor_endpoint" {
   value = module.platform.frontdoor_endpoint
 }
