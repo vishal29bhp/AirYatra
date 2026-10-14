@@ -333,16 +333,18 @@ locals {
 
 # ---------------- Delivery and governance ----------------
 module "github_oidc" {
-  source                 = "../github_oidc"
-  name_prefix            = local.name_prefix
-  location               = var.location
-  resource_group_name    = azurerm_resource_group.this.name
-  resource_group_id      = azurerm_resource_group.this.id
-  github_repository      = var.github_repository
-  github_environment     = var.environment
-  registry_id            = module.container_apps.registry_id
-  web_storage_account_id = module.frontdoor.web_storage_account_id
-  tags                   = local.tags
+  source              = "../github_oidc"
+  name_prefix         = local.name_prefix
+  location            = var.location
+  resource_group_name = azurerm_resource_group.this.name
+  resource_group_id   = azurerm_resource_group.this.id
+  github_repository   = var.github_repository
+  github_environment  = var.environment
+
+  github_repository_immutable = var.github_repository_immutable
+  registry_id                 = module.container_apps.registry_id
+  web_storage_account_id      = module.frontdoor.web_storage_account_id
+  tags                        = local.tags
 }
 
 module "governance" {
