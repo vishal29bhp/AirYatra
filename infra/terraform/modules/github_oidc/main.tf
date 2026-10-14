@@ -16,6 +16,14 @@ variable "github_repository" {
   description = "owner/repo, e.g. vishal29bhp/AirYatra."
   type        = string
 }
+variable "github_repository_immutable" {
+  description = <<-EOT
+    owner@owner_id/repo@repo_id. Repositories that use GitHub's immutable OIDC subject claims send
+    "repo:owner@id/repo@id:environment:<env>" instead of "repo:owner/repo:environment:<env>". Null skips it.
+  EOT
+  type        = string
+  default     = null
+}
 variable "github_environment" {
   description = "GitHub environment whose jobs may assume this identity (protect it with required reviewers for prod)."
   type        = string
@@ -44,6 +52,15 @@ resource "azurerm_federated_identity_credential" "environment" {
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   subject                   = "repo:${var.github_repository}:environment:${var.github_environment}"
+}
+
+resource "azurerm_federated_identity_credential" "environment_immutable" {
+  count                     = var.github_repository_immutable == null ? 0 : 1
+  name                      = "github-${var.github_environment}-immutable"
+  user_assigned_identity_id = azurerm_user_assigned_identity.this.id
+  audience                  = ["api://AzureADTokenExchange"]
+  issuer                    = "https://token.actions.githubusercontent.com"
+  subject                   = "repo:${var.github_repository_immutable}:environment:${var.github_environment}"
 }
 
 resource "azurerm_role_assignment" "acr_push" {

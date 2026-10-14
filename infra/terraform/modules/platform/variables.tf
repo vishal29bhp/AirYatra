@@ -193,6 +193,11 @@ variable "github_repository" {
   type    = string
   default = "vishal29bhp/AirYatra"
 }
+variable "github_repository_immutable" {
+  description = "The same repository as owner@owner_id/repo@repo_id, as sent in GitHub's immutable OIDC subject claims."
+  type        = string
+  default     = "vishal29bhp@26572540/AirYatra@1340832811"
+}
 variable "access_token_expire_minutes" {
   description = "Short-lived access tokens (S.2 A07)."
   type        = number
