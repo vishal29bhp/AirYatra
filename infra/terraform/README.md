@@ -38,6 +38,9 @@ Everything is in Central India (`centralindia`), with South India (`southindia`)
 
 ## Apply, step by step
 
+For dev there is a fuller copy-paste walkthrough (bash and PowerShell), including GitHub and Key Vault setup:
+[docs/operations/FIRST_DEPLOY_DEV.md](../../docs/operations/FIRST_DEPLOY_DEV.md).
+
 ```bash
 az login
 az account set --subscription <SUBSCRIPTION_ID>
