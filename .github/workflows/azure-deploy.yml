@@ -116,8 +116,13 @@ jobs:
             if [ "$COMPUTE_PLATFORM" = "app_service" ]; then
               image=$(az webapp config show -n "$API_APP" -g "$RG" --query linuxFxVersion -o tsv)
               echo "attempt $i: configured image=$image"
+              # The old container can still answer while the new one starts, so only accept
+              # this app's own readiness reply (it also proves the database is reachable).
               case "$image" in
-                *":$TAG") curl -fsS --max-time 10 "$API_URL/health" && exit 0 ;;
+                *":$TAG")
+                  body=$(curl -fsS --max-time 10 "$API_URL/health/ready" || true)
+                  echo "ready: ${body:-no answer}"
+                  case "$body" in *'"service":"airyatra-api"'*) exit 0 ;; esac ;;
               esac
               sleep 15
               continue
