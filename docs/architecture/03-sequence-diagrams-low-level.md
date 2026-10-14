@@ -591,7 +591,7 @@ sequenceDiagram
     AIS->>LLM: complete(system_prompt, history, text)
     LLM->>AOAI: same interface as the old LlmChat wrapper
     AOAI->>ID: get token for cognitiveservices
-    AOAI->>OA: chat completions (deployment gpt-4o-mini)
+    AOAI->>OA: chat completions (deployment airyatra-chat, gpt-5-mini)
     OA-->>AOAI: answer (content filter applied)
     AOAI-->>AIS: text
     AIS->>RED: output filter (no secrets, no tool calls)

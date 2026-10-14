@@ -41,7 +41,8 @@ variable "tags" {
 }
 
 locals {
-  admin_username = "airyatra_app"
+  # Azure only accepts Latin letters and digits here.
+  admin_username = "airyatraapp"
 }
 
 # Letters and digits only, so the password needs no escaping inside the connection string.

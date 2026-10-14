@@ -36,9 +36,10 @@ module "platform" {
 
   # AI
   openai_deployments = {
-    "gpt-4o-mini" = {
-      model_name    = "gpt-4o-mini"
-      model_version = "2024-07-18"
+    # gpt-4o-mini (2024-07-18) no longer accepts new deployments.
+    "airyatra-chat" = {
+      model_name    = "gpt-5-mini"
+      model_version = "2025-08-07"
       sku_name      = "GlobalStandard"
       capacity      = 10
     }
