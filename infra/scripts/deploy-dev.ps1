@@ -239,7 +239,7 @@ if (-not $SkipKeys) {
         $staffPassword = -join ($bytes | ForEach-Object { $alphabet[$_ % $alphabet.Length] })
         Set-VaultSecret "bootstrap-staff-password" $staffPassword
         Write-Host ""
-        Write-Host "Dev login password (ceo@, admin@, operator@, finance@, hr@, sales@, booking@, noreply@airyatra.co.in):" -ForegroundColor Yellow
+        Write-Host "Dev login password (ceo@, admin@, operator@, customer@ (demo data), finance@, hr@, sales@, booking@, noreply@airyatra.co.in):" -ForegroundColor Yellow
         Write-Host "  $staffPassword" -ForegroundColor Yellow
         Write-Host "Save it in your password manager. It is not shown again; read it back with:"
         Write-Host "  az keyvault secret show --vault-name $KeyVault --name bootstrap-staff-password --query value -o tsv"
