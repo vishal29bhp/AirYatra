@@ -5,6 +5,11 @@ variable "subscription_id" {
 variable "atlas_org_id" {
   type = string
 }
+variable "atlas_termination_protection" {
+  description = "Keeps the production database from being deleted. Only infra/scripts/teardown.ps1 turns it off, just before a teardown."
+  type        = bool
+  default     = true
+}
 variable "alert_email" {
   type = string
 }

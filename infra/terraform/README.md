@@ -101,8 +101,29 @@ Change values in `envs/prod/main.tf`, `plan`, `apply`. No module changes:
 
 ## Destroying
 
-`prod` has Atlas termination protection, Key Vault purge protection and resource group delete protection on purpose.
-Do not destroy prod without a verified Atlas backup.
+Use [`infra/scripts/teardown.ps1`](../scripts/teardown.ps1), not a bare `terraform destroy`. It runs `terraform destroy`
+for one environment with guard rails:
+
+- It plans first and stops, before deleting anything, if any planned change is not a delete or any resource is outside
+  the environment's own resource group (`rg-airyatra-<env>-...`). Other projects on the subscription are never touched.
+- You type `destroy airyatra-<env>` to go ahead. Prod also needs `-ConfirmProduction` and the Atlas credentials.
+- Subscription-wide Defender for Cloud plans (prod turns them on) stay on unless you pass `-DisableDefenderPlans`,
+  because they cover every project on the subscription.
+- Key Vault secrets and the static website setting are dropped from state and go with their parent, so the teardown
+  does not need to reach Key Vault through its firewall.
+- Prod: Atlas termination protection is turned off on the cluster just before the destroy
+  (`atlas_termination_protection` defaults to `true` and nothing else sets it).
+- `-RemoveGitHubEnvironment` also deletes the GitHub environment. `-RemoveStateStorage` also deletes the state storage
+  account, only when every state file in it is empty. `-PlanOnly` checks and lists, deleting nothing.
+
+```powershell
+.\infra\scripts\teardown.ps1 -Environment dev -SubscriptionId <id> -PlanOnly   # see what would go
+.\infra\scripts\teardown.ps1 -Environment dev -SubscriptionId <id>
+```
+
+What remains afterwards: Key Vault keeps the deleted vault for 90 days (purge protection; `az keyvault recover --name
+<vault>` brings the keys back). The database and blob files are gone for good; for prod, Atlas backups go with the
+cluster, so download a snapshot first. Do not tear down prod without a verified backup.
 
 ## Checks run
 

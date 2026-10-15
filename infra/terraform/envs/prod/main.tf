@@ -29,7 +29,7 @@ module "platform" {
   atlas_instance_size               = "M10"
   atlas_autoscale_max_instance_size = "M30"
   atlas_dr_node_enabled             = false
-  atlas_termination_protection      = true
+  atlas_termination_protection      = var.atlas_termination_protection
   atlas_backup_restore_window_days  = 7
 
   # AI: India-region deployment keeps prompts in India.
