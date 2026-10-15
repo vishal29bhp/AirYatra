@@ -11,6 +11,7 @@ import LanguageSwitcher from '../components/shared/LanguageSwitcher';
 import TestimonialsSlider from '../components/landing/TestimonialsSlider';
 import InvestorInterestSection from '../components/landing/InvestorInterestSection';
 import { bi, tr } from '../lib/bilingual';
+import { dashboardPath } from '../lib/dashboardPath';
 
 // Hero Slider Images
 const HERO_SLIDES = [
@@ -112,7 +113,7 @@ function LandingPage({ user }) {
           <div className="flex items-center space-x-3">
             <LanguageSwitcher />
             {user ? (
-              <Link to={`/${user.roles[0]}`}>
+              <Link to={dashboardPath(user.roles)}>
                 <Button variant="default" className="bg-lime text-black hover:bg-lime/90 font-semibold rounded-sm" data-testid="dashboard-btn">
                   {t('nav.dashboard')}
                 </Button>

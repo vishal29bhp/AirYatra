@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { GoogleLoginButton } from '../components/auth/GoogleLogin';
 import PasswordStrengthMeter from '../components/auth/PasswordStrengthMeter';
 import { bi, tr } from '../lib/bilingual';
+import { dashboardPath } from '../lib/dashboardPath';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -46,8 +47,7 @@ function LoginPage({ setUser }) {
 
   const handleGoogleSuccess = (data) => {
     setUser(data.user);
-    const role = data.user.roles[0];
-    navigate(`/${role}`);
+    navigate(dashboardPath(data.user.roles));
   };
 
   const handleGoogleError = (error) => {
@@ -204,8 +204,7 @@ function LoginPage({ setUser }) {
     localStorage.setItem('user', JSON.stringify(data.user));
     setUser(data.user);
     
-    const role = data.user.roles[0];
-    navigate(`/${role}`);
+    navigate(dashboardPath(data.user.roles));
   };
 
   const handleOtpChange = (index, value) => {

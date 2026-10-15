@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { googleAuthAPI, authAPI } from '@/services/api';
 import { toast } from 'sonner';
 import { bi, tr } from '../../lib/bilingual';
+import { dashboardPath } from '../../lib/dashboardPath';
 
 // Device info collector
 const getDeviceInfo = () => {
@@ -104,8 +105,7 @@ function EmergentAuthCallback({ onLogin }) {
       
       // Redirect based on role
       setTimeout(() => {
-        const role = loginData.user.roles?.[0] || 'customer';
-        navigate(`/${role}`);
+        navigate(loginData.user.roles?.length ? dashboardPath(loginData.user.roles) : '/customer');
       }, 1500);
       
     } catch (error) {
