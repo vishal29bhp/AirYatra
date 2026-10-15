@@ -6,6 +6,7 @@ from datetime import datetime, timezone, timedelta
 import random
 import string
 from database import get_database
+from services.dev_otp import fixed_otp
 
 router = APIRouter(prefix="/verification", tags=["Verification"])
 
@@ -32,8 +33,8 @@ class TermsAgreementRequest(BaseModel):
     agreed_insurance: bool = False
 
 def generate_otp(length: int = 6) -> str:
-    """Generate a numeric OTP"""
-    return ''.join(random.choices(string.digits, k=length))
+    """Generate a numeric OTP (the fixed dev code when DEV_FIXED_OTP applies, see services/dev_otp.py)"""
+    return fixed_otp() or ''.join(random.choices(string.digits, k=length))
 
 @router.post("/send-otp")
 async def send_otp(request: SendOTPRequest, db=Depends(get_database)):

@@ -25,6 +25,8 @@ module "platform" {
     "booking@airyatra.co.in:operations",
     "noreply@airyatra.co.in:support",
   ])
+  # No SMTP or SMS yet: every login and registration code is 123456 (dev only, ignored elsewhere).
+  dev_fixed_otp   = "123456"
   app_service_sku = "B1"
   # These apply when compute_platform is container_apps. 1 API replica is enough for dev; no zone redundancy.
   api_image               = var.api_image
