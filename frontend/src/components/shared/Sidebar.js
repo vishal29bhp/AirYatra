@@ -106,25 +106,18 @@ export const ResponsiveSidebar = ({
         />
       )}
       
-      {/* Sidebar */}
+      {/* Sidebar. Keep comments out of the class string: words in it become classes (a stray "hidden" hid it on desktop). */}
       <aside
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
           bg-slate-900 border-r border-slate-700 overflow-y-auto overflow-x-hidden
           transition-all duration-300 ease-in-out
-          
-          /* Width based on collapsed state */
           ${effectiveCollapsed ? 'w-16' : 'w-72'}
-          
-          /* Mobile: Fixed, hidden when closed */
           fixed lg:sticky lg:relative z-50 lg:z-auto
           top-0 lg:top-[73px]
           h-screen lg:h-[calc(100vh-73px)]
-          
-          /* Mobile: Hide completely when closed, show when open */
           ${isMobileOpen ? 'left-0 translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          
           ${className}
         `}
       >
