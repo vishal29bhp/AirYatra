@@ -285,6 +285,7 @@ function OperatorDashboard({ user, onLogout }) {
               <Route path="landing-permissions" element={<LandingPermissionViewer operator={operator} />} />
               <Route path="pricing" element={<OperatorPricingConfig />} />
               <Route path="profile" element={<OperatorProfile operator={operator} onOperatorUpdate={setOperator} />} />
+              <Route path="settings" element={<OperatorProfile operator={operator} onOperatorUpdate={setOperator} />} />
               <Route path="pilot-assignment" element={<PilotAssignmentCalendar />} />
               <Route path="crew-scheduling" element={<CrewSchedulingBoard />} />
               <Route path="cost-tracker" element={<MaintenanceCostTracker />} />

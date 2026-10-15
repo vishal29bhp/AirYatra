@@ -1,9 +1,10 @@
 """Dev-only: create staff logins in a database that does not have them yet.
 
 The Azure dev database starts empty, so nobody can sign in until real data is copied over.
-When BOOTSTRAP_STAFF lists "email:role" pairs and BOOTSTRAP_STAFF_PASSWORD (from Key Vault) is
-set, each missing email gets an account with that password. Existing users are never changed,
-and nothing runs in production environments.
+When BOOTSTRAP_STAFF lists "email:role" pairs ("email:role+role" for several roles) and
+BOOTSTRAP_STAFF_PASSWORD (from Key Vault) is set, each missing email gets an account with that
+password. Accounts this bootstrap created earlier get their roles brought in line with the list;
+every other user is never changed. Nothing runs in production environments.
 """
 import logging
 from datetime import datetime, timezone
@@ -17,18 +18,24 @@ logger = logging.getLogger(__name__)
 
 MIN_PASSWORD_LENGTH = 12
 PLACEHOLDER = "set-me"
-STAFF_ROLES = {"super_admin", "admin", "finance", "hr", "sales", "support", "operations", "marketing"}
+STAFF_ROLES = {"super_admin", "admin", "finance", "hr", "sales", "support", "operations", "marketing",
+               "operator", "pilot"}
+CREATED_BY = "staff_bootstrap"
 
 
-def parse_staff(spec: str) -> List[Tuple[str, str]]:
-    """'a@x.in:admin, b@x.in:hr' -> [('a@x.in', 'admin'), ('b@x.in', 'hr')]. Rejects unknown roles."""
+def parse_staff(spec: str) -> List[Tuple[str, List[str]]]:
+    """'a@x.in:super_admin+admin, b@x.in:hr' -> [('a@x.in', ['super_admin', 'admin']), ('b@x.in', ['hr'])].
+
+    Rejects unknown roles. The first role decides which dashboard opens after login.
+    """
     staff = []
     for item in filter(None, (part.strip() for part in spec.split(","))):
-        email, sep, role = item.rpartition(":")
-        email, role = email.strip().lower(), role.strip()
-        if not sep or "@" not in email or role not in STAFF_ROLES:
-            raise ValueError(f"BOOTSTRAP_STAFF entry must be email:role with a staff role, got {item!r}")
-        staff.append((email, role))
+        email, sep, role_list = item.rpartition(":")
+        email = email.strip().lower()
+        roles = [r.strip() for r in role_list.split("+") if r.strip()]
+        if not sep or "@" not in email or not roles or any(r not in STAFF_ROLES for r in roles):
+            raise ValueError(f"BOOTSTRAP_STAFF entry must be email:role[+role] with known roles, got {item!r}")
+        staff.append((email, roles))
     return staff
 
 
@@ -45,8 +52,13 @@ async def bootstrap_staff(db, spec: str, password: str, app_env: str) -> List[st
 
     created = []
     password_hash = get_password_hash(password)
-    for email, role in parse_staff(spec):
-        if await db.users.find_one({"email": email}, {"_id": 1}):
+    for email, roles in parse_staff(spec):
+        existing = await db.users.find_one({"email": email}, {"_id": 0, "id": 1, "roles": 1, "created_by": 1})
+        if existing:
+            if existing.get("created_by") == CREATED_BY and existing.get("roles") != roles:
+                await db.users.update_one({"id": existing["id"]}, {"$set": {
+                    "role": roles[0], "roles": roles, "updated_at": datetime.now(timezone.utc).isoformat()}})
+                logger.info("Updated roles of bootstrap login %s", email)
             continue
         now = datetime.now(timezone.utc).isoformat()
         await db.users.insert_one({
@@ -55,11 +67,11 @@ async def bootstrap_staff(db, spec: str, password: str, app_env: str) -> List[st
             "password_hash": password_hash,
             "full_name": email.split("@")[0].capitalize(),
             "phone": "",
-            "role": role,
-            "roles": [role],
+            "role": roles[0],
+            "roles": roles,
             "is_verified": True,
             "is_active": True,
-            "created_by": "staff_bootstrap",
+            "created_by": CREATED_BY,
             "created_at": now,
             "updated_at": now,
         })

@@ -236,7 +236,7 @@ variable "manual_secret_env_vars" {
 }
 
 variable "bootstrap_staff" {
-  description = "Dev only: comma-separated email:role staff logins created at API start when missing (see backend/services/staff_bootstrap.py). Empty = off."
+  description = "Dev only: comma-separated email:role[+role] logins created at API start when missing (see backend/services/staff_bootstrap.py). Empty = off."
   type        = string
   default     = ""
 }
