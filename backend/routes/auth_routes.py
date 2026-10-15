@@ -104,9 +104,10 @@ async def register(request: Request, user_data: UserCreate):
     user_dict["created_at"] = datetime.utcnow().isoformat()
     user_dict["updated_at"] = datetime.utcnow().isoformat()
     
-    # SECURITY FIX: Force role to "customer" for self-registration
-    # Admin/operator/pilot roles can only be assigned via admin-authenticated endpoint
-    user_dict["roles"] = ["customer"]
+    # Self-registration gives "customer", or "operator" when the operator sign-up was chosen. A new
+    # operator gets no customer inquiries until an admin approves the operator profile they then create
+    # (services/inquiry_broadcast_service.py). Staff and pilot roles are only assigned by an admin.
+    user_dict["roles"] = ["operator"] if "operator" in (user_data.roles or []) else ["customer"]
     
     # Create a copy for insertion to avoid MongoDB adding _id to original dict
     insert_dict = user_dict.copy()
