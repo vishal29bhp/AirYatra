@@ -6,7 +6,8 @@ import { operatorAPI } from '../services/api';
 import { toast } from 'sonner';
 import NotificationBell from '../components/shared/NotificationBell';
 import GlobalSearch from '../components/shared/GlobalSearch';
-import { useResponsiveSidebar, MobileMenuButton, ResponsiveSidebar, CollapsibleNavGroup, NavItem } from '../components/shared/Sidebar';
+import { useResponsiveSidebar, MobileMenuButton, ResponsiveSidebar, CollapsibleNavGroup, navItemClass } from '../components/shared/Sidebar';
+import { BrandMark } from '../components/dashboard/Premium';
 
 // Import operator sub-pages
 import OperatorHome from '../components/operator/OperatorHome';
@@ -34,7 +35,7 @@ import MaintenanceCostTracker from '../components/operator/MaintenanceCostTracke
 import PilotDocumentUpload from '../components/operator/PilotDocumentUpload';
 import { OperatorAuctions } from '../components/auction/AuctionDashboard';
 import { OperatorFleetDashboard } from '../components/aircraft/AircraftCatalog';
-import { bi } from '../lib/bilingual';
+import { bi, tr } from '../lib/bilingual';
 
 // Organized Navigation Structure - 5 Main Categories
 const navGroups = [
@@ -154,7 +155,7 @@ function OperatorDashboard({ user, onLogout }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
@@ -169,9 +170,9 @@ function OperatorDashboard({ user, onLogout }) {
   const activeGroup = getActiveGroup();
 
   return (
-    <div className="min-h-screen bg-slate-950" data-testid="operator-dashboard">
+    <div className="min-h-screen bg-slate-900" data-testid="operator-dashboard">
       {/* Top Navigation */}
-      <nav className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+      <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-full mx-auto px-4 lg:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             {/* Mobile Menu Button */}
@@ -179,18 +180,15 @@ function OperatorDashboard({ user, onLogout }) {
               onClick={sidebar.toggleMobile} 
               isOpen={sidebar.isMobileOpen}
             />
-            <Plane className="h-8 w-8 text-lime" />
-            <span className="text-xl lg:text-2xl font-bold text-white">AirYatra Operator</span>
+            <BrandMark tag={tr('Operator', 'ऑपरेटर')} />
           </div>
           <div className="flex items-center space-x-2 lg:space-x-4">
             <GlobalSearch user={user} />
             <NotificationBell user={user} />
             <div className="text-right hidden sm:block">
               <div className="text-white font-medium text-sm lg:text-base" data-testid="operator-name">{operator?.company_name}</div>
-              <div className="text-slate-400 text-xs lg:text-sm" data-testid="verification-status">
-                Status: <span className={operator?.status === 'active' ? 'text-green-400' : 'text-lime'}>
-                  {operator?.status}
-                </span>
+              <div className="text-xs" data-testid="verification-status">
+                <span className={operator?.status === 'active' ? 'text-lime' : 'text-amber'}>{operator?.status}</span>
               </div>
             </div>
             <Button variant="ghost" onClick={onLogout} className="text-white hover:text-lime" data-testid="logout-btn">
@@ -236,21 +234,12 @@ function OperatorDashboard({ user, onLogout }) {
                       to={item.path}
                       onClick={sidebar.closeMobile}
                       title={sidebar.effectiveCollapsed ? item.label : undefined}
-                      className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
-                        isActive
-                          ? 'bg-lime text-black'
-                          : item.highlight
-                            ? 'text-yellow-400 hover:bg-yellow-500/20'
-                            : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                      }`}
+                      className={navItemClass(isActive)}
                     >
                       <ItemIcon className="h-4 w-4 shrink-0" />
                       {!sidebar.effectiveCollapsed && (
                         <>
                           <span className="truncate">{item.label}</span>
-                          {item.highlight && !isActive && (
-                            <span className="ml-auto w-2 h-2 bg-yellow-400 rounded-full animate-pulse shrink-0" />
-                          )}
                         </>
                       )}
                     </Link>

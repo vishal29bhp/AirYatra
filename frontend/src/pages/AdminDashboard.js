@@ -8,7 +8,8 @@ import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { useResponsiveSidebar, MobileMenuButton, ResponsiveSidebar, CollapsibleNavGroup, NavItem } from '@/components/shared/Sidebar';
 
 // Import admin components
-import AdminOverview from '@/components/admin/AdminOverview';
+import AdminCommand from '@/components/admin/AdminCommand';
+import { BrandMark } from '@/components/dashboard/Premium';
 import OperatorManagement from '@/components/admin/OperatorManagement';
 import BookingManagement from '@/components/admin/BookingManagement';
 import BookingCalendarView from '@/components/admin/BookingCalendarView';
@@ -319,7 +320,7 @@ function AdminDashboard({ user, onLogout }) {
   const renderContent = () => {
     switch (activeTab) {
       case 'overview':
-        return <AdminOverview data={dashboardData} onRefresh={loadDashboard} loading={loading} onNavigate={setActiveTab} />;
+        return <AdminCommand data={dashboardData} loading={loading} onNavigate={setActiveTab} isCeo={(user.roles || []).includes('super_admin')} />;
       // New Priority 1 Features
       case 'support':
         return <SupportDashboard />;
@@ -476,16 +477,16 @@ function AdminDashboard({ user, onLogout }) {
       case 'command_center':
         return <CommandCenter user={user} />;
       default:
-        return <AdminOverview data={dashboardData} onRefresh={loadDashboard} loading={loading} />;
+        return <AdminCommand data={dashboardData} loading={loading} onNavigate={setActiveTab} isCeo={(user.roles || []).includes('super_admin')} />;
     }
   };
 
   const activeGroup = getActiveGroup();
 
   return (
-    <div className="min-h-screen bg-slate-950" data-testid="admin-dashboard">
+    <div className="min-h-screen bg-slate-900" data-testid="admin-dashboard">
       {/* Top Navigation */}
-      <nav className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+      <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-full mx-auto px-4 lg:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             {/* Mobile Menu Button */}
@@ -493,22 +494,21 @@ function AdminDashboard({ user, onLogout }) {
               onClick={sidebar.toggleMobile} 
               isOpen={sidebar.isMobileOpen}
             />
-            <Plane className="h-8 w-8 text-lime" />
-            <span className="text-xl lg:text-2xl font-bold text-white">AirYatra Admin</span>
+            <BrandMark tag={(user.roles || []).includes('super_admin') ? 'CEO' : 'Admin'} />
           </div>
           <div className="flex items-center space-x-2 lg:space-x-4">
             <GlobalSearch user={user} />
             {dashboardData?.statistics?.pending_operator_approvals > 0 && (
-              <div className="hidden md:flex items-center px-3 py-1 bg-lime/20 rounded-full">
-                <AlertTriangle className="h-4 w-4 text-lime mr-2" />
-                <span className="text-lime text-sm">
+              <div className="hidden md:flex items-center px-3 py-1 border border-amber/60">
+                <AlertTriangle className="h-4 w-4 text-amber mr-2" />
+                <span className="text-amber text-sm">
                   {dashboardData.statistics.pending_operator_approvals} Pending
                 </span>
               </div>
             )}
             <NotificationBell user={user} />
             <ThemeToggle />
-            <span className="text-slate-300 hidden lg:inline">Welcome, {user.full_name}</span>
+            <span className="text-slate-300 hidden lg:inline text-sm">{user.full_name}</span>
             <Button variant="ghost" onClick={onLogout} className="text-white hover:text-lime" data-testid="logout-btn">
               <LogOut className="h-5 w-5" />
             </Button>

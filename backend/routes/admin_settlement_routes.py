@@ -54,8 +54,8 @@ async def create_settlement(data: dict, user: dict = Depends(require_roles([User
     return {"message": "Settlement created", "settlement": settlement}
 
 @router.get("/")
-async def get_settlements(user: dict = Depends(require_roles([UserRole.ADMIN, UserRole.SUPER_ADMIN])), status: str = None):
-    """Get all settlements"""
+async def get_settlements(user: dict = Depends(require_roles([UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.FINANCE])), status: str = None):
+    """Get all settlements (finance can view; approving and paying stay admin-only)"""
     db = get_database()
     
     query = {}
