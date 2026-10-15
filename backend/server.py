@@ -494,6 +494,16 @@ async def startup_event():
         except Exception as e:
             logger.warning(f"Staff bootstrap skipped: {type(e).__name__}: {e}")
 
+    # Dev only: demo records for client walkthroughs (see services/demo_seed.py). DEMO_DATA=off or remove.
+    if settings.app_env in {"dev", "development", "local"}:
+        try:
+            from database import get_database
+            from services.demo_seed import run_from_env
+            await run_from_env(get_database(), settings.app_env, os.environ.get("DEMO_DATA", "seed"),
+                               os.environ.get("BOOTSTRAP_STAFF_PASSWORD", ""))
+        except Exception as e:
+            logger.warning(f"Demo data skipped: {type(e).__name__}: {e}")
+
     from services.dev_otp import fixed_otp
     if fixed_otp():
         logger.warning("DEV_FIXED_OTP is on: every login and registration code is the fixed dev code")
