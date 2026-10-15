@@ -23,6 +23,13 @@ function AIChatbot({ user }) {
     scrollToBottom();
   }, [messages]);
 
+  // Dashboards open the assistant with window.dispatchEvent(new Event('airyatra:open-chat')).
+  useEffect(() => {
+    const open = () => { setIsOpen(true); setIsMinimized(false); };
+    window.addEventListener('airyatra:open-chat', open);
+    return () => window.removeEventListener('airyatra:open-chat', open);
+  }, []);
+
   useEffect(() => {
     // Load welcome message when opened
     if (isOpen && messages.length === 0) {

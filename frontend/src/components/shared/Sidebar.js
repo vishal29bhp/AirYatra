@@ -106,25 +106,18 @@ export const ResponsiveSidebar = ({
         />
       )}
       
-      {/* Sidebar */}
+      {/* Sidebar. Keep comments out of the class string: words in it become classes (a stray "hidden" hid it on desktop). */}
       <aside
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-          bg-slate-900/50 border-r border-slate-800 overflow-y-auto overflow-x-hidden
+          bg-slate-900 border-r border-slate-700 overflow-y-auto overflow-x-hidden
           transition-all duration-300 ease-in-out
-          
-          /* Width based on collapsed state */
           ${effectiveCollapsed ? 'w-16' : 'w-72'}
-          
-          /* Mobile: Fixed, hidden when closed */
           fixed lg:sticky lg:relative z-50 lg:z-auto
           top-0 lg:top-[73px]
           h-screen lg:h-[calc(100vh-73px)]
-          
-          /* Mobile: Hide completely when closed, show when open */
           ${isMobileOpen ? 'left-0 translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          
           ${className}
         `}
       >
@@ -172,17 +165,13 @@ export const CollapsibleNavGroup = ({
       <button
         onClick={onToggle}
         title={isCollapsed ? label : undefined}
-        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all ${
-          isActive
-            ? 'bg-lime/20 text-lime'
-            : hasHighlight
-              ? 'text-slate-200 hover:bg-slate-800'
-              : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+        className={`w-full flex items-center justify-between px-3 py-2.5 transition-colors ${
+          isActive ? 'text-lime' : 'text-slate-400 hover:text-slate-100'
         }`}
       >
         <div className="flex items-center space-x-3">
-          <GroupIcon className={`h-5 w-5 shrink-0 ${isActive ? 'text-lime' : ''}`} />
-          {!isCollapsed && <span className="font-medium text-sm truncate">{label}</span>}
+          <GroupIcon className={`h-4 w-4 shrink-0 ${isActive ? 'text-lime' : ''}`} />
+          {!isCollapsed && <span className="font-mono text-[11px] uppercase tracking-[0.14em] truncate">{label}</span>}
         </div>
         {!isCollapsed && (
           isExpanded ? <ChevronDown className="h-4 w-4 shrink-0" /> : <ChevronRight className="h-4 w-4 shrink-0" />
@@ -191,13 +180,19 @@ export const CollapsibleNavGroup = ({
       
       {/* Expanded Items */}
       {isExpanded && !isCollapsed && (
-        <div className="mt-1 ml-4 space-y-0.5 border-l border-slate-700 pl-3">
+        <div className="mt-1 space-y-0.5">
           {children}
         </div>
       )}
     </div>
   );
 };
+
+// Flat nav rows: the open screen is a solid lime bar, everything else is quiet text.
+export const navItemClass = (isActive) =>
+  `w-full flex items-center space-x-2.5 px-3 py-2.5 transition-colors text-sm ${
+    isActive ? 'bg-lime text-black font-semibold' : 'text-slate-300 hover:bg-slate-800 hover:text-slate-100'
+  }`;
 
 /**
  * NavItem - Single navigation item
@@ -216,21 +211,12 @@ export const NavItem = ({
       onClick={onClick}
       data-testid={testId}
       title={isCollapsed ? label : undefined}
-      className={`w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg transition-all text-sm ${
-        isActive
-          ? 'bg-lime text-black'
-          : highlight
-            ? 'text-yellow-400 hover:bg-yellow-500/20'
-            : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-      }`}
+      className={navItemClass(isActive)}
     >
       <ItemIcon className="h-4 w-4 shrink-0" />
       {!isCollapsed && (
         <>
           <span className="truncate">{label}</span>
-          {highlight && !isActive && (
-            <span className="ml-auto w-2 h-2 bg-yellow-400 rounded-full shrink-0" />
-          )}
         </>
       )}
     </button>
@@ -243,5 +229,6 @@ export default {
   SidebarToggleButton,
   ResponsiveSidebar,
   CollapsibleNavGroup,
-  NavItem
+  NavItem,
+  navItemClass
 };
