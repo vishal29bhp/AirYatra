@@ -157,7 +157,8 @@ function New-CheckedDestroyPlan([string[]] $ExtraArgs, [switch] $Final) {
     try {
         # -refresh=false: the plan works from state, so it does not need to reach Key Vault through its firewall
         # (your IP may have changed since the deploy) and does not depend on resources still answering.
-        Invoke-Native terraform plan -destroy "-input=false" "-refresh=false" -out $PlanFile @ExtraArgs
+        # Out-Host: shown on screen, not mixed into this function's return value.
+        Invoke-Native terraform plan -destroy "-input=false" "-refresh=false" -out $PlanFile @ExtraArgs | Out-Host
         $json = (& terraform show -json $PlanFile) -join "`n"
         if ($LASTEXITCODE -ne 0) { throw "'terraform show -json $PlanFile' failed." }
     } finally { Pop-Location }
