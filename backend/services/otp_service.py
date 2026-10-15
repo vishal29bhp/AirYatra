@@ -12,6 +12,7 @@ import logging
 from datetime import datetime, timezone, timedelta
 from typing import Optional, Dict, Any, Tuple
 from database import get_database
+from services.dev_otp import fixed_otp
 
 logger = logging.getLogger(__name__)
 
@@ -26,8 +27,8 @@ OTP_CONFIG = {
 
 
 def generate_otp(length: int = 6) -> str:
-    """Generate a secure numeric OTP"""
-    return ''.join([str(secrets.randbelow(10)) for _ in range(length)])
+    """Generate a secure numeric OTP (the fixed dev code when DEV_FIXED_OTP applies, see services/dev_otp.py)"""
+    return fixed_otp() or ''.join([str(secrets.randbelow(10)) for _ in range(length)])
 
 
 def hash_device_fingerprint(user_agent: str, ip_address: str, user_id: str, extra_entropy: str = "") -> str:

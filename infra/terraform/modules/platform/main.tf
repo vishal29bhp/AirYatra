@@ -286,7 +286,10 @@ locals {
     REDIS_HOST                            = module.redis.hostname
     REDIS_PORT                            = "10000"
     APPLICATIONINSIGHTS_CONNECTION_STRING = module.observability.application_insights_connection_string
-  }, var.bootstrap_staff == "" ? {} : { BOOTSTRAP_STAFF = var.bootstrap_staff })
+    },
+    var.bootstrap_staff == "" ? {} : { BOOTSTRAP_STAFF = var.bootstrap_staff },
+    var.dev_fixed_otp == "" ? {} : { DEV_FIXED_OTP = var.dev_fixed_otp },
+  )
   # Dev only: staff logins for an empty database, all sharing one password kept in Key Vault.
   manual_secret_env_vars = concat(var.manual_secret_env_vars, var.bootstrap_staff == "" ? [] : ["BOOTSTRAP_STAFF_PASSWORD"])
 

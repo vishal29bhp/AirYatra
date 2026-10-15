@@ -494,6 +494,10 @@ async def startup_event():
         except Exception as e:
             logger.warning(f"Staff bootstrap skipped: {type(e).__name__}: {e}")
 
+    from services.dev_otp import fixed_otp
+    if fixed_otp():
+        logger.warning("DEV_FIXED_OTP is on: every login and registration code is the fixed dev code")
+
     # Initialize Security Middleware (Audit Logger, Session Manager, File Encryption)
     try:
         from database import get_database

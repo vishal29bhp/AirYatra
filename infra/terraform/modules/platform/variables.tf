@@ -241,6 +241,17 @@ variable "bootstrap_staff" {
   default     = ""
 }
 
+variable "dev_fixed_otp" {
+  description = "Dev only: a six-digit code used for every login and registration OTP until SMTP and SMS are set up (see backend/services/dev_otp.py). Empty = random codes."
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.dev_fixed_otp == "" || (can(regex("^[0-9]{6}$", var.dev_fixed_otp)) && var.environment == "dev")
+    error_message = "dev_fixed_otp must be six digits and is allowed only in the dev environment."
+  }
+}
+
 variable "load_test_location" {
   description = "Region for Azure Load Testing when the primary region does not offer it. Null uses location."
   type        = string
