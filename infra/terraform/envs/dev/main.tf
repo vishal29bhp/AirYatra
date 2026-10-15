@@ -14,10 +14,12 @@ module "platform" {
   # project), so dev runs the API, with its scheduler, on a single App Service B1 instance.
   compute_platform = "app_service"
 
-  # The dev database starts empty: these staff logins are created at API start, all with the
-  # password in Key Vault secret bootstrap-staff-password (deploy-dev.ps1 generates it).
+  # The dev database starts empty: these logins are created at API start, all with the password in
+  # Key Vault secret bootstrap-staff-password (deploy-dev.ps1 generates it). "a+b" gives several roles,
+  # the first one opening its dashboard: ceo@ has super_admin and admin, so it reaches every staff screen.
   bootstrap_staff = join(",", [
-    "ceo@airyatra.co.in:super_admin",
+    "ceo@airyatra.co.in:super_admin+admin",
+    "operator@airyatra.co.in:operator",
     "admin@airyatra.co.in:admin",
     "finance@airyatra.co.in:finance",
     "hr@airyatra.co.in:hr",
