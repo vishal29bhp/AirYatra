@@ -159,6 +159,16 @@ jobs:
           npm install --no-save --legacy-peer-deps ajv@8
           npx craco build
 
+      # The first sign-in's GitHub token is only accepted for a few minutes, and the API build can take
+      # longer. Storage needs a fresh Azure token, so sign in again just before the upload.
+      - name: Sign in to Azure again (OIDC)
+        if: inputs.deploy_frontend
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
       - name: Upload the web app and purge the edge cache
         if: inputs.deploy_frontend
         run: |
