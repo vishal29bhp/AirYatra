@@ -9,7 +9,7 @@ from uuid import uuid4
 from pydantic import BaseModel
 from enum import Enum
 from database import get_database
-from middleware import get_current_user, require_roles
+from middleware import get_current_user, require_roles, has_any_role
 from models import UserRole
 import json
 import math
@@ -159,7 +159,7 @@ async def get_location_history(
 ):
     """Get location history for an employee"""
     # Check authorization
-    if current_user["id"] != employee_id and current_user.get("role") not in ["admin", "super_admin", "sales_manager"]:
+    if current_user["id"] != employee_id and not has_any_role(current_user, "admin", "super_admin", "sales_manager"):
         raise HTTPException(status_code=403, detail="Not authorized")
     
     if not date:
@@ -198,7 +198,7 @@ async def get_route_for_date(
 ):
     """Get route/path for map display"""
     # Check authorization
-    if current_user["id"] != employee_id and current_user.get("role") not in ["admin", "super_admin", "sales_manager"]:
+    if current_user["id"] != employee_id and not has_any_role(current_user, "admin", "super_admin", "sales_manager"):
         raise HTTPException(status_code=403, detail="Not authorized")
     
     if not date:
@@ -302,7 +302,7 @@ async def get_field_visits(
     query = {}
     
     # Non-admin can only see their own visits
-    if current_user.get("role") not in ["admin", "super_admin", "sales_manager"]:
+    if not has_any_role(current_user, "admin", "super_admin", "sales_manager"):
         query["employee_id"] = current_user["id"]
     elif employee_id:
         query["employee_id"] = employee_id
@@ -456,7 +456,7 @@ async def get_daily_summary(
 ):
     """Get daily field activity summary"""
     # Check authorization
-    if current_user["id"] != employee_id and current_user.get("role") not in ["admin", "super_admin", "sales_manager"]:
+    if current_user["id"] != employee_id and not has_any_role(current_user, "admin", "super_admin", "sales_manager"):
         raise HTTPException(status_code=403, detail="Not authorized")
     
     if not date:

@@ -118,7 +118,7 @@ async def initiate_pickup(
             db=db
         )
     
-    print(f"[JOURNEY OTP] Pickup OTP for booking {request.booking_id}: {otp}")
+    print(f"[JOURNEY OTP] Pickup OTP generated for booking {request.booking_id}")
     print(f"[JOURNEY OTP] Notification result: {notification_result}")
     
     return {
@@ -127,7 +127,6 @@ async def initiate_pickup(
         "otp_type": "pickup",
         "customer_notified": notification_result.get("success", True),
         "notification_mock": notification_result.get("mock", True),
-        "debug_otp": otp  # Remove in production
     }
 
 @router.post("/pickup/verify")
@@ -187,13 +186,12 @@ async def verify_pickup_otp(
     }
     await db.journey_otps.insert_one(start_otp_record)
     
-    print(f"[JOURNEY OTP] Start Journey OTP for booking {request.booking_id}: {start_otp}")
+    print(f"[JOURNEY OTP] Start Journey OTP generated for booking {request.booking_id}")
     
     return {
         "message": "Pickup verified! Start journey OTP sent to customer.",
         "booking_id": request.booking_id,
         "next_step": "start_journey",
-        "debug_otp": start_otp  # Remove in production
     }
 
 @router.post("/start")
@@ -294,12 +292,11 @@ async def initiate_journey_completion(
         {"$set": {"journey_status": "awaiting_completion_otp"}}
     )
     
-    print(f"[JOURNEY OTP] Completion OTP for booking {booking_id}: {otp}")
+    print(f"[JOURNEY OTP] Completion OTP generated for booking {booking_id}")
     
     return {
         "message": "Completion OTP sent to customer",
         "booking_id": booking_id,
-        "debug_otp": otp  # Remove in production
     }
 
 @router.post("/complete/verify")

@@ -41,6 +41,25 @@ async def get_token_from_request(
         headers={"WWW-Authenticate": "Bearer"},
     )
 
+def effective_roles(user: dict) -> List[str]:
+    """The roles a user is checked against.
+
+    Older records carry a single "role" instead of the "roles" list, so it counts too. super_admin is the top role,
+    so it also passes every check that allows "admin"; most staff screens only name "admin".
+    """
+    roles = list(user.get("roles") or [])
+    legacy = user.get("role")
+    if isinstance(legacy, str) and legacy and legacy not in roles:
+        roles.append(legacy)
+    if UserRole.SUPER_ADMIN.value in roles and UserRole.ADMIN.value not in roles:
+        roles.append(UserRole.ADMIN.value)
+    return roles
+
+
+def has_any_role(user: dict, *roles: str) -> bool:
+    return any(str(getattr(r, "value", r)) in effective_roles(user) for r in roles)
+
+
 async def get_current_user(token: str = Depends(get_token_from_request)):
     """Get current authenticated user with token revocation check"""
     credentials_exception = HTTPException(
@@ -93,6 +112,9 @@ async def get_current_user(token: str = Depends(get_token_from_request)):
             detail="User is inactive"
         )
     
+    # Checks across the API read user["roles"]; resolve them once here (in memory only, nothing is saved).
+    user["roles"] = effective_roles(user)
+
     # Attach token hash for potential session management
     user["_current_token_hash"] = token_hash
     
