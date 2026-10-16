@@ -12,10 +12,17 @@ from uuid import uuid4
 from enum import Enum
 from decimal import Decimal, ROUND_HALF_UP
 from database import get_database
-from middleware import get_current_user, require_roles
+from middleware import get_current_user, require_roles, effective_roles
 from models import UserRole
 import os
 import logging
+
+
+def approver_role(user: dict) -> str:
+    """The user's most senior approval role (approvals are queued per role)."""
+    roles = effective_roles(user)
+    return next((r for r in ("super_admin", "admin", "finance", "hr") if r in roles), roles[0] if roles else "")
+
 
 router = APIRouter(prefix="/payments", tags=["Payment Gateway"])
 logger = logging.getLogger(__name__)
@@ -1111,7 +1118,7 @@ async def get_pending_approvals(
 ):
     """Get pending approvals for current user's role / लंबित अनुमोदन प्राप्त करें"""
     workflow = ApprovalWorkflow(db)
-    role = current_user.get("role", "")
+    role = approver_role(current_user)
     
     approvals = await workflow.get_pending_approvals(role=role, user_id=current_user["id"])
     
@@ -1219,7 +1226,7 @@ async def reject_approval(
         approval_id=approval_id,
         rejector_id=current_user["id"],
         rejector_name=current_user.get("full_name", current_user.get("email")),
-        rejector_role=current_user.get("role", "unknown"),
+        rejector_role=approver_role(current_user) or "unknown",
         reason=data.get("reason", "No reason provided")
     )
     

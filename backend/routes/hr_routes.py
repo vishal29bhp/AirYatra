@@ -9,7 +9,7 @@ from uuid import uuid4
 from pydantic import BaseModel
 from enum import Enum
 from database import get_database
-from middleware import get_current_user, require_roles
+from middleware import get_current_user, require_roles, has_any_role
 from models import UserRole
 
 router = APIRouter(prefix="/hr", tags=["HR Management"])
@@ -294,10 +294,11 @@ async def get_incentive_report(
         year = datetime.now().year
     
     # Get all sales employees
+    sales_roles = ["sales", "sales_manager"]
     sales_users = await db.users.find({
-        "role": {"$in": ["sales", "sales_manager"]},
+        "$or": [{"roles": {"$in": sales_roles}}, {"role": {"$in": sales_roles}}],
         "status": "active"
-    }, {"_id": 0, "id": 1, "full_name": 1, "email": 1, "role": 1}).to_list(100)
+    }, {"_id": 0, "id": 1, "full_name": 1, "email": 1, "role": 1, "roles": 1}).to_list(100)
     
     report = []
     for user in sales_users:
@@ -306,7 +307,7 @@ async def get_incentive_report(
         )
         incentives["employee_name"] = user.get("full_name", user["email"])
         incentives["employee_email"] = user["email"]
-        incentives["role"] = user["role"]
+        incentives["role"] = next((r for r in (user.get("roles") or []) if r in sales_roles), user.get("role"))
         report.append(incentives)
     
     return {
@@ -873,7 +874,7 @@ async def get_employee_salary(
 ):
     """Get employee's salary structure"""
     # Check if user is viewing own salary or is admin
-    if current_user["id"] != employee_id and current_user.get("role") not in ["admin", "super_admin"]:
+    if current_user["id"] != employee_id and not has_any_role(current_user, "admin", "super_admin"):
         raise HTTPException(status_code=403, detail="Not authorized")
     
     salary = await db.employee_salaries.find_one(

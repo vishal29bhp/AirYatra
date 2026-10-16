@@ -72,7 +72,7 @@ async def send_otp(request: SendOTPRequest, db=Depends(get_database)):
             email_sent = True
         else:
             # Mock email sending - log OTP for testing
-            print(f"[MOCK EMAIL] OTP for {request.email}: {otp}")
+            print("[MOCK EMAIL] OTP generated; no email provider is configured")
             email_sent = True
     
     if request.phone:
@@ -81,7 +81,7 @@ async def send_otp(request: SendOTPRequest, db=Depends(get_database)):
             sms_sent = True
         else:
             # Mock SMS sending - log OTP for testing
-            print(f"[MOCK SMS] OTP for {request.phone}: {otp}")
+            print("[MOCK SMS] OTP generated; no SMS provider is configured")
             sms_sent = True
     
     return {
@@ -89,8 +89,6 @@ async def send_otp(request: SendOTPRequest, db=Depends(get_database)):
         "email_sent": email_sent if request.email else None,
         "sms_sent": sms_sent if request.phone else None,
         "expires_in_minutes": 10,
-        # Include OTP in response for testing (remove in production)
-        "debug_otp": otp  # Remove this line in production
     }
 
 @router.post("/verify-otp")

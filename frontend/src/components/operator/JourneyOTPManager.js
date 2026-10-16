@@ -76,7 +76,7 @@ function JourneyOTPManager({ operator }) {
         pilot_id: selectedPilot
       });
       
-      toast.success(`Pickup initiated! OTP sent to customer\nDebug OTP: ${response.data.debug_otp}`);
+      toast.success('Pickup initiated! OTP sent to customer');
       loadData();
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to initiate pickup');
@@ -108,7 +108,7 @@ function JourneyOTPManager({ operator }) {
           otp: otpInput,
           otp_type: 'pickup'
         });
-        toast.success(`Pickup verified! Start journey OTP sent.\nDebug OTP: ${response.data.debug_otp}`);
+        toast.success('Pickup verified! Start journey OTP sent.');
       } else if (currentOTPType === 'start_journey') {
         response = await journeyAPI.verifyStartJourney({
           booking_id: selectedBooking.id,
@@ -139,7 +139,7 @@ function JourneyOTPManager({ operator }) {
     setProcessingOTP(true);
     try {
       const response = await journeyAPI.initiateCompletion(booking.id);
-      toast.success(`Completion OTP sent to customer!\nDebug OTP: ${response.data.debug_otp}`);
+      toast.success('Completion OTP sent to customer!');
       loadData();
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Failed to initiate completion');
